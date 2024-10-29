@@ -204,15 +204,9 @@ export const HomePage = () => {
         </motion.div>
       </Box>
 
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <Grid container spacing={4} justifyContent="center">
-          <Grid item xs={12} md={4}>
-            <motion.div variants={itemVariants}>
-              <Box sx={{ p: 3, textAlign: 'center' }}>
+      <Grid container spacing={4} justifyContent="center">
+        <Grid item xs={12} md={4}>
+          <Box sx={{ p: 3, textAlign: 'center' }}>
                 <Typography variant="h6" gutterBottom>
                   Create Your AI
                 </Typography>
@@ -230,12 +224,10 @@ export const HomePage = () => {
                   Get Started
                 </Button>
               </Box>
-            </motion.div>
           </Grid>
           
           <Grid item xs={12} md={4}>
-            <motion.div variants={itemVariants}>
-              <Box sx={{ p: 3, textAlign: 'center' }}>
+            <Box sx={{ p: 3, textAlign: 'center' }}>
                 <Typography variant="h6" gutterBottom>
                   Adopt an AI
                 </Typography>
@@ -265,10 +257,6 @@ export const HomePage = () => {
           <Grid container spacing={4} sx={{ mt: 2 }}>
             {testimonials.map((testimonial, index) => (
               <Grid item xs={12} md={4} key={index}>
-                <motion.div
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.05 }}
-                >
                   <Card>
                     <CardContent>
                       <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
