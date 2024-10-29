@@ -1,0 +1,33 @@
+meta:
+  title: "AI Development Tech Tree"
+  description: "Unlock new capabilities and features as you progress"
+
+categories:
+  - name: "Core"
+    description: "Fundamental AI capabilities"
+  - name: "Learning"
+    description: "Knowledge acquisition abilities"
+  - name: "Interaction"
+    description: "Communication and interface features"
+
+perks:
+  - id: "basic-processing"
+    name: "Basic Processing"
+    description: "Foundation for AI operations"
+    level: 1
+    category: "Core"
+    icon: "memory"
+    
+  - id: "pattern-recognition"
+    name: "Pattern Recognition"
+    description: "Ability to identify and learn from patterns"
+    level: 1
+    category: "Learning"
+    icon: "psychology"
+    
+  - id: "natural-language"
+    name: "Natural Language"
+    description: "Basic text understanding and generation"
+    level: 1
+    category: "Interaction"
+    icon: "chat"
