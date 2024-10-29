@@ -9,6 +9,7 @@ import { BlogPage } from './pages/BlogPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { PaymentSuccessPage } from './pages/PaymentSuccessPage';
 import { EnterpriseContactPage } from './pages/EnterpriseContactPage';
+import { TechTreePage } from './pages/TechTreePage';
 import { ErrorBoundary } from './components/ErrorBoundary';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/blog" element={<BlogPage />} />
+            <Route path="/tech-tree" element={<TechTreePage />} />
             <Route path="/payment/success" element={<PaymentSuccessPage />} />
             <Route path="/enterprise-contact" element={<EnterpriseContactPage />} />
             <Route path="*" element={<NotFoundPage />} />
