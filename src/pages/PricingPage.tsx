@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { 
   Box, 
   Container, 
   Typography, 
   Grid, 
-  Card, 
+  Card,
+  Button,
   CardContent, 
   Button, 
   Switch, 
@@ -37,19 +38,28 @@ export const PricingPage = () => {
     setIsYearly(!isYearly);
   };
 
-  const renderPriceTag = (plan: PricingPlan) => {
+  const PriceDisplay = ({ plan }: { plan: PricingPlan }) => {
     const price = isYearly ? plan.price.yearly : plan.price.monthly;
-    if (typeof price === 'number') {
-      return (
-        <Typography variant="h3" component="span">
-          ${price}
-          <Typography variant="h6" component="span" color="text.secondary">
-            /{isYearly ? 'year' : 'month'}
+    return (
+      <motion.div
+        key={`${price}-${isYearly}`}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.2 }}
+      >
+        {typeof price === 'number' ? (
+          <Typography variant="h3" component="span">
+            ${price}
+            <Typography variant="h6" component="span" color="text.secondary">
+              /{isYearly ? 'year' : 'month'}
+            </Typography>
           </Typography>
-        </Typography>
-      );
-    }
-    return <Typography variant="h3">{price}</Typography>;
+        ) : (
+          <Typography variant="h3">{price}</Typography>
+        )}
+      </motion.div>
+    );
   };
 
   return (
@@ -65,35 +75,72 @@ export const PricingPage = () => {
       </Box>
 
       {/* Pricing Toggle */}
-      <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
-        <Typography>{pricingContent.pricing_table.frequency_toggle.monthly}</Typography>
-        <Switch checked={isYearly} onChange={handleFrequencyChange} />
-        <Typography>
-          {pricingContent.pricing_table.frequency_toggle.yearly}
-          {isYearly && (
-            <Typography
-              component="span"
-              sx={{
-                ml: 1,
-                bgcolor: 'success.main',
-                color: 'white',
-                px: 1,
-                py: 0.5,
-                borderRadius: 1,
-                fontSize: '0.8rem',
-              }}
-            >
-              {pricingContent.pricing_table.frequency_toggle.yearly_discount}
-            </Typography>
-          )}
+      <Box
+        sx={{
+          position: 'sticky',
+          top: 0,
+          zIndex: 1,
+          backgroundColor: 'background.default',
+          py: 2,
+          borderBottom: 1,
+          borderColor: 'divider',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: 2,
+        }}
+      >
+        <Typography variant="h6" color="text.secondary">
+          {pricingContent.pricing_table.frequency_toggle.monthly}
         </Typography>
+        <Switch 
+          checked={isYearly} 
+          onChange={handleFrequencyChange}
+          color="primary"
+        />
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Typography variant="h6" color="text.secondary">
+            {pricingContent.pricing_table.frequency_toggle.yearly}
+          </Typography>
+          {isYearly && (
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 20 }}
+            >
+              <Typography
+                sx={{
+                  ml: 1,
+                  bgcolor: 'success.main',
+                  color: 'white',
+                  px: 1,
+                  py: 0.5,
+                  borderRadius: 1,
+                  fontSize: '0.8rem',
+                }}
+              >
+                {pricingContent.pricing_table.frequency_toggle.yearly_discount}
+              </Typography>
+            </motion.div>
+          )}
+        </Box>
       </Box>
 
       {/* Pricing Cards */}
-      <Grid container spacing={4} sx={{ mb: 8 }}>
+      <Grid 
+        container 
+        spacing={{ xs: 2, md: 4 }} 
+        sx={{ mb: 8, px: { xs: 2, md: 4 } }}
+      >
         {pricingContent.pricing_table.plans.map((plan, index) => (
-          <Grid item xs={12} md={3} key={plan.name}>
-            <Card
+          <Grid item xs={12} sm={6} md={3} key={plan.name}>
+            <motion.div
+              whileHover={{ 
+                scale: plan.tag === 'Most Popular' ? 1.05 : 1.02,
+                transition: { duration: 0.2 }
+              }}
+            >
+              <Card
               sx={{
                 height: '100%',
                 display: 'flex',
@@ -162,7 +209,25 @@ export const PricingPage = () => {
         <Typography variant="h4" align="center" gutterBottom>
           {pricingContent.feature_comparison.title}
         </Typography>
-        <Table>
+        <Table
+          sx={{
+            '& th': {
+              backgroundColor: theme.palette.grey[100],
+              fontWeight: 'bold',
+            },
+            '& td, & th': {
+              padding: 2,
+              borderBottom: `1px solid ${theme.palette.divider}`,
+            },
+            '& tr:hover': {
+              backgroundColor: theme.palette.action.hover,
+            },
+            '& .category-header': {
+              backgroundColor: theme.palette.primary.light,
+              color: theme.palette.primary.contrastText,
+            }
+          }}
+        >
           <TableHead>
             <TableRow>
               <TableCell>Feature</TableCell>
@@ -253,5 +318,42 @@ export const PricingPage = () => {
         </Button>
       </Box>
     </Container>
+    <ScrollTopButton />
+  );
+};
+
+const ScrollTopButton = () => {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const toggleVisible = () => {
+      const scrolled = document.documentElement.scrollTop;
+      setVisible(scrolled > 300);
+    };
+
+    window.addEventListener('scroll', toggleVisible);
+    return () => window.removeEventListener('scroll', toggleVisible);
+  }, []);
+
+  return (
+    <motion.div
+      animate={{ opacity: visible ? 1 : 0 }}
+      initial={{ opacity: 0 }}
+      style={{
+        position: 'fixed',
+        bottom: 20,
+        right: 20,
+        zIndex: 1000,
+      }}
+    >
+      <Button
+        variant="contained"
+        color="primary"
+        sx={{ borderRadius: '50%', minWidth: 0, width: 48, height: 48 }}
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      >
+        ↑
+      </Button>
+    </motion.div>
   );
 };
