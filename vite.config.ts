@@ -1,10 +1,10 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import yaml from 'vite-plugin-yaml'
+import ViteYaml from '@modyfi/vite-plugin-yaml'
 
 export default defineConfig({
   plugins: [
     react(),
-    yaml()
+    ViteYaml()
   ],
 })
