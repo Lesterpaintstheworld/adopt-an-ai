@@ -16,13 +16,5 @@ export default defineConfig({
       },
       frontmatter: true
     })
-  ],
-  optimizeDeps: {
-    include: ['js-yaml']
-  },
-  build: {
-    commonjsOptions: {
-      include: [/js-yaml/]
-    }
-  }
+  ]
 })
