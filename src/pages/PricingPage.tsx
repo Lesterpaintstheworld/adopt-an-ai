@@ -62,9 +62,10 @@ export const PricingPage = () => {
   };
 
   return (
-    <Container maxWidth="xl">
-      {/* Hero Section */}
-      <Box sx={{ textAlign: 'center', my: 8 }}>
+    <>
+      <Container maxWidth="xl">
+        {/* Hero Section */}
+        <Box sx={{ textAlign: 'center', my: 8 }}>
         <Typography variant="h2" component="h1" gutterBottom>
           {pricingContent.hero.headline}
         </Typography>
@@ -317,8 +318,9 @@ export const PricingPage = () => {
           {pricingContent.cta.button.text}
         </Button>
       </Box>
-    </Container>
-    <ScrollTopButton />
+      </Container>
+      <ScrollTopButton />
+    </>
   );
 };
 
