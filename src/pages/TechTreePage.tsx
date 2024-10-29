@@ -9,6 +9,7 @@ import {
   IconButton,
   Tooltip,
   Chip,
+  Divider,
 } from '@mui/material';
 import * as MuiIcons from '@mui/icons-material';
 import techContent from '../../content/tech/tech.yml';
@@ -26,19 +27,61 @@ export const TechTreePage = () => {
     // @ts-ignore - MuiIcons has dynamic icons
     const Icon = perk.icon ? MuiIcons[perk.icon] : MuiIcons.Stars;
 
+    const tooltipContent = (
+      <Box sx={{ p: 1, maxWidth: 300 }}>
+        <Typography variant="subtitle1" sx={{ fontWeight: 'bold', mb: 1 }}>
+          {perk.name}
+        </Typography>
+        <Typography variant="body2" sx={{ mb: 1 }}>
+          {perk.description}
+        </Typography>
+        <Divider sx={{ my: 1 }} />
+        <Box sx={{ mt: 1 }}>
+          <Typography variant="caption" display="block">
+            Category: {perk.category}
+          </Typography>
+          <Typography variant="caption" display="block">
+            Level: {perk.level}
+          </Typography>
+          {perk.prerequisites && (
+            <Typography variant="caption" display="block">
+              Prerequisites: {perk.prerequisites.join(', ')}
+            </Typography>
+          )}
+        </Box>
+      </Box>
+    );
+
     return (
-      <Card 
-        sx={{ 
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          position: 'relative',
-          '&:hover': {
-            transform: 'translateY(-4px)',
-            transition: 'transform 0.2s ease-in-out',
-          }
+      <Tooltip
+        title={tooltipContent}
+        placement="top"
+        arrow
+        PopperProps={{
+          sx: {
+            '& .MuiTooltip-tooltip': {
+              bgcolor: 'background.paper',
+              color: 'text.primary',
+              boxShadow: 3,
+              '& .MuiTooltip-arrow': {
+                color: 'background.paper',
+              },
+            },
+          },
         }}
       >
+        <Card 
+          sx={{ 
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            position: 'relative',
+            '&:hover': {
+              transform: 'translateY(-4px)',
+              transition: 'transform 0.2s ease-in-out',
+            }
+          }}
+        >
         <CardContent>
           <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
             <IconButton size="small" color="primary">
