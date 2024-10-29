@@ -267,7 +267,6 @@ export const HomePage = () => {
                       </Typography>
                     </CardContent>
                   </Card>
-                </motion.div>
               </Grid>
             ))}
           </Grid>
@@ -291,7 +290,6 @@ export const HomePage = () => {
             ))}
           </Box>
         </Box>
-      </motion.div>
     </Container>
   );
 };
