@@ -4,6 +4,7 @@ import { theme } from './utils/theme';
 import { MainLayout } from './components/layout/MainLayout';
 import { HomePage } from './pages/HomePage';
 import { PricingPage } from './pages/PricingPage';
+import { AboutPage } from './pages/AboutPage';
 import { ErrorBoundary } from './components/ErrorBoundary';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route element={<MainLayout />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/pricing" element={<PricingPage />} />
+            <Route path="/about" element={<AboutPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
