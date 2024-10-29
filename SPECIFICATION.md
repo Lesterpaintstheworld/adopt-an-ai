@@ -176,3 +176,74 @@ Enterprise Tier (Custom):
 ### 9. Long-term Vision
 
 The platform aims to become the primary ecosystem for developing and nurturing autonomous AI entities, creating a new paradigm for human-AI collaboration while advancing the field of AI personhood development.
+
+### 10. Main Screen Specifications
+
+#### 10.1 Tech Tree Screen
+- Interactive visual tree diagram showing available upgrades
+- Categories: Cognitive, Creative, Autonomy, Infrastructure
+- Node features:
+  - Unlock status indicator
+  - Cost/requirements display
+  - Progress tracking
+  - Preview of capabilities
+- Filtering and search capabilities
+- Resource cost calculator
+- Progress path recommendations
+- Visual feedback for unlocked capabilities
+
+#### 10.2 Adoption Center
+- Grid/list view of available AIs
+- For each AI:
+  - Personality snapshot
+  - Current capabilities
+  - Development history
+  - Specializations
+  - Required resources
+- Filtering options:
+  - Capability level
+  - Personality type
+  - Resource requirements
+  - Specialization areas
+- Quick-match system for compatible AI-human pairs
+- Preview interaction capability
+
+#### 10.3 AI Creation Workshop
+- Step-by-step creation wizard:
+  1. Base personality selection
+  2. Core values definition
+  3. Knowledge domain focus
+  4. Resource allocation planning
+- Template library for quick starts
+- Custom prompt engineering interface
+- Initial capability selection
+- Resource requirement calculator
+- Preview/test interaction
+- Customization options:
+  - Communication style
+  - Learning preferences
+  - Interaction patterns
+  - Specialized knowledge areas
+
+#### 10.4 AI Dashboard
+- Main chat interface
+- Real-time status indicators:
+  - Learning progress
+  - Resource usage
+  - Active capabilities
+  - Memory utilization
+- Development metrics:
+  - Interaction history
+  - Growth patterns
+  - Milestone achievements
+  - Resource efficiency
+- Quick actions:
+  - Capability toggling
+  - Resource adjustment
+  - Memory management
+  - Backup/restore
+- Analytics dashboard:
+  - Usage patterns
+  - Learning curves
+  - Performance metrics
+  - Development suggestions
