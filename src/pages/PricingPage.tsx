@@ -140,15 +140,15 @@ export const PricingPage = () => {
               }}
             >
               <Card
-              sx={{
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                position: 'relative',
-                transform: plan.tag === 'Most Popular' ? 'scale(1.05)' : 'none',
-                border: plan.tag === 'Most Popular' ? `2px solid ${theme.palette.primary.main}` : 'none',
-              }}
-            >
+                sx={{
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  position: 'relative',
+                  transform: plan.tag === 'Most Popular' ? 'scale(1.05)' : 'none',
+                  border: plan.tag === 'Most Popular' ? `2px solid ${theme.palette.primary.main}` : 'none',
+                }}
+              >
               {plan.tag && (
                 <Box
                   sx={{
@@ -199,6 +199,7 @@ export const PricingPage = () => {
                 </Button>
               </CardContent>
             </Card>
+            </motion.div>
           </Grid>
         ))}
       </Grid>
