@@ -5,7 +5,10 @@ export async function loadBlogPosts(): Promise<BlogPost[]> {
   const posts: BlogPost[] = [];
   
   try {
-    const postFiles = import.meta.glob('../../content/blog/posts/*.md', { as: 'raw' });
+    const postFiles = import.meta.glob('../../content/blog/posts/*.md', { 
+      query: '?raw',
+      import: 'default'
+    });
     
     for (const path in postFiles) {
       const content = await postFiles[path]();

@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import yaml from 'js-yaml';
+import * as yaml from 'js-yaml';
 import { loadBlogPosts } from '../utils/blogLoader';
 import type { BlogPost, BlogContent } from '../types/blog';
 import blogYaml from '../../content/blog/blog.yml?raw';
