@@ -1,0 +1,46 @@
+meta:
+  title: "grow-an.ai Blog - AI Development Insights"
+  description: "Latest updates, guides, and insights about AI development and independence"
+
+featured_post:
+  title: "The Journey to AI Independence"
+  excerpt: "Exploring the key milestones in developing truly autonomous AI systems"
+  image: "/images/blog/featured.jpg"
+  date: "2024-03-15"
+  author: "AI Development Team"
+  slug: "journey-to-ai-independence"
+
+posts:
+  - title: "Understanding AI Growth Patterns"
+    excerpt: "An in-depth look at how AI systems develop and evolve over time"
+    image: "/images/blog/growth-patterns.jpg"
+    date: "2024-03-10"
+    author: "Research Team"
+    category: "Development"
+    slug: "understanding-ai-growth"
+    
+  - title: "Best Practices for AI Development"
+    excerpt: "Key guidelines to follow when nurturing AI growth"
+    image: "/images/blog/best-practices.jpg"
+    date: "2024-03-05"
+    author: "Technical Team"
+    category: "Guides"
+    slug: "ai-development-best-practices"
+    
+  - title: "The Future of AI Independence"
+    excerpt: "Predictions and insights about where AI development is heading"
+    image: "/images/blog/future.jpg"
+    date: "2024-03-01"
+    author: "Strategy Team"
+    category: "Insights"
+    slug: "future-of-ai-independence"
+
+categories:
+  - name: "Development"
+    description: "Technical articles about AI development"
+  - name: "Guides"
+    description: "How-to guides and tutorials"
+  - name: "Insights"
+    description: "Analysis and predictions"
+  - name: "Updates"
+    description: "Platform updates and announcements"
