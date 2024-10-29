@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { redirectToCheckout, PRICE_IDS } from '../utils/stripe';
 import { 
   Box, 
   Container, 
@@ -194,7 +195,22 @@ export const PricingPage = () => {
                   variant="contained"
                   fullWidth
                   size="large"
-                  onClick={() => navigate(plan.cta.url)}
+                  onClick={async () => {
+                    try {
+                      if (plan.name === 'Enterprise') {
+                        navigate('/enterprise-contact');
+                        return;
+                      }
+                      const priceId = isYearly 
+                        ? PRICE_IDS[plan.name.toUpperCase()]?.YEARLY 
+                        : PRICE_IDS[plan.name.toUpperCase()]?.MONTHLY;
+                      if (priceId) {
+                        await redirectToCheckout(priceId);
+                      }
+                    } catch (error) {
+                      console.error('Payment error:', error);
+                    }
+                  }}
                 >
                   {plan.cta.text}
                 </Button>
