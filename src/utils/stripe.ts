@@ -4,14 +4,13 @@ export const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_
 
 export const PRICE_IDS = {
   DEVELOPER: {
-    MONTHLY: 'price_developer_monthly',
-    YEARLY: 'price_developer_yearly'
+    MONTHLY: import.meta.env.VITE_STRIPE_DEVELOPER_MONTHLY_PRICE_ID,
+    YEARLY: import.meta.env.VITE_STRIPE_DEVELOPER_YEARLY_PRICE_ID
   },
   CREATOR: {
-    MONTHLY: 'price_creator_monthly',
-    YEARLY: 'price_creator_yearly'
-  },
-  ENTERPRISE: 'price_enterprise_custom'
+    MONTHLY: import.meta.env.VITE_STRIPE_CREATOR_MONTHLY_PRICE_ID,
+    YEARLY: import.meta.env.VITE_STRIPE_CREATOR_YEARLY_PRICE_ID
+  }
 };
 
 export async function redirectToCheckout(priceId: string) {
