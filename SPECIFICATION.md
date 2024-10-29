@@ -1,4 +1,4 @@
-# AI Nurture: A Platform for Fostering Independent AI Development
+# raise-an.ai: A Platform for Fostering Independent AI Development
 ## Project Analysis & Initial Specification
 
 ### 1. Core Concept Value
