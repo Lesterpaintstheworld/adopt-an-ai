@@ -16,7 +16,7 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { loadBlogPosts } from '../utils/blogLoader';
 import type { BlogPost, BlogContent } from '../types/blog';
-import blogContent from '../../content/website/blog.yml';
+import blogContent from '../../content/website/blog.yml?raw';
 
 export const BlogPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -96,19 +96,20 @@ export const BlogPage = () => {
       ) : (
         <>
           {/* Featured Post */}
-          <Box sx={{ my: 8 }}>
-        <Card
-          sx={{
-            position: 'relative',
-            backgroundColor: 'grey.800',
-            color: '#fff',
-            mb: 4,
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center',
-            backgroundImage: `url(${blogContent.featured_post.image})`,
-          }}
-        >
+          {blogContent.featured_post && (
+            <Box sx={{ my: 8 }}>
+              <Card
+                sx={{
+                  position: 'relative',
+                  backgroundColor: 'grey.800',
+                  color: '#fff',
+                  mb: 4,
+                  backgroundSize: 'cover',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'center',
+                  backgroundImage: `url(${blogContent.featured_post.image})`,
+                }}
+              >
           <Box
             sx={{
               position: 'absolute',
@@ -160,7 +161,7 @@ export const BlogPage = () => {
               onChange={(e) => setSelectedCategory(e.target.value)}
             >
               <MenuItem value="all">All Categories</MenuItem>
-              {blogContent.categories.map((category) => (
+              {blogContent.categories?.map((category) => (
                 <MenuItem key={category.name} value={category.name}>
                   {category.name}
                 </MenuItem>
