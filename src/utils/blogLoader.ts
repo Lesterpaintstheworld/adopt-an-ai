@@ -1,20 +1,24 @@
 import { BlogPost } from '../types/blog';
+import matter from 'gray-matter';
 
 export async function loadBlogPosts(): Promise<BlogPost[]> {
   const posts: BlogPost[] = [];
   
   try {
-    // Import all .md files from the blog posts directory
-    const postFiles = import.meta.glob('../../content/blog/posts/*.md');
+    const postFiles = import.meta.glob('../../content/blog/posts/*.md', { as: 'raw' });
     
     for (const path in postFiles) {
-      const post = await postFiles[path]();
-      const { attributes, html } = post.default;
+      const content = await postFiles[path]();
+      const { data } = matter(content);
       
       posts.push({
-        ...attributes as BlogPost,
-        content: html,
-        slug: path.split('/').pop()?.replace('.md', '') || ''
+        title: data.title,
+        excerpt: data.excerpt,
+        image: data.image,
+        date: data.date,
+        author: data.author,
+        category: data.category,
+        slug: data.slug
       });
     }
   } catch (error) {
@@ -22,7 +26,6 @@ export async function loadBlogPosts(): Promise<BlogPost[]> {
     return [];
   }
   
-  // Sort by date
   return posts.sort((a, b) => 
     new Date(b.date).getTime() - new Date(a.date).getTime()
   );
