@@ -14,9 +14,10 @@ import {
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import yaml from 'js-yaml';
 import { loadBlogPosts } from '../utils/blogLoader';
 import type { BlogPost, BlogContent } from '../types/blog';
-import blogContent from '../../content/website/blog.yml?raw';
+import blogYaml from '../../content/website/blog.yml?raw';
 
 export const BlogPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -24,6 +25,7 @@ export const BlogPage = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const blogContent = yaml.load(blogYaml) as BlogContent;
 
   useEffect(() => {
     loadBlogPosts().then(loadedPosts => {
