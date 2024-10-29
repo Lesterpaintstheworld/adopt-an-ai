@@ -15,7 +15,8 @@ import {
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { loadBlogPosts } from '../utils/blogLoader';
-import type { BlogPost } from '../types/blog';
+import type { BlogPost, BlogContent } from '../types/blog';
+import blogContent from '../../content/website/blog.yml';
 
 export const BlogPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
