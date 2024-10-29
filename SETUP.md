@@ -9,6 +9,7 @@
 - Redis 6+
 - Python 3.10+
 - Git
+- pnpm (preferred package manager)
 
 ## Local Development Setup
 
@@ -20,14 +21,29 @@ cd raise-an.ai
 
 2. Install dependencies
 ```bash
+# Install pnpm if not already installed
+npm install -g pnpm
+
 # Frontend
 cd frontend
-npm install
+pnpm install
 
 # Backend services
 cd ../backend
 python -m venv venv
 source venv/bin/activate  # or `venv\Scripts\activate` on Windows
+
+# Install dependencies for each service
+cd user-service
+pip install -r requirements.txt
+
+cd ../ai-service
+pip install -r requirements.txt
+
+cd ../memory-service
+pip install -r requirements.txt
+
+cd ../resource-service
 pip install -r requirements.txt
 ```
 

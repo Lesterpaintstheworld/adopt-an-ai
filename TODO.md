@@ -1,10 +1,20 @@
 # raise-an.ai TODO List
 
-## Immediate Priority
-- [ ] Set up initial project repository structure
-- [ ] Create development environment setup documentation
-- [ ] Design database schema
-- [ ] Create API specifications for core microservices
+## Immediate Priority (Week 1)
+- [ ] Initialize project repository structure
+  - [ ] Create frontend directory (React + TypeScript + Vite)
+  - [ ] Set up backend microservices structure
+  - [ ] Configure initial Kubernetes setup
+  - [ ] Set up development documentation
+- [ ] Frontend Foundation
+  - [ ] Configure React + TypeScript + Vite
+  - [ ] Set up Material UI
+  - [ ] Implement basic routing
+  - [ ] Create core UI components
+- [ ] User Service Setup
+  - [ ] Design user database schema
+  - [ ] Implement authentication endpoints
+  - [ ] Create user profile management
 
 ## Technical Architecture
 - [ ] Frontend (React)
