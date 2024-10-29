@@ -7,6 +7,8 @@ import { PricingPage } from './pages/PricingPage';
 import { AboutPage } from './pages/AboutPage';
 import { BlogPage } from './pages/BlogPage';
 import { NotFoundPage } from './pages/NotFoundPage';
+import { PaymentSuccessPage } from './pages/PaymentSuccessPage';
+import { EnterpriseContactPage } from './pages/EnterpriseContactPage';
 import { ErrorBoundary } from './components/ErrorBoundary';
 
 function App() {
