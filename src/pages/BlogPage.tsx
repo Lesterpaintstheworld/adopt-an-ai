@@ -112,75 +112,76 @@ export const BlogPage = () => {
                   backgroundImage: `url(${blogContent.featured_post.image})`,
                 }}
               >
-          <Box
-            sx={{
-              position: 'absolute',
-              top: 0,
-              bottom: 0,
-              right: 0,
-              left: 0,
-              backgroundColor: 'rgba(0,0,0,.3)',
-            }}
-          />
-          <Grid container>
-            <Grid item md={6}>
-              <Box
-                sx={{
-                  position: 'relative',
-                  p: { xs: 3, md: 6 },
-                  pr: { md: 0 },
-                }}
-              >
-                <Typography component="h1" variant="h3" color="inherit" gutterBottom>
-                  {blogContent.featured_post.title}
-                </Typography>
-                <Typography variant="h5" color="inherit" paragraph>
-                  {blogContent.featured_post.excerpt}
-                </Typography>
-              </Box>
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    top: 0,
+                    bottom: 0,
+                    right: 0,
+                    left: 0,
+                    backgroundColor: 'rgba(0,0,0,.3)',
+                  }}
+                />
+                <Grid container>
+                  <Grid item md={6}>
+                    <Box
+                      sx={{
+                        position: 'relative',
+                        p: { xs: 3, md: 6 },
+                        pr: { md: 0 },
+                      }}
+                    >
+                      <Typography component="h1" variant="h3" color="inherit" gutterBottom>
+                        {blogContent.featured_post.title}
+                      </Typography>
+                      <Typography variant="h5" color="inherit" paragraph>
+                        {blogContent.featured_post.excerpt}
+                      </Typography>
+                    </Box>
+                  </Grid>
+                </Grid>
+              </Card>
+            </Box>
+          )}
+
+          {/* Filters */}
+          <Box sx={{ mb: 4 }}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  fullWidth
+                  label="Search posts"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  fullWidth
+                  select
+                  label="Category"
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                >
+                  <MenuItem value="all">All Categories</MenuItem>
+                  {blogContent.categories?.map((category) => (
+                    <MenuItem key={category.name} value={category.name}>
+                      {category.name}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </Grid>
             </Grid>
-          </Grid>
-        </Card>
-      </Box>
+          </Box>
 
-      {/* Filters */}
-      <Box sx={{ mb: 4 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={12} md={6}>
-            <TextField
-              fullWidth
-              label="Search posts"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
+          {/* Blog Posts Grid */}
+          <Grid container spacing={4}>
+            {filteredPosts.map((post, index) => (
+              <Grid item key={index} xs={12} sm={6} md={4}>
+                <BlogPostCard post={post} />
+              </Grid>
+            ))}
           </Grid>
-          <Grid item xs={12} md={6}>
-            <TextField
-              fullWidth
-              select
-              label="Category"
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-            >
-              <MenuItem value="all">All Categories</MenuItem>
-              {blogContent.categories?.map((category) => (
-                <MenuItem key={category.name} value={category.name}>
-                  {category.name}
-                </MenuItem>
-              ))}
-            </TextField>
-          </Grid>
-        </Grid>
-      </Box>
-
-      {/* Blog Posts Grid */}
-      <Grid container spacing={4}>
-        {filteredPosts.map((post, index) => (
-          <Grid item key={index} xs={12} sm={6} md={4}>
-            <BlogPostCard post={post} />
-          </Grid>
-        ))}
-      </Grid>
         </>
       )}
     </Container>
