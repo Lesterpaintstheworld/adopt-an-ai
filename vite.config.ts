@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import ViteYaml from '@modyfi/vite-plugin-yaml'
 import { plugin as markdown } from 'vite-plugin-markdown'
+import path from 'path'
 
 export default defineConfig({
   plugins: [
@@ -22,7 +23,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      'js-yaml': 'js-yaml/dist/js-yaml.mjs'
+      'js-yaml': path.resolve(__dirname, 'node_modules/js-yaml/index.js')
     }
   }
 })
