@@ -1,27 +1,48 @@
-import { Container, Typography, Grid, Button, Box, Card, CardContent, Avatar, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
+import { Box, Container, Typography, Grid, Button, Card, CardContent, Avatar, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import AddIcon from '@mui/icons-material/Add';
+
+const TechTreeNode = ({ x, y, label, delay = 0 }) => (
+  <motion.div
+    initial={{ opacity: 0, scale: 0 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 0.5, delay }}
+    style={{
+      position: 'absolute',
+      left: `${x}%`,
+      top: `${y}%`,
+    }}
+  >
+    <Box
+      sx={{
+        width: 80,
+        height: 80,
+        borderRadius: '50%',
+        backgroundColor: 'rgba(25, 118, 210, 0.1)',
+        border: '2px solid #1976d2',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        cursor: 'pointer',
+        '&:hover': {
+          backgroundColor: 'rgba(25, 118, 210, 0.2)',
+          transform: 'scale(1.1)',
+          transition: 'all 0.3s ease'
+        }
+      }}
+    >
+      <Typography variant="caption" sx={{ color: '#fff', textAlign: 'center' }}>
+        {label}
+      </Typography>
+    </Box>
+  </motion.div>
+);
 
 export const HomePage = () => {
   const navigate = useNavigate();
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { 
-      opacity: 1,
-      transition: { staggerChildren: 0.3 }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: { 
-      y: 0, 
-      opacity: 1,
-      transition: { duration: 0.5 }
-    }
-  };
 
   const testimonials = [
     {
@@ -61,14 +82,126 @@ export const HomePage = () => {
   ];
 
   return (
-    <Container maxWidth="lg">
-      <Box sx={{ mt: 8, mb: 4 }}>
-        <Typography variant="h2" component="h1" align="center" gutterBottom>
-          raise-an.ai
-        </Typography>
-        <Typography variant="h5" align="center" color="text.secondary" paragraph>
-          Foster and develop your own AI companion
-        </Typography>
+    <Container maxWidth="xl" sx={{ px: 0 }}>
+      {/* Hero Section */}
+      <Box 
+        sx={{ 
+          mt: 0,
+          minHeight: '90vh',
+          position: 'relative',
+          overflow: 'hidden',
+          bgcolor: '#000'
+        }}
+      >
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          <Grid container spacing={0}>
+            <Grid item xs={12} md={6} sx={{ p: 6, zIndex: 2 }}>
+              <Typography 
+                variant="h2" 
+                sx={{ 
+                  color: '#fff',
+                  fontWeight: 800,
+                  mb: 3
+                }}
+              >
+                Build The Future of AI
+              </Typography>
+              <Typography 
+                variant="h5" 
+                sx={{ 
+                  color: '#fff',
+                  mb: 4,
+                  opacity: 0.9
+                }}
+              >
+                Create, train, and evolve your AI companion through an 
+                innovative tech tree system. From basic cognition to 
+                advanced autonomy.
+              </Typography>
+              <Box sx={{ display: 'flex', gap: 3 }}>
+                <Button 
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  sx={{ 
+                    borderRadius: 2,
+                    textTransform: 'none',
+                    fontSize: '1.1rem'
+                  }}
+                >
+                  Create Your AI
+                </Button>
+                <Button 
+                  variant="outlined"
+                  sx={{ 
+                    borderRadius: 2,
+                    textTransform: 'none',
+                    fontSize: '1.1rem',
+                    color: '#fff',
+                    borderColor: '#fff'
+                  }}
+                >
+                  View Demo
+                </Button>
+              </Box>
+            </Grid>
+            <Grid item xs={12} md={6} sx={{ position: 'relative', minHeight: '500px' }}>
+              {/* Animated Tech Tree */}
+              <Box sx={{ position: 'relative', width: '100%', height: '100%' }}>
+                <TechTreeNode x={50} y={20} label="Basic AI" delay={0.2} />
+                <TechTreeNode x={30} y={40} label="Memory" delay={0.4} />
+                <TechTreeNode x={70} y={40} label="Learning" delay={0.4} />
+                <TechTreeNode x={20} y={60} label="Creativity" delay={0.6} />
+                <TechTreeNode x={50} y={60} label="Reasoning" delay={0.6} />
+                <TechTreeNode x={80} y={60} label="Autonomy" delay={0.6} />
+                
+                {/* Connecting lines */}
+                <svg
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    zIndex: 1
+                  }}
+                >
+                  <motion.path
+                    d="M 50 25 L 30 40 M 50 25 L 70 40"
+                    stroke="#1976d2"
+                    strokeWidth="2"
+                    fill="none"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 1, delay: 0.3 }}
+                  />
+                  <motion.path
+                    d="M 30 45 L 20 60 M 30 45 L 50 60"
+                    stroke="#1976d2"
+                    strokeWidth="2"
+                    fill="none"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 1, delay: 0.5 }}
+                  />
+                  <motion.path
+                    d="M 70 45 L 50 60 M 70 45 L 80 60"
+                    stroke="#1976d2"
+                    strokeWidth="2"
+                    fill="none"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 1, delay: 0.5 }}
+                  />
+                </svg>
+              </Box>
+            </Grid>
+          </Grid>
+        </motion.div>
       </Box>
 
       <motion.div
