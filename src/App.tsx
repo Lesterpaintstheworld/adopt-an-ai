@@ -3,6 +3,7 @@ import { ThemeProvider, CssBaseline } from '@mui/material';
 import { theme } from './utils/theme';
 import { MainLayout } from './components/layout/MainLayout';
 import { HomePage } from './pages/HomePage';
+import { PricingPage } from './pages/PricingPage';
 import { ErrorBoundary } from './components/ErrorBoundary';
 
 function App() {

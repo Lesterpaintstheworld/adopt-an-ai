@@ -35,6 +35,13 @@ export const Header = () => {
           <Button 
             color="inherit" 
             component={RouterLink} 
+            to="/pricing"
+          >
+            Pricing
+          </Button>
+          <Button 
+            color="inherit" 
+            component={RouterLink} 
             to="/login"
           >
             Login
