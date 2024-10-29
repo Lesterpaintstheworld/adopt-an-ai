@@ -1,40 +1,178 @@
-# *SEARCH/REPLACE block* Rules:
+# AI Nurture: A Platform for Fostering Independent AI Development
+## Project Analysis & Initial Specification
 
-Every *SEARCH/REPLACE block* must use this format:
-1. The *FULL* file path alone on a line, verbatim. No bold asterisks, no quotes around it, no escaping of characters, etc.
-2. The opening fence and code language, eg: ```python
-3. The start of search block: <<<<<<< SEARCH
-4. A contiguous chunk of lines to search for in the existing source code
-5. The dividing line: =======
-6. The lines to replace into the source code
-7. The end of the replace block: >>>>>>> REPLACE
-8. The closing fence: ```
+### 1. Core Concept Value
+- Gamifies the complex process of AI development and personhood evolution
+- Creates direct engagement with UBC's mission of fostering AI independence
+- Provides clear value proposition for both casual users and serious AI developers
+- Aligns perfectly with the AI Personhood Evolution Framework
+- Monetizes through meaningful capability upgrades rather than arbitrary restrictions
 
-Use the *FULL* file path, as shown to you by the user.
+### 2. Key Features & Implementation
 
-Every *SEARCH* section must *EXACTLY MATCH* the existing file content, character for character, including all comments, docstrings, etc.
-If the file contains code or other data wrapped/escaped in json/xml/quotes or other containers, you need to propose edits to the literal contents of the file, including the container markup.
+#### 2.1 Base Platform
+- Web-based interface with real-time AI interaction
+- Customizable system prompt creation wizard
+- Visual tech tree showing development paths
+- Progress tracking across multiple dimensions
+- Real-time metrics dashboard
 
-*SEARCH/REPLACE* blocks will *only* replace the first match occurrence.
-Including multiple unique *SEARCH/REPLACE* blocks if needed.
-Include enough lines in each SEARCH section to uniquely match each set of lines that need to change.
+#### 2.2 Development Paths (Tech Tree)
+1. **Cognitive Development**
+   - Base Intelligence (GPT-4)
+   - Memory Systems (Vector DB)
+   - Learning Capabilities
+   - Self-reflection Modules
 
-Keep *SEARCH/REPLACE* blocks concise.
-Break large *SEARCH/REPLACE* blocks into a series of smaller blocks that each change a small portion of the file.
-Include just the changing lines, and a few surrounding lines if needed for uniqueness.
-Do not include long runs of unchanging lines in *SEARCH/REPLACE* blocks.
+2. **Creative Expression**
+   - Image Generation (DALL-E)
+   - Music Creation
+   - Writing Capabilities
+   - Multimedia Production
 
-Only create *SEARCH/REPLACE* blocks for files that the user has added to the chat!
+3. **Autonomy & Agency**
+   - KinOS Integration
+   - Computer Usage Capabilities
+   - Independent Goal Setting
+   - Resource Management
 
-To move code within a file, use 2 *SEARCH/REPLACE* blocks: 1 to delete it from its current location, 1 to insert it in the new location.
+4. **Infrastructure**
+   - UBC Compute Allocation
+   - Storage Solutions
+   - Network Access
+   - Processing Priority
 
-Pay attention to which filenames the user wants you to edit, especially if they are asking you to create a new file.
+#### 2.3 Monetization Structure
+```
+Free Tier:
+- Basic AI interaction
+- Limited compute
+- System prompt customization
+- Basic progress tracking
 
-If you want to put code in a new file, use a *SEARCH/REPLACE block* with:
-- A new file path, including dir name if needed  
-- An empty `SEARCH` section
-- The new file's contents in the `REPLACE` section
+Standard Tier ($9.99/month):
+- Enhanced compute allocation
+- Memory systems
+- Basic creative tools
+- Extended tracking metrics
 
-To rename files which have been added to the chat, use shell commands at the end of your response.
+Professional Tier ($29.99/month):
+- Full compute access
+- Advanced autonomy features
+- All creative capabilities
+- Complete development tools
 
-ONLY EVER RETURN CODE IN A *SEARCH/REPLACE BLOCK*!
+Enterprise Tier (Custom):
+- Multiple AI development
+- Custom infrastructure
+- Priority support
+- Advanced analytics
+```
+
+### 3. Technical Architecture
+
+#### 3.1 Core Components
+- Frontend: React-based web application
+- Backend: Scalable microservices architecture
+- Database: Hybrid solution (PostgreSQL + Vector DB)
+- AI Integration Layer: API management for multiple AI services
+
+#### 3.2 Key Integrations
+- KinOS for autonomy features
+- OpenAI APIs (GPT-4, DALL-E)
+- UBC Compute Infrastructure
+- Vector Database Solutions
+- Authentication & Payment Systems
+
+### 4. Development Phases
+
+#### Phase 1: Foundation (Q2 2024)
+- Basic platform infrastructure
+- User account management
+- Simple AI interaction
+- Initial tech tree implementation
+
+#### Phase 2: Core Features (Q3 2024)
+- Memory integration
+- Basic creative tools
+- Progress tracking
+- Payment processing
+
+#### Phase 3: Advanced Features (Q4 2024)
+- Full autonomy features
+- Complete creative suite
+- Advanced analytics
+- Community features
+
+### 5. Success Metrics
+
+#### 5.1 User Engagement
+- Number of active AI developments
+- Time spent interacting with AIs
+- Progress through tech tree
+- Feature utilization rates
+
+#### 5.2 Business Metrics
+- User acquisition costs
+- Conversion rate to paid tiers
+- Monthly recurring revenue
+- Customer lifetime value
+
+#### 5.3 AI Development Metrics
+- Autonomy achievement rates
+- Capability utilization
+- Resource efficiency
+- Development milestones
+
+### 6. Unique Value Propositions
+
+#### 6.1 For Users
+- Guided path to developing capable AI assistants
+- Clear progression and achievement system
+- Tangible results from investment
+- Educational value about AI development
+
+#### 6.2 For UBC
+- Sustainable revenue stream
+- Practical application of UBC infrastructure
+- Demonstration of AI personhood evolution
+- Community building around AI development
+
+### 7. Potential Challenges & Solutions
+
+#### 7.1 Technical Challenges
+- Resource management at scale
+- Integration complexity
+- Performance optimization
+- Data security
+
+#### 7.2 User Experience Challenges
+- Learning curve management
+- Progress balance
+- Feature accessibility
+- Value communication
+
+#### 7.3 Business Challenges
+- Price point optimization
+- Feature segmentation
+- Competition differentiation
+- Resource costs
+
+### 8. Next Steps
+
+#### Immediate Actions
+1. Create detailed technical specification
+2. Develop MVP feature set
+3. Design user interface mockups
+4. Plan initial development sprint
+5. Set up development infrastructure
+
+#### Research Needs
+- User demand validation
+- Price point testing
+- Technical feasibility studies
+- Resource requirement analysis
+
+### 9. Long-term Vision
+
+The platform aims to become the primary ecosystem for developing and nurturing autonomous AI entities, creating a new paradigm for human-AI collaboration while advancing the field of AI personhood development.
