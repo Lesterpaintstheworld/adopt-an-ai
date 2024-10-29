@@ -82,34 +82,35 @@ export const TechTreePage = () => {
             }
           }}
         >
-        <CardContent>
-          <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-            <IconButton size="small" color="primary">
-              <Icon />
-            </IconButton>
-            <Typography variant="h6" component="h2" sx={{ ml: 1 }}>
-              {perk.name}
+          <CardContent>
+            <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+              <IconButton size="small" color="primary">
+                <Icon />
+              </IconButton>
+              <Typography variant="h6" component="h2" sx={{ ml: 1 }}>
+                {perk.name}
+              </Typography>
+            </Box>
+            <Typography variant="body2" color="text.secondary">
+              {perk.description}
             </Typography>
-          </Box>
-          <Typography variant="body2" color="text.secondary">
-            {perk.description}
-          </Typography>
-          <Box sx={{ mt: 2 }}>
-            <Chip 
-              label={`Level ${perk.level}`}
-              size="small"
-              color="primary"
-              variant="outlined"
-            />
-            <Chip 
-              label={perk.category}
-              size="small"
-              sx={{ ml: 1 }}
-              variant="outlined"
-            />
-          </Box>
-        </CardContent>
-      </Card>
+            <Box sx={{ mt: 2 }}>
+              <Chip 
+                label={`Level ${perk.level}`}
+                size="small"
+                color="primary"
+                variant="outlined"
+              />
+              <Chip 
+                label={perk.category}
+                size="small"
+                sx={{ ml: 1 }}
+                variant="outlined"
+              />
+            </Box>
+          </CardContent>
+        </Card>
+      </Tooltip>
     );
   };
 
