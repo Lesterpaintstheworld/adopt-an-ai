@@ -12,8 +12,9 @@ export default defineConfig({
       markdownIt: {
         html: true,
         linkify: true,
-        typographer: true
-      }
+        typographer: true,
+      },
+      frontmatter: true
     })
   ],
 })
