@@ -245,7 +245,6 @@ export const HomePage = () => {
                   Browse AIs
                 </Button>
               </Box>
-            </motion.div>
           </Grid>
         </Grid>
 
