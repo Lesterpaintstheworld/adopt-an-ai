@@ -171,7 +171,7 @@ export const PricingPage = () => {
                 <Typography variant="h4" component="h2" gutterBottom>
                   {plan.name}
                 </Typography>
-                {renderPriceTag(plan)}
+                <PriceDisplay plan={plan} />
                 <Typography color="text.secondary" sx={{ mb: 2 }}>
                   {plan.description}
                 </Typography>
