@@ -11,23 +11,90 @@ categories:
     description: "Communication and interface features"
 
 perks:
+  # Core Category
   - id: "basic-processing"
     name: "Basic Processing"
     description: "Foundation for AI operations"
     level: 1
     category: "Core"
     icon: "memory"
-    
+
+  - id: "advanced-processing"
+    name: "Advanced Processing"
+    description: "Enhanced computational capabilities"
+    level: 2
+    category: "Core"
+    icon: "memory"
+    prerequisites: ["basic-processing"]
+
+  - id: "neural-optimization"
+    name: "Neural Optimization"
+    description: "Improved neural network efficiency"
+    level: 3
+    category: "Core"
+    icon: "memory"
+    prerequisites: ["advanced-processing"]
+
+  # Learning Category
   - id: "pattern-recognition"
     name: "Pattern Recognition"
     description: "Ability to identify and learn from patterns"
     level: 1
     category: "Learning"
     icon: "psychology"
-    
+
+  - id: "adaptive-learning"
+    name: "Adaptive Learning"
+    description: "Dynamic adjustment of learning strategies"
+    level: 2
+    category: "Learning"
+    icon: "psychology"
+    prerequisites: ["pattern-recognition"]
+
+  - id: "deep-inference"
+    name: "Deep Inference"
+    description: "Advanced reasoning and deduction capabilities"
+    level: 3
+    category: "Learning"
+    icon: "psychology"
+    prerequisites: ["adaptive-learning"]
+
+  - id: "knowledge-synthesis"
+    name: "Knowledge Synthesis"
+    description: "Combine and create new knowledge from existing information"
+    level: 4
+    category: "Learning"
+    icon: "psychology"
+    prerequisites: ["deep-inference"]
+
+  # Interaction Category
   - id: "natural-language"
     name: "Natural Language"
     description: "Basic text understanding and generation"
     level: 1
     category: "Interaction"
     icon: "chat"
+
+  - id: "context-awareness"
+    name: "Context Awareness"
+    description: "Understanding and maintaining conversation context"
+    level: 2
+    category: "Interaction"
+    icon: "chat"
+    prerequisites: ["natural-language"]
+
+  - id: "emotional-intelligence"
+    name: "Emotional Intelligence"
+    description: "Recognition and response to emotional cues"
+    level: 3
+    category: "Interaction"
+    icon: "chat"
+    prerequisites: ["context-awareness"]
+
+  - id: "multimodal-communication"
+    name: "Multimodal Communication"
+    description: "Ability to process and generate multiple forms of communication"
+    level: 4
+    category: "Interaction"
+    icon: "chat"
+    prerequisites: ["emotional-intelligence"]
