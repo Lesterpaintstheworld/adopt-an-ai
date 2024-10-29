@@ -1,5 +1,4 @@
 import { Box, Container, Typography, Grid, Button, Card, CardContent, Avatar, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
 
 type FAQItem = {
   question: string;
