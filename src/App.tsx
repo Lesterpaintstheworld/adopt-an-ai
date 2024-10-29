@@ -3,10 +3,12 @@ import { ThemeProvider, CssBaseline } from '@mui/material';
 import { theme } from './utils/theme';
 import { MainLayout } from './components/layout/MainLayout';
 import { HomePage } from './pages/HomePage';
+import { ErrorBoundary } from './components/ErrorBoundary';
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
+    <ErrorBoundary>
+      <ThemeProvider theme={theme}>
       <CssBaseline />
       <BrowserRouter>
         <Routes>
@@ -17,6 +19,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
+    </ErrorBoundary>
   );
 }
 
