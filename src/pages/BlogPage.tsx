@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import yaml from 'js-yaml';
 import { loadBlogPosts } from '../utils/blogLoader';
 import type { BlogPost, BlogContent } from '../types/blog';
-import blogYaml from '../../content/website/blog.yml?raw';
+import blogYaml from '../../content/blog/blog.yml?raw';
 
 export const BlogPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');

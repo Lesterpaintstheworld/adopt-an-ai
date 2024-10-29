@@ -5,7 +5,7 @@ export async function loadBlogPosts(): Promise<BlogPost[]> {
   
   try {
     // Import all .md files from the blog posts directory
-    const postFiles = import.meta.glob('/content/blog/posts/*.md');
+    const postFiles = import.meta.glob('../../content/blog/posts/*.md');
     
     for (const path in postFiles) {
       const post = await postFiles[path]();
