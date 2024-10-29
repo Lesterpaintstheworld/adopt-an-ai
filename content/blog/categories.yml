@@ -1,0 +1,9 @@
+categories:
+  - name: "Development"
+    description: "Technical articles about AI development"
+  - name: "Guides"
+    description: "How-to guides and tutorials"
+  - name: "Insights"
+    description: "Analysis and predictions"
+  - name: "Updates"
+    description: "Platform updates and announcements"

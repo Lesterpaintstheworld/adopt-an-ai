@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Box,
   Container,
@@ -13,15 +13,24 @@ import {
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import blogContent from '../../content/website/blog.yml';
+import { loadBlogPosts } from '../utils/blogLoader';
 import type { BlogPost } from '../types/blog';
 
 export const BlogPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  const filteredPosts = blogContent.posts.filter(post => {
+  useEffect(() => {
+    loadBlogPosts().then(loadedPosts => {
+      setPosts(loadedPosts);
+      setLoading(false);
+    });
+  }, []);
+
+  const filteredPosts = posts.filter(post => {
     const matchesCategory = selectedCategory === 'all' || post.category === selectedCategory;
     const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
