@@ -15,7 +15,7 @@ function App() {
         <Routes>
           <Route element={<MainLayout />}>
             <Route path="/" element={<HomePage />} />
-            {/* Other routes will be added here */}
+            <Route path="/pricing" element={<PricingPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
