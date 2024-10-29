@@ -5,6 +5,7 @@ import { MainLayout } from './components/layout/MainLayout';
 import { HomePage } from './pages/HomePage';
 import { PricingPage } from './pages/PricingPage';
 import { AboutPage } from './pages/AboutPage';
+import { BlogPage } from './pages/BlogPage';
 import { ErrorBoundary } from './components/ErrorBoundary';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/about" element={<AboutPage />} />
+            <Route path="/blog" element={<BlogPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
