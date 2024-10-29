@@ -93,8 +93,9 @@ export const BlogPage = () => {
           <CircularProgress />
         </Box>
       ) : (
-      {/* Featured Post */}
-      <Box sx={{ my: 8 }}>
+        <>
+          {/* Featured Post */}
+          <Box sx={{ my: 8 }}>
         <Card
           sx={{
             position: 'relative',
@@ -176,6 +177,7 @@ export const BlogPage = () => {
           </Grid>
         ))}
       </Grid>
+        </>
       )}
     </Container>
   );
