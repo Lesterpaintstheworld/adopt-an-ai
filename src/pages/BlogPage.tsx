@@ -10,6 +10,7 @@ import {
   Chip,
   TextField,
   MenuItem,
+  CircularProgress,
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
@@ -87,6 +88,11 @@ export const BlogPage = () => {
 
   return (
     <Container maxWidth="xl">
+      {loading ? (
+        <Box sx={{ display: 'flex', justifyContent: 'center', my: 4 }}>
+          <CircularProgress />
+        </Box>
+      ) : (
       {/* Featured Post */}
       <Box sx={{ my: 8 }}>
         <Card
@@ -170,6 +176,7 @@ export const BlogPage = () => {
           </Grid>
         ))}
       </Grid>
+      )}
     </Container>
   );
 };
