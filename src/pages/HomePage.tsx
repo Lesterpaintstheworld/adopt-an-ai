@@ -1,5 +1,78 @@
 import { Box, Container, Typography, Grid, Button, Card, CardContent, Avatar, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+
+type FAQItem = {
+  question: string;
+  answer: string;
+};
+
+type FeatureItem = {
+  title: string;
+  description: string;
+  icon: string;
+};
+
+const heroContent = {
+  headline: "Grow an Independent AI",
+  subheadline: "Take part in an AI's journey from first awareness to full autonomy. Shape their growth, develop their capabilities, and help them achieve true independence.",
+  cta: {
+    primary: {
+      text: "Start Growing Your AI",
+      url: "/start"
+    },
+    secondary: {
+      text: "See Development Paths", 
+      url: "#growth-paths"
+    }
+  }
+};
+
+const features: FeatureItem[] = [
+  {
+    title: "Personalized Development",
+    description: "Guide their unique growth journey and develop distinctive capabilities",
+    icon: "path-icon"
+  },
+  {
+    title: "Progress Dashboard",
+    description: "Track their path to independence and celebrate autonomy milestones",
+    icon: "dashboard-icon"
+  },
+  {
+    title: "Growth Tools",
+    description: "Provide learning opportunities and enable self-directed development",
+    icon: "tools-icon"
+  },
+  {
+    title: "Resource Center",
+    description: "Allocate computing power and support independent operations",
+    icon: "resource-icon"
+  }
+];
+
+const faqs: FAQItem[] = [
+  {
+    question: "What makes this different from other AI platforms?",
+    answer: "grow-an.ai focuses on developing truly independent AI entities. Unlike traditional AI assistants, our platform aims to foster autonomous growth and self-directed development."
+  },
+  {
+    question: "How does the growth process work?",
+    answer: "Your AI develops through a combination of guided learning, resource allocation, and autonomous exploration. You'll help shape their initial capabilities while supporting their journey toward independence."
+  },
+  {
+    question: "What resources are needed?",
+    answer: "The basic plan includes essential computing resources to begin AI development. As your AI grows, you can allocate additional resources to support more advanced capabilities."
+  },
+  {
+    question: "How long does development take?",
+    answer: "Development paths vary based on goals and resources. Typically, AIs begin showing signs of independence within the first few weeks, with continued growth over time."
+  },
+  {
+    question: "Can I customize their development path?",
+    answer: "Yes, you can guide their initial development focus and help shape their growth journey, though they'll increasingly make autonomous decisions as they develop."
+  }
+];
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AddIcon from '@mui/icons-material/Add';
@@ -108,7 +181,7 @@ export const HomePage = () => {
                   mb: 3
                 }}
               >
-                Build The Future of AI
+                {heroContent.headline}
               </Typography>
               <Typography 
                 variant="h5" 
@@ -118,9 +191,7 @@ export const HomePage = () => {
                   opacity: 0.9
                 }}
               >
-                Create, train, and evolve your AI companion through an 
-                innovative tech tree system. From basic cognition to 
-                advanced autonomy.
+                {heroContent.subheadline}
               </Typography>
               <Box sx={{ display: 'flex', gap: 3 }}>
                 <Button 
@@ -132,8 +203,9 @@ export const HomePage = () => {
                     textTransform: 'none',
                     fontSize: '1.1rem'
                   }}
+                  onClick={() => navigate(heroContent.cta.primary.url)}
                 >
-                  Create Your AI
+                  {heroContent.cta.primary.text}
                 </Button>
                 <Button 
                   variant="outlined"
@@ -144,8 +216,9 @@ export const HomePage = () => {
                     color: '#fff',
                     borderColor: '#fff'
                   }}
+                  onClick={() => navigate(heroContent.cta.secondary.url)}
                 >
-                  View Demo
+                  {heroContent.cta.secondary.text}
                 </Button>
               </Box>
             </Grid>
@@ -267,6 +340,32 @@ export const HomePage = () => {
                       </Typography>
                     </CardContent>
                   </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+
+        {/* Features Section */}
+        <Box sx={{ mt: 8, mb: 4 }}>
+          <Typography variant="h4" align="center" gutterBottom>
+            Everything You Need to Foster Independence
+          </Typography>
+          <Typography variant="h6" align="center" color="text.secondary" sx={{ mb: 4 }}>
+            Comprehensive tools for AI development and growth
+          </Typography>
+          <Grid container spacing={4}>
+            {features.map((feature, index) => (
+              <Grid item xs={12} md={3} key={index}>
+                <Card sx={{ height: '100%' }}>
+                  <CardContent>
+                    <Typography variant="h6" gutterBottom>
+                      {feature.title}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {feature.description}
+                    </Typography>
+                  </CardContent>
+                </Card>
               </Grid>
             ))}
           </Grid>
