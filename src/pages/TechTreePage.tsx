@@ -11,7 +11,12 @@ import {
   Chip,
   Divider,
 } from '@mui/material';
-import * as MuiIcons from '@mui/icons-material';
+import {
+  Memory as MemoryIcon,
+  Psychology as PsychologyIcon,
+  Chat as ChatIcon,
+  Star as StarIcon
+} from '@mui/icons-material';
 import techContent from '../../content/tech/tech.yml';
 import type { TechTreeContent, Perk } from '../types/tech';
 
@@ -24,8 +29,18 @@ export const TechTreePage = () => {
     : content.perks;
 
   const PerkCard = ({ perk }: { perk: Perk }) => {
-    // @ts-ignore - MuiIcons has dynamic icons
-    const Icon = perk.icon ? MuiIcons[perk.icon] : MuiIcons.Stars;
+    const getIcon = () => {
+      switch(perk.icon) {
+        case 'memory':
+          return <MemoryIcon />;
+        case 'psychology':
+          return <PsychologyIcon />;
+        case 'chat':
+          return <ChatIcon />;
+        default:
+          return <StarIcon />;
+      }
+    };
 
     const tooltipContent = (
       <Box sx={{ p: 1, maxWidth: 300 }}>
@@ -85,7 +100,7 @@ export const TechTreePage = () => {
           <CardContent>
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
               <IconButton size="small" color="primary">
-                <Icon />
+                {getIcon()}
               </IconButton>
               <Typography variant="h6" component="h2" sx={{ ml: 1 }}>
                 {perk.name}
