@@ -17,4 +17,12 @@ export default defineConfig({
       frontmatter: true
     })
   ],
+  optimizeDeps: {
+    include: ['js-yaml']
+  },
+  resolve: {
+    alias: {
+      'js-yaml': 'js-yaml/dist/js-yaml.mjs'
+    }
+  }
 })
