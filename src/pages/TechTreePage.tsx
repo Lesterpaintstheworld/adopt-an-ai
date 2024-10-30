@@ -6,7 +6,9 @@ import {
   Chip,
   Tooltip,
 } from '@mui/material';
-import { TAG_STYLES } from '../utils/tagStyles';
+import { TAG_STYLES } from '@/utils/tagStyles';
+import { TechTree, PhaseData, Perk } from '@/types/tech';
+import techTree from '@/content/tech/tech-tree.yml';
 
 // Constants for layout calculations
 const BASE_PHASE_WIDTH = 2400; // Base width that we'll adjust
@@ -205,8 +207,8 @@ const TechItem = ({
   onHover,
   highlightedItem
 }: { 
-  item: any; 
-  phase: string; 
+  item: Perk;
+  phase: string;
   position: { x: number, y: number };
   onHover: (itemName: string | null) => void;
   highlightedItem: string | null;
@@ -313,7 +315,7 @@ const TechItem = ({
 };
 
 export const TechTreePage = () => {
-  const [positions, setPositions] = useState<any>({});
+  const [positions, setPositions] = useState<Record<string, { x: number, y: number }>>({});
   const [highlightedItem, setHighlightedItem] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   
@@ -322,7 +324,7 @@ export const TechTreePage = () => {
   }, []);
 
   // Flatten all items for easier processing
-  const allItems = Object.entries(techTree).flatMap(([phaseKey, phaseData]: [string, any]) =>
+  const allItems = Object.entries(techTree as TechTree).flatMap(([phaseKey, phaseData]: [string, PhaseData]) =>
     Object.entries(phaseData)
       .filter(([key]) => !['name', 'period', 'description'].includes(key))
       .flatMap(([layerKey, items]: [string, any]) => {
