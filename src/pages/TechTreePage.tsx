@@ -42,10 +42,11 @@ const getTagIcon = (tag: string) => {
 // Helper to calculate item positions
 const calculateNodePositions = (techTree: any) => {
   const positions: { [key: string]: { x: number, y: number } } = {};
-  const PHASE_WIDTH = 800; // Increased to give more horizontal space
+  const PHASE_WIDTH = 800;
   const ITEM_HEIGHT = 120;
   const LAYER_PADDING = 40;
-  const CHRONOLOGICAL_SPACING = 200; // Increased spacing between items
+  const CHRONOLOGICAL_SPACING = 150;
+  const PHASE_START_PADDING = 100;
   
   Object.entries(techTree).forEach(([phaseKey, phaseData]: [string, any], phaseIndex) => {
     const layers = Object.entries(phaseData)
@@ -55,14 +56,11 @@ const calculateNodePositions = (techTree: any) => {
       // Sort items by chronological order before positioning
       const sortedItems = [...items].sort(sortByChronologicalOrder);
       
-      sortedItems.forEach((item: any) => {
-        // Base x position for the phase
-        const baseX = phaseIndex * PHASE_WIDTH;
-        // Add chronological offset within the phase
-        const chronologicalOffset = ((item.chronologicalOrder || 1) - 1) * CHRONOLOGICAL_SPACING;
+      sortedItems.forEach((item: any, itemIndex: number) => {
+        const chronologicalOrder = item.chronologicalOrder || itemIndex + 1;
         
         positions[item.name] = {
-          x: baseX + chronologicalOffset + 100,
+          x: (phaseIndex * PHASE_WIDTH) + PHASE_START_PADDING + ((chronologicalOrder - 1) * CHRONOLOGICAL_SPACING),
           y: layerIndex * (ITEM_HEIGHT + LAYER_PADDING) + 100
         };
       });
@@ -229,7 +227,7 @@ export const TechTreePage = () => {
             variant="h5"
             sx={{
               position: 'absolute',
-              left: index * 400 + 100,
+              left: index * PHASE_WIDTH + PHASE_START_PADDING,
               top: 20,
               width: 280,
               textAlign: 'center',
