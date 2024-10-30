@@ -126,32 +126,6 @@ async function generateDallePrompt(perk: Perk, openai: OpenAI): Promise<string> 
   return `${basePrompt} ${technicalSpecs}`;
 }
 
-const TAG_STYLES: { [key: string]: { palette: string; theme: string } } = {
-  'CREATIVE': {
-    palette: 'vibrant pink and magenta energy',
-    theme: 'artistic, flowing energy streams, creative sparks'
-  },
-  'TECHNICAL': {
-    palette: 'glowing blue and cyan circuits',
-    theme: 'technical, circuit patterns, data streams'
-  },
-  'SOCIAL': {
-    palette: 'harmonious green and emerald auras',
-    theme: 'interconnected nodes, organic patterns'
-  },
-  'INTEGRATION': {
-    palette: 'deep purple and violet connections',
-    theme: 'interwoven patterns, network nodes'
-  },
-  'COGNITIVE': {
-    palette: 'warm orange and gold neural patterns',
-    theme: 'brain-like structures, synaptic connections'
-  },
-  'OPERATIONAL': {
-    palette: 'royal purple and silver mechanisms',
-    theme: 'gears, efficiency symbols, flow patterns'
-  }
-};
 
 
 const generateSpecificIconElements = async (perk: Perk, openai: OpenAI): Promise<string> => {
@@ -215,8 +189,8 @@ const getDefaultVisualElements = (perk: Perk): string => {
 interface TagStyle {
   background: string;
   color: string;
-  palette: string; // Color description for the prompt
-  theme: string;  // Visual theme elements for the prompt
+  palette: string;
+  theme: string;
 }
 
 const TAG_STYLES: { [key: string]: TagStyle } = {
