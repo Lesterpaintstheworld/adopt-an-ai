@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import ErrorBoundary from './ErrorBoundary';
 
 // Add global error handler
 window.onerror = (message, source, lineno, colno, error) => {
@@ -12,12 +13,23 @@ window.onunhandledrejection = (event) => {
   console.error('Unhandled promise rejection:', event.reason);
 };
 
+const rootElement = document.getElementById('root');
+if (!rootElement) {
+  throw new Error('Failed to find root element');
+}
+
 try {
-  ReactDOM.createRoot(document.getElementById('root')!).render(
+  ReactDOM.createRoot(rootElement).render(
     <React.StrictMode>
-      <App />
+      <ErrorBoundary>
+        <App />
+      </ErrorBoundary>
     </React.StrictMode>
   );
 } catch (error) {
   console.error('Error during app initialization:', error);
+  document.body.innerHTML = `<div style="color: red; padding: 20px;">
+    <h1>Failed to initialize app</h1>
+    <pre>${error instanceof Error ? error.message : String(error)}</pre>
+  </div>`;
 }
