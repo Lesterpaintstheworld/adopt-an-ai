@@ -258,22 +258,3 @@ const TAG_STYLES: { [key: string]: TagStyle } = {
   }
 };
 
-export const generateDallePrompt = async (perk: Perk, openai: OpenAI): Promise<string> => {
-  const tagType = perk.tag.split(' ')[1];
-  const style = TAG_STYLES[tagType];
-  
-  if (!style) {
-    throw new Error(`Unknown tag type: ${tagType}`);
-  }
-
-  // Base composition elements
-  const basePrompt = `Create a World of Warcraft style ability icon with a futuristic twist. The icon should feature ${style.palette}. The icon represents "${perk.shortDescription || perk.description}". Style: ${style.theme}.`;
-
-  // Get specific visual elements using GPT-4
-  const specificElements = await generateSpecificIconElements(perk, openai);
-
-  // Composition and technical requirements
-  const technicalSpecs = `The image should be a square icon with a dark border and inner glow, highly detailed in a semi-realistic style. The composition should be centered and instantly recognizable as a game ability icon while maintaining a sci-fi aesthetic. The image should be 1024x1024 pixels with high contrast and clear details.`;
-
-  return `${basePrompt} ${specificElements} ${technicalSpecs}`;
-};
