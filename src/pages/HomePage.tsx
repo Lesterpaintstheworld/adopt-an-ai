@@ -1,4 +1,9 @@
+import React from 'react';
 import { Box, Container, Typography, Grid, Button, Card, CardContent, Avatar, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import AddIcon from '@mui/icons-material/Add';
 
 type FAQItem = {
   question: string;
@@ -113,7 +118,8 @@ const TechTreeNode = ({ x, y, label, delay = 0 }) => (
   </motion.div>
 );
 
-export const HomePage = () => {
+export default function HomePage() {
+  console.log('HomePage rendering...');
   const navigate = useNavigate();
 
   const testimonials = [
@@ -391,45 +397,3 @@ export const HomePage = () => {
     </Container>
   );
 };
-import { Box, Container, Typography, Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-
-export default function HomePage() {
-  console.log('HomePage rendering...');
-  const navigate = useNavigate();
-
-  return (
-    <Container maxWidth="lg">
-      <Box sx={{ 
-        my: 4,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        textAlign: 'center'
-      }}>
-        <Typography variant="h2" component="h1" gutterBottom>
-          Welcome to raise-an.ai
-        </Typography>
-        <Typography variant="h5" color="text.secondary" paragraph>
-          Your platform for advanced AI development and training
-        </Typography>
-        <Box sx={{ mt: 4, display: 'flex', gap: 2 }}>
-          <Button 
-            variant="contained" 
-            size="large"
-            onClick={() => navigate('/enterprise')}
-          >
-            Enterprise Solutions
-          </Button>
-          <Button 
-            variant="outlined" 
-            size="large"
-            onClick={() => navigate('/pricing')}
-          >
-            View Pricing
-          </Button>
-        </Box>
-      </Box>
-    </Container>
-  );
-}
