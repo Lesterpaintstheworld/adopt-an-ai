@@ -25,7 +25,7 @@ def icon_exists(perk_name: str) -> bool:
     return (ICONS_DIR / get_perk_icon_filename(perk_name)).exists()
 
 async def generate_dalle_prompt(perk, client: OpenAI):
-    """Generate DALL-E prompt using GPT-4o first."""
+    """Generate DALL-E prompt using GPT-4."""
     # Prepare all available perk information
     perk_info = {
         'name': perk['name'],
@@ -61,8 +61,8 @@ Focus on describing the main central element first, then briefly mention support
 Be specific but concise. Do not include technical specifications or image size requirements."""
 
     try:
-        completion = await client.chat.completions.create(
-            model="gpt-4o",
+        completion = client.chat.completions.create(
+            model="gpt-4",
             messages=[
                 {"role": "system", "content": "You are an expert at creating DALL-E image generation prompts."},
                 {"role": "user", "content": prompt}
@@ -79,8 +79,8 @@ Be specific but concise. Do not include technical specifications or image size r
         return f"{dalle_prompt} {technical_specs}"
         
     except Exception as e:
-        print(f"Error generating GPT-4o prompt for {perk['name']}: {str(e)}")
-        # Fall back to basic prompt generation if GPT-4o fails
+        print(f"Error generating GPT-4 prompt for {perk['name']}: {str(e)}")
+        # Fall back to basic prompt generation if GPT-4 fails
         return generate_basic_dalle_prompt(perk)
 
 def generate_basic_dalle_prompt(perk):
