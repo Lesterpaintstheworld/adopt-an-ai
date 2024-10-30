@@ -73,7 +73,15 @@ const calculateNodePositions = (techTree: any) => {
 };
 
 // Component for drawing connection lines
-const ConnectionLines = ({ positions, items }: { positions: any, items: any[] }) => {
+const ConnectionLines = ({ 
+  positions, 
+  items,
+  highlightedItem 
+}: { 
+  positions: any, 
+  items: any[],
+  highlightedItem: string | null 
+}) => {
   const svgRef = useRef<SVGSVGElement>(null);
 
   return (
@@ -94,14 +102,18 @@ const ConnectionLines = ({ positions, items }: { positions: any, items: any[] })
           const end = positions[item.name];
           if (!start || !end) return null;
 
+          const isHighlighted = 
+            highlightedItem === item.name || 
+            highlightedItem === prereq;
+
           return (
             <path
               key={`${prereq}-${item.name}`}
               d={`M${start.x + 300} ${start.y + 40} C${(start.x + end.x) / 2} ${start.y + 40}, ${(start.x + end.x) / 2} ${end.y + 40}, ${end.x} ${end.y + 40}`}
-              stroke="#666"
-              strokeWidth="2"
+              stroke={isHighlighted ? "#000" : "#666"}
+              strokeWidth={isHighlighted ? "3" : "2"}
               fill="none"
-              strokeDasharray="4"
+              strokeDasharray={isHighlighted ? "" : "4"}
             />
           );
         })
@@ -110,7 +122,19 @@ const ConnectionLines = ({ positions, items }: { positions: any, items: any[] })
   );
 };
 
-const TechItem = ({ item, phase, position }: { item: any; phase: string; position: { x: number, y: number } }) => {
+const TechItem = ({ 
+  item, 
+  phase, 
+  position,
+  onHover,
+  highlightedItem
+}: { 
+  item: any; 
+  phase: string; 
+  position: { x: number, y: number };
+  onHover: (itemName: string | null) => void;
+  highlightedItem: string | null;
+}) => {
   return (
     <Tooltip
       title={
@@ -138,6 +162,8 @@ const TechItem = ({ item, phase, position }: { item: any; phase: string; positio
     >
       <Paper
         elevation={2}
+        onMouseEnter={() => onHover(item.name)}
+        onMouseLeave={() => onHover(null)}
         sx={{
           position: 'absolute',
           left: position.x,
@@ -155,6 +181,7 @@ const TechItem = ({ item, phase, position }: { item: any; phase: string; positio
             phase === 'phase_3' ? theme.palette.success.light :
             theme.palette.warning.light,
           opacity: 0.9,
+          fontWeight: (item.prerequisites || []).includes(highlightedItem) || item.name === highlightedItem ? 'bold' : 'normal',
         }}
       >
         <Box display="flex" alignItems="center" justifyContent="space-between">
@@ -175,6 +202,7 @@ const TechItem = ({ item, phase, position }: { item: any; phase: string; positio
 
 export const TechTreePage = () => {
   const [positions, setPositions] = useState<any>({});
+  const [highlightedItem, setHighlightedItem] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
@@ -211,7 +239,11 @@ export const TechTreePage = () => {
           p: 4,
         }}
       >
-        <ConnectionLines positions={positions} items={allItems} />
+        <ConnectionLines 
+          positions={positions} 
+          items={allItems}
+          highlightedItem={highlightedItem}
+        />
         
         {allItems.map((item) => (
           <TechItem
@@ -219,6 +251,8 @@ export const TechTreePage = () => {
             item={item}
             phase={item.phase}
             position={positions[item.name] || { x: 0, y: 0 }}
+            onHover={setHighlightedItem}
+            highlightedItem={highlightedItem}
           />
         ))}
         
