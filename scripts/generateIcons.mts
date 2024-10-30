@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'fs/promises';
 import path from 'path';
 import yaml from 'js-yaml';
 import * as dotenv from 'dotenv';
@@ -8,17 +8,16 @@ import { dirname } from 'path';
 import { generateAndSaveIconWithRetry } from '../src/utils/perkIconGenerator.js';
 import { Perk } from '../src/types/tech.js';
 
-// Initialize paths
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const techTreePath = path.resolve(__dirname, '..', 'content', 'tech', 'tech-tree.yml');
-
-if (!fs.existsSync(techTreePath)) {
-  throw new Error(`Tech tree file not found at: ${techTreePath}`);
+// Helper function for better error formatting
+function formatError(error: unknown): string {
+  if (error instanceof Error) {
+    return `${error.name}: ${error.message}\n${error.stack}`;
+  }
+  if (typeof error === 'object' && error !== null) {
+    return JSON.stringify(error, null, 2);
+  }
+  return String(error);
 }
-
-// Load environment variables
-dotenv.config();
 
 // Helper function to validate OpenAI client
 function initializeOpenAI(): OpenAI {
@@ -30,9 +29,13 @@ function initializeOpenAI(): OpenAI {
 }
 
 // Helper function to load and parse tech tree
-function loadTechTree(): Perk[] {
+async function loadTechTree(): Promise<Perk[]> {
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = dirname(__filename);
+  const techTreePath = path.resolve(__dirname, '..', 'content', 'tech', 'tech-tree.yml');
+
   try {
-    const content = fs.readFileSync(techTreePath, 'utf8');
+    const content = await fs.readFile(techTreePath, 'utf8');
     const techTree = yaml.load(content) as Record<string, any>;
 
     if (!techTree || typeof techTree !== 'object') {
@@ -47,8 +50,10 @@ function loadTechTree(): Perk[] {
         Object.entries(phaseData).forEach(([key, items]) => {
           if (!['name', 'period', 'description'].includes(key) && Array.isArray(items)) {
             items.forEach((item: any) => {
-              if (item.name && item.tag) {
+              if (item?.name && item?.tag) {
                 perks.push(item as Perk);
+              } else {
+                console.warn(`Skipping invalid perk in ${phase}/${key}:`, item);
               }
             });
           }
@@ -56,10 +61,13 @@ function loadTechTree(): Perk[] {
       }
     });
 
+    if (perks.length === 0) {
+      throw new Error('No valid perks found in tech tree');
+    }
+
     return perks;
   } catch (error) {
-    console.error('Error loading tech tree:', error);
-    throw error;
+    throw new Error(`Failed to load tech tree: ${formatError(error)}`);
   }
 }
 
@@ -71,8 +79,7 @@ async function processPerk(perk: Perk, openai: OpenAI): Promise<boolean> {
     console.log(`Success: ${perk.name}`);
     return true;
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : String(error);
-    console.error(`Failed to process ${perk.name}:`, errorMessage);
+    console.error(`Failed to process ${perk.name}:`, formatError(error));
     return false;
   }
 }
@@ -80,11 +87,13 @@ async function processPerk(perk: Perk, openai: OpenAI): Promise<boolean> {
 // Main function
 async function main() {
   try {
-    console.log('Initializing...');
+    // Initialize environment
+    dotenv.config();
+    console.log('Initializing OpenAI client...');
     const openai = initializeOpenAI();
     
     console.log('Loading tech tree...');
-    const perks = loadTechTree();
+    const perks = await loadTechTree();
     console.log(`Found ${perks.length} perks to process`);
 
     let successful = 0;
@@ -97,7 +106,7 @@ async function main() {
       } else {
         failed++;
       }
-      // Add a small delay between perks
+      // Add a small delay between perks to avoid rate limiting
       await new Promise(resolve => setTimeout(resolve, 1000));
     }
 
@@ -109,29 +118,26 @@ async function main() {
       process.exit(1);
     }
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : String(error);
-    console.error('Fatal error:', errorMessage);
+    console.error('Fatal error:', formatError(error));
     process.exit(1);
   }
 }
 
-// Run the script
+// Set up global error handlers before running main
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise);
+  console.error('Reason:', formatError(reason));
+  process.exit(1);
+});
+
+process.on('uncaughtException', (error) => {
+  console.error('Uncaught Exception:', formatError(error));
+  process.exit(1);
+});
+
+// Run the script with proper error handling
 main().catch(error => {
-  const errorMessage = error instanceof Error ? error.message : String(error);
-  console.error('Unhandled error:', errorMessage);
-  process.exit(1);
-});
-
-// Global error handlers
-process.on('unhandledRejection', (error: unknown) => {
-  const errorMessage = error instanceof Error ? error.message : String(error);
-  console.error('Unhandled promise rejection:', errorMessage);
-  process.exit(1);
-});
-
-process.on('uncaughtException', (error: unknown) => {
-  const errorMessage = error instanceof Error ? error.message : String(error);
-  console.error('Uncaught exception:', errorMessage);
+  console.error('Fatal error in main:', formatError(error));
   process.exit(1);
 });
 import fs from 'fs/promises';
