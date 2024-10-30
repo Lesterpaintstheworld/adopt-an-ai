@@ -3,6 +3,7 @@ import { Header } from './Header';
 import { Outlet } from 'react-router-dom';
 
 export const MainLayout = () => {
+  console.log('MainLayout rendering...');
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
