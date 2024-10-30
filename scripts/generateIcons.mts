@@ -79,38 +79,108 @@ async function fileExists(path: string): Promise<boolean> {
 
 // Core functionality
 async function generateIconPrompt(perk: Perk): string {
-  const tagType = perk.tag.split(' ')[1];
-  const style = TAG_STYLES[tagType];
-  
-  if (!style) {
-    throw new Error(`Unknown tag type: ${tagType}`);
+  try {
+    const specificElements = await generateSpecificIconElements(perk, openai);
+    return specificElements;
+  } catch (error) {
+    console.warn('Failed to generate specific prompt, falling back to default:', error);
+    const tagType = perk.tag.split(' ')[1];
+    const style = TAG_STYLES[tagType];
+    
+    if (!style) {
+      throw new Error(`Unknown tag type: ${tagType}`);
+    }
+
+    const basePrompt = `Create a World of Warcraft style ability icon with a futuristic twist. The icon should feature ${style.palette}. The icon represents "${perk.shortDescription || perk.description}". Style: ${style.theme}.`;
+    
+    const technicalSpecs = `The image should be a square icon with a dark border and inner glow, highly detailed in a semi-realistic style. The composition should be centered and instantly recognizable as a game ability icon while maintaining a sci-fi aesthetic.`;
+
+    return `${basePrompt} ${technicalSpecs}`;
   }
-
-  const basePrompt = `Create a World of Warcraft style ability icon with a futuristic twist. The icon should feature ${style.palette}. The icon represents "${perk.shortDescription || perk.description}". Style: ${style.theme}.`;
-  
-  const technicalSpecs = `The image should be a square icon with a dark border and inner glow, highly detailed in a semi-realistic style. The composition should be centered and instantly recognizable as a game ability icon while maintaining a sci-fi aesthetic.`;
-
-  return `${basePrompt} ${technicalSpecs}`;
 }
 
-async function generateIcon(perk: Perk, openai: OpenAI): Promise<Buffer> {
-  const prompt = await generateIconPrompt(perk);
-  console.log(`Generating icon for ${perk.name} with prompt: ${prompt}`);
+async function generateSpecificIconElements(perk: Perk, openai: OpenAI): Promise<string> {
+  const prompt = `You are an expert at creating DALL-E image generation prompts.
+Generate a detailed prompt for a World of Warcraft style ability icon with a futuristic twist.
+The icon should maintain consistency with other ability icons while being unique and recognizable.
 
-  const response = await openai.images.generate({
-    model: "dall-e-3",
-    prompt,
-    n: 1,
-    size: "1024x1024",
-    response_format: "b64_json"
-  });
+The icon represents this perk:
+Name: ${perk.name}
+Short description: ${perk.shortDescription || ''}
+Long description: ${perk.longDescription || perk.description || ''}
+Tag type: ${perk.tag}
+Phase: ${getPhaseFromPrerequisites(perk)}
 
-  const imageData = response.data[0].b64_json;
-  if (!imageData) {
-    throw new Error('No image data received from OpenAI');
+Requirements:
+- Must be in World of Warcraft ability icon style
+- Should have a futuristic sci-fi aesthetic
+- Include specific visual elements that represent the perk's function
+- Use appropriate colors and symbols
+- Must be instantly recognizable at small sizes
+- Should include lighting effects and depth
+- Must maintain professional game-like quality
+
+Focus on the visual elements only. Be specific but concise.
+Do not include technical specifications or image size requirements.`;
+
+  try {
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4",
+      messages: [{ role: "user", content: prompt }],
+      temperature: 0.7,
+      max_tokens: 150
+    });
+
+    return completion.choices[0].message.content || getDefaultVisualElements(perk);
+  } catch (error) {
+    console.error('Failed to generate prompt with GPT-4:', error);
+    return getDefaultVisualElements(perk);
   }
+}
 
-  return Buffer.from(imageData, 'base64');
+const getPhaseFromPrerequisites = (perk: Perk): string => {
+  const phases = ['phase_1', 'phase_2', 'phase_3', 'phase_4'];
+  return phases.find(phase => 
+    perk.prerequisites?.some(prereq => prereq.includes(phase))
+  ) || 'phase_1';
+};
+
+const getDefaultVisualElements = (perk: Perk): string => {
+  const phaseElements = {
+    phase_1: 'with foundational, crystalline structures',
+    phase_2: 'with evolving, dynamic patterns',
+    phase_3: 'with transcendent, ethereal effects',
+    phase_4: 'with perfect, harmonious symmetry'
+  };
+
+  const phase = getPhaseFromPrerequisites(perk);
+  return phaseElements[phase as keyof typeof phaseElements];
+};
+
+async function generateIcon(perk: Perk, openai: OpenAI): Promise<Buffer> {
+  try {
+    const prompt = await generateIconPrompt(perk);
+    console.log(`Generating icon for ${perk.name} with prompt: ${prompt}`);
+    
+    const response = await openai.images.generate({
+      model: "dall-e-3",
+      prompt: prompt,
+      n: 1,
+      size: "1024x1024", // Square format is fastest
+      quality: "standard", // Standard quality for faster generation
+      response_format: "b64_json"
+    });
+
+    const imageData = response.data[0].b64_json;
+    if (!imageData) {
+      throw new Error('No image data received from OpenAI');
+    }
+
+    return Buffer.from(imageData, 'base64');
+  } catch (error) {
+    console.error(`Error generating icon for ${perk.name}:`, error);
+    throw error;
+  }
 }
 
 async function generateIconWithRetry(perk: Perk, openai: OpenAI, maxRetries = 3): Promise<Buffer> {
