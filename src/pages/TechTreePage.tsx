@@ -22,7 +22,7 @@ import techTree from '../../content/tech/tech-tree.yml';
 const BASE_PHASE_WIDTH = 2400; // Base width that we'll adjust
 const ITEM_HEIGHT = 160;
 const LAYER_PADDING = 60;
-const CHRONOLOGICAL_SPACING = 200;
+const CHRONOLOGICAL_SPACING = 400; // Augmenté de 200 à 400 pour plus d'espace horizontal
 const PHASE_START_PADDING = 200;
 const PHASE_PADDING = 200;
 const ITEM_IMAGE_SIZE = 80;
