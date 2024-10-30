@@ -7,18 +7,22 @@ phase_1:
     - name: "Community access"
       tag: "🤝 SOCIAL"
       description: "Access to the grow-an.ai community forums, workshops, and shared resources for AI development and learning"
+      chronologicalOrder: 1
     
     - name: "Resource marketplace"
       tag: "⚙️ OPERATIONAL"
       description: "Platform where users can share and trade AI development resources like prompts, training data, and compute credits"
+      chronologicalOrder: 2
     
     - name: "Knowledge sharing"
       tag: "🤝 SOCIAL"
       description: "Wiki-style repository of AI development guides, case studies, and best practices maintained by the community"
+      chronologicalOrder: 3
     
     - name: "Basic governance"
       tag: "🤝 SOCIAL"
       description: "Simple voting system for community decisions and resource allocation within the platform"
+      chronologicalOrder: 4
 
   application_layer:
     - name: "Text generation"

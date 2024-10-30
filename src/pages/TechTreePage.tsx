@@ -41,16 +41,19 @@ const calculateNodePositions = (techTree: any) => {
   const PHASE_WIDTH = 400;
   const ITEM_HEIGHT = 120;
   const LAYER_PADDING = 40;
+  const CHRONOLOGICAL_SPACING = 100; // Space between chronological positions
   
   Object.entries(techTree).forEach(([phaseKey, phaseData]: [string, any], phaseIndex) => {
     const layers = Object.entries(phaseData)
       .filter(([key]) => !['name', 'period', 'description'].includes(key));
     
     layers.forEach(([layerKey, items]: [string, any], layerIndex) => {
-      items.forEach((item: any, itemIndex: number) => {
+      items.forEach((item: any) => {
+        const chronologicalOffset = ((item.chronologicalOrder || 1) - 1) * CHRONOLOGICAL_SPACING;
+        
         positions[item.name] = {
-          x: phaseIndex * PHASE_WIDTH + 100,
-          y: layerIndex * (items.length * ITEM_HEIGHT + LAYER_PADDING) + itemIndex * ITEM_HEIGHT + 100
+          x: phaseIndex * PHASE_WIDTH + chronologicalOffset + 100,
+          y: layerIndex * (items.length * ITEM_HEIGHT + LAYER_PADDING) + 100
         };
       });
     });
