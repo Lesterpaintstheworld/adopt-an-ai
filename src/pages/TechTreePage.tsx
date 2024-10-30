@@ -16,7 +16,7 @@ import BuildIcon from '@mui/icons-material/Build';
 import NetworkCheckIcon from '@mui/icons-material/NetworkCheck';
 import PsychologyIcon from '@mui/icons-material/Psychology';
 import SettingsIcon from '@mui/icons-material/Settings';
-import techTree from '../../content/tech/tech-tree.yml';
+import techTree from '@/content/tech/tech-tree.yml';
 
 // Constants for layout calculations
 const BASE_PHASE_WIDTH = 2400; // Base width that we'll adjust
