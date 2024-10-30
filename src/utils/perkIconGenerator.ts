@@ -159,7 +159,68 @@ const generateSpecificIconElements = (perk: Perk): string => {
   return 'futuristic symbols, energy patterns, and technological elements';
 }
 
-export const generateDallePrompt = (perk: Perk): string => {
-  const basePrompt = generateIconPrompt(perk);
-  return `${basePrompt} The image should be 1024x1024 pixels, centered composition, with high contrast and clear details.`;
+interface TagStyle {
+  background: string;
+  color: string;
+  palette: string; // Color description for the prompt
+  theme: string;  // Visual theme elements for the prompt
 }
+
+const TAG_STYLES: { [key: string]: TagStyle } = {
+  'CREATIVE': {
+    background: '#FFE0E9',
+    color: '#D81B60',
+    palette: 'vibrant pink and magenta energy streams with creative sparks',
+    theme: 'artistic, flowing energy streams, creative sparks'
+  },
+  'TECHNICAL': {
+    background: '#E3F2FD',
+    color: '#1976D2',
+    palette: 'glowing blue and cyan circuit patterns',
+    theme: 'technical, circuit patterns, data streams'
+  },
+  'SOCIAL': {
+    background: '#E8F5E9',
+    color: '#388E3C',
+    palette: 'harmonious green and emerald auras',
+    theme: 'interconnected nodes, organic patterns'
+  },
+  'INTEGRATION': {
+    background: '#EDE7F6',
+    color: '#5E35B1',
+    palette: 'deep purple and violet connection streams',
+    theme: 'interwoven patterns, network nodes'
+  },
+  'COGNITIVE': {
+    background: '#FFF3E0',
+    color: '#E65100',
+    palette: 'warm orange and gold neural patterns',
+    theme: 'brain-like structures, synaptic connections'
+  },
+  'OPERATIONAL': {
+    background: '#F3E5F5',
+    color: '#7B1FA2',
+    palette: 'royal purple and silver mechanisms',
+    theme: 'gears, efficiency symbols, flow patterns'
+  }
+};
+
+export const generateDallePrompt = (perk: Perk): string => {
+  const tagType = perk.tag.split(' ')[1];
+  const style = TAG_STYLES[tagType];
+  
+  if (!style) {
+    throw new Error(`Unknown tag type: ${tagType}`);
+  }
+
+  // Base composition elements
+  const basePrompt = `Create a World of Warcraft style ability icon with a futuristic twist. The icon should feature ${style.palette}. The icon represents "${perk.shortDescription || perk.description}". Style: ${style.theme}.`;
+
+  // Add specific visual elements based on the perk
+  const specificElements = generateSpecificIconElements(perk);
+
+  // Composition and technical requirements
+  const technicalSpecs = `The image should be a square icon with a dark border and inner glow, highly detailed in a semi-realistic style. The composition should be centered and instantly recognizable as a game ability icon while maintaining a sci-fi aesthetic. The image should be 1024x1024 pixels with high contrast and clear details.`;
+
+  return `${basePrompt} ${specificElements} ${technicalSpecs}`;
+};
