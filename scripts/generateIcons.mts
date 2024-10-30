@@ -5,6 +5,8 @@ import dotenv from 'dotenv';
 import OpenAI from 'openai';
 import { fileURLToPath } from 'url';
 
+import { TAG_STYLES } from '../src/utils/tagStyles';
+
 // Basic type definitions
 type Perk = {
   name: string;
@@ -12,38 +14,6 @@ type Perk = {
   description: string;
   shortDescription?: string;
   longDescription?: string;
-};
-
-interface TagStyle {
-  palette: string;
-  theme: string;
-}
-
-const TAG_STYLES: { [key: string]: TagStyle } = {
-  'CREATIVE': {
-    palette: 'vibrant pink and magenta energy streams',
-    theme: 'artistic, flowing energy streams, creative sparks'
-  },
-  'TECHNICAL': {
-    palette: 'glowing blue and cyan circuit patterns',
-    theme: 'technical, circuit patterns, data streams'
-  },
-  'SOCIAL': {
-    palette: 'harmonious green and emerald auras',
-    theme: 'interconnected nodes, organic patterns'
-  },
-  'INTEGRATION': {
-    palette: 'deep purple and violet connection streams',
-    theme: 'interwoven patterns, network nodes'
-  },
-  'COGNITIVE': {
-    palette: 'warm orange and gold neural patterns',
-    theme: 'brain-like structures, synaptic connections'
-  },
-  'OPERATIONAL': {
-    palette: 'royal purple and silver mechanisms',
-    theme: 'gears, efficiency symbols, flow patterns'
-  }
 };
 
 // Configuration
