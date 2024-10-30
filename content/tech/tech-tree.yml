@@ -24,7 +24,8 @@ phase_1:
     
     - name: "Basic governance"
       tag: "🤝 SOCIAL"
-      description: "Simple voting system for community decisions and resource allocation within the platform"
+      shortDescription: "Participate in community decision-making through structured voting and feedback systems."
+      longDescription: "Foundational governance system enabling democratic participation in platform decisions and resource allocation. Features include transparent voting mechanisms, proposal submission tools, and basic conflict resolution processes while maintaining community standards and fairness."
       chronologicalOrder: 4
 
   application_layer:
@@ -169,7 +170,8 @@ phase_2:
   ecosystem_layer:
     - name: "Economic systems"
       tag: "🤝 SOCIAL"
-      description: "Internal marketplace using virtual currency for trading AI services, compute resources, and capabilities between users and AIs"
+      shortDescription: "Engage in virtual economies for trading AI services and resources using platform currency."
+      longDescription: "Comprehensive economic framework for valuing and exchanging AI-related assets and services. The system includes virtual currency management, market dynamics monitoring, and automated trading mechanisms while ensuring fair value exchange and economic stability."
       chronologicalOrder: 1
     
     - name: "Governance structures"
