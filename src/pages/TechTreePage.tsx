@@ -6,8 +6,16 @@ import {
   Chip,
   Tooltip,
 } from '@mui/material';
-import { TAG_STYLES } from '@/utils/tagStyles';
 import { TechTree, PhaseData, Perk } from '@/types/tech';
+import { TAG_STYLES } from '@/utils/tagStyles';
+import { getPerkIconUrl } from '@/utils/perkIconGenerator';
+import CodeIcon from '@mui/icons-material/Code';
+import BrushIcon from '@mui/icons-material/Brush';
+import PeopleIcon from '@mui/icons-material/People';
+import BuildIcon from '@mui/icons-material/Build';
+import NetworkCheckIcon from '@mui/icons-material/NetworkCheck';
+import PsychologyIcon from '@mui/icons-material/Psychology';
+import SettingsIcon from '@mui/icons-material/Settings';
 import techTree from '@/content/tech/tech-tree.yml';
 
 // Constants for layout calculations
@@ -22,15 +30,6 @@ const ITEM_IMAGE_SIZE = 60;
 const sortByChronologicalOrder = (a: any, b: any) => {
   return (a.chronologicalOrder || 1) - (b.chronologicalOrder || 1);
 };
-import { getPerkIconUrl } from '../utils/perkIconGenerator';
-import CodeIcon from '@mui/icons-material/Code';
-import BrushIcon from '@mui/icons-material/Brush';
-import PeopleIcon from '@mui/icons-material/People';
-import BuildIcon from '@mui/icons-material/Build';
-import NetworkCheckIcon from '@mui/icons-material/NetworkCheck';
-import PsychologyIcon from '@mui/icons-material/Psychology';
-import SettingsIcon from '@mui/icons-material/Settings';
-import techTree from '../../content/tech/tech-tree.yml';
 
 
 const getTagIcon = (tag: string) => {
