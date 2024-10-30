@@ -5,6 +5,7 @@ import { MainLayout } from './components/layout/MainLayout';
 import HomePage from './pages/HomePage';
 import PaymentSuccessPage from './pages/PaymentSuccessPage';
 import EnterpriseContactPage from './pages/EnterpriseContactPage';
+import { TechTreePage } from './pages/TechTreePage';
 
 console.log('App component initializing...');
 
@@ -20,6 +21,7 @@ function App() {
             <Route index element={<HomePage />} />
             <Route path="/payment/success" element={<PaymentSuccessPage />} />
             <Route path="/enterprise" element={<EnterpriseContactPage />} />
+            <Route path="/tech-tree" element={<TechTreePage />} />
           </Route>
         </Routes>
       </BrowserRouter>

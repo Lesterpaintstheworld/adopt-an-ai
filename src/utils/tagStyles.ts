@@ -43,3 +43,46 @@ export const TAG_STYLES: { [key: string]: TagStyle } = {
     theme: 'gears, efficiency symbols, flow patterns'
   }
 };
+export const TAG_STYLES: { [key: string]: { color: string; borderColor: string; theme: string; palette: string } } = {
+  TECHNICAL: {
+    color: '#2196f3',
+    borderColor: '#2196f3',
+    theme: 'mechanical and technological elements',
+    palette: 'blue and silver metallic colors'
+  },
+  CREATIVE: {
+    color: '#9c27b0',
+    borderColor: '#9c27b0',
+    theme: 'artistic and imaginative elements',
+    palette: 'purple and gold accents'
+  },
+  SOCIAL: {
+    color: '#4caf50',
+    borderColor: '#4caf50',
+    theme: 'connection and communication elements',
+    palette: 'green and white harmonious colors'
+  },
+  INTEGRATION: {
+    color: '#ff9800',
+    borderColor: '#ff9800',
+    theme: 'interconnected network elements',
+    palette: 'orange and blue complementary colors'
+  },
+  COGNITIVE: {
+    color: '#e91e63',
+    borderColor: '#e91e63',
+    theme: 'neural and thought-process elements',
+    palette: 'pink and electric blue highlights'
+  },
+  OPERATIONAL: {
+    color: '#795548',
+    borderColor: '#795548',
+    theme: 'systematic and procedural elements',
+    palette: 'brown and bronze industrial colors'
+  }
+};
+
+export const getTagColor = (tag: string) => {
+  const tagType = tag.split(' ')[1];
+  return TAG_STYLES[tagType] || { color: '#666', borderColor: '#666' };
+};
