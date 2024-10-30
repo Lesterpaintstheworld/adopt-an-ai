@@ -10,12 +10,9 @@ import { NotFoundPage } from './pages/NotFoundPage';
 import { PaymentSuccessPage } from './pages/PaymentSuccessPage';
 import { EnterpriseContactPage } from './pages/EnterpriseContactPage';
 import { TechTreePage } from './pages/TechTreePage';
-import { ErrorBoundary } from './components/ErrorBoundary';
-
 function App() {
   return (
-    <ErrorBoundary>
-      <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
       <BrowserRouter>
         <Routes>
@@ -32,7 +29,6 @@ function App() {
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
-    </ErrorBoundary>
   );
 }
 
