@@ -128,16 +128,6 @@ const TAG_STYLES: { [key: string]: TagStyle } = {
   }
 };
 
-const generateIconPrompt = (perk: Perk): string => {
-  const tagType = perk.tag.split(' ')[1];
-  const style = TAG_STYLES[tagType];
-  
-  if (!style) {
-    throw new Error(`Unknown tag type: ${tagType}`);
-  }
-
-  return `Create a World of Warcraft style ability icon with a futuristic twist, featuring ${style.palette}. The icon represents "${perk.shortDescription || perk.description}". Style: ${style.theme}. The image should be a square icon with a dark border and inner glow, highly detailed in a semi-realistic style, featuring ${generateSpecificIconElements(perk)}. The overall composition should be instantly recognizable as a game ability icon while maintaining a sci-fi aesthetic.`;
-}
 
 const generateSpecificIconElements = (perk: Perk): string => {
   // Add specific visual elements based on perk name and description
