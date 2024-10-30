@@ -286,7 +286,7 @@ const TechItem = ({
         <Box
           sx={{
             width: ITEM_IMAGE_SIZE,
-            height: ITEM_IMAGE_SIZE,
+            height: '100%',
             borderRadius: 1,
             flexShrink: 0,
             overflow: 'hidden',
