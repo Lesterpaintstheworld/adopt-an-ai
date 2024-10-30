@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import yaml from 'js-yaml';
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
 import OpenAI from 'openai';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -12,6 +12,10 @@ import { Perk } from '../src/types/tech';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const techTreePath = path.resolve(__dirname, '..', 'content', 'tech', 'tech-tree.yml');
+
+if (!fs.existsSync(techTreePath)) {
+  throw new Error(`Tech tree file not found at: ${techTreePath}`);
+}
 
 // Load environment variables
 dotenv.config();
