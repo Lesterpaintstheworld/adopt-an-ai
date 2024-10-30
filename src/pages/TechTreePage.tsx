@@ -27,6 +27,26 @@ const PHASE_START_PADDING = 200; // Reduced from 300 to start items closer to ph
 const PHASE_PADDING = 200; // Increased from 100 to add more space between phases
 const ITEM_IMAGE_SIZE = 60;
 
+const getTagColor = (tag: string) => {
+  const tagType = tag.split(' ')[1];
+  switch (tagType) {
+    case 'CREATIVE':
+      return { color: '#d32f2f', borderColor: '#d32f2f' };
+    case 'TECHNICAL':
+      return { color: '#1976d2', borderColor: '#1976d2' };
+    case 'SOCIAL':
+      return { color: '#388e3c', borderColor: '#388e3c' };
+    case 'INTEGRATION':
+      return { color: '#7b1fa2', borderColor: '#7b1fa2' };
+    case 'COGNITIVE':
+      return { color: '#f57c00', borderColor: '#f57c00' };
+    case 'OPERATIONAL':
+      return { color: '#0288d1', borderColor: '#0288d1' };
+    default:
+      return { color: '#757575', borderColor: '#757575' };
+  }
+};
+
 const sortByChronologicalOrder = (a: any, b: any) => {
   return (a.chronologicalOrder || 1) - (b.chronologicalOrder || 1);
 };
