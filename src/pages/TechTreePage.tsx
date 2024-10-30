@@ -307,8 +307,8 @@ const TechItem = ({
             }}
           />
         </Box>
-        <Box sx={{ flex: 1 }}>
-          <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
+        <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
+          <Typography variant="subtitle1" fontWeight="bold">
             {item.name}
           </Typography>
           <Chip
@@ -328,7 +328,8 @@ const TechItem = ({
               minWidth: '140px',
               paddingLeft: '12px',
               paddingRight: '12px',
-              fontSize: '0.9rem'
+              fontSize: '0.9rem',
+              marginTop: 'auto'
             }}
           />
         </Box>
