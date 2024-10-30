@@ -14,7 +14,8 @@
     "types": ["node"]
   },
   "include": [
-    "scripts/**/*"
+    "scripts/**/*",
+    "src/**/*"
   ],
   "exclude": [
     "node_modules"
