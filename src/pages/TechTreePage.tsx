@@ -109,7 +109,14 @@ const ConnectionLines = ({
           return (
             <path
               key={`${prereq}-${item.name}`}
-              d={`M${start.x + 280} ${start.y + 40} C${start.x + 400} ${start.y + 120}, ${end.x - 120} ${end.y - 40}, ${end.x} ${end.y + 40}`}
+              d={`
+                M${start.x + 280} ${start.y + 40}
+                H${start.x + 340}
+                C${start.x + 360} ${start.y + 40},
+                ${start.x + 360} ${end.y + 40},
+                ${start.x + 380} ${end.y + 40}
+                H${end.x}
+              `}
               stroke={isHighlighted ? "#000" : "#666"}
               strokeWidth={isHighlighted ? "3" : "2"}
               fill="none"
