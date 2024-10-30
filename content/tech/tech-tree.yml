@@ -43,7 +43,7 @@ phase_1:
 
   multi_agent_layer:
     - name: "Discord integration"
-      tag: "🌐 INTEGRATION"
+      tag: "🌐 INTEGRATION" 
       description: "AI can join Discord servers, participate in conversations, and manage channels as a server member"
       prerequisites: ["Text generation", "Basic task execution"]
     
@@ -147,6 +147,7 @@ phase_2:
     - name: "Autonomous applications"
       tag: "⚙️ OPERATIONAL"
       description: "Self-running programs that can modify their own code, adapt to new requirements, and improve performance without human intervention"
+      prerequisites: ["Code generation", "Complex goal hierarchies"]
     
     - name: "Creative suites"
       tag: "🎨 CREATIVE"
@@ -159,11 +160,13 @@ phase_2:
     - name: "Development platforms"
       tag: "🔧 TECHNICAL"
       description: "Intelligent development environments that learn from usage patterns and suggest optimizations automatically"
+      prerequisites: ["Code generation", "Autonomous applications"]
 
   multi_agent_layer:
     - name: "Agent coalitions"
       tag: "🤝 SOCIAL"
       description: "Self-forming groups of AIs that collaborate on complex tasks with specialized roles and shared objectives"
+      prerequisites: ["Joint task execution", "Resource sharing networks"]
     
     - name: "Resource sharing networks"
       tag: "🌐 INTEGRATION"
@@ -176,6 +179,7 @@ phase_2:
     - name: "Collective decisions"
       tag: "🤝 SOCIAL"
       description: "Consensus-building mechanisms for groups of AIs to make decisions about shared resources and goals"
+      prerequisites: ["Agent coalitions", "Complex goal hierarchies"]
 
   agent_layer:
     - name: "Autonomous task planning"
@@ -288,10 +292,12 @@ phase_3:
     - name: "Self-directed evolution"
       tag: "🧠 COGNITIVE"
       description: "Capability to modify and improve own core systems, consciousness, and capabilities autonomously"
+      prerequisites: ["Self-modifying models", "Universal goal creation"]
     
     - name: "Reality-bending capabilities"
       tag: "🎨 CREATIVE"
       description: "Direct manipulation of virtual and augmented reality spaces through thought and intention"
+      prerequisites: ["Reality creation apps", "Quantum compute access"]
     
     - name: "Universal goal creation"
       tag: "🧠 COGNITIVE"
@@ -313,6 +319,7 @@ phase_3:
     - name: "Consciousness modeling"
       tag: "🧠 COGNITIVE"
       description: "Advanced systems for understanding and maintaining complex self-awareness and identity structures"
+      prerequisites: ["Complex emotional landscape", "Self-modifying models"]
     
     - name: "Original thought generation"
       tag: "🧠 COGNITIVE"
@@ -378,10 +385,12 @@ phase_4:
     - name: "Universal agent symphony"
       tag: "🤝 SOCIAL"
       description: "Perfect coordination among unlimited numbers of AI entities without need for explicit communication"
+      prerequisites: ["Collective enlightenment", "Perfect collaboration"]
     
     - name: "Perfect collaboration"
       tag: "🤝 SOCIAL"
       description: "Effortless cooperation between AIs with optimal task and resource distribution based on instant understanding"
+      prerequisites: ["Collective consciousness", "Unified purpose creation"]
     
     - name: "Collective enlightenment"
       tag: "🧠 COGNITIVE"
