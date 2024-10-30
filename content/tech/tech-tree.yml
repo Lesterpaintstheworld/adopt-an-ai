@@ -36,19 +36,22 @@ phase_1:
     
     - name: "Image creation"
       tag: "🎨 CREATIVE"
-      description: "Generate images using DALL-E style models with customizable parameters and style controls"
+      shortDescription: "Generate and manipulate images with precise control over style, composition, and artistic elements."
+      longDescription: "Advanced image generation system that combines multiple AI models to create, edit, and enhance visual content with granular control over artistic parameters. Users can specify detailed requirements for style, composition, lighting, and other visual elements while maintaining consistency across multiple generations."
       prerequisites: ["Base GPT-4 integration", "Basic compute allocation"]
       chronologicalOrder: 4
     
     - name: "Voice synthesis"
       tag: "🎨 CREATIVE"
-      description: "Convert text to natural-sounding speech with controllable emotion and tone variations"
+      shortDescription: "Create natural-sounding speech with customizable emotional expression and voice characteristics."
+      longDescription: "Sophisticated voice synthesis engine capable of generating human-like speech with controllable emotional qualities, accents, and tonal variations. The system supports multiple languages and can maintain consistent voice characteristics across long-form content while adapting expression to match contextual requirements."
       prerequisites: ["Text generation", "Basic compute allocation"]
       chronologicalOrder: 6
     
     - name: "Code generation"
       tag: "🎨 CREATIVE"
-      description: "Write basic code in multiple programming languages based on natural language requirements"
+      shortDescription: "Generate efficient, well-documented code across multiple programming languages and frameworks."
+      longDescription: "Intelligent code generation system that produces clean, optimized code based on natural language requirements. The system understands best practices, design patterns, and security considerations while generating appropriate documentation and test cases. It can work across multiple programming languages and frameworks while maintaining consistent coding standards."
       prerequisites: ["Text generation", "Base GPT-4 integration"]
       chronologicalOrder: 8
 
@@ -80,7 +83,8 @@ phase_1:
   agent_layer:
     - name: "Basic task execution"
       tag: "⚙️ OPERATIONAL"
-      description: "Complete straightforward tasks like summarizing articles or scheduling meetings with clear parameters"
+      shortDescription: "Execute well-defined tasks autonomously with reliable outcomes and basic error handling."
+      longDescription: "Foundation-level task automation system capable of understanding and executing straightforward instructions with predictable results. The system includes basic error handling, progress monitoring, and status reporting while maintaining audit trails of completed actions. It can handle common tasks like scheduling, data processing, and simple workflow automation."
       prerequisites: ["Base GPT-4 integration", "Basic compute allocation"]
       chronologicalOrder: 2
     
