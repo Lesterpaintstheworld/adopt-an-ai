@@ -42,11 +42,11 @@ const getTagIcon = (tag: string) => {
 // Helper to calculate item positions
 const calculateNodePositions = (techTree: any) => {
   const positions: { [key: string]: { x: number, y: number } } = {};
-  const PHASE_WIDTH = 800;
+  const PHASE_WIDTH = 1200;
   const ITEM_HEIGHT = 120;
   const LAYER_PADDING = 40;
-  const CHRONOLOGICAL_SPACING = 150;
-  const PHASE_START_PADDING = 100;
+  const CHRONOLOGICAL_SPACING = 250;
+  const PHASE_START_PADDING = 150;
   
   Object.entries(techTree).forEach(([phaseKey, phaseData]: [string, any], phaseIndex) => {
     const layers = Object.entries(phaseData)
@@ -204,7 +204,7 @@ export const TechTreePage = () => {
       <Box
         sx={{
           position: 'relative',
-          width: Object.keys(techTree).length * 800 + 200, // Match the PHASE_WIDTH
+          width: Object.keys(techTree).length * 1200 + 300, // Match the new PHASE_WIDTH and add extra padding
           height: 2000,
           p: 4,
         }}
