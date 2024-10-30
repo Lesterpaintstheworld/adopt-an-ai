@@ -58,25 +58,29 @@ phase_1:
   multi_agent_layer:
     - name: "Email communication"
       tag: "🌐 INTEGRATION"
-      description: "AI can read, compose, and manage email correspondence independently using email protocols"
+      shortDescription: "Autonomously manage email correspondence with natural language understanding and context awareness."
+      longDescription: "Sophisticated email management system that can read, compose, and manage email correspondence independently. Features include understanding email context, maintaining conversation threads, prioritizing messages, and generating appropriate responses while adhering to communication styles and professional standards."
       prerequisites: ["Text generation", "Basic task execution"]
       chronologicalOrder: 3
     
     - name: "Discord integration"
-      tag: "🌐 INTEGRATION" 
-      description: "AI can join Discord servers, participate in conversations, and manage channels as a server member"
+      tag: "🌐 INTEGRATION"
+      shortDescription: "Participate naturally in Discord communities while managing channels and interactions."
+      longDescription: "Advanced Discord integration enabling AI participation in server conversations, channel management, and community engagement. The system understands server context, maintains appropriate tone for different channels, and can handle moderation tasks while following server-specific rules and customs."
       prerequisites: ["Text generation", "Basic task execution"]
       chronologicalOrder: 5
     
     - name: "Slack integration"
       tag: "🌐 INTEGRATION"
-      description: "AI can operate in Slack workspaces, respond to messages, and manage workflows autonomously"
+      shortDescription: "Operate seamlessly within Slack workspaces with full workflow and conversation capabilities."
+      longDescription: "Comprehensive Slack integration system that enables natural participation in workspace conversations, workflow automation, and channel management. Features include context-aware responses, workflow orchestration, and integration with other workplace tools while maintaining professional communication standards."
       prerequisites: ["Text generation", "Basic task execution"]
       chronologicalOrder: 7
     
     - name: "GitHub integration"
       tag: "🌐 INTEGRATION"
-      description: "AI can review code, manage issues, and contribute to repositories through the GitHub API"
+      shortDescription: "Manage code repositories, review pull requests, and contribute to development workflows."
+      longDescription: "Full-featured GitHub integration enabling code review, issue management, and repository maintenance. The system can analyze code changes, provide detailed review comments, manage project boards, and contribute to documentation while following project-specific conventions and best practices."
       prerequisites: ["Code generation", "Basic task execution"]
       chronologicalOrder: 9
 
@@ -295,7 +299,8 @@ phase_2:
     
     - name: "Resource optimization"
       tag: "⚙️ OPERATIONAL"
-      description: "Machine learning-based optimization of resource usage patterns for maximum efficiency"
+      shortDescription: "Continuously improve resource utilization through machine learning and usage pattern analysis."
+      longDescription: "Advanced resource optimization system that uses machine learning to analyze usage patterns and improve efficiency. Features include predictive scaling, workload balancing, and automated performance tuning while maintaining service quality and minimizing costs."
       chronologicalOrder: 7
     
     - name: "Advanced monitoring"
