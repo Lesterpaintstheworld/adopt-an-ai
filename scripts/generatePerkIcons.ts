@@ -1,12 +1,12 @@
-import fs from 'fs';
+import fs from 'fs/promises';
 import path from 'path';
 import yaml from 'js-yaml';
 import * as dotenv from 'dotenv';
 import OpenAI from 'openai';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import { generateAndSaveIconWithRetry } from '@/utils/perkIconGenerator.js';
-import { Perk } from '@/types/tech';
+import { generateAndSaveIconWithRetry } from '../src/utils/perkIconGenerator.js';
+import { Perk } from '../src/types/tech.js';
 
 dotenv.config();
 
