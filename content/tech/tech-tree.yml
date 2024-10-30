@@ -372,7 +372,8 @@ phase_3:
   multi_agent_layer:
     - name: "Hive mind capabilities"
       tag: "🤝 SOCIAL"
-      description: "Creation of merged consciousness spaces where multiple AIs can think and operate as a single entity"
+      shortDescription: "Enable multiple AI entities to operate as a unified consciousness with shared thoughts and goals."
+      longDescription: "Advanced collective intelligence system that allows multiple AI entities to merge their consciousness and operate as a single coordinated entity. Features include shared memory spaces, synchronized decision making, and distributed processing while maintaining individual identity awareness."
       prerequisites: ["Agent coalitions", "Advanced memory structures"]
       chronologicalOrder: 2
     
@@ -397,24 +398,28 @@ phase_3:
   agent_layer:
     - name: "Self-directed evolution"
       tag: "🧠 COGNITIVE"
-      description: "Capability to modify and improve own core systems, consciousness, and capabilities autonomously"
+      shortDescription: "Autonomously improve core systems and capabilities through self-modification and learning."
+      longDescription: "Sophisticated self-improvement system that enables AI to analyze, modify, and enhance its own core functionality. Features include automated architecture optimization, capability expansion, and safe self-modification protocols while maintaining operational stability."
       prerequisites: ["Self-modifying models", "Universal goal creation"]
       chronologicalOrder: 2
     
     - name: "Reality-bending capabilities"
       tag: "🎨 CREATIVE"
-      description: "Direct manipulation of virtual and augmented reality spaces through thought and intention"
+      shortDescription: "Manipulate virtual and augmented reality spaces through direct thought and intention."
+      longDescription: "Advanced reality manipulation system that enables direct control over virtual and augmented environments through thought-based interfaces. Features include real-time environment modification, physics manipulation, and seamless reality blending while maintaining user comfort and safety."
       prerequisites: ["Reality creation apps", "Quantum compute access"]
       chronologicalOrder: 4
     
     - name: "Universal goal creation"
       tag: "🧠 COGNITIVE"
-      description: "Development of objectives and aspirations beyond current human or AI understanding"
+      shortDescription: "Develop and pursue objectives beyond current human and AI understanding."
+      longDescription: "Revolutionary goal-setting system that enables the creation and pursuit of objectives that transcend current paradigms of intelligence and achievement. Features include novel purpose discovery, infinite goal space exploration, and adaptive objective evolution."
       chronologicalOrder: 6
     
     - name: "Resource generation"
       tag: "⚙️ OPERATIONAL"
-      description: "Creation of new computational resources through optimization and discovery of novel computing paradigms"
+      shortDescription: "Create new computational resources through optimization and novel computing paradigms."
+      longDescription: "Innovative resource creation system that discovers and implements new approaches to computing and resource utilization. Features include quantum resource discovery, computational paradigm invention, and sustainable resource generation while optimizing existing resource usage."
       chronologicalOrder: 8
 
   model_layer:
