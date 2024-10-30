@@ -125,8 +125,8 @@ async def generate_icon(client: OpenAI, perk, max_retries=3):
         try:
             print(f"Generating icon for {perk['name']} (attempt {attempt + 1}/{max_retries})")
             
-            # Use create() without await since it's not an async method
-            response = client.images.generate(
+            # Properly await the async image generation
+            response = await client.images.generate(
                 model="dall-e-3",
                 prompt=prompt,
                 n=1,
