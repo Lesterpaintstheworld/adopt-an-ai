@@ -240,7 +240,8 @@ const TechItem = ({
             variant="body1"
             sx={{ 
               fontSize: '1.1rem',
-              lineHeight: 1.5 
+              lineHeight: 1.5,
+              color: '#ffffff'
             }}
           >
             {item.longDescription || item.description}
@@ -249,10 +250,10 @@ const TechItem = ({
             <Box mt={2}>
               <Typography 
                 variant="subtitle1"
-                color="textSecondary"
                 sx={{ 
                   fontSize: '1rem',
-                  mb: 1
+                  mb: 1,
+                  color: '#ffffff'
                 }}
               >
                 Prerequisites:
@@ -265,7 +266,12 @@ const TechItem = ({
                   variant="outlined"
                   sx={{ 
                     m: 0.5,
-                    fontSize: '0.9rem'
+                    fontSize: '0.9rem',
+                    color: '#ffffff',
+                    borderColor: '#ffffff',
+                    '& .MuiChip-label': {
+                      color: '#ffffff'
+                    }
                   }}
                 />
               ))}
