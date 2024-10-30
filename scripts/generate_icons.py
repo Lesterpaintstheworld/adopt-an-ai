@@ -24,7 +24,7 @@ def icon_exists(perk_name: str) -> bool:
     """Check if icon already exists."""
     return (ICONS_DIR / get_perk_icon_filename(perk_name)).exists()
 
-async def generate_dalle_prompt(perk):
+def generate_dalle_prompt(perk):
     """Generate DALL-E prompt based on perk data."""
     tag_type = perk['tag'].split(' ')[1]
     
@@ -46,6 +46,7 @@ async def generate_dalle_prompt(perk):
 
 def generate_icon(client: OpenAI, perk, max_retries=3):
     """Generate icon using DALL-E."""
+    # Get the prompt synchronously now that generate_dalle_prompt is not async
     prompt = generate_dalle_prompt(perk)
     
     for attempt in range(max_retries):
@@ -54,7 +55,7 @@ def generate_icon(client: OpenAI, perk, max_retries=3):
             
             response = client.images.generate(
                 model="dall-e-3",
-                prompt=prompt,
+                prompt=prompt,  # Use the prompt directly
                 n=1,
                 size="1024x1024",
                 response_format="b64_json"
