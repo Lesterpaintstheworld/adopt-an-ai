@@ -14,6 +14,38 @@ type Perk = {
   longDescription?: string;
 };
 
+interface TagStyle {
+  palette: string;
+  theme: string;
+}
+
+const TAG_STYLES: { [key: string]: TagStyle } = {
+  'CREATIVE': {
+    palette: 'vibrant pink and magenta energy streams',
+    theme: 'artistic, flowing energy streams, creative sparks'
+  },
+  'TECHNICAL': {
+    palette: 'glowing blue and cyan circuit patterns',
+    theme: 'technical, circuit patterns, data streams'
+  },
+  'SOCIAL': {
+    palette: 'harmonious green and emerald auras',
+    theme: 'interconnected nodes, organic patterns'
+  },
+  'INTEGRATION': {
+    palette: 'deep purple and violet connection streams',
+    theme: 'interwoven patterns, network nodes'
+  },
+  'COGNITIVE': {
+    palette: 'warm orange and gold neural patterns',
+    theme: 'brain-like structures, synaptic connections'
+  },
+  'OPERATIONAL': {
+    palette: 'royal purple and silver mechanisms',
+    theme: 'gears, efficiency symbols, flow patterns'
+  }
+};
+
 // Configuration
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -48,9 +80,17 @@ async function fileExists(path: string): Promise<boolean> {
 // Core functionality
 async function generateIconPrompt(perk: Perk): string {
   const tagType = perk.tag.split(' ')[1];
-  const basePrompt = `Create a World of Warcraft style ability icon with a futuristic twist. The icon represents "${perk.shortDescription || perk.description}".`;
-  const specs = "The image should be a square icon with a dark border and inner glow, highly detailed in a semi-realistic style.";
-  return `${basePrompt} ${specs}`;
+  const style = TAG_STYLES[tagType];
+  
+  if (!style) {
+    throw new Error(`Unknown tag type: ${tagType}`);
+  }
+
+  const basePrompt = `Create a World of Warcraft style ability icon with a futuristic twist. The icon should feature ${style.palette}. The icon represents "${perk.shortDescription || perk.description}". Style: ${style.theme}.`;
+  
+  const technicalSpecs = `The image should be a square icon with a dark border and inner glow, highly detailed in a semi-realistic style. The composition should be centered and instantly recognizable as a game ability icon while maintaining a sci-fi aesthetic.`;
+
+  return `${basePrompt} ${technicalSpecs}`;
 }
 
 async function generateIcon(perk: Perk, openai: OpenAI): Promise<Buffer> {
@@ -71,6 +111,27 @@ async function generateIcon(perk: Perk, openai: OpenAI): Promise<Buffer> {
   }
 
   return Buffer.from(imageData, 'base64');
+}
+
+async function generateIconWithRetry(perk: Perk, openai: OpenAI, maxRetries = 3): Promise<Buffer> {
+  let lastError: Error | null = null;
+  
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      console.log(`Attempt ${i + 1}/${maxRetries} for ${perk.name}`);
+      return await generateIcon(perk, openai);
+    } catch (error) {
+      lastError = error instanceof Error ? error : new Error(String(error));
+      console.error(`Attempt ${i + 1} failed for ${perk.name}:`, lastError.message);
+      if (i < maxRetries - 1) {
+        const delay = 2000 * (i + 1);
+        console.log(`Waiting ${delay}ms before retry...`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+      }
+    }
+  }
+  
+  throw new Error(`Failed to generate icon for ${perk.name} after ${maxRetries} retries. Last error: ${lastError?.message}`);
 }
 
 // Main execution
@@ -107,31 +168,45 @@ async function main() {
     }
   }
 
+  let totalPerks = 0;
+  let completedPerks = 0;
+  let skippedPerks = 0;
+  let failedPerks = 0;
+
   // Process each perk
   for (const perk of perks) {
+    totalPerks++;
     const iconPath = path.join(ICONS_DIR, sanitizeFilename(perk.name));
     
     try {
       // Skip if icon already exists
       if (await fileExists(iconPath)) {
-        console.log(`Icon already exists for ${perk.name}, skipping...`);
+        skippedPerks++;
+        console.log(`Icon already exists for ${perk.name}, skipping... (${completedPerks}/${totalPerks} completed, ${skippedPerks} skipped)`);
         continue;
       }
 
       console.log(`Processing ${perk.name}...`);
-      const imageBuffer = await generateIcon(perk, openai);
+      const imageBuffer = await generateIconWithRetry(perk, openai);
       await fs.writeFile(iconPath, imageBuffer);
-      console.log(`Successfully generated icon for ${perk.name}`);
+      completedPerks++;
+      console.log(`Successfully generated icon for ${perk.name} (${completedPerks}/${totalPerks} completed, ${skippedPerks} skipped)`);
       
       // Add a small delay between requests to avoid rate limiting
       await new Promise(resolve => setTimeout(resolve, 1000));
     } catch (error) {
-      console.error(`Failed to generate icon for ${perk.name}:`, error);
-      // Continue with next perk instead of stopping the whole process
+      failedPerks++;
+      console.error(`Failed to generate icon for ${perk.name} (${failedPerks} failed):`, error);
     }
   }
 
-  console.log('Icon generation process completed!');
+  console.log(`
+Icon generation completed!
+Total perks: ${totalPerks}
+Successfully generated: ${completedPerks}
+Skipped (already exist): ${skippedPerks}
+Failed: ${failedPerks}
+`);
 }
 
 // Execute with proper error handling
