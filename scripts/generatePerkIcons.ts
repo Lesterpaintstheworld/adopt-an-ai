@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
+import OpenAI from 'openai';
 import techTree from '../content/tech/tech-tree.yml';
-import { generateAndSaveIcon } from '../src/utils/perkIconGenerator';
+import { generateAndSaveIcon, generateAndSaveIconWithRetry } from '../src/utils/perkIconGenerator';
 
 dotenv.config();
 
@@ -22,7 +23,7 @@ const generateAllIcons = async () => {
     try {
       console.log(`Generating icon for ${perk.name}...`);
       const openai = new OpenAI({ apiKey: openaiApiKey });
-      await generateAndSaveIconWithRetry(perk, openai);
+      await generateAndSaveIconWithRetry(perk, openaiApiKey);
       console.log(`Successfully generated icon for ${perk.name}`);
       // Add a delay to avoid rate limits
       await new Promise(resolve => setTimeout(resolve, 1000));

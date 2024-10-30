@@ -70,7 +70,7 @@ const generateFallbackIcon = (perk: Perk): string => {
 };
 
 // Add error handling and retry logic
-const generateAndSaveIconWithRetry = async (
+export const generateAndSaveIconWithRetry = async (
   perk: Perk,
   openaiApiKey: string,
   maxRetries = 3
@@ -96,7 +96,7 @@ const generateAndSaveIconWithRetry = async (
 
 export const generateAndSaveIcon = async (
   perk: Perk, 
-  openaiApiKey: string
+  openai: OpenAI
 ): Promise<string> => {
   await ensureIconsDirectory();
   
