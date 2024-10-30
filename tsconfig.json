@@ -17,6 +17,6 @@
     "esModuleInterop": true,
     "allowJs": true
   },
-  "include": ["src", "scripts", "src/types/yaml.d.ts"],
+  "include": ["src", "src/types/yaml.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
