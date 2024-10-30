@@ -29,53 +29,6 @@ import PsychologyIcon from '@mui/icons-material/Psychology';
 import SettingsIcon from '@mui/icons-material/Settings';
 import techTree from '../../content/tech/tech-tree.yml';
 
-const getTagColor = (tag: string) => {
-  const tagType = tag.split(' ')[1];
-  switch (tagType) {
-    case 'CREATIVE':
-      return {
-        background: '#FFE0E9',
-        color: '#D81B60',
-        borderColor: '#F06292'
-      };
-    case 'TECHNICAL':
-      return {
-        background: '#E3F2FD',
-        color: '#1976D2',
-        borderColor: '#64B5F6'
-      };
-    case 'SOCIAL':
-      return {
-        background: '#E8F5E9',
-        color: '#388E3C',
-        borderColor: '#81C784'
-      };
-    case 'INTEGRATION':
-      return {
-        background: '#EDE7F6',
-        color: '#5E35B1',
-        borderColor: '#9575CD'
-      };
-    case 'COGNITIVE':
-      return {
-        background: '#FFF3E0',
-        color: '#E65100',
-        borderColor: '#FFB74D'
-      };
-    case 'OPERATIONAL':
-      return {
-        background: '#F3E5F5',
-        color: '#7B1FA2',
-        borderColor: '#BA68C8'
-      };
-    default:
-      return {
-        background: '#FAFAFA',
-        color: '#424242',
-        borderColor: '#9E9E9E'
-      };
-  }
-};
 
 const getTagIcon = (tag: string) => {
   const iconType = tag.split(' ')[1];
