@@ -308,31 +308,29 @@ const TechItem = ({
           />
         </Box>
         <Box sx={{ flex: 1 }}>
-          <Box display="flex" alignItems="center" justifyContent="space-between">
-            <Typography variant="subtitle1" fontWeight="bold">
-              {item.name}
-            </Typography>
-            <Chip
-              icon={getTagIcon(item.tag)}
-              label={item.tag.split(' ')[1]}
-              size="small"
-              variant="outlined"
-              sx={{
-                ...getTagColor(item.tag),
-                '& .MuiChip-icon': {
-                  color: '#ffffff',
-                  marginLeft: '8px'
-                },
-                borderRadius: '16px',
-                fontWeight: 500,
-                height: '28px',
-                minWidth: '140px',
-                paddingLeft: '12px',
-                paddingRight: '12px',
-                fontSize: '0.9rem'
-              }}
-            />
-          </Box>
+          <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
+            {item.name}
+          </Typography>
+          <Chip
+            icon={getTagIcon(item.tag)}
+            label={item.tag.split(' ')[1]}
+            size="small"
+            variant="outlined"
+            sx={{
+              ...getTagColor(item.tag),
+              '& .MuiChip-icon': {
+                color: '#ffffff',
+                marginLeft: '8px'
+              },
+              borderRadius: '16px',
+              fontWeight: 500,
+              height: '28px',
+              minWidth: '140px',
+              paddingLeft: '12px',
+              paddingRight: '12px',
+              fontSize: '0.9rem'
+            }}
+          />
         </Box>
       </Paper>
     </Tooltip>
