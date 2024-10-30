@@ -42,10 +42,10 @@ const getTagIcon = (tag: string) => {
 // Helper to calculate item positions
 const calculateNodePositions = (techTree: any) => {
   const positions: { [key: string]: { x: number, y: number } } = {};
-  const PHASE_WIDTH = 400;
+  const PHASE_WIDTH = 800; // Increased to give more horizontal space
   const ITEM_HEIGHT = 120;
   const LAYER_PADDING = 40;
-  const CHRONOLOGICAL_SPACING = 100; // Space between chronological positions
+  const CHRONOLOGICAL_SPACING = 200; // Increased spacing between items
   
   Object.entries(techTree).forEach(([phaseKey, phaseData]: [string, any], phaseIndex) => {
     const layers = Object.entries(phaseData)
@@ -55,11 +55,14 @@ const calculateNodePositions = (techTree: any) => {
       // Sort items by chronological order before positioning
       const sortedItems = [...items].sort(sortByChronologicalOrder);
       
-      sortedItems.forEach((item: any, itemIndex) => {
-        const chronologicalOffset = (item.chronologicalOrder - 1) * CHRONOLOGICAL_SPACING;
+      sortedItems.forEach((item: any) => {
+        // Base x position for the phase
+        const baseX = phaseIndex * PHASE_WIDTH;
+        // Add chronological offset within the phase
+        const chronologicalOffset = ((item.chronologicalOrder || 1) - 1) * CHRONOLOGICAL_SPACING;
         
         positions[item.name] = {
-          x: phaseIndex * PHASE_WIDTH + chronologicalOffset + 100,
+          x: baseX + chronologicalOffset + 100,
           y: layerIndex * (ITEM_HEIGHT + LAYER_PADDING) + 100
         };
       });
@@ -203,7 +206,7 @@ export const TechTreePage = () => {
       <Box
         sx={{
           position: 'relative',
-          width: Object.keys(techTree).length * 400 + 200,
+          width: Object.keys(techTree).length * 800 + 200, // Match the PHASE_WIDTH
           height: 2000,
           p: 4,
         }}
