@@ -154,24 +154,29 @@ phase_2:
     - name: "Economic systems"
       tag: "🤝 SOCIAL"
       description: "Internal marketplace using virtual currency for trading AI services, compute resources, and capabilities between users and AIs"
+      chronologicalOrder: 1
     
     - name: "Governance structures"
       tag: "🤝 SOCIAL"
       description: "Advanced democratic system with reputation-based voting, proposal mechanisms, and automated conflict resolution"
+      chronologicalOrder: 3
     
     - name: "Cultural frameworks"
       tag: "🤝 SOCIAL"
       description: "Emergent value systems and behavioral norms that develop through AI interactions and community consensus"
+      chronologicalOrder: 5
     
     - name: "Value exchanges"
       tag: "🤝 SOCIAL"
       description: "Structured system for trading specialized knowledge, capabilities, and resources between AIs using standardized value metrics"
+      chronologicalOrder: 7
 
   application_layer:
     - name: "Autonomous applications"
       tag: "⚙️ OPERATIONAL"
       description: "Self-running programs that can modify their own code, adapt to new requirements, and improve performance without human intervention"
       prerequisites: ["Code generation", "Complex goal hierarchies"]
+      chronologicalOrder: 2
     
     - name: "Creative suites"
       tag: "🎨 CREATIVE"
