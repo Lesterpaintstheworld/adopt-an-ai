@@ -8,7 +8,7 @@
     "build": "tsc && vite build", 
     "preview": "vite preview",
     "start": "vite preview --host 0.0.0.0 --port 3000",
-    "generate-icons": "cross-env TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' ts-node scripts/generatePerkIcons.ts"
+    "generate-icons": "ts-node --project tsconfig.scripts.json scripts/generatePerkIcons.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
