@@ -7,6 +7,13 @@ import {
   Tooltip,
 } from '@mui/material';
 
+// Constants for layout calculations
+const PHASE_WIDTH = 1200;
+const ITEM_HEIGHT = 120;
+const LAYER_PADDING = 40;
+const CHRONOLOGICAL_SPACING = 250;
+const PHASE_START_PADDING = 150;
+
 const sortByChronologicalOrder = (a: any, b: any) => {
   return (a.chronologicalOrder || 1) - (b.chronologicalOrder || 1);
 };
@@ -42,11 +49,6 @@ const getTagIcon = (tag: string) => {
 // Helper to calculate item positions
 const calculateNodePositions = (techTree: any) => {
   const positions: { [key: string]: { x: number, y: number } } = {};
-  const PHASE_WIDTH = 1200;
-  const ITEM_HEIGHT = 120;
-  const LAYER_PADDING = 40;
-  const CHRONOLOGICAL_SPACING = 250;
-  const PHASE_START_PADDING = 150;
   
   Object.entries(techTree).forEach(([phaseKey, phaseData]: [string, any], phaseIndex) => {
     const layers = Object.entries(phaseData)
