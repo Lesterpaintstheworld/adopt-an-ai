@@ -26,8 +26,16 @@ def icon_exists(perk_name: str) -> bool:
 
 def generate_dalle_prompt(perk):
     """Generate DALL-E prompt based on perk data."""
-    # Get description, falling back to shortDescription if available, or a default
-    description = perk.get('description') or perk.get('shortDescription') or perk.get('longDescription') or perk['name']
+    # Get description, with proper error handling using .get()
+    description = None
+    for field in ['shortDescription', 'description', 'longDescription']:
+        description = perk.get(field)
+        if description:
+            break
+    
+    # If no description found, use name
+    if not description:
+        description = perk['name']
     
     # Get tag type, with error handling
     tag = perk.get('tag', 'UNKNOWN')
