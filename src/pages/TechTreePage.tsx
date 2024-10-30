@@ -71,25 +71,27 @@ const calculateNodePositions = (techTree: any) => {
   const positions: { [key: string]: { x: number, y: number } } = {};
   let currentX = 0; // Track the cumulative x position
   
-  Object.entries(techTree).forEach(([phaseKey, phaseData]: [string, any], phaseIndex) => {
+  Object.entries(techTree).forEach(([phaseKey, phaseData]: [string, any]) => {
     const phaseWidth = calculatePhaseWidth(phaseData);
-    const layers = Object.entries(phaseData)
-      .filter(([key]) => !['name', 'period', 'description'].includes(key));
     
-    layers.forEach(([layerKey, items]: [string, any], layerIndex) => {
-      const sortedItems = [...items].sort(sortByChronologicalOrder);
-      
-      sortedItems.forEach((item: any) => {
-        const chronologicalOrder = item.chronologicalOrder || 1;
-        
-        positions[item.name] = {
-          x: currentX + PHASE_START_PADDING + ((chronologicalOrder - 1) * CHRONOLOGICAL_SPACING),
-          y: layerIndex * (ITEM_HEIGHT + LAYER_PADDING) + 100
-        };
+    // Handle all non-metadata entries (layers)
+    Object.entries(phaseData)
+      .filter(([key]) => !['name', 'period', 'description'].includes(key))
+      .forEach(([layerKey, items]: [string, any], layerIndex) => {
+        // Process each item in the layer
+        items.forEach((item: any) => {
+          if (!item.chronologicalOrder) {
+            console.warn(`Missing chronologicalOrder for item: ${item.name}`);
+          }
+          
+          positions[item.name] = {
+            x: currentX + ((item.chronologicalOrder || 1) * CHRONOLOGICAL_SPACING),
+            y: layerIndex * (ITEM_HEIGHT + LAYER_PADDING) + 100
+          };
+        });
       });
-    });
     
-    currentX += phaseWidth; // Move to the next phase position
+    currentX += phaseWidth; // Move to next phase
   });
   
   return positions;
