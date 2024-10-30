@@ -140,16 +140,26 @@ const ConnectionLines = ({
           
           // Calculate the midpoint for the path
           const midX = startX + (endX - startX) / 2;
+          const goingUp = endY < startY;
 
-          // Create path with rounded corners
-          const path = `
-            M ${startX} ${startY}
-            H ${midX - CORNER_RADIUS}
-            Q ${midX} ${startY} ${midX} ${startY + CORNER_RADIUS}
-            V ${endY - CORNER_RADIUS}
-            Q ${midX} ${endY} ${midX + CORNER_RADIUS} ${endY}
-            H ${endX}
-          `;
+          // Create path with rounded corners based on direction
+          const path = goingUp 
+            ? `
+              M ${startX} ${startY}
+              H ${midX - CORNER_RADIUS}
+              Q ${midX} ${startY} ${midX} ${startY - CORNER_RADIUS}
+              V ${endY + CORNER_RADIUS}
+              Q ${midX} ${endY} ${midX + CORNER_RADIUS} ${endY}
+              H ${endX}
+            `
+            : `
+              M ${startX} ${startY}
+              H ${midX - CORNER_RADIUS}
+              Q ${midX} ${startY} ${midX} ${startY + CORNER_RADIUS}
+              V ${endY - CORNER_RADIUS}
+              Q ${midX} ${endY} ${midX + CORNER_RADIUS} ${endY}
+              H ${endX}
+            `;
 
           return (
             <g key={`${prereq}-${item.name}`}>
