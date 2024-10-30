@@ -37,7 +37,7 @@ async def generate_dalle_prompt(perk, client: OpenAI):
     
     prompt = f"""You are an expert at creating DALL-E image generation prompts.
 Generate a detailed prompt for a World of Warcraft style ability icon with a futuristic twist.
-The icon should maintain consistency with other ability icons while being unique and recognizable.
+The icon must have ONE prominent, central feature that makes it instantly recognizable.
 
 The icon represents this perk:
 Name: {perk_info['name']}
@@ -47,16 +47,18 @@ Description: {perk_info['description']}
 Tag type: {perk_info['tag']}
 
 Requirements:
+- Must have ONE clear, dominant symbol/object in the center
+- The central element should take up about 60-70% of the icon space
+- Background elements should enhance but not compete with the main symbol
 - Must be in World of Warcraft ability icon style
 - Should have a futuristic sci-fi aesthetic
-- Include specific visual elements that represent the perk's function
-- Use appropriate colors and symbols
+- Use appropriate colors and dramatic lighting
 - Must be instantly recognizable at small sizes
-- Should include lighting effects and depth
+- Include a subtle outer glow or energy effect around the central element
 - Must maintain professional game-like quality
 
-Focus on the visual elements only. Be specific but concise.
-Do not include technical specifications or image size requirements."""
+Focus on describing the main central element first, then briefly mention supporting elements.
+Be specific but concise. Do not include technical specifications or image size requirements."""
 
     try:
         completion = await client.chat.completions.create(
@@ -72,7 +74,7 @@ Do not include technical specifications or image size requirements."""
         dalle_prompt = completion.choices[0].message.content
         
         # Add technical specifications
-        technical_specs = "The image should be a square icon with a dark border and inner glow, highly detailed in a semi-realistic style. The composition should be centered and instantly recognizable as a game ability icon while maintaining a sci-fi aesthetic."
+        technical_specs = "The image should be a square icon with a dark border and inner glow, highly detailed in a semi-realistic style. The composition should be centered with one dominant element taking up 60-70% of the space, while maintaining a sci-fi aesthetic."
         
         return f"{dalle_prompt} {technical_specs}"
         
@@ -99,18 +101,18 @@ def generate_basic_dalle_prompt(perk):
     tag_type = tag.split(' ')[1] if ' ' in tag else 'UNKNOWN'
     
     style_guides = {
-        'CREATIVE': 'vibrant and artistic, with warm colors and flowing designs',
-        'TECHNICAL': 'technical and precise, with blue tones and geometric patterns',
-        'SOCIAL': 'organic and connected, with green hues and interlinked elements',
-        'INTEGRATION': 'harmonious and balanced, with purple tones and unified components',
-        'COGNITIVE': 'complex and neural, with orange highlights and branching patterns',
-        'OPERATIONAL': 'structured and efficient, with cyan accents and systematic layouts'
+        'CREATIVE': 'vibrant and artistic, with a glowing central symbol surrounded by warm, flowing energy',
+        'TECHNICAL': 'technical and precise, with a prominent geometric central element in blue tones',
+        'SOCIAL': 'organic and connected, with a central networking symbol in bright green hues',
+        'INTEGRATION': 'harmonious and balanced, with a central unified symbol in purple tones',
+        'COGNITIVE': 'complex and neural, with a prominent brain-inspired central element in orange',
+        'OPERATIONAL': 'structured and efficient, with a central mechanical symbol in cyan accents'
     }
     
-    style_guide = style_guides.get(tag_type, 'balanced and professional, with neutral tones and clean designs')
+    style_guide = style_guides.get(tag_type, 'balanced and professional, with a clear central symbol in neutral tones')
     
-    base_prompt = f"Create a World of Warcraft style ability icon with a futuristic twist. The icon represents \"{description}\". Style: {style_guide}."
-    technical_specs = "The image should be a square icon with a dark border and inner glow, highly detailed in a semi-realistic style. The composition should be centered and instantly recognizable as a game ability icon while maintaining a sci-fi aesthetic."
+    base_prompt = f"Create a World of Warcraft style ability icon with a futuristic twist. The icon features a large, prominent central symbol representing \"{description}\". Style: {style_guide}."
+    technical_specs = "The image should be a square icon with a dark border and inner glow, highly detailed in a semi-realistic style. The central element should occupy 60-70% of the space, with supporting elements enhancing but not overwhelming the main focus."
     
     return f"{base_prompt} {technical_specs}"
 
