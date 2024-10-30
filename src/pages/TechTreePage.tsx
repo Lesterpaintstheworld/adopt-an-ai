@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import { TechTree, PhaseData, Perk } from '@/types/tech';
 import { TAG_STYLES } from '@/utils/tagStyles';
-import { getPerkIconUrl } from '@/utils/perkIconGenerator';
+import { getPerkIconUrl } from '../utils/perkIconGenerator';
 import CodeIcon from '@mui/icons-material/Code';
 import BrushIcon from '@mui/icons-material/Brush';
 import PeopleIcon from '@mui/icons-material/People';
