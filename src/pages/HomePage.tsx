@@ -76,10 +76,6 @@ const faqs: FAQItem[] = [
     answer: "Yes, you can guide their initial development focus and help shape their growth journey, though they'll increasingly make autonomous decisions as they develop."
   }
 ];
-import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import AddIcon from '@mui/icons-material/Add';
 
 const TechTreeNode = ({ x, y, label, delay = 0 }) => (
   <motion.div
