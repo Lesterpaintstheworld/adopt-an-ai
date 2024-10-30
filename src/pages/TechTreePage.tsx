@@ -131,22 +131,46 @@ const ConnectionLines = ({
             highlightedItem === item.name || 
             highlightedItem === prereq;
 
+          // Calculate the path points
+          const startX = start.x + 280;
+          const startY = start.y + 40;
+          const endX = end.x;
+          const endY = end.y + 40;
+          const midX = (startX + endX) / 2;
+
           return (
-            <path
-              key={`${prereq}-${item.name}`}
-              d={`
-                M${start.x + 280} ${start.y + 40}
-                H${start.x + 340}
-                C${start.x + 360} ${start.y + 40},
-                ${start.x + 360} ${end.y + 40},
-                ${start.x + 380} ${end.y + 40}
-                H${end.x}
-              `}
-              stroke={isHighlighted ? "#000" : "#666"}
-              strokeWidth={isHighlighted ? "3" : "2"}
-              fill="none"
-              strokeDasharray={isHighlighted ? "" : "4"}
-            />
+            <g key={`${prereq}-${item.name}`}>
+              <defs>
+                <marker
+                  id={`arrowhead-${isHighlighted ? 'highlighted' : 'normal'}`}
+                  markerWidth="10"
+                  markerHeight="7"
+                  refX="9"
+                  refY="3.5"
+                  orient="auto"
+                >
+                  <polygon
+                    points="0 0, 10 3.5, 0 7"
+                    fill={isHighlighted ? "#000" : "#666"}
+                  />
+                </marker>
+              </defs>
+              <path
+                d={`
+                  M${startX} ${startY}
+                  H${startX + 40}
+                  C${startX + 60} ${startY},
+                  ${endX - 60} ${endY},
+                  ${endX - 40} ${endY}
+                  H${endX}
+                `}
+                stroke={isHighlighted ? "#000" : "#666"}
+                strokeWidth={isHighlighted ? "3" : "2"}
+                fill="none"
+                strokeDasharray={isHighlighted ? "" : "4"}
+                markerEnd={`url(#arrowhead-${isHighlighted ? 'highlighted' : 'normal'})`}
+              />
+            </g>
           );
         })
       )}
