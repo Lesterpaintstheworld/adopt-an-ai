@@ -80,22 +80,29 @@ async function fileExists(path: string): Promise<boolean> {
 // Core functionality
 async function generateIconPrompt(perk: Perk): string {
   try {
+    console.log(`Generating prompt for perk: ${perk.name}`);
+    console.log(`Perk tag: ${perk.tag}`);
+    
     const specificElements = await generateSpecificIconElements(perk, openai);
+    console.log(`Generated specific elements: ${specificElements}`);
     return specificElements;
   } catch (error) {
     console.warn('Failed to generate specific prompt, falling back to default:', error);
     const tagType = perk.tag.split(' ')[1];
-    const style = TAG_STYLES[tagType];
+    console.log(`Using tag type: ${tagType} for default prompt`);
     
+    const style = TAG_STYLES[tagType];
     if (!style) {
+      console.error(`No style found for tag type: ${tagType}`);
       throw new Error(`Unknown tag type: ${tagType}`);
     }
 
     const basePrompt = `Create a World of Warcraft style ability icon with a futuristic twist. The icon should feature ${style.palette}. The icon represents "${perk.shortDescription || perk.description}". Style: ${style.theme}.`;
-    
     const technicalSpecs = `The image should be a square icon with a dark border and inner glow, highly detailed in a semi-realistic style. The composition should be centered and instantly recognizable as a game ability icon while maintaining a sci-fi aesthetic.`;
-
-    return `${basePrompt} ${technicalSpecs}`;
+    const finalPrompt = `${basePrompt} ${technicalSpecs}`;
+    
+    console.log(`Generated fallback prompt: ${finalPrompt}`);
+    return finalPrompt;
   }
 }
 
@@ -161,6 +168,7 @@ async function generateIcon(perk: Perk, openai: OpenAI): Promise<Buffer> {
   try {
     const prompt = await generateIconPrompt(perk);
     console.log(`Generating icon for ${perk.name} with prompt: ${prompt}`);
+    console.log('Sending request to DALL-E...');
     
     const response = await openai.images.generate({
       model: "dall-e-3",
@@ -170,15 +178,20 @@ async function generateIcon(perk: Perk, openai: OpenAI): Promise<Buffer> {
       quality: "standard", // Standard quality for faster generation
       response_format: "b64_json"
     });
+    console.log('Received response from DALL-E');
 
     const imageData = response.data[0].b64_json;
     if (!imageData) {
       throw new Error('No image data received from OpenAI');
     }
+    console.log('Successfully extracted image data');
 
     return Buffer.from(imageData, 'base64');
   } catch (error) {
     console.error(`Error generating icon for ${perk.name}:`, error);
+    if (error instanceof Error) {
+      console.error('Error stack:', error.stack);
+    }
     throw error;
   }
 }
