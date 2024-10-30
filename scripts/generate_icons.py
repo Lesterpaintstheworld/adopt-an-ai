@@ -24,8 +24,65 @@ def icon_exists(perk_name: str) -> bool:
     """Check if icon already exists."""
     return (ICONS_DIR / get_perk_icon_filename(perk_name)).exists()
 
-def generate_dalle_prompt(perk):
-    """Generate DALL-E prompt based on perk data."""
+async def generate_dalle_prompt(perk, client: OpenAI):
+    """Generate DALL-E prompt using GPT-4o first."""
+    # Prepare all available perk information
+    perk_info = {
+        'name': perk['name'],
+        'tag': perk.get('tag', 'UNKNOWN'),
+        'shortDescription': perk.get('shortDescription', ''),
+        'longDescription': perk.get('longDescription', ''),
+        'description': perk.get('description', '')
+    }
+    
+    prompt = f"""You are an expert at creating DALL-E image generation prompts.
+Generate a detailed prompt for a World of Warcraft style ability icon with a futuristic twist.
+The icon should maintain consistency with other ability icons while being unique and recognizable.
+
+The icon represents this perk:
+Name: {perk_info['name']}
+Short description: {perk_info['shortDescription']}
+Long description: {perk_info['longDescription']}
+Description: {perk_info['description']}
+Tag type: {perk_info['tag']}
+
+Requirements:
+- Must be in World of Warcraft ability icon style
+- Should have a futuristic sci-fi aesthetic
+- Include specific visual elements that represent the perk's function
+- Use appropriate colors and symbols
+- Must be instantly recognizable at small sizes
+- Should include lighting effects and depth
+- Must maintain professional game-like quality
+
+Focus on the visual elements only. Be specific but concise.
+Do not include technical specifications or image size requirements."""
+
+    try:
+        completion = await client.chat.completions.create(
+            model="gpt-4o",
+            messages=[
+                {"role": "system", "content": "You are an expert at creating DALL-E image generation prompts."},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.7,
+            max_tokens=150
+        )
+        
+        dalle_prompt = completion.choices[0].message.content
+        
+        # Add technical specifications
+        technical_specs = "The image should be a square icon with a dark border and inner glow, highly detailed in a semi-realistic style. The composition should be centered and instantly recognizable as a game ability icon while maintaining a sci-fi aesthetic."
+        
+        return f"{dalle_prompt} {technical_specs}"
+        
+    except Exception as e:
+        print(f"Error generating GPT-4o prompt for {perk['name']}: {str(e)}")
+        # Fall back to basic prompt generation if GPT-4o fails
+        return generate_basic_dalle_prompt(perk)
+
+def generate_basic_dalle_prompt(perk):
+    """Fallback function for basic DALL-E prompt generation."""
     # Get description, with proper error handling using .get()
     description = None
     for field in ['shortDescription', 'description', 'longDescription']:
@@ -57,18 +114,18 @@ def generate_dalle_prompt(perk):
     
     return f"{base_prompt} {technical_specs}"
 
-def generate_icon(client: OpenAI, perk, max_retries=3):
+async def generate_icon(client: OpenAI, perk, max_retries=3):
     """Generate icon using DALL-E."""
-    # Get the prompt synchronously now that generate_dalle_prompt is not async
-    prompt = generate_dalle_prompt(perk)
+    # Get the prompt using GPT-4o
+    prompt = await generate_dalle_prompt(perk, client)
     
     for attempt in range(max_retries):
         try:
             print(f"Generating icon for {perk['name']} (attempt {attempt + 1}/{max_retries})")
             
-            response = client.images.generate(
+            response = await client.images.generate(
                 model="dall-e-3",
-                prompt=prompt,  # Use the prompt directly
+                prompt=prompt,
                 n=1,
                 size="1024x1024",
                 response_format="b64_json"
@@ -100,7 +157,7 @@ def process_perks(tech_tree_data):
                 perks.extend(value)
     return perks
 
-def main():
+async def main():
     try:
         # Ensure we have an OpenAI API key
         if not os.getenv('OPENAI_API_KEY'):
@@ -128,7 +185,7 @@ def main():
                 continue
             
             try:
-                image_data = generate_icon(client, perk)
+                image_data = await generate_icon(client, perk)
                 save_icon(image_data, perk['name'])
             except Exception as e:
                 print(f"Failed to generate icon for {perk['name']}: {str(e)}")
@@ -141,4 +198,5 @@ def main():
         raise
 
 if __name__ == "__main__":
-    main()
+    import asyncio
+    asyncio.run(main())
