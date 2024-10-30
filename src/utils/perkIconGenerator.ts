@@ -34,133 +34,116 @@ const iconExists = async (perkName: string): Promise<boolean> => {
   }
 };
 
-// Get the URL for a perk's icon (for use in the frontend)
-export const getPerkIconUrl = (perkName: string): string => {
-  return `/perk-icons/${getPerkIconFilename(perkName)}`;
-};
-
 // Generate and save icon for a perk
-// Add a function to generate fallback icons for error cases
-const generateFallbackIcon = (perk: Perk): string => {
-  const canvas = document.createElement('canvas');
-  canvas.width = 128;
-  canvas.height = 128;
-  const ctx = canvas.getContext('2d');
-  if (!ctx) return '';
+async function generateIcon(perk: Perk, openai: OpenAI): Promise<Buffer> {
+  try {
+    const prompt = await generateDallePrompt(perk, openai);
+    
+    const response = await openai.images.generate({
+      model: "dall-e-3",
+      prompt: prompt,
+      n: 1,
+      size: "1024x1024",
+      response_format: "b64_json"
+    });
 
-  // Get tag style for colors
-  const tagType = perk.tag.split(' ')[1];
-  const style = TAG_STYLES[tagType];
-
-  // Draw gradient background
-  const gradient = ctx.createLinearGradient(0, 0, 128, 128);
-  gradient.addColorStop(0, style.background);
-  gradient.addColorStop(1, style.color);
-  ctx.fillStyle = gradient;
-  ctx.fillRect(0, 0, 128, 128);
-
-  // Add perk initials
-  ctx.fillStyle = '#ffffff';
-  ctx.font = 'bold 48px Arial';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  const initials = perk.name
-    .split(' ')
-    .map(word => word[0])
-    .join('')
-    .substring(0, 2);
-  ctx.fillText(initials, 64, 64);
-
-  return canvas.toDataURL();
-};
-
-// Add error handling and retry logic
-export const generateAndSaveIconWithRetry = async (
-  perk: Perk,
-  openaiApiKey: string,
-  maxRetries = 3
-): Promise<string> => {
-  for (let i = 0; i < maxRetries; i++) {
-    try {
-      return await generateAndSaveIcon(perk, openaiApiKey);
-    } catch (error) {
-      console.error(`Attempt ${i + 1} failed for ${perk.name}:`, error);
-      if (i === maxRetries - 1) {
-        // Use fallback on final retry
-        const fallbackIcon = generateFallbackIcon(perk);
-        const iconPath = getPerkIconPath(perk.name);
-        await fs.writeFile(iconPath, fallbackIcon.split(',')[1], 'base64');
-        return iconPath;
-      }
-      // Wait before retrying
-      await new Promise(resolve => setTimeout(resolve, 2000 * (i + 1)));
+    const imageData = response.data[0].b64_json;
+    if (!imageData) {
+      throw new Error('No image data received from OpenAI');
     }
+
+    return Buffer.from(imageData, 'base64');
+  } catch (error) {
+    console.error(`Error generating icon for ${perk.name}:`, error);
+    throw error;
   }
-  throw new Error('Should never reach here due to fallback');
-};
-
-export const generateAndSaveIcon = async (
-  perk: Perk, 
-  openai: OpenAI
-): Promise<string> => {
-  await ensureIconsDirectory();
-  
-  const iconPath = getPerkIconPath(perk.name);
-  
-  // Check if icon already exists
-  if (await iconExists(perk.name)) {
-    return iconPath;
-  }
-
-  return generateAndSaveIconWithRetry(perk, openaiApiKey);
-};
-
-// Get the URL for a perk's icon (for use in the frontend)
-export const getPerkIconUrl = (perkName: string): string => {
-  return `/perk-icons/${getPerkIconFilename(perkName)}`;
-};
-
-interface TagStyle {
-  background: string;
-  color: string;
-  palette: string; // Color description for the prompt
-  theme: string;  // Visual theme elements for the prompt
 }
 
-const TAG_STYLES: { [key: string]: TagStyle } = {
+export async function generateAndSaveIcon(perk: Perk, openai: OpenAI): Promise<string> {
+  try {
+    await ensureIconsDirectory();
+    const iconPath = getPerkIconPath(perk.name);
+    
+    // Check if icon already exists
+    if (await iconExists(perk.name)) {
+      return iconPath;
+    }
+
+    const imageBuffer = await generateIcon(perk, openai);
+    await fs.writeFile(iconPath, imageBuffer);
+    return iconPath;
+  } catch (error) {
+    console.error(`Error saving icon for ${perk.name}:`, error);
+    throw error;
+  }
+}
+
+export async function generateAndSaveIconWithRetry(
+  perk: Perk,
+  openai: OpenAI,
+  maxRetries = 3
+): Promise<string> {
+  let lastError: Error | null = null;
+  
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      return await generateAndSaveIcon(perk, openai);
+    } catch (error) {
+      lastError = error as Error;
+      console.error(`Attempt ${i + 1} failed for ${perk.name}:`, error);
+      if (i < maxRetries - 1) {
+        // Wait before retrying
+        await new Promise(resolve => setTimeout(resolve, 2000 * (i + 1)));
+      }
+    }
+  }
+  
+  // If we get here, all retries failed
+  throw new Error(`Failed to generate icon for ${perk.name} after ${maxRetries} retries. Last error: ${lastError?.message}`);
+}
+
+// Get the URL for a perk's icon (for use in the frontend)
+export const getPerkIconUrl = (perkName: string): string => {
+  return `/perk-icons/${getPerkIconFilename(perkName)}`;
+};
+
+async function generateDallePrompt(perk: Perk, openai: OpenAI): Promise<string> {
+  const tagType = perk.tag.split(' ')[1];
+  const style = TAG_STYLES[tagType];
+  
+  if (!style) {
+    throw new Error(`Unknown tag type: ${tagType}`);
+  }
+
+  const basePrompt = `Create a World of Warcraft style ability icon with a futuristic twist. The icon should feature ${style.palette}. The icon represents "${perk.shortDescription || perk.description}". Style: ${style.theme}.`;
+  
+  const technicalSpecs = `The image should be a square icon with a dark border and inner glow, highly detailed in a semi-realistic style. The composition should be centered and instantly recognizable as a game ability icon while maintaining a sci-fi aesthetic.`;
+
+  return `${basePrompt} ${technicalSpecs}`;
+}
+
+const TAG_STYLES: { [key: string]: { palette: string; theme: string } } = {
   'CREATIVE': {
-    background: '#FFE0E9',
-    color: '#D81B60',
     palette: 'vibrant pink and magenta energy',
     theme: 'artistic, flowing energy streams, creative sparks'
   },
   'TECHNICAL': {
-    background: '#E3F2FD',
-    color: '#1976D2',
     palette: 'glowing blue and cyan circuits',
     theme: 'technical, circuit patterns, data streams'
   },
   'SOCIAL': {
-    background: '#E8F5E9',
-    color: '#388E3C',
     palette: 'harmonious green and emerald auras',
     theme: 'interconnected nodes, organic patterns'
   },
   'INTEGRATION': {
-    background: '#EDE7F6',
-    color: '#5E35B1',
     palette: 'deep purple and violet connections',
     theme: 'interwoven patterns, network nodes'
   },
   'COGNITIVE': {
-    background: '#FFF3E0',
-    color: '#E65100',
     palette: 'warm orange and gold neural patterns',
     theme: 'brain-like structures, synaptic connections'
   },
   'OPERATIONAL': {
-    background: '#F3E5F5',
-    color: '#7B1FA2',
     palette: 'royal purple and silver mechanisms',
     theme: 'gears, efficiency symbols, flow patterns'
   }
