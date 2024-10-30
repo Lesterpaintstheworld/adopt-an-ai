@@ -14,6 +14,7 @@ const LAYER_PADDING = 40;
 const CHRONOLOGICAL_SPACING = 400; // Changed from 300 to 400
 const PHASE_START_PADDING = 200; // Reduced from 300 to start items closer to phase beginning
 const PHASE_PADDING = 200; // Increased from 100 to add more space between phases
+const ITEM_IMAGE_SIZE = 60;
 
 const sortByChronologicalOrder = (a: any, b: any) => {
   return (a.chronologicalOrder || 1) - (b.chronologicalOrder || 1);
@@ -290,6 +291,8 @@ const TechItem = ({
           top: position.y,
           width: 280,
           p: 2,
+          display: 'flex',
+          gap: 2,
           '&:hover': {
             transform: 'scale(1.05)',
             transition: 'transform 0.2s',
@@ -304,24 +307,35 @@ const TechItem = ({
           fontWeight: (item.prerequisites || []).includes(highlightedItem) || item.name === highlightedItem ? 'bold' : 'normal',
         }}
       >
-        <Box display="flex" alignItems="center" justifyContent="space-between">
-          <Typography variant="subtitle1" fontWeight="bold">
-            {item.name}
-          </Typography>
-          <Chip
-            icon={getTagIcon(item.tag)}
-            label={item.tag.split(' ')[1]}
-            size="small"
-            variant="outlined"
-            sx={{
-              ...getTagColor(item.tag),
-              borderWidth: '1px',
-              borderStyle: 'solid',
-              '& .MuiSvgIcon-root': {
-                color: getTagColor(item.tag).color
-              }
-            }}
-          />
+        <Box
+          sx={{
+            width: ITEM_IMAGE_SIZE,
+            height: ITEM_IMAGE_SIZE,
+            backgroundColor: 'rgba(255, 255, 255, 0.2)',
+            borderRadius: 1,
+            flexShrink: 0,
+          }}
+        />
+        <Box sx={{ flex: 1 }}>
+          <Box display="flex" alignItems="center" justifyContent="space-between">
+            <Typography variant="subtitle1" fontWeight="bold">
+              {item.name}
+            </Typography>
+            <Chip
+              icon={getTagIcon(item.tag)}
+              label={item.tag.split(' ')[1]}
+              size="small"
+              variant="outlined"
+              sx={{
+                ...getTagColor(item.tag),
+                borderWidth: '1px',
+                borderStyle: 'solid',
+                '& .MuiSvgIcon-root': {
+                  color: getTagColor(item.tag).color
+                }
+              }}
+            />
+          </Box>
         </Box>
       </Paper>
     </Tooltip>
