@@ -76,3 +76,19 @@ export const PaymentSuccessPage = () => {
     </Container>
   );
 };
+import { Box, Typography } from '@mui/material';
+
+const PaymentSuccessPage = () => {
+  return (
+    <Box sx={{ textAlign: 'center', py: 4 }}>
+      <Typography variant="h4" gutterBottom>
+        Payment Successful!
+      </Typography>
+      <Typography variant="body1">
+        Thank you for your purchase. You will receive a confirmation email shortly.
+      </Typography>
+    </Box>
+  );
+};
+
+export default PaymentSuccessPage;

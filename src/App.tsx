@@ -1,13 +1,25 @@
-import { BrowserRouter } from 'react-router-dom';
-import { ThemeProvider } from '@mui/material';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { ThemeProvider, CssBaseline } from '@mui/material';
 import { theme } from './utils/theme';
 import { MainLayout } from './components/layout/MainLayout';
+import PaymentSuccessPage from './pages/PaymentSuccessPage';
+import EnterpriseContactPage from './pages/EnterpriseContactPage';
+
+console.log('App component initializing...');
 
 function App() {
+  console.log('App rendering...');
+  
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <BrowserRouter>
-        <MainLayout />
+        <Routes>
+          <Route path="/" element={<MainLayout />}>
+            <Route path="/payment/success" element={<PaymentSuccessPage />} />
+            <Route path="/enterprise" element={<EnterpriseContactPage />} />
+          </Route>
+        </Routes>
       </BrowserRouter>
     </ThemeProvider>
   );
