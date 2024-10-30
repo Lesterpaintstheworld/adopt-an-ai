@@ -1,6 +1,6 @@
-import dotenv from 'dotenv';
-import OpenAI from 'openai';
-import techTree from '../content/tech/tech-tree.yml';
+const dotenv = require('dotenv');
+const OpenAI = require('openai');
+const techTree = require('../content/tech/tech-tree.yml');
 import { generateAndSaveIcon, generateAndSaveIconWithRetry } from '../src/utils/perkIconGenerator';
 
 dotenv.config();
