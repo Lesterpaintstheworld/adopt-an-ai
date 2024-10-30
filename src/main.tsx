@@ -13,10 +13,14 @@ window.onunhandledrejection = (event) => {
   console.error('Unhandled promise rejection:', event.reason);
 };
 
+console.log('Starting app initialization...');
+
 const rootElement = document.getElementById('root');
 if (!rootElement) {
   throw new Error('Failed to find root element');
 }
+
+console.log('Root element found, attempting to render...');
 
 try {
   ReactDOM.createRoot(rootElement).render(

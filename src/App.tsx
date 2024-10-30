@@ -11,9 +11,13 @@ import { PaymentSuccessPage } from './pages/PaymentSuccessPage';
 import { EnterpriseContactPage } from './pages/EnterpriseContactPage';
 import { TechTreePage } from './pages/TechTreePage';
 function App() {
+  console.log('App component rendering...');
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <div style={{ position: 'fixed', top: 0, left: 0, padding: '10px', background: '#fff', zIndex: 9999 }}>
+        Loading...
+      </div>
       <BrowserRouter>
         <Routes>
           <Route element={<MainLayout />}>
