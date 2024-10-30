@@ -87,16 +87,17 @@ async function generateIcon(perk: Perk, openai: OpenAI): Promise<Buffer> {
 }
 
 async function main() {
-  try {
-    // Validate OpenAI API key
-    if (!process.env.OPENAI_API_KEY) {
-      throw new Error('OPENAI_API_KEY environment variable is not set');
-    }
+  console.log('Starting icon generation process...');
+  
+  // Validate OpenAI API key
+  if (!process.env.OPENAI_API_KEY) {
+    throw new Error('OPENAI_API_KEY environment variable is not set');
+  }
 
-    // Initialize OpenAI client
-    const openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY
-    });
+  // Initialize OpenAI client
+  const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY
+  });
 
     // Ensure icons directory exists
     await ensureDirectory(ICONS_DIR);
@@ -131,21 +132,37 @@ async function main() {
         await fs.writeFile(iconPath, imageBuffer);
         console.log(`Successfully generated icon for ${perk.name}`);
       } catch (error) {
-        console.error(`Failed to generate icon for ${perk.name}:`, error);
+        console.error(`Failed to generate icon for ${perk.name}:`, {
+          name: error?.name,
+          message: error?.message,
+          stack: error?.stack,
+          perk: perk.name
+        });
+        // Re-throw to handle in outer catch
+        throw error;
       }
 
       // Add a small delay between requests
       await new Promise(resolve => setTimeout(resolve, 1000));
     }
 
+    console.log('Icon generation process completed successfully');
   } catch (error) {
-    console.error('Fatal error occurred:', error);
+    console.error('Fatal error occurred during icon generation:', {
+      name: error?.name,
+      message: error?.message,
+      stack: error?.stack
+    });
     process.exit(1);
   }
 }
 
 // Execute with proper error handling
 main().catch(error => {
-  console.error('Unhandled error:', error);
+  console.error('Unhandled error in main process:', {
+    name: error?.name,
+    message: error?.message,
+    stack: error?.stack
+  });
   process.exit(1);
 });
