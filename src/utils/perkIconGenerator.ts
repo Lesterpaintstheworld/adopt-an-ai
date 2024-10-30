@@ -66,15 +66,18 @@ export async function generateAndSaveIcon(perk: Perk, openai: OpenAI): Promise<s
     
     // Check if icon already exists
     if (await iconExists(perk.name)) {
+      console.log(`Icon already exists for ${perk.name}`);
       return iconPath;
     }
 
+    console.log(`Generating icon for ${perk.name}...`);
     const imageBuffer = await generateIcon(perk, openai);
+    console.log(`Writing icon to ${iconPath}...`);
     await fs.writeFile(iconPath, imageBuffer);
     return iconPath;
   } catch (error) {
-    console.error(`Error saving icon for ${perk.name}:`, error);
-    throw error;
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    throw new Error(`Failed to generate/save icon for ${perk.name}: ${errorMessage}`);
   }
 }
 
@@ -87,18 +90,19 @@ export async function generateAndSaveIconWithRetry(
   
   for (let i = 0; i < maxRetries; i++) {
     try {
+      console.log(`Attempt ${i + 1}/${maxRetries} for ${perk.name}`);
       return await generateAndSaveIcon(perk, openai);
     } catch (error) {
-      lastError = error as Error;
-      console.error(`Attempt ${i + 1} failed for ${perk.name}:`, error);
+      lastError = error instanceof Error ? error : new Error(String(error));
+      console.error(`Attempt ${i + 1} failed for ${perk.name}:`, lastError.message);
       if (i < maxRetries - 1) {
-        // Wait before retrying
-        await new Promise(resolve => setTimeout(resolve, 2000 * (i + 1)));
+        const delay = 2000 * (i + 1);
+        console.log(`Waiting ${delay}ms before retry...`);
+        await new Promise(resolve => setTimeout(resolve, delay));
       }
     }
   }
   
-  // If we get here, all retries failed
   throw new Error(`Failed to generate icon for ${perk.name} after ${maxRetries} retries. Last error: ${lastError?.message}`);
 }
 

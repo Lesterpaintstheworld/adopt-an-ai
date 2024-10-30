@@ -62,12 +62,13 @@ function loadTechTree(): Perk[] {
 // Helper function to process a single perk
 async function processPerk(perk: Perk, openai: OpenAI): Promise<boolean> {
   try {
-    console.log(`Processing: ${perk.name}`);
+    console.log(`\nProcessing: ${perk.name}`);
     await generateAndSaveIconWithRetry(perk, openai);
     console.log(`Success: ${perk.name}`);
     return true;
   } catch (error) {
-    console.error(`Failed to process ${perk.name}:`, error);
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    console.error(`Failed to process ${perk.name}:`, errorMessage);
     return false;
   }
 }
@@ -75,14 +76,13 @@ async function processPerk(perk: Perk, openai: OpenAI): Promise<boolean> {
 // Main function
 async function main() {
   try {
-    // Initialize OpenAI
+    console.log('Initializing...');
     const openai = initializeOpenAI();
     
-    // Load perks
+    console.log('Loading tech tree...');
     const perks = loadTechTree();
     console.log(`Found ${perks.length} perks to process`);
 
-    // Process perks sequentially
     let successful = 0;
     let failed = 0;
 
@@ -93,36 +93,40 @@ async function main() {
       } else {
         failed++;
       }
-      // Add a small delay between requests
+      // Add a small delay between perks
       await new Promise(resolve => setTimeout(resolve, 1000));
     }
 
-    // Print summary
     console.log('\nGeneration Summary:');
     console.log(`Successfully generated: ${successful}`);
     console.log(`Failed to generate: ${failed}`);
 
-    // Exit with appropriate code
-    process.exit(failed > 0 ? 1 : 0);
+    if (failed > 0) {
+      process.exit(1);
+    }
   } catch (error) {
-    console.error('Fatal error:', error);
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    console.error('Fatal error:', errorMessage);
     process.exit(1);
   }
 }
 
 // Run the script
 main().catch(error => {
-  console.error('Unhandled error:', error);
+  const errorMessage = error instanceof Error ? error.message : String(error);
+  console.error('Unhandled error:', errorMessage);
   process.exit(1);
 });
 
 // Global error handlers
-process.on('unhandledRejection', (error) => {
-  console.error('Unhandled promise rejection:', error);
+process.on('unhandledRejection', (error: unknown) => {
+  const errorMessage = error instanceof Error ? error.message : String(error);
+  console.error('Unhandled promise rejection:', errorMessage);
   process.exit(1);
 });
 
-process.on('uncaughtException', (error) => {
-  console.error('Uncaught exception:', error);
+process.on('uncaughtException', (error: unknown) => {
+  const errorMessage = error instanceof Error ? error.message : String(error);
+  console.error('Uncaught exception:', errorMessage);
   process.exit(1);
 });
