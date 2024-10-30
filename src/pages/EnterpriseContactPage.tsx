@@ -1,7 +1,7 @@
 import { Box, Container, Typography, TextField, Button } from '@mui/material';
 import { useState } from 'react';
 
-export const EnterpriseContactPage = () => {
+export default function EnterpriseContactPage() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -74,19 +74,3 @@ export const EnterpriseContactPage = () => {
     </Container>
   );
 };
-import { Box, Typography } from '@mui/material';
-
-const EnterpriseContactPage = () => {
-  return (
-    <Box sx={{ textAlign: 'center', py: 4 }}>
-      <Typography variant="h4" gutterBottom>
-        Enterprise Solutions
-      </Typography>
-      <Typography variant="body1">
-        Contact us to learn more about our enterprise offerings.
-      </Typography>
-    </Box>
-  );
-};
-
-export default EnterpriseContactPage;
