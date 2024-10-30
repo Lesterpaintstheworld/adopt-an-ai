@@ -188,7 +188,7 @@ Do not include technical specifications or image size requirements.`;
 
   try {
     const completion = await openai.chat.completions.create({
-      model: "gpt-4",
+      model: "gpt-4o",
       messages: [{ role: "user", content: prompt }],
       temperature: 0.7,
       max_tokens: 150
@@ -196,7 +196,7 @@ Do not include technical specifications or image size requirements.`;
 
     return completion.choices[0].message.content || getDefaultVisualElements(perk);
   } catch (error) {
-    console.error('Failed to generate prompt with GPT-4:', error);
+    console.error('Failed to generate prompt with GPT-4o:', error);
     return getDefaultVisualElements(perk);
   }
 };
