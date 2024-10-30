@@ -34,6 +34,11 @@ const iconExists = async (perkName: string): Promise<boolean> => {
   }
 };
 
+// Get the URL for a perk's icon (for use in the frontend)
+export const getPerkIconUrl = (perkName: string): string => {
+  return `/perk-icons/${getPerkIconFilename(perkName)}`;
+};
+
 // Generate and save icon for a perk
 // Add a function to generate fallback icons for error cases
 const generateFallbackIcon = (perk: Perk): string => {
