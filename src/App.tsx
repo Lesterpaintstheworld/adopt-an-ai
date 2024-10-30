@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import { theme } from './utils/theme';
 import { MainLayout } from './components/layout/MainLayout';
+import HomePage from './pages/HomePage';
 import PaymentSuccessPage from './pages/PaymentSuccessPage';
 import EnterpriseContactPage from './pages/EnterpriseContactPage';
 
@@ -16,6 +17,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainLayout />}>
+            <Route index element={<HomePage />} />
             <Route path="/payment/success" element={<PaymentSuccessPage />} />
             <Route path="/enterprise" element={<EnterpriseContactPage />} />
           </Route>
