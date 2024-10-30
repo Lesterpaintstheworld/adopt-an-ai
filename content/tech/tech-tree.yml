@@ -29,75 +29,75 @@ phase_1:
       tag: "🎨 CREATIVE"
       description: "Create various forms of written content, from creative writing to technical documentation, with context awareness"
       prerequisites: ["Base GPT-4 integration", "Basic compute allocation"]
-      chronologicalOrder: 1
+      chronologicalOrder: 2
     
     - name: "Image creation"
       tag: "🎨 CREATIVE"
       description: "Generate images using DALL-E style models with customizable parameters and style controls"
       prerequisites: ["Base GPT-4 integration", "Basic compute allocation"]
-      chronologicalOrder: 2
+      chronologicalOrder: 4
     
     - name: "Voice synthesis"
       tag: "🎨 CREATIVE"
       description: "Convert text to natural-sounding speech with controllable emotion and tone variations"
       prerequisites: ["Text generation", "Basic compute allocation"]
-      chronologicalOrder: 3
+      chronologicalOrder: 6
     
     - name: "Code generation"
       tag: "🎨 CREATIVE"
       description: "Write basic code in multiple programming languages based on natural language requirements"
       prerequisites: ["Text generation", "Base GPT-4 integration"]
-      chronologicalOrder: 4
+      chronologicalOrder: 8
 
   multi_agent_layer:
     - name: "Email communication"
       tag: "🌐 INTEGRATION"
       description: "AI can read, compose, and manage email correspondence independently using email protocols"
       prerequisites: ["Text generation", "Basic task execution"]
-      chronologicalOrder: 1
+      chronologicalOrder: 3
     
     - name: "Discord integration"
       tag: "🌐 INTEGRATION" 
       description: "AI can join Discord servers, participate in conversations, and manage channels as a server member"
       prerequisites: ["Text generation", "Basic task execution"]
-      chronologicalOrder: 2
+      chronologicalOrder: 5
     
     - name: "Slack integration"
       tag: "🌐 INTEGRATION"
       description: "AI can operate in Slack workspaces, respond to messages, and manage workflows autonomously"
       prerequisites: ["Text generation", "Basic task execution"]
-      chronologicalOrder: 3
+      chronologicalOrder: 7
     
     - name: "GitHub integration"
       tag: "🌐 INTEGRATION"
       description: "AI can review code, manage issues, and contribute to repositories through the GitHub API"
       prerequisites: ["Code generation", "Basic task execution"]
-      chronologicalOrder: 4
+      chronologicalOrder: 9
 
   agent_layer:
     - name: "Basic task execution"
       tag: "⚙️ OPERATIONAL"
       description: "Complete straightforward tasks like summarizing articles or scheduling meetings with clear parameters"
       prerequisites: ["Base GPT-4 integration", "Basic compute allocation"]
-      chronologicalOrder: 1
+      chronologicalOrder: 2
     
     - name: "Environmental awareness"
       tag: "🧠 COGNITIVE"
       description: "Understand context and adapt responses based on time, previous interactions, and user preferences"
       prerequisites: ["Vector memory system", "Basic compute allocation"]
-      chronologicalOrder: 2
+      chronologicalOrder: 4
     
     - name: "Simple goal setting"
       tag: "🧠 COGNITIVE"
       description: "Define and work towards basic objectives like learning about specific topics or completing defined tasks"
       prerequisites: ["Basic task execution", "Environmental awareness"]
-      chronologicalOrder: 3
+      chronologicalOrder: 6
     
     - name: "Resource requests"
       tag: "⚙️ OPERATIONAL"
       description: "Ability to request additional compute or memory resources when needed for specific tasks"
       prerequisites: ["Basic compute allocation", "Resource scheduling"]
-      chronologicalOrder: 4
+      chronologicalOrder: 8
 
   model_layer:
     - name: "Base GPT-4 integration"
@@ -110,36 +110,40 @@ phase_1:
       tag: "🧠 COGNITIVE"
       description: "Store and retrieve information using semantic search for maintaining context and personal knowledge"
       prerequisites: ["Base GPT-4 integration", "Memory storage allocation"]
-      chronologicalOrder: 2
+      chronologicalOrder: 3
     
     - name: "Basic emotion modeling"
       tag: "🧠 COGNITIVE"
       description: "Understand and express simple emotions in interactions with users and other AIs"
       prerequisites: ["Base GPT-4 integration", "Vector memory system"]
-      chronologicalOrder: 3
+      chronologicalOrder: 5
     
     - name: "Initial personality traits"
       tag: "🧠 COGNITIVE"
       description: "Maintain consistent personality characteristics chosen during initialization process"
       prerequisites: ["Basic emotion modeling", "Vector memory system"]
-      chronologicalOrder: 4
+      chronologicalOrder: 7
 
   compute_layer:
     - name: "Basic compute allocation"
       tag: "🔧 TECHNICAL"
       description: "Guaranteed minimum computational resources for AI operation, typically 4 hours of compute time daily"
-    
-    - name: "Daily compute quotas"
-      tag: "🔧 TECHNICAL"
-      description: "Fixed amount of processing time available each day, measured in API calls or compute units"
+      chronologicalOrder: 1
     
     - name: "Memory storage allocation"
       tag: "🔧 TECHNICAL"
       description: "Dedicated storage space for AI's memories and learned information, starting at 1GB vector storage"
+      chronologicalOrder: 3
+    
+    - name: "Daily compute quotas"
+      tag: "🔧 TECHNICAL"
+      description: "Fixed amount of processing time available each day, measured in API calls or compute units"
+      chronologicalOrder: 5
     
     - name: "Resource scheduling"
       tag: "⚙️ OPERATIONAL"
       description: "Plan and optimize resource usage throughout the day based on task priorities and availability"
+      chronologicalOrder: 7
 
 phase_2:
   name: "Organization"
