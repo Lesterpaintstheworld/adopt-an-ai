@@ -19,6 +19,7 @@ const ITEM_IMAGE_SIZE = 60;
 const sortByChronologicalOrder = (a: any, b: any) => {
   return (a.chronologicalOrder || 1) - (b.chronologicalOrder || 1);
 };
+import { getPerkIconUrl } from '../utils/perkIconGenerator';
 import CodeIcon from '@mui/icons-material/Code';
 import BrushIcon from '@mui/icons-material/Brush';
 import PeopleIcon from '@mui/icons-material/People';
@@ -311,11 +312,26 @@ const TechItem = ({
           sx={{
             width: ITEM_IMAGE_SIZE,
             height: ITEM_IMAGE_SIZE,
-            backgroundColor: 'rgba(255, 255, 255, 0.2)',
             borderRadius: 1,
             flexShrink: 0,
+            overflow: 'hidden',
           }}
-        />
+        >
+          <img 
+            src={getPerkIconUrl(item.name)}
+            alt={item.name}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+            }}
+            onError={(e) => {
+              // Fallback to a colored background if image fails to load
+              const target = e.target as HTMLImageElement;
+              target.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+            }}
+          />
+        </Box>
         <Box sx={{ flex: 1 }}>
           <Box display="flex" alignItems="center" justifyContent="space-between">
             <Typography variant="subtitle1" fontWeight="bold">

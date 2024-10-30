@@ -1,4 +1,86 @@
 import { Perk } from '../types/tech';
+import OpenAI from 'openai';
+import fs from 'fs/promises';
+import path from 'path';
+
+const ICONS_DIR = path.join(process.cwd(), 'public', 'perk-icons');
+
+// Ensure the icons directory exists
+const ensureIconsDirectory = async () => {
+  try {
+    await fs.access(ICONS_DIR);
+  } catch {
+    await fs.mkdir(ICONS_DIR, { recursive: true });
+  }
+};
+
+// Convert perk name to valid filename
+const getPerkIconFilename = (perkName: string): string => {
+  return `${perkName.toLowerCase().replace(/[^a-z0-9]/g, '-')}.png`;
+};
+
+// Get the full path for a perk's icon
+const getPerkIconPath = (perkName: string): string => {
+  return path.join(ICONS_DIR, getPerkIconFilename(perkName));
+};
+
+// Check if icon already exists
+const iconExists = async (perkName: string): Promise<boolean> => {
+  try {
+    await fs.access(getPerkIconPath(perkName));
+    return true;
+  } catch {
+    return false;
+  }
+};
+
+// Generate and save icon for a perk
+export const generateAndSaveIcon = async (
+  perk: Perk, 
+  openaiApiKey: string
+): Promise<string> => {
+  await ensureIconsDirectory();
+  
+  const iconPath = getPerkIconPath(perk.name);
+  
+  // Check if icon already exists
+  if (await iconExists(perk.name)) {
+    return iconPath;
+  }
+
+  const openai = new OpenAI({ apiKey: openaiApiKey });
+  const prompt = generateDallePrompt(perk);
+
+  try {
+    const response = await openai.images.generate({
+      model: "dall-e-3",
+      prompt: prompt,
+      n: 1,
+      size: "1024x1024",
+    });
+
+    if (!response.data[0]?.url) {
+      throw new Error('No image URL in DALL-E response');
+    }
+
+    // Download the image
+    const imageResponse = await fetch(response.data[0].url);
+    const imageBuffer = await imageResponse.arrayBuffer();
+    
+    // Save the image
+    await fs.writeFile(iconPath, Buffer.from(imageBuffer));
+    
+    return iconPath;
+  } catch (error) {
+    console.error(`Failed to generate icon for ${perk.name}:`, error);
+    throw error;
+  }
+};
+
+// Get the URL for a perk's icon (for use in the frontend)
+export const getPerkIconUrl = (perkName: string): string => {
+  return `/perk-icons/${getPerkIconFilename(perkName)}`;
+};
 
 interface TagStyle {
   background: string;
