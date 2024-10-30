@@ -6,6 +6,10 @@ import {
   Chip,
   Tooltip,
 } from '@mui/material';
+
+const sortByChronologicalOrder = (a: any, b: any) => {
+  return (a.chronologicalOrder || 1) - (b.chronologicalOrder || 1);
+};
 import CodeIcon from '@mui/icons-material/Code';
 import BrushIcon from '@mui/icons-material/Brush';
 import PeopleIcon from '@mui/icons-material/People';
@@ -175,9 +179,11 @@ export const TechTreePage = () => {
   const allItems = Object.entries(techTree).flatMap(([phaseKey, phaseData]: [string, any]) =>
     Object.entries(phaseData)
       .filter(([key]) => !['name', 'period', 'description'].includes(key))
-      .flatMap(([layerKey, items]: [string, any]) =>
-        items.map((item: any) => ({ ...item, phase: phaseKey }))
-      )
+      .flatMap(([layerKey, items]: [string, any]) => {
+        // Sort items within each layer by chronological order
+        const sortedItems = [...items].sort(sortByChronologicalOrder);
+        return sortedItems.map((item: any) => ({ ...item, phase: phaseKey }));
+      })
   );
 
   return (
