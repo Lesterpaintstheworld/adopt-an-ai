@@ -236,8 +236,10 @@ const TechItem = ({
     <Tooltip
       title={
         <Box>
-          <Typography variant="subtitle2">{item.description}</Typography>
-          {item.prerequisites && (
+          <Typography variant="subtitle2">
+            {item.longDescription || item.description}
+          </Typography>
+          {item.prerequisites && item.prerequisites.length > 0 && (
             <Box mt={1}>
               <Typography variant="caption" color="textSecondary">
                 Prerequisites:
@@ -256,6 +258,11 @@ const TechItem = ({
         </Box>
       }
       arrow
+      PopperProps={{
+        sx: {
+          maxWidth: '500px'
+        }
+      }}
     >
       <Paper
         elevation={2}
@@ -281,7 +288,7 @@ const TechItem = ({
             phase === 'phase_3' ? theme.palette.success.light :
             theme.palette.warning.light,
           opacity: 0.9,
-          fontWeight: (item.prerequisites || []).includes(highlightedItem) || item.name === highlightedItem ? 'bold' : 'normal',
+          fontWeight: item.name === highlightedItem || (item.prerequisites || []).includes(highlightedItem) ? 'bold' : 'normal',
         }}
       >
         <Box
