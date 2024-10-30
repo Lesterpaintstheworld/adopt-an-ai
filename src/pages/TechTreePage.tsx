@@ -357,11 +357,17 @@ export const TechTreePage = () => {
     <Box
       ref={containerRef}
       sx={{
-        position: 'relative',
+        position: 'fixed',
+        top: 64,
+        left: 0,
+        right: 0,
+        bottom: 0,
         overflowX: 'auto',
         overflowY: 'auto',
+        width: '100vw',
         height: 'calc(100vh - 64px)',
-        width: '100%',
+        bgcolor: 'background.default',
+        zIndex: 1,
       }}
     >
       <Box
