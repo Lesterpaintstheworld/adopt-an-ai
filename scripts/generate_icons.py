@@ -118,14 +118,15 @@ def generate_basic_dalle_prompt(perk):
 
 async def generate_icon(client: OpenAI, perk, max_retries=3):
     """Generate icon using DALL-E."""
-    # Get the prompt using GPT-4o
+    # Get the prompt using GPT-4
     prompt = await generate_dalle_prompt(perk, client)
     
     for attempt in range(max_retries):
         try:
             print(f"Generating icon for {perk['name']} (attempt {attempt + 1}/{max_retries})")
             
-            response = await client.images.generate(
+            # Use create() without await since it's not an async method
+            response = client.images.generate(
                 model="dall-e-3",
                 prompt=prompt,
                 n=1,
