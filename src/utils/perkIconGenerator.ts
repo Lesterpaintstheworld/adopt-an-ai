@@ -2,7 +2,6 @@ import { Perk } from '../types/tech.js';
 import OpenAI from 'openai';
 import fs from 'fs/promises';
 import path from 'path';
-import { TAG_STYLES } from './tagStyles';
 
 const ICONS_DIR = path.join(process.cwd(), 'public', 'perk-icons');
 
@@ -114,13 +113,32 @@ export const getPerkIconUrl = (perkName: string): string => {
 
 async function generateDallePrompt(perk: Perk, openai: OpenAI): Promise<string> {
   const tagType = perk.tag.split(' ')[1];
-  const style = TAG_STYLES[tagType];
+  let styleGuide = '';
   
-  if (!style) {
-    throw new Error(`Unknown tag type: ${tagType}`);
+  switch (tagType) {
+    case 'CREATIVE':
+      styleGuide = 'vibrant and artistic, with warm colors and flowing designs';
+      break;
+    case 'TECHNICAL':
+      styleGuide = 'technical and precise, with blue tones and geometric patterns';
+      break;
+    case 'SOCIAL':
+      styleGuide = 'organic and connected, with green hues and interlinked elements';
+      break;
+    case 'INTEGRATION':
+      styleGuide = 'harmonious and balanced, with purple tones and unified components';
+      break;
+    case 'COGNITIVE':
+      styleGuide = 'complex and neural, with orange highlights and branching patterns';
+      break;
+    case 'OPERATIONAL':
+      styleGuide = 'structured and efficient, with cyan accents and systematic layouts';
+      break;
+    default:
+      styleGuide = 'balanced and professional, with neutral tones and clean designs';
   }
 
-  const basePrompt = `Create a World of Warcraft style ability icon with a futuristic twist. The icon should feature ${style.palette}. The icon represents "${perk.shortDescription || perk.description}". Style: ${style.theme}.`;
+  const basePrompt = `Create a World of Warcraft style ability icon with a futuristic twist. The icon represents "${perk.shortDescription || perk.description}". Style: ${styleGuide}.`;
   
   const technicalSpecs = `The image should be a square icon with a dark border and inner glow, highly detailed in a semi-realistic style. The composition should be centered and instantly recognizable as a game ability icon while maintaining a sci-fi aesthetic.`;
 
