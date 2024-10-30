@@ -212,93 +212,111 @@ process.on('unhandledRejection', (reason, promise) => {
 
 // Main execution
 async function main() {
+  console.log('=== Starting Icon Generation Process ===');
+  console.log('Current working directory:', process.cwd());
+  console.log('Node version:', process.version);
+  
   try {
-    console.log('Starting icon generation process...');
-
     // Validate OpenAI API key
+    console.log('Checking OpenAI API key...');
     if (!process.env.OPENAI_API_KEY) {
       throw new Error('OPENAI_API_KEY environment variable is not set');
     }
+    console.log('OpenAI API key found');
 
     // Initialize OpenAI client
+    console.log('Initializing OpenAI client...');
     const openai = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY
     });
 
-    // Test OpenAI connection before proceeding
+    // Test OpenAI connection
+    console.log('Testing OpenAI connection...');
     try {
-      await openai.models.list();
+      const models = await openai.models.list();
+      console.log('Successfully connected to OpenAI. Available models:', models.data.length);
     } catch (apiError) {
+      console.error('OpenAI connection test failed:', apiError);
       throw new Error(`Failed to connect to OpenAI API: ${apiError instanceof Error ? apiError.message : String(apiError)}`);
     }
 
     // Ensure icons directory exists
+    console.log(`Ensuring icons directory exists at: ${ICONS_DIR}`);
     await ensureDirectory(ICONS_DIR);
+    console.log('Icons directory ready');
 
     // Read and parse tech tree
+    console.log(`Reading tech tree from: ${TECH_TREE_PATH}`);
     let techTree;
     try {
-      console.log('Reading tech tree...');
       const techTreeContent = await fs.readFile(TECH_TREE_PATH, 'utf8');
+      console.log('Tech tree file read successfully');
       techTree = yaml.load(techTreeContent) as Record<string, any>;
       if (!techTree) {
         throw new Error('Tech tree file is empty or invalid');
       }
+      console.log('Tech tree parsed successfully');
     } catch (error) {
+      console.error('Failed to read or parse tech tree:', error);
       throw new Error(`Failed to read or parse tech tree: ${error instanceof Error ? error.message : String(error)}`);
     }
 
-  // Extract all perks
-  const perks: Perk[] = [];
-  for (const phase of Object.values(techTree)) {
-    if (typeof phase === 'object') {
-      for (const [key, value] of Object.entries(phase)) {
-        if (Array.isArray(value) && !['name', 'period', 'description'].includes(key)) {
-          perks.push(...value as Perk[]);
+    // Extract and process perks
+    console.log('Extracting perks from tech tree...');
+    const perks: Perk[] = [];
+    for (const phase of Object.values(techTree)) {
+      if (typeof phase === 'object') {
+        for (const [key, value] of Object.entries(phase)) {
+          if (Array.isArray(value) && !['name', 'period', 'description'].includes(key)) {
+            perks.push(...value as Perk[]);
+          }
         }
       }
     }
-  }
+    console.log(`Found ${perks.length} total perks to process`);
 
-  let totalPerks = 0;
-  let completedPerks = 0;
-  let skippedPerks = 0;
-  let failedPerks = 0;
+    let totalPerks = 0;
+    let completedPerks = 0;
+    let skippedPerks = 0;
+    let failedPerks = 0;
 
-  // Process each perk
-  for (const perk of perks) {
-    totalPerks++;
-    const iconPath = path.join(ICONS_DIR, sanitizeFilename(perk.name));
-    
-    try {
-      // Skip if icon already exists
-      if (await fileExists(iconPath)) {
-        skippedPerks++;
-        console.log(`Icon already exists for ${perk.name}, skipping... (${completedPerks}/${totalPerks} completed, ${skippedPerks} skipped)`);
-        continue;
-      }
-
-      console.log(`Processing ${perk.name}...`);
-      const imageBuffer = await generateIconWithRetry(perk, openai);
-      await fs.writeFile(iconPath, imageBuffer);
-      completedPerks++;
-      console.log(`Successfully generated icon for ${perk.name} (${completedPerks}/${totalPerks} completed, ${skippedPerks} skipped)`);
+    // Process each perk
+    for (const perk of perks) {
+      totalPerks++;
+      const iconPath = path.join(ICONS_DIR, sanitizeFilename(perk.name));
       
-      // Add a small delay between requests to avoid rate limiting
-      await new Promise(resolve => setTimeout(resolve, 1000));
-    } catch (error) {
-      failedPerks++;
-      console.error(`Failed to generate icon for ${perk.name} (${failedPerks} failed):`, error);
-    }
-  }
+      console.log(`\n=== Processing perk ${totalPerks}/${perks.length}: ${perk.name} ===`);
+      console.log(`Icon path: ${iconPath}`);
+      
+      try {
+        if (await fileExists(iconPath)) {
+          skippedPerks++;
+          console.log(`Icon already exists for ${perk.name}, skipping... (${completedPerks}/${totalPerks} completed, ${skippedPerks} skipped)`);
+          continue;
+        }
 
-  console.log(`
-Icon generation completed!
-Total perks: ${totalPerks}
-Successfully generated: ${completedPerks}
-Skipped (already exist): ${skippedPerks}
-Failed: ${failedPerks}
-`);
+        console.log(`Generating icon for ${perk.name}...`);
+        const imageBuffer = await generateIconWithRetry(perk, openai);
+        console.log(`Writing icon to ${iconPath}...`);
+        await fs.writeFile(iconPath, imageBuffer);
+        completedPerks++;
+        console.log(`Successfully generated icon for ${perk.name} (${completedPerks}/${totalPerks} completed, ${skippedPerks} skipped)`);
+        
+        // Add a small delay between requests
+        const delay = 1000;
+        console.log(`Waiting ${delay}ms before next request...`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+      } catch (error) {
+        failedPerks++;
+        console.error(`Failed to generate icon for ${perk.name} (${failedPerks} failed):`, error);
+      }
+    }
+
+    console.log(`\n=== Icon Generation Summary ===`);
+    console.log(`Total perks: ${totalPerks}`);
+    console.log(`Successfully generated: ${completedPerks}`);
+    console.log(`Skipped (already exist): ${skippedPerks}`);
+    console.log(`Failed: ${failedPerks}`);
 }
 
 // Execute with proper error handling
