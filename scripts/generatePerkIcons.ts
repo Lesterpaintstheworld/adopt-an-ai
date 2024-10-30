@@ -14,6 +14,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 async function generateIcons() {
+  // Verify OpenAI API key exists
+  if (!process.env.OPENAI_API_KEY) {
+    throw new Error('OPENAI_API_KEY environment variable is not set');
+  }
+
   try {
     // Initialize OpenAI client
     const openai = new OpenAI({
@@ -22,8 +27,22 @@ async function generateIcons() {
 
     // Read and parse the tech tree YAML file
     const techTreePath = path.join(__dirname, '../content/tech/tech-tree.yml');
+    
+    // Verify file exists
+    if (!fs.existsSync(techTreePath)) {
+      throw new Error(`Tech tree file not found at: ${techTreePath}`);
+    }
+
+    console.log('Reading tech tree from:', techTreePath);
     const techTreeContent = fs.readFileSync(techTreePath, 'utf8');
-    const techTree = yaml.load(techTreeContent) as any;
+    
+    let techTree;
+    try {
+      techTree = yaml.load(techTreeContent) as any;
+    } catch (error) {
+      console.error('Error parsing YAML:', error);
+      throw error;
+    }
 
     // Process each phase
     for (const [phaseName, phaseData] of Object.entries(techTree)) {
@@ -42,6 +61,7 @@ async function generateIcons() {
             await generateAndSaveIconWithRetry(item, openai);
           } catch (error) {
             console.error(`Failed to generate icon for ${item.name}:`, error);
+            // Continue with next item instead of stopping completely
           }
         }
       }
@@ -54,4 +74,8 @@ async function generateIcons() {
   }
 }
 
-generateIcons().catch(console.error);
+// Use proper promise handling
+generateIcons().catch(error => {
+  console.error('Fatal error during icon generation:', error);
+  process.exit(1);
+});
