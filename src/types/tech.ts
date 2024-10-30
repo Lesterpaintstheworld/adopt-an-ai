@@ -1,22 +1,20 @@
 export interface Perk {
-  id: string;
   name: string;
+  tag: string;
   description: string;
-  level: number;
-  category: string;
-  icon?: string;
+  shortDescription?: string;
+  longDescription?: string;
+  chronologicalOrder?: number;
   prerequisites?: string[];
-  unlocked?: boolean;
 }
 
-export interface TechTreeContent {
-  meta: {
-    title: string;
-    description: string;
-  };
-  categories: {
-    name: string;
-    description: string;
-  }[];
-  perks: Perk[];
+export interface PhaseData {
+  name: string;
+  period: string;
+  description: string;
+  [key: string]: any; // For layer data
+}
+
+export interface TechTree {
+  [key: string]: PhaseData;
 }
