@@ -52,12 +52,15 @@ const calculateNodePositions = (techTree: any) => {
       .filter(([key]) => !['name', 'period', 'description'].includes(key));
     
     layers.forEach(([layerKey, items]: [string, any], layerIndex) => {
-      items.forEach((item: any) => {
-        const chronologicalOffset = ((item.chronologicalOrder || 1) - 1) * CHRONOLOGICAL_SPACING;
+      // Sort items by chronological order before positioning
+      const sortedItems = [...items].sort(sortByChronologicalOrder);
+      
+      sortedItems.forEach((item: any, itemIndex) => {
+        const chronologicalOffset = (item.chronologicalOrder - 1) * CHRONOLOGICAL_SPACING;
         
         positions[item.name] = {
           x: phaseIndex * PHASE_WIDTH + chronologicalOffset + 100,
-          y: layerIndex * (items.length * ITEM_HEIGHT + LAYER_PADDING) + 100
+          y: layerIndex * (ITEM_HEIGHT + LAYER_PADDING) + 100
         };
       });
     });
