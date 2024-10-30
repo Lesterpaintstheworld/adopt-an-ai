@@ -6,6 +6,7 @@ import {
   Chip,
   Tooltip,
 } from '@mui/material';
+import { TAG_STYLES } from '../utils/tagStyles';
 
 // Constants for layout calculations
 const BASE_PHASE_WIDTH = 2400; // Base width that we'll adjust
