@@ -235,25 +235,27 @@ const TechItem = ({
   return (
     <Tooltip
       title={
-        <Box sx={{ p: 1 }}>
+        <Box sx={{ p: 2 }}>
           <Typography 
             variant="body1"
             sx={{ 
-              fontSize: '1.1rem',
-              lineHeight: 1.5,
-              color: '#ffffff'
+              fontSize: '1.3rem',
+              lineHeight: 1.6,
+              color: '#ffffff',
+              mb: 2
             }}
           >
             {item.longDescription || item.description}
           </Typography>
           {item.prerequisites && item.prerequisites.length > 0 && (
-            <Box mt={2}>
+            <Box mt={3}>
               <Typography 
                 variant="subtitle1"
                 sx={{ 
-                  fontSize: '1rem',
-                  mb: 1,
-                  color: '#ffffff'
+                  fontSize: '1.2rem',
+                  mb: 1.5,
+                  color: '#ffffff',
+                  fontWeight: 'bold'
                 }}
               >
                 Prerequisites:
@@ -265,12 +267,14 @@ const TechItem = ({
                   size="medium"
                   variant="outlined"
                   sx={{ 
-                    m: 0.5,
-                    fontSize: '0.9rem',
+                    m: 0.8,
+                    fontSize: '1.1rem',
                     color: '#ffffff',
                     borderColor: '#ffffff',
+                    height: '36px',
                     '& .MuiChip-label': {
-                      color: '#ffffff'
+                      color: '#ffffff',
+                      px: 2
                     }
                   }}
                 />
@@ -282,13 +286,17 @@ const TechItem = ({
       arrow
       PopperProps={{
         sx: {
-          maxWidth: '800px',
+          maxWidth: '1000px',
           '& .MuiTooltip-tooltip': {
             backgroundColor: 'rgba(0, 0, 0, 0.9)',
-            padding: '16px',
+            padding: '24px',
+            color: '#ffffff',
+            fontSize: '1.2rem'
           }
         }
       }}
+      enterDelay={0}
+      enterNextDelay={0}
     >
       <Paper
         elevation={2}
