@@ -1,155 +1,136 @@
-import fs from 'fs/promises';
+import fs from 'fs';
 import path from 'path';
 import yaml from 'js-yaml';
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
 import OpenAI from 'openai';
 import { fileURLToPath } from 'url';
-import { TAG_STYLES } from '../src/utils/tagStyles';
+import { dirname } from 'path';
+import { generateAndSaveIconWithRetry } from '../src/utils/perkIconGenerator.js';
+import { Perk } from '../src/types/tech.js';
 
-// Configuration
+// Initialize paths
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const ICONS_DIR = path.join(process.cwd(), 'public', 'perk-icons');
-const TECH_TREE_PATH = path.join(process.cwd(), 'content', 'tech', 'tech-tree.yml');
+const __dirname = dirname(__filename);
+const techTreePath = path.resolve(__dirname, '..', 'content', 'tech', 'tech-tree.yml');
 
-// Initialize environment variables
+if (!fs.existsSync(techTreePath)) {
+  throw new Error(`Tech tree file not found at: ${techTreePath}`);
+}
+
+// Load environment variables
 dotenv.config();
 
-// Basic type definitions
-type Perk = {
-  name: string;
-  tag: string;
-  description: string;
-  shortDescription?: string;
-  longDescription?: string;
-  prerequisites?: string[];
-};
-
-// Utility functions
-async function ensureDirectory(dir: string) {
-  try {
-    await fs.access(dir);
-  } catch {
-    await fs.mkdir(dir, { recursive: true });
+// Helper function to validate OpenAI client
+function initializeOpenAI(): OpenAI {
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) {
+    throw new Error('OPENAI_API_KEY not found in environment variables');
   }
+  return new OpenAI({ apiKey });
 }
 
-function sanitizeFilename(name: string): string {
-  return name.toLowerCase().replace(/[^a-z0-9]/g, '-') + '.png';
-}
-
-async function fileExists(path: string): Promise<boolean> {
+// Helper function to load and parse tech tree
+function loadTechTree(): Perk[] {
   try {
-    await fs.access(path);
-    return true;
-  } catch {
-    return false;
-  }
-}
+    const content = fs.readFileSync(techTreePath, 'utf8');
+    const techTree = yaml.load(content) as Record<string, any>;
 
-async function generateIconPrompt(perk: Perk): string {
-  const tagType = perk.tag.split(' ')[1];
-  const style = TAG_STYLES[tagType];
-  
-  if (!style) {
-    throw new Error(`Unknown tag type: ${tagType}`);
-  }
-
-  const basePrompt = `Create a World of Warcraft style ability icon with a futuristic twist. The icon should feature ${style.palette}. The icon represents "${perk.shortDescription || perk.description}". Style: ${style.theme}.`;
-  const technicalSpecs = `The image should be a square icon with a dark border and inner glow, highly detailed in a semi-realistic style. The composition should be centered and instantly recognizable as a game ability icon while maintaining a sci-fi aesthetic.`;
-  
-  return `${basePrompt} ${technicalSpecs}`;
-}
-
-async function generateIcon(perk: Perk, openai: OpenAI): Promise<Buffer> {
-  try {
-    const prompt = await generateIconPrompt(perk);
-    console.log(`Generating icon for ${perk.name} with prompt: ${prompt}`);
-    
-    const response = await openai.images.generate({
-      model: "dall-e-3",
-      prompt: prompt,
-      n: 1,
-      size: "1024x1024",
-      response_format: "b64_json"
-    });
-
-    const imageData = response.data[0].b64_json;
-    if (!imageData) {
-      throw new Error('No image data received from OpenAI');
+    if (!techTree || typeof techTree !== 'object') {
+      throw new Error('Invalid tech tree data structure');
     }
 
-    return Buffer.from(imageData, 'base64');
+    const perks: Perk[] = [];
+    
+    // Extract perks from each phase
+    Object.entries(techTree).forEach(([phase, phaseData]: [string, any]) => {
+      if (phaseData && typeof phaseData === 'object') {
+        Object.entries(phaseData).forEach(([key, items]) => {
+          if (!['name', 'period', 'description'].includes(key) && Array.isArray(items)) {
+            items.forEach((item: any) => {
+              if (item.name && item.tag) {
+                perks.push(item as Perk);
+              }
+            });
+          }
+        });
+      }
+    });
+
+    return perks;
   } catch (error) {
-    console.error(`Error generating icon for ${perk.name}:`, error);
+    console.error('Error loading tech tree:', error);
     throw error;
   }
 }
 
-async function main() {
+// Helper function to process a single perk
+async function processPerk(perk: Perk, openai: OpenAI): Promise<boolean> {
   try {
-    console.log('Starting icon generation process...');
-    
-    // Validate OpenAI API key
-    if (!process.env.OPENAI_API_KEY) {
-      throw new Error('OPENAI_API_KEY environment variable is not set');
-    }
-
-    // Initialize OpenAI client
-    const openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY
-    });
-
-    // Ensure icons directory exists
-    await ensureDirectory(ICONS_DIR);
-
-    // Read and parse tech tree
-    const techTreeContent = await fs.readFile(TECH_TREE_PATH, 'utf8');
-    const techTree = yaml.load(techTreeContent) as Record<string, any>;
-
-    // Extract perks
-    const perks: Perk[] = [];
-    for (const phase of Object.values(techTree)) {
-      if (typeof phase === 'object') {
-        for (const [key, value] of Object.entries(phase)) {
-          if (Array.isArray(value) && !['name', 'period', 'description'].includes(key)) {
-            perks.push(...value as Perk[]);
-          }
-        }
-      }
-    }
-
-    // Process each perk
-    for (const perk of perks) {
-      const iconPath = path.join(ICONS_DIR, sanitizeFilename(perk.name));
-      
-      if (await fileExists(iconPath)) {
-        console.log(`Icon already exists for ${perk.name}, skipping...`);
-        continue;
-      }
-
-      try {
-        const imageBuffer = await generateIcon(perk, openai);
-        await fs.writeFile(iconPath, imageBuffer);
-        console.log(`Successfully generated icon for ${perk.name}`);
-      } catch (error) {
-        console.error(`Failed to generate icon for ${perk.name}:`, error);
-        throw error; // Re-throw to be caught by outer catch
-      }
-
-      // Add a small delay between requests
-      await new Promise(resolve => setTimeout(resolve, 1000));
-    }
-
-    console.log('Icon generation process completed successfully');
+    console.log(`\nProcessing: ${perk.name}`);
+    await generateAndSaveIconWithRetry(perk, openai);
+    console.log(`Success: ${perk.name}`);
+    return true;
   } catch (error) {
-    console.error('Error during icon generation:', error);
-    throw error; // Re-throw to be caught by the top-level catch
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    console.error(`Failed to process ${perk.name}:`, errorMessage);
+    return false;
   }
 }
 
-// Execute with proper error handling
+// Main function
+async function main() {
+  try {
+    console.log('Initializing...');
+    const openai = initializeOpenAI();
+    
+    console.log('Loading tech tree...');
+    const perks = loadTechTree();
+    console.log(`Found ${perks.length} perks to process`);
+
+    let successful = 0;
+    let failed = 0;
+
+    for (const perk of perks) {
+      const success = await processPerk(perk, openai);
+      if (success) {
+        successful++;
+      } else {
+        failed++;
+      }
+      // Add a small delay between perks
+      await new Promise(resolve => setTimeout(resolve, 1000));
+    }
+
+    console.log('\nGeneration Summary:');
+    console.log(`Successfully generated: ${successful}`);
+    console.log(`Failed to generate: ${failed}`);
+
+    if (failed > 0) {
+      process.exit(1);
+    }
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    console.error('Fatal error:', errorMessage);
+    process.exit(1);
+  }
+}
+
+// Run the script
 main().catch(error => {
-  console.error('Unhandled error in main process:', error);
+  const errorMessage = error instanceof Error ? error.message : String(error);
+  console.error('Unhandled error:', errorMessage);
+  process.exit(1);
+});
+
+// Global error handlers
+process.on('unhandledRejection', (error: unknown) => {
+  const errorMessage = error instanceof Error ? error.message : String(error);
+  console.error('Unhandled promise rejection:', errorMessage);
+  process.exit(1);
+});
+
+process.on('uncaughtException', (error: unknown) => {
+  const errorMessage = error instanceof Error ? error.message : String(error);
+  console.error('Uncaught exception:', errorMessage);
   process.exit(1);
 });
