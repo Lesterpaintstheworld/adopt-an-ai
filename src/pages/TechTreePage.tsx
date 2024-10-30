@@ -3,172 +3,165 @@ import {
   Box,
   Container,
   Typography,
-  Grid,
-  Card,
-  CardContent,
-  IconButton,
-  Tooltip,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Paper,
   Chip,
-  Divider,
+  Tooltip,
+  Grid,
+  LinearProgress,
 } from '@mui/material';
 import {
+  ExpandMore as ExpandMoreIcon,
   Memory as MemoryIcon,
   Psychology as PsychologyIcon,
   Chat as ChatIcon,
-  Star as StarIcon
+  Star as StarIcon,
+  Timeline as TimelineIcon,
 } from '@mui/icons-material';
-import techContent from '../../content/tech/tech.yml';
-import type { TechTreeContent, Perk } from '../types/tech';
+import techTree from '../../content/tech/tech-tree.yml';
 
-export const TechTreePage = () => {
-  const content = techContent as TechTreeContent;
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+// Helper function to get icon by tag
+const getTagIcon = (tag: string) => {
+  const type = tag.split(' ')[1];
+  switch(type) {
+    case 'TECHNICAL': return <MemoryIcon fontSize="small" />;
+    case 'COGNITIVE': return <PsychologyIcon fontSize="small" />;
+    case 'SOCIAL': return <ChatIcon fontSize="small" />;
+    default: return <StarIcon fontSize="small" />;
+  };
+};
 
-  const filteredPerks = selectedCategory
-    ? content.perks.filter(perk => perk.category === selectedCategory)
-    : content.perks;
-
-  const PerkCard = ({ perk }: { perk: Perk }) => {
-    const getIcon = () => {
-      switch(perk.icon) {
-        case 'memory':
-          return <MemoryIcon />;
-        case 'psychology':
-          return <PsychologyIcon />;
-        case 'chat':
-          return <ChatIcon />;
-        default:
-          return <StarIcon />;
-      }
-    };
-
-    const tooltipContent = (
-      <Box sx={{ p: 1, maxWidth: 300 }}>
-        <Typography variant="subtitle1" sx={{ fontWeight: 'bold', mb: 1 }}>
-          {perk.name}
-        </Typography>
-        <Typography variant="body2" sx={{ mb: 1 }}>
-          {perk.description}
-        </Typography>
-        <Divider sx={{ my: 1 }} />
-        <Box sx={{ mt: 1 }}>
-          <Typography variant="caption" display="block">
-            Category: {perk.category}
-          </Typography>
-          <Typography variant="caption" display="block">
-            Level: {perk.level}
-          </Typography>
-          {perk.prerequisites && (
-            <Typography variant="caption" display="block">
-              Prerequisites: {perk.prerequisites.join(', ')}
-            </Typography>
+const TechItem = ({ item, phase }: { item: any; phase: string }) => {
+  return (
+    <Tooltip
+      title={
+        <Box>
+          <Typography variant="subtitle2">{item.description}</Typography>
+          {item.prerequisites && (
+            <Box mt={1}>
+              <Typography variant="caption" color="textSecondary">
+                Prerequisites:
+              </Typography>
+              {item.prerequisites.map((prereq: string) => (
+                <Chip
+                  key={prereq}
+                  label={prereq}
+                  size="small"
+                  variant="outlined"
+                  sx={{ m: 0.5 }}
+                />
+              ))}
+            </Box>
           )}
         </Box>
-      </Box>
-    );
-
-    return (
-      <Tooltip
-        title={tooltipContent}
-        placement="top"
-        arrow
-        PopperProps={{
-          sx: {
-            '& .MuiTooltip-tooltip': {
-              bgcolor: 'background.paper',
-              color: 'text.primary',
-              boxShadow: 3,
-              '& .MuiTooltip-arrow': {
-                color: 'background.paper',
-              },
-            },
+      }
+      arrow
+    >
+      <Paper
+        elevation={2}
+        sx={{
+          p: 2,
+          m: 1,
+          '&:hover': {
+            transform: 'translateY(-2px)',
+            transition: 'transform 0.2s',
+            boxShadow: 3,
           },
+          backgroundColor: (theme) => 
+            phase === 'phase_1' ? theme.palette.primary.light :
+            phase === 'phase_2' ? theme.palette.secondary.light :
+            phase === 'phase_3' ? theme.palette.success.light :
+            theme.palette.warning.light,
+          opacity: 0.9,
         }}
       >
-        <Card 
-          sx={{ 
-            height: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            position: 'relative',
-            '&:hover': {
-              transform: 'translateY(-4px)',
-              transition: 'transform 0.2s ease-in-out',
-            }
-          }}
-        >
-          <CardContent>
-            <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-              <IconButton size="small" color="primary">
-                {getIcon()}
-              </IconButton>
-              <Typography variant="h6" component="h2" sx={{ ml: 1 }}>
-                {perk.name}
-              </Typography>
-            </Box>
-            <Typography variant="body2" color="text.secondary">
-              {perk.description}
-            </Typography>
-            <Box sx={{ mt: 2 }}>
-              <Chip 
-                label={`Level ${perk.level}`}
-                size="small"
-                color="primary"
-                variant="outlined"
-              />
-              <Chip 
-                label={perk.category}
-                size="small"
-                sx={{ ml: 1 }}
-                variant="outlined"
-              />
-            </Box>
-          </CardContent>
-        </Card>
-      </Tooltip>
-    );
-  };
+        <Box display="flex" alignItems="center" justifyContent="space-between">
+          <Typography variant="subtitle1" fontWeight="bold">
+            {item.name}
+          </Typography>
+          <Chip
+            icon={getTagIcon(item.tag)}
+            label={item.tag.split(' ')[1]}
+            size="small"
+            variant="outlined"
+          />
+        </Box>
+      </Paper>
+    </Tooltip>
+  );
+};
+
+const LayerSection = ({ title, items, phase }: { title: string; items: any[]; phase: string }) => (
+  <Box mb={3}>
+    <Typography variant="h6" gutterBottom sx={{ textTransform: 'capitalize' }}>
+      {title.replace('_', ' ')}
+    </Typography>
+    <Grid container spacing={2}>
+      {items.map((item) => (
+        <Grid item xs={12} sm={6} md={4} key={item.name}>
+          <TechItem item={item} phase={phase} />
+        </Grid>
+      ))}
+    </Grid>
+  </Box>
+);
+
+export const TechTreePage = () => {
+  const [expandedPhase, setExpandedPhase] = useState<string>('phase_1');
 
   return (
     <Container maxWidth="xl">
       <Box sx={{ my: 4 }}>
-        <Typography variant="h3" component="h1" gutterBottom>
-          Tech Tree
+        <Typography variant="h3" gutterBottom>
+          AI Evolution Tech Tree
         </Typography>
-        <Typography variant="h5" color="text.secondary" paragraph>
-          Unlock new capabilities as you progress
-        </Typography>
-
-        {/* Category filters */}
-        <Box sx={{ mb: 4, display: 'flex', gap: 1 }}>
-          <Tooltip title="Show all categories">
-            <Chip
-              label="All"
-              onClick={() => setSelectedCategory(null)}
-              color={selectedCategory === null ? 'primary' : 'default'}
-              clickable
-            />
-          </Tooltip>
-          {content.categories.map((category) => (
-            <Tooltip key={category.name} title={category.description}>
-              <Chip
-                label={category.name}
-                onClick={() => setSelectedCategory(category.name)}
-                color={selectedCategory === category.name ? 'primary' : 'default'}
-                clickable
-              />
-            </Tooltip>
-          ))}
-        </Box>
-
-        {/* Perks grid */}
-        <Grid container spacing={3}>
-          {filteredPerks.map((perk) => (
-            <Grid item key={perk.id} xs={12} sm={6} md={4}>
-              <PerkCard perk={perk} />
-            </Grid>
-          ))}
-        </Grid>
+        
+        {Object.entries(techTree).map(([phaseKey, phaseData]: [string, any]) => (
+          <Accordion 
+            key={phaseKey}
+            expanded={expandedPhase === phaseKey}
+            onChange={() => setExpandedPhase(phaseKey)}
+            sx={{ mb: 2 }}
+          >
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Box sx={{ width: '100%' }}>
+                <Box display="flex" alignItems="center" justifyContent="space-between">
+                  <Typography variant="h5">
+                    {phaseData.name} ({phaseData.period})
+                  </Typography>
+                  <TimelineIcon />
+                </Box>
+                <Typography variant="body2" color="textSecondary">
+                  {phaseData.description}
+                </Typography>
+                <LinearProgress 
+                  variant="determinate" 
+                  value={
+                    phaseKey === 'phase_1' ? 100 :
+                    phaseKey === 'phase_2' ? 75 :
+                    phaseKey === 'phase_3' ? 50 :
+                    25
+                  }
+                  sx={{ mt: 1 }}
+                />
+              </Box>
+            </AccordionSummary>
+            <AccordionDetails>
+              {Object.entries(phaseData)
+                .filter(([key]) => key !== 'name' && key !== 'period' && key !== 'description')
+                .map(([layerKey, items]: [string, any]) => (
+                  <LayerSection 
+                    key={layerKey}
+                    title={layerKey}
+                    items={items}
+                    phase={phaseKey}
+                  />
+                ))}
+            </AccordionDetails>
+          </Accordion>
+        ))}
       </Box>
     </Container>
   );
