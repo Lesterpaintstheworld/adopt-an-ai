@@ -6,6 +6,14 @@ import OpenAI from 'openai';
 import { fileURLToPath } from 'url';
 import { generateAndSaveIconWithRetry } from '../src/utils/perkIconGenerator';
 
+// Helper function for better error formatting
+function formatError(error: unknown): string {
+  if (error instanceof Error) {
+    return `${error.name}: ${error.message}\n${error.stack}`;
+  }
+  return String(error);
+}
+
 // Initialize environment variables
 dotenv.config();
 
