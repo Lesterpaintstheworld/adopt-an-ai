@@ -26,7 +26,12 @@ def icon_exists(perk_name: str) -> bool:
 
 def generate_dalle_prompt(perk):
     """Generate DALL-E prompt based on perk data."""
-    tag_type = perk['tag'].split(' ')[1]
+    # Get description, falling back to shortDescription if available, or a default
+    description = perk.get('description') or perk.get('shortDescription') or perk.get('longDescription') or perk['name']
+    
+    # Get tag type, with error handling
+    tag = perk.get('tag', 'UNKNOWN')
+    tag_type = tag.split(' ')[1] if ' ' in tag else 'UNKNOWN'
     
     style_guides = {
         'CREATIVE': 'vibrant and artistic, with warm colors and flowing designs',
@@ -39,7 +44,7 @@ def generate_dalle_prompt(perk):
     
     style_guide = style_guides.get(tag_type, 'balanced and professional, with neutral tones and clean designs')
     
-    base_prompt = f"Create a World of Warcraft style ability icon with a futuristic twist. The icon represents \"{perk.get('shortDescription', perk['description'])}\". Style: {style_guide}."
+    base_prompt = f"Create a World of Warcraft style ability icon with a futuristic twist. The icon represents \"{description}\". Style: {style_guide}."
     technical_specs = "The image should be a square icon with a dark border and inner glow, highly detailed in a semi-realistic style. The composition should be centered and instantly recognizable as a game ability icon while maintaining a sci-fi aesthetic."
     
     return f"{base_prompt} {technical_specs}"
