@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "start": "vite preview --host 0.0.0.0 --port 3000",
     "generate-icons": "cross-env NODE_OPTIONS=\"--loader ts-node/esm\" ts-node --project tsconfig.scripts.json ./scripts/generateIcons.mts",
-    "test-openai": "cross-env NODE_OPTIONS=\"--loader ts-node/esm\" ts-node --project tsconfig.scripts.json ./scripts/test-openai.mts"
+    "test-openai": "cross-env NODE_OPTIONS=\"--loader ts-node/esm\" ts-node --project tsconfig.scripts.json ./scripts/test-openai.mts",
+    "test-icon-generation": "cross-env NODE_OPTIONS=\"--loader ts-node/esm\" ts-node --project tsconfig.scripts.json ./scripts/test-icon-generation.mts"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
