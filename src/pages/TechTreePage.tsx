@@ -292,17 +292,30 @@ const TechItem = ({
       arrow
       PopperProps={{
         sx: {
+          maxWidth: 'none !important',
+          width: 'auto !important',
           '& .MuiTooltip-tooltip': {
             backgroundColor: 'rgba(0, 0, 0, 0.9)',
             padding: '24px',
             maxWidth: 'none !important',
-            width: 'auto',
+            width: 'auto !important',
             fontSize: '1.2rem'
           },
           '& .MuiTooltip-arrow': {
             color: 'rgba(0, 0, 0, 0.9)'
           }
-        }
+        },
+        modifiers: [
+          {
+            name: 'preventOverflow',
+            enabled: true,
+            options: {
+              altAxis: true,
+              altBoundary: true,
+              padding: 8
+            }
+          }
+        ]
       }}
       enterDelay={0}
       enterNextDelay={0}
