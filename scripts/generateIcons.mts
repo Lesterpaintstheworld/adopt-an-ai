@@ -204,27 +204,49 @@ async function generateIconWithRetry(perk: Perk, openai: OpenAI, maxRetries = 3)
   throw new Error(`Failed to generate icon for ${perk.name} after ${maxRetries} retries. Last error: ${lastError?.message}`);
 }
 
+// Add global unhandled rejection handler
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+  process.exit(1);
+});
+
 // Main execution
 async function main() {
-  console.log('Starting icon generation process...');
+  try {
+    console.log('Starting icon generation process...');
 
-  // Validate OpenAI API key
-  if (!process.env.OPENAI_API_KEY) {
-    throw new Error('OPENAI_API_KEY environment variable is not set');
-  }
+    // Validate OpenAI API key
+    if (!process.env.OPENAI_API_KEY) {
+      throw new Error('OPENAI_API_KEY environment variable is not set');
+    }
 
-  // Initialize OpenAI client
-  const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY
-  });
+    // Initialize OpenAI client
+    const openai = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY
+    });
 
-  // Ensure icons directory exists
-  await ensureDirectory(ICONS_DIR);
+    // Test OpenAI connection before proceeding
+    try {
+      await openai.models.list();
+    } catch (apiError) {
+      throw new Error(`Failed to connect to OpenAI API: ${apiError instanceof Error ? apiError.message : String(apiError)}`);
+    }
 
-  // Read and parse tech tree
-  console.log('Reading tech tree...');
-  const techTreeContent = await fs.readFile(TECH_TREE_PATH, 'utf8');
-  const techTree = yaml.load(techTreeContent) as Record<string, any>;
+    // Ensure icons directory exists
+    await ensureDirectory(ICONS_DIR);
+
+    // Read and parse tech tree
+    let techTree;
+    try {
+      console.log('Reading tech tree...');
+      const techTreeContent = await fs.readFile(TECH_TREE_PATH, 'utf8');
+      techTree = yaml.load(techTreeContent) as Record<string, any>;
+      if (!techTree) {
+        throw new Error('Tech tree file is empty or invalid');
+      }
+    } catch (error) {
+      throw new Error(`Failed to read or parse tech tree: ${error instanceof Error ? error.message : String(error)}`);
+    }
 
   // Extract all perks
   const perks: Perk[] = [];
@@ -281,6 +303,14 @@ Failed: ${failedPerks}
 
 // Execute with proper error handling
 main().catch(error => {
-  console.error('Fatal error:', error);
+  // Properly format and display the error
+  console.error('Fatal error occurred:');
+  if (error instanceof Error) {
+    console.error(`Name: ${error.name}`);
+    console.error(`Message: ${error.message}`);
+    console.error(`Stack: ${error.stack}`);
+  } else {
+    console.error('Unknown error type:', error);
+  }
   process.exit(1);
 });
