@@ -6,17 +6,20 @@ phase_1:
   ecosystem_layer:
     - name: "Community access"
       tag: "🤝 SOCIAL"
-      description: "Access to the grow-an.ai community forums, workshops, and shared resources for AI development and learning"
+      shortDescription: "Join a vibrant community of AI developers and enthusiasts sharing knowledge and resources."
+      longDescription: "Access to a comprehensive ecosystem of forums, workshops, and collaborative spaces where AI developers and enthusiasts come together to share experiences, troubleshoot challenges, and build connections. Members can participate in regular events, access shared resources, and contribute to the collective growth of the AI development community."
       chronologicalOrder: 1
     
     - name: "Resource marketplace"
       tag: "⚙️ OPERATIONAL"
-      description: "Platform where users can share and trade AI development resources like prompts, training data, and compute credits"
+      shortDescription: "Trade and exchange AI development resources in a dynamic community marketplace."
+      longDescription: "A sophisticated trading platform where users can buy, sell, and exchange valuable AI development assets including custom prompts, curated training datasets, compute credits, and specialized tools. The marketplace facilitates both direct purchases and bartering arrangements, with built-in rating systems and quality assurance mechanisms."
       chronologicalOrder: 2
     
     - name: "Knowledge sharing"
       tag: "🤝 SOCIAL"
-      description: "Wiki-style repository of AI development guides, case studies, and best practices maintained by the community"
+      shortDescription: "Access a comprehensive wiki of AI development guides, case studies, and best practices."
+      longDescription: "A collaborative knowledge repository containing detailed guides, technical documentation, case studies, and community-maintained best practices for AI development. The wiki features peer review processes, version control, and integration with practical examples and code snippets to support hands-on learning."
       chronologicalOrder: 3
     
     - name: "Basic governance"
