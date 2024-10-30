@@ -266,6 +266,7 @@ const TechItem = ({
           left: position.x,
           top: position.y,
           width: 350,
+          height: ITEM_HEIGHT - 40,
           p: 3,
           display: 'flex',
           gap: 3,
@@ -290,6 +291,7 @@ const TechItem = ({
             borderRadius: 1,
             flexShrink: 0,
             overflow: 'hidden',
+            margin: '-24px 0',
           }}
         >
           <img 
