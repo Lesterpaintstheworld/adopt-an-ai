@@ -5,8 +5,8 @@ import * as dotenv from 'dotenv';
 import OpenAI from 'openai';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import { generateAndSaveIconWithRetry } from '../src/utils/perkIconGenerator.js';
-import { Perk } from '../src/types/tech';
+import { generateAndSaveIconWithRetry } from '@/utils/perkIconGenerator.js';
+import { Perk } from '@/types/tech';
 
 dotenv.config();
 
