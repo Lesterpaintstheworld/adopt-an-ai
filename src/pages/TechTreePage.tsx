@@ -267,9 +267,9 @@ const TechItem = ({
           top: position.y,
           width: 350,
           height: ITEM_HEIGHT - 40,
-          p: 3,
           display: 'flex',
           gap: 3,
+          padding: 0,
           '&:hover': {
             transform: 'scale(1.05)',
             transition: 'transform 0.2s',
@@ -286,12 +286,10 @@ const TechItem = ({
       >
         <Box
           sx={{
-            width: ITEM_IMAGE_SIZE,
-            height: '100%',
-            borderRadius: 1,
+            width: ITEM_HEIGHT - 40,
+            height: ITEM_HEIGHT - 40,
             flexShrink: 0,
             overflow: 'hidden',
-            margin: '-24px 0',
           }}
         >
           <img 
@@ -303,13 +301,12 @@ const TechItem = ({
               objectFit: 'cover',
             }}
             onError={(e) => {
-              // Fallback to a colored background if image fails to load
               const target = e.target as HTMLImageElement;
               target.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
             }}
           />
         </Box>
-        <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
+        <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: 3 }}>
           <Typography variant="subtitle1" fontWeight="bold">
             {item.name}
           </Typography>
