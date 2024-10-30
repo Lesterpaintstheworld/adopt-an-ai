@@ -11,7 +11,7 @@ import {
 const BASE_PHASE_WIDTH = 2400; // Base width that we'll adjust
 const ITEM_HEIGHT = 120;
 const LAYER_PADDING = 40;
-const CHRONOLOGICAL_SPACING = 600; // Doubled from 300 to 600
+const CHRONOLOGICAL_SPACING = 400; // Changed from 300 to 400
 const PHASE_START_PADDING = 200; // Reduced from 300 to start items closer to phase beginning
 const PHASE_PADDING = 200; // Increased from 100 to add more space between phases
 
