@@ -2,6 +2,7 @@ import { Perk } from '../types/tech.js';
 import OpenAI from 'openai';
 import fs from 'fs/promises';
 import path from 'path';
+import { TAG_STYLES } from './tagStyles';
 
 const ICONS_DIR = path.join(process.cwd(), 'public', 'perk-icons');
 
@@ -185,6 +186,4 @@ const getDefaultVisualElements = (perk: Perk): string => {
   const phase = getPhaseFromPrerequisites(perk);
   return phaseElements[phase as keyof typeof phaseElements];
 };
-
-import { TAG_STYLES, TagStyle } from './tagStyles';
 
