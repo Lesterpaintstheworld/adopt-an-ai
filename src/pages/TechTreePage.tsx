@@ -409,8 +409,8 @@ export const TechTreePage = () => {
         bottom: 0,
         overflowX: 'auto',
         overflowY: 'auto',
-        width: '100vw',
-        height: 'calc(100vh - 64px)',
+        width: '133.33vw', // Compensate for 0.75 scale (100/0.75)
+        height: 'calc(133.33vh - 85.33px)', // Compensate for header and scale
         bgcolor: 'background.default',
         zIndex: 1,
         transform: 'scale(0.75)',
@@ -421,8 +421,8 @@ export const TechTreePage = () => {
         sx={{
           position: 'relative',
           width: (Object.values(techTree).reduce((acc: number, phase: any) => 
-            acc + calculatePhaseWidth(phase), 0) + 300) / 0.75, // Adjust width to compensate for scale
-          height: 2000 / 0.75, // Adjust height to compensate for scale
+            acc + calculatePhaseWidth(phase), 0) + 300),
+          height: 2000,
           p: 4,
         }}
       >
