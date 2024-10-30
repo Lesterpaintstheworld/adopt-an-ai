@@ -235,14 +235,19 @@ const TechItem = ({
   return (
     <Tooltip
       title={
-        <Box sx={{ p: 2 }}>
+        <Box sx={{ 
+          p: 2,
+          minWidth: '600px',
+          maxWidth: '800px'
+        }}>
           <Typography 
             variant="body1"
             sx={{ 
               fontSize: '1.3rem',
               lineHeight: 1.6,
               color: '#ffffff',
-              mb: 2
+              mb: 2,
+              whiteSpace: 'normal'
             }}
           >
             {item.longDescription || item.description}
@@ -260,25 +265,26 @@ const TechItem = ({
               >
                 Prerequisites:
               </Typography>
-              {item.prerequisites.map((prereq: string) => (
-                <Chip
-                  key={prereq}
-                  label={prereq}
-                  size="medium"
-                  variant="outlined"
-                  sx={{ 
-                    m: 0.8,
-                    fontSize: '1.1rem',
-                    color: '#ffffff',
-                    borderColor: '#ffffff',
-                    height: '36px',
-                    '& .MuiChip-label': {
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                {item.prerequisites.map((prereq: string) => (
+                  <Chip
+                    key={prereq}
+                    label={prereq}
+                    size="medium"
+                    variant="outlined"
+                    sx={{ 
+                      fontSize: '1.1rem',
                       color: '#ffffff',
-                      px: 2
-                    }
-                  }}
-                />
-              ))}
+                      borderColor: '#ffffff',
+                      height: '36px',
+                      '& .MuiChip-label': {
+                        color: '#ffffff',
+                        px: 2
+                      }
+                    }}
+                  />
+                ))}
+              </Box>
             </Box>
           )}
         </Box>
@@ -286,12 +292,15 @@ const TechItem = ({
       arrow
       PopperProps={{
         sx: {
-          maxWidth: '1000px',
           '& .MuiTooltip-tooltip': {
             backgroundColor: 'rgba(0, 0, 0, 0.9)',
             padding: '24px',
-            color: '#ffffff',
+            maxWidth: 'none !important',
+            width: 'auto',
             fontSize: '1.2rem'
+          },
+          '& .MuiTooltip-arrow': {
+            color: 'rgba(0, 0, 0, 0.9)'
           }
         }
       }}
