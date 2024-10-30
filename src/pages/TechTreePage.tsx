@@ -11,9 +11,9 @@ import {
 const BASE_PHASE_WIDTH = 2400; // Base width that we'll adjust
 const ITEM_HEIGHT = 120;
 const LAYER_PADDING = 40;
-const CHRONOLOGICAL_SPACING = 500;
-const PHASE_START_PADDING = 300;
-const PHASE_PADDING = 100; // Add padding between phases
+const CHRONOLOGICAL_SPACING = 300; // Reduced from 500 to make items closer
+const PHASE_START_PADDING = 200; // Reduced from 300 to start items closer to phase beginning
+const PHASE_PADDING = 200; // Increased from 100 to add more space between phases
 
 const sortByChronologicalOrder = (a: any, b: any) => {
   return (a.chronologicalOrder || 1) - (b.chronologicalOrder || 1);
@@ -55,13 +55,15 @@ const calculatePhaseWidth = (phaseData: any) => {
   Object.entries(phaseData).forEach(([key, value]: [string, any]) => {
     if (!['name', 'period', 'description'].includes(key)) {
       value.forEach((item: any) => {
-        maxChronologicalOrder = Math.max(maxChronologicalOrder, item.chronologicalOrder || 0);
+        if (item.chronologicalOrder) {
+          maxChronologicalOrder = Math.max(maxChronologicalOrder, item.chronologicalOrder);
+        }
       });
     }
   });
   
   // Calculate width based on the highest chronological order
-  return Math.max(BASE_PHASE_WIDTH, (maxChronologicalOrder * CHRONOLOGICAL_SPACING) + PHASE_START_PADDING + PHASE_PADDING);
+  return (maxChronologicalOrder * CHRONOLOGICAL_SPACING) + PHASE_START_PADDING + PHASE_PADDING;
 };
 
 // Helper to calculate item positions
