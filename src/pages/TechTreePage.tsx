@@ -8,11 +8,11 @@ import {
 } from '@mui/material';
 
 // Constants for layout calculations
-const PHASE_WIDTH = 1200;
+const PHASE_WIDTH = 2400;
 const ITEM_HEIGHT = 120;
 const LAYER_PADDING = 40;
-const CHRONOLOGICAL_SPACING = 250;
-const PHASE_START_PADDING = 150;
+const CHRONOLOGICAL_SPACING = 500;
+const PHASE_START_PADDING = 300;
 
 const sortByChronologicalOrder = (a: any, b: any) => {
   return (a.chronologicalOrder || 1) - (b.chronologicalOrder || 1);
@@ -206,7 +206,7 @@ export const TechTreePage = () => {
       <Box
         sx={{
           position: 'relative',
-          width: Object.keys(techTree).length * 1200 + 300, // Match the new PHASE_WIDTH and add extra padding
+          width: Object.keys(techTree).length * 2400 + 600, // Match the new PHASE_WIDTH and add extra padding
           height: 2000,
           p: 4,
         }}
