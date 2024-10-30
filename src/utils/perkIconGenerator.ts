@@ -187,10 +187,3 @@ const getDefaultVisualElements = (perk: Perk): string => {
   return phaseElements[phase as keyof typeof phaseElements];
 };
 
-export function getPerkIconUrl(perkName: string): string {
-  // Convert perk name to filename format (lowercase, replace spaces/special chars with hyphens)
-  const filename = perkName.toLowerCase().replace(/[^a-z0-9]/g, '-') + '.png';
-  
-  // Return the URL path to the icon
-  return `/perk-icons/${filename}`;
-}
