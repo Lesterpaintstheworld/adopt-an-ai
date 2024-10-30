@@ -1,4 +1,4 @@
-import { Perk } from '../types/tech';
+import { Perk } from '../types/tech.js';
 import OpenAI from 'openai';
 import fs from 'fs/promises';
 import path from 'path';
