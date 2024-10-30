@@ -20,12 +20,12 @@ import techTree from '../../content/tech/tech-tree.yml';
 
 // Constants for layout calculations
 const BASE_PHASE_WIDTH = 2400; // Base width that we'll adjust
-const ITEM_HEIGHT = 120;
-const LAYER_PADDING = 40;
-const CHRONOLOGICAL_SPACING = 400; // Changed from 300 to 400
-const PHASE_START_PADDING = 200; // Reduced from 300 to start items closer to phase beginning
-const PHASE_PADDING = 200; // Increased from 100 to add more space between phases
-const ITEM_IMAGE_SIZE = 60;
+const ITEM_HEIGHT = 160;
+const LAYER_PADDING = 60;
+const CHRONOLOGICAL_SPACING = 500;
+const PHASE_START_PADDING = 200;
+const PHASE_PADDING = 200;
+const ITEM_IMAGE_SIZE = 80;
 
 const getTagColor = (tag: string) => {
   const tagType = tag.split(' ')[1];
@@ -265,10 +265,10 @@ const TechItem = ({
           position: 'absolute',
           left: position.x,
           top: position.y,
-          width: 280,
-          p: 2,
+          width: 350,
+          p: 3,
           display: 'flex',
-          gap: 2,
+          gap: 3,
           '&:hover': {
             transform: 'scale(1.05)',
             transition: 'transform 0.2s',
@@ -320,13 +320,16 @@ const TechItem = ({
               sx={{
                 ...getTagColor(item.tag),
                 '& .MuiChip-icon': {
-                  color: '#ffffff'
+                  color: '#ffffff',
+                  marginLeft: '8px'
                 },
                 borderRadius: '16px',
                 fontWeight: 500,
-                height: '24px',
-                paddingLeft: '8px',
-                paddingRight: '8px'
+                height: '28px',
+                minWidth: '140px',
+                paddingLeft: '12px',
+                paddingRight: '12px',
+                fontSize: '0.9rem'
               }}
             />
           </Box>
