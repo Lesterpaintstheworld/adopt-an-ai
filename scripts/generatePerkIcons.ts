@@ -21,7 +21,7 @@ const generateAllIcons = async () => {
   for (const perk of perks) {
     try {
       console.log(`Generating icon for ${perk.name}...`);
-      await generateAndSaveIcon(perk, openaiApiKey);
+      await generateAndSaveIconWithRetry(perk, openaiApiKey);
       console.log(`Successfully generated icon for ${perk.name}`);
       // Add a delay to avoid rate limits
       await new Promise(resolve => setTimeout(resolve, 1000));

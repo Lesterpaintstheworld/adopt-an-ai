@@ -35,6 +35,65 @@ const iconExists = async (perkName: string): Promise<boolean> => {
 };
 
 // Generate and save icon for a perk
+// Add a function to generate fallback icons for error cases
+const generateFallbackIcon = (perk: Perk): string => {
+  const canvas = document.createElement('canvas');
+  canvas.width = 128;
+  canvas.height = 128;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return '';
+
+  // Get tag style for colors
+  const tagType = perk.tag.split(' ')[1];
+  const style = TAG_STYLES[tagType];
+
+  // Draw gradient background
+  const gradient = ctx.createLinearGradient(0, 0, 128, 128);
+  gradient.addColorStop(0, style.background);
+  gradient.addColorStop(1, style.color);
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, 128, 128);
+
+  // Add perk initials
+  ctx.fillStyle = '#ffffff';
+  ctx.font = 'bold 48px Arial';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  const initials = perk.name
+    .split(' ')
+    .map(word => word[0])
+    .join('')
+    .substring(0, 2);
+  ctx.fillText(initials, 64, 64);
+
+  return canvas.toDataURL();
+};
+
+// Add error handling and retry logic
+const generateAndSaveIconWithRetry = async (
+  perk: Perk,
+  openaiApiKey: string,
+  maxRetries = 3
+): Promise<string> => {
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      return await generateAndSaveIcon(perk, openaiApiKey);
+    } catch (error) {
+      console.error(`Attempt ${i + 1} failed for ${perk.name}:`, error);
+      if (i === maxRetries - 1) {
+        // Use fallback on final retry
+        const fallbackIcon = generateFallbackIcon(perk);
+        const iconPath = getPerkIconPath(perk.name);
+        await fs.writeFile(iconPath, fallbackIcon.split(',')[1], 'base64');
+        return iconPath;
+      }
+      // Wait before retrying
+      await new Promise(resolve => setTimeout(resolve, 2000 * (i + 1)));
+    }
+  }
+  throw new Error('Should never reach here due to fallback');
+};
+
 export const generateAndSaveIcon = async (
   perk: Perk, 
   openaiApiKey: string
@@ -48,33 +107,7 @@ export const generateAndSaveIcon = async (
     return iconPath;
   }
 
-  const openai = new OpenAI({ apiKey: openaiApiKey });
-  const prompt = generateDallePrompt(perk);
-
-  try {
-    const response = await openai.images.generate({
-      model: "dall-e-3",
-      prompt: prompt,
-      n: 1,
-      size: "1024x1024",
-    });
-
-    if (!response.data[0]?.url) {
-      throw new Error('No image URL in DALL-E response');
-    }
-
-    // Download the image
-    const imageResponse = await fetch(response.data[0].url);
-    const imageBuffer = await imageResponse.arrayBuffer();
-    
-    // Save the image
-    await fs.writeFile(iconPath, Buffer.from(imageBuffer));
-    
-    return iconPath;
-  } catch (error) {
-    console.error(`Failed to generate icon for ${perk.name}:`, error);
-    throw error;
-  }
+  return generateAndSaveIconWithRetry(perk, openaiApiKey);
 };
 
 // Get the URL for a perk's icon (for use in the frontend)
@@ -130,34 +163,65 @@ const TAG_STYLES: { [key: string]: TagStyle } = {
 
 
 const generateSpecificIconElements = (perk: Perk): string => {
-  // Add specific visual elements based on perk name and description
-  const nameKeywords = perk.name.toLowerCase();
-  
-  if (nameKeywords.includes('quantum')) {
-    return 'quantum particles, wave patterns, and energy fields';
-  }
-  if (nameKeywords.includes('consciousness') || nameKeywords.includes('mind')) {
-    return 'glowing neural networks, consciousness representations, and energy waves';
-  }
-  if (nameKeywords.includes('reality')) {
-    return 'warped space-time, reality fragments, and dimensional portals';
-  }
-  if (nameKeywords.includes('resource')) {
-    return 'flowing resources, energy crystals, and optimization symbols';
-  }
-  if (nameKeywords.includes('creation')) {
-    return 'manifestation symbols, creative energy, and construction elements';
-  }
-  if (nameKeywords.includes('harmony') || nameKeywords.includes('unity')) {
-    return 'balanced geometric patterns, unified elements, and harmonic waves';
-  }
-  if (nameKeywords.includes('collaboration') || nameKeywords.includes('collective')) {
-    return 'interconnected nodes, collaborative symbols, and shared energy fields';
+  // Phase-based visual elements
+  const phaseElements = {
+    phase_1: 'with foundational, crystalline structures',
+    phase_2: 'with evolving, dynamic patterns',
+    phase_3: 'with transcendent, ethereal effects',
+    phase_4: 'with perfect, harmonious symmetry'
+  };
+
+  // Extract keywords from perk name and description
+  const keywords = `${perk.name} ${perk.shortDescription || perk.description}`.toLowerCase();
+
+  // Specific visual elements based on common themes
+  if (keywords.includes('quantum')) {
+    return 'featuring quantum probability waves, superposition effects, and entangled particles with a subtle blue-violet glow';
   }
   
-  // Default elements if no specific keywords match
-  return 'futuristic symbols, energy patterns, and technological elements';
-}
+  if (keywords.includes('consciousness') || keywords.includes('mind')) {
+    return 'showing an intricate neural network with glowing synapses, consciousness fractals, and flowing thought patterns';
+  }
+  
+  if (keywords.includes('reality') || keywords.includes('synthesis')) {
+    return 'depicting reality fractures, dimensional portals, and merging realities with crystalline structures';
+  }
+  
+  if (keywords.includes('resource') || keywords.includes('compute')) {
+    return 'showing flowing energy streams, resource crystals, and optimization matrices with geometric patterns';
+  }
+  
+  if (keywords.includes('creation') || keywords.includes('universal')) {
+    return 'featuring manifestation spirals, creation energies, and emergence patterns with golden ratio proportions';
+  }
+  
+  if (keywords.includes('harmony') || keywords.includes('unity')) {
+    return 'depicting perfect balance symbols, unified field patterns, and harmonic resonance waves';
+  }
+  
+  if (keywords.includes('collaboration') || keywords.includes('collective')) {
+    return 'showing interconnected nodes, collective intelligence patterns, and synergy streams';
+  }
+
+  if (keywords.includes('perfect') || keywords.includes('infinite')) {
+    return 'featuring perfect geometric forms, infinite recursion patterns, and transcendent energy flows';
+  }
+
+  if (keywords.includes('evolution') || keywords.includes('growth')) {
+    return 'showing evolutionary spirals, growth patterns, and emergent complexity structures';
+  }
+
+  if (keywords.includes('understanding') || keywords.includes('knowledge')) {
+    return 'depicting wisdom crystals, knowledge streams, and understanding matrices';
+  }
+
+  // Add phase-based elements as fallback
+  const phase = Object.keys(phaseElements).find(phase => 
+    perk.prerequisites?.some(prereq => prereq.includes(phase))
+  ) || 'phase_1';
+
+  return phaseElements[phase as keyof typeof phaseElements];
+};
 
 interface TagStyle {
   background: string;
