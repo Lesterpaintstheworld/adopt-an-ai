@@ -12,6 +12,8 @@ import { EnterpriseContactPage } from './pages/EnterpriseContactPage';
 import { TechTreePage } from './pages/TechTreePage';
 function App() {
   console.log('App component rendering...');
+  console.log('Theme configuration:', theme);
+  console.log('Current router context:', window.location.pathname);
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
