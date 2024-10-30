@@ -322,9 +322,11 @@ const TechItem = ({
                 '& .MuiChip-icon': {
                   color: '#ffffff'
                 },
-                borderRadius: '4px',
+                borderRadius: '16px',
                 fontWeight: 500,
-                height: '24px'
+                height: '24px',
+                paddingLeft: '8px',
+                paddingRight: '8px'
               }}
             />
           </Box>
