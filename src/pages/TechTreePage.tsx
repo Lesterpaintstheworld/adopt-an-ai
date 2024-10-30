@@ -8,11 +8,12 @@ import {
 } from '@mui/material';
 
 // Constants for layout calculations
-const PHASE_WIDTH = 2400;
+const BASE_PHASE_WIDTH = 2400; // Base width that we'll adjust
 const ITEM_HEIGHT = 120;
 const LAYER_PADDING = 40;
 const CHRONOLOGICAL_SPACING = 500;
 const PHASE_START_PADDING = 300;
+const PHASE_PADDING = 100; // Add padding between phases
 
 const sortByChronologicalOrder = (a: any, b: any) => {
   return (a.chronologicalOrder || 1) - (b.chronologicalOrder || 1);
@@ -46,27 +47,47 @@ const getTagIcon = (tag: string) => {
   }
 };
 
+// Calculate width needed for a single phase
+const calculatePhaseWidth = (phaseData: any) => {
+  let maxChronologicalOrder = 0;
+  
+  // Check all layers in the phase
+  Object.entries(phaseData).forEach(([key, value]: [string, any]) => {
+    if (!['name', 'period', 'description'].includes(key)) {
+      value.forEach((item: any) => {
+        maxChronologicalOrder = Math.max(maxChronologicalOrder, item.chronologicalOrder || 0);
+      });
+    }
+  });
+  
+  // Calculate width based on the highest chronological order
+  return Math.max(BASE_PHASE_WIDTH, (maxChronologicalOrder * CHRONOLOGICAL_SPACING) + PHASE_START_PADDING + PHASE_PADDING);
+};
+
 // Helper to calculate item positions
 const calculateNodePositions = (techTree: any) => {
   const positions: { [key: string]: { x: number, y: number } } = {};
+  let currentX = 0; // Track the cumulative x position
   
   Object.entries(techTree).forEach(([phaseKey, phaseData]: [string, any], phaseIndex) => {
+    const phaseWidth = calculatePhaseWidth(phaseData);
     const layers = Object.entries(phaseData)
       .filter(([key]) => !['name', 'period', 'description'].includes(key));
     
     layers.forEach(([layerKey, items]: [string, any], layerIndex) => {
-      // Sort items by chronological order before positioning
       const sortedItems = [...items].sort(sortByChronologicalOrder);
       
-      sortedItems.forEach((item: any, itemIndex: number) => {
-        const chronologicalOrder = item.chronologicalOrder || itemIndex + 1;
+      sortedItems.forEach((item: any) => {
+        const chronologicalOrder = item.chronologicalOrder || 1;
         
         positions[item.name] = {
-          x: (phaseIndex * PHASE_WIDTH) + PHASE_START_PADDING + ((chronologicalOrder - 1) * CHRONOLOGICAL_SPACING),
+          x: currentX + PHASE_START_PADDING + ((chronologicalOrder - 1) * CHRONOLOGICAL_SPACING),
           y: layerIndex * (ITEM_HEIGHT + LAYER_PADDING) + 100
         };
       });
     });
+    
+    currentX += phaseWidth; // Move to the next phase position
   });
   
   return positions;
@@ -241,7 +262,8 @@ export const TechTreePage = () => {
       <Box
         sx={{
           position: 'relative',
-          width: Object.keys(techTree).length * 2400 + 600, // Match the new PHASE_WIDTH and add extra padding
+          width: Object.values(techTree).reduce((acc: number, phase: any) => 
+            acc + calculatePhaseWidth(phase), 0) + 300, // Add some extra padding
           height: 2000,
           p: 4,
         }}
@@ -264,21 +286,28 @@ export const TechTreePage = () => {
         ))}
         
         {/* Phase headers */}
-        {Object.entries(techTree).map(([phaseKey, phaseData]: [string, any], index) => (
-          <Typography
-            key={phaseKey}
-            variant="h5"
-            sx={{
-              position: 'absolute',
-              left: index * PHASE_WIDTH + PHASE_START_PADDING,
-              top: 20,
-              width: 280,
-              textAlign: 'center',
-            }}
-          >
-            {phaseData.name} ({phaseData.period})
-          </Typography>
-        ))}
+        {Object.entries(techTree).map(([phaseKey, phaseData]: [string, any], index) => {
+          const previousPhases = Object.values(techTree).slice(0, index);
+          const xPosition = previousPhases.reduce((acc: number, phase: any) => {
+            return acc + calculatePhaseWidth(phase);
+          }, 0);
+          
+          return (
+            <Typography
+              key={phaseKey}
+              variant="h5"
+              sx={{
+                position: 'absolute',
+                left: xPosition + PHASE_START_PADDING,
+                top: 20,
+                width: 280,
+                textAlign: 'center',
+              }}
+            >
+              {phaseData.name} ({phaseData.period})
+            </Typography>
+          );
+        })}
       </Box>
     </Box>
   );
