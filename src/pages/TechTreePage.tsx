@@ -6,7 +6,34 @@ import {
   Chip,
   Tooltip,
 } from '@mui/material';
+import CodeIcon from '@mui/icons-material/Code';
+import BrushIcon from '@mui/icons-material/Brush';
+import PeopleIcon from '@mui/icons-material/People';
+import BuildIcon from '@mui/icons-material/Build';
+import NetworkCheckIcon from '@mui/icons-material/NetworkCheck';
+import PsychologyIcon from '@mui/icons-material/Psychology';
+import SettingsIcon from '@mui/icons-material/Settings';
 import techTree from '../../content/tech/tech-tree.yml';
+
+const getTagIcon = (tag: string) => {
+  const iconType = tag.split(' ')[1];
+  switch (iconType) {
+    case 'CREATIVE':
+      return <BrushIcon />;
+    case 'TECHNICAL':
+      return <BuildIcon />;
+    case 'SOCIAL':
+      return <PeopleIcon />;
+    case 'INTEGRATION':
+      return <NetworkCheckIcon />;
+    case 'COGNITIVE':
+      return <PsychologyIcon />;
+    case 'OPERATIONAL':
+      return <SettingsIcon />;
+    default:
+      return <CodeIcon />;
+  }
+};
 
 // Helper to calculate item positions
 const calculateNodePositions = (techTree: any) => {
