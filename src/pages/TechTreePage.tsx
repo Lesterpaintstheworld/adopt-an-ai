@@ -31,19 +31,19 @@ const getTagColor = (tag: string) => {
   const tagType = tag.split(' ')[1];
   switch (tagType) {
     case 'CREATIVE':
-      return { color: '#d32f2f', borderColor: '#d32f2f' };
+      return { backgroundColor: '#d32f2f', color: '#ffffff', minWidth: '120px' };
     case 'TECHNICAL':
-      return { color: '#1976d2', borderColor: '#1976d2' };
+      return { backgroundColor: '#1976d2', color: '#ffffff', minWidth: '120px' };
     case 'SOCIAL':
-      return { color: '#388e3c', borderColor: '#388e3c' };
+      return { backgroundColor: '#388e3c', color: '#ffffff', minWidth: '120px' };
     case 'INTEGRATION':
-      return { color: '#7b1fa2', borderColor: '#7b1fa2' };
+      return { backgroundColor: '#7b1fa2', color: '#ffffff', minWidth: '120px' };
     case 'COGNITIVE':
-      return { color: '#f57c00', borderColor: '#f57c00' };
+      return { backgroundColor: '#f57c00', color: '#ffffff', minWidth: '120px' };
     case 'OPERATIONAL':
-      return { color: '#0288d1', borderColor: '#0288d1' };
+      return { backgroundColor: '#0288d1', color: '#ffffff', minWidth: '120px' };
     default:
-      return { color: '#757575', borderColor: '#757575' };
+      return { backgroundColor: '#757575', color: '#ffffff', minWidth: '120px' };
   }
 };
 
@@ -319,11 +319,12 @@ const TechItem = ({
               variant="outlined"
               sx={{
                 ...getTagColor(item.tag),
-                borderWidth: '1px',
-                borderStyle: 'solid',
-                '& .MuiSvgIcon-root': {
-                  color: getTagColor(item.tag).color
-                }
+                '& .MuiChip-icon': {
+                  color: '#ffffff'
+                },
+                borderRadius: '4px',
+                fontWeight: 500,
+                height: '24px'
               }}
             />
           </Box>
