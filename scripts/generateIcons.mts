@@ -134,3 +134,85 @@ process.on('uncaughtException', (error: unknown) => {
   console.error('Uncaught exception:', errorMessage);
   process.exit(1);
 });
+import fs from 'fs/promises';
+import path from 'path';
+import yaml from 'js-yaml';
+import dotenv from 'dotenv';
+import OpenAI from 'openai';
+import { fileURLToPath } from 'url';
+import { generateAndSaveIconWithRetry } from '../src/utils/perkIconGenerator.js';
+
+// Helper function for better error formatting
+function formatError(error: unknown): string {
+  if (error instanceof Error) {
+    return `${error.name}: ${error.message}\n${error.stack}`;
+  }
+  return String(error);
+}
+
+async function main() {
+  try {
+    // Initialize environment
+    dotenv.config();
+    
+    if (!process.env.OPENAI_API_KEY) {
+      throw new Error('OPENAI_API_KEY not found in environment variables');
+    }
+
+    const openai = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY
+    });
+
+    // Read tech tree
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+    const techTreePath = path.join(__dirname, '..', 'content', 'tech', 'tech-tree.yml');
+    
+    console.log('Reading tech tree from:', techTreePath);
+    const content = await fs.readFile(techTreePath, 'utf8');
+    const techTree = yaml.load(content) as any;
+
+    // Extract all perks
+    const perks: any[] = [];
+    Object.values(techTree).forEach((phase: any) => {
+      Object.entries(phase).forEach(([key, value]: [string, any]) => {
+        if (!['name', 'period', 'description'].includes(key)) {
+          value.forEach((item: any) => {
+            perks.push(item);
+          });
+        }
+      });
+    });
+
+    console.log(`Found ${perks.length} perks to process`);
+
+    // Process each perk
+    for (const perk of perks) {
+      try {
+        console.log(`\nProcessing: ${perk.name}`);
+        await generateAndSaveIconWithRetry(perk, openai);
+        console.log(`Successfully generated icon for ${perk.name}`);
+      } catch (error) {
+        console.error(`Failed to generate icon for ${perk.name}:`, formatError(error));
+        // Continue with next perk instead of stopping
+      }
+    }
+
+    console.log('\nIcon generation complete!');
+  } catch (error) {
+    console.error('Fatal error:', formatError(error));
+    process.exit(1);
+  }
+}
+
+// Add proper error handling for the main execution
+main().catch(error => {
+  console.error('Unhandled error:', formatError(error));
+  process.exit(1);
+});
+
+// Add handler for truly unhandled rejections
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', formatError(reason));
+  process.exit(1);
+});
