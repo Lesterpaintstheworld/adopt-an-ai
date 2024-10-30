@@ -108,6 +108,7 @@ const ConnectionLines = ({
   highlightedItem: string | null 
 }) => {
   const svgRef = useRef<SVGSVGElement>(null);
+  const CORNER_RADIUS = 20; // Radius for rounded corners
 
   return (
     <svg
@@ -131,12 +132,24 @@ const ConnectionLines = ({
             highlightedItem === item.name || 
             highlightedItem === prereq;
 
-          // Calculate the path points
-          const startX = start.x + 280;
-          const startY = start.y + 40;
-          const endX = end.x;
-          const endY = end.y + 40;
-          const midX = (startX + endX) / 2;
+          // Calculate path points
+          const startX = start.x + 280; // Exit from right side of prerequisite
+          const startY = start.y + 40;  // Middle height of box
+          const endX = end.x;           // Enter from left side of dependent
+          const endY = end.y + 40;      // Middle height of box
+          
+          // Calculate the midpoint for the path
+          const midX = startX + (endX - startX) / 2;
+
+          // Create path with rounded corners
+          const path = `
+            M ${startX} ${startY}
+            H ${midX - CORNER_RADIUS}
+            Q ${midX} ${startY} ${midX} ${startY + CORNER_RADIUS}
+            V ${endY - CORNER_RADIUS}
+            Q ${midX} ${endY} ${midX + CORNER_RADIUS} ${endY}
+            H ${endX}
+          `;
 
           return (
             <g key={`${prereq}-${item.name}`}>
@@ -156,14 +169,7 @@ const ConnectionLines = ({
                 </marker>
               </defs>
               <path
-                d={`
-                  M${startX} ${startY}
-                  H${startX + 40}
-                  C${startX + 60} ${startY},
-                  ${endX - 60} ${endY},
-                  ${endX - 40} ${endY}
-                  H${endX}
-                `}
+                d={path}
                 stroke={isHighlighted ? "#000" : "#666"}
                 strokeWidth={isHighlighted ? "3" : "2"}
                 fill="none"
