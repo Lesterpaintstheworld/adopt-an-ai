@@ -5,6 +5,14 @@ import dotenv from 'dotenv';
 import OpenAI from 'openai';
 import { fileURLToPath } from 'url';
 
+// Helper function for error formatting
+function formatError(error: unknown): string {
+    if (error instanceof Error) {
+        return `${error.name}: ${error.message}\n${error.stack}`;
+    }
+    return String(error);
+}
+
 // Initialize environment variables
 dotenv.config();
 
@@ -38,7 +46,7 @@ async function testFileSystem() {
         
         return true;
     } catch (error) {
-        console.error('File system test failed:', error);
+        console.error('File system test failed:\n', formatError(error));
         return false;
     }
 }
@@ -145,28 +153,60 @@ async function testImageGeneration() {
 async function runAllTests() {
     console.log('Starting component tests...');
     
-    const results = {
-        fileSystem: await testFileSystem(),
-        yamlParsing: await testYamlParsing(),
-        openAI: await testOpenAI(),
-        techTree: await testTechTreeReading(),
-        imageGeneration: await testImageGeneration()
-    };
+    const results: Record<string, boolean> = {};
     
-    console.log('\n=== Test Results ===');
-    Object.entries(results).forEach(([test, passed]) => {
-        console.log(`${test}: ${passed ? '✅ PASSED' : '❌ FAILED'}`);
-    });
-    
-    if (Object.values(results).every(result => result)) {
-        console.log('\nAll tests passed successfully! ✨');
-    } else {
-        console.log('\nSome tests failed. Please check the logs above. ⚠️');
+    try {
+        // Run each test in sequence with proper error handling
+        const tests = {
+            fileSystem: testFileSystem,
+            yamlParsing: testYamlParsing,
+            openAI: testOpenAI,
+            techTree: testTechTreeReading,
+            imageGeneration: testImageGeneration
+        };
+
+        for (const [name, testFn] of Object.entries(tests)) {
+            try {
+                results[name] = await testFn();
+            } catch (error) {
+                console.error(`Test "${name}" failed with error:\n`, formatError(error));
+                results[name] = false;
+            }
+        }
+
+        // Log results
+        console.log('\n=== Test Results ===');
+        Object.entries(results).forEach(([test, passed]) => {
+            console.log(`${test}: ${passed ? '✅ PASSED' : '❌ FAILED'}`);
+        });
+
+        const allPassed = Object.values(results).every(result => result);
+        if (allPassed) {
+            console.log('\nAll tests passed successfully! ✨');
+        } else {
+            console.log('\nSome tests failed. Please check the logs above. ⚠️');
+        }
+
+        // Return explicit exit code
+        process.exit(allPassed ? 0 : 1);
+    } catch (error) {
+        console.error('Fatal error during test execution:\n', formatError(error));
+        process.exit(1);
     }
 }
 
+// Add diagnostic information
+console.log('Node version:', process.version);
+console.log('Current working directory:', process.cwd());
+
 // Execute tests with proper error handling
 runAllTests().catch(error => {
-    console.error('Fatal error during testing:', error);
+    console.error('Unhandled error in test suite:\n', formatError(error));
+    process.exit(1);
+});
+
+// Add handler for truly unhandled rejections
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('Unhandled Rejection at:', promise, 'reason:', formatError(reason));
     process.exit(1);
 });
