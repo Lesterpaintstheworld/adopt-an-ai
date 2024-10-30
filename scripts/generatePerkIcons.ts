@@ -3,7 +3,12 @@ import path from 'path';
 import yaml from 'js-yaml';
 import dotenv from 'dotenv';
 import OpenAI from 'openai';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 import { generateAndSaveIcon, generateAndSaveIconWithRetry } from '../src/utils/perkIconGenerator';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 dotenv.config();
 
