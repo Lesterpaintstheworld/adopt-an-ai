@@ -13,14 +13,12 @@ import {
   ListItemIcon,
   ListItemText,
   Switch,
-  useTheme,
 } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
 const PricingPage = () => {
-  const theme = useTheme();
   const navigate = useNavigate();
   const [annualBilling, setAnnualBilling] = useState(false);
 
