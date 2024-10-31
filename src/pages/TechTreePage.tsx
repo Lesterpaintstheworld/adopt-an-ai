@@ -336,11 +336,11 @@ const TechItem = ({
             zIndex: 10,
           },
           backgroundColor: (theme) => {
-            const alpha = 0.95;
-            return phase === 'phase_1' ? `${theme.palette.primary.light}${Math.round(alpha * 255).toString(16).padStart(2, '0')}` :
-              phase === 'phase_2' ? `${theme.palette.secondary.light}${Math.round(alpha * 255).toString(16).padStart(2, '0')}` :
-              phase === 'phase_3' ? `${theme.palette.success.light}${Math.round(alpha * 255).toString(16).padStart(2, '0')}` :
-              `${theme.palette.warning.light}${Math.round(alpha * 255).toString(16).padStart(2, '0')}`;
+            const alpha = 0.75; // Reduced opacity for lighter feel
+            return phase === 'phase_1' ? `rgba(144, 202, 249, ${alpha})` : // Soft blue
+                   phase === 'phase_2' ? `rgba(129, 212, 250, ${alpha})` : // Light cyan-blue
+                   phase === 'phase_3' ? `rgba(178, 223, 219, ${alpha})` : // Soft teal
+                   `rgba(165, 214, 243, ${alpha})`; // Light sky blue
           },
           fontWeight: item.name === highlightedItem || (item.prerequisites || []).includes(highlightedItem || '') ? 'bold' : 'normal',
         }}
