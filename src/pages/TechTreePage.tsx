@@ -422,27 +422,7 @@ export const TechTreePage = () => {
   );
 
   return (
-    <>
-      {/* Background container */}
-      <Box
-        sx={{
-          position: 'absolute',
-          top: 64,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          width: '16000px',
-          height: '100%',
-          backgroundImage: 'url(/website/convergence-dark.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          zIndex: 1,
-        }}
-      />
-
-      {/* Content container */}
-      <Box
+    <Box
         ref={containerRef}
         sx={{
           position: 'fixed',
@@ -468,6 +448,10 @@ export const TechTreePage = () => {
             height: 2000,
             p: 4,
             minWidth: '16000px',
+            backgroundImage: 'url(/website/convergence-dark.png)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
           }}
         >
           <ConnectionLines 
