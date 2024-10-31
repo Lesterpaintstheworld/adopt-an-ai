@@ -13,12 +13,16 @@ const BlogPostPage: React.FC = () => {
     const loadPost = async () => {
       try {
         setLoading(true);
+        console.log('Loading blog post with slug:', slug);
         const content = await getBlogContent();
-        
+        console.log('Loaded blog content:', content);
+      
         // Find the post either in regular posts or featured post
         const foundPost = content.posts.find(p => p.slug === slug) || 
           (content.featured_post?.slug === slug ? content.featured_post : null);
-        
+      
+        console.log('Found post:', foundPost);
+      
         if (foundPost) {
           setPost(foundPost);
         }
