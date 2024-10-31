@@ -37,7 +37,7 @@ const iconExists = async (perkName: string): Promise<boolean> => {
 // Generate and save icon for a perk
 async function generateIcon(perk: Perk, openai: OpenAI): Promise<Buffer> {
   try {
-    const prompt = await generateDallePrompt(perk, openai);
+    const prompt = await generateDallePrompt(perk);
     
     const response = await openai.images.generate({
       model: "dall-e-3",
@@ -111,7 +111,7 @@ export const getPerkIconUrl = (perkName: string): string => {
   return `/perk-icons/${getPerkIconFilename(perkName)}`;
 };
 
-async function generateDallePrompt(perk: Perk, openai: OpenAI): Promise<string> {
+async function generateDallePrompt(perk: Perk): Promise<string> {
   const tagType = perk.tag.split(' ')[1];
   let styleGuide = '';
   
@@ -145,63 +145,4 @@ async function generateDallePrompt(perk: Perk, openai: OpenAI): Promise<string> 
   return `${basePrompt} ${technicalSpecs}`;
 }
 
-
-
-const generateSpecificIconElements = async (perk: Perk, openai: OpenAI): Promise<string> => {
-  const prompt = `You are an expert at creating DALL-E image generation prompts.
-Generate a detailed prompt for a World of Warcraft style ability icon with a futuristic twist.
-The icon should maintain consistency with other ability icons while being unique and recognizable.
-
-The icon represents this perk:
-Name: ${perk.name}
-Short description: ${perk.shortDescription || ''}
-Long description: ${perk.longDescription || perk.description || ''}
-Tag type: ${perk.tag}
-Phase: ${getPhaseFromPrerequisites(perk)}
-
-Requirements:
-- Must be in World of Warcraft ability icon style
-- Should have a futuristic sci-fi aesthetic
-- Include specific visual elements that represent the perk's function
-- Use appropriate colors and symbols
-- Must be instantly recognizable at small sizes
-- Should include lighting effects and depth
-- Must maintain professional game-like quality
-
-Focus on the visual elements only. Be specific but concise.
-Do not include technical specifications or image size requirements.`;
-
-  try {
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4o",
-      messages: [{ role: "user", content: prompt }],
-      temperature: 0.7,
-      max_tokens: 150
-    });
-
-    return completion.choices[0].message.content || getDefaultVisualElements(perk);
-  } catch (error) {
-    console.error('Failed to generate prompt with GPT-4o:', error);
-    return getDefaultVisualElements(perk);
-  }
-};
-
-const getPhaseFromPrerequisites = (perk: Perk): string => {
-  const phases = ['phase_1', 'phase_2', 'phase_3', 'phase_4'];
-  return phases.find(phase => 
-    perk.prerequisites?.some(prereq => prereq.includes(phase))
-  ) || 'phase_1';
-};
-
-const getDefaultVisualElements = (perk: Perk): string => {
-  const phaseElements = {
-    phase_1: 'with foundational, crystalline structures',
-    phase_2: 'with evolving, dynamic patterns',
-    phase_3: 'with transcendent, ethereal effects',
-    phase_4: 'with perfect, harmonious symmetry'
-  };
-
-  const phase = getPhaseFromPrerequisites(perk);
-  return phaseElements[phase as keyof typeof phaseElements];
-};
 
