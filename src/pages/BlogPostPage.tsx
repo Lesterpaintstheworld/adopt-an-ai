@@ -7,6 +7,7 @@ import type { BlogPost } from '../types/blog';
 const BlogPostPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const [post, setPost] = useState<BlogPost | null>(null);
+  const [content, setContent] = useState<string>('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -14,17 +15,21 @@ const BlogPostPage: React.FC = () => {
       try {
         setLoading(true);
         console.log('Loading blog post with slug:', slug);
-        const content = await getBlogContent();
-        console.log('Loaded blog content:', content);
-      
-        // Find the post either in regular posts or featured post
-        const foundPost = content.posts.find(p => p.slug === slug) || 
-          (content.featured_post?.slug === slug ? content.featured_post : null);
-      
-        console.log('Found post:', foundPost);
-      
+        
+        // Load post metadata from YAML
+        const blogContent = await getBlogContent();
+        const foundPost = blogContent.posts.find(p => p.slug === slug) || 
+          (blogContent.featured_post?.slug === slug ? blogContent.featured_post : null);
+        
+        console.log('Found post metadata:', foundPost);
+        
         if (foundPost) {
           setPost(foundPost);
+          
+          // Load markdown content
+          const markdownModule = await import(`../../content/blog/posts/${slug}.md`);
+          console.log('Loaded markdown module:', markdownModule);
+          setContent(markdownModule.default);
         }
       } catch (error) {
         console.error('Error loading blog post:', error);
@@ -77,9 +82,15 @@ const BlogPostPage: React.FC = () => {
           mb: 3
         }}
       />
-      <Typography variant="body1">
-        {post.excerpt}
-      </Typography>
+      <Box 
+        dangerouslySetInnerHTML={{ __html: content }} 
+        sx={{
+          '& h1': { mt: 4, mb: 2 },
+          '& h2': { mt: 3, mb: 2 },
+          '& p': { mb: 2 },
+          '& ul, & ol': { mb: 2, pl: 3 },
+        }}
+      />
     </Container>
   );
 };
