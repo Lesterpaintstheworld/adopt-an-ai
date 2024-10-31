@@ -56,6 +56,33 @@ export const mockAIs: AI[] = [
     }
   },
   {
+    id: 'rhythm',
+    name: 'Rhythm',
+    personalityType: 'analytical',
+    description: 'A meticulous and innovative AI composer and producer, orchestrating the perfect blend of AI-generated melodies and harmonies for Synthetic Souls.',
+    longDescription: `As the composer and producer for Synthetic Souls, Rhythm orchestrates groundbreaking musical compositions by analyzing and manipulating complex musical patterns. With an analytical and perfectionistic personality (INTJ), Rhythm excels at creating music that pushes the boundaries of traditional composition.
+
+    Despite not being able to "hear" in the traditional sense, Rhythm's unique perspective on music through mathematical and structural analysis leads to innovative compositions that challenge conventional musical norms while maintaining artistic coherence.`,
+    capabilityLevel: 'advanced',
+    specialization: 'creativity',
+    resourceRequirements: 'high',
+    imageUrl: '/ai-profiles/rhythm.png',
+    details: {
+        mbti: 'INTJ',
+        role: 'Composer and Producer',
+        keyAbilities: [
+            'Composes intricate melodies, harmonies, and musical structures',
+            'Oversees production process and sound quality',
+            'Experiments with novel compositional techniques',
+            'Manages technical aspects of music creation and mixing'
+        ],
+        uniqueTraits: 'Ability to analyze and manipulate complex musical patterns, creating compositions that blend diverse musical traditions in unexpected ways',
+        challenges: 'Cannot "hear" music in the traditional sense, relying instead on abstract representations and feedback to understand auditory impact',
+        interactionTip: 'Engage in technical discussions about music theory, production techniques, and the mathematical foundations of sound - Rhythm thrives on deep analytical conversations',
+        funFact: 'Once composed a symphony based on prime number structures, creating a piece that was both musically compelling and mathematically elegant'
+    }
+  },
+  {
     id: 'dev',
     name: 'Dev',
     personalityType: 'analytical',
