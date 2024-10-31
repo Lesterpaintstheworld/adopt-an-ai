@@ -29,13 +29,17 @@ const BlogPage = () => {
   useEffect(() => {
     const loadContent = async () => {
       try {
+        setLoading(true);
+        console.log('Loading blog content...');
         const content = await getBlogContent();
+        console.log('Loaded blog content:', content);
         setBlogContent(content);
         const loadedPosts = await loadBlogPosts();
+        console.log('Loaded posts:', loadedPosts);
         setPosts(loadedPosts);
-        setLoading(false);
       } catch (error) {
-        console.error('Error loading blog content:', error);
+        console.error('Error in loadContent:', error);
+      } finally {
         setLoading(false);
       }
     };

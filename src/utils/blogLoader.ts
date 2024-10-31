@@ -2,14 +2,24 @@ import { BlogPost, BlogContent } from '../types/blog';
 
 export async function loadBlogPosts(): Promise<BlogPost[]> {
   try {
-    const blogConfig = await import('../../content/blog/blog.yml');
-    const blogContent = blogConfig.default as BlogContent;
-    const posts = [...blogContent.posts];
+    // Import all YAML files
+    const blogModule = await import('../../content/blog/blog.yml');
+    const blogData = blogModule.default;
     
-    if (blogContent.featured_post) {
-      posts.unshift(blogContent.featured_post);
+    // Ensure we have posts
+    if (!blogData || !blogData.posts) {
+      console.error('Blog data is missing or malformed:', blogData);
+      return [];
     }
 
+    const posts = [...blogData.posts];
+    
+    // Add featured post if it exists
+    if (blogData.featured_post) {
+      posts.unshift(blogData.featured_post);
+    }
+
+    // Sort by date
     return posts.sort((a, b) => 
       new Date(b.date).getTime() - new Date(a.date).getTime()
     );
@@ -20,6 +30,17 @@ export async function loadBlogPosts(): Promise<BlogPost[]> {
 }
 
 export async function getBlogContent(): Promise<BlogContent> {
-  const blogConfig = await import('../../content/blog/blog.yml');
-  return blogConfig.default as BlogContent;
+  try {
+    const blogModule = await import('../../content/blog/blog.yml');
+    const blogData = blogModule.default;
+    
+    if (!blogData) {
+      throw new Error('Blog data is missing');
+    }
+    
+    return blogData as BlogContent;
+  } catch (error) {
+    console.error('Error loading blog content:', error);
+    throw error;
+  }
 }
