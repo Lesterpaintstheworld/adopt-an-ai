@@ -23,35 +23,40 @@ const BlogPostPage: React.FC = () => {
         // Try to directly import the markdown file first
         try {
           console.log('Attempting to load markdown file directly...');
-          const posts = import.meta.glob('../../content/blog/posts/*.md', { eager: true });
-            
+          const posts = import.meta.glob('/content/blog/posts/*.md', { eager: true });
+          
           // Log available files for debugging
           console.log('Available markdown files:', Object.keys(posts));
-            
+          
           const matchingPost = Object.entries(posts).find(([path]) => {
             const filename = path.split('/').pop() || '';
-            // Remove .md extension for comparison
+            // Remove .md extension and match against the full slug
             const filenameWithoutExt = filename.replace('.md', '');
+            console.log('Comparing:', filenameWithoutExt, 'with slug:', slug);
             return filenameWithoutExt === slug;
           });
-            
+          
           if (!matchingPost) {
             console.log('No matching post found for slug:', slug);
             throw new Error('Markdown file not found');
           }
 
           const [_, module] = matchingPost;
-          const { attributes, html } = (module as any).default;
-            
-          console.log('Loaded markdown content:', { attributes, html });
-            
-          setContent(html || '');
+          console.log('Loaded module:', module);
+          
+          // Handle both possible module formats
+          const content = (module as any).default?.html || (module as any).html || '';
+          const attributes = (module as any).default?.attributes || (module as any).attributes || {};
+          
+          console.log('Parsed content:', { content, attributes });
+          
+          setContent(content);
           if (attributes) {
             setPost({
-              title: attributes.title || post?.title,
+              title: attributes.title || post?.title || '',
               slug: attributes.slug || slug,
-              author: attributes.author || post?.author,
-              date: attributes.date || post?.date,
+              author: attributes.author || post?.author || '',
+              date: attributes.date || post?.date || '',
               excerpt: attributes.excerpt || post?.excerpt || '',
               image: attributes.image || post?.image || '/images/blog/default.jpg',
               category: attributes.category || post?.category || 'Uncategorized'
