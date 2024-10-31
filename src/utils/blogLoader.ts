@@ -1,5 +1,5 @@
 import { BlogPost, BlogContent } from '../types/blog';
-import blogConfig from '../../content/blog/blog.yml';
+import blogConfig from '@content/blog/blog.yml';
 
 export async function loadBlogPosts(): Promise<BlogPost[]> {
   try {
