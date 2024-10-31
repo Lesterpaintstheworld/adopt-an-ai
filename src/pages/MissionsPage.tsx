@@ -278,7 +278,7 @@ const MissionsPage: React.FC = () => {
       {/* Categories */}
       <Box sx={{ mb: 4 }}>
         <ToggleButtonGroup
-          value={selectedCategory}
+          value={filters.category}
           exclusive
           onChange={handleCategoryChange}
           aria-label="mission categories"
