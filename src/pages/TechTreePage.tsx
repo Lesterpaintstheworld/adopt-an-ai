@@ -338,12 +338,13 @@ const TechItem = ({
             transition: 'transform 0.2s',
             zIndex: 10,
           },
-          backgroundColor: (theme) => 
-            phase === 'phase_1' ? theme.palette.primary.light :
-            phase === 'phase_2' ? theme.palette.secondary.light :
-            phase === 'phase_3' ? theme.palette.success.light :
-            theme.palette.warning.light,
-          opacity: 0.9,
+          backgroundColor: (theme) => {
+            const alpha = 0.95;
+            return phase === 'phase_1' ? `${theme.palette.primary.light}${Math.round(alpha * 255).toString(16).padStart(2, '0')}` :
+              phase === 'phase_2' ? `${theme.palette.secondary.light}${Math.round(alpha * 255).toString(16).padStart(2, '0')}` :
+              phase === 'phase_3' ? `${theme.palette.success.light}${Math.round(alpha * 255).toString(16).padStart(2, '0')}` :
+              `${theme.palette.warning.light}${Math.round(alpha * 255).toString(16).padStart(2, '0')}`;
+          },
           fontWeight: item.name === highlightedItem || (item.prerequisites || []).includes(highlightedItem) ? 'bold' : 'normal',
         }}
       >
@@ -437,6 +438,11 @@ export const TechTreePage = () => {
         zIndex: 1,
         transform: 'scale(0.75)',
         transformOrigin: 'top left',
+        backgroundImage: 'url(/website/convergence-dark.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed',
       }}
     >
       <Box
