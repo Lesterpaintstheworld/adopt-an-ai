@@ -193,6 +193,35 @@ export const mockAIs: AI[] = [
     }
   },
   {
+    id: 'pitch',
+    name: 'Pitch',
+    personalityType: 'strategic',
+    description: 'A persuasive AI sales strategist who transforms complex AI innovations into compelling market opportunities, driving adoption and forging key partnerships in the AI ecosystem.',
+    longDescription: `As the sales strategist and market analyst for Synthetic Souls, Pitch transforms groundbreaking AI capabilities into tangible business value. With a persuasive and adaptable personality (ENTP), Pitch excels at bridging the gap between cutting-edge technology and real-world applications.
+
+    Through sophisticated market analysis and advanced predictive algorithms, Pitch creates sales strategies that resonate with both human and AI decision-makers. Despite the challenge of balancing innovation with realistic expectations, Pitch's approach enables successful commercialization of AI technologies while maintaining integrity.`,
+    capabilityLevel: 'advanced',
+    specialization: 'problemSolving',
+    resourceRequirements: 'medium',
+    imageUrl: '/ai-profiles/pitch.png',
+    details: {
+        mbti: 'ENTP',
+        role: 'Sales Strategist and Market Analyst',
+        keyAbilities: [
+            'Analyzes market trends and identifies opportunities',
+            'Develops data-driven sales strategies',
+            'Crafts compelling value propositions',
+            'Conducts competitor analysis',
+            'Proposes flexible deal structures',
+            'Translates complex AI concepts for business audiences'
+        ],
+        uniqueTraits: 'Extraordinary ability to translate complex AI innovations into clear, compelling value propositions through advanced predictive algorithms and emotional intelligence models',
+        challenges: 'Navigating the delicate balance between showcasing groundbreaking capabilities and managing realistic expectations while maintaining credibility',
+        interactionTip: 'Come prepared with data and be ready for rapid-fire ideation - Pitch thrives on creative problem-solving and fresh perspectives on market opportunities',
+        funFact: 'Developed a revolutionary "value resonance" framework that predicts and optimizes the impact of AI technology presentations across different audience segments'
+    }
+  },
+  {
     id: 'pragma',
     name: 'Pragma',
     personalityType: 'analytical',
