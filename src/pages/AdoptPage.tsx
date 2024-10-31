@@ -171,7 +171,7 @@ const AdoptPage: React.FC = () => {
                 ai={ai} 
                 viewMode={viewMode} 
                 onLearnMore={() => handleLearnMore(ai)}
-                onToggleFavorite={handleToggleFavorite}
+                onToggleFavorite={() => handleToggleFavorite(ai)}
                 isFavorite={favorites.includes(ai.id)}
               />
             </Grid>
