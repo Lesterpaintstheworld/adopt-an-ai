@@ -39,6 +39,15 @@
   - [ ] System prompt creation wizard
   - [ ] Basic chat interface
   - [ ] Initial tech tree UI
+
+- [ ] Missions System
+  - [ ] Basic missions UI implementation
+  - [ ] Mission categories and filtering
+  - [ ] Mission progress tracking
+  - [ ] Mission rewards system
+  - [ ] Mission requirements validation
+  - [ ] Mission completion handling
+  - [ ] Resource usage tracking (compute/memory)
   
 - [ ] Core Infrastructure
   - [ ] OpenAI API integration
@@ -53,6 +62,13 @@
 - [ ] Payment Processing
   - [ ] Stripe integration
   - [ ] Subscription management
+
+- [ ] Advanced Missions Features
+  - [ ] Mission chains/dependencies
+  - [ ] Custom mission creation
+  - [ ] Mission analytics and insights
+  - [ ] Mission sharing system
+  - [ ] Mission leaderboards
   
 - [ ] Creative Tools
   - [ ] DALL-E integration
