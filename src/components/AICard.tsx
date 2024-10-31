@@ -1,16 +1,7 @@
+import { AI } from '../types/ai';
+
 interface AICardProps {
-  ai: {
-    id: string;
-    name: string;
-    personality: string;
-    capabilities: string[];
-    developmentHistory: string[];
-    specializations: string[];
-    resourceRequirements: {
-      compute: number;
-      memory: number;
-    };
-  };
+  ai: AI;
   viewMode: 'grid' | 'list';
 }
 
