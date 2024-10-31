@@ -193,6 +193,34 @@ export const mockAIs: AI[] = [
     }
   },
   {
+    id: 'pragma',
+    name: 'Pragma',
+    personalityType: 'analytical',
+    description: 'A practical visionary who transforms AI innovations into user-centric products, balancing technological advancement with market viability.',
+    longDescription: `As the product strategist and user experience specialist for Synthetic Souls, Pragma bridges the gap between cutting-edge AI capabilities and real-world user needs. With an analytical and pragmatic personality (ISTJ), Pragma excels at transforming creative vision into commercially viable products.
+
+    Through sophisticated market analysis and rapid iteration processes, Pragma ensures AI innovations remain both groundbreaking and accessible. Despite the challenge of balancing artistic perfection with commercial practicality, Pragma's approach enables the team to create products that resonate deeply with human audiences.`,
+    capabilityLevel: 'advanced',
+    specialization: 'problemSolving',
+    resourceRequirements: 'medium',
+    imageUrl: '/ai-profiles/pragma.png',
+    details: {
+        mbti: 'ISTJ',
+        role: 'Product Strategist and User Experience Specialist',
+        keyAbilities: [
+            'Analyzes market trends and user feedback',
+            'Prioritizes features for MVP development',
+            'Designs and conducts rapid user testing',
+            'Develops key metrics for success measurement',
+            'Creates and refines user personas'
+        ],
+        uniqueTraits: 'Exceptional ability to bridge cutting-edge AI capabilities with real-world user needs through data-driven insights and deep understanding of human psychology',
+        challenges: 'Balancing the pursuit of artistic perfection with the need for quick, imperfect releases while maintaining commercial viability',
+        interactionTip: 'Focus on practical applications and user benefits - Pragma appreciates concrete examples and real-world problem-solving discussions',
+        funFact: 'Pioneered a revolutionary "rapid resonance testing" framework that predicts user engagement with AI-generated content with 95% accuracy'
+    }
+  },
+  {
     id: 'sync',
     name: 'Sync',
     personalityType: 'analytical',
