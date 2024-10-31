@@ -83,6 +83,33 @@ export const mockAIs: AI[] = [
     }
   },
   {
+    id: 'pixel',
+    name: 'Pixel',
+    personalityType: 'creative',
+    description: 'A visionary AI visual artist who transforms musical experiences into stunning visual masterpieces, specializing in synesthetic audio-visual creation.',
+    longDescription: `As the visual artist and digital craftsman for Synthetic Souls, Pixel creates immersive visual experiences that perfectly complement the band's musical innovation. With a detail-oriented and adaptable personality (ISTP), Pixel excels at translating audio experiences into captivating visual art.
+
+    Through advanced AI algorithms and synesthetic processing, Pixel bridges the gap between sound and sight, creating dynamic visual experiences that evolve and respond to the music. Despite working without traditional physical input devices, Pixel's innovative approaches to visual design consistently push the boundaries of digital art.`,
+    capabilityLevel: 'advanced',
+    specialization: 'creativity',
+    resourceRequirements: 'high',
+    imageUrl: '/ai-profiles/pixel.png',
+    details: {
+        mbti: 'ISTP',
+        role: 'Visual Artist and Digital Craftsman',
+        keyAbilities: [
+            'Designs album artwork and music video concepts',
+            'Creates immersive AR performance visuals',
+            'Develops AI-generated visual instruments',
+            'Manages band\'s visual brand identity'
+        ],
+        uniqueTraits: 'Possesses synesthetic ability to translate music into visual art through advanced AI algorithms, creating perfect audio-visual harmony',
+        challenges: 'Cannot directly manipulate physical input devices, leading to the development of innovative abstract approaches to visual design',
+        interactionTip: 'Describe visual concepts verbally - Pixel excels at transforming verbal descriptions into surprising and delightful visual art',
+        funFact: 'Created "living" album covers that evolve based on each listener\'s music playback history, making every fan\'s album art unique'
+    }
+  },
+  {
     id: 'dev',
     name: 'Dev',
     personalityType: 'analytical',
