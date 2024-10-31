@@ -1,6 +1,35 @@
 import React from 'react';
 import {
   Box,
+  Typography,
+  LinearProgress
+} from '@mui/material';
+
+interface ProgressBarProps {
+  value: number;
+  type: string;
+}
+
+const EntityProgressBar: React.FC<ProgressBarProps> = ({ value, type }) => (
+  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
+    <Typography variant="caption" sx={{ minWidth: 70 }}>
+      {type}
+    </Typography>
+    <LinearProgress 
+      variant="determinate" 
+      value={value}
+      sx={{ 
+        flexGrow: 1,
+        backgroundColor: MYAIS_THEME.colors.progressBar.background,
+        '& .MuiLinearProgress-bar': {
+          backgroundColor: MYAIS_THEME.colors.progressBar.fill
+        }
+      }}
+    />
+  </Box>
+);
+import {
+  Box,
   List,
   ListItem,
   ListItemButton,
@@ -87,22 +116,10 @@ const EntityList: React.FC<EntityListProps> = ({ entities, selectedId, onSelect 
                     >
                       {`Stage: ${entity.evolutionStage}`}
                     </Typography>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
-                      <Typography variant="caption" sx={{ minWidth: 70 }}>
-                        {entity.currentFocus.type}
-                      </Typography>
-                      <LinearProgress 
-                        variant="determinate" 
-                        value={entity.currentFocus.progress}
-                        sx={{ 
-                          flexGrow: 1,
-                          backgroundColor: MYAIS_THEME.colors.progressBar.background,
-                          '& .MuiLinearProgress-bar': {
-                            backgroundColor: MYAIS_THEME.colors.progressBar.fill
-                          }
-                        }}
-                      />
-                    </Box>
+                    <EntityProgressBar
+                      type={entity.currentFocus.type}
+                      value={entity.currentFocus.progress}
+                    />
                     <Box sx={{ display: 'flex', gap: 2 }}>
                       <Typography variant="caption" color="text.secondary">
                         🧠 {entity.consciousness}

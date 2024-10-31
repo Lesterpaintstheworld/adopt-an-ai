@@ -1,5 +1,47 @@
+interface MyAIsTheme {
+  spacing: {
+    resourceBar: {
+      height: number;
+      padding: number;
+    };
+    entityList: {
+      width: string;
+      itemHeight: number;
+      padding: number;
+      gap: number;
+    };
+    panel: {
+      padding: number;
+    };
+  };
+  colors: {
+    resources: {
+      compute: string;
+      energy: string;
+      knowledge: string;
+    };
+    progress: {
+      background: string;
+      fill: string;
+    };
+    entity: {
+      selected: string;
+      hover: string;
+      border: string;
+    };
+    progressBar: {
+      background: string;
+      fill: string;
+    };
+    entityProgress: {
+      background: string;
+      fill: string;
+    };
+  };
+}
+
 // Theme constants for My AIs page
-export const MYAIS_THEME = {
+export const MYAIS_THEME: MyAIsTheme = {
   spacing: {
     resourceBar: {
       height: 64,

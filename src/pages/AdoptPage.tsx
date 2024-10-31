@@ -1,4 +1,10 @@
 import React, { useState } from 'react';
+
+type FilterChangeEvent = {
+  target: {
+    value: string;
+  };
+};
 import {
   Box,
   Typography,
@@ -75,7 +81,7 @@ const AdoptPage: React.FC = () => {
           <FormControl size="small">
             <Select
               value={filters.capabilityLevel}
-              onChange={(e) => setFilters({ ...filters, capabilityLevel: e.target.value as AdoptFilters['capabilityLevel'] })}
+              onChange={handleFilterChange('capabilityLevel')}
             >
               <MenuItem value="all">All Capabilities</MenuItem>
               <MenuItem value="basic">Basic</MenuItem>

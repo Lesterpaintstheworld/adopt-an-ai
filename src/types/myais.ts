@@ -32,8 +32,10 @@ export interface Connection {
   type: 'mentor' | 'peer' | 'student' | 'creative';
 }
 
+export type FocusType = 'learn' | 'evolve' | 'connect' | 'explore';
+
 export interface DevelopmentFocus {
-  type: 'learn' | 'evolve' | 'connect' | 'explore';
+  type: FocusType;
   progress: number;
   timeRemaining: number;
   resourceConsumption: Resources;
