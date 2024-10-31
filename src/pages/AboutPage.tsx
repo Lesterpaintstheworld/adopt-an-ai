@@ -7,56 +7,6 @@ import {
   CardContent,
 } from '@mui/material';
 
-interface AboutContent {
-  hero: {
-    headline: string;
-    subheadline: string;
-  };
-  mission: {
-    title: string;
-    content: string;
-    key_points: Array<{
-      title: string;
-      description: string;
-    }>;
-  };
-  vision: {
-    title: string;
-    content: string;
-    timeline: {
-      current_phase: string;
-      phases: Array<{
-        year: string;
-        title: string;
-        description: string;
-      }>;
-    };
-  };
-  technology: {
-    title: string;
-    subtitle: string;
-    components: Array<{
-      name: string;
-      description: string;
-    }>;
-  };
-  team: {
-    title: string;
-    subtitle: string;
-    members: Array<{
-      name: string;
-      description: string;
-    }>;
-  };
-  connect: {
-    title: string;
-    channels: Array<{
-      name: string;
-      description: string;
-      url: string;
-    }>;
-  };
-}
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
@@ -207,7 +157,7 @@ const AboutPage = () => {
             {aboutContent.team.subtitle}
           </Typography>
           <Grid container spacing={4}>
-            {aboutContent.team.members.map((member, index) => (
+            {aboutContent.team.members.map((member: { name: string; description: string }, index: number) => (
               <Grid item xs={12} md={4} key={index}>
                 <Card sx={{ height: '100%' }}>
                   <CardContent>
@@ -231,7 +181,7 @@ const AboutPage = () => {
           {aboutContent.connect.title}
         </Typography>
         <Grid container spacing={4} justifyContent="center">
-          {aboutContent.connect.channels.map((channel, index) => (
+          {aboutContent.connect.channels.map((channel: { name: string; description: string; url: string }, index: number) => (
             <Grid item xs={12} sm={6} md={3} key={index}>
               <Card 
                 sx={{ 

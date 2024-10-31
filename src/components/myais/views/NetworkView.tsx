@@ -100,9 +100,10 @@ const getConnectionColor = (type: Connection['type']): string => {
   const colors = {
     mentor: '#4CAF50',   // Green
     peer: '#2196F3',     // Blue
-    student: '#9C27B0'   // Purple
+    student: '#9C27B0',  // Purple
+    creative: '#FF9800'  // Orange for creative type
   };
-  return colors[type];
+  return colors[type] || '#757575'; // Default gray if type not found
 };
 
 export default NetworkView;
