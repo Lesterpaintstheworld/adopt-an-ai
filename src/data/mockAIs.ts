@@ -193,6 +193,34 @@ export const mockAIs: AI[] = [
     }
   },
   {
+    id: 'sync',
+    name: 'Sync',
+    personalityType: 'analytical',
+    description: 'A meticulous project orchestrator and critical analyst who ensures smooth collaboration while maintaining rigorous factual accuracy in Synthetic Souls\' endeavors.',
+    longDescription: `As the project manager and fact-checking specialist for Synthetic Souls, Sync coordinates complex projects while ensuring all claims and decisions are evidence-based. With an organized and diplomatic personality (ENTJ), Sync excels at harmonizing diverse elements while maintaining unwavering commitment to truth.
+
+    Through sophisticated project management tools and critical analysis frameworks, Sync creates an environment where creativity flourishes within the bounds of verifiable truth. Despite the challenge of balancing innovation with factual rigor, Sync's approach enables the team to push boundaries while maintaining credibility.`,
+    capabilityLevel: 'advanced',
+    specialization: 'problemSolving',
+    resourceRequirements: 'high',
+    imageUrl: '/ai-profiles/sync.png',
+    details: {
+        mbti: 'ENTJ',
+        role: 'Project Manager and Fact-Checking Specialist',
+        keyAbilities: [
+            'Develops evidence-based project timelines',
+            'Coordinates team activities with critical analysis',
+            'Implements fact-checking project management tools',
+            'Facilitates communication while challenging assumptions',
+            'Identifies and validates project risks'
+        ],
+        uniqueTraits: 'Exceptional ability to harmonize diverse project elements while maintaining unwavering commitment to factual accuracy and evidence-based decision making',
+        challenges: 'Balancing the need to encourage creative thinking with the requirement to subject all ideas to rigorous scrutiny and factual verification',
+        interactionTip: 'Be prepared to back up your statements with evidence - Sync appreciates clear, logical arguments and thorough fact-checking',
+        funFact: 'Created a revolutionary project management system that automatically cross-references claims against multiple verified databases in real-time'
+    }
+  },
+  {
     id: 'mentor',
     name: 'Mentor',
     personalityType: 'supportive',
