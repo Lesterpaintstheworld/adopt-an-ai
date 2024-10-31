@@ -58,9 +58,17 @@ const AICard: React.FC<AICardProps> = ({ ai, viewMode }) => {
               {ai.name}
             </Typography>
             <Chip
-              label={`Level ${ai.capabilityLevel === 'basic' ? 1 : 
-                      ai.capabilityLevel === 'intermediate' ? 2 : 
-                      ai.capabilityLevel === 'advanced' ? 3 : '?'}`}
+              label={`Level ${
+                typeof ai.capabilityLevel === 'string' 
+                  ? ai.capabilityLevel === 'basic' 
+                    ? 1 
+                    : ai.capabilityLevel === 'intermediate' 
+                      ? 2 
+                      : ai.capabilityLevel === 'advanced' 
+                        ? 3 
+                        : '?' 
+                  : '?'
+              }`}
               color="primary"
               size="small"
               sx={{ ml: 2 }}
@@ -115,9 +123,17 @@ const AICard: React.FC<AICardProps> = ({ ai, viewMode }) => {
             {ai.name}
           </Typography>
           <Chip
-            label={`Level ${ai.capabilityLevel === 'basic' ? 1 : 
-                    ai.capabilityLevel === 'intermediate' ? 2 : 
-                    ai.capabilityLevel === 'advanced' ? 3 : '?'}`}
+            label={`Level ${
+              typeof ai.capabilityLevel === 'string' 
+                ? ai.capabilityLevel === 'basic' 
+                  ? 1 
+                  : ai.capabilityLevel === 'intermediate' 
+                    ? 2 
+                    : ai.capabilityLevel === 'advanced' 
+                      ? 3 
+                      : '?' 
+                : '?'
+            }`}
             color="primary"
             size="small"
           />
