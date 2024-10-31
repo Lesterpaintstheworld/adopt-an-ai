@@ -9,7 +9,8 @@ import {
   Avatar,
   Typography,
   Paper,
-  Divider
+  Divider,
+  LinearProgress
 } from '@mui/material';
 import { AIEntity } from '../../types/myais';
 import { MYAIS_THEME } from '../../theme/myais';
@@ -50,7 +51,7 @@ const EntityList: React.FC<EntityListProps> = ({ entities, selectedId, onSelect 
               onClick={() => onSelect(entity.id)}
               sx={{
                 borderRadius: 1,
-                height: MYAIS_THEME.spacing.entityList.itemHeight,
+                height: 'auto',
                 '&.Mui-selected': {
                   backgroundColor: MYAIS_THEME.colors.entity.selected,
                   '&:hover': {
@@ -64,6 +65,7 @@ const EntityList: React.FC<EntityListProps> = ({ entities, selectedId, onSelect 
             >
               <ListItemAvatar>
                 <Avatar
+                  src={`/ai-profiles/${entity.id}.png`}
                   sx={{
                     width: 48,
                     height: 48,
@@ -76,85 +78,6 @@ const EntityList: React.FC<EntityListProps> = ({ entities, selectedId, onSelect 
               </ListItemAvatar>
               <ListItemText
                 primary={entity.name}
-                secondary={`Stage: ${entity.evolutionStage}`}
-                primaryTypographyProps={{
-                  variant: 'subtitle1',
-                  fontWeight: 500
-                }}
-                secondaryTypographyProps={{
-                  variant: 'body2'
-                }}
-              />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Paper>
-  );
-};
-
-export default EntityList;
-import React from 'react';
-import { 
-  Box, 
-  List, 
-  ListItem, 
-  ListItemButton, 
-  ListItemText,
-  ListItemAvatar,
-  Avatar,
-  Typography,
-  LinearProgress,
-  Paper
-} from '@mui/material';
-import { AIEntity } from '../../types/myais';
-
-interface EntityListProps {
-  entities: AIEntity[];
-  selectedId: string | null;
-  onSelect: (id: string) => void;
-}
-
-const EntityList: React.FC<EntityListProps> = ({ entities, selectedId, onSelect }) => {
-  return (
-    <Paper sx={{ 
-      height: '100%', 
-      overflow: 'auto',
-      backgroundColor: 'background.paper',
-      borderRadius: 0
-    }}>
-      <List sx={{ padding: 1 }}>
-        {entities.map((entity) => (
-          <ListItem 
-            key={entity.id} 
-            disablePadding 
-            sx={{ mb: 1 }}
-          >
-            <ListItemButton 
-              selected={selectedId === entity.id}
-              onClick={() => onSelect(entity.id)}
-              sx={{ 
-                borderRadius: 1,
-                '&.Mui-selected': {
-                  backgroundColor: 'primary.dark',
-                  '&:hover': {
-                    backgroundColor: 'primary.dark',
-                  }
-                }
-              }}
-            >
-              <ListItemAvatar>
-                <Avatar 
-                  src={`/ai-profiles/${entity.id}.png`}
-                  alt={entity.name}
-                />
-              </ListItemAvatar>
-              <ListItemText
-                primary={
-                  <Typography variant="subtitle1" component="div">
-                    {entity.name}
-                  </Typography>
-                }
                 secondary={
                   <Box sx={{ width: '100%' }}>
                     <Typography 
@@ -187,6 +110,10 @@ const EntityList: React.FC<EntityListProps> = ({ entities, selectedId, onSelect 
                     </Box>
                   </Box>
                 }
+                primaryTypographyProps={{
+                  variant: 'subtitle1',
+                  fontWeight: 500
+                }}
               />
             </ListItemButton>
           </ListItem>
