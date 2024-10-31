@@ -6,6 +6,8 @@ import { mockAIs } from '../data/mockAIs';
 import { filterAIs } from '../utils/filterAIs';
 
 const AdoptPage: React.FC = () => {
+  console.log('AdoptPage rendering...');
+
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -16,7 +18,11 @@ const AdoptPage: React.FC = () => {
     specialization: 'all',
   });
 
+  console.log('mockAIs:', mockAIs);
+  console.log('filters:', filters);
+
   if (error) {
+    console.log('Error state:', error);
     return (
       <MainLayout>
         <div className="p-6 text-red-600">
@@ -27,6 +33,7 @@ const AdoptPage: React.FC = () => {
   }
 
   const filteredAIs = filterAIs(mockAIs, filters);
+  console.log('filteredAIs:', filteredAIs);
 
   return (
     <MainLayout>
