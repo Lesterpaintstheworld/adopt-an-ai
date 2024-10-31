@@ -1,17 +1,5 @@
 import React, { useState } from 'react';
 
-type FilterChangeEvent = {
-  target: {
-    value: string;
-  };
-};
-
-const handleFilterChange = (filterName: keyof AdoptFilters) => (event: FilterChangeEvent) => {
-  setFilters(prev => ({
-    ...prev,
-    [filterName]: event.target.value
-  }));
-};
 import {
   Box,
   Typography,
@@ -39,6 +27,19 @@ const AdoptPage: React.FC = () => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  
+  type FilterChangeEvent = {
+    target: {
+      value: string;
+    };
+  };
+
+  const handleFilterChange = (filterName: keyof AdoptFilters) => (event: FilterChangeEvent) => {
+    setFilters(prev => ({
+      ...prev,
+      [filterName]: event.target.value
+    }));
+  };
   const [filters, setFilters] = useState<AdoptFilters>({
     capabilityLevel: 'all',
     personalityType: 'all',
