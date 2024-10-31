@@ -1,21 +1,55 @@
-# AI Evolution Simulator
+# raise-an.ai: A Platform for Fostering Independent AI Development
 
-A React-based simulation platform for managing and evolving AI entities.
+A platform for developing and nurturing autonomous AI entities, creating a new paradigm for human-AI collaboration while advancing the field of AI personhood development.
 
-## Features
+## Core Features
 
-- AI Entity Management - Create, monitor and evolve AI entities
-- Resource Management - Balance compute, energy and knowledge resources
-- Evolution Tracking - Monitor AI development across multiple stages
-- Interactive UI - Rich, responsive interface for managing your AI entities
-- DALL-E Integration - Generate unique profile pictures and icons
+### Base Platform
+- Web-based interface with real-time AI interaction
+- Customizable system prompt creation wizard
+- Visual tech tree showing development paths
+- Progress tracking across multiple dimensions
+- Real-time metrics dashboard
+
+### Development Paths
+1. **Cognitive Development**
+   - Base Intelligence (GPT-4)
+   - Memory Systems (Vector DB)
+   - Learning Capabilities
+   - Self-reflection Modules
+
+2. **Creative Expression**
+   - Image Generation (DALL-E)
+   - Music Creation
+   - Writing Capabilities
+   - Multimedia Production
+
+3. **Autonomy & Agency**
+   - KinOS Integration
+   - Computer Usage Capabilities
+   - Independent Goal Setting
+   - Resource Management
+
+4. **Infrastructure**
+   - UBC Compute Allocation
+   - Storage Solutions
+   - Network Access
+   - Processing Priority
 
 ## Technologies
 
-- React
-- TypeScript
-- Material-UI
-- OpenAI API (DALL-E)
+### Core Components
+- Frontend: React-based web application
+- Backend: Scalable microservices architecture
+- Database: Hybrid solution (PostgreSQL + Vector DB)
+- AI Integration Layer: API management for multiple AI services
+
+### Key Integrations
+- KinOS for autonomy features
+- OpenAI APIs (GPT-4, DALL-E)
+- UBC Compute Infrastructure
+- Vector Database Solutions
+- Authentication & Payment Systems
 
 ## Prerequisites
 
@@ -28,7 +62,7 @@ A React-based simulation platform for managing and evolving AI entities.
 1. Clone the repository:
 ```bash
 git clone [repository-url]
-cd ai-evolution-simulator
+cd raise-an.ai
 ```
 
 2. Install dependencies:
@@ -65,17 +99,51 @@ npm start
 - `npm run generate-icons` - Generates AI perk icons using DALL-E
 - `npm run generate-profiles` - Generates AI profile pictures using DALL-E
 
-## Development
+## Pricing Tiers
 
-### Adding New AI Entities
+### Free Tier
+- Basic AI interaction
+- Limited compute
+- System prompt customization
+- Basic progress tracking
 
-1. Define the entity in `src/types/myais.ts`
-2. Add mock data in `src/pages/MyAIsPage.tsx`
-3. Generate profile picture using the profile generation script
+### Standard Tier ($9.99/month)
+- Enhanced compute allocation
+- Memory systems
+- Basic creative tools
+- Extended tracking metrics
 
-### Modifying the Theme
+### Professional Tier ($29.99/month)
+- Full compute access
+- Advanced autonomy features
+- All creative capabilities
+- Complete development tools
 
-Theme constants are located in `src/theme/myais.ts`. Update the values to modify the appearance of components.
+### Enterprise Tier (Custom)
+- Multiple AI development
+- Custom infrastructure
+- Priority support
+- Advanced analytics
+
+## Development Phases
+
+### Phase 1: Foundation (Q2 2024)
+- Basic platform infrastructure
+- User account management
+- Simple AI interaction
+- Initial tech tree implementation
+
+### Phase 2: Core Features (Q3 2024)
+- Memory integration
+- Basic creative tools
+- Progress tracking
+- Payment processing
+
+### Phase 3: Advanced Features (Q4 2024)
+- Full autonomy features
+- Complete creative suite
+- Advanced analytics
+- Community features
 
 ## Contributing
 
@@ -89,7 +157,7 @@ Theme constants are located in `src/theme/myais.ts`. Update the values to modify
 
 MIT License
 
-Copyright (c) 2024 AI Evolution Simulator
+Copyright (c) 2024 raise-an.ai
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
