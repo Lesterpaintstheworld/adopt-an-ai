@@ -26,7 +26,7 @@ const MainView: React.FC<MainViewProps> = ({
   onViewChange
 }) => {
   const handleViewChange = (
-    event: React.MouseEvent<HTMLElement>,
+    _: React.MouseEvent<HTMLElement>,
     newView: 'evolution' | 'network' | 'collective' | null
   ) => {
     if (newView) {

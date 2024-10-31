@@ -1,4 +1,3 @@
-import { Component, ErrorInfo, ReactNode } from 'react';
 import {
   AppBar,
   Box,
@@ -10,7 +9,7 @@ import {
 import { Resources } from '../../types/myais';
 import { MYAIS_THEME } from '../../theme/myais';
 
-const ResourceProgress = styled(LinearProgress)(({ theme }) => ({
+const ResourceProgress = styled(LinearProgress)(() => ({
   height: 8,
   borderRadius: 4,
   backgroundColor: MYAIS_THEME.colors.progress.background,
