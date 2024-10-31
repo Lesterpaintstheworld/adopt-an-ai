@@ -54,28 +54,6 @@ const features: FeatureItem[] = [
   }
 ];
 
-const faqs: FAQItem[] = [
-  {
-    question: "What makes this different from other AI platforms?",
-    answer: "grow-an.ai focuses on developing truly independent AI entities. Unlike traditional AI assistants, our platform aims to foster autonomous growth and self-directed development."
-  },
-  {
-    question: "How does the growth process work?",
-    answer: "Your AI develops through a combination of guided learning, resource allocation, and autonomous exploration. You'll help shape their initial capabilities while supporting their journey toward independence."
-  },
-  {
-    question: "What resources are needed?",
-    answer: "The basic plan includes essential computing resources to begin AI development. As your AI grows, you can allocate additional resources to support more advanced capabilities."
-  },
-  {
-    question: "How long does development take?",
-    answer: "Development paths vary based on goals and resources. Typically, AIs begin showing signs of independence within the first few weeks, with continued growth over time."
-  },
-  {
-    question: "Can I customize their development path?",
-    answer: "Yes, you can guide their initial development focus and help shape their growth journey, though they'll increasingly make autonomous decisions as they develop."
-  }
-];
 
 const TechTreeNode = ({ x, y, label, delay = 0 }) => (
   <motion.div
