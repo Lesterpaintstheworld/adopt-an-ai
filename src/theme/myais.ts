@@ -5,6 +5,12 @@ export const MYAIS_THEME = {
       height: 64,
       padding: 16,
     },
+    entityList: {
+      width: '100%',
+      itemHeight: 72,
+      padding: 16,
+      gap: 8
+    },
     panel: {
       padding: 16,
     }
@@ -18,6 +24,11 @@ export const MYAIS_THEME = {
     progress: {
       background: 'rgba(255, 255, 255, 0.12)',
       fill: 'rgba(255, 255, 255, 0.8)'
+    },
+    entity: {
+      selected: 'rgba(255, 255, 255, 0.08)',
+      hover: 'rgba(255, 255, 255, 0.04)',
+      border: 'rgba(255, 255, 255, 0.12)'
     }
   }
 };
