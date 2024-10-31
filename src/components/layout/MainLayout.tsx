@@ -1,5 +1,6 @@
-import { Box, Container, AppBar, Toolbar, Typography, Button } from '@mui/material';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Box, Container } from '@mui/material';
+import { Outlet } from 'react-router-dom';
+import { Header } from './Header';
 
 export const MainLayout = () => {
   console.log('MainLayout rendering...');
@@ -7,45 +8,7 @@ export const MainLayout = () => {
   
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      <AppBar position="static">
-        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Button 
-            color="inherit" 
-            onClick={() => navigate('/')}
-            sx={{ typography: 'h6' }}
-          >
-            raise-an.ai
-          </Button>
-          
-          <Box sx={{ display: 'flex', gap: 2 }}>
-            <Button 
-              color="inherit"
-              onClick={() => navigate('/tech-tree')}
-            >
-              Tech Tree
-            </Button>
-            <Button 
-              color="inherit"
-              onClick={() => navigate('/pricing')}
-            >
-              Pricing
-            </Button>
-            <Button 
-              color="inherit"
-              onClick={() => navigate('/enterprise')}
-            >
-              Enterprise
-            </Button>
-            <Button 
-              variant="outlined" 
-              color="inherit"
-              onClick={() => navigate('/login')}
-            >
-              Login
-            </Button>
-          </Box>
-        </Toolbar>
-      </AppBar>
+      <Header />
       
       <Container component="main" sx={{ flex: 1, py: 4 }}>
         <Outlet />
