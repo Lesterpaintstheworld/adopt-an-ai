@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, Container, Typography, Grid, Button, Card, CardContent, Avatar, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
