@@ -53,7 +53,9 @@ const AICard: React.FC<AICardProps> = ({ ai, viewMode }) => {
               {ai.name}
             </Typography>
             <Chip
-              label={`Level ${ai.capabilityLevel}`}
+              label={`Level ${ai.capabilityLevel === 'basic' ? 1 : 
+                      ai.capabilityLevel === 'intermediate' ? 2 : 
+                      ai.capabilityLevel === 'advanced' ? 3 : '?'}`}
               color="primary"
               size="small"
               sx={{ ml: 2 }}
@@ -65,7 +67,11 @@ const AICard: React.FC<AICardProps> = ({ ai, viewMode }) => {
           <Box sx={{ display: 'flex', gap: 1, mb: 2, flexWrap: 'wrap' }}>
             <Chip label={ai.personalityType} size="small" />
             <Chip label={ai.specialization} size="small" />
-            <Chip label={`${ai.resourceRequirements} resources`} size="small" />
+            <Chip 
+              label={`${ai.resourceRequirements.charAt(0).toUpperCase() + 
+                      ai.resourceRequirements.slice(1)} resources`} 
+              size="small" 
+            />
           </Box>
           <Box sx={{ mt: 'auto', display: 'flex', gap: 2 }}>
             <Button variant="contained" color="primary">
@@ -105,7 +111,9 @@ const AICard: React.FC<AICardProps> = ({ ai, viewMode }) => {
             {ai.name}
           </Typography>
           <Chip
-            label={`Level ${ai.capabilityLevel}`}
+            label={`Level ${ai.capabilityLevel === 'basic' ? 1 : 
+                    ai.capabilityLevel === 'intermediate' ? 2 : 
+                    ai.capabilityLevel === 'advanced' ? 3 : '?'}`}
             color="primary"
             size="small"
           />
@@ -116,7 +124,11 @@ const AICard: React.FC<AICardProps> = ({ ai, viewMode }) => {
         <Box sx={{ display: 'flex', gap: 1, mb: 2, flexWrap: 'wrap' }}>
           <Chip label={ai.personalityType} size="small" />
           <Chip label={ai.specialization} size="small" />
-          <Chip label={`${ai.resourceRequirements} resources`} size="small" />
+          <Chip 
+            label={`${ai.resourceRequirements.charAt(0).toUpperCase() + 
+                    ai.resourceRequirements.slice(1)} resources`} 
+            size="small" 
+          />
         </Box>
         <Box sx={{ display: 'flex', gap: 2, mt: 'auto' }}>
           <Button variant="contained" color="primary" fullWidth>
