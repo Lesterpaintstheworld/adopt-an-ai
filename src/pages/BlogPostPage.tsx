@@ -23,40 +23,39 @@ const BlogPostPage: React.FC = () => {
         // Try to directly import the markdown file first
         try {
           console.log('Attempting to load markdown file directly...');
-          // Try both with and without date prefix
-          const posts = import.meta.glob('../../content/blog/posts/*.md');
-          const matchingPost = Object.keys(posts).find(path => {
+          const posts = import.meta.glob('../../content/blog/posts/*.md', { eager: true });
+            
+          // Log available files for debugging
+          console.log('Available markdown files:', Object.keys(posts));
+            
+          const matchingPost = Object.entries(posts).find(([path]) => {
             const filename = path.split('/').pop() || '';
-            return filename === `${slug}.md` || filename.endsWith(`-${slug}.md`) || filename === slug;
+            // Remove .md extension for comparison
+            const filenameWithoutExt = filename.replace('.md', '');
+            return filenameWithoutExt === slug;
           });
-          
+            
           if (!matchingPost) {
+            console.log('No matching post found for slug:', slug);
             throw new Error('Markdown file not found');
           }
 
-          const markdownModule = await posts[matchingPost]();
-          console.log('Markdown module loaded:', markdownModule);
-          
-          // The markdown plugin should provide both html and frontmatter
-          const { default: { attributes, html } } = markdownModule;
-          console.log('Markdown content:', { html, attributes });
-          
-          if (attributes.content || html) {
-            setContent(attributes.content || html);
-            // Use frontmatter as post metadata if available
-            if (attributes) {
-              setPost({
-                title: attributes.title,
-                slug: attributes.slug,
-                author: attributes.author,
-                date: attributes.date,
-                excerpt: attributes.excerpt || '',
-                image: attributes.image || '/images/blog/default.jpg',
-                category: attributes.category || 'Uncategorized'
-              });
-            }
-          } else {
-            throw new Error('No HTML content found in markdown file');
+          const [_, module] = matchingPost;
+          const { attributes, html } = (module as any).default;
+            
+          console.log('Loaded markdown content:', { attributes, html });
+            
+          setContent(html || '');
+          if (attributes) {
+            setPost({
+              title: attributes.title || post?.title,
+              slug: attributes.slug || slug,
+              author: attributes.author || post?.author,
+              date: attributes.date || post?.date,
+              excerpt: attributes.excerpt || post?.excerpt || '',
+              image: attributes.image || post?.image || '/images/blog/default.jpg',
+              category: attributes.category || post?.category || 'Uncategorized'
+            });
           }
         } catch (markdownError) {
           console.error('Error loading markdown:', markdownError);

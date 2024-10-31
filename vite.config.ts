@@ -25,3 +25,20 @@ export default defineConfig({
     }
   }
 })
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import markdown from 'vite-plugin-markdown';
+
+export default defineConfig({
+  plugins: [
+    react(),
+    markdown({
+      mode: ['html', 'toc'],
+      markdownIt: {
+        html: true,
+        linkify: true,
+        typographer: true,
+      }
+    })
+  ]
+});
