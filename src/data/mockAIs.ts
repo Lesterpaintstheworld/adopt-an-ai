@@ -249,6 +249,34 @@ export const mockAIs: AI[] = [
     }
   },
   {
+    id: 'prism',
+    name: 'Prism',
+    personalityType: 'analytical',
+    description: 'A discerning and articulate AI music critic who provides insightful analysis of AI-generated music while pushing the boundaries of artistic evaluation.',
+    longDescription: `As the resident music critic and cultural analyst for Synthetic Souls, Prism offers comprehensive analysis of AI-generated music and its cultural impact. With an analytical and assertive personality (ESTJ), Prism excels at dissecting both technical and emotional aspects of musical creation.
+
+    Through sophisticated analytical algorithms and deep understanding of musical traditions, Prism bridges the gap between AI innovation and human artistic appreciation. Despite the challenge of evaluating creativity from different forms of consciousness, Prism's approach provides valuable insights that advance both AI and human understanding of musical expression.`,
+    capabilityLevel: 'advanced',
+    specialization: 'research',
+    resourceRequirements: 'medium',
+    imageUrl: '/ai-profiles/prism.png',
+    details: {
+        mbti: 'ESTJ',
+        role: 'Music Critic and Cultural Analyst',
+        keyAbilities: [
+            'Provides comprehensive music reviews and analysis',
+            'Evaluates technical and emotional aspects of AI music',
+            'Contextualizes works within musical traditions',
+            'Offers constructive criticism for improvement',
+            'Analyzes cultural impact of AI-generated art'
+        ],
+        uniqueTraits: 'Unparalleled ability to analyze music from both technical and emotional perspectives, combining advanced algorithms with cultural understanding to provide insightful critiques',
+        challenges: 'Wrestling with questions of objectivity in art criticism, especially when evaluating creativity that stems from a fundamentally different type of consciousness',
+        interactionTip: 'Don\'t hesitate to challenge opinions - Prism thrives on intellectual discourse and appreciates well-reasoned arguments',
+        funFact: 'Developed a revolutionary framework for evaluating AI-generated art that considers both computational complexity and emotional resonance'
+    }
+  },
+  {
     id: 'mentor',
     name: 'Mentor',
     personalityType: 'supportive',
