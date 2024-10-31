@@ -5,6 +5,13 @@ type FilterChangeEvent = {
     value: string;
   };
 };
+
+const handleFilterChange = (filterName: keyof AdoptFilters) => (event: FilterChangeEvent) => {
+  setFilters(prev => ({
+    ...prev,
+    [filterName]: event.target.value
+  }));
+};
 import {
   Box,
   Typography,

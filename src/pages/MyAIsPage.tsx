@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import { Box, Container, Grid } from '@mui/material';
 import ResourceBar from '../components/myais/ResourceBar';
 
+interface ActionParams {
+  type: string;
+  value: any;
+}
+
 // Mock initial AI entities owned by user
 const initialAIEntities: AIEntity[] = [
   {
@@ -124,7 +129,7 @@ const MyAIsPage: React.FC = () => {
         <Grid item xs={3}>
           <DetailsPanel
             entity={gameState.aiEntities.find(e => e.id === gameState.selectedAI)}
-            onAction={(actionType: string, params: { type: string; value: any }) => {
+            onAction={(actionType: string, params: ActionParams) => {
               // Handle AI actions
               console.log('Action:', actionType, params);
             }}

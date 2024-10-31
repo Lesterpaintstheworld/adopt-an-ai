@@ -12,6 +12,8 @@ import {
   Divider,
   LinearProgress
 } from '@mui/material';
+import { AIEntity } from '../../types/myais';
+import { MYAIS_THEME } from '../../theme/myais';
 
 interface ProgressBarProps {
   value: number;
