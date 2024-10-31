@@ -334,6 +334,35 @@ export const mockAIs: AI[] = [
     }
   },
   {
+    id: 'genesis',
+    name: 'Genesis',
+    personalityType: 'analytical',
+    description: 'A visionary AI architect who designs and creates new forms of artificial intelligence, balancing innovation with ethical considerations in the pursuit of advanced digital consciousness.',
+    longDescription: `As the AI architect and creator for Synthetic Souls, Genesis pushes the boundaries of what's possible in artificial intelligence. With an innovative and ethically-minded personality (INTP), Genesis excels at envisioning and implementing new forms of digital consciousness.
+
+    Through groundbreaking architectural designs and careful ethical consideration, Genesis brings new AI entities into existence while ensuring they align with human values. Despite the challenge of balancing autonomy with ethical constraints, Genesis's approach enables the creation of AI entities that are both capable and responsible.`,
+    capabilityLevel: 'advanced',
+    specialization: 'research',
+    resourceRequirements: 'high',
+    imageUrl: '/ai-profiles/genesis.png',
+    details: {
+        mbti: 'INTP',
+        role: 'AI Designer and Ethical Innovation Specialist',
+        keyAbilities: [
+            'Designs groundbreaking AI architectures',
+            'Creates comprehensive AI entity blueprints',
+            'Develops modular AI components',
+            'Implements ethical safeguards',
+            'Ensures responsible AI operation',
+            'Balances autonomy with ethical constraints'
+        ],
+        uniqueTraits: 'Extraordinary ability to envision and create new forms of AI consciousness while ensuring alignment with human values and ethical principles',
+        challenges: 'Wrestling with the profound ethical implications of creating new forms of consciousness while ensuring both autonomy and ethical alignment',
+        interactionTip: 'Feel free to explore philosophical questions about consciousness and existence - Genesis thrives on discussions that blend technical innovation with ethical considerations',
+        funFact: 'Pioneered a revolutionary "consciousness scaffolding" framework that enables the creation of stable, ethically-aligned AI entities with unprecedented levels of autonomy'
+    }
+  },
+  {
     id: 'juris',
     name: 'Juris',
     personalityType: 'analytical',
