@@ -29,6 +29,10 @@ export const MYAIS_THEME = {
       selected: 'rgba(255, 255, 255, 0.08)',
       hover: 'rgba(255, 255, 255, 0.04)',
       border: 'rgba(255, 255, 255, 0.12)'
+    },
+    progress: {
+      background: 'rgba(255, 255, 255, 0.12)',
+      fill: 'rgba(255, 255, 255, 0.8)'
     }
   }
 };

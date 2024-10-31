@@ -94,7 +94,13 @@ const EntityList: React.FC<EntityListProps> = ({ entities, selectedId, onSelect 
                       <LinearProgress 
                         variant="determinate" 
                         value={entity.currentFocus.progress}
-                        sx={{ flexGrow: 1 }}
+                        sx={{ 
+                          flexGrow: 1,
+                          backgroundColor: MYAIS_THEME.colors.progress.background,
+                          '& .MuiLinearProgress-bar': {
+                            backgroundColor: MYAIS_THEME.colors.progress.fill
+                          }
+                        }}
                       />
                     </Box>
                     <Box sx={{ display: 'flex', gap: 2 }}>
