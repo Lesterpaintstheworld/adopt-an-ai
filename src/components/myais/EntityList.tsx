@@ -1,4 +1,6 @@
 import React from 'react';
+import { MYAIS_THEME } from '../../theme/myais';
+import { AIEntity } from '../../types/ai';
 import {
   Box,
   List,
