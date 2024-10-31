@@ -17,9 +17,18 @@ const formatResourceRequirements = (resources: 'low' | 'medium' | 'high'): strin
 interface AICardProps {
   ai: AI;
   viewMode: 'grid' | 'list';
+  onLearnMore: (ai: AI) => void;
+  isFavorite?: boolean;
+  onToggleFavorite: (ai: AI) => void;
 }
 
-const AICard: React.FC<AICardProps> = ({ ai, viewMode }) => {
+const AICard: React.FC<AICardProps> = ({ 
+  ai, 
+  viewMode, 
+  onLearnMore, 
+  isFavorite = false,
+  onToggleFavorite 
+}) => {
   if (viewMode === 'list') {
     return (
       <Paper
@@ -150,8 +159,16 @@ const AICard: React.FC<AICardProps> = ({ ai, viewMode }) => {
           <Button variant="contained" color="primary" fullWidth>
             Adopt
           </Button>
-          <Button variant="outlined" fullWidth>
+          <Button variant="outlined" fullWidth onClick={() => onLearnMore(ai)}>
             Learn More
+          </Button>
+          <Button 
+            variant="outlined" 
+            fullWidth
+            color={isFavorite ? "error" : "primary"}
+            onClick={() => onToggleFavorite(ai)}
+          >
+            {isFavorite ? "Remove Favorite" : "Favorite"}
           </Button>
         </Box>
       </CardContent>
