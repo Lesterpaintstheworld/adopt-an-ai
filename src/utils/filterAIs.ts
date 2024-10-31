@@ -1,9 +1,5 @@
 import { AI, AdoptFilters } from '../types/ai';
 
-const isValidFilter = (filter: string): filter is AdoptFilters[keyof AdoptFilters] => {
-  return ['all', 'basic', 'intermediate', 'advanced', 'low', 'medium', 'high'].includes(filter);
-};
-
 export const filterAIs = (ais: AI[], filters: AdoptFilters): AI[] => {
   return ais.filter(ai => {
     // Check capability level
