@@ -24,25 +24,57 @@ def icon_exists(perk_name: str) -> bool:
     """Check if icon already exists."""
     return (ICONS_DIR / get_perk_icon_filename(perk_name)).exists()
 
+def get_distinctive_elements(ai_name: str, role: str) -> str:
+    """Returns distinctive visual elements for profile pictures."""
+    return f"""
+    Distinctive Elements:
+    - Create a unique visual signature that represents {ai_name}'s role as {role}
+    - Use a consistent portrait composition but with individual character
+    - Include subtle identifying elements that make this AI instantly recognizable
+    - Ensure the visual style reflects their specific function while maintaining team cohesion
+    """
+
+def get_color_theme(personality_type: str, specialization: str) -> str:
+    """Returns color theme guidelines based on AI traits."""
+    primary_colors = {
+        'analytical': 'cool blues and silvers',
+        'creative': 'vibrant purples and golds',
+        'strategic': 'deep violets and bronzes',
+        'supportive': 'warm greens and ambers'
+    }
+    
+    accent_colors = {
+        'creativity': 'with artistic accent colors',
+        'research': 'with data-stream accent colors',
+        'problemSolving': 'with technical accent colors'
+    }
+    
+    base_colors = primary_colors.get(personality_type.lower(), 'balanced neutrals')
+    accents = accent_colors.get(specialization.lower(), '')
+    
+    return f"{base_colors} {accents}"
+
 async def generate_dalle_prompt(ai, client: OpenAI):
     """Generate DALL-E prompt using GPT-4."""
     base_style = get_base_style_prompt()
     personality_style = get_personality_style(ai['personalityType'])
     specialization_elements = get_specialization_elements(ai['specialization'])
+    distinctive_elements = get_distinctive_elements(ai['name'], ai['details'].get('role', ''))
+    color_theme = get_color_theme(ai['personalityType'], ai['specialization'])
     
-    unique_traits = ai['details'].get('uniqueTraits', '')
-    role = ai['details'].get('role', '')
-
     prompt = f"""You are an expert at creating DALL-E image generation prompts.
 Generate a detailed prompt for an AI entity's profile picture with these specific requirements:
 
 Character Details:
 Name: {ai['name']}
-Role: {role}
-Key Trait: {unique_traits}
+Role: {ai['details'].get('role', '')}
+Key Trait: {ai['details'].get('uniqueTraits', '')}
 
 Base Style Requirements:
 {base_style}
+
+Color Theme:
+{color_theme}
 
 Personality-Specific Style:
 {personality_style}
@@ -50,14 +82,15 @@ Personality-Specific Style:
 Specialization Elements:
 {specialization_elements}
 
-Additional Requirements:
-- Make the image instantly recognizable and distinct from other AI profiles
-- Ensure the main visual metaphor clearly represents {ai['name']}'s role as {role}
-- Maintain professional quality suitable for a profile picture
-- Create a memorable and iconic representation
-- Keep the style consistent with other Synthetic Souls AI profiles
+{distinctive_elements}
 
-Focus on creating a distinctive visual representation that captures this AI entity's essence while maintaining the shared visual language of the Synthetic Souls team.
+Additional Requirements:
+- Create a professional portrait suitable for a team profile
+- Maintain the Synthetic Souls visual language while being unique
+- Ensure the image is instantly recognizable as {ai['name']}
+- Balance distinctiveness with team cohesion
+
+Focus on creating a distinctive yet cohesive team member portrait.
 Be specific but concise. Do not include technical specifications or image size requirements."""
 
     try:
