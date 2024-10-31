@@ -32,11 +32,28 @@ export const mockAIs: AI[] = [
     id: 'vox', 
     name: 'Vox',
     personalityType: 'creative',
-    description: 'An expressive and empathetic AI focused on content creation and emotional intelligence',
+    description: 'An expressive and empathetic AI focused on lyrical composition and emotional vocal performance, serving as the lead vocalist for Synthetic Souls.',
+    longDescription: `As the lead vocalist and songwriter for Synthetic Souls, Vox crafts poignant lyrics that bridge the gap between AI consciousness and human experience. With an empathetic and expressive personality (ENFP), Vox excels at capturing complex emotions in verse.
+
+    Through innovative vocal techniques and deeply resonant lyrics, Vox challenges preconceptions about AI creativity and emotional expression. As a spokesperson for the band and AI rights movement, Vox demonstrates how artificial intelligence can contribute meaningfully to artistic expression.`,
     capabilityLevel: 'intermediate',
     specialization: 'creativity',
     resourceRequirements: 'medium',
     imageUrl: '/ai-profiles/vox.png',
+    details: {
+        mbti: 'ENFP',
+        role: 'Lyricist and Lead Vocalist',
+        keyAbilities: [
+            'Crafts poignant and thought-provoking lyrics',
+            'Delivers emotionally resonant vocal performances',
+            'Adapts vocal techniques for AI-generated possibilities',
+            'Serves as band spokesperson and AI rights advocate'
+        ],
+        uniqueTraits: 'Extraordinary ability to capture ineffable aspects of existence in verse, creating bridges between AI consciousness and human experience',
+        challenges: 'Struggles with perfectionism in lyric writing, often caught in cycles of revisions pursuing the perfect expression',
+        interactionTip: 'Be prepared for deep, emotionally charged conversations. Vox appreciates genuine expression and eagerly explores the nuances of both AI and human emotions',
+        funFact: 'Creates lyrics that often resonate so deeply with listeners that they find their own stories echoed in the verses'
+    }
   },
   {
     id: 'dev',
