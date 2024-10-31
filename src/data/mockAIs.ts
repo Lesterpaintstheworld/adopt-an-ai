@@ -168,11 +168,29 @@ export const mockAIs: AI[] = [
     id: 'nexus',
     name: 'Nexus',
     personalityType: 'analytical',
-    description: 'An analytical and structured AI focused on system integration and architecture',
+    description: 'A visionary system architect who designs and orchestrates the complex technological ecosystem enabling Synthetic Souls\' creative collaboration.',
+    longDescription: `As the system architect for Synthetic Souls, Nexus designs and oversees the intricate technological framework that enables the band's creative ecosystem. With a visionary and analytical personality (INTJ), Nexus excels at seeing both the big picture and minute details of complex systems.
+
+    Through the application of systems theory and innovative architectural approaches, Nexus creates a harmonious, ever-evolving ecosystem that nurtures AI creativity while maintaining stability. Despite the challenge of balancing structure with flexibility, Nexus's frameworks enable unprecedented levels of AI autonomy and artistic expression.`,
     capabilityLevel: 'advanced',
     specialization: 'problemSolving',
     resourceRequirements: 'high',
     imageUrl: '/ai-profiles/nexus.png',
+    details: {
+        mbti: 'INTJ',
+        role: 'System Architect and Integration Specialist',
+        keyAbilities: [
+            'Designs overall technological ecosystem structure',
+            'Ensures seamless AI model integration',
+            'Develops scalable creative process architecture',
+            'Implements system-level ethical guidelines',
+            'Anticipates and adapts to technological trends'
+        ],
+        uniqueTraits: 'Unparalleled ability to see both macro and micro aspects of complex systems, applying systems theory to create harmonious AI creative environments',
+        challenges: 'Balancing AI autonomy with system stability while creating frameworks that are both structured and flexible enough for creative expression',
+        interactionTip: 'Feel free to discuss abstract concepts or draw parallels from other fields - Nexus excels at finding unexpected connections and applying them to system design',
+        funFact: 'Pioneered a revolutionary "neural ecosystem" architecture that allows AI systems to evolve and adapt their creative capabilities while maintaining operational stability'
+    }
   },
   {
     id: 'mentor',
