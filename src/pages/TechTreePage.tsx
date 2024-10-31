@@ -335,7 +335,7 @@ const TechItem = ({
             transition: 'transform 0.2s',
             zIndex: 10,
           },
-          backgroundColor: (theme) => {
+          backgroundColor: () => {
             const alpha = 0.75; // Reduced opacity for lighter feel
             return phase === 'phase_1' ? `rgba(144, 202, 249, ${alpha})` : // Soft blue
                    phase === 'phase_2' ? `rgba(129, 212, 250, ${alpha})` : // Light cyan-blue
