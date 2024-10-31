@@ -29,6 +29,10 @@ export const Header = () => {
             color="inherit" 
             component={RouterLink} 
             to="/missions"
+            sx={{ 
+              display: 'inline-flex',
+              mx: 1
+            }}
           >
             Missions
           </Button>
