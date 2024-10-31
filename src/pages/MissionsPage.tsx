@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Mission, Difficulty, Status } from '../types/missions';
+import { mockMissions } from '../data/mockMissions';
 import { 
   Box, 
   Container, 
@@ -20,31 +22,12 @@ import {
   SelectChangeEvent,
 } from '@mui/material';
 
-// Types for missions
-type Difficulty = 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert';
-type Status = 'available' | 'in_progress' | 'locked' | 'completed';
-
 interface Filters {
   category: string | null;
   difficulty: Difficulty | 'all';
   status: Status | 'all';
 }
 
-interface Mission {
-  id: string;
-  title: string;
-  description: string;
-  difficulty: 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert';
-  category: 'Communication' | 'Creativity' | 'Problem Solving' | 'Research';
-  duration: string;
-  requirements: string[];
-  rewards: {
-    xp?: number;
-    capabilities?: string[];
-    resources?: string[];
-  };
-  status: 'available' | 'in_progress' | 'locked' | 'completed';
-}
 
 // Category configuration
 const categories = [
@@ -62,75 +45,6 @@ const difficultyColors = {
   Expert: '#e74c3c',
 };
 
-// Mock missions data
-const mockMissions: Mission[] = [
-  {
-    id: '1',
-    title: 'Basic Communication Training',
-    description: 'Learn to handle basic conversation patterns and responses',
-    difficulty: 'Beginner',
-    category: 'Communication',
-    duration: '< 1h',
-    requirements: ['Basic AI Core'],
-    rewards: { xp: 100 },
-    status: 'available',
-  },
-  {
-    id: '2',
-    title: 'Creative Writing Exercise',
-    description: 'Generate creative stories based on prompts',
-    difficulty: 'Intermediate',
-    category: 'Creativity',
-    duration: '2h',
-    requirements: ['Basic AI Core', 'Language Module'],
-    rewards: { xp: 200, capabilities: ['Creative Writing'] },
-    status: 'locked',
-  },
-  {
-    id: '3',
-    title: 'Logic Puzzle Challenge',
-    description: 'Solve complex logical puzzles and explain reasoning',
-    difficulty: 'Advanced',
-    category: 'Problem Solving',
-    duration: '4h',
-    requirements: ['Logic Module'],
-    rewards: { xp: 300 },
-    status: 'available',
-  },
-  {
-    id: '4',
-    title: 'Data Analysis Project',
-    description: 'Analyze datasets and generate insights',
-    difficulty: 'Expert',
-    category: 'Research',
-    duration: '8h',
-    requirements: ['Analysis Module', 'Advanced AI Core'],
-    rewards: { xp: 500, capabilities: ['Data Analysis'] },
-    status: 'locked',
-  },
-  {
-    id: '5',
-    title: 'Advanced Communication Patterns',
-    description: 'Master complex dialogue flows and context switching',
-    difficulty: 'Advanced',
-    category: 'Communication',
-    duration: '6h',
-    requirements: ['Advanced Language Module'],
-    rewards: { xp: 400, capabilities: ['Context Mastery'] },
-    status: 'in_progress',
-  },
-  {
-    id: '6',
-    title: 'Research Methodology',
-    description: 'Learn systematic approaches to gathering and analyzing information',
-    difficulty: 'Intermediate',
-    category: 'Research',
-    duration: '3h',
-    requirements: ['Basic Research Module'],
-    rewards: { xp: 250, capabilities: ['Research Methods'] },
-    status: 'completed',
-  }
-];
 
 const MissionsPage: React.FC = () => {
   const [filters, setFilters] = useState<Filters>({
