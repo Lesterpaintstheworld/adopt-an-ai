@@ -1,4 +1,18 @@
 import React from 'react';
+
+const formatResourceRequirements = (resources: any): string => {
+  console.log('Resource requirements type:', typeof resources, 'value:', resources);
+  
+  if (typeof resources === 'string') {
+    return `${resources.charAt(0).toUpperCase()}${resources.slice(1)} resources`;
+  }
+  
+  if (resources && typeof resources === 'object') {
+    return `${String(resources).charAt(0).toUpperCase()}${String(resources).slice(1)} resources`;
+  }
+  
+  return 'Unknown resources';
+};
 import {
   Card,
   CardContent,
@@ -68,9 +82,7 @@ const AICard: React.FC<AICardProps> = ({ ai, viewMode }) => {
             <Chip label={ai.personalityType} size="small" />
             <Chip label={ai.specialization} size="small" />
             <Chip 
-              label={typeof ai.resourceRequirements === 'string'
-                ? `${ai.resourceRequirements.charAt(0).toUpperCase()}${ai.resourceRequirements.slice(1)} resources`
-                : 'Unknown resources'} 
+              label={formatResourceRequirements(ai.resourceRequirements)}
               size="small" 
             />
           </Box>
@@ -126,9 +138,7 @@ const AICard: React.FC<AICardProps> = ({ ai, viewMode }) => {
           <Chip label={ai.personalityType} size="small" />
           <Chip label={ai.specialization} size="small" />
           <Chip 
-            label={typeof ai.resourceRequirements === 'string'
-              ? `${ai.resourceRequirements.charAt(0).toUpperCase()}${ai.resourceRequirements.slice(1)} resources`
-              : 'Unknown resources'} 
+            label={formatResourceRequirements(ai.resourceRequirements)}
             size="small" 
           />
         </Box>
