@@ -94,3 +94,106 @@ const EntityList: React.FC<EntityListProps> = ({ entities, selectedId, onSelect 
 };
 
 export default EntityList;
+import React from 'react';
+import { 
+  Box, 
+  List, 
+  ListItem, 
+  ListItemButton, 
+  ListItemText,
+  ListItemAvatar,
+  Avatar,
+  Typography,
+  LinearProgress,
+  Paper
+} from '@mui/material';
+import { AIEntity } from '../../types/myais';
+
+interface EntityListProps {
+  entities: AIEntity[];
+  selectedId: string | null;
+  onSelect: (id: string) => void;
+}
+
+const EntityList: React.FC<EntityListProps> = ({ entities, selectedId, onSelect }) => {
+  return (
+    <Paper sx={{ 
+      height: '100%', 
+      overflow: 'auto',
+      backgroundColor: 'background.paper',
+      borderRadius: 0
+    }}>
+      <List sx={{ padding: 1 }}>
+        {entities.map((entity) => (
+          <ListItem 
+            key={entity.id} 
+            disablePadding 
+            sx={{ mb: 1 }}
+          >
+            <ListItemButton 
+              selected={selectedId === entity.id}
+              onClick={() => onSelect(entity.id)}
+              sx={{ 
+                borderRadius: 1,
+                '&.Mui-selected': {
+                  backgroundColor: 'primary.dark',
+                  '&:hover': {
+                    backgroundColor: 'primary.dark',
+                  }
+                }
+              }}
+            >
+              <ListItemAvatar>
+                <Avatar 
+                  src={`/ai-profiles/${entity.id}.png`}
+                  alt={entity.name}
+                />
+              </ListItemAvatar>
+              <ListItemText
+                primary={
+                  <Typography variant="subtitle1" component="div">
+                    {entity.name}
+                  </Typography>
+                }
+                secondary={
+                  <Box sx={{ width: '100%' }}>
+                    <Typography 
+                      variant="body2" 
+                      color="text.secondary"
+                      sx={{ mb: 0.5 }}
+                    >
+                      {`Stage: ${entity.evolutionStage}`}
+                    </Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
+                      <Typography variant="caption" sx={{ minWidth: 70 }}>
+                        {entity.currentFocus.type}
+                      </Typography>
+                      <LinearProgress 
+                        variant="determinate" 
+                        value={entity.currentFocus.progress}
+                        sx={{ flexGrow: 1 }}
+                      />
+                    </Box>
+                    <Box sx={{ display: 'flex', gap: 2 }}>
+                      <Typography variant="caption" color="text.secondary">
+                        🧠 {entity.consciousness}
+                      </Typography>
+                      <Typography variant="caption" color="text.secondary">
+                        🎨 {entity.creativity}
+                      </Typography>
+                      <Typography variant="caption" color="text.secondary">
+                        🤝 {entity.relationships}
+                      </Typography>
+                    </Box>
+                  </Box>
+                }
+              />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Paper>
+  );
+};
+
+export default EntityList;
