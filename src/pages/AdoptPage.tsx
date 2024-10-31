@@ -1,9 +1,17 @@
-import React, { useState } from 'react';
-import AICard from '../components/AICard';
+import React from 'react';
 import MainLayout from '../components/layout/MainLayout';
 
-// Mock data for AI listings
-const mockAIs: AI[] = [
+const AdoptPage: React.FC = () => {
+  console.log('AdoptPage rendering');
+  
+  return (
+    <div className="bg-red-500 p-4">
+      <h1>Adopt Page Test</h1>
+    </div>
+  );
+};
+
+export default AdoptPage;
   {
     id: 'lyra',
     name: 'Lyra',
