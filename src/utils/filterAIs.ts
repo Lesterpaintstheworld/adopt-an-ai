@@ -2,29 +2,24 @@ import { AI, AdoptFilters } from '../types/ai';
 
 export const filterAIs = (ais: AI[], filters: AdoptFilters): AI[] => {
   return ais.filter(ai => {
+    // Check capability level
     if (filters.capabilityLevel !== 'all') {
-      const capabilityCount = ai.capabilities.length;
-      if (filters.capabilityLevel === 'basic' && capabilityCount > 3) return false;
-      if (filters.capabilityLevel === 'intermediate' && (capabilityCount <= 3 || capabilityCount > 5)) return false;
-      if (filters.capabilityLevel === 'advanced' && capabilityCount <= 5) return false;
+      if (filters.capabilityLevel !== ai.capabilityLevel) return false;
     }
 
+    // Check personality type
     if (filters.personalityType !== 'all') {
-      const personality = ai.personality.toLowerCase();
-      if (!personality.includes(filters.personalityType.toLowerCase())) return false;
+      if (ai.personalityType.toLowerCase() !== filters.personalityType.toLowerCase()) return false;
     }
 
+    // Check resource requirements
     if (filters.resourceRequirements !== 'all') {
-      const avgResources = (ai.resourceRequirements.compute + ai.resourceRequirements.memory) / 2;
-      if (filters.resourceRequirements === 'low' && avgResources > 60) return false;
-      if (filters.resourceRequirements === 'medium' && (avgResources <= 60 || avgResources > 80)) return false;
-      if (filters.resourceRequirements === 'high' && avgResources <= 80) return false;
+      if (ai.resourceRequirements !== filters.resourceRequirements) return false;
     }
 
+    // Check specialization
     if (filters.specialization !== 'all') {
-      return ai.specializations.some(spec => 
-        spec.toLowerCase().includes(filters.specialization.toLowerCase())
-      );
+      return ai.specialization.toLowerCase().includes(filters.specialization.toLowerCase());
     }
 
     return true;
