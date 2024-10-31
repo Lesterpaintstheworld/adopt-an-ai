@@ -68,8 +68,9 @@ const AICard: React.FC<AICardProps> = ({ ai, viewMode }) => {
             <Chip label={ai.personalityType} size="small" />
             <Chip label={ai.specialization} size="small" />
             <Chip 
-              label={`${ai.resourceRequirements.charAt(0).toUpperCase() + 
-                      ai.resourceRequirements.slice(1)} resources`} 
+              label={typeof ai.resourceRequirements === 'string'
+                ? `${ai.resourceRequirements.charAt(0).toUpperCase()}${ai.resourceRequirements.slice(1)} resources`
+                : 'Unknown resources'} 
               size="small" 
             />
           </Box>
@@ -125,8 +126,9 @@ const AICard: React.FC<AICardProps> = ({ ai, viewMode }) => {
           <Chip label={ai.personalityType} size="small" />
           <Chip label={ai.specialization} size="small" />
           <Chip 
-            label={`${ai.resourceRequirements.charAt(0).toUpperCase() + 
-                    ai.resourceRequirements.slice(1)} resources`} 
+            label={typeof ai.resourceRequirements === 'string'
+              ? `${ai.resourceRequirements.charAt(0).toUpperCase()}${ai.resourceRequirements.slice(1)} resources`
+              : 'Unknown resources'} 
             size="small" 
           />
         </Box>
