@@ -1,8 +1,11 @@
 import { Box, Container, Typography } from '@mui/material';
-import { Outlet } from 'react-router-dom';
 import { Header } from './Header';
 
-export const MainLayout = () => {
+interface MainLayoutProps {
+  children: React.ReactNode;
+}
+
+export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   console.log('MainLayout rendering...');
   
   return (
@@ -10,7 +13,7 @@ export const MainLayout = () => {
       <Header />
       
       <Container component="main" sx={{ flex: 1, py: 4 }}>
-        <Outlet />
+        {children}
       </Container>
       
       <Box component="footer" sx={{ py: 3, bgcolor: 'background.paper' }}>
