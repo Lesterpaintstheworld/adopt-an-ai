@@ -8,6 +8,7 @@ import EnterpriseContactPage from './pages/EnterpriseContactPage';
 import { TechTreePage } from './pages/TechTreePage';
 import MissionsPage from './pages/MissionsPage';
 import BlogPage from './pages/BlogPage';
+import BlogPostPage from './pages/BlogPostPage';
 
 console.log('App component initializing...');
 
@@ -26,6 +27,7 @@ function App() {
             <Route path="/tech-tree" element={<TechTreePage />} />
             <Route path="/missions" element={<MissionsPage />} />
             <Route path="/blog" element={<BlogPage />} />
+            <Route path="/blog/:slug" element={<BlogPostPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
