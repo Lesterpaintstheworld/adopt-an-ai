@@ -2,12 +2,6 @@ import { Box, Container, Typography, Grid, Button, Card, CardContent, Avatar, Ac
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import AddIcon from '@mui/icons-material/Add';
-
-type FAQItem = {
-  question: string;
-  answer: string;
-};
 
 type FeatureItem = {
   title: string;
@@ -54,7 +48,14 @@ const features: FeatureItem[] = [
 ];
 
 
-const TechTreeNode = ({ x, y, label, delay = 0 }) => (
+interface TechTreeNodeProps {
+  x: number;
+  y: number;
+  label: string;
+  delay?: number;
+}
+
+const TechTreeNode = ({ x, y, label, delay = 0 }: TechTreeNodeProps) => (
   <motion.div
     initial={{ opacity: 0, scale: 0 }}
     animate={{ opacity: 1, scale: 1 }}
