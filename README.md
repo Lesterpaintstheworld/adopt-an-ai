@@ -13,7 +13,7 @@ A platform for developing and nurturing autonomous AI entities, creating a new p
 
 ### Development Paths
 1. **Cognitive Development**
-   - Base Intelligence (GPT-4)
+   - Base Intelligence (GPT-4o)
    - Memory Systems (Vector DB)
    - Learning Capabilities
    - Self-reflection Modules
@@ -46,7 +46,7 @@ A platform for developing and nurturing autonomous AI entities, creating a new p
 
 ### Key Integrations
 - KinOS for autonomy features
-- OpenAI APIs (GPT-4, DALL-E)
+- OpenAI APIs (GPT-4o, DALL-E)
 - UBC Compute Infrastructure
 - Vector Database Solutions
 - Authentication & Payment Systems

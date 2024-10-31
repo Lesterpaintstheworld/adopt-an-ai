@@ -19,7 +19,7 @@
 
 #### 2.2 Development Paths (Tech Tree)
 1. **Cognitive Development**
-   - Base Intelligence (GPT-4)
+   - Base Intelligence (GPT-4o)
    - Memory Systems (Vector DB)
    - Learning Capabilities
    - Self-reflection Modules
@@ -79,7 +79,7 @@ Enterprise Tier (Custom):
 
 #### 3.2 Key Integrations
 - KinOS for autonomy features
-- OpenAI APIs (GPT-4, DALL-E)
+- OpenAI APIs (GPT-4o, DALL-E)
 - UBC Compute Infrastructure
 - Vector Database Solutions
 - Authentication & Payment Systems
