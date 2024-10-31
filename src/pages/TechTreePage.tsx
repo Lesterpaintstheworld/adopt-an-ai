@@ -235,16 +235,15 @@ const TechItem = ({
       title={
         <Box sx={{ 
           p: 2,
-          minWidth: '600px',
-          maxWidth: '800px'
+          width: '400px'
         }}>
           <Typography 
             variant="body1"
             sx={{ 
-              fontSize: '1.3rem',
-              lineHeight: 1.6,
+              fontSize: '1.1rem',
+              lineHeight: 1.4,
               color: '#ffffff',
-              mb: 2,
+              mb: 1,
               whiteSpace: 'normal'
             }}
           >
@@ -255,8 +254,8 @@ const TechItem = ({
               <Typography 
                 variant="subtitle1"
                 sx={{ 
-                  fontSize: '1.2rem',
-                  mb: 1.5,
+                  fontSize: '1rem',
+                  mb: 1,
                   color: '#ffffff',
                   fontWeight: 'bold'
                 }}
@@ -271,7 +270,7 @@ const TechItem = ({
                     size="medium"
                     variant="outlined"
                     sx={{ 
-                      fontSize: '1.1rem',
+                      fontSize: '0.9rem',
                       color: '#ffffff',
                       borderColor: '#ffffff',
                       height: '36px',
