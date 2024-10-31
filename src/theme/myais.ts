@@ -30,7 +30,11 @@ export const MYAIS_THEME = {
       hover: 'rgba(255, 255, 255, 0.04)',
       border: 'rgba(255, 255, 255, 0.12)'
     },
-    progress: {
+    progressBar: {
+      background: 'rgba(255, 255, 255, 0.12)',
+      fill: 'rgba(255, 255, 255, 0.8)'
+    },
+    entityProgress: {
       background: 'rgba(255, 255, 255, 0.12)',
       fill: 'rgba(255, 255, 255, 0.8)'
     }

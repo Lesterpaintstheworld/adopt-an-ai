@@ -29,7 +29,7 @@ export interface AIEntity {
 export interface Connection {
   targetId: string;
   strength: number;
-  type: 'mentor' | 'peer' | 'student';
+  type: 'mentor' | 'peer' | 'student' | 'creative';
 }
 
 export interface DevelopmentFocus {
