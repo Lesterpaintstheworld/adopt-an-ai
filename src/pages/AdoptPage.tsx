@@ -28,8 +28,17 @@ const AdoptPage: React.FC = () => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [selectedAI, setSelectedAI] = useState<AI | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [favorites, setFavorites] = useState<string[]>([]);
   const isLoading = false;
   const error = null;
+
+  const handleToggleFavorite = (ai: AI) => {
+    setFavorites(prev => 
+      prev.includes(ai.id) 
+        ? prev.filter(id => id !== ai.id)
+        : [...prev, ai.id]
+    );
+  };
 
   const handleLearnMore = (ai: AI) => {
     setSelectedAI(ai);
@@ -162,7 +171,8 @@ const AdoptPage: React.FC = () => {
                 ai={ai} 
                 viewMode={viewMode} 
                 onLearnMore={() => handleLearnMore(ai)}
-                onToggleFavorite={() => {}} // Empty function since favorites aren't used in AdoptPage
+                onToggleFavorite={handleToggleFavorite}
+                isFavorite={favorites.includes(ai.id)}
               />
             </Grid>
           ))}
