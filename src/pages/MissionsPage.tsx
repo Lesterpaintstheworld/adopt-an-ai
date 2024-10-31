@@ -10,6 +10,7 @@ import {
   CardHeader, 
   CardActions, 
   Button,
+  LinearProgress,
   ToggleButton,
   ToggleButtonGroup,
   FormControl,
@@ -138,6 +139,14 @@ const MissionsPage: React.FC = () => {
     status: 'all'
   });
   const [missions, setMissions] = useState<Mission[]>(mockMissions);
+  const [activeMissions, setActiveMissions] = useState<Mission[]>([]);
+  const [userResources, setUserResources] = useState({
+    xp: 0,
+    capabilities: [] as string[],
+    compute: 75, // percent
+    memory: 50, // percent
+    activeMissionLimit: 3
+  });
 
   const filterMissions = (filters: Filters) => {
     let filteredMissions = [...mockMissions];
@@ -193,6 +202,40 @@ const MissionsPage: React.FC = () => {
     filterMissions(newFilters);
   };
 
+  const handleMissionAction = (mission: Mission) => {
+    if (mission.status === 'locked') {
+      return;
+    }
+
+    if (mission.status === 'available') {
+      if (activeMissions.length >= userResources.activeMissionLimit) {
+        return;
+      }
+
+      const updatedMissions = missions.map(m => 
+        m.id === mission.id ? { ...m, status: 'in_progress' } : m
+      );
+      setMissions(updatedMissions);
+      setActiveMissions([...activeMissions, mission]);
+    }
+    else if (mission.status === 'in_progress') {
+      const updatedMissions = missions.map(m => 
+        m.id === mission.id ? { ...m, status: 'completed' } : m
+      );
+      setMissions(updatedMissions);
+      setActiveMissions(activeMissions.filter(m => m.id !== mission.id));
+      
+      setUserResources(prev => ({
+        ...prev,
+        xp: prev.xp + (mission.rewards.xp || 0),
+        capabilities: [
+          ...prev.capabilities,
+          ...(mission.rewards.capabilities || [])
+        ]
+      }));
+    }
+  };
+
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
       <Box sx={{ mb: 4 }}>
@@ -200,11 +243,36 @@ const MissionsPage: React.FC = () => {
           AI Missions
         </Typography>
         <Box sx={{ display: 'flex', gap: 2, mb: 3 }}>
-          <Chip label="Active Missions: 0/3" />
-          <Chip label="AI Level: 1" />
-          <Chip label="Compute: 75%" />
-          <Chip label="Memory: 50%" />
+          <Chip 
+            label={`Active Missions: ${activeMissions.length}/${userResources.activeMissionLimit}`}
+            color={activeMissions.length >= userResources.activeMissionLimit ? "warning" : "default"}
+          />
+          <Chip 
+            label={`XP: ${userResources.xp}`}
+            color="primary"
+          />
+          <Chip 
+            label={`Compute: ${userResources.compute}%`}
+            color={userResources.compute < 20 ? "error" : "default"}
+          />
+          <Chip 
+            label={`Memory: ${userResources.memory}%`}
+            color={userResources.memory < 20 ? "error" : "default"}
+          />
         </Box>
+        {userResources.capabilities.length > 0 && (
+          <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+            {userResources.capabilities.map((capability, index) => (
+              <Chip
+                key={index}
+                label={capability}
+                size="small"
+                variant="outlined"
+                color="secondary"
+              />
+            ))}
+          </Box>
+        )}
       </Box>
 
       {/* Categories */}
@@ -274,6 +342,42 @@ const MissionsPage: React.FC = () => {
         </FormControl>
       </Box>
 
+      {/* Active Missions */}
+      {activeMissions.length > 0 && (
+        <Box sx={{ mb: 4 }}>
+          <Typography variant="h6" gutterBottom>
+            Active Missions
+          </Typography>
+          <Grid container spacing={2}>
+            {activeMissions.map((mission) => (
+              <Grid item xs={12} sm={6} md={4} key={mission.id}>
+                <Card variant="outlined">
+                  <CardContent>
+                    <Typography variant="subtitle1">
+                      {mission.title}
+                    </Typography>
+                    <LinearProgress 
+                      variant="determinate" 
+                      value={Math.random() * 100}
+                      sx={{ mt: 1 }}
+                    />
+                  </CardContent>
+                  <CardActions>
+                    <Button
+                      size="small"
+                      onClick={() => handleMissionAction(mission)}
+                      fullWidth
+                    >
+                      Complete
+                    </Button>
+                  </CardActions>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+      )}
+
       {/* Missions Grid */}
       {missions.length === 0 ? (
         <Box sx={{ textAlign: 'center', py: 4 }}>
@@ -324,14 +428,23 @@ const MissionsPage: React.FC = () => {
               <CardActions>
                 <Button
                   variant="contained"
-                  color="primary"
-                  disabled={mission.status === 'locked'}
+                  color={mission.status === 'in_progress' ? 'secondary' : 'primary'}
+                  disabled={
+                    mission.status === 'locked' ||
+                    (mission.status === 'available' && 
+                     activeMissions.length >= userResources.activeMissionLimit)
+                  }
+                  onClick={() => handleMissionAction(mission)}
                   fullWidth
                 >
                   {mission.status === 'in_progress'
-                    ? 'Continue'
+                    ? 'Complete'
                     : mission.status === 'locked'
                     ? 'Locked'
+                    : mission.status === 'completed'
+                    ? 'Completed'
+                    : activeMissions.length >= userResources.activeMissionLimit
+                    ? 'Mission Limit Reached'
                     : 'Start'}
                 </Button>
               </CardActions>
