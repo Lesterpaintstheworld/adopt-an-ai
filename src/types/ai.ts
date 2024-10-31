@@ -17,3 +17,23 @@ export interface AdoptFilters {
   resourceRequirements: 'all' | 'low' | 'medium' | 'high';
   specialization: string;
 }
+export interface AI {
+    id: string;
+    name: string;
+    personalityType: 'analytical' | 'creative' | 'strategic' | 'supportive';
+    description: string;
+    longDescription?: string;
+    capabilityLevel: 'basic' | 'intermediate' | 'advanced';
+    specialization: string;
+    resourceRequirements: 'low' | 'medium' | 'high';
+    imageUrl: string;
+    details?: {
+        mbti?: string;
+        role?: string;
+        keyAbilities?: string[];
+        uniqueTraits?: string;
+        challenges?: string;
+        interactionTip?: string;
+        funFact?: string;
+    };
+}
