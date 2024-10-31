@@ -93,7 +93,7 @@ const calculateNodePositions = (techTree: any) => {
   const positions: { [key: string]: { x: number, y: number } } = {};
   let currentX = 0; // Track the cumulative x position
   
-  Object.entries(techTree).forEach(([phaseKey, phaseData]: [string, any]) => {
+  Object.entries(techTree).forEach(([_phaseKey, phaseData]: [string, any]) => {
     const phaseWidth = calculatePhaseWidth(phaseData);
     
     // Handle all non-metadata entries (layers)
