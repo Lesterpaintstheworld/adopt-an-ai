@@ -25,9 +25,10 @@ const BlogPostPage: React.FC = () => {
           console.log('Attempting to load markdown file directly...');
           // Try both with and without date prefix
           const posts = import.meta.glob('../../content/blog/posts/*.md');
-          const matchingPost = Object.keys(posts).find(path => 
-            path.includes(`-${slug}.md`) || path.endsWith(`/${slug}.md`)
-          );
+          const matchingPost = Object.keys(posts).find(path => {
+            const filename = path.split('/').pop() || '';
+            return filename === `${slug}.md` || filename.endsWith(`-${slug}.md`) || filename === slug;
+          });
           
           if (!matchingPost) {
             throw new Error('Markdown file not found');

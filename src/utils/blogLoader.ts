@@ -7,14 +7,15 @@ export async function loadBlogPosts(): Promise<BlogPost[]> {
     const blogData = blogModule.default;
     
     // Import markdown content
-    const markdownFiles = import.meta.glob('../../content/blog/posts/*.md');
-    const markdownPosts = await Promise.all(
-      Object.entries(markdownFiles).map(async ([path, loader]) => {
-        const content = await loader();
-        const slug = path.split('/').pop()?.replace(/^\d{4}-\d{2}-\d{2}-(.+)\.md$/, '$1');
-        return { ...content.default.attributes, slug };
-      })
-    );
+    const markdownFiles = import.meta.glob('../../content/blog/posts/*.md', { eager: true });
+    const markdownPosts = Object.entries(markdownFiles).map(([path, content]: [string, any]) => {
+      const { attributes, html } = content.default;
+      return {
+        ...attributes,
+        content: html,
+        slug: path.split('/').pop()?.replace(/\.md$/, '')
+      };
+    });
 
     // Merge YAML and markdown posts
     const allPosts = [...markdownPosts, ...blogData.posts];
