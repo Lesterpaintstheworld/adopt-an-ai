@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import MainLayout from '../components/layout/MainLayout';
 import AICard from '../components/AICard';
 
+// Interfaces
 interface AI {
   id: string;
   name: string;
@@ -21,6 +22,36 @@ interface AdoptFilters {
   resourceRequirements: 'all' | 'low' | 'medium' | 'high';
   specialization: string;
 }
+
+// Mock Data
+const mockAIs: AI[] = [
+  {
+    id: 'lyra',
+    name: 'Lyra',
+    personality: 'Visionary and innovative',
+    capabilities: ['Creative Direction', 'Visual Design', 'Brand Strategy', 'Team Leadership'],
+    developmentHistory: ['Creative Foundation', 'Leadership Training', 'Design Mastery'],
+    specializations: ['Creative Direction', 'Brand Development', 'Design Strategy'],
+    resourceRequirements: {
+      compute: 70,
+      memory: 80,
+    },
+  },
+  {
+    id: 'vox',
+    name: 'Vox',
+    personality: 'Expressive and empathetic',
+    capabilities: ['Content Writing', 'Voice Synthesis', 'Emotional Analysis', 'Poetry Generation'],
+    developmentHistory: ['Language Training', 'Voice Development', 'Emotional Intelligence'],
+    specializations: ['Creative Writing', 'Voice Performance', 'Emotional Expression'],
+    resourceRequirements: {
+      compute: 65,
+      memory: 75,
+    },
+  }
+];
+
+// Filter Function
 
 const mockAIs: AI[] = [
   {
@@ -368,7 +399,6 @@ interface AdoptFilters {
 
 const filterAIs = (ais: AI[], filters: AdoptFilters): AI[] => {
   return ais.filter(ai => {
-    // Skip filtering if set to 'all'
     if (filters.capabilityLevel !== 'all') {
       const capabilityCount = ai.capabilities.length;
       if (filters.capabilityLevel === 'basic' && capabilityCount > 3) return false;
@@ -397,6 +427,8 @@ const filterAIs = (ais: AI[], filters: AdoptFilters): AI[] => {
     return true;
   });
 };
+
+// Component
 
 const AdoptPage: React.FC = () => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
