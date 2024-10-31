@@ -25,7 +25,7 @@ def profile_exists(ai_name: str) -> bool:
     return (PROFILE_PICS_DIR / get_profile_filename(ai_name)).exists()
 
 async def generate_dalle_prompt(ai, client: OpenAI):
-    """Generate DALL-E prompt using GPT-4."""
+    """Generate DALL-E prompt using GPT-4o."""
     prompt = f"""You are an expert at creating DALL-E image generation prompts.
 Generate a detailed prompt for an AI entity's profile picture that captures their personality and role.
 
@@ -53,7 +53,7 @@ Be specific but concise. Do not include technical specifications or image size r
 
     try:
         completion = client.chat.completions.create(
-            model="gpt-4",
+            model="gpt-4o",
             messages=[
                 {"role": "system", "content": "You are an expert at creating DALL-E image generation prompts."},
                 {"role": "user", "content": prompt}
@@ -70,7 +70,7 @@ Be specific but concise. Do not include technical specifications or image size r
         return f"{dalle_prompt} {technical_specs}"
         
     except Exception as e:
-        print(f"Error generating GPT-4 prompt for {ai['name']}: {str(e)}")
+        print(f"Error generating GPT-4o prompt for {ai['name']}: {str(e)}")
         return generate_basic_dalle_prompt(ai)
 
 def generate_basic_dalle_prompt(ai):
