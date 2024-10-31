@@ -7,7 +7,9 @@ export const Header = () => {
       position="fixed"
       sx={{
         zIndex: (theme) => theme.zIndex.drawer + 1,
-        backgroundColor: 'background.paper',
+        backgroundColor: (theme) => theme.palette.background.default,
+        borderBottom: '1px solid',
+        borderColor: 'divider',
       }}
     >
       <Toolbar>
@@ -18,51 +20,51 @@ export const Header = () => {
           sx={{ 
             flexGrow: 1, 
             textDecoration: 'none', 
-            color: 'inherit' 
+            color: (theme) => theme.palette.text.primary
           }}
         >
           raise-an.ai
         </Typography>
         <Box sx={{ display: 'flex', gap: 2 }}>
           <Button 
-            color="inherit" 
             component={RouterLink} 
             to="/tech-tree"
+            sx={{ color: (theme) => theme.palette.text.primary }}
           >
             Tech Tree
           </Button>
           <Button 
-            color="inherit" 
             component={RouterLink} 
             to="/missions"
+            sx={{ color: (theme) => theme.palette.text.primary }}
           >
             Missions
           </Button>
           <Button 
-            color="inherit" 
             component={RouterLink} 
             to="/adopt"
+            sx={{ color: (theme) => theme.palette.text.primary }}
           >
             Adopt
           </Button>
           <Button 
-            color="inherit" 
             component={RouterLink} 
             to="/pricing"
+            sx={{ color: (theme) => theme.palette.text.primary }}
           >
             Pricing
           </Button>
           <Button 
-            color="inherit" 
             component={RouterLink} 
             to="/blog"
+            sx={{ color: (theme) => theme.palette.text.primary }}
           >
             Blog
           </Button>
           <Button 
-            color="inherit" 
             component={RouterLink} 
             to="/login"
+            sx={{ color: (theme) => theme.palette.text.primary }}
           >
             Login
           </Button>
