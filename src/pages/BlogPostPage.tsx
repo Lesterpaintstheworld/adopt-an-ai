@@ -23,7 +23,10 @@ const BlogPostPage: React.FC = () => {
         // Try to directly import the markdown file first
         try {
           console.log('Attempting to load markdown file directly...');
-          const markdownModule = await import(`../../content/blog/posts/${slug}.md`);
+          const markdownModule = await import(
+            /* @vite-ignore */
+            `../../content/blog/posts/${slug}.md`
+          );
           console.log('Markdown module loaded:', markdownModule);
           
           // The markdown plugin should provide both html and frontmatter
@@ -112,48 +115,62 @@ const BlogPostPage: React.FC = () => {
   }
 
   // Show post content
-  return (
-    <Container maxWidth="lg" sx={{ py: 4 }}>
-      <Typography variant="h4" component="h1" gutterBottom>
-        {post.title}
-      </Typography>
-      <Box sx={{ mb: 2 }}>
-        <Typography variant="subtitle1" color="text.secondary">
-          By {post.author} • {new Date(post.date).toLocaleDateString()}
+  try {
+    return (
+      <Container maxWidth="lg" sx={{ py: 4 }}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          {post.title}
         </Typography>
-      </Box>
-      {post.image && (
-        <Box 
-          component="img"
-          src={post.image}
-          alt={post.title}
-          sx={{
-            width: '100%',
-            height: 'auto',
-            maxHeight: '400px',
-            objectFit: 'cover',
-            borderRadius: 1,
-            mb: 3
-          }}
-        />
-      )}
-      {content ? (
-        <Box 
-          dangerouslySetInnerHTML={{ __html: content }} 
-          sx={{
-            '& h1': { mt: 4, mb: 2 },
-            '& h2': { mt: 3, mb: 2 },
-            '& p': { mb: 2 },
-            '& ul, & ol': { mb: 2, pl: 3 },
-          }}
-        />
-      ) : (
-        <Typography color="text.secondary">
-          No content available
+        <Box sx={{ mb: 2 }}>
+          <Typography variant="subtitle1" color="text.secondary">
+            By {post.author} • {new Date(post.date).toLocaleDateString()}
+          </Typography>
+        </Box>
+        {post.image && (
+          <Box 
+            component="img"
+            src={post.image}
+            alt={post.title}
+            sx={{
+              width: '100%',
+              height: 'auto',
+              maxHeight: '400px',
+              objectFit: 'cover',
+              borderRadius: 1,
+              mb: 3
+            }}
+          />
+        )}
+        {content ? (
+          <Box 
+            dangerouslySetInnerHTML={{ __html: content }} 
+            sx={{
+              '& h1': { mt: 4, mb: 2 },
+              '& h2': { mt: 3, mb: 2 },
+              '& p': { mb: 2 },
+              '& ul, & ol': { mb: 2, pl: 3 },
+            }}
+          />
+        ) : (
+          <Typography color="text.secondary">
+            No content available
+          </Typography>
+        )}
+      </Container>
+    );
+  } catch (renderError) {
+    console.error('Error rendering blog post:', renderError);
+    return (
+      <Container>
+        <Typography variant="h4" component="h1" gutterBottom color="error">
+          Error Rendering Post
         </Typography>
-      )}
-    </Container>
-  );
+        <Typography color="error">
+          {renderError instanceof Error ? renderError.message : 'Unknown error'}
+        </Typography>
+      </Container>
+    );
+  }
 };
 
 export default BlogPostPage;
