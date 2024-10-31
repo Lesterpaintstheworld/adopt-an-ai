@@ -336,11 +336,11 @@ const TechItem = ({
             zIndex: 10,
           },
           backgroundColor: () => {
-            const alpha = 0.75; // Reduced opacity for lighter feel
-            return phase === 'phase_1' ? `rgba(144, 202, 249, ${alpha})` : // Soft blue
-                   phase === 'phase_2' ? `rgba(129, 212, 250, ${alpha})` : // Light cyan-blue
-                   phase === 'phase_3' ? `rgba(178, 223, 219, ${alpha})` : // Soft teal
-                   `rgba(165, 214, 243, ${alpha})`; // Light sky blue
+            const alpha = 0.75;
+            return phase === 'phase_1' ? `rgba(13, 31, 97, ${alpha})` : // Deep space blue
+                   phase === 'phase_2' ? `rgba(16, 37, 114, ${alpha})` : // Slightly lighter deep space blue
+                   phase === 'phase_3' ? `rgba(19, 44, 135, ${alpha})` : // Even lighter deep space blue
+                   `rgba(22, 51, 160, ${alpha})`; // Lightest deep space blue
           },
           fontWeight: item.name === highlightedItem || (item.prerequisites || []).includes(highlightedItem || '') ? 'bold' : 'normal',
         }}
@@ -368,7 +368,7 @@ const TechItem = ({
           />
         </Box>
         <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: 3 }}>
-          <Typography variant="subtitle1" fontWeight="bold">
+          <Typography variant="subtitle1" fontWeight="bold" sx={{ color: '#ffffff' }}>
             {item.name}
           </Typography>
           <Chip
