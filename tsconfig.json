@@ -21,6 +21,6 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src", "src/types/yaml.d.ts"],
+  "include": ["src", "src/types/yaml.d.ts", "src/env.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
