@@ -24,8 +24,8 @@ const AdoptPage: React.FC = () => {
   console.log('AdoptPage rendering... Current path:', window.location.pathname);
 
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const isLoading = false;
+  const error = null;
   
   type FilterChangeEvent = {
     target: {
@@ -73,7 +73,7 @@ const AdoptPage: React.FC = () => {
         <ToggleButtonGroup
           value={viewMode}
           exclusive
-          onChange={(e, newMode) => newMode && setViewMode(newMode)}
+          onChange={(_e, newMode) => newMode && setViewMode(newMode)}
           aria-label="view mode"
         >
           <ToggleButton value="grid" aria-label="grid view">
