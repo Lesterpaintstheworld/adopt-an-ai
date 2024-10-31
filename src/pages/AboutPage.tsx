@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 // Import your about content
 import aboutContent from '../../content/website/about.yml';
 
-export const AboutPage = () => {
+const AboutPage = () => {
   const navigate = useNavigate();
 
   return (
@@ -205,3 +205,5 @@ export const AboutPage = () => {
     </Container>
   );
 };
+
+export default AboutPage;
