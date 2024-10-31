@@ -429,7 +429,6 @@ const TechTreePage = () => {
       overflow: 'hidden',
       paddingTop: '64px'
     }}>
-      <Header />
       <Box
         ref={containerRef}
         sx={{
