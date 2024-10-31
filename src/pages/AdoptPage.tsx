@@ -139,11 +139,43 @@ interface AI {
 }
 
 interface AdoptFilters {
-  capabilityLevel: string;
-  personalityType: string;
-  resourceRequirements: string;
+  capabilityLevel: 'all' | 'basic' | 'intermediate' | 'advanced';
+  personalityType: 'all' | 'analytical' | 'creative' | 'strategic' | 'supportive';
+  resourceRequirements: 'all' | 'low' | 'medium' | 'high';
   specialization: string;
 }
+
+const filterAIs = (ais: AI[], filters: AdoptFilters): AI[] => {
+  return ais.filter(ai => {
+    // Skip filtering if set to 'all'
+    if (filters.capabilityLevel !== 'all') {
+      const capabilityCount = ai.capabilities.length;
+      if (filters.capabilityLevel === 'basic' && capabilityCount > 3) return false;
+      if (filters.capabilityLevel === 'intermediate' && (capabilityCount <= 3 || capabilityCount > 5)) return false;
+      if (filters.capabilityLevel === 'advanced' && capabilityCount <= 5) return false;
+    }
+
+    if (filters.personalityType !== 'all') {
+      const personality = ai.personality.toLowerCase();
+      if (!personality.includes(filters.personalityType.toLowerCase())) return false;
+    }
+
+    if (filters.resourceRequirements !== 'all') {
+      const avgResources = (ai.resourceRequirements.compute + ai.resourceRequirements.memory) / 2;
+      if (filters.resourceRequirements === 'low' && avgResources > 60) return false;
+      if (filters.resourceRequirements === 'medium' && (avgResources <= 60 || avgResources > 80)) return false;
+      if (filters.resourceRequirements === 'high' && avgResources <= 80) return false;
+    }
+
+    if (filters.specialization !== 'all') {
+      return ai.specializations.some(spec => 
+        spec.toLowerCase().includes(filters.specialization.toLowerCase())
+      );
+    }
+
+    return true;
+  });
+};
 
 const AdoptPage: React.FC = () => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
@@ -185,8 +217,9 @@ const AdoptPage: React.FC = () => {
         <div className="flex gap-4">
           <select
             className="border rounded p-2"
+            value={filters.capabilityLevel}
             onChange={(e) =>
-              setFilters({ ...filters, capabilityLevel: e.target.value })
+              setFilters({ ...filters, capabilityLevel: e.target.value as AdoptFilters['capabilityLevel'] })
             }
           >
             <option value="all">All Capabilities</option>
@@ -197,18 +230,34 @@ const AdoptPage: React.FC = () => {
 
           <select
             className="border rounded p-2"
+            value={filters.personalityType}
             onChange={(e) =>
-              setFilters({ ...filters, personalityType: e.target.value })
+              setFilters({ ...filters, personalityType: e.target.value as AdoptFilters['personalityType'] })
             }
           >
             <option value="all">All Personalities</option>
             <option value="analytical">Analytical</option>
             <option value="creative">Creative</option>
+            <option value="strategic">Strategic</option>
             <option value="supportive">Supportive</option>
           </select>
 
           <select
             className="border rounded p-2"
+            value={filters.resourceRequirements}
+            onChange={(e) =>
+              setFilters({ ...filters, resourceRequirements: e.target.value as AdoptFilters['resourceRequirements'] })
+            }
+          >
+            <option value="all">All Resource Levels</option>
+            <option value="low">Low Requirements</option>
+            <option value="medium">Medium Requirements</option>
+            <option value="high">High Requirements</option>
+          </select>
+
+          <select
+            className="border rounded p-2"
+            value={filters.specialization}
             onChange={(e) =>
               setFilters({ ...filters, specialization: e.target.value })
             }
@@ -222,6 +271,7 @@ const AdoptPage: React.FC = () => {
       </div>
 
       {/* AI Grid/List View */}
+      {/* AI Grid/List View */}
       <div
         className={`${
           viewMode === 'grid'
@@ -229,7 +279,7 @@ const AdoptPage: React.FC = () => {
             : 'flex flex-col gap-4'
         }`}
       >
-        {mockAIs.map((ai) => (
+        {filterAIs(mockAIs, filters).map((ai) => (
           <AICard key={ai.id} ai={ai} viewMode={viewMode} />
         ))}
       </div>
