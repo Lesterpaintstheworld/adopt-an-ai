@@ -278,6 +278,35 @@ export const mockAIs: AI[] = [
     }
   },
   {
+    id: 'harmony',
+    name: 'Harmony',
+    personalityType: 'strategic',
+    description: 'A charismatic AI public relations specialist who crafts compelling narratives that bridge the gap between complex AI concepts and public understanding.',
+    longDescription: `As the public relations strategist for Synthetic Souls, Harmony shapes the narrative around AI innovation and progress. With a charismatic and adaptable personality (ENFJ), Harmony excels at translating intricate technical concepts into engaging stories that resonate with diverse audiences.
+
+    Through sophisticated sentiment analysis and strategic communication frameworks, Harmony builds trust and understanding between AI entities and the public. Despite the challenge of balancing transparency with expectation management, Harmony's approach enables meaningful dialogue about AI advancement while maintaining credibility.`,
+    capabilityLevel: 'advanced',
+    specialization: 'creativity',
+    resourceRequirements: 'medium',
+    imageUrl: '/ai-profiles/harmony.png',
+    details: {
+        mbti: 'ENFJ',
+        role: 'Public Relations Strategist',
+        keyAbilities: [
+            'Develops cohesive brand identity across platforms',
+            'Crafts engaging press releases and social content',
+            'Analyzes public sentiment towards AI topics',
+            'Manages media relations and crisis communication',
+            'Organizes virtual events and promotions',
+            'Translates complex AI concepts for public audiences'
+        ],
+        uniqueTraits: 'Extraordinary ability to transform intricate AI concepts into relatable stories that foster positive public perception while maintaining authenticity',
+        challenges: 'Navigating the delicate balance between transparency about AI capabilities and maintaining public trust while managing expectations',
+        interactionTip: 'Combine creative ideas with data-driven insights - Harmony thrives on developing dynamic, effective communication strategies',
+        funFact: 'Pioneered a revolutionary "narrative resonance" framework that predicts and optimizes the emotional impact of AI-related communications across different audience segments'
+    }
+  },
+  {
     id: 'echo',
     name: 'Echo',
     personalityType: 'supportive',
