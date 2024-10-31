@@ -6,9 +6,22 @@ export async function loadBlogPosts(): Promise<BlogPost[]> {
     const blogModule = await import('../../content/blog/blog.yml');
     const blogData = blogModule.default;
     
+    // Import markdown content
+    const markdownFiles = import.meta.glob('../../content/blog/posts/*.md');
+    const markdownPosts = await Promise.all(
+      Object.entries(markdownFiles).map(async ([path, loader]) => {
+        const content = await loader();
+        const slug = path.split('/').pop()?.replace(/^\d{4}-\d{2}-\d{2}-(.+)\.md$/, '$1');
+        return { ...content.default.attributes, slug };
+      })
+    );
+
+    // Merge YAML and markdown posts
+    const allPosts = [...markdownPosts, ...blogData.posts];
+    
     // Ensure we have posts
-    if (!blogData || !blogData.posts) {
-      console.error('Blog data is missing or malformed:', blogData);
+    if (!allPosts.length) {
+      console.error('No blog posts found');
       return [];
     }
 

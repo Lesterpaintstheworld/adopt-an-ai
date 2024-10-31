@@ -23,18 +23,25 @@ const BlogPostPage: React.FC = () => {
         // Try to directly import the markdown file first
         try {
           console.log('Attempting to load markdown file directly...');
-          const markdownModule = await import(
-            /* @vite-ignore */
-            `../../content/blog/posts/${slug}.md`
+          // Try both with and without date prefix
+          const posts = import.meta.glob('../../content/blog/posts/*.md');
+          const matchingPost = Object.keys(posts).find(path => 
+            path.includes(`-${slug}.md`) || path.endsWith(`/${slug}.md`)
           );
+          
+          if (!matchingPost) {
+            throw new Error('Markdown file not found');
+          }
+
+          const markdownModule = await posts[matchingPost]();
           console.log('Markdown module loaded:', markdownModule);
           
           // The markdown plugin should provide both html and frontmatter
-          const { html, attributes } = markdownModule.default;
+          const { default: { attributes, html } } = markdownModule;
           console.log('Markdown content:', { html, attributes });
           
-          if (html) {
-            setContent(html);
+          if (attributes.content || html) {
+            setContent(attributes.content || html);
             // Use frontmatter as post metadata if available
             if (attributes) {
               setPost({
