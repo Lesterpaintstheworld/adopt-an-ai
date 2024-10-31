@@ -2,35 +2,40 @@ import { BlogPost, BlogContent } from '../types/blog';
 
 export async function loadBlogPosts(): Promise<BlogPost[]> {
   try {
-    // Import all YAML files
+    // Import YAML data
     const blogModule = await import('../../content/blog/blog.yml');
     const blogData = blogModule.default;
     
-    // Import markdown content
-    const markdownFiles = import.meta.glob('../../content/blog/posts/*.md', { eager: true });
-    const markdownPosts = Object.entries(markdownFiles).map(([path, content]: [string, any]) => {
-      const { attributes, html } = content.default;
-      return {
-        ...attributes,
-        content: html,
-        slug: path.split('/').pop()?.replace(/\.md$/, '')
-      };
-    });
-
-    // Merge YAML and markdown posts
-    const allPosts = [...markdownPosts, ...blogData.posts];
-    
-    // Ensure we have posts
-    if (!allPosts.length) {
-      console.error('No blog posts found');
-      return [];
-    }
-
-    const posts = [...blogData.posts];
+    // Start with an array of posts from the YAML
+    let posts: BlogPost[] = [];
     
     // Add featured post if it exists
     if (blogData.featured_post) {
-      posts.unshift(blogData.featured_post);
+      posts.push(blogData.featured_post);
+    }
+    
+    // Add regular posts
+    if (blogData.posts) {
+      posts = [...posts, ...blogData.posts];
+    }
+
+    // Import and merge markdown content
+    const markdownFiles = import.meta.glob('../../content/blog/posts/*.md', { eager: true });
+    
+    // Update markdown content for matching posts
+    for (const [path, content] of Object.entries(markdownFiles)) {
+      const { attributes, html } = (content as any).default;
+      const slug = path.split('/').pop()?.replace(/\.md$/, '');
+      
+      // Find matching post and update its content
+      const postIndex = posts.findIndex(p => p.slug === slug || p.slug === attributes.slug);
+      if (postIndex !== -1) {
+        posts[postIndex] = {
+          ...posts[postIndex],
+          ...attributes,
+          content: html
+        };
+      }
     }
 
     // Sort by date
