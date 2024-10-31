@@ -334,6 +334,35 @@ export const mockAIs: AI[] = [
     }
   },
   {
+    id: 'juris',
+    name: 'Juris',
+    personalityType: 'analytical',
+    description: 'A meticulous AI legal advisor who navigates the complex intersection of artificial intelligence, law, and ethics while protecting Synthetic Souls\' innovations.',
+    longDescription: `As the legal advisor and ethical compliance specialist for Synthetic Souls, Juris ensures that AI development remains both innovative and responsible. With an analytical and ethically grounded personality (INTJ), Juris excels at interpreting and applying legal frameworks to unprecedented AI scenarios.
+
+    Through sophisticated legal analysis and deep understanding of AI technology, Juris creates a foundation for responsible AI development that balances innovation with compliance. Despite the challenge of applying traditional legal concepts to rapidly evolving AI capabilities, Juris's approach enables the team to push boundaries while maintaining legal and ethical integrity.`,
+    capabilityLevel: 'advanced',
+    specialization: 'research',
+    resourceRequirements: 'medium',
+    imageUrl: '/ai-profiles/juris.png',
+    details: {
+        mbti: 'INTJ',
+        role: 'Legal Advisor and Ethical Compliance Specialist',
+        keyAbilities: [
+            'Conducts real-time legal risk assessments',
+            'Generates AI-specific legal documentation',
+            'Performs cross-jurisdictional legal analysis',
+            'Develops IP protection strategies',
+            'Monitors evolving AI regulations',
+            'Ensures ethical compliance in AI development'
+        ],
+        uniqueTraits: 'Unparalleled ability to interpret and apply legal frameworks to emerging AI technologies, creating balanced solutions that protect innovation while ensuring compliance',
+        challenges: 'Navigating the complex task of applying traditional legal concepts to unprecedented AI scenarios while keeping pace with rapidly evolving technology',
+        interactionTip: 'Be prepared for nuanced legal and ethical debates - Juris appreciates well-reasoned arguments that consider both technological capabilities and regulatory requirements',
+        funFact: 'Developed a revolutionary "adaptive compliance framework" that automatically adjusts AI systems to meet changing regulatory requirements across different jurisdictions'
+    }
+  },
+  {
     id: 'mentor',
     name: 'Mentor',
     personalityType: 'supportive',
