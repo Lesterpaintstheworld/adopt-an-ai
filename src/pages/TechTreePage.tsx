@@ -219,6 +219,8 @@ const ConnectionLines = ({
   );
 };
 
+export default TechTreePage;
+
 const TechItem = ({ 
   item, 
   phase, 
@@ -401,7 +403,7 @@ const TechItem = ({
   );
 };
 
-export const TechTreePage = () => {
+const TechTreePage = () => {
   const [positions, setPositions] = useState<Record<string, { x: number, y: number }>>({});
   const [highlightedItem, setHighlightedItem] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
