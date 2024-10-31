@@ -6,8 +6,8 @@ import {
   Chip,
   Tooltip,
 } from '@mui/material';
-import { TechTree, PhaseData, Perk } from '@/types/tech';
-import { getPerkIconUrl } from '@/utils/perkIconUrl';
+import { TechTree, PhaseData, Perk } from '../types/tech';
+import { getPerkIconUrl } from '../utils/perkIconUrl';
 import CodeIcon from '@mui/icons-material/Code';
 import BrushIcon from '@mui/icons-material/Brush';
 import PeopleIcon from '@mui/icons-material/People';

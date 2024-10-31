@@ -23,6 +23,7 @@ export const filterAIs = (ais: AI[], filters: AdoptFilters): AI[] => {
 
     // Check specialization
     if (filters.specialization !== 'all') {
+      if (!ai.specialization) return false;
       return ai.specialization.toLowerCase().includes(filters.specialization.toLowerCase());
     }
 
