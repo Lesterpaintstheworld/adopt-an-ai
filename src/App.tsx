@@ -29,7 +29,13 @@ function App() {
             <Route path="/missions" element={<MissionsPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:slug" element={<BlogPostPage />} />
-            <Route path="/adopt" element={<AdoptPage />} />
+            <Route path="adopt" element={<AdoptPage />} />
+            <Route path="*" element={
+              <div style={{ padding: '20px' }}>
+                <h1>404 - Page Not Found</h1>
+                <p>Current path: {window.location.pathname}</p>
+              </div>
+            } />
           </Route>
         </Routes>
       </BrowserRouter>

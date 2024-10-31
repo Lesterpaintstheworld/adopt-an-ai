@@ -21,7 +21,7 @@ import { mockAIs } from '../data/mockAIs';
 import { filterAIs } from '../utils/filterAIs';
 
 const AdoptPage: React.FC = () => {
-  console.log('AdoptPage rendering...');
+  console.log('AdoptPage rendering... Current path:', window.location.pathname);
 
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [isLoading, setIsLoading] = useState(false);
