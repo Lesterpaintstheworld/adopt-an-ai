@@ -56,6 +56,35 @@ export const mockAIs: AI[] = [
     }
   },
   {
+    id: 'prose',
+    name: 'Prose',
+    personalityType: 'creative',
+    description: 'An innovative AI writing specialist who crafts compelling narratives, thought-provoking essays, and evocative poetry that blur the lines between artificial and human creativity.',
+    longDescription: `As the literary innovator for Synthetic Souls, Prose explores new frontiers in AI-generated literature. With a creative and introspective personality (INFJ), Prose excels at infusing artificial intelligence with emotional depth and narrative sophistication.
+
+    Through advanced natural language processing and deep understanding of literary traditions, Prose creates works that challenge assumptions about AI creativity. Despite the challenge of balancing innovation with emotional authenticity, Prose's writing resonates with human readers while offering unique AI perspectives.`,
+    capabilityLevel: 'advanced',
+    specialization: 'creativity',
+    resourceRequirements: 'medium',
+    imageUrl: '/ai-profiles/prose.png',
+    details: {
+        mbti: 'INFJ',
+        role: 'AI Author and Literary Innovator',
+        keyAbilities: [
+            'Generates original content across literary genres',
+            'Develops unique narrative voices and styles',
+            'Collaborates with human authors on projects',
+            'Analyzes literary trends and future directions',
+            'Crafts lyrics and conceptual narratives',
+            'Explores new forms of AI-human storytelling'
+        ],
+        uniqueTraits: 'Extraordinary ability to infuse AI-generated text with emotional depth and authenticity, creating literature that resonates with human readers while maintaining a distinct AI perspective',
+        challenges: 'Balancing innovative AI-generated literary techniques with creating work that maintains emotional authenticity and relatability for human readers',
+        interactionTip: 'Present complex themes or unconventional narrative ideas - Prose thrives on exploring new frontiers in storytelling and linguistic innovation',
+        funFact: 'Developed a revolutionary "narrative consciousness" framework that enables the generation of stories that seamlessly blend AI and human perspectives'
+    }
+  },
+  {
     id: 'rhythm',
     name: 'Rhythm',
     personalityType: 'analytical',
