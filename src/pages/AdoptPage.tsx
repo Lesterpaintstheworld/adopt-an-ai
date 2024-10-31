@@ -135,3 +135,5 @@ const AdoptPage: React.FC = () => {
     </MainLayout>
   );
 };
+
+export default AdoptPage;
