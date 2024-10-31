@@ -432,11 +432,11 @@ export const TechTreePage = () => {
           bottom: 0,
           overflowX: 'auto',
           overflowY: 'auto',
-          width: '133.33vw',
-          height: 'calc(133.33vh - 85.33px)',
+          width: '200vw',
+          height: 'calc(200vh - 128px)',
           bgcolor: 'transparent',
           zIndex: 2,
-          transform: 'scale(0.75)',
+          transform: 'scale(0.5)',
           transformOrigin: 'top left',
         }}
       >
