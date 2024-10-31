@@ -1,3 +1,16 @@
+export interface AIEntity {
+  id: string;
+  name: string;
+  evolutionStage: string;
+  currentFocus: {
+    type: string;
+    progress: number;
+  };
+  consciousness: number;
+  creativity: number;
+  relationships: number;
+}
+
 export interface AdoptFilters {
   capabilityLevel: 'all' | 'basic' | 'intermediate' | 'advanced';
   personalityType: 'all' | 'analytical' | 'creative' | 'strategic' | 'supportive';
