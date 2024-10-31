@@ -19,7 +19,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
+    "types": ["vite/client"]
   },
   "include": ["src", "src/types/yaml.d.ts", "src/env.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
