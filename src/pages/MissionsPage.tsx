@@ -212,15 +212,15 @@ const MissionsPage: React.FC = () => {
         return;
       }
 
-      const updatedMissions = missions.map(m => 
-        m.id === mission.id ? { ...m, status: 'in_progress' } : m
+      const updatedMissions: Mission[] = missions.map(m => 
+        m.id === mission.id ? { ...m, status: 'in_progress' as const } : m
       );
       setMissions(updatedMissions);
       setActiveMissions([...activeMissions, mission]);
     }
     else if (mission.status === 'in_progress') {
-      const updatedMissions = missions.map(m => 
-        m.id === mission.id ? { ...m, status: 'completed' } : m
+      const updatedMissions: Mission[] = missions.map(m => 
+        m.id === mission.id ? { ...m, status: 'completed' as const } : m
       );
       setMissions(updatedMissions);
       setActiveMissions(activeMissions.filter(m => m.id !== mission.id));

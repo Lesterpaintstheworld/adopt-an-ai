@@ -7,7 +7,6 @@ import {
   Tooltip,
 } from '@mui/material';
 import { TechTree, PhaseData, Perk } from '@/types/tech';
-import { TAG_STYLES } from '@/utils/tagStyles';
 import { getPerkIconUrl } from '@/utils/perkIconUrl';
 import CodeIcon from '@mui/icons-material/Code';
 import BrushIcon from '@mui/icons-material/Brush';
@@ -19,13 +18,11 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import techTree from '../../content/tech/tech-tree.yml';
 
 // Constants for layout calculations
-const BASE_PHASE_WIDTH = 2400; // Base width that we'll adjust
 const ITEM_HEIGHT = 160;
 const LAYER_PADDING = 60;
 const CHRONOLOGICAL_SPACING = 400; // Augmenté de 200 à 400 pour plus d'espace horizontal
 const PHASE_START_PADDING = 200;
 const PHASE_PADDING = 200;
-const ITEM_IMAGE_SIZE = 80;
 
 const getTagColor = (tag: string) => {
   const tagType = tag.split(' ')[1];
@@ -102,7 +99,7 @@ const calculateNodePositions = (techTree: any) => {
     // Handle all non-metadata entries (layers)
     Object.entries(phaseData)
       .filter(([key]) => !['name', 'period', 'description'].includes(key))
-      .forEach(([layerKey, items]: [string, any], layerIndex) => {
+      .forEach(([_layerKey, items]: [string, any], layerIndex) => {
         // Process each item in the layer
         items.forEach((item: any) => {
           if (!item.chronologicalOrder) {
@@ -346,7 +343,7 @@ const TechItem = ({
               phase === 'phase_3' ? `${theme.palette.success.light}${Math.round(alpha * 255).toString(16).padStart(2, '0')}` :
               `${theme.palette.warning.light}${Math.round(alpha * 255).toString(16).padStart(2, '0')}`;
           },
-          fontWeight: item.name === highlightedItem || (item.prerequisites || []).includes(highlightedItem) ? 'bold' : 'normal',
+          fontWeight: item.name === highlightedItem || (item.prerequisites || []).includes(highlightedItem || '') ? 'bold' : 'normal',
         }}
       >
         <Box
