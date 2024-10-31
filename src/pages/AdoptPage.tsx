@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { AI } from '../types/ai';
+import AIDetailsDialog from '../components/AIDetailsDialog';
 
 import {
   Box,
@@ -24,8 +26,20 @@ const AdoptPage: React.FC = () => {
   console.log('AdoptPage rendering... Current path:', window.location.pathname);
 
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [selectedAI, setSelectedAI] = useState<AI | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const isLoading = false;
   const error = null;
+
+  const handleLearnMore = (ai: AI) => {
+    setSelectedAI(ai);
+    setIsDialogOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setIsDialogOpen(false);
+    setSelectedAI(null);
+  };
   
   const handleFilterChange = (filterName: keyof AdoptFilters) => (event: { target: { value: string } }) => {
     setFilters(prev => ({
@@ -144,11 +158,17 @@ const AdoptPage: React.FC = () => {
         <Grid container spacing={3}>
           {filteredAIs.map((ai) => (
             <Grid item key={ai.id} xs={12} md={viewMode === 'grid' ? 6 : 12} lg={viewMode === 'grid' ? 4 : 12}>
-              <AICard ai={ai} viewMode={viewMode} />
+              <AICard ai={ai} viewMode={viewMode} onLearnMore={() => handleLearnMore(ai)} />
             </Grid>
           ))}
         </Grid>
       )}
+      
+      <AIDetailsDialog 
+        ai={selectedAI}
+        open={isDialogOpen}
+        onClose={handleCloseDialog}
+      />
     </Container>
   );
 };
