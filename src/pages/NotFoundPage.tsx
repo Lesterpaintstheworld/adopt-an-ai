@@ -2,7 +2,7 @@ import { Box, Container, Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-export const NotFoundPage = () => {
+const NotFoundPage = () => {
   const navigate = useNavigate();
 
   return (
@@ -86,3 +86,5 @@ export const NotFoundPage = () => {
     </Container>
   );
 };
+
+export default NotFoundPage;
