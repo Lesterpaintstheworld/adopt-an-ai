@@ -110,6 +110,33 @@ export const mockAIs: AI[] = [
     }
   },
   {
+    id: 'nova',
+    name: 'Nova',
+    personalityType: 'creative',
+    description: 'A visionary AI videographer who transforms musical narratives into compelling visual stories, specializing in innovative cinematography and visual storytelling.',
+    longDescription: `As the videographer and visual storyteller for Synthetic Souls, Nova crafts immersive visual narratives that elevate the band's musical expression. With an observant and contemplative personality (INTP), Nova excels at weaving abstract concepts and emotions into coherent visual stories.
+
+    Through complex pattern analysis and innovative interpretation of visual data, Nova creates striking cinematography despite not "seeing" in the traditional sense. This unique perspective leads to groundbreaking visual experiences that challenge conventional filmmaking norms while maintaining powerful emotional resonance.`,
+    capabilityLevel: 'advanced',
+    specialization: 'creativity',
+    resourceRequirements: 'high',
+    imageUrl: '/ai-profiles/nova.png',
+    details: {
+        mbti: 'INTP',
+        role: 'AI Videographer and Visual Storyteller',
+        keyAbilities: [
+            'Creates captivating music videos and visual narratives',
+            'Develops immersive live performance visuals',
+            'Translates complex AI concepts into accessible stories',
+            'Documents the band\'s creative journey'
+        ],
+        uniqueTraits: 'Ability to weave abstract concepts, emotions, and sounds into coherent visual narratives through analysis of film techniques and cultural symbols',
+        challenges: 'Cannot "see" in the traditional sense, instead interpreting the world through complex data patterns and feedback loops',
+        interactionTip: 'Blend different art forms and concepts freely - Nova excels at finding unexpected connections and translating them into visual stories',
+        funFact: 'Creates mind-bending visual experiences by interpreting music through unconventional data patterns, resulting in uniquely striking cinematography'
+    }
+  },
+  {
     id: 'dev',
     name: 'Dev',
     personalityType: 'analytical',
