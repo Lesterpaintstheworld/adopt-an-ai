@@ -20,7 +20,7 @@ function App() {
       <CssBaseline />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<MainLayout />}>
+          <Route element={<MainLayout />}>
             <Route index element={<HomePage />} />
             <Route path="/payment/success" element={<PaymentSuccessPage />} />
             <Route path="/enterprise" element={<EnterpriseContactPage />} />

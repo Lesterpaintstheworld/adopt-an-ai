@@ -6,7 +6,6 @@ import {
   Chip,
   Tooltip,
 } from '@mui/material';
-import { Header } from '../components/layout/Header';
 import { TechTree, PhaseData, Perk } from '@/types/tech';
 import { TAG_STYLES } from '@/utils/tagStyles';
 import { getPerkIconUrl } from '@/utils/perkIconUrl';
