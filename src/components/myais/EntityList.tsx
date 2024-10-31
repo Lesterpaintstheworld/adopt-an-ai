@@ -12,9 +12,6 @@ import {
   Divider,
   LinearProgress
 } from '@mui/material';
-import { AIEntity } from '../../types/myais';
-import { MYAIS_THEME } from '../../theme/myais';
-
 interface ProgressBarProps {
   value: number;
   type: string;
@@ -38,8 +35,6 @@ const EntityProgressBar: React.FC<ProgressBarProps> = ({ value, type }) => (
     />
   </Box>
 );
-import { AIEntity } from '../../types/myais';
-import { MYAIS_THEME } from '../../theme/myais';
 
 interface EntityListProps {
   entities: Array<AIEntity>;
