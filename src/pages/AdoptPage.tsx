@@ -1,4 +1,45 @@
 import React, { useState } from 'react';
+import AICard from '../components/AICard';
+
+// Mock data for AI listings
+const mockAIs = [
+  {
+    id: '1',
+    name: 'Research Assistant',
+    personality: 'Analytical and methodical',
+    capabilities: ['Data Analysis', 'Literature Review', 'Report Writing'],
+    developmentHistory: ['Basic Training', 'Research Specialization'],
+    specializations: ['Academic Research', 'Data Science'],
+    resourceRequirements: {
+      compute: 60,
+      memory: 40,
+    },
+  },
+  {
+    id: '2',
+    name: 'Creative Companion',
+    personality: 'Imaginative and inspiring',
+    capabilities: ['Story Writing', 'Art Direction', 'Brainstorming'],
+    developmentHistory: ['Creativity Training', 'Art Appreciation'],
+    specializations: ['Creative Writing', 'Visual Arts'],
+    resourceRequirements: {
+      compute: 50,
+      memory: 70,
+    },
+  },
+  {
+    id: '3',
+    name: 'Problem Solver',
+    personality: 'Logical and systematic',
+    capabilities: ['Algorithm Design', 'Pattern Recognition', 'Optimization'],
+    developmentHistory: ['Logic Training', 'Problem-Solving Focus'],
+    specializations: ['Mathematical Analysis', 'System Design'],
+    resourceRequirements: {
+      compute: 80,
+      memory: 60,
+    },
+  }
+];
 
 interface AI {
   id: string;
@@ -104,27 +145,9 @@ const AdoptPage: React.FC = () => {
             : 'flex flex-col gap-4'
         }`}
       >
-        {/* AI Card Component - We'll implement this next */}
-        {/* Placeholder for demonstration */}
-        <div className="border rounded-lg p-4 shadow-sm">
-          <h3 className="text-xl font-semibold mb-2">AI Assistant</h3>
-          <p className="text-gray-600 mb-4">
-            A versatile AI specialized in research and analysis
-          </p>
-          <div className="flex flex-wrap gap-2 mb-4">
-            {['Research', 'Analysis', 'Data Processing'].map((tag) => (
-              <span
-                key={tag}
-                className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-sm"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-          <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-            Preview
-          </button>
-        </div>
+        {mockAIs.map((ai) => (
+          <AICard key={ai.id} ai={ai} viewMode={viewMode} />
+        ))}
       </div>
     </div>
   );
