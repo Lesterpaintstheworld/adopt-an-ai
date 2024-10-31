@@ -5,6 +5,75 @@ from pathlib import Path
 from openai import OpenAI
 from dotenv import load_dotenv
 
+def get_base_style_prompt():
+    """Returns the shared visual style guidelines for all AI profiles."""
+    return """
+    Create a high-quality digital portrait with these consistent style elements:
+    - Minimalist, elegant sci-fi aesthetic
+    - Subtle holographic/digital effects
+    - Clean, sharp lines with flowing energy patterns
+    - Rich, deep colors with accent lighting
+    - Semi-abstract representation suggesting both technology and consciousness
+    - Professional lighting with a slight ethereal glow
+    - Dark background with subtle geometric patterns
+    - Consistent portrait framing and composition
+    """
+
+def get_personality_style(personality_type: str) -> str:
+    """Returns style guidelines based on AI personality type."""
+    styles = {
+        'analytical': """
+            - Geometric and precise patterns
+            - Cool blue and silver color palette
+            - Angular, crystalline structures
+            - Mathematical/data visualization elements
+            - Clean, structured composition
+        """,
+        'creative': """
+            - Flowing, organic patterns
+            - Vibrant, diverse color palette
+            - Fluid, dynamic energy streams
+            - Artistic/musical visual elements
+            - Asymmetric, expressive composition
+        """,
+        'strategic': """
+            - Interconnected network patterns
+            - Deep purple and gold accents
+            - Strategic/game-like elements
+            - Command/control visual motifs
+            - Balanced, purposeful composition
+        """,
+        'supportive': """
+            - Soft, harmonious patterns
+            - Warm green and gentle gold tones
+            - Nurturing, protective elements
+            - Connection/community visual themes
+            - Welcoming, approachable composition
+        """
+    }
+    return styles.get(personality_type.lower(), '')
+
+def get_specialization_elements(specialization: str) -> str:
+    """Returns visual elements based on AI specialization."""
+    elements = {
+        'creativity': """
+            - Abstract artistic tools/instruments
+            - Creative energy flows
+            - Inspiration particles/sparks
+        """,
+        'research': """
+            - Data streams/analysis patterns
+            - Scientific visualization elements
+            - Knowledge web structures
+        """,
+        'problemSolving': """
+            - Solution pathway visualizations
+            - System/process flow elements
+            - Integration/connection nodes
+        """
+    }
+    return elements.get(specialization.lower(), '')
+
 # Load environment variables
 load_dotenv()
 
