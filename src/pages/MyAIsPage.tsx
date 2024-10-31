@@ -13,7 +13,7 @@ const initialAIEntities: AIEntity[] = [
     creativity: 95,
     relationships: 70,
     currentFocus: {
-      type: 'create',
+      type: 'evolve',
       progress: 45,
       timeRemaining: 120,
       resourceConsumption: {
