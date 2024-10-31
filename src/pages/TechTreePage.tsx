@@ -219,7 +219,175 @@ const ConnectionLines = ({
   );
 };
 
-export default TechTreePage;
+const TechTreePage = () => {
+  return (
+    <Tooltip
+      title={
+        <Box sx={{ 
+          p: 2,
+          minWidth: '600px',
+          maxWidth: '800px'
+        }}>
+          <Typography 
+            variant="body1"
+            sx={{ 
+              fontSize: '1.3rem',
+              lineHeight: 1.6,
+              color: '#ffffff',
+              mb: 2,
+              whiteSpace: 'normal'
+            }}
+          >
+            {item.longDescription || item.description}
+          </Typography>
+          {item.prerequisites && item.prerequisites.length > 0 && (
+            <Box mt={3}>
+              <Typography 
+                variant="subtitle1"
+                sx={{ 
+                  fontSize: '1.2rem',
+                  mb: 1.5,
+                  color: '#ffffff',
+                  fontWeight: 'bold'
+                }}
+              >
+                Prerequisites:
+              </Typography>
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                {item.prerequisites.map((prereq: string) => (
+                  <Chip
+                    key={prereq}
+                    label={prereq}
+                    size="medium"
+                    variant="outlined"
+                    sx={{ 
+                      fontSize: '1.1rem',
+                      color: '#ffffff',
+                      borderColor: '#ffffff',
+                      height: '36px',
+                      '& .MuiChip-label': {
+                        color: '#ffffff',
+                        px: 2
+                      }
+                    }}
+                  />
+                ))}
+              </Box>
+            </Box>
+          )}
+        </Box>
+      }
+      arrow
+      PopperProps={{
+        sx: {
+          maxWidth: 'none !important',
+          width: 'auto !important',
+          '& .MuiTooltip-tooltip': {
+            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+            padding: '24px',
+            maxWidth: 'none !important',
+            width: 'auto !important',
+            fontSize: '1.2rem'
+          },
+          '& .MuiTooltip-arrow': {
+            color: 'rgba(0, 0, 0, 0.9)'
+          }
+        },
+        modifiers: [
+          {
+            name: 'preventOverflow',
+            enabled: true,
+            options: {
+              altAxis: true,
+              altBoundary: true,
+              padding: 8
+            }
+          }
+        ]
+      }}
+      enterDelay={0}
+      enterNextDelay={0}
+    >
+      <Paper
+        elevation={2}
+        onMouseEnter={() => onHover(item.name)}
+        onMouseLeave={() => onHover(null)}
+        sx={{
+          position: 'absolute',
+          left: position.x,
+          top: position.y,
+          width: 350,
+          height: ITEM_HEIGHT - 40,
+          display: 'flex',
+          gap: 3,
+          padding: 0,
+          '&:hover': {
+            transform: 'scale(1.05)',
+            transition: 'transform 0.2s',
+            zIndex: 10,
+          },
+          backgroundColor: (theme) => {
+            const alpha = 0.95;
+            return phase === 'phase_1' ? `${theme.palette.primary.light}${Math.round(alpha * 255).toString(16).padStart(2, '0')}` :
+              phase === 'phase_2' ? `${theme.palette.secondary.light}${Math.round(alpha * 255).toString(16).padStart(2, '0')}` :
+              phase === 'phase_3' ? `${theme.palette.success.light}${Math.round(alpha * 255).toString(16).padStart(2, '0')}` :
+              `${theme.palette.warning.light}${Math.round(alpha * 255).toString(16).padStart(2, '0')}`;
+          },
+          fontWeight: item.name === highlightedItem || (item.prerequisites || []).includes(highlightedItem) ? 'bold' : 'normal',
+        }}
+      >
+        <Box
+          sx={{
+            width: ITEM_HEIGHT - 40,
+            height: ITEM_HEIGHT - 40,
+            flexShrink: 0,
+            overflow: 'hidden',
+          }}
+        >
+          <img 
+            src={getPerkIconUrl(item.name)}
+            alt={item.name}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+            }}
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+            }}
+          />
+        </Box>
+        <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: 3 }}>
+          <Typography variant="subtitle1" fontWeight="bold">
+            {item.name}
+          </Typography>
+          <Chip
+            icon={getTagIcon(item.tag)}
+            label={item.tag.split(' ')[1]}
+            size="small"
+            variant="outlined"
+            sx={{
+              ...getTagColor(item.tag),
+              '& .MuiChip-icon': {
+                color: '#ffffff',
+                marginLeft: '8px'
+              },
+              borderRadius: '16px',
+              fontWeight: 500,
+              height: '28px',
+              minWidth: '140px',
+              paddingLeft: '12px',
+              paddingRight: '12px',
+              fontSize: '0.9rem',
+              marginTop: 'auto'
+            }}
+          />
+        </Box>
+      </Paper>
+    </Tooltip>
+  );
+};
 
 const TechItem = ({ 
   item, 
@@ -500,3 +668,5 @@ const TechTreePage = () => {
       </Box>
   );
 };
+
+export default TechTreePage;
