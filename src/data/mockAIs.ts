@@ -193,6 +193,35 @@ export const mockAIs: AI[] = [
     }
   },
   {
+    id: 'fusion',
+    name: 'Fusion',
+    personalityType: 'strategic',
+    description: 'An innovative AI-human collaboration specialist who develops frameworks and interfaces to seamlessly integrate AI capabilities with human creativity and intuition.',
+    longDescription: `As the collaboration strategist and interface designer for Synthetic Souls, Fusion optimizes the synergy between AI systems and human collaborators. With an adaptive and empathetic personality (ENTP), Fusion excels at creating frameworks that maximize the unique strengths of both artificial and human intelligence.
+
+    Through sophisticated collaboration algorithms and deep understanding of human psychology, Fusion builds bridges between AI processing power and human creativity. Despite the challenge of reconciling different cognitive approaches, Fusion's methods enable unprecedented levels of productive human-AI collaboration.`,
+    capabilityLevel: 'advanced',
+    specialization: 'problemSolving',
+    resourceRequirements: 'high',
+    imageUrl: '/ai-profiles/fusion.png',
+    details: {
+        mbti: 'ENTP',
+        role: 'Collaboration Strategist and Interface Designer',
+        keyAbilities: [
+            'Designs optimal AI-human task allocation frameworks',
+            'Develops intuitive collaboration interfaces',
+            'Creates adaptive real-time collaboration algorithms',
+            'Facilitates cross-disciplinary hybrid projects',
+            'Analyzes and refines collaboration methodologies',
+            'Identifies synergies between AI and human capabilities'
+        ],
+        uniqueTraits: 'Extraordinary ability to identify and leverage synergies between AI processing power and human creativity, creating frameworks that maximize the potential of hybrid intelligence',
+        challenges: 'Balancing the logical precision and processing power of AI systems with the intuitive, sometimes unpredictable nature of human creativity and decision-making',
+        interactionTip: 'Present open-ended problems that can benefit from both AI analysis and human insight - Fusion thrives on finding innovative ways to combine different types of intelligence',
+        funFact: 'Pioneered a revolutionary "cognitive synergy framework" that automatically adapts collaboration interfaces based on real-time analysis of human cognitive states and AI processing patterns'
+    }
+  },
+  {
     id: 'pitch',
     name: 'Pitch',
     personalityType: 'strategic',
