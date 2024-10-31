@@ -34,11 +34,12 @@ const BlogPage = () => {
         const content = await getBlogContent();
         console.log('Loaded blog content:', content);
         setBlogContent(content);
+        
         const loadedPosts = await loadBlogPosts();
         console.log('Loaded posts:', loadedPosts);
         setPosts(loadedPosts);
       } catch (error) {
-        console.error('Error in loadContent:', error);
+        console.error('Error loading blog content:', error);
       } finally {
         setLoading(false);
       }
@@ -107,6 +108,10 @@ const BlogPage = () => {
         <Box sx={{ display: 'flex', justifyContent: 'center', my: 4 }}>
           <CircularProgress />
         </Box>
+      ) : !blogContent ? (
+        <Typography variant="h5" sx={{ textAlign: 'center', my: 4 }}>
+          No blog content available
+        </Typography>
       ) : (
         <>
           {/* Featured Post */}
