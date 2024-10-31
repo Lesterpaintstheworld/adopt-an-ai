@@ -7,7 +7,6 @@ import {
   Box,
   Chip,
   Button,
-  Grid,
   Paper,
 } from '@mui/material';
 import { AI } from '../types/ai';

@@ -4,8 +4,7 @@ import {
   Paper,
   ToggleButton,
   ToggleButtonGroup,
-  Typography,
-  CircularProgress
+  Typography
 } from '@mui/material';
 import { AIEntity } from '../../types/myais';
 import { MYAIS_THEME } from '../../theme/myais';

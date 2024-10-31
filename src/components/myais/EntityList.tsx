@@ -1,7 +1,15 @@
 import React from 'react';
 import {
   Box,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemAvatar,
+  ListItemText,
+  Avatar,
   Typography,
+  Paper,
+  Divider,
   LinearProgress
 } from '@mui/material';
 
@@ -28,19 +36,6 @@ const EntityProgressBar: React.FC<ProgressBarProps> = ({ value, type }) => (
     />
   </Box>
 );
-import {
-  Box,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemAvatar,
-  ListItemText,
-  Avatar,
-  Typography,
-  Paper,
-  Divider,
-  LinearProgress
-} from '@mui/material';
 import { AIEntity } from '../../types/myais';
 import { MYAIS_THEME } from '../../theme/myais';
 
