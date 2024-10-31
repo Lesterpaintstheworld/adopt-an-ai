@@ -158,7 +158,12 @@ const AdoptPage: React.FC = () => {
         <Grid container spacing={3}>
           {filteredAIs.map((ai) => (
             <Grid item key={ai.id} xs={12} md={viewMode === 'grid' ? 6 : 12} lg={viewMode === 'grid' ? 4 : 12}>
-              <AICard ai={ai} viewMode={viewMode} onLearnMore={() => handleLearnMore(ai)} />
+              <AICard 
+                ai={ai} 
+                viewMode={viewMode} 
+                onLearnMore={() => handleLearnMore(ai)}
+                onToggleFavorite={() => {}} // Empty function since favorites aren't used in AdoptPage
+              />
             </Grid>
           ))}
         </Grid>
