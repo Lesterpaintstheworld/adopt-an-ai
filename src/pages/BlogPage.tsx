@@ -16,7 +16,7 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { loadBlogPosts } from '../utils/blogLoader';
 import type { BlogPost, BlogContent } from '../types/blog';
-import blogYaml from '../../content/blog/blog.yml';
+import { getBlogContent } from '../utils/blogLoader';
 
 const BlogPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -24,7 +24,7 @@ const BlogPage = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const blogContent = blogYaml as BlogContent;
+  const blogContent = getBlogContent();
 
   useEffect(() => {
     loadBlogPosts().then(loadedPosts => {
