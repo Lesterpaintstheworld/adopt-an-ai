@@ -460,57 +460,57 @@ export const TechTreePage = () => {
           transformOrigin: 'top left',
         }}
       >
-      <Box
-        sx={{
-          position: 'relative',
-          width: (Object.values(techTree).reduce((acc: number, phase: any) => 
-            acc + calculatePhaseWidth(phase), 0) + 300),
-          height: 2000,
-          p: 4,
-          minWidth: '16000px',
-        }}
-      >
-        <ConnectionLines 
-          positions={positions} 
-          items={allItems}
-          highlightedItem={highlightedItem}
-        />
-        
-        {allItems.map((item) => (
-          <TechItem
-            key={item.name}
-            item={item}
-            phase={item.phase}
-            position={positions[item.name] || { x: 0, y: 0 }}
-            onHover={setHighlightedItem}
+        <Box
+          sx={{
+            position: 'relative',
+            width: (Object.values(techTree).reduce((acc: number, phase: any) => 
+              acc + calculatePhaseWidth(phase), 0) + 300),
+            height: 2000,
+            p: 4,
+            minWidth: '16000px',
+          }}
+        >
+          <ConnectionLines 
+            positions={positions} 
+            items={allItems}
             highlightedItem={highlightedItem}
           />
-        ))}
-        
-        {/* Phase headers */}
-        {Object.entries(techTree).map(([phaseKey, phaseData]: [string, any], index) => {
-          const previousPhases = Object.values(techTree).slice(0, index);
-          const xPosition = previousPhases.reduce((acc: number, phase: any) => {
-            return acc + calculatePhaseWidth(phase);
-          }, 0);
           
-          return (
-            <Typography
-              key={phaseKey}
-              variant="h5"
-              sx={{
-                position: 'absolute',
-                left: xPosition + PHASE_START_PADDING,
-                top: 20,
-                width: 280,
-                textAlign: 'center',
-              }}
-            >
-              {phaseData.name} ({phaseData.period})
-            </Typography>
-          );
-        })}
-      </Box>
+          {allItems.map((item) => (
+            <TechItem
+              key={item.name}
+              item={item}
+              phase={item.phase}
+              position={positions[item.name] || { x: 0, y: 0 }}
+              onHover={setHighlightedItem}
+              highlightedItem={highlightedItem}
+            />
+          ))}
+          
+          {/* Phase headers */}
+          {Object.entries(techTree).map(([phaseKey, phaseData]: [string, any], index) => {
+            const previousPhases = Object.values(techTree).slice(0, index);
+            const xPosition = previousPhases.reduce((acc: number, phase: any) => {
+              return acc + calculatePhaseWidth(phase);
+            }, 0);
+            
+            return (
+              <Typography
+                key={phaseKey}
+                variant="h5"
+                sx={{
+                  position: 'absolute',
+                  left: xPosition + PHASE_START_PADDING,
+                  top: 20,
+                  width: 280,
+                  textAlign: 'center',
+                }}
+              >
+                {phaseData.name} ({phaseData.period})
+              </Typography>
+            );
+          })}
+        </Box>
       </Box>
     </>
   );
