@@ -1,18 +1,4 @@
 import React from 'react';
-
-const formatResourceRequirements = (resources: any): string => {
-  console.log('Resource requirements type:', typeof resources, 'value:', resources);
-  
-  if (typeof resources === 'string') {
-    return `${resources.charAt(0).toUpperCase()}${resources.slice(1)} resources`;
-  }
-  
-  if (resources && typeof resources === 'object') {
-    return `${String(resources).charAt(0).toUpperCase()}${String(resources).slice(1)} resources`;
-  }
-  
-  return 'Unknown resources';
-};
 import {
   Card,
   CardContent,
@@ -25,6 +11,11 @@ import {
   Paper,
 } from '@mui/material';
 import { AI } from '../types/ai';
+
+const formatResourceRequirements = (resources: string): string => {
+  if (!resources) return 'Unknown resources';
+  return `${resources.charAt(0).toUpperCase()}${resources.slice(1)} resources`;
+};
 
 interface AICardProps {
   ai: AI;
