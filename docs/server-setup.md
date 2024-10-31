@@ -63,7 +63,49 @@ npm run build
 npm run preview
 ```
 
-5. Ensure your production server:
+5. For nginx deployment, use this configuration:
+```nginx
+server {
+    listen 80;
+    server_name your-domain.com;  # Replace with your domain
+
+    root /var/www/raise-an.ai/dist;  # Path to your dist folder
+    index index.html;
+
+    # Handle Single Page Application routing
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    # Specific handling for Vite assets
+    location /assets/ {
+        expires 1y;
+        add_header Cache-Control "public, no-transform";
+        try_files $uri =404;
+    }
+
+    # Handle Vite's SVG favicon
+    location = /vite.svg {
+        expires 1y;
+        add_header Cache-Control "public, no-transform";
+    }
+
+    # Security headers
+    add_header X-Frame-Options "SAMEORIGIN";
+    add_header X-XSS-Protection "1; mode=block";
+    add_header X-Content-Type-Options "nosniff";
+
+    # Enable gzip compression
+    gzip on;
+    gzip_vary on;
+    gzip_min_length 10240;
+    gzip_proxied expired no-cache no-store private auth;
+    gzip_types text/plain text/css text/xml text/javascript application/x-javascript application/xml application/javascript;
+    gzip_disable "MSIE [1-6]\.";
+}
+```
+
+6. Ensure your production server:
    - Has HTTPS configured
    - Has proper CORS settings
    - Serves the correct environment variables
