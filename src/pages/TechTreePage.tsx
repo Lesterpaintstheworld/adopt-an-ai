@@ -496,6 +496,5 @@ export const TechTreePage = () => {
           })}
         </Box>
       </Box>
-    </>
   );
 };
