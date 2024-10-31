@@ -424,7 +424,11 @@ const TechTreePage = () => {
   );
 
   return (
-    <Box sx={{ height: '100vh', overflow: 'hidden' }}>
+    <Box sx={{ 
+      height: '100vh', 
+      overflow: 'hidden',
+      paddingTop: '64px'
+    }}>
       <Header />
       <Box
         ref={containerRef}

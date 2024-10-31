@@ -3,7 +3,13 @@ import { Link as RouterLink } from 'react-router-dom';
 
 export const Header = () => {
   return (
-    <AppBar position="static">
+    <AppBar 
+      position="fixed"
+      sx={{
+        zIndex: (theme) => theme.zIndex.drawer + 1,
+        backgroundColor: 'background.paper',
+      }}
+    >
       <Toolbar>
         <Typography 
           variant="h6" 
