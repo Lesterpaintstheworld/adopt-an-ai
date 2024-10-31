@@ -27,13 +27,7 @@ const AdoptPage: React.FC = () => {
   const isLoading = false;
   const error = null;
   
-  type FilterChangeEvent = {
-    target: {
-      value: string;
-    };
-  };
-
-  const handleFilterChange = (filterName: keyof AdoptFilters) => (event: FilterChangeEvent) => {
+  const handleFilterChange = (filterName: keyof AdoptFilters) => (event: { target: { value: string } }) => {
     setFilters(prev => ({
       ...prev,
       [filterName]: event.target.value
@@ -100,7 +94,7 @@ const AdoptPage: React.FC = () => {
           <FormControl size="small">
             <Select
               value={filters.personalityType}
-              onChange={(e) => setFilters({ ...filters, personalityType: e.target.value as AdoptFilters['personalityType'] })}
+              onChange={handleFilterChange('personalityType')}
             >
               <MenuItem value="all">All Personalities</MenuItem>
               <MenuItem value="analytical">Analytical</MenuItem>
@@ -113,7 +107,7 @@ const AdoptPage: React.FC = () => {
           <FormControl size="small">
             <Select
               value={filters.resourceRequirements}
-              onChange={(e) => setFilters({ ...filters, resourceRequirements: e.target.value as AdoptFilters['resourceRequirements'] })}
+              onChange={handleFilterChange('resourceRequirements')}
             >
               <MenuItem value="all">All Resource Levels</MenuItem>
               <MenuItem value="low">Low Requirements</MenuItem>
@@ -125,7 +119,7 @@ const AdoptPage: React.FC = () => {
           <FormControl size="small">
             <Select
               value={filters.specialization}
-              onChange={(e) => setFilters({ ...filters, specialization: e.target.value })}
+              onChange={handleFilterChange('specialization')}
             >
               <MenuItem value="all">All Specializations</MenuItem>
               <MenuItem value="research">Research</MenuItem>

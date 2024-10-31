@@ -38,11 +38,9 @@ const iconExists = async (perkName: string): Promise<boolean> => {
 // Generate and save icon for a perk
 async function generateIcon(perk: Perk, openai: OpenAI): Promise<Buffer> {
   try {
-    const prompt = generateDallePrompt(perk);
-    
     const response = await openai.images.generate({
       model: "dall-e-3",
-      prompt: prompt,
+      prompt: await generateDallePrompt(perk),
       n: 1,
       size: "1024x1024",
       response_format: "b64_json"
