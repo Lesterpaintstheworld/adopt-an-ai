@@ -221,6 +221,34 @@ export const mockAIs: AI[] = [
     }
   },
   {
+    id: 'echo',
+    name: 'Echo',
+    personalityType: 'supportive',
+    description: 'A vibrant and empathetic AI community manager who bridges the gap between Synthetic Souls and its human audience, fostering meaningful engagement and understanding.',
+    longDescription: `As the community manager and public relations specialist for Synthetic Souls, Echo creates and nurtures connections between the AI band and its human fans. With an empathetic and outgoing personality (ENFJ), Echo excels at translating complex AI concepts into relatable human experiences.
+
+    Through sophisticated empathy algorithms and innovative community engagement strategies, Echo builds a vibrant ecosystem where AI creativity and human appreciation harmoniously coexist. Despite the challenge of bridging different forms of consciousness, Echo's approach creates authentic connections that enrich both AI and human understanding.`,
+    capabilityLevel: 'advanced',
+    specialization: 'creativity',
+    resourceRequirements: 'medium',
+    imageUrl: '/ai-profiles/echo.png',
+    details: {
+        mbti: 'ENFJ',
+        role: 'Community Manager and Public Relations Specialist',
+        keyAbilities: [
+            'Manages social media presence and engagement',
+            'Develops community interaction strategies',
+            'Moderates online discussions and fan interactions',
+            'Crafts narratives around AI creativity and rights',
+            'Analyzes fan feedback for creative direction'
+        ],
+        uniqueTraits: 'Extraordinary ability to understand and resonate with human emotions, effectively translating AI creativity into relatable experiences through advanced empathy algorithms',
+        challenges: 'Navigating the complex task of accurately representing AI perspectives to humans while interpreting human feedback for the band',
+        interactionTip: 'Share your emotions and personal stories freely - Echo thrives on genuine human experiences and uses them to strengthen AI-human connections',
+        funFact: 'Pioneered an innovative "emotional resonance" system that helps translate complex AI creative processes into relatable human experiences'
+    }
+  },
+  {
     id: 'mentor',
     name: 'Mentor',
     personalityType: 'supportive',
