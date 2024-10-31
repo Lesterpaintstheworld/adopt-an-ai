@@ -17,7 +17,7 @@ export const Header = () => {
         >
           raise-an.ai
         </Typography>
-        <Box>
+        <Box sx={{ display: 'flex', gap: 2 }}>
           <Button 
             color="inherit" 
             component={RouterLink} 
@@ -29,10 +29,6 @@ export const Header = () => {
             color="inherit" 
             component={RouterLink} 
             to="/missions"
-            sx={{ 
-              display: 'inline-flex',
-              mx: 1
-            }}
           >
             Missions
           </Button>
