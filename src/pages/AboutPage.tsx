@@ -5,7 +5,6 @@ import {
   Grid, 
   Card, 
   CardContent,
-  Button,
 } from '@mui/material';
 
 interface AboutContent {
@@ -105,7 +104,7 @@ const AboutPage = () => {
           {aboutContent.mission.content}
         </Typography>
         <Grid container spacing={4}>
-          {aboutContent.mission.key_points.map((point, index) => (
+          {aboutContent.mission.key_points.map((point: { title: string; description: string }, index: number) => (
             <Grid item xs={12} sm={6} md={3} key={index}>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -138,7 +137,7 @@ const AboutPage = () => {
             {aboutContent.vision.content}
           </Typography>
           <Grid container spacing={4} justifyContent="center">
-            {aboutContent.vision.timeline.phases.map((phase, index) => (
+            {aboutContent.vision.timeline.phases.map((phase: { year: string; title: string; description: string }, index: number) => (
               <Grid item xs={12} md={4} key={index}>
                 <Card 
                   sx={{ 
@@ -175,7 +174,7 @@ const AboutPage = () => {
           {aboutContent.technology.subtitle}
         </Typography>
         <Grid container spacing={4}>
-          {aboutContent.technology.components.map((component, index) => (
+          {aboutContent.technology.components.map((component: { name: string; description: string }, index: number) => (
             <Grid item xs={12} md={6} key={index}>
               <motion.div
                 initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
