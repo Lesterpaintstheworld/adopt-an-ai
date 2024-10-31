@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import MainLayout from '../components/layout/MainLayout';
+import { MainLayout } from '../components/layout/MainLayout';
 import AICard from '../components/AICard';
 import { AI, AdoptFilters } from '../types/ai';
 import { mockAIs } from '../data/mockAIs';
