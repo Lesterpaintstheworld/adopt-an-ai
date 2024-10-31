@@ -125,28 +125,72 @@ def save_profile_pic(image_data: bytes, ai_name: str):
 def extract_mock_ais():
     """Extract AI data from mockAIs.ts file."""
     try:
+        print("Reading mockAIs.ts file...")
         with open(MOCK_AIS_PATH, 'r', encoding='utf-8') as f:
             content = f.read()
-            
+        
+        print("File contents length:", len(content))
+        
         # Extract the array content between square brackets
         start = content.find('[')
         end = content.rfind(']') + 1
         if start == -1 or end == 0:
             raise ValueError("Could not find AI data array in mockAIs.ts")
             
-        # Convert TypeScript object to Python string
-        array_content = content[start:end]
-        # Replace TypeScript/JavaScript specific syntax with Python syntax
-        array_content = array_content.replace('true', 'True')
-        array_content = array_content.replace('false', 'False')
-        array_content = array_content.replace('null', 'None')
+        print(f"Found array content from position {start} to {end}")
         
-        # Use eval to parse the array (safe in this context since we control the input file)
-        ais = eval(array_content)
-        return ais
+        # Get the array content
+        array_content = content[start:end]
+        
+        # Split into individual AI objects
+        ai_objects = []
+        current_depth = 0
+        current_object = ""
+        
+        for char in array_content:
+            if char == '{':
+                current_depth += 1
+                current_object += char
+            elif char == '}':
+                current_depth -= 1
+                current_object += char
+                if current_depth == 0:
+                    # Clean and parse the object
+                    cleaned_object = (
+                        current_object
+                        .replace('\n', '')
+                        .replace('true', 'True')
+                        .replace('false', 'False')
+                        .replace('null', 'None')
+                        .strip()
+                        .strip(',')
+                    )
+                    try:
+                        # Convert the cleaned object string to a dictionary
+                        obj_dict = {}
+                        # Extract key-value pairs
+                        pairs = cleaned_object.strip('{}').split(',')
+                        for pair in pairs:
+                            if ':' in pair:
+                                key, value = pair.split(':', 1)
+                                key = key.strip().strip("'").strip('"')
+                                value = value.strip().strip("'").strip('"')
+                                obj_dict[key] = value
+                        ai_objects.append(obj_dict)
+                    except Exception as e:
+                        print(f"Error parsing object: {e}")
+                    current_object = ""
+            elif current_depth > 0:
+                current_object += char
+        
+        print(f"Successfully parsed {len(ai_objects)} AI objects")
+        return ai_objects
         
     except Exception as e:
         print(f"Error parsing mockAIs.ts: {str(e)}")
+        print(f"Exception type: {type(e)}")
+        import traceback
+        traceback.print_exc()
         return []
 
 async def main():
