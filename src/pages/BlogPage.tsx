@@ -18,7 +18,7 @@ import { loadBlogPosts } from '../utils/blogLoader';
 import type { BlogPost, BlogContent } from '../types/blog';
 import blogYaml from '../../content/blog/blog.yml';
 
-export const BlogPage = () => {
+const BlogPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -186,3 +186,5 @@ export const BlogPage = () => {
     </Container>
   );
 };
+
+export default BlogPage;
