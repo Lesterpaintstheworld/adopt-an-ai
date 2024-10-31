@@ -31,9 +31,9 @@ function App() {
             <Route path="/missions" element={<MissionsPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:slug" element={<BlogPostPage />} />
-            <Route path="adopt" element={<AdoptPage />} />
-            <Route path="my-ais" element={<MyAIsPage />} />
-            <Route path="pricing" element={<PricingPage />} />
+            <Route path="/adopt" element={<AdoptPage />} />
+            <Route path="/my-ais" element={<MyAIsPage />} />
+            <Route path="/pricing" element={<PricingPage />} />
             <Route path="*" element={
               <div style={{ padding: '20px' }}>
                 <h1>404 - Page Not Found</h1>
