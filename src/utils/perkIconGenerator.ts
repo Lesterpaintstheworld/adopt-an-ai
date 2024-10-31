@@ -36,7 +36,7 @@ const iconExists = async (perkName: string): Promise<boolean> => {
 };
 
 // Generate and save icon for a perk
-async function generateIcon(perk: Perk): Promise<Buffer> {
+async function generateIcon(perk: Perk, openai: OpenAI): Promise<Buffer> {
   try {
     const prompt = generateDallePrompt(perk);
     
@@ -72,7 +72,7 @@ export async function generateAndSaveIcon(perk: Perk, openai: OpenAI): Promise<s
     }
 
     console.log(`Generating icon for ${perk.name}...`);
-    const imageBuffer = await generateIcon(perk);
+    const imageBuffer = await generateIcon(perk, openai);
     console.log(`Writing icon to ${iconPath}...`);
     await fs.writeFile(iconPath, imageBuffer);
     return iconPath;
