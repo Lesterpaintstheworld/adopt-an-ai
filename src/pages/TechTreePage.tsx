@@ -424,7 +424,7 @@ const TechTreePage = () => {
   );
 
   return (
-    <>
+    <Box sx={{ height: '100vh', overflow: 'hidden' }}>
       <Header />
       <Box
         ref={containerRef}
@@ -439,7 +439,7 @@ const TechTreePage = () => {
           width: '200vw',
           height: 'calc(200vh - 128px)',
           bgcolor: 'transparent',
-          zIndex: 2,
+          zIndex: 1,
           transform: 'scale(0.5)',
           transformOrigin: 'top left',
         }}
@@ -500,7 +500,7 @@ const TechTreePage = () => {
           })}
         </Box>
       </Box>
-    </>
+    </Box>
   );
 };
 
