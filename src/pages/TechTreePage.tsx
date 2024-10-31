@@ -412,7 +412,7 @@ const TechTreePage = () => {
   const allItems = Object.entries(techTree as TechTree).flatMap(([phaseKey, phaseData]: [string, PhaseData]) =>
     Object.entries(phaseData)
       .filter(([key]) => !['name', 'period', 'description'].includes(key))
-      .flatMap(([layerKey, items]: [string, any]) => {
+      .flatMap(([_, items]: [string, any]) => {
         // Sort items within each layer by chronological order
         const sortedItems = [...items].sort(sortByChronologicalOrder);
         return sortedItems.map((item: any) => ({ ...item, phase: phaseKey }));

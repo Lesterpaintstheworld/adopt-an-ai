@@ -16,7 +16,7 @@ import {
 import ViewModuleIcon from '@mui/icons-material/ViewModule';
 import ViewListIcon from '@mui/icons-material/ViewList';
 import AICard from '../components/AICard';
-import { AI, AdoptFilters } from '../types/ai';
+import { AdoptFilters } from '../types/ai';
 import { mockAIs } from '../data/mockAIs';
 import { filterAIs } from '../utils/filterAIs';
 

@@ -11,7 +11,7 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
 // Import your about content
-import { AboutContent } from '../../types/about';
+import { AboutContent } from '../types/about';
 import aboutContent from '../../content/website/about.yml';
 
 const AboutPage = () => {
