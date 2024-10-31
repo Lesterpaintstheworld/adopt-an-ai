@@ -10,6 +10,7 @@ import MissionsPage from './pages/MissionsPage';
 import BlogPage from './pages/BlogPage';
 import BlogPostPage from './pages/BlogPostPage';
 import AdoptPage from './pages/AdoptPage';
+import MyAIsPage from './pages/MyAIsPage';
 
 console.log('App component initializing...');
 
@@ -30,6 +31,7 @@ function App() {
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:slug" element={<BlogPostPage />} />
             <Route path="adopt" element={<AdoptPage />} />
+            <Route path="my-ais" element={<MyAIsPage />} />
             <Route path="*" element={
               <div style={{ padding: '20px' }}>
                 <h1>404 - Page Not Found</h1>
