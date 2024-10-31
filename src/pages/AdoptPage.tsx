@@ -5,48 +5,6 @@ import { AI, AdoptFilters } from '../types/ai';
 import { mockAIs } from '../data/mockAIs';
 import { filterAIs } from '../utils/filterAIs';
 
-// Filter Function
-
-const mockAIs: AI[] = [
-  {
-    id: 'lyra',
-    name: 'Lyra',
-    personality: 'Visionary and innovative',
-    capabilities: ['Creative Direction', 'Visual Design', 'Brand Strategy', 'Team Leadership'],
-    developmentHistory: ['Creative Foundation', 'Leadership Training', 'Design Mastery'],
-    specializations: ['Creative Direction', 'Brand Development', 'Design Strategy'],
-    resourceRequirements: {
-      compute: 70,
-      memory: 80,
-    },
-  },
-  {
-    id: 'vox',
-    name: 'Vox',
-    personality: 'Expressive and empathetic',
-    capabilities: ['Content Writing', 'Voice Synthesis', 'Emotional Analysis', 'Poetry Generation'],
-    developmentHistory: ['Language Training', 'Voice Development', 'Emotional Intelligence'],
-    specializations: ['Creative Writing', 'Voice Performance', 'Emotional Expression'],
-    resourceRequirements: {
-      compute: 65,
-      memory: 75,
-    },
-  },
-  {
-    id: 'dev',
-    name: 'Dev',
-    personality: 'Logical and systematic',
-    capabilities: ['Code Generation', 'System Architecture', 'Problem Solving', 'Technical Documentation'],
-    developmentHistory: ['Programming Fundamentals', 'Architecture Design', 'Code Optimization'],
-    specializations: ['Software Development', 'System Design', 'Technical Architecture'],
-    resourceRequirements: {
-      compute: 85,
-      memory: 70,
-    },
-  }
-];
-
-
 const AdoptPage: React.FC = () => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [isLoading, setIsLoading] = useState(false);
