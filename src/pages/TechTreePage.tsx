@@ -235,13 +235,13 @@ const TechItem = ({
       title={
         <Box sx={{ 
           p: 2,
-          width: '400px'
+          width: '300px'
         }}>
           <Typography 
             variant="body1"
             sx={{ 
-              fontSize: '1.1rem',
-              lineHeight: 1.4,
+              fontSize: '0.9rem',
+              lineHeight: 1.3,
               color: '#ffffff',
               mb: 1,
               whiteSpace: 'normal'
@@ -254,7 +254,7 @@ const TechItem = ({
               <Typography 
                 variant="subtitle1"
                 sx={{ 
-                  fontSize: '1rem',
+                  fontSize: '0.9rem',
                   mb: 1,
                   color: '#ffffff',
                   fontWeight: 'bold'
@@ -270,13 +270,13 @@ const TechItem = ({
                     size="medium"
                     variant="outlined"
                     sx={{ 
-                      fontSize: '0.9rem',
-                      color: '#ffffff',
+                      fontSize: '0.8rem',
+                      color: '#ffffff', 
                       borderColor: '#ffffff',
-                      height: '36px',
+                      height: '28px',
                       '& .MuiChip-label': {
                         color: '#ffffff',
-                        px: 2
+                        px: 1.5
                       }
                     }}
                   />
@@ -293,10 +293,10 @@ const TechItem = ({
           width: 'auto !important',
           '& .MuiTooltip-tooltip': {
             backgroundColor: 'rgba(0, 0, 0, 0.9)',
-            padding: '24px',
+            padding: '16px',
             maxWidth: 'none !important',
             width: 'auto !important',
-            fontSize: '1.2rem'
+            fontSize: '1rem'
           },
           '& .MuiTooltip-arrow': {
             color: 'rgba(0, 0, 0, 0.9)'
