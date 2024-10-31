@@ -51,10 +51,23 @@ npm run preview -- --host 0.0.0.0 --port 3000
 npm run build
 ```
 
-2. Preview the production build:
+2. The build process will create a `dist` directory containing the optimized production files.
+
+3. Deploy the contents of the `dist` directory to your web server. Common options:
+   - Upload to a static hosting service (Netlify, Vercel, GitHub Pages)
+   - Copy to an nginx/Apache web server directory
+   - Deploy to a cloud service (AWS S3, Google Cloud Storage)
+
+4. Before deploying to production, verify the build:
 ```bash
 npm run preview
 ```
+
+5. Ensure your production server:
+   - Has HTTPS configured
+   - Has proper CORS settings
+   - Serves the correct environment variables
+   - Has proper cache headers for static assets
 
 ## Common Issues and Solutions
 
