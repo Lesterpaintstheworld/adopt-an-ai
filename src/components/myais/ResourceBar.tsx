@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component, ErrorInfo, ReactNode } from 'react';
 import {
   AppBar,
   Box,
