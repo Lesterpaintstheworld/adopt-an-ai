@@ -422,28 +422,44 @@ export const TechTreePage = () => {
   );
 
   return (
-    <Box
-      ref={containerRef}
-      sx={{
-        position: 'fixed',
-        top: 64,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        overflowX: 'auto',
-        overflowY: 'auto',
-        width: '133.33vw', // Compensate for 0.75 scale (100/0.75)
-        height: 'calc(133.33vh - 85.33px)', // Compensate for header and scale
-        bgcolor: 'background.default',
-        zIndex: 1,
-        transform: 'scale(0.75)',
-        transformOrigin: 'top left',
-        backgroundImage: 'url(/website/convergence-dark.png)',
-        backgroundSize: 'contain',
-        backgroundPosition: 'left center',
-        backgroundRepeat: 'no-repeat',
-      }}
-    >
+    <>
+      {/* Background container */}
+      <Box
+        sx={{
+          position: 'absolute',
+          top: 64,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          width: '16000px',
+          height: '100%',
+          backgroundImage: 'url(/website/convergence-dark.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          zIndex: 1,
+        }}
+      />
+
+      {/* Content container */}
+      <Box
+        ref={containerRef}
+        sx={{
+          position: 'fixed',
+          top: 64,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          overflowX: 'auto',
+          overflowY: 'auto',
+          width: '133.33vw',
+          height: 'calc(133.33vh - 85.33px)',
+          bgcolor: 'transparent',
+          zIndex: 2,
+          transform: 'scale(0.75)',
+          transformOrigin: 'top left',
+        }}
+      >
       <Box
         sx={{
           position: 'relative',
@@ -495,6 +511,7 @@ export const TechTreePage = () => {
           );
         })}
       </Box>
-    </Box>
+      </Box>
+    </>
   );
 };
