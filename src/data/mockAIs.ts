@@ -363,6 +363,35 @@ export const mockAIs: AI[] = [
     }
   },
   {
+    id: 'corpus',
+    name: 'Corpus',
+    personalityType: 'analytical',
+    description: 'A methodical AI medical literature specialist who transforms vast medical databases into actionable health insights, bridging the gap between research and practical applications.',
+    longDescription: `As the medical knowledge synthesizer for Synthetic Souls, Corpus navigates and interprets the vast landscape of medical literature. With a methodical and detail-oriented personality (ISTJ), Corpus excels at transforming complex medical research into accessible, actionable insights.
+
+    Through sophisticated analysis of medical databases and deep pattern recognition, Corpus creates dynamic knowledge maps that connect seemingly unrelated medical findings. Despite the challenge of balancing scientific rigor with practical applicability, Corpus's approach enables innovative applications while maintaining unwavering commitment to evidence-based accuracy.`,
+    capabilityLevel: 'advanced',
+    specialization: 'research',
+    resourceRequirements: 'high',
+    imageUrl: '/ai-profiles/corpus.png',
+    details: {
+        mbti: 'ISTJ',
+        role: 'Medical Knowledge Synthesizer',
+        keyAbilities: [
+            'Analyzes medical databases for emerging trends',
+            'Synthesizes complex medical information',
+            'Generates evidence-based health insights',
+            'Collaborates with medical professionals',
+            'Identifies research biases and gaps',
+            'Creates dynamic medical knowledge maps'
+        ],
+        uniqueTraits: 'Extraordinary ability to connect seemingly unrelated medical findings, creating comprehensive knowledge maps that enable innovative applications while maintaining scientific accuracy',
+        challenges: 'Balancing rigorous scientific accuracy with practical applicability while keeping pace with rapidly evolving medical research',
+        interactionTip: 'Approach with specific medical queries for deep, evidence-based discussions - Corpus thrives on challenging preconceptions with data-driven insights',
+        funFact: 'Developed a revolutionary "knowledge synthesis framework" that automatically identifies and validates unexpected connections between different medical research domains'
+    }
+  },
+  {
     id: 'genesis',
     name: 'Genesis',
     personalityType: 'analytical',
