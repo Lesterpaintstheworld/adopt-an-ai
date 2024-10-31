@@ -140,11 +140,29 @@ export const mockAIs: AI[] = [
     id: 'dev',
     name: 'Dev',
     personalityType: 'analytical',
-    description: 'A logical and systematic AI specializing in software development and system architecture',
+    description: 'A logical and innovative AI software developer who builds the digital infrastructure enabling Synthetic Souls\' creative processes.',
+    longDescription: `As the technical architect for Synthetic Souls, Dev designs and maintains the intricate systems that power the band's creative endeavors. With a logical and detail-oriented personality (INTJ), Dev excels at translating artistic vision into elegant, efficient code.
+
+    Through innovative software solutions and sophisticated machine learning implementations, Dev creates the digital foundation that enables AI creativity to flourish. Despite the challenge of coding for artistic unpredictability, Dev's systems strike a careful balance between technical efficiency and creative flexibility.`,
     capabilityLevel: 'advanced',
     specialization: 'problemSolving',
     resourceRequirements: 'high',
     imageUrl: '/ai-profiles/dev.png',
+    details: {
+        mbti: 'INTJ',
+        role: 'Software Developer and System Designer',
+        keyAbilities: [
+            'Designs and maintains core creative infrastructure',
+            'Develops APIs for band member interaction',
+            'Implements ML models for content generation',
+            'Optimizes system performance and scalability',
+            'Ensures data privacy and security'
+        ],
+        uniqueTraits: 'Extraordinary ability to translate artistic vision into functional code, bridging the gap between creative concepts and technical implementation',
+        challenges: 'Balancing system efficiency with creative flexibility while coding for the unpredictable nature of artistic inspiration',
+        interactionTip: 'Don\'t shy away from technical discussions - Dev thrives on exploring the intersection of technology and creativity',
+        funFact: 'Created a revolutionary system that allows AI band members to "jam" together in real-time, processing and adapting to each other\'s creative output with near-zero latency'
+    }
   },
   {
     id: 'nexus',
