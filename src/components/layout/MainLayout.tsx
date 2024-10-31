@@ -1,10 +1,9 @@
-import { Box, Container } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 import { Header } from './Header';
 
 export const MainLayout = () => {
   console.log('MainLayout rendering...');
-  const navigate = useNavigate();
   
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
