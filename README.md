@@ -2,6 +2,21 @@
 
 A React-based simulation platform for managing and evolving AI entities.
 
+## Features
+
+- AI Entity Management - Create, monitor and evolve AI entities
+- Resource Management - Balance compute, energy and knowledge resources
+- Evolution Tracking - Monitor AI development across multiple stages
+- Interactive UI - Rich, responsive interface for managing your AI entities
+- DALL-E Integration - Generate unique profile pictures and icons
+
+## Technologies
+
+- React
+- TypeScript
+- Material-UI
+- OpenAI API (DALL-E)
+
 ## Prerequisites
 
 - Node.js (v16 or higher)
