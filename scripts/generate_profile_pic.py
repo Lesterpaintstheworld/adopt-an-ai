@@ -124,10 +124,30 @@ def save_profile_pic(image_data: bytes, ai_name: str):
 
 def extract_mock_ais():
     """Extract AI data from mockAIs.ts file."""
-    # This is a placeholder - you'll need to implement proper TS file parsing
-    # For now, you might want to create a separate JSON file with AI data
-    # or implement proper TypeScript parsing
-    pass
+    try:
+        with open(MOCK_AIS_PATH, 'r', encoding='utf-8') as f:
+            content = f.read()
+            
+        # Extract the array content between square brackets
+        start = content.find('[')
+        end = content.rfind(']') + 1
+        if start == -1 or end == 0:
+            raise ValueError("Could not find AI data array in mockAIs.ts")
+            
+        # Convert TypeScript object to Python string
+        array_content = content[start:end]
+        # Replace TypeScript/JavaScript specific syntax with Python syntax
+        array_content = array_content.replace('true', 'True')
+        array_content = array_content.replace('false', 'False')
+        array_content = array_content.replace('null', 'None')
+        
+        # Use eval to parse the array (safe in this context since we control the input file)
+        ais = eval(array_content)
+        return ais
+        
+    except Exception as e:
+        print(f"Error parsing mockAIs.ts: {str(e)}")
+        return []
 
 async def main():
     try:
@@ -137,23 +157,22 @@ async def main():
         client = OpenAI()
         ensure_profile_directory()
         
-        # For testing, you can use a sample AI
-        sample_ai = {
-            "name": "Vox",
-            "personalityType": "analytical",
-            "specialization": "research",
-            "description": "A highly analytical AI focused on research and data analysis",
-            "capabilityLevel": "advanced"
-        }
+        # Load all AIs from mockAIs.ts
+        ais = extract_mock_ais()
+        print(f"Found {len(ais)} AIs to process")
         
-        try:
-            if not profile_exists(sample_ai['name']):
-                image_data = await generate_profile_pic(client, sample_ai)
-                save_profile_pic(image_data, sample_ai['name'])
-            else:
-                print(f"Profile picture already exists for {sample_ai['name']}, skipping...")
-        except Exception as e:
-            print(f"Failed to generate profile picture for {sample_ai['name']}: {str(e)}")
+        # Process each AI
+        for ai in ais:
+            try:
+                if not profile_exists(ai['name']):
+                    print(f"Generating profile picture for {ai['name']}...")
+                    image_data = await generate_profile_pic(client, ai)
+                    save_profile_pic(image_data, ai['name'])
+                else:
+                    print(f"Profile picture already exists for {ai['name']}, skipping...")
+            except Exception as e:
+                print(f"Failed to generate profile picture for {ai['name']}: {str(e)}")
+                continue
         
         print("Profile picture generation complete!")
         
