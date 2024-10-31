@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import AICard from '../components/AICard';
+import MainLayout from '../components/layout/MainLayout';
 
 // Mock data for AI listings
 const mockAIs: AI[] = [
@@ -179,6 +180,8 @@ const filterAIs = (ais: AI[], filters: AdoptFilters): AI[] => {
 
 const AdoptPage: React.FC = () => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [filters, setFilters] = useState<AdoptFilters>({
     capabilityLevel: 'all',
     personalityType: 'all',
@@ -186,8 +189,21 @@ const AdoptPage: React.FC = () => {
     specialization: 'all',
   });
 
+  if (error) {
+    return (
+      <MainLayout>
+        <div className="p-6 text-red-600">
+          Error loading AI adoption center: {error}
+        </div>
+      </MainLayout>
+    );
+  }
+
+  const filteredAIs = filterAIs(mockAIs, filters);
+
   return (
-    <div className="p-6">
+    <MainLayout>
+      <div className="max-w-7xl mx-auto p-6">
       <header className="mb-6">
         <h1 className="text-3xl font-bold mb-2">AI Adoption Center</h1>
         <p className="text-gray-600">Find your perfect AI companion</p>
@@ -271,19 +287,27 @@ const AdoptPage: React.FC = () => {
       </div>
 
       {/* AI Grid/List View */}
-      {/* AI Grid/List View */}
-      <div
-        className={`${
+      {isLoading ? (
+        <div className="flex justify-center items-center min-h-[400px]">
+          <div className="text-gray-600">Loading AIs...</div>
+        </div>
+      ) : filteredAIs.length === 0 ? (
+        <div className="text-center py-8 text-gray-600">
+          No AIs match your current filters. Try adjusting your criteria.
+        </div>
+      ) : (
+        <div className={`${
           viewMode === 'grid'
             ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'
             : 'flex flex-col gap-4'
-        }`}
-      >
-        {filterAIs(mockAIs, filters).map((ai) => (
-          <AICard key={ai.id} ai={ai} viewMode={viewMode} />
-        ))}
+        }`}>
+          {filteredAIs.map((ai) => (
+            <AICard key={ai.id} ai={ai} viewMode={viewMode} />
+          ))}
+        </div>
+      )}
       </div>
-    </div>
+    </MainLayout>
   );
 };
 
