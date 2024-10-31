@@ -74,7 +74,8 @@ server {
 
     # Handle Single Page Application routing
     location / {
-        try_files $uri $uri/ /index.html;
+        try_files $uri $uri/ /index.html?$args;  # Modified to preserve query parameters
+        add_header Cache-Control "no-cache";      # Added for SPA routes
     }
 
     # Specific handling for Vite assets
