@@ -23,14 +23,23 @@ const BlogPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
+  const [blogContent, setBlogContent] = useState<BlogContent | null>(null);
   const navigate = useNavigate();
-  const blogContent = getBlogContent();
 
   useEffect(() => {
-    loadBlogPosts().then(loadedPosts => {
-      setPosts(loadedPosts);
-      setLoading(false);
-    });
+    const loadContent = async () => {
+      try {
+        const content = await getBlogContent();
+        setBlogContent(content);
+        const loadedPosts = await loadBlogPosts();
+        setPosts(loadedPosts);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error loading blog content:', error);
+        setLoading(false);
+      }
+    };
+    loadContent();
   }, []);
 
   const filteredPosts = posts.filter(post => {

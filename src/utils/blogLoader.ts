@@ -1,12 +1,11 @@
 import { BlogPost, BlogContent } from '../types/blog';
-import blogConfig from '../../../content/website/blog.yml';
 
 export async function loadBlogPosts(): Promise<BlogPost[]> {
   try {
-    const blogContent = blogConfig as BlogContent;
+    const blogConfig = await import('../../content/blog/blog.yml');
+    const blogContent = blogConfig.default as BlogContent;
     const posts = [...blogContent.posts];
     
-    // Add featured post to the list if it exists
     if (blogContent.featured_post) {
       posts.unshift(blogContent.featured_post);
     }
@@ -20,6 +19,7 @@ export async function loadBlogPosts(): Promise<BlogPost[]> {
   }
 }
 
-export function getBlogContent(): BlogContent {
-  return blogConfig as BlogContent;
+export async function getBlogContent(): Promise<BlogContent> {
+  const blogConfig = await import('../../content/blog/blog.yml');
+  return blogConfig.default as BlogContent;
 }
