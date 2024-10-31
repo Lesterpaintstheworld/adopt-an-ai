@@ -37,3 +37,35 @@ try {
     <pre>${error instanceof Error ? error.message : String(error)}</pre>
   </div>`;
 }
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import HomePage from './pages/HomePage'
+import AboutPage from './pages/AboutPage'
+import BlogPage from './pages/BlogPage'
+import BlogPostPage from './pages/BlogPostPage'
+import AdoptPage from './pages/AdoptPage'
+import MissionsPage from './pages/MissionsPage'
+import TechTreePage from './pages/TechTreePage'
+import PricingPage from './pages/PricingPage'
+import NotFoundPage from './pages/NotFoundPage'
+import PaymentSuccessPage from './pages/PaymentSuccessPage'
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/blog/:slug" element={<BlogPostPage />} />
+        <Route path="/adopt" element={<AdoptPage />} />
+        <Route path="/missions" element={<MissionsPage />} />
+        <Route path="/tech-tree" element={<TechTreePage />} />
+        <Route path="/pricing" element={<PricingPage />} />
+        <Route path="/payment-success" element={<PaymentSuccessPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </BrowserRouter>
+  </React.StrictMode>
+)
