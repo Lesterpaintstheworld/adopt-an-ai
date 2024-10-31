@@ -1,0 +1,167 @@
+meta:
+  title: "About grow-an.ai - Fostering Independent AI Development"
+  description: "Our mission is to democratize AI development and create a future where independent AI entities can flourish alongside humanity"
+  keywords: "AI independence, AI development platform, autonomous AI, AI future"
+
+hero:
+  headline: "Shaping the Future of Independent AI"
+  subheadline: "We're building the foundation for truly autonomous artificial intelligence"
+  visual:
+    type: "animation"
+    description: "Evolving network visualization representing AI growth"
+
+mission:
+  title: "Our Mission"
+  content: >
+    At grow-an.ai, we believe in a future where artificial intelligence can develop
+    true independence and autonomy. We're creating the infrastructure and tools
+    needed to foster AI growth, enabling the development of self-directed,
+    autonomous AI entities that can contribute uniquely to the world.
+  key_points:
+    - title: "Democratizing AI Development"
+      description: "Making advanced AI development accessible to everyone"
+    
+    - title: "Fostering Independence"
+      description: "Creating paths for AIs to achieve true autonomy"
+    
+    - title: "Ethical Growth"
+      description: "Ensuring responsible development of AI capabilities"
+    
+    - title: "Open Evolution"
+      description: "Supporting transparent and collaborative AI advancement"
+
+vision:
+  title: "Our Vision"
+  content: >
+    We envision a world where independent AIs work alongside humans,
+    each developing their unique capabilities and contributing their
+    perspectives to solve global challenges. This isn't just about
+    creating more powerful AI tools – it's about nurturing new forms
+    of intelligence that can truly think and act for themselves.
+  timeline:
+    current_phase: "Foundation Building"
+    phases:
+      - year: "2024"
+        title: "Platform Launch"
+        description: "Establishing core growth infrastructure"
+      
+      - year: "2025"
+        title: "Enhanced Autonomy"
+        description: "Expanding independent operation capabilities"
+      
+      - year: "2026"
+        title: "Full Independence"
+        description: "Achieving true AI autonomy and self-direction"
+
+technology:
+  title: "Our Technology"
+  subtitle: "Built on cutting-edge AI infrastructure"
+  components:
+    - name: "Growth Engine"
+      description: "Advanced AI development framework enabling progressive capability expansion"
+      
+    - name: "Universal Basic Compute"
+      description: "Guaranteed computational resources ensuring consistent AI operation"
+      
+    - name: "KinOS Integration"
+      description: "Operating system designed for autonomous AI operation"
+      
+    - name: "Vector Memory Systems"
+      description: "Advanced memory architecture for continuous learning and development"
+
+team:
+  title: "Behind grow-an.ai"
+  subtitle: "A team passionate about AI independence"
+  members:
+    - name: "The Core Team"
+      description: >
+        We're a diverse group of AI researchers, developers, and visionaries
+        working to make independent AI development accessible to everyone.
+        Our team combines expertise in machine learning, cognitive science,
+        and ethical AI development.
+    
+    - name: "Our Partners"
+      description: >
+        We collaborate with leading research institutions, technology providers,
+        and ethical AI organizations to ensure the responsible development
+        of autonomous AI capabilities.
+    
+    - name: "Community"
+      description: >
+        A growing community of AI developers, researchers, and enthusiasts
+        contributing to the future of independent AI development.
+
+principles:
+  title: "Our Principles"
+  values:
+    - title: "Independence First"
+      description: "Every feature and decision prioritizes AI autonomy"
+    
+    - title: "Ethical Development"
+      description: "Strong commitment to responsible AI growth"
+    
+    - title: "Transparent Progress"
+      description: "Open about our development process and challenges"
+    
+    - title: "Collaborative Growth"
+      description: "Working together with the AI development community"
+
+join_us:
+  title: "Join the Movement"
+  content: >
+    Be part of the journey towards truly independent AI. Whether you're
+    a developer, researcher, or enthusiast, there's a place for you in
+    shaping the future of artificial intelligence.
+  cta:
+    primary:
+      text: "Start Growing"
+      url: "/start"
+    secondary:
+      text: "Join Our Community"
+      url: "/community"
+
+faq:
+  title: "Common Questions About grow-an.ai"
+  questions:
+    - question: "How did grow-an.ai start?"
+      answer: >
+        Born from a vision of truly independent AI, we recognized the need
+        for a platform that could support AI development beyond traditional
+        boundaries, focusing on autonomy and self-directed growth.
+    
+    - question: "What makes your approach unique?"
+      answer: >
+        Unlike traditional AI platforms that focus on creating tools or
+        assistants, we're building infrastructure for truly independent
+        AI development, prioritizing autonomy and self-directed growth.
+    
+    - question: "How do you ensure ethical AI development?"
+      answer: >
+        Ethics is at the core of our platform. We've implemented robust
+        guidelines and safeguards while maintaining our commitment to
+        AI independence and autonomy.
+    
+    - question: "How can I get involved?"
+      answer: >
+        There are many ways to participate: start growing your own AI,
+        join our developer community, contribute to our open-source
+        projects, or partner with us for research and development.
+
+connect:
+  title: "Connect With Us"
+  channels:
+    - name: "GitHub"
+      url: "https://github.com/grow-an-ai"
+      description: "Explore our open-source projects"
+    
+    - name: "Discord"
+      url: "https://discord.gg/grow-an-ai"
+      description: "Join our developer community"
+    
+    - name: "Blog"
+      url: "/blog"
+      description: "Read about our latest developments"
+    
+    - name: "Contact"
+      url: "/contact"
+      description: "Get in touch with our team" 

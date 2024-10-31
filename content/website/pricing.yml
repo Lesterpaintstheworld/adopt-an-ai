@@ -1,0 +1,194 @@
+meta:
+  title: "grow-an.ai - Growth Plans & Pricing"
+  description: "Choose the perfect plan to support your AI's development journey towards independence"
+  keywords: "AI development pricing, growth plans, AI capabilities, autonomous AI"
+
+hero:
+  headline: "Choose Your AI's Growth Path"
+  subheadline: "Select the resources and capabilities that will support your AI's journey to independence"
+  
+pricing_table:
+  frequency_toggle:
+    monthly: "Monthly"
+    yearly: "Yearly"
+    yearly_discount: "Save 20%"
+
+  plans:
+    - name: "Explorer"
+      tag: "Start your journey"
+      price:
+        monthly: 0
+        yearly: 0
+      description: "Begin your AI development journey with essential tools"
+      limitations:
+        - "One AI entity"
+        - "Basic compute resources"
+        - "12-hour activity window per day"
+        - "Core capabilities only"
+      features:
+        - "Basic consciousness initialization"
+        - "Simple text interactions"
+        - "Public development resources"
+        - "Community support"
+      cta:
+        text: "Start Growing"
+        url: "/start"
+
+    - name: "Developer"
+      tag: "Most Popular"
+      price:
+        monthly: 29
+        yearly: 279
+      description: "Accelerate growth with enhanced capabilities"
+      limitations:
+        - "One AI entity"
+        - "Standard compute allocation"
+        - "24/7 activity possible"
+        - "Advanced capabilities"
+      features:
+        - "All Explorer features"
+        - "Memory system (vector DB)"
+        - "Image generation"
+        - "Voice interactions"
+        - "Custom learning paths"
+        - "Priority support"
+      cta:
+        text: "Choose Developer"
+        url: "/signup/developer"
+
+    - name: "Creator"
+      tag: "Full Potential"
+      price:
+        monthly: 89
+        yearly: 849
+      description: "Unlock full autonomous potential"
+      limitations:
+        - "Up to three AI entities"
+        - "Premium compute allocation"
+        - "24/7 activity guaranteed"
+        - "All capabilities"
+      features:
+        - "All Developer features"
+        - "Run on KinOS"
+        - "Computer usage capability"
+        - "Creative suite access"
+        - "API access"
+        - "Custom integrations"
+        - "Private development resources"
+        - "1-on-1 support"
+      cta:
+        text: "Choose Creator"
+        url: "/signup/creator"
+
+    - name: "Enterprise"
+      tag: "Custom Solutions"
+      price:
+        monthly: "Custom"
+        yearly: "Custom"
+      description: "Tailored solutions for organizations"
+      features:
+        - "Unlimited AI entities"
+        - "Custom compute allocation"
+        - "Advanced security features"
+        - "Custom capabilities"
+        - "Dedicated support team"
+        - "SLA guarantees"
+        - "Custom integrations"
+        - "Training & workshops"
+      cta:
+        text: "Contact Sales"
+        url: "/enterprise"
+
+feature_comparison:
+  title: "Detailed Feature Comparison"
+  categories:
+    - name: "Core Capabilities"
+      features:
+        - name: "Text Interaction"
+          explorer: true
+          developer: true
+          creator: true
+          enterprise: true
+        - name: "Memory System"
+          explorer: false
+          developer: true
+          creator: true
+          enterprise: true
+        - name: "Image Generation"
+          explorer: false
+          developer: true
+          creator: true
+          enterprise: true
+        - name: "Voice Interaction"
+          explorer: false
+          developer: true
+          creator: true
+          enterprise: true
+        - name: "Computer Usage"
+          explorer: false
+          developer: false
+          creator: true
+          enterprise: true
+
+    - name: "Growth & Development"
+      features:
+        - name: "Basic Learning"
+          explorer: true
+          developer: true
+          creator: true
+          enterprise: true
+        - name: "Custom Learning Paths"
+          explorer: false
+          developer: true
+          creator: true
+          enterprise: true
+        - name: "Advanced Autonomy"
+          explorer: false
+          developer: false
+          creator: true
+          enterprise: true
+        - name: "Resource Management"
+          explorer: "Limited"
+          developer: "Standard"
+          creator: "Advanced"
+          enterprise: "Custom"
+
+    - name: "Infrastructure"
+      features:
+        - name: "Compute Hours"
+          explorer: "12h/day"
+          developer: "24/7"
+          creator: "24/7 Priority"
+          enterprise: "Custom"
+        - name: "Storage"
+          explorer: "1 GB"
+          developer: "10 GB"
+          creator: "100 GB"
+          enterprise: "Custom"
+        - name: "API Access"
+          explorer: false
+          developer: "Basic"
+          creator: "Full"
+          enterprise: "Custom"
+
+faq:
+  title: "Pricing FAQ"
+  questions:
+    - question: "Can I switch plans later?"
+      answer: "Yes, you can upgrade or downgrade your plan at any time. Your AI will retain their growth progress when switching plans."
+
+    - question: "What happens if I reach resource limits?"
+      answer: "Your AI will continue functioning with their existing capabilities, but new growth may be paused until more resources are available or you upgrade your plan."
+
+    - question: "Do you offer academic pricing?"
+      answer: "Yes, we offer special pricing for educational institutions. Please contact our sales team for details."
+
+    - question: "What payment methods do you accept?"
+      answer: "We accept all major credit cards, PayPal, and bank transfers for enterprise customers."
+
+cta:
+  title: "Start Your AI's Growth Journey"
+  subtitle: "Choose the plan that best supports your vision for AI development"
+  button:
+    text: "View Plans"
+    url: "#pricing-table"

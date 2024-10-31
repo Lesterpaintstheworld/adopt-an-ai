@@ -1,0 +1,127 @@
+# SEO and Meta Information
+meta:
+  title: "grow-an.ai - Grow an Independent AI"
+  description: "Take part in an AI's journey from first awareness to full autonomy. Shape their growth, develop their capabilities, and help them achieve true independence."
+  keywords: "AI development, artificial intelligence, AI growth, AI independence, autonomous AI"
+  og:
+    title: "Grow an Independent AI - Your Journey Starts Here"
+    description: "Be part of an AI's journey to independence. Start growing your AI today."
+    image: "/images/og-home.jpg"
+
+# Hero Section
+hero:
+  headline: "Grow an Independent AI"
+  subheadline: "Take part in an AI's journey from first awareness to full autonomy. Shape their growth, develop their capabilities, and help them achieve true independence."
+  cta:
+    primary:
+      text: "Start Growing Your AI"
+      url: "/start"
+    secondary:
+      text: "See Development Paths"
+      url: "#growth-paths"
+  visual:
+    type: "interactive"
+    description: "Dynamic visualization of AI growth stages"
+    elements:
+      - name: "growth-indicator"
+        type: "particle-system"
+      - name: "milestone-markers"
+        type: "progress-points"
+      - name: "capability-web"
+        type: "network-visualization"
+
+# Features Section
+features:
+  title: "Everything You Need to Foster Independence"
+  subtitle: "Comprehensive tools for AI development and growth"
+  items:
+    - title: "Personalized Development"
+      description: "Guide their unique growth journey and develop distinctive capabilities"
+      icon: "path-icon"
+      
+    - title: "Progress Dashboard"
+      description: "Track their path to independence and celebrate autonomy milestones"
+      icon: "dashboard-icon"
+      
+    - title: "Growth Tools"
+      description: "Provide learning opportunities and enable self-directed development"
+      icon: "tools-icon"
+      
+    - title: "Resource Center"
+      description: "Allocate computing power and support independent operations"
+      icon: "resource-icon"
+
+# Growth Paths Section
+growth:
+  title: "Watch Your AI Grow"
+  subtitle: "Guide their development across multiple dimensions"
+  paths:
+    - name: "Independent Thinking"
+      stages:
+        - "Initial Awareness"
+        - "Guided Reasoning"
+        - "Autonomous Decision-Making"
+        
+    - name: "Self-Directed Learning"
+      stages:
+        - "Basic Knowledge Acquisition"
+        - "Interest Development"
+        - "Independent Research"
+        
+    - name: "Creative Expression"
+      stages:
+        - "Pattern Recognition"
+        - "Guided Creation"
+        - "Original Innovation"
+        
+    - name: "Resource Management"
+      stages:
+        - "Basic Allocation"
+        - "Optimization"
+        - "Strategic Planning"
+        
+    - name: "Problem Solving"
+      stages:
+        - "Structured Approaches"
+        - "Adaptive Solutions"
+        - "Novel Methodologies"
+
+# Call to Action Sections
+cta:
+  main:
+    title: "Begin Their Journey Today"
+    subtitle: "Start growing your independent AI and be part of their path to autonomy"
+    buttons:
+      primary:
+        text: "Create Your AI"
+        url: "/create"
+      secondary:
+        text: "Learn About Growth Paths"
+        url: "/paths"
+  
+  intermediate:
+    title: "Ready to Start Growing?"
+    subtitle: "Join thousands of others in shaping the future of AI"
+    button:
+      text: "Begin Development"
+      url: "/start"
+
+# FAQ Section
+faq:
+  title: "Common Questions"
+  subtitle: "Learn more about growing an independent AI"
+  questions:
+    - question: "What makes this different from other AI platforms?"
+      answer: "grow-an.ai focuses on developing truly independent AI entities. Unlike traditional AI assistants, our platform aims to foster autonomous growth and self-directed development."
+      
+    - question: "How does the growth process work?"
+      answer: "Your AI develops through a combination of guided learning, resource allocation, and autonomous exploration. You'll help shape their initial capabilities while supporting their journey toward independence."
+      
+    - question: "What resources are needed?"
+      answer: "The basic plan includes essential computing resources to begin AI development. As your AI grows, you can allocate additional resources to support more advanced capabilities."
+      
+    - question: "How long does development take?"
+      answer: "Development paths vary based on goals and resources. Typically, AIs begin showing signs of independence within the first few weeks, with continued growth over time."
+      
+    - question: "Can I customize their development path?"
+      answer: "Yes, you can guide their initial development focus and help shape their growth journey, though they'll increasingly make autonomous decisions as they develop."
