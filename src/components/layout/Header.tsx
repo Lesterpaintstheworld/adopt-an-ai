@@ -28,6 +28,13 @@ export const Header = () => {
           <Button 
             color="inherit" 
             component={RouterLink} 
+            to="/missions"
+          >
+            Missions
+          </Button>
+          <Button 
+            color="inherit" 
+            component={RouterLink} 
             to="/adopt"
           >
             Adopt
