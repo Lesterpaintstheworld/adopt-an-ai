@@ -2,11 +2,7 @@ import { Box, Container, Typography } from '@mui/material';
 import { Header } from './Header';
 import { Outlet } from 'react-router-dom';
 
-interface MainLayoutProps {
-  children: React.ReactNode;
-}
-
-export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+export const MainLayout = () => {
   console.log('MainLayout rendering...');
   
   return (

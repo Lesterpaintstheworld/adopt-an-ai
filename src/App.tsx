@@ -5,7 +5,7 @@ import { MainLayout } from './components/layout/MainLayout';
 import HomePage from './pages/HomePage';
 import PaymentSuccessPage from './pages/PaymentSuccessPage';
 import EnterpriseContactPage from './pages/EnterpriseContactPage';
-import { TechTreePage } from './pages/TechTreePage';
+import TechTreePage from './pages/TechTreePage';
 import MissionsPage from './pages/MissionsPage';
 import BlogPage from './pages/BlogPage';
 import BlogPostPage from './pages/BlogPostPage';
