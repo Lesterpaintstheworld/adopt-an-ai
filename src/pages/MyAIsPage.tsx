@@ -124,8 +124,9 @@ const MyAIsPage: React.FC = () => {
         <Grid item xs={3}>
           <DetailsPanel
             entity={gameState.aiEntities.find(e => e.id === gameState.selectedAI)}
-            onAction={(actionType, params) => {
+            onAction={(actionType: string, params: { type: string; value: any }) => {
               // Handle AI actions
+              console.log('Action:', actionType, params);
             }}
           />
         </Grid>

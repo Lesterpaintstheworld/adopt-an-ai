@@ -12,8 +12,7 @@ import {
 } from '@mui/material';
 import { AI } from '../types/ai';
 
-const formatResourceRequirements = (resources: any): string => {
-  if (typeof resources !== 'string') return 'Unknown resources';
+const formatResourceRequirements = (resources: 'low' | 'medium' | 'high'): string => {
   return `${resources.charAt(0).toUpperCase()}${resources.slice(1)} resources`;
 };
 

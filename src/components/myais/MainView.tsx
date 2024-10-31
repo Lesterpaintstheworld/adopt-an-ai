@@ -30,7 +30,7 @@ const MainView: React.FC<MainViewProps> = ({
     event: React.MouseEvent<HTMLElement>,
     newView: 'evolution' | 'network' | 'collective' | null
   ) => {
-    if (newView !== null) {
+    if (newView) {
       onViewChange(newView);
     }
   };
