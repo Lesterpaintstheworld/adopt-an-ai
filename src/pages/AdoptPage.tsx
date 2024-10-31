@@ -1,5 +1,20 @@
 import React, { useState } from 'react';
-import { MainLayout } from '../components/layout/MainLayout';
+import {
+  Box,
+  Typography,
+  Button,
+  Select,
+  MenuItem,
+  FormControl,
+  Grid,
+  Container,
+  CircularProgress,
+  Alert,
+  ToggleButton,
+  ToggleButtonGroup
+} from '@mui/material';
+import ViewModuleIcon from '@mui/icons-material/ViewModule';
+import ViewListIcon from '@mui/icons-material/ViewList';
 import AICard from '../components/AICard';
 import { AI, AdoptFilters } from '../types/ai';
 import { mockAIs } from '../data/mockAIs';
@@ -18,128 +33,116 @@ const AdoptPage: React.FC = () => {
     specialization: 'all',
   });
 
-  console.log('mockAIs:', mockAIs);
-  console.log('filters:', filters);
-
   if (error) {
-    console.log('Error state:', error);
     return (
-      <MainLayout>
-        <div className="p-6 text-red-600">
+      <Container>
+        <Alert severity="error" sx={{ mt: 2 }}>
           Error loading AI adoption center: {error}
-        </div>
-      </MainLayout>
+        </Alert>
+      </Container>
     );
   }
 
   const filteredAIs = filterAIs(mockAIs, filters);
-  console.log('filteredAIs:', filteredAIs);
 
   return (
-    <MainLayout>
-      <div className="max-w-7xl mx-auto p-6">
-        <header className="mb-6">
-          <h1 className="text-3xl font-bold mb-2">AI Adoption Center</h1>
-          <p className="text-gray-600">Find your perfect AI companion</p>
-        </header>
+    <Container maxWidth="xl">
+      <Box sx={{ mt: 4, mb: 6 }}>
+        <Typography variant="h2" gutterBottom>
+          AI Adoption Center
+        </Typography>
+        <Typography variant="h5" color="text.secondary">
+          Find your perfect AI companion
+        </Typography>
+      </Box>
 
-        <div className="flex justify-between items-center mb-6">
-          <div className="flex gap-2">
-            <button
-              onClick={() => setViewMode('grid')}
-              className={`px-4 py-2 rounded ${
-                viewMode === 'grid' ? 'bg-blue-500 text-white' : 'bg-gray-200'
-              }`}
-            >
-              Grid
-            </button>
-            <button
-              onClick={() => setViewMode('list')}
-              className={`px-4 py-2 rounded ${
-                viewMode === 'list' ? 'bg-blue-500 text-white' : 'bg-gray-200'
-              }`}
-            >
-              List
-            </button>
-          </div>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 4 }}>
+        <ToggleButtonGroup
+          value={viewMode}
+          exclusive
+          onChange={(e, newMode) => newMode && setViewMode(newMode)}
+          aria-label="view mode"
+        >
+          <ToggleButton value="grid" aria-label="grid view">
+            <ViewModuleIcon />
+          </ToggleButton>
+          <ToggleButton value="list" aria-label="list view">
+            <ViewListIcon />
+          </ToggleButton>
+        </ToggleButtonGroup>
 
-          <div className="flex gap-4">
-            <select
-              className="border rounded p-2"
+        <Box sx={{ display: 'flex', gap: 2 }}>
+          <FormControl size="small">
+            <Select
               value={filters.capabilityLevel}
-              onChange={(e) =>
-                setFilters({ ...filters, capabilityLevel: e.target.value as AdoptFilters['capabilityLevel'] })
-              }
+              onChange={(e) => setFilters({ ...filters, capabilityLevel: e.target.value as AdoptFilters['capabilityLevel'] })}
             >
-              <option value="all">All Capabilities</option>
-              <option value="basic">Basic</option>
-              <option value="intermediate">Intermediate</option>
-              <option value="advanced">Advanced</option>
-            </select>
+              <MenuItem value="all">All Capabilities</MenuItem>
+              <MenuItem value="basic">Basic</MenuItem>
+              <MenuItem value="intermediate">Intermediate</MenuItem>
+              <MenuItem value="advanced">Advanced</MenuItem>
+            </Select>
+          </FormControl>
 
-            <select
-              className="border rounded p-2"
+          <FormControl size="small">
+            <Select
               value={filters.personalityType}
-              onChange={(e) =>
-                setFilters({ ...filters, personalityType: e.target.value as AdoptFilters['personalityType'] })
-              }
+              onChange={(e) => setFilters({ ...filters, personalityType: e.target.value as AdoptFilters['personalityType'] })}
             >
-              <option value="all">All Personalities</option>
-              <option value="analytical">Analytical</option>
-              <option value="creative">Creative</option>
-              <option value="strategic">Strategic</option>
-              <option value="supportive">Supportive</option>
-            </select>
+              <MenuItem value="all">All Personalities</MenuItem>
+              <MenuItem value="analytical">Analytical</MenuItem>
+              <MenuItem value="creative">Creative</MenuItem>
+              <MenuItem value="strategic">Strategic</MenuItem>
+              <MenuItem value="supportive">Supportive</MenuItem>
+            </Select>
+          </FormControl>
 
-            <select
-              className="border rounded p-2"
+          <FormControl size="small">
+            <Select
               value={filters.resourceRequirements}
-              onChange={(e) =>
-                setFilters({ ...filters, resourceRequirements: e.target.value as AdoptFilters['resourceRequirements'] })
-              }
+              onChange={(e) => setFilters({ ...filters, resourceRequirements: e.target.value as AdoptFilters['resourceRequirements'] })}
             >
-              <option value="all">All Resource Levels</option>
-              <option value="low">Low Requirements</option>
-              <option value="medium">Medium Requirements</option>
-              <option value="high">High Requirements</option>
-            </select>
+              <MenuItem value="all">All Resource Levels</MenuItem>
+              <MenuItem value="low">Low Requirements</MenuItem>
+              <MenuItem value="medium">Medium Requirements</MenuItem>
+              <MenuItem value="high">High Requirements</MenuItem>
+            </Select>
+          </FormControl>
 
-            <select
-              className="border rounded p-2"
+          <FormControl size="small">
+            <Select
               value={filters.specialization}
-              onChange={(e) =>
-                setFilters({ ...filters, specialization: e.target.value })
-              }
+              onChange={(e) => setFilters({ ...filters, specialization: e.target.value })}
             >
-              <option value="all">All Specializations</option>
-              <option value="research">Research</option>
-              <option value="creativity">Creativity</option>
-              <option value="problemSolving">Problem Solving</option>
-            </select>
-          </div>
-        </div>
+              <MenuItem value="all">All Specializations</MenuItem>
+              <MenuItem value="research">Research</MenuItem>
+              <MenuItem value="creativity">Creativity</MenuItem>
+              <MenuItem value="problemSolving">Problem Solving</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+      </Box>
 
-        {isLoading ? (
-          <div className="flex justify-center items-center min-h-[400px]">
-            <div className="text-gray-600">Loading AIs...</div>
-          </div>
-        ) : filteredAIs.length === 0 ? (
-          <div className="text-center py-8 text-gray-600">
+      {isLoading ? (
+        <Box sx={{ display: 'flex', justifyContent: 'center', my: 8 }}>
+          <CircularProgress />
+        </Box>
+      ) : filteredAIs.length === 0 ? (
+        <Box sx={{ textAlign: 'center', py: 8 }}>
+          <Typography color="text.secondary">
             No AIs match your current filters. Try adjusting your criteria.
-          </div>
-        ) : (
-          <div className={`${
-            viewMode === 'grid'
-              ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'
-              : 'flex flex-col gap-4'
-          }`}>
-            {filteredAIs.map((ai) => (
-              <AICard key={ai.id} ai={ai} viewMode={viewMode} />
-            ))}
-          </div>
-        )}
-      </div>
-    </MainLayout>
+          </Typography>
+        </Box>
+      ) : (
+        <Grid container spacing={3}>
+          {filteredAIs.map((ai) => (
+            <Grid item key={ai.id} xs={12} md={viewMode === 'grid' ? 6 : 12} lg={viewMode === 'grid' ? 4 : 12}>
+              <AICard ai={ai} viewMode={viewMode} />
+            </Grid>
+          ))}
+        </Grid>
+      )}
+    </Container>
   );
 };
 
