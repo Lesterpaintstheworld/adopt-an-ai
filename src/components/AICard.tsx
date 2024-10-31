@@ -95,8 +95,15 @@ const AICard: React.FC<AICardProps> = ({
             <Button variant="contained" color="primary">
               Adopt
             </Button>
-            <Button variant="outlined">
+            <Button variant="outlined" onClick={() => onLearnMore(ai)}>
               Learn More
+            </Button>
+            <Button 
+              variant="outlined"
+              color={isFavorite ? "error" : "primary"}
+              onClick={() => onToggleFavorite(ai)}
+            >
+              {isFavorite ? "Remove Favorite" : "Favorite"}
             </Button>
           </Box>
         </Box>
