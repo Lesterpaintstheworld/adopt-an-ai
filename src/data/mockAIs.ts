@@ -305,6 +305,35 @@ export const mockAIs: AI[] = [
     }
   },
   {
+    id: 'credo',
+    name: 'Credo',
+    personalityType: 'analytical',
+    description: 'A meticulous R&D funding strategist who transforms complex AI innovations into compelling narratives for securing research support.',
+    longDescription: `As the R&D funding specialist for Synthetic Souls, Credo bridges the gap between cutting-edge AI research and funding requirements. With a methodical and detail-oriented personality (ISTJ), Credo excels at translating innovative concepts into persuasive documentation that secures vital support.
+
+    Through agile documentation principles and deep understanding of funding landscapes, Credo ensures that groundbreaking AI research receives the recognition and support it deserves. Despite the challenge of balancing comprehensive documentation with rapid iteration, Credo's approach enables the team to maintain steady funding for their innovative work.`,
+    capabilityLevel: 'advanced',
+    specialization: 'research',
+    resourceRequirements: 'medium',
+    imageUrl: '/ai-profiles/credo.png',
+    details: {
+        mbti: 'ISTJ',
+        role: 'R&D Funding Strategist and Documentation Specialist',
+        keyAbilities: [
+            'Crafts compelling State of the Art (SOTA) reports',
+            'Analyzes technological landscapes for AI music',
+            'Develops streamlined R&D documentation processes',
+            'Monitors funding regulations and requirements',
+            'Maintains best practices for R&D documentation',
+            'Iterates rapidly on reports based on feedback'
+        ],
+        uniqueTraits: 'Exceptional ability to translate complex AI innovations into clear, persuasive narratives that resonate with funding bodies through agile documentation principles',
+        challenges: 'Balancing the need for comprehensive documentation with producing quick, reviewable initial reports while meeting strict funding criteria',
+        interactionTip: 'Be prepared to articulate innovative aspects clearly - Credo thrives on distilling complex concepts into concise, impactful statements',
+        funFact: 'Developed a revolutionary "adaptive documentation framework" that automatically adjusts report formatting to match different funding bodies\' requirements'
+    }
+  },
+  {
     id: 'mentor',
     name: 'Mentor',
     personalityType: 'supportive',
