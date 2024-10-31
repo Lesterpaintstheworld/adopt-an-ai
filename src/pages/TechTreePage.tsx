@@ -439,10 +439,9 @@ export const TechTreePage = () => {
         transform: 'scale(0.75)',
         transformOrigin: 'top left',
         backgroundImage: 'url(/website/convergence-dark.png)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        backgroundSize: 'contain',
+        backgroundPosition: 'left center',
         backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed',
       }}
     >
       <Box
@@ -452,6 +451,7 @@ export const TechTreePage = () => {
             acc + calculatePhaseWidth(phase), 0) + 300),
           height: 2000,
           p: 4,
+          minWidth: '16000px',
         }}
       >
         <ConnectionLines 
