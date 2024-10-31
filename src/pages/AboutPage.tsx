@@ -62,9 +62,11 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
 // Import your about content
-import aboutContent from '../../content/website/about.yml' as AboutContent;
+import { AboutContent } from '../../types/about';
+import aboutContent from '../../content/website/about.yml';
 
 const AboutPage = () => {
+  const content = aboutContent as AboutContent;
   const navigate = useNavigate();
 
   return (
@@ -86,10 +88,10 @@ const AboutPage = () => {
           transition={{ duration: 0.8 }}
         >
           <Typography variant="h2" component="h1" gutterBottom>
-            {aboutContent.hero.headline}
+            {content.hero.headline}
           </Typography>
           <Typography variant="h5" color="text.secondary" sx={{ mb: 4 }}>
-            {aboutContent.hero.subheadline}
+            {content.hero.subheadline}
           </Typography>
         </motion.div>
       </Box>
@@ -97,7 +99,7 @@ const AboutPage = () => {
       {/* Mission Section */}
       <Box sx={{ my: 8 }}>
         <Typography variant="h3" gutterBottom align="center">
-          {aboutContent.mission.title}
+          {content.mission.title}
         </Typography>
         <Typography variant="body1" sx={{ mb: 4, maxWidth: '800px', mx: 'auto' }}>
           {aboutContent.mission.content}
