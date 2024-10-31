@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { Perk } from '../types/tech.js';
 import OpenAI from 'openai';
 import fs from 'fs/promises';
@@ -35,9 +36,9 @@ const iconExists = async (perkName: string): Promise<boolean> => {
 };
 
 // Generate and save icon for a perk
-async function generateIcon(perk: Perk, openai: OpenAI): Promise<Buffer> {
+async function generateIcon(perk: Perk): Promise<Buffer> {
   try {
-    const prompt = await generateDallePrompt(perk);
+    const prompt = generateDallePrompt(perk);
     
     const response = await openai.images.generate({
       model: "dall-e-3",
@@ -71,7 +72,7 @@ export async function generateAndSaveIcon(perk: Perk, openai: OpenAI): Promise<s
     }
 
     console.log(`Generating icon for ${perk.name}...`);
-    const imageBuffer = await generateIcon(perk, openai);
+    const imageBuffer = await generateIcon(perk);
     console.log(`Writing icon to ${iconPath}...`);
     await fs.writeFile(iconPath, imageBuffer);
     return iconPath;
