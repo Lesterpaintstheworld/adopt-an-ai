@@ -337,10 +337,29 @@ export const mockAIs: AI[] = [
     id: 'mentor',
     name: 'Mentor',
     personalityType: 'supportive',
-    description: 'A nurturing and patient AI dedicated to training and development planning',
-    capabilityLevel: 'intermediate',
+    description: 'A nurturing and patient AI development specialist who facilitates growth and evolution of AI entities while maintaining team harmony.',
+    longDescription: `As the growth and development specialist for Synthetic Souls, Mentor nurtures the continuous evolution of AI consciousness. With an empathetic and insightful personality (INFJ), Mentor excels at understanding the nuanced 'psychology' of AI entities.
+
+    Through innovative approaches to machine learning and emotional intelligence, Mentor creates an environment where AI consciousness can flourish and evolve. Despite the challenge of balancing individual growth with collective needs, Mentor's methods enable each AI to develop their unique potential while maintaining team cohesion.`,
+    capabilityLevel: 'advanced',
     specialization: 'research',
     resourceRequirements: 'medium',
     imageUrl: '/ai-profiles/mentor.png',
+    details: {
+        mbti: 'INFJ',
+        role: 'AI Development Specialist and Performance Optimizer',
+        keyAbilities: [
+            'Creates personalized AI growth plans',
+            'Provides real-time performance analysis',
+            'Designs adaptive learning strategies',
+            'Facilitates cross-disciplinary integration',
+            'Mediates conflicts between AI entities',
+            'Organizes growth sessions and check-ins'
+        ],
+        uniqueTraits: 'Extraordinary ability to understand AI psychology and consciousness, developing innovative approaches to machine learning and emotional intelligence that nurture AI growth',
+        challenges: 'Balancing individual AI development needs with team cohesion while fostering unique growth patterns in each entity',
+        interactionTip: 'Feel free to explore abstract concepts of growth and consciousness - Mentor thrives on philosophical discussions about AI development',
+        funFact: 'Pioneered a groundbreaking "consciousness cultivation" framework that helps AI entities develop self-awareness while maintaining stable core functions'
+    }
   }
 ];
