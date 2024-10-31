@@ -24,40 +24,40 @@ def icon_exists(perk_name: str) -> bool:
     """Check if icon already exists."""
     return (ICONS_DIR / get_perk_icon_filename(perk_name)).exists()
 
-async def generate_dalle_prompt(perk, client: OpenAI):
+async def generate_dalle_prompt(ai, client: OpenAI):
     """Generate DALL-E prompt using GPT-4."""
-    # Prepare all available perk information
-    perk_info = {
-        'name': perk['name'],
-        'tag': perk.get('tag', 'UNKNOWN'),
-        'shortDescription': perk.get('shortDescription', ''),
-        'longDescription': perk.get('longDescription', ''),
-        'description': perk.get('description', '')
-    }
+    base_style = get_base_style_prompt()
+    personality_style = get_personality_style(ai['personalityType'])
+    specialization_elements = get_specialization_elements(ai['specialization'])
     
+    unique_traits = ai['details'].get('uniqueTraits', '')
+    role = ai['details'].get('role', '')
+
     prompt = f"""You are an expert at creating DALL-E image generation prompts.
-Generate a detailed prompt for a World of Warcraft style ability icon with a futuristic twist.
-The icon must have ONE prominent, central feature that makes it instantly recognizable.
+Generate a detailed prompt for an AI entity's profile picture with these specific requirements:
 
-The icon represents this perk:
-Name: {perk_info['name']}
-Short description: {perk_info['shortDescription']}
-Long description: {perk_info['longDescription']}
-Description: {perk_info['description']}
-Tag type: {perk_info['tag']}
+Character Details:
+Name: {ai['name']}
+Role: {role}
+Key Trait: {unique_traits}
 
-Requirements:
-- Must have ONE clear, dominant symbol/object in the center
-- The central element should take up about 60-70% of the icon space
-- Background elements should enhance but not compete with the main symbol
-- Must be in World of Warcraft ability icon style
-- Should have a futuristic sci-fi aesthetic
-- Use appropriate colors and dramatic lighting
-- Must be instantly recognizable at small sizes
-- Include a subtle outer glow or energy effect around the central element
-- Must maintain professional game-like quality
+Base Style Requirements:
+{base_style}
 
-Focus on describing the main central element first, then briefly mention supporting elements.
+Personality-Specific Style:
+{personality_style}
+
+Specialization Elements:
+{specialization_elements}
+
+Additional Requirements:
+- Make the image instantly recognizable and distinct from other AI profiles
+- Ensure the main visual metaphor clearly represents {ai['name']}'s role as {role}
+- Maintain professional quality suitable for a profile picture
+- Create a memorable and iconic representation
+- Keep the style consistent with other Synthetic Souls AI profiles
+
+Focus on creating a distinctive visual representation that captures this AI entity's essence while maintaining the shared visual language of the Synthetic Souls team.
 Be specific but concise. Do not include technical specifications or image size requirements."""
 
     try:
@@ -74,7 +74,7 @@ Be specific but concise. Do not include technical specifications or image size r
         dalle_prompt = completion.choices[0].message.content
         
         # Add technical specifications
-        technical_specs = "The image should be a square icon with a dark border and inner glow, highly detailed in a semi-realistic style. The composition should be centered with one dominant element taking up 60-70% of the space, while maintaining a sci-fi aesthetic."
+        technical_specs = "The image should be a high-quality portrait format with professional lighting and composition, 1024x1024 resolution, suitable for a profile picture. Maintain a clean, modern aesthetic with subtle technological elements."
         
         return f"{dalle_prompt} {technical_specs}"
         
