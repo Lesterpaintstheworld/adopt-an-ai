@@ -22,37 +22,26 @@ touch .env
 ```env
 # OpenAI API Configuration
 REACT_APP_OPENAI_API_KEY=your_openai_api_key_here
-
-# Server Configuration
-PORT=3000
-NODE_ENV=development
-
-# Database Configuration (if applicable)
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=raise_an_ai
-DB_USER=your_db_user
-DB_PASSWORD=your_db_password
 ```
 
 ## Starting the Development Server
 
 1. Run the development server:
 ```bash
-npm start
+npm run dev
 ```
 This will:
-- Start the React development server
-- Enable hot reloading
-- Open your default browser to `http://localhost:3000`
+- Start the Vite development server
+- Enable hot module replacement (HMR)
+- Show the local URL in the terminal
 
 2. Alternative development commands:
 ```bash
-# Start without opening browser
-npm start -- --no-open
+# Preview production build
+npm run preview
 
-# Start on a specific port
-PORT=4000 npm start
+# Preview on a specific host/port
+npm run preview -- --host 0.0.0.0 --port 3000
 ```
 
 ## Production Deployment
@@ -62,21 +51,17 @@ PORT=4000 npm start
 npm run build
 ```
 
-2. Serve the production build:
+2. Preview the production build:
 ```bash
-# Using serve package
-npx serve -s build
-
-# Or using a production server like nginx
-# Configure nginx to serve the /build directory
+npm run preview
 ```
 
 ## Common Issues and Solutions
 
 ### Port Already in Use
 ```bash
-# Find process using port 3000
-lsof -i :3000
+# Find process using port 5173 (Vite's default port)
+lsof -i :5173
 
 # Kill the process
 kill -9 <PID>
@@ -84,27 +69,15 @@ kill -9 <PID>
 
 ### Environment Variables Not Loading
 - Ensure `.env` file is in the root directory
-- Verify variable names start with `REACT_APP_`
 - Restart the development server
-
-### Database Connection Issues
-1. Check database service is running:
-```bash
-# PostgreSQL
-sudo service postgresql status
-
-# Or for macOS
-brew services list
-```
-
-2. Verify database credentials in `.env`
+- Check Vite's environment variable format (VITE_ prefix)
 
 ## Monitoring and Logs
 
 - Development logs appear in the terminal running the server
 - Access the React Developer Tools in your browser
 - Check browser console for frontend errors
-- Server logs are in `npm-debug.log` if the server crashes
+- Build logs are in the terminal during build process
 
 ## Security Considerations
 
@@ -116,34 +89,28 @@ npm update
 ```
 
 3. Use HTTPS in production
-4. Implement rate limiting for API endpoints
-5. Configure CORS appropriately
+4. Configure CORS appropriately
 
 ## Additional Configuration
 
 ### Custom Port
 ```bash
-# In .env
-PORT=4000
-
-# Or via command line
-PORT=4000 npm start
-```
-
-### Proxy Configuration
-Add to `package.json` for API proxying:
-```json
-{
-  "proxy": "http://localhost:5000"
-}
+# In vite.config.js
+export default defineConfig({
+  server: {
+    port: 4000
+  }
+})
 ```
 
 ### SSL in Development
-```bash
-# In .env
-HTTPS=true
-SSL_CRT_FILE=path/to/cert.crt
-SSL_KEY_FILE=path/to/cert.key
+```typescript
+// In vite.config.js
+export default defineConfig({
+  server: {
+    https: true
+  }
+})
 ```
 
 ## Development Tools
@@ -152,6 +119,14 @@ SSL_KEY_FILE=path/to/cert.key
 - React Developer Tools
 - Redux DevTools (if using Redux)
 - Apollo DevTools (if using GraphQL)
+
+### Available Scripts
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run generate-icons` - Generate AI perk icons using DALL-E
+- `npm run test-openai` - Test OpenAI integration
+- `npm run test-icon-generation` - Test icon generation
 
 ### Debugging
 1. Use Chrome DevTools with React Developer Tools
