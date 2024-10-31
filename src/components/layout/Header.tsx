@@ -49,6 +49,13 @@ export const Header = () => {
           </Button>
           <Button 
             component={RouterLink} 
+            to="/my-ais"
+            sx={{ color: (theme) => theme.palette.text.primary }}
+          >
+            My AIs
+          </Button>
+          <Button 
+            component={RouterLink} 
             to="/pricing"
             sx={{ color: (theme) => theme.palette.text.primary }}
           >
