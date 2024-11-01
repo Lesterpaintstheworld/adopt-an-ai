@@ -7,10 +7,23 @@ import {
   List,
   ListItem,
   ListItemText,
+  ListItemIcon,
   Grid,
   IconButton,
   Paper,
+  CircularProgress,
+  LinearProgress,
 } from '@mui/material';
+import {
+  Timeline,
+  TimelineItem,
+  TimelineSeparator,
+  TimelineConnector,
+  TimelineContent,
+  TimelineDot,
+} from '@mui/lab';
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import Mermaid from 'react-mermaid2';
 import CloseIcon from '@mui/icons-material/Close';
 import { Perk, PerkFullData } from '../types/tech';
 
@@ -21,7 +34,64 @@ interface PerkDetailModalProps {
   fullData: PerkFullData | null;
 }
 
+const MetricProgress = ({ current, target, label }: { 
+  current: string;
+  target: string;
+  label: string;
+}) => {
+  const currentValue = parseFloat(current.replace('%', ''));
+  const targetValue = parseFloat(target.replace('%', ''));
+  const progress = (currentValue / targetValue) * 100;
+
+  return (
+    <Box sx={{ width: '100%', mb: 2 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+        <Typography variant="body2">{label}</Typography>
+        <Typography variant="body2">
+          {current} / {target}
+        </Typography>
+      </Box>
+      <LinearProgress 
+        variant="determinate" 
+        value={Math.min(progress, 100)}
+        sx={{
+          height: 8,
+          borderRadius: 4,
+          backgroundColor: 'rgba(0,0,0,0.1)',
+          '& .MuiLinearProgress-bar': {
+            borderRadius: 4,
+            backgroundColor: progress >= 100 ? 'success.main' : 'primary.main',
+          }
+        }}
+      />
+    </Box>
+  );
+};
+
+const SeverityBadge = ({ severity }: { severity: string }) => {
+  const getColor = () => {
+    switch (severity.toLowerCase()) {
+      case 'critical': return 'error';
+      case 'high': return 'warning';
+      case 'medium': return 'info';
+      case 'low': return 'success';
+      default: return 'default';
+    }
+  };
+
+  return (
+    <Chip
+      label={severity}
+      color={getColor()}
+      size="small"
+      sx={{ ml: 1 }}
+    />
+  );
+};
+
 const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps) => {
+  const [isLoading, setIsLoading] = useState(false);
+  
   if (!perk) return null;
 
   return (
@@ -57,6 +127,20 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
             background: '#555',
           },
         },
+        '&::-webkit-scrollbar': {
+          width: '8px',
+        },
+        '&::-webkit-scrollbar-track': {
+          background: '#f1f1f1',
+          borderRadius: '4px',
+        },
+        '&::-webkit-scrollbar-thumb': {
+          background: '#888',
+          borderRadius: '4px',
+          '&:hover': {
+            background: '#555',
+          },
+        },
       }}>
         <IconButton
           sx={{ position: 'absolute', right: 8, top: 8 }}
@@ -74,14 +158,49 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
             <Chip label={`ID: ${fullData?.capability_id || perk.capability_id}`} />
           </Grid>
 
-          {fullData?.version_control && (
-            <Grid item xs={12} md={6}>
-              <Paper elevation={2} sx={{ p: 2 }}>
-                <Typography variant="h6" gutterBottom>Version Control</Typography>
-                <Typography>Current Version: {fullData.version_control.current_version}</Typography>
-                <Typography>Last Updated: {fullData.version_control.last_updated}</Typography>
-              </Paper>
-            </Grid>
+          {isLoading ? (
+            <Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}>
+              <CircularProgress />
+            </Box>
+          ) : (
+            <>
+              {fullData?.version_control && (
+                <Grid item xs={12} md={6}>
+                  <Paper elevation={2} sx={{ p: 2 }}>
+                    <Typography variant="h6" gutterBottom>Version History</Typography>
+                    <Timeline>
+                      {fullData.version_control.version_history.map((version, index) => (
+                        <TimelineItem key={index}>
+                          <TimelineSeparator>
+                            <TimelineDot color={index === 0 ? "primary" : "grey"} />
+                            {index < fullData.version_control.version_history.length - 1 && <TimelineConnector />}
+                          </TimelineSeparator>
+                          <TimelineContent>
+                            <Typography variant="subtitle2">
+                              Version {version.version} - {version.date}
+                            </Typography>
+                            <List dense>
+                              {version.changes.map((change, changeIndex) => (
+                                <ListItem key={changeIndex}>
+                                  <ListItemIcon>
+                                    <FiberManualRecordIcon sx={{ fontSize: 8 }} />
+                                  </ListItemIcon>
+                                  <ListItemText primary={change} />
+                                </ListItem>
+                              ))}
+                            </List>
+                            <Typography variant="caption" color="textSecondary">
+                              Reviewed by: {version.reviewed_by}
+                              {version.approved_by && ` | Approved by: ${version.approved_by}`}
+                            </Typography>
+                          </TimelineContent>
+                        </TimelineItem>
+                      ))}
+                    </Timeline>
+                  </Paper>
+                </Grid>
+              )}
+            </>
           )}
 
           <Grid item xs={12}>
@@ -156,8 +275,13 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                   {fullData.risks_and_mitigations.technical_risks.map((risk, index) => (
                     <ListItem key={index}>
                       <ListItemText
-                        primary={risk.risk}
-                        secondary={`Severity: ${risk.severity} | Mitigation: ${risk.mitigation}`}
+                        primary={
+                          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                            {risk.risk}
+                            <SeverityBadge severity={risk.severity} />
+                          </Box>
+                        }
+                        secondary={`Mitigation: ${risk.mitigation}`}
                       />
                     </ListItem>
                   ))}
@@ -185,17 +309,15 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
               <Paper elevation={2} sx={{ p: 2 }}>
                 <Typography variant="h6" gutterBottom>Success Metrics</Typography>
                 
-                <Typography variant="subtitle1">Operational KPIs:</Typography>
-                <List>
-                  {fullData.success_metrics.operational_kpis.map((kpi, index) => (
-                    <ListItem key={index}>
-                      <ListItemText
-                        primary={kpi.metric}
-                        secondary={`Target: ${kpi.target} | Current: ${kpi.current}`}
-                      />
-                    </ListItem>
-                  ))}
-                </List>
+                <Typography variant="subtitle1" gutterBottom>Operational KPIs:</Typography>
+                {fullData.success_metrics.operational_kpis.map((kpi, index) => (
+                  <MetricProgress
+                    key={index}
+                    label={kpi.metric}
+                    current={kpi.current}
+                    target={kpi.target}
+                  />
+                ))}
               </Paper>
             </Grid>
           )}
@@ -294,6 +416,19 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                     </ListItem>
                   ))}
                 </List>
+              </Paper>
+            </Grid>
+          )}
+
+          {fullData?.dependencies_visualization?.primary_diagram && (
+            <Grid item xs={12}>
+              <Paper elevation={2} sx={{ p: 2 }}>
+                <Typography variant="h6" gutterBottom>Dependencies Visualization</Typography>
+                <Box sx={{ overflow: 'auto' }}>
+                  <Mermaid
+                    chart={fullData.dependencies_visualization.primary_diagram}
+                  />
+                </Box>
               </Paper>
             </Grid>
           )}
