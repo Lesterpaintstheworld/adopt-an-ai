@@ -13,7 +13,22 @@ import {
   Paper,
   CircularProgress,
   LinearProgress,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
+  Fab,
 } from '@mui/material';
+import DescriptionIcon from '@mui/icons-material/Description';
+import SchoolIcon from '@mui/icons-material/School';
+import LaunchIcon from '@mui/icons-material/Launch';
+import RestoreIcon from '@mui/icons-material/Restore';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import {
   Timeline,
   TimelineItem,
@@ -99,6 +114,11 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
       open={open}
       onClose={onClose}
       aria-labelledby="perk-detail-modal"
+      sx={{
+        '& .MuiModal-backdrop': {
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        },
+      }}
     >
       <Box sx={{
         position: 'absolute',
@@ -113,6 +133,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
         boxShadow: 24,
         overflow: 'auto',
         p: 4,
+        scrollBehavior: 'smooth',
         '&::-webkit-scrollbar': {
           width: '8px',
         },
@@ -468,7 +489,140 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
               </Paper>
             </Grid>
           )}
+
+          {fullData?.technical_specifications && (
+            <Grid item xs={12}>
+              <Paper elevation={2} sx={{ p: 2 }}>
+                <Typography variant="h6" gutterBottom>Technical Specifications</Typography>
+                
+                <Accordion>
+                  <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                    <Typography>Core Components</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <List>
+                      {fullData.technical_specifications.core_components.map((component, index) => (
+                        <ListItem key={index}>
+                          <ListItemText 
+                            primary={component.name}
+                            secondary={component.description}
+                          />
+                        </ListItem>
+                      ))}
+                    </List>
+                  </AccordionDetails>
+                </Accordion>
+
+                <Accordion>
+                  <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                    <Typography>Performance Metrics</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <TableContainer>
+                      <Table size="small">
+                        <TableBody>
+                          {Object.entries(fullData.technical_specifications.performance_metrics).map(([key, value]) => (
+                            <TableRow key={key}>
+                              <TableCell component="th" scope="row">
+                                {key}
+                              </TableCell>
+                              <TableCell>{value}</TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </TableContainer>
+                  </AccordionDetails>
+                </Accordion>
+              </Paper>
+            </Grid>
+          )}
+
+          {fullData?.documentation && (
+            <Grid item xs={12} md={6}>
+              <Paper elevation={2} sx={{ p: 2 }}>
+                <Typography variant="h6" gutterBottom>Documentation</Typography>
+                
+                <Typography variant="subtitle1">Technical Documentation:</Typography>
+                <List dense>
+                  {fullData.documentation.technical_docs.map((doc, index) => (
+                    <ListItem key={index}>
+                      <ListItemIcon>
+                        <DescriptionIcon fontSize="small" />
+                      </ListItemIcon>
+                      <ListItemText primary={doc} />
+                    </ListItem>
+                  ))}
+                </List>
+
+                <Divider sx={{ my: 2 }} />
+
+                <Typography variant="subtitle1">Training Materials:</Typography>
+                <List dense>
+                  {fullData.documentation.training_materials.map((material, index) => (
+                    <ListItem key={index}>
+                      <ListItemIcon>
+                        <SchoolIcon fontSize="small" />
+                      </ListItemIcon>
+                      <ListItemText primary={material} />
+                    </ListItem>
+                  ))}
+                </List>
+              </Paper>
+            </Grid>
+          )}
+
+          {fullData?.deployment && (
+            <Grid item xs={12} md={6}>
+              <Paper elevation={2} sx={{ p: 2 }}>
+                <Typography variant="h6" gutterBottom>Deployment</Typography>
+                
+                <Typography variant="subtitle1">Strategies:</Typography>
+                <List dense>
+                  {fullData.deployment.strategies.map((strategy, index) => (
+                    <ListItem key={index}>
+                      <ListItemIcon>
+                        <LaunchIcon fontSize="small" />
+                      </ListItemIcon>
+                      <ListItemText primary={strategy} />
+                    </ListItem>
+                  ))}
+                </List>
+
+                <Divider sx={{ my: 2 }} />
+
+                <Typography variant="subtitle1">Rollback Procedures:</Typography>
+                <List dense>
+                  {fullData.deployment.rollback_procedures.map((procedure, index) => (
+                    <ListItem key={index}>
+                      <ListItemIcon>
+                        <RestoreIcon fontSize="small" />
+                      </ListItemIcon>
+                      <ListItemText 
+                        primary={procedure}
+                      />
+                    </ListItem>
+                  ))}
+                </List>
+              </Paper>
+            </Grid>
+          )}
         </Grid>
+
+        <Fab
+          color="primary"
+          sx={{
+            position: 'fixed',
+            bottom: 16,
+            right: 16,
+          }}
+          onClick={() => {
+            const modalElement = document.querySelector('[role="dialog"]');
+            if (modalElement) modalElement.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        >
+          <KeyboardArrowUpIcon />
+        </Fab>
       </Box>
     </Modal>
   );
