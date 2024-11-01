@@ -6,7 +6,7 @@ import {
   Chip,
   Tooltip,
 } from '@mui/material';
-import { TechTree, PhaseData, Perk } from '../types/tech';
+import { TechTree, PhaseData, Perk, PerkFullData } from '../types/tech';
 import { getPerkIconUrl } from '../utils/perkIconUrl';
 import CodeIcon from '@mui/icons-material/Code';
 import BrushIcon from '@mui/icons-material/Brush';
@@ -217,6 +217,26 @@ const ConnectionLines = ({
 };
 
 
+const loadFullPerkData = async (perkId: string): Promise<PerkFullData | null> => {
+  try {
+    const fullData = await import(`../../content/tech/${perkId}.yml`);
+    return fullData.default;
+  } catch {
+    return null;
+  }
+};
+
+const mergePerkData = (basicPerk: Perk, fullData: PerkFullData | null): Perk => {
+  if (!fullData) return basicPerk;
+  
+  return {
+    ...basicPerk,
+    name: fullData.name,
+    description: fullData.description.short,
+    longDescription: fullData.description.long,
+  };
+};
+
 const TechItem = ({ 
   item, 
   phase, 
@@ -230,6 +250,18 @@ const TechItem = ({
   onHover: (itemName: string | null) => void;
   highlightedItem: string | null;
 }) => {
+  const [mergedData, setMergedData] = useState<Perk>(item);
+
+  useEffect(() => {
+    const loadData = async () => {
+      if (item.capability_id) {
+        const fullData = await loadFullPerkData(item.capability_id);
+        setMergedData(mergePerkData(item, fullData));
+      }
+    };
+    loadData();
+  }, [item]);
+
   return (
     <Tooltip
       title={
@@ -369,11 +401,11 @@ const TechItem = ({
         </Box>
         <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: 3 }}>
           <Typography variant="subtitle1" fontWeight="bold" sx={{ color: '#ffffff' }}>
-            {item.name}
+            {mergedData.name}
           </Typography>
           <Chip
-            icon={getTagIcon(item.tag)}
-            label={item.tag.split(' ')[1]}
+            icon={getTagIcon(mergedData.tag)}
+            label={mergedData.tag.split(' ')[1]}
             size="small"
             variant="outlined"
             sx={{

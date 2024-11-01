@@ -142,7 +142,8 @@ phase_1:
       chronologicalOrder: 7
 
   compute_layer:
-    - name: "Basic compute allocation"
+    - name: "Basic Compute Allocation"
+      capability_id: "COM_P1_001"
       tag: "🔧 TECHNICAL"
       description: "Guaranteed minimum computational resources for AI operation, typically 4 hours of compute time daily"
       chronologicalOrder: 1
