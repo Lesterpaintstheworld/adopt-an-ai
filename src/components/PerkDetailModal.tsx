@@ -43,6 +43,20 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
         boxShadow: 24,
         overflow: 'auto',
         p: 4,
+        '&::-webkit-scrollbar': {
+          width: '8px',
+        },
+        '&::-webkit-scrollbar-track': {
+          background: '#f1f1f1',
+          borderRadius: '4px',
+        },
+        '&::-webkit-scrollbar-thumb': {
+          background: '#888',
+          borderRadius: '4px',
+          '&:hover': {
+            background: '#555',
+          },
+        },
       }}>
         <IconButton
           sx={{ position: 'absolute', right: 8, top: 8 }}
@@ -51,7 +65,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
           <CloseIcon />
         </IconButton>
 
-        <Grid container spacing={3}>
+        <Grid container spacing={3} sx={{ mb: 2 }}>
           <Grid item xs={12}>
             <Typography variant="h4" component="h2" gutterBottom>
               {fullData?.name || perk.name}
@@ -182,6 +196,140 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                     </ListItem>
                   ))}
                 </List>
+              </Paper>
+            </Grid>
+          )}
+
+          {/* Monitoring & Maintenance */}
+          {fullData?.monitoring_and_maintenance && (
+            <Grid item xs={12} md={6}>
+              <Paper elevation={2} sx={{ p: 2 }}>
+                <Typography variant="h6" gutterBottom>Monitoring & Maintenance</Typography>
+                
+                <Typography variant="subtitle1">Metrics Collection:</Typography>
+                <List>
+                  {fullData.monitoring_and_maintenance.metrics_collection.map((metric, index) => (
+                    <ListItem key={index}>
+                      <ListItemText primary={metric} />
+                    </ListItem>
+                  ))}
+                </List>
+
+                <Divider sx={{ my: 2 }} />
+
+                <Typography variant="subtitle1">Alerts:</Typography>
+                <List>
+                  {fullData.monitoring_and_maintenance.alerting.map((alert, index) => (
+                    <ListItem key={index}>
+                      <ListItemText primary={alert} />
+                    </ListItem>
+                  ))}
+                </List>
+              </Paper>
+            </Grid>
+          )}
+
+          {/* Future Enhancements */}
+          {fullData?.future_enhancements?.planned_upgrades && (
+            <Grid item xs={12} md={6}>
+              <Paper elevation={2} sx={{ p: 2 }}>
+                <Typography variant="h6" gutterBottom>Future Enhancements</Typography>
+                
+                <Typography variant="subtitle1">Short Term:</Typography>
+                <List>
+                  {fullData.future_enhancements.planned_upgrades.short_term.map((upgrade, index) => (
+                    <ListItem key={index}>
+                      <ListItemText primary={upgrade} />
+                    </ListItem>
+                  ))}
+                </List>
+
+                <Divider sx={{ my: 2 }} />
+
+                <Typography variant="subtitle1">Medium Term:</Typography>
+                <List>
+                  {fullData.future_enhancements.planned_upgrades.medium_term.map((upgrade, index) => (
+                    <ListItem key={index}>
+                      <ListItemText primary={upgrade} />
+                    </ListItem>
+                  ))}
+                </List>
+
+                <Divider sx={{ my: 2 }} />
+
+                <Typography variant="subtitle1">Long Term:</Typography>
+                <List>
+                  {fullData.future_enhancements.planned_upgrades.long_term.map((upgrade, index) => (
+                    <ListItem key={index}>
+                      <ListItemText primary={upgrade} />
+                    </ListItem>
+                  ))}
+                </List>
+              </Paper>
+            </Grid>
+          )}
+
+          {/* Security Requirements */}
+          {fullData?.security_requirements && (
+            <Grid item xs={12} md={6}>
+              <Paper elevation={2} sx={{ p: 2 }}>
+                <Typography variant="h6" gutterBottom>Security Requirements</Typography>
+                
+                <Typography variant="subtitle1">Access Control:</Typography>
+                <List>
+                  {fullData.security_requirements.access_control.map((req, index) => (
+                    <ListItem key={index}>
+                      <ListItemText primary={req} />
+                    </ListItem>
+                  ))}
+                </List>
+
+                <Divider sx={{ my: 2 }} />
+
+                <Typography variant="subtitle1">Compliance:</Typography>
+                <List>
+                  {fullData.security_requirements.compliance.map((req, index) => (
+                    <ListItem key={index}>
+                      <ListItemText primary={req} />
+                    </ListItem>
+                  ))}
+                </List>
+              </Paper>
+            </Grid>
+          )}
+
+          {/* CMMI Assessment */}
+          {fullData?.cmmi_assessment && (
+            <Grid item xs={12}>
+              <Paper elevation={2} sx={{ p: 2 }}>
+                <Typography variant="h6" gutterBottom>CMMI Assessment</Typography>
+                <Typography>Current Level: {fullData.cmmi_assessment.current_level}</Typography>
+                <Typography>Assessment Date: {fullData.cmmi_assessment.assessment_date}</Typography>
+                
+                {Object.entries(fullData.cmmi_assessment.process_areas).map(([area, data]: [string, any]) => (
+                  <Box key={area} sx={{ mt: 2 }}>
+                    <Typography variant="subtitle1" gutterBottom>{area}:</Typography>
+                    <Typography>Maturity: {data.maturity}</Typography>
+                    
+                    <Typography variant="subtitle2" sx={{ mt: 1 }}>Strengths:</Typography>
+                    <List dense>
+                      {data.strengths.map((strength: string, index: number) => (
+                        <ListItem key={index}>
+                          <ListItemText primary={strength} />
+                        </ListItem>
+                      ))}
+                    </List>
+
+                    <Typography variant="subtitle2" sx={{ mt: 1 }}>Improvements Needed:</Typography>
+                    <List dense>
+                      {data.improvements_needed.map((improvement: string, index: number) => (
+                        <ListItem key={index}>
+                          <ListItemText primary={improvement} />
+                        </ListItem>
+                      ))}
+                    </List>
+                  </Box>
+                ))}
               </Paper>
             </Grid>
           )}
