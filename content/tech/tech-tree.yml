@@ -149,11 +149,13 @@ phase_1:
       chronologicalOrder: 1
     
     - name: "Memory storage allocation"
+      capability_id: "COM_P1_002"
       tag: "🔧 TECHNICAL"
       description: "Dedicated storage space for AI's memories and learned information, starting at 1GB vector storage"
       chronologicalOrder: 3
     
     - name: "Daily compute quotas"
+      capability_id: "COM_P1_003"
       tag: "🔧 TECHNICAL"
       description: "Fixed amount of processing time available each day, measured in API calls or compute units"
       chronologicalOrder: 5
