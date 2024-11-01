@@ -80,6 +80,56 @@ def validate_version_control(generated_data):
     
     return inconsistencies
 
+def validate_dependencies_graph(generated_data):
+    """Validate the dependencies visualization graph"""
+    inconsistencies = []
+    
+    if 'dependencies_visualization' not in generated_data:
+        return ["Missing dependencies visualization"]
+        
+    viz = generated_data['dependencies_visualization']
+    if 'primary_diagram' not in viz:
+        return ["Missing primary diagram in dependencies visualization"]
+        
+    # Vérifier que tous les prérequis sont dans le graphe
+    prereqs = set()
+    if 'dependencies' in generated_data and 'prerequisites' in generated_data['dependencies']:
+        for layer in generated_data['dependencies']['prerequisites'].values():
+            if isinstance(layer, list):
+                prereqs.update(layer)
+    
+    diagram = viz['primary_diagram']
+    for prereq in prereqs:
+        if prereq not in diagram:
+            inconsistencies.append(f"Prerequisite {prereq} missing from visualization")
+    
+    return inconsistencies
+
+def validate_metrics_coherence(generated_data):
+    """Validate coherence between different metric sections"""
+    inconsistencies = []
+    
+    # Vérifier la cohérence entre les KPIs et le monitoring
+    kpis = set()
+    if 'success_metrics' in generated_data:
+        for metric_group in generated_data['success_metrics'].values():
+            for metric in metric_group:
+                if isinstance(metric, dict) and 'metric' in metric:
+                    kpis.add(metric['metric'].lower())
+    
+    monitored_metrics = set()
+    if 'monitoring_and_maintenance' in generated_data:
+        monitoring = generated_data['monitoring_and_maintenance'].get('monitoring', {})
+        metrics = monitoring.get('metrics_collection', [])
+        if isinstance(metrics, list):
+            monitored_metrics.update(m.lower() for m in metrics)
+    
+    for kpi in kpis:
+        if not any(kpi in m for m in monitored_metrics):
+            inconsistencies.append(f"KPI {kpi} not covered by monitoring")
+    
+    return inconsistencies
+
 def extract_phase_and_layer(capability_id):
     """Extract phase and layer information from capability ID"""
     try:
@@ -136,7 +186,10 @@ class PerkGenerator:
             'attempts': 0,
             'successes': 0,
             'failures': 0,
-            'fixes_required': 0
+            'fixes_required': 0,
+            'dependency_fixes': 0,
+            'metric_fixes': 0,
+            'validation_time': 0
         }
 
     async def _generate_raw_perk_details(self, perk_data, template):
@@ -176,6 +229,9 @@ class PerkGenerator:
 
     async def generate_perk_details(self, perk_data, template, max_retries=3):
         """Generate detailed perk data using Claude with enhanced validation"""
+        import time
+        start_time = time.time()
+        
         self.generation_stats['attempts'] += 1
         
         phase, layer = extract_phase_and_layer(perk_data['capability_id'])
@@ -191,6 +247,16 @@ class PerkGenerator:
                 inconsistencies.extend(validate_perk_data(generated_data, perk_data, template))
                 inconsistencies.extend(validate_technical_coherence(generated_data, phase, layer))
                 inconsistencies.extend(validate_version_control(generated_data))
+                inconsistencies.extend(validate_dependencies_graph(generated_data))
+                inconsistencies.extend(validate_metrics_coherence(generated_data))
+                
+                # Mise à jour des statistiques
+                if any('dependencies' in i for i in inconsistencies):
+                    self.generation_stats['dependency_fixes'] += 1
+                if any('metric' in i.lower() for i in inconsistencies):
+                    self.generation_stats['metric_fixes'] += 1
+                    
+                self.generation_stats['validation_time'] += time.time() - start_time
                 
                 if not inconsistencies:
                     self.generation_stats['successes'] += 1
@@ -225,15 +291,23 @@ class PerkGenerator:
         return None
 
     def print_generation_stats(self):
-        """Print generation statistics"""
-        print("\nGeneration Statistics:")
+        """Print enhanced generation statistics"""
+        print("\nDetailed Generation Statistics:")
         print(f"Total attempts: {self.generation_stats['attempts']}")
         print(f"Successful generations: {self.generation_stats['successes']}")
         print(f"Failed generations: {self.generation_stats['failures']}")
         print(f"Fixes required: {self.generation_stats['fixes_required']}")
+        print(f"Dependency fixes: {self.generation_stats['dependency_fixes']}")
+        print(f"Metric fixes: {self.generation_stats['metric_fixes']}")
+        print(f"Average validation time: {self.generation_stats['validation_time']/max(1, self.generation_stats['attempts']):.2f}s")
         if self.generation_stats['attempts'] > 0:
             success_rate = (self.generation_stats['successes'] / self.generation_stats['attempts']) * 100
             print(f"Success rate: {success_rate:.2f}%")
+
+def save_generation_stats(stats, output_file="generation_stats.yml"):
+    """Save generation statistics to a YAML file"""
+    with open(output_file, 'w') as f:
+        yaml.dump(stats, f)
 
 async def main():
     # Load template
@@ -269,8 +343,24 @@ async def main():
                                     else:
                                         print(f"Failed to generate details for {item['capability_id']}")
     finally:
-        # Afficher les statistiques à la fin
         generator.print_generation_stats()
+        save_generation_stats(generator.generation_stats)
+        
+        # Afficher un résumé des erreurs les plus communes
+        print("\nCommon Error Patterns:")
+        error_patterns = {}
+        for phase_key, phase_data in tech_tree.items():
+            if isinstance(phase_data, dict):
+                for layer_key, layer_items in phase_data.items():
+                    if isinstance(layer_items, list):
+                        for item in layer_items:
+                            if "capability_id" in item:
+                                perk_file = Path(f"content/tech/{item['capability_id']}.yml")
+                                if not perk_file.exists():
+                                    error_patterns[item['capability_id']] = "Generation failed"
+        
+        for pattern, count in error_patterns.items():
+            print(f"{pattern}: {count}")
 
 if __name__ == "__main__":
     asyncio.run(main())
