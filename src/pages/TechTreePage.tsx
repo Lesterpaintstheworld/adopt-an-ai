@@ -7,6 +7,13 @@ import {
   Tooltip,
 } from '@mui/material';
 import { TechTree, PhaseData, Perk, PerkFullData } from '../types/tech';
+import PerkDetailModal from '../components/PerkDetailModal';
+
+interface ModalState {
+  isOpen: boolean;
+  selectedPerk: Perk | null;
+  fullData: PerkFullData | null;
+}
 import { getPerkIconUrl } from '../utils/perkIconUrl';
 import CodeIcon from '@mui/icons-material/Code';
 import BrushIcon from '@mui/icons-material/Brush';
@@ -242,14 +249,9 @@ const TechItem = ({
   phase, 
   position,
   onHover,
-  highlightedItem
-}: { 
-  item: Perk;
-  phase: string;
-  position: { x: number, y: number };
-  onHover: (itemName: string | null) => void;
-  highlightedItem: string | null;
-}) => {
+  highlightedItem,
+  onClick
+}: TechItemProps) => {
   const [mergedData, setMergedData] = useState<Perk>(item);
 
   useEffect(() => {
@@ -351,6 +353,7 @@ const TechItem = ({
     >
       <Paper
         elevation={2}
+        onClick={() => onClick(item)}
         onMouseEnter={() => onHover(item.name)}
         onMouseLeave={() => onHover(null)}
         sx={{
@@ -362,6 +365,7 @@ const TechItem = ({
           display: 'flex',
           gap: 3,
           padding: 0,
+          cursor: 'pointer',
           '&:hover': {
             transform: 'scale(1.05)',
             transition: 'transform 0.2s',
@@ -433,7 +437,24 @@ const TechItem = ({
 const TechTreePage = () => {
   const [positions, setPositions] = useState<Record<string, { x: number, y: number }>>({});
   const [highlightedItem, setHighlightedItem] = useState<string | null>(null);
+  const [modalState, setModalState] = useState<ModalState>({
+    isOpen: false,
+    selectedPerk: null,
+    fullData: null,
+  });
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const handlePerkClick = async (perk: Perk) => {
+    let fullData = null;
+    if (perk.capability_id) {
+      fullData = await loadFullPerkData(perk.capability_id);
+    }
+    setModalState({
+      isOpen: true,
+      selectedPerk: perk,
+      fullData: fullData,
+    });
+  };
   
   useEffect(() => {
     setPositions(calculateNodePositions(techTree));
@@ -502,8 +523,16 @@ const TechTreePage = () => {
               position={positions[item.name] || { x: 0, y: 0 }}
               onHover={setHighlightedItem}
               highlightedItem={highlightedItem}
+              onClick={handlePerkClick}
             />
           ))}
+          
+          <PerkDetailModal
+            open={modalState.isOpen}
+            onClose={() => setModalState(prev => ({ ...prev, isOpen: false }))}
+            perk={modalState.selectedPerk}
+            fullData={modalState.fullData}
+          />
           
           {/* Phase headers */}
           {Object.entries(techTree).map(([phaseKey, phaseData]: [string, any], index) => {
