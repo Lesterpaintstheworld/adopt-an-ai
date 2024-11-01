@@ -244,6 +244,15 @@ const mergePerkData = (basicPerk: Perk, fullData: PerkFullData | null): Perk => 
   };
 };
 
+interface TechItemProps {
+  item: Perk;
+  phase: string;
+  position: { x: number, y: number };
+  onHover: (itemName: string | null) => void;
+  highlightedItem: string | null;
+  onClick: (perk: Perk) => void;
+}
+
 const TechItem = ({ 
   item, 
   phase, 
