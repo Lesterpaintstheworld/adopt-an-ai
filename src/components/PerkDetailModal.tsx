@@ -38,7 +38,8 @@ import {
   TimelineDot,
 } from '@mui/lab';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
-import Mermaid from 'mermaid-react';
+import mermaid from 'mermaid';
+import { useEffect } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { Perk, PerkFullData } from '../types/tech';
 
@@ -446,13 +447,20 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
               <Paper elevation={2} sx={{ p: 2 }}>
                 <Typography variant="h6" gutterBottom>Dependencies Visualization</Typography>
                 <Box sx={{ overflow: 'auto' }}>
-                  <Mermaid
-                    chart={fullData.dependencies_visualization.primary_diagram}
-                    config={{
-                      theme: 'default',
-                      securityLevel: 'loose'
-                    }}
-                  />
+                  {fullData.dependencies_visualization.primary_diagram && (
+                    <>
+                      {useEffect(() => {
+                        mermaid.initialize({
+                          theme: 'default',
+                          securityLevel: 'loose'
+                        });
+                        mermaid.contentLoaded();
+                      }, [fullData.dependencies_visualization.primary_diagram])}
+                      <div className="mermaid">
+                        {fullData.dependencies_visualization.primary_diagram}
+                      </div>
+                    </>
+                  )}
                 </Box>
               </Paper>
             </Grid>
