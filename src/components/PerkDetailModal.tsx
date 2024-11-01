@@ -38,7 +38,7 @@ import {
   TimelineDot,
 } from '@mui/lab';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
-import Mermaid from 'react-mermaid2';
+import Mermaid from 'mermaid-react';
 import CloseIcon from '@mui/icons-material/Close';
 import { Perk, PerkFullData } from '../types/tech';
 
@@ -448,6 +448,10 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                 <Box sx={{ overflow: 'auto' }}>
                   <Mermaid
                     chart={fullData.dependencies_visualization.primary_diagram}
+                    config={{
+                      theme: 'default',
+                      securityLevel: 'loose'
+                    }}
                   />
                 </Box>
               </Paper>
