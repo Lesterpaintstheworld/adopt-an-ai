@@ -4,6 +4,66 @@ import asyncio
 from anthropic import AsyncAnthropic
 from pathlib import Path
 
+def validate_perk_data(generated_data, original_data, template):
+    """Validate generated perk data against original data and template"""
+    inconsistencies = []
+    
+    # Verify required fields
+    required_fields = [
+        'capability_id',
+        'name',
+        'description',
+        'technical_specifications',
+        'dependencies'
+    ]
+    
+    for field in required_fields:
+        if field not in generated_data:
+            inconsistencies.append(f"Missing required field: {field}")
+    
+    # Check consistency with original data
+    if generated_data['capability_id'] != original_data['capability_id']:
+        inconsistencies.append("Inconsistent capability_id")
+    
+    # Check dependencies consistency
+    if 'prerequisites' in original_data:
+        original_prereqs = set(original_data['prerequisites'])
+        generated_prereqs = set()
+        if 'dependencies' in generated_data and 'prerequisites' in generated_data['dependencies']:
+            for layer in generated_data['dependencies']['prerequisites'].values():
+                if isinstance(layer, list):
+                    generated_prereqs.update(layer)
+        
+        missing_prereqs = original_prereqs - generated_prereqs
+        if missing_prereqs:
+            inconsistencies.append(f"Missing prerequisites: {missing_prereqs}")
+    
+    return inconsistencies
+
+def fix_inconsistencies(generated_data, original_data, inconsistencies):
+    """Try to fix detected inconsistencies"""
+    fixed_data = generated_data.copy()
+    
+    for inconsistency in inconsistencies:
+        if "Missing required field" in inconsistency:
+            field = inconsistency.split(": ")[1]
+            if field in original_data:
+                fixed_data[field] = original_data[field]
+        
+        elif "Inconsistent capability_id" in inconsistency:
+            fixed_data['capability_id'] = original_data['capability_id']
+        
+        elif "Missing prerequisites" in inconsistency:
+            if 'dependencies' not in fixed_data:
+                fixed_data['dependencies'] = {}
+            if 'prerequisites' not in fixed_data['dependencies']:
+                fixed_data['dependencies']['prerequisites'] = {}
+            
+            missing_prereqs = eval(inconsistency.split(": ")[1])
+            fixed_data['dependencies']['prerequisites']['compute_layer'] = list(missing_prereqs)
+    
+    return fixed_data
+
 class PerkGenerator:
     def __init__(self):
         self.model = "claude-3-sonnet-20240229"
@@ -11,9 +71,9 @@ class PerkGenerator:
         if not api_key:
             raise ValueError("ANTHROPIC_API_KEY not found in environment!")
         self.client = AsyncAnthropic(api_key=api_key)
-        
-    async def generate_perk_details(self, perk_data, template):
-        """Generate detailed perk data using Claude"""
+
+    async def _generate_raw_perk_details(self, perk_data, template):
+        """Generate raw perk data using Claude"""
         prompt = f"""You are a technical writer creating detailed specifications for AI capabilities.
         
         Here is the basic perk data:
@@ -46,6 +106,41 @@ class PerkGenerator:
         except Exception as e:
             print(f"Error generating perk details: {e}")
             return None
+
+    async def generate_perk_details(self, perk_data, template, max_retries=3):
+        """Generate detailed perk data using Claude with validation and fixes"""
+        for attempt in range(max_retries):
+            try:
+                generated_data = await self._generate_raw_perk_details(perk_data, template)
+                if not generated_data:
+                    continue
+                
+                # Validate generated data
+                inconsistencies = validate_perk_data(generated_data, perk_data, template)
+                
+                if not inconsistencies:
+                    return generated_data
+                
+                print(f"Found inconsistencies (attempt {attempt + 1}): {inconsistencies}")
+                
+                # Try to fix inconsistencies
+                fixed_data = fix_inconsistencies(generated_data, perk_data, inconsistencies)
+                
+                # Validate again after fixes
+                remaining_inconsistencies = validate_perk_data(fixed_data, perk_data, template)
+                
+                if not remaining_inconsistencies:
+                    print(f"Successfully fixed inconsistencies on attempt {attempt + 1}")
+                    return fixed_data
+                
+                print(f"Unable to fix all inconsistencies, retrying... ({attempt + 1}/{max_retries})")
+                
+            except Exception as e:
+                print(f"Error on attempt {attempt + 1}: {e}")
+                if attempt == max_retries - 1:
+                    raise
+        
+        return None
 
 async def main():
     # Load template
