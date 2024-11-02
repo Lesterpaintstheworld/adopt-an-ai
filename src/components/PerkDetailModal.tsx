@@ -361,7 +361,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
           )}
 
           {/* Monitoring & Maintenance */}
-          {fullData?.monitoring_and_maintenance && (
+          {fullData?.monitoring_and_maintenance?.metrics_collection?.length > 0 && (
             <Grid item xs={12} md={6}>
               <Paper elevation={2} sx={{ p: 2 }}>
                 <Typography variant="h6" gutterBottom>Monitoring & Maintenance</Typography>
@@ -375,16 +375,19 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                   ))}
                 </List>
 
-                <Divider sx={{ my: 2 }} />
-
-                <Typography variant="subtitle1">Alerts:</Typography>
-                <List>
-                  {fullData.monitoring_and_maintenance.alerting.map((alert, index) => (
-                    <ListItem key={index}>
-                      <ListItemText primary={alert} />
-                    </ListItem>
-                  ))}
-                </List>
+                {fullData?.monitoring_and_maintenance?.alerting?.length > 0 && (
+                  <>
+                    <Divider sx={{ my: 2 }} />
+                    <Typography variant="subtitle1">Alerts:</Typography>
+                    <List>
+                      {fullData.monitoring_and_maintenance.alerting.map((alert, index) => (
+                        <ListItem key={index}>
+                          <ListItemText primary={alert} />
+                        </ListItem>
+                      ))}
+                    </List>
+                  </>
+                )}
               </Paper>
             </Grid>
           )}
