@@ -338,7 +338,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                 <Grid item xs={12} md={6}>
                   <Paper elevation={2} sx={{ 
                     p: 2,
-                    bgcolor: COLORS.surface,
+                    bgcolor: 'rgba(0, 0, 0, 0.75)', // Fond noir avec 75% d'opacité
                     color: COLORS.text.primary,
                     '& .MuiTypography-root': {
                       color: COLORS.text.primary,
@@ -387,7 +387,10 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
           )}
 
           <Grid item xs={12}>
-            <Paper elevation={2} sx={{ p: 2 }}>
+            <Paper elevation={2} sx={{ 
+              p: 2,
+              bgcolor: 'rgba(0, 0, 0, 0.75)', // Fond noir avec 75% d'opacité
+            }}>
               <Typography variant="h6" gutterBottom>Description</Typography>
               <Typography variant="body1" paragraph>
                 {fullData?.description.long || perk.description}
@@ -397,7 +400,10 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
 
           {fullData?.technical_specifications?.core_components && (
             <Grid item xs={12} md={6}>
-              <Paper elevation={2} sx={{ p: 2 }}>
+              <Paper elevation={2} sx={{ 
+                p: 2,
+                bgcolor: 'rgba(0, 0, 0, 0.75)', // Fond noir avec 75% d'opacité
+              }}>
                 <Typography variant="h6" gutterBottom>Technical Specifications</Typography>
                 {fullData?.technical_specifications?.core_components?.length > 0 && (
                   <>
@@ -420,7 +426,10 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
 
           {fullData?.dependencies?.prerequisites && (
             <Grid item xs={12} md={6}>
-              <Paper elevation={2} sx={{ p: 2 }}>
+              <Paper elevation={2} sx={{ 
+                p: 2,
+                bgcolor: 'rgba(0, 0, 0, 0.75)', // Fond noir avec 75% d'opacité
+              }}>
                 <Typography variant="h6" gutterBottom>Dependencies</Typography>
                 
                 <Typography variant="subtitle1">Prerequisites:</Typography>
@@ -476,7 +485,10 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
 
           {fullData?.risks_and_mitigations?.technical_risks && (
             <Grid item xs={12}>
-              <Paper elevation={2} sx={{ p: 2 }}>
+              <Paper elevation={2} sx={{ 
+                p: 2,
+                bgcolor: 'rgba(0, 0, 0, 0.75)', // Fond noir avec 75% d'opacité
+              }}>
                 <Typography variant="h6" gutterBottom>Risks and Mitigations</Typography>
                 
                 {fullData?.risks_and_mitigations?.technical_risks?.length > 0 && (
