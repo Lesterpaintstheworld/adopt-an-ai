@@ -292,26 +292,15 @@ class PerkGenerator:
         self.logger = logging.getLogger(__name__)
         self.model = "claude-3-sonnet-20240229"
         
-        # Force UTF-8 encoding on Windows
-        import sys
-        if sys.platform.startswith('win'):
-            try:
-                # Try C.UTF-8 first
-                import locale
-                locale.setlocale(locale.LC_ALL, 'C.UTF-8')
-            except locale.Error:
-                try:
-                    # Then try UTF-8
-                    locale.setlocale(locale.LC_ALL, '.UTF-8')
-                except locale.Error:
-                    try:
-                        # Last attempt with default locale + UTF-8 encoding
-                        locale.setlocale(locale.LC_ALL, '')
-                        import codecs
-                        sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer)
-                        sys.stderr = codecs.getwriter('utf-8')(sys.stderr.buffer)
-                    except:
-                        self.logger.warning("Could not set UTF-8 locale, using system default")
+        # Configuration globale de l'encodage pour YAML
+        yaml.add_representer(
+            str,
+            lambda dumper, data: dumper.represent_scalar(
+                'tag:yaml.org,2002:str',
+                data,
+                style='|' if '\n' in data else None
+            )
+        )
         
         # Search for .env file in current and parent directories
         current_dir = Path(__file__).parent.absolute()
@@ -359,35 +348,25 @@ class PerkGenerator:
         }
 
     def sanitize_text(self, text):
-        """Sanitize text to handle encoding issues"""
+        """Nettoie et normalise le texte en UTF-8"""
         if not isinstance(text, str):
             return text
         
-        # Use UTF-8 consistently
-        text = text.encode('utf-8', 'replace').decode('utf-8')
+        # Normalisation Unicode
+        text = unicodedata.normalize('NFKC', text)
         
-        # Clean problematic characters while preserving valid ones
+        # Nettoyage des caractères problématiques
         text = ''.join(c for c in text if c.isprintable() or c in ['\n', '\r', '\t'])
-        
-        # Remove null bytes and replacement chars
-        text = text.replace('\u0000', '')
-        text = text.replace('\ufffd', '')
         
         return text
 
     async def _generate_raw_perk_details(self, perk_data: Dict, template: Dict) -> Dict:
         """Generate raw perk data using Claude"""
         try:
-            # Load tech tree for context
+            # Lecture du fichier tech tree avec encodage explicite
             tech_tree_path = Path("content/tech/tech-tree.yml")
-            try:
-                # First try with standard UTF-8
-                with open(tech_tree_path, encoding='utf-8') as f:
-                    tech_tree = yaml.safe_load(f)
-            except UnicodeError:
-                # Fallback to UTF-8 with BOM if standard UTF-8 fails
-                with open(tech_tree_path, encoding='utf-8-sig') as f:
-                    tech_tree = yaml.safe_load(f)
+            with open(tech_tree_path, 'r', encoding='utf-8-sig') as f:
+                tech_tree = yaml.safe_load(f)
 
             # Extract phase and layer for focused context
             phase, layer = extract_phase_and_layer(perk_data['capability_id'])
@@ -442,32 +421,29 @@ class PerkGenerator:
                 print("Error: Empty response from API")
                 return None
 
-            try:
+            if response.content:
                 raw_text = response.content[0].text
+                # Nettoyage et normalisation du texte
+                raw_text = self.sanitize_text(raw_text)
                 
-                # Force UTF-8 encoding and handle problematic characters
-                raw_text = raw_text.encode('utf-8', errors='replace').decode('utf-8')
+                # Nettoyage du formatage markdown
+                raw_text = raw_text.strip('`yaml\n`')
                 
-                # Clean non-printable characters while preserving newlines
-                raw_text = ''.join(c for c in raw_text if c.isprintable() or c in ['\n', '\r', '\t'])
-                
-                # Clean up markdown formatting
-                if raw_text.startswith('```yaml'):
-                    raw_text = raw_text[7:]
-                elif raw_text.startswith('```'):
-                    raw_text = raw_text[3:]
-                if raw_text.endswith('```'):
-                    raw_text = raw_text[:-3]
-                
-                # Parse YAML with safe_load
+                # Parse YAML avec gestion explicite de l'encodage
                 result = yaml.safe_load(raw_text)
                 
-                if not result:
-                    print("Error: Could not parse YAML response")
-                    print("Raw response:", raw_text)
-                    return None
-                
-                return result
+                if result:
+                    # Nettoyer récursivement toutes les chaînes dans le résultat
+                    def clean_dict(d):
+                        if isinstance(d, dict):
+                            return {k: clean_dict(v) for k, v in d.items()}
+                        elif isinstance(d, list):
+                            return [clean_dict(x) for x in d]
+                        elif isinstance(d, str):
+                            return self.sanitize_text(d)
+                        return d
+                    
+                    return clean_dict(result)
                 
             except yaml.YAMLError as e:
                 print("Error parsing YAML response:", e)
