@@ -23,6 +23,7 @@ phase_1:
       chronologicalOrder: 3
     
     - name: "Basic governance"
+      capability_id: "COM_P1_004"
       tag: "🤝 SOCIAL"
       shortDescription: "Participate in community decision-making through structured voting and feedback systems."
       longDescription: "Foundational governance system enabling democratic participation in platform decisions and resource allocation. Features include transparent voting mechanisms, proposal submission tools, and basic conflict resolution processes while maintaining community standards and fairness."
