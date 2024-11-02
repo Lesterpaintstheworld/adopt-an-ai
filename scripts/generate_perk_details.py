@@ -494,7 +494,7 @@ class PerkGenerator:
 def save_generation_stats(stats, output_file="generation_stats.yml"):
     """Save generation statistics to a YAML file"""
     with open(output_file, 'w', encoding='utf-8') as f:
-        yaml.dump(stats, f)
+        yaml.dump(stats, f, allow_unicode=True)
 
 async def main():
     generator = PerkGenerator()
