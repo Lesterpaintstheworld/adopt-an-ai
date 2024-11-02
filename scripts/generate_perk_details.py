@@ -3,6 +3,7 @@ import yaml
 import asyncio
 import logging
 import unicodedata
+import codecs
 from typing import Dict, List, Set
 from datetime import datetime, timedelta
 from anthropic import AsyncAnthropic
@@ -333,22 +334,23 @@ class PerkGenerator:
             'validation_time': 0
         }
 
-    def clean_text_for_yaml(self, text: str) -> str:
-        """Clean text to ensure it's YAML-safe"""
+    def sanitize_text(self, text):
+        """Sanitize text to handle encoding issues"""
         if not isinstance(text, str):
             return text
-            
-        # Encoder puis décoder en ignorant les caractères problématiques
-        text = text.encode('utf-8', 'ignore').decode('utf-8')
-        
-        # Nettoyer les caractères non-ASCII
-        text = ''.join(char for char in text if ord(char) < 128)
-        
+    
+        # Replace problematic characters with their closest ASCII equivalent
+        text = text.encode('ascii', 'replace').decode('ascii')
+    
+        # Additional cleaning for YAML compatibility
+        text = text.replace('\u0000', '')  # Remove null bytes
+        text = text.replace('\ufffd', '_') # Replace replacement character
+    
         # Escape YAML special characters
         special_chars = [':', '-', '[', ']', '{', '}', '|', '>', '"', "'"]
         for char in special_chars:
             text = text.replace(char, '\\' + char)
-        
+    
         return text
 
     async def _generate_raw_perk_details(self, perk_data: Dict, template: Dict) -> Dict:
@@ -563,7 +565,7 @@ async def main():
     
     # Load tech tree
     tech_tree_path = Path("content/tech/tech-tree.yml")
-    with open(tech_tree_path, encoding='utf-8') as f:
+    with codecs.open(tech_tree_path, 'r', encoding='utf-8', errors='replace') as f:
         tech_tree = yaml.safe_load(f)
 
     print("\nExisting capability files:")
@@ -640,11 +642,17 @@ async def main():
                                             cleaned_perk = {}
                                             for key, value in detailed_perk.items():
                                                 if isinstance(value, str):
-                                                    cleaned_perk[key] = generator.clean_text_for_yaml(value)
+                                                    cleaned_perk[key] = generator.sanitize_text(value)
+                                                elif isinstance(value, dict):
+                                                    cleaned_perk[key] = {k: generator.sanitize_text(v) if isinstance(v, str) else v 
+                                                                       for k, v in value.items()}
+                                                elif isinstance(value, list):
+                                                    cleaned_perk[key] = [generator.sanitize_text(item) if isinstance(item, str) else item 
+                                                                       for item in value]
                                                 else:
                                                     cleaned_perk[key] = value
                                                     
-                                            with open(perk_file, 'w', encoding='utf-8', errors='ignore') as f:
+                                            with codecs.open(perk_file, 'w', encoding='utf-8', errors='replace') as f:
                                                 yaml.dump(cleaned_perk, f, sort_keys=False, allow_unicode=True,
                                                          default_flow_style=False, width=float("inf"))
                                             print(f"Successfully generated {perk_file}")
