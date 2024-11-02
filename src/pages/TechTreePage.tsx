@@ -307,13 +307,7 @@ const TechItem = ({
             transition: 'transform 0.2s',
             zIndex: 10,
           },
-          backgroundColor: () => {
-            const alpha = 0.75;
-            return phase === 'phase_1' ? `rgba(13, 31, 97, ${alpha})` : // Deep space blue
-                   phase === 'phase_2' ? `rgba(16, 37, 114, ${alpha})` : // Slightly lighter deep space blue
-                   phase === 'phase_3' ? `rgba(19, 44, 135, ${alpha})` : // Even lighter deep space blue
-                   `rgba(22, 51, 160, ${alpha})`; // Lightest deep space blue
-          },
+          backgroundColor: 'rgba(0, 0, 0, 0.75)', // All boxes are black with 75% opacity
           fontWeight: item.name === highlightedItem || (item.prerequisites || []).includes(highlightedItem || '') ? 'bold' : 'normal',
         }}
       >
