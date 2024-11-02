@@ -21,8 +21,8 @@ const COLORS = {
   primary: '#007FFF',          // Bright blue
   secondary: '#0059B2',        // Darker blue
   text: {
-    primary: '#007FFF',        // Bright blue
-    secondary: '#0059B2'       // Darker blue
+    primary: '#FFFFFF',        // White text for better contrast
+    secondary: '#B0B0B0'       // Light gray for secondary text
   }
 };
 
@@ -403,6 +403,16 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
               <Paper elevation={2} sx={{ 
                 p: 2,
                 bgcolor: 'rgba(0, 0, 0, 0.75)', // Fond noir avec 75% d'opacité
+                color: COLORS.text.primary, // Ensure text is white
+                '& .MuiTypography-root': {
+                  color: COLORS.text.primary,
+                },
+                '& .MuiListItemText-primary': {
+                  color: COLORS.text.primary,
+                },
+                '& .MuiListItemText-secondary': {
+                  color: COLORS.text.secondary,
+                },
               }}>
                 <Typography variant="h6" gutterBottom>Technical Specifications</Typography>
                 {fullData?.technical_specifications?.core_components?.length > 0 && (
@@ -535,7 +545,20 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
 
           {fullData?.success_metrics?.operational_kpis?.length > 0 && (
             <Grid item xs={12} md={6}>
-              <Paper elevation={2} sx={{ p: 2 }}>
+              <Paper elevation={2} sx={{ 
+                p: 2,
+                bgcolor: 'rgba(0, 0, 0, 0.75)',
+                color: COLORS.text.primary,
+                '& .MuiTypography-root': {
+                  color: COLORS.text.primary,
+                },
+                '& .MuiListItemText-primary': {
+                  color: COLORS.text.primary,
+                },
+                '& .MuiListItemText-secondary': {
+                  color: COLORS.text.secondary,
+                }
+              }}>
                 <Typography variant="h6" gutterBottom>Success Metrics</Typography>
                 
                 <Typography variant="subtitle1" gutterBottom>Operational KPIs:</Typography>
