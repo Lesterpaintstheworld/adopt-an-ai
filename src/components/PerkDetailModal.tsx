@@ -342,7 +342,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
             </Grid>
           )}
 
-          {fullData?.success_metrics?.operational_kpis && (
+          {fullData?.success_metrics?.operational_kpis?.length > 0 && (
             <Grid item xs={12} md={6}>
               <Paper elevation={2} sx={{ p: 2 }}>
                 <Typography variant="h6" gutterBottom>Success Metrics</Typography>
