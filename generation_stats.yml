@@ -1,7 +1,7 @@
-attempts: 25
+attempts: 0
 dependency_fixes: 0
 failures: 0
 fixes_required: 0
 metric_fixes: 0
-successes: 24
+successes: 0
 validation_time: 0

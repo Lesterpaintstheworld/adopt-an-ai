@@ -9,6 +9,13 @@ const formatValue = (value: any): string => {
     if (Array.isArray(value)) {
       return value.map(item => formatValue(item)).join(', ');
     }
+    // Handle specific object structures
+    if (value.strategy && value.phases) {
+      return `Strategy: ${value.strategy}, Phases: ${formatValue(value.phases)}`;
+    }
+    if (value.current && value.target) {
+      return `Current: ${value.current}, Target: ${value.target}`;
+    }
     return Object.entries(value)
       .map(([key, val]) => `${key}: ${formatValue(val)}`)
       .join(', ');
