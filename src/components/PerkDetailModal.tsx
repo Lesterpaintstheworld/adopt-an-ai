@@ -810,14 +810,15 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                 
                 <Typography variant="subtitle1">Metrics Collection:</Typography>
                 <List>
-                  {fullData.monitoring_and_maintenance.metrics_collection.map((metric: string, index: number) => (
+                  {fullData?.monitoring_and_maintenance?.metrics_collection?.map((metric: string, index: number) => (
                     <ListItem key={index}>
                       <ListItemText primary={metric} />
                     </ListItem>
                   ))}
                 </List>
 
-                {fullData?.monitoring_and_maintenance?.alerting?.length > 0 && (
+                {fullData?.monitoring_and_maintenance?.alerting && 
+                 fullData.monitoring_and_maintenance.alerting.length > 0 && (
                   <>
                     <Divider sx={{ my: 2 }} />
                     <Typography variant="subtitle1">Alerts:</Typography>
