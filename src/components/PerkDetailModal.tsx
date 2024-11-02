@@ -32,9 +32,18 @@ const formatValue = (value: any): string => {
   }
   
   // Handle Date objects
-  if (value instanceof Date || (typeof value === 'string' && !isNaN(Date.parse(value)))) {
-    const date = value instanceof Date ? value : new Date(value);
-    return date.toLocaleDateString();
+  if (value instanceof Date) {
+    return value.toLocaleDateString();
+  }
+  
+  // Handle date strings
+  if (typeof value === 'string' && !isNaN(Date.parse(value))) {
+    try {
+      const date = new Date(value);
+      return date.toLocaleDateString();
+    } catch {
+      return value;
+    }
   }
   
   if (typeof value === 'object') {
@@ -46,11 +55,15 @@ const formatValue = (value: any): string => {
       return `Strategy: ${value.strategy}, Phases: ${formatValue(value.phases)}`;
     }
     if (value.current && value.target) {
-      return `Current: ${value.current}, Target: ${value.target}`;
+      return `Current: ${formatValue(value.current)}, Target: ${formatValue(value.target)}`;
     }
-    return Object.entries(value)
-      .map(([key, val]) => `${key}: ${formatValue(val)}`)
-      .join(', ');
+    try {
+      return Object.entries(value)
+        .map(([key, val]) => `${key}: ${formatValue(val)}`)
+        .join(', ');
+    } catch {
+      return String(value);
+    }
   }
   return String(value);
 };
