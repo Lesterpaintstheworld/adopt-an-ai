@@ -398,19 +398,29 @@ async def main():
     with open(tech_tree_path, encoding='utf-8') as f:
         tech_tree = yaml.safe_load(f)
     
+    # Debug prints
+    print("\nDebug Information:")
+    print("1. Template loaded:", bool(template))
+    print("2. Tech tree loaded:", bool(tech_tree))
+    print("\nScanning for capabilities to generate:")
+    
     generator = PerkGenerator()
     
     try:
         # Process each phase and layer
         for phase_key, phase_data in tech_tree.items():
+            print(f"\nChecking phase: {phase_key}")
             if isinstance(phase_data, dict):
                 for layer_key, layer_items in phase_data.items():
+                    print(f"  Checking layer: {layer_key}")
                     if isinstance(layer_items, list):
                         for item in layer_items:
                             if "capability_id" in item:
                                 perk_file = Path(f"content/tech/{item['capability_id']}.yml")
+                                print(f"    Found capability: {item['capability_id']}")
+                                print(f"    File exists: {perk_file.exists()}")
                                 if not perk_file.exists():
-                                    print(f"Generating details for {item['capability_id']}...")
+                                    print(f"    Generating details for {item['capability_id']}...")
                                     
                                     detailed_perk = await generator.generate_perk_details(item, template)
                                     
