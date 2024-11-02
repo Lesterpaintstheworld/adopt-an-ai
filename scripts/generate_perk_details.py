@@ -292,6 +292,12 @@ class PerkGenerator:
         self.logger = logging.getLogger(__name__)
         self.model = "claude-3-sonnet-20240229"
         
+        # Force UTF-8 encoding on Windows
+        import sys
+        if sys.platform.startswith('win'):
+            import locale
+            locale.setlocale(locale.LC_ALL, 'C.UTF-8')
+        
         # Search for .env file in current and parent directories
         current_dir = Path(__file__).parent.absolute()
         root_dir = current_dir
@@ -360,11 +366,12 @@ class PerkGenerator:
             # Load tech tree for context
             tech_tree_path = Path("content/tech/tech-tree.yml")
             try:
-                with open(tech_tree_path, encoding='utf-8', errors='replace') as f:
+                # First try with standard UTF-8
+                with open(tech_tree_path, encoding='utf-8') as f:
                     tech_tree = yaml.safe_load(f)
             except UnicodeError:
-                # Fallback to read with different encoding if UTF-8 fails
-                with open(tech_tree_path, encoding='cp1252', errors='replace') as f:
+                # Fallback to UTF-8 with BOM if standard UTF-8 fails
+                with open(tech_tree_path, encoding='utf-8-sig') as f:
                     tech_tree = yaml.safe_load(f)
 
             # Extract phase and layer for focused context
