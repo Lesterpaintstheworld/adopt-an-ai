@@ -1,14 +1,44 @@
 import os
 import yaml
 import asyncio
+import logging
+from typing import Dict, List, Set
+from datetime import datetime
 from anthropic import AsyncAnthropic
 from pathlib import Path
 
-def validate_perk_data(generated_data, original_data, template):
-    """Validate generated perk data against original data and template"""
+# Constants
+VALID_TAGS = {'🤝 SOCIAL', '⚙️ OPERATIONAL', '🎨 CREATIVE', '🧠 COGNITIVE', '🔧 TECHNICAL', '🌐 INTEGRATION'}
+LAYER_SPECIFIC_RULES = {
+    'compute_layer': {'required_metrics': ['utilization', 'performance']},
+    'model_layer': {'required_metrics': ['accuracy', 'latency']},
+    'agent_layer': {'required_metrics': ['reliability', 'response_time']},
+    'application_layer': {'required_metrics': ['availability', 'error_rate']},
+    'ecosystem_layer': {'required_metrics': ['adoption', 'engagement']},
+    'multi_agent_layer': {'required_metrics': ['coordination', 'throughput']}
+}
+
+def setup_logging():
+    """Configure logging"""
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        handlers=[
+            logging.FileHandler('perk_generation.log'),
+            logging.StreamHandler()
+        ]
+    )
+
+def validate_perk_data(generated_data: Dict, original_data: Dict, template: Dict) -> List[str]:
+    """Enhanced validation of generated perk data"""
     inconsistencies = []
     
-    # Verify required fields
+    # Template structure validation
+    for key in template.keys():
+        if key not in generated_data:
+            inconsistencies.append(f"Missing template section: {key}")
+    
+    # Required fields validation
     required_fields = [
         'capability_id',
         'name',
@@ -21,24 +51,70 @@ def validate_perk_data(generated_data, original_data, template):
         if field not in generated_data:
             inconsistencies.append(f"Missing required field: {field}")
     
-    # Check consistency with original data
-    if generated_data['capability_id'] != original_data['capability_id']:
-        inconsistencies.append("Inconsistent capability_id")
+    # Tag validation
+    if 'tag' in original_data and original_data['tag'] not in VALID_TAGS:
+        inconsistencies.append(f"Invalid tag: {original_data['tag']}")
     
-    # Check dependencies consistency
+    # Prerequisites validation
     if 'prerequisites' in original_data:
-        original_prereqs = set(original_data['prerequisites'])
+        prereqs = set(original_data['prerequisites'])
+        if not validate_prerequisites_exist(prereqs):
+            inconsistencies.append("Invalid prerequisites referenced")
+        
+        # Check dependencies consistency
         generated_prereqs = set()
         if 'dependencies' in generated_data and 'prerequisites' in generated_data['dependencies']:
             for layer in generated_data['dependencies']['prerequisites'].values():
                 if isinstance(layer, list):
                     generated_prereqs.update(layer)
         
-        missing_prereqs = original_prereqs - generated_prereqs
+        missing_prereqs = prereqs - generated_prereqs
         if missing_prereqs:
             inconsistencies.append(f"Missing prerequisites: {missing_prereqs}")
     
+    # Chronological order validation
+    if 'chronologicalOrder' in original_data:
+        if not validate_chronological_order(original_data):
+            inconsistencies.append("Invalid chronological order")
+    
     return inconsistencies
+
+def validate_prerequisites_exist(prereqs: Set[str]) -> bool:
+    """Validate that all prerequisites exist in the tech tree"""
+    with open(Path("content/tech/tech-tree.yml")) as f:
+        tech_tree = yaml.safe_load(f)
+    
+    all_capabilities = set()
+    for phase in tech_tree.values():
+        if isinstance(phase, dict):
+            for layer in phase.values():
+                if isinstance(layer, list):
+                    for item in layer:
+                        if isinstance(item, dict) and 'name' in item:
+                            all_capabilities.add(item['name'])
+    
+    return all(prereq in all_capabilities for prereq in prereqs)
+
+def validate_chronological_order(data: Dict) -> bool:
+    """Validate chronological order consistency"""
+    if 'chronologicalOrder' not in data:
+        return True
+        
+    phase, layer = extract_phase_and_layer(data.get('capability_id', ''))
+    if not phase or not layer:
+        return True
+        
+    with open(Path("content/tech/tech-tree.yml")) as f:
+        tech_tree = yaml.safe_load(f)
+    
+    layer_items = tech_tree.get(phase, {}).get(layer, [])
+    for item in layer_items:
+        if isinstance(item, dict) and 'chronologicalOrder' in item:
+            if item['chronologicalOrder'] < data['chronologicalOrder'] and \
+               set(data.get('prerequisites', [])).intersection(set(item.get('prerequisites', []))):
+                return False
+    
+    return True
 
 def validate_technical_coherence(generated_data, phase, layer):
     """Validate technical coherence based on phase and layer context"""
@@ -177,6 +253,8 @@ def fix_inconsistencies(generated_data, original_data, inconsistencies):
 
 class PerkGenerator:
     def __init__(self):
+        setup_logging()
+        self.logger = logging.getLogger(__name__)
         self.model = "claude-3-sonnet-20240229"
         api_key = os.getenv("ANTHROPIC_API_KEY")
         if not api_key:
@@ -227,10 +305,10 @@ class PerkGenerator:
             print(f"Error generating perk details: {e}")
             return None
 
-    async def generate_perk_details(self, perk_data, template, max_retries=3):
-        """Generate detailed perk data using Claude with enhanced validation"""
-        import time
-        start_time = time.time()
+    async def generate_perk_details(self, perk_data: Dict, template: Dict, max_retries: int = 3) -> Dict:
+        """Enhanced perk generation with better error handling and logging"""
+        self.logger.info(f"Generating details for {perk_data.get('capability_id', 'unknown')}")
+        start_time = datetime.now()
         
         self.generation_stats['attempts'] += 1
         
