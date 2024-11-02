@@ -13,6 +13,7 @@ export interface Perk {
 export interface PerkFullData {
   capability_id: string;
   name: string;
+  tag: string;
   version_control: {
     current_version: string;
     last_updated: string;
