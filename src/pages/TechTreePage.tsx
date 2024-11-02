@@ -356,7 +356,11 @@ const TechItem = ({
   );
 };
 
-const TechTreePage = () => {
+interface TechTreePageProps {
+  standalone?: boolean;
+}
+
+const TechTreePage: React.FC<TechTreePageProps> = ({ standalone = false }) => {
   const [positions, setPositions] = useState<Record<string, { x: number, y: number }>>({});
   const [highlightedItem, setHighlightedItem] = useState<string | null>(null);
   const [modalState, setModalState] = useState<ModalState>({
@@ -398,13 +402,13 @@ const TechTreePage = () => {
       <Box sx={{ 
         height: '100vh', 
         overflow: 'hidden',
-        paddingTop: '64px'
+        paddingTop: standalone ? '0' : '64px'
       }}>
         <Box
           ref={containerRef}
           sx={{
             position: 'fixed',
-            top: 64,
+            top: standalone ? 0 : 64,
             left: 0,
             right: 0,
             bottom: 0,

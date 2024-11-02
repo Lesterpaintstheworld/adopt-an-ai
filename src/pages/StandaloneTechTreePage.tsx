@@ -8,16 +8,9 @@ const StandaloneTechTreePage = () => {
       height: '100vh',
       width: '100vw',
       overflow: 'hidden',
-      // Remove the top padding that was compensating for the menu
-      '& > div': {
-        paddingTop: '0 !important'
-      },
-      // Adjust the fixed positioning of the inner container
-      '& > div > div': {
-        top: '0 !important'
-      }
+      backgroundColor: 'background.default'
     }}>
-      <TechTreePage />
+      <TechTreePage standalone={true} />
     </Box>
   );
 };
