@@ -320,14 +320,16 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                     <Typography variant="subtitle1">Ethical Risks:</Typography>
                     <List>
                       {fullData.risks_and_mitigations.ethical_risks.map((risk, index) => (
-                    <ListItem key={index}>
-                      <ListItemText
-                        primary={risk.risk}
-                        secondary={`Mitigation: ${risk.mitigation}`}
-                      />
-                    </ListItem>
-                  ))}
-                </List>
+                        <ListItem key={index}>
+                          <ListItemText
+                            primary={risk.risk}
+                            secondary={`Mitigation: ${risk.mitigation}`}
+                          />
+                        </ListItem>
+                      ))}
+                    </List>
+                  </>
+                )}
               </Paper>
             </Grid>
           )}
