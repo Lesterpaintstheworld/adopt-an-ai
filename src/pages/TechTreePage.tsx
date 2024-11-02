@@ -261,7 +261,7 @@ const TechItem = ({
   highlightedItem,
   onClick
 }: TechItemProps) => {
-  const [mergedData, setMergedData] = useState<Perk>(item);
+  const [mergedData, setMergedData] = React.useState<Perk>(item);
 
   useEffect(() => {
     const loadData = async () => {
