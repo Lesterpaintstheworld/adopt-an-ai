@@ -10,72 +10,99 @@ export interface Perk {
   [key: string]: any; // Allow string indexing for sanitization
 }
 
-export interface PerkFullData {
-  capability_id: string;
-  name: string;
-  tag: string;
-  version_control: {
-    current_version: string;
-    last_updated: string;
+export interface PerkFullData extends Perk {
+  dependencies_visualization?: {
+    primary_diagram?: string;
+  };
+  dependencies: {
+    prerequisites: {
+      [key: string]: Array<{
+        capability?: string;
+        criticality?: string;
+      }>;
+    };
+    enables?: {
+      [key: string]: Array<{
+        capability: string;
+        relationship?: string;
+      }>;
+    };
+  };
+  security_requirements?: {
+    access_control?: Array<string | Record<string, any>>;
+    compliance?: Array<string | Record<string, any>> | Record<string, any>;
+    authentication?: string;
+    authorization?: string;
+    data_protection?: string;
+  };
+  success_metrics?: {
+    operational_kpis?: Array<{
+      metric: string;
+      current: string | number | Date;
+      target: string | number | Date;
+    }>;
+  };
+  monitoring_and_maintenance?: {
+    metrics_collection?: string[];
+    alerting?: string[];
+  };
+  version_control?: {
     version_history: Array<{
-      version: string;
-      date: string;
+      version: string | number;
+      date: string | Date;
       changes: string[];
       reviewed_by: string;
       approved_by?: string;
     }>;
   };
-  description: {
-    short: string;
-    long: string;
-  };
-  technical_specifications: {
-    core_components: Array<{
+  technical_specifications?: {
+    core_components?: Array<{
       name: string;
       description: string;
     }>;
-    performance_metrics: {
-      base_compute: {
-        cpu: string;
-        memory: string;
-        storage: string;
-      };
-      guaranteed_uptime: string;
-      response_time: string;
+    performance_metrics?: {
+      [key: string]: string | number;
     };
   };
-  dependencies: {
-    prerequisites: {
-      infrastructure: string[];
-      system: string[];
-    };
-    enables: {
-      compute_layer: string[];
-      model_layer: string[];
-    };
-  };
-  risks_and_mitigations: {
-    technical_risks: Array<{
+  risks_and_mitigations?: {
+    technical_risks?: Array<{
       risk: string;
-      mitigation: string;
       severity: string;
+      mitigation: string;
     }>;
-    ethical_risks: Array<{
+    ethical_risks?: Array<{
       risk: string;
       mitigation: string;
     }>;
   };
-  success_metrics: {
-    operational_kpis: Array<{
-      metric: string;
-      target: string;
-      current: string;
-    }>;
-    adoption_metrics: Array<{
-      metric: string;
-      target: string;
-      current: string;
-    }>;
+  documentation?: {
+    technical_docs?: string[];
+    training_materials?: string[];
+  };
+  deployment?: {
+    strategies: Array<{
+      strategy?: string;
+      phases?: string[];
+    } | string>;
+    rollback_procedures: string[];
+  };
+  future_enhancements?: {
+    planned_upgrades: {
+      short_term: string[];
+      medium_term: string[];
+      long_term: string[];
+    };
+  };
+  cmmi_assessment?: {
+    current_level: number | string;
+    assessment_date: string | Date;
+    process_areas: {
+      [key: string]: {
+        maturity: string | number;
+        strengths: string[];
+        improvements_needed: string[];
+      };
+    };
   };
 }
 

@@ -4,18 +4,6 @@ import DialogContent from '@mui/material/DialogContent';
 import mermaid from 'mermaid';
 import { Perk } from '../types/tech';
 
-const sanitizePerkData = (perk: Perk | null): Perk | null => {
-  if (!perk) return null;
-  
-  const sanitized = { ...perk };
-  Object.keys(sanitized).forEach(key => {
-    if (sanitized[key] && typeof sanitized[key] === 'object') {
-      sanitized[key] = JSON.stringify(sanitized[key]);
-    }
-  });
-  return sanitized;
-};
-
 const formatDateValue = (value: any): string => {
   if (value instanceof Date) {
     return value.toLocaleDateString();
@@ -597,7 +585,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                   lineHeight: 1.6      // Ajustement de l'interligne pour une meilleure lisibilité
                 }}
               >
-                {fullData?.description?.long || perk.description}
+                {fullData?.description?.long || perk?.description}
               </Typography>
             </Paper>
           </Grid>
