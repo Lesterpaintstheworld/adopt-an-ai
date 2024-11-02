@@ -41,49 +41,71 @@ def validate_perk_data(generated_data: Dict, original_data: Dict, template: Dict
     """Enhanced validation of generated perk data"""
     inconsistencies = []
     
-    # Template structure validation
-    for key in template.keys():
-        if key not in generated_data:
-            inconsistencies.append(f"Missing template section: {key}")
-    
-    # Required fields validation
-    required_fields = [
-        'capability_id',
-        'name',
-        'description',
-        'technical_specifications',
-        'dependencies'
-    ]
-    
-    for field in required_fields:
-        if field not in generated_data:
-            inconsistencies.append(f"Missing required field: {field}")
-    
-    # Tag validation
-    if 'tag' in original_data and original_data['tag'] not in VALID_TAGS:
-        inconsistencies.append(f"Invalid tag: {original_data['tag']}")
-    
-    # Prerequisites validation
-    if 'prerequisites' in original_data:
-        prereqs = set(original_data['prerequisites'])
-        if not validate_prerequisites_exist(prereqs):
-            inconsistencies.append("Invalid prerequisites referenced")
+    try:
+        # Template structure validation
+        if template:
+            for key in template.keys():
+                if key not in generated_data:
+                    inconsistencies.append(f"Missing template section: {key}")
         
-        # Check dependencies consistency
-        generated_prereqs = set()
-        if 'dependencies' in generated_data and 'prerequisites' in generated_data['dependencies']:
-            for layer in generated_data['dependencies']['prerequisites'].values():
-                if isinstance(layer, list):
-                    generated_prereqs.update(layer)
+        # Required fields validation
+        required_fields = [
+            'capability_id',
+            'name',
+            'description',
+            'technical_specifications',
+            'dependencies'
+        ]
         
-        missing_prereqs = prereqs - generated_prereqs
-        if missing_prereqs:
-            inconsistencies.append(f"Missing prerequisites: {missing_prereqs}")
+        for field in required_fields:
+            if field not in generated_data:
+                inconsistencies.append(f"Missing required field: {field}")
+        
+        # Tag validation
+        if 'tag' in original_data:
+            tag = original_data.get('tag')
+            if isinstance(tag, str) and tag not in VALID_TAGS:
+                inconsistencies.append(f"Invalid tag: {tag}")
+        
+        # Prerequisites validation
+        if 'prerequisites' in original_data:
+            prereqs = set()
+            if isinstance(original_data['prerequisites'], list):
+                prereqs.update(str(p) for p in original_data['prerequisites'])
+            elif isinstance(original_data['prerequisites'], dict):
+                for items in original_data['prerequisites'].values():
+                    if isinstance(items, list):
+                        prereqs.update(str(p) for p in items)
+            
+            if prereqs and not validate_prerequisites_exist(prereqs):
+                inconsistencies.append("Invalid prerequisites referenced")
+            
+            # Check dependencies consistency
+            generated_prereqs = set()
+            if 'dependencies' in generated_data and 'prerequisites' in generated_data['dependencies']:
+                deps = generated_data['dependencies']['prerequisites']
+                if isinstance(deps, dict):
+                    for layer in deps.values():
+                        if isinstance(layer, list):
+                            generated_prereqs.update(str(p) for p in layer)
+                elif isinstance(deps, list):
+                    generated_prereqs.update(str(p) for p in deps)
+            
+            missing_prereqs = prereqs - generated_prereqs
+            if missing_prereqs:
+                inconsistencies.append(f"Missing prerequisites: {missing_prereqs}")
+        
+        # Chronological order validation
+        if 'chronologicalOrder' in original_data:
+            if not validate_chronological_order(original_data):
+                inconsistencies.append("Invalid chronological order")
     
-    # Chronological order validation
-    if 'chronologicalOrder' in original_data:
-        if not validate_chronological_order(original_data):
-            inconsistencies.append("Invalid chronological order")
+    except Exception as e:
+        print(f"Error in validate_perk_data: {str(e)}")
+        print(f"Error type: {type(e)}")
+        import traceback
+        print("Traceback:", traceback.format_exc())
+        inconsistencies.append(f"Validation error: {str(e)}")
     
     return inconsistencies
 
