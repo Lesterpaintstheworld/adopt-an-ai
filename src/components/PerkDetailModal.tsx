@@ -3,8 +3,16 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import mermaid from 'mermaid';
 
+/**
+ * Formate le nom du perk pour l'utiliser comme nom de fichier d'icône
+ * Exemple: "Agent Coalitions" -> "agent-coalitions"
+ */
 const getPerkIconFilename = (perkName: string): string => {
-  return perkName.toLowerCase().replace(/\s+/g, '-');
+  // Convertir en minuscules et remplacer les espaces par des tirets
+  const formattedName = perkName.toLowerCase().replace(/\s+/g, '-');
+  
+  // Retirer les caractères spéciaux si nécessaire
+  return formattedName.replace(/[^a-z0-9-]/g, '');
 };
 
 const COLORS = {
