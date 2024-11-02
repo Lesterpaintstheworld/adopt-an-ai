@@ -158,10 +158,10 @@ phase_1:
     - Base GPT-4 integration
     - Basic compute allocation
 
-  - name: Interactive Workflows
+  - name: Code Generation
     tag: 🎨 CREATIVE
-    shortDescription: "Create and manage interactive processes with branching logic and user feedback"
-    longDescription: "Sophisticated workflow management system that enables creation and execution of complex interactive processes. Features dynamic branching, user input handling, and progress tracking while maintaining process integrity and user engagement."
+    shortDescription: "Create and manage code with intelligent generation and optimization"
+    longDescription: "Advanced code generation system that enables automated creation and optimization of software code. Features dynamic code analysis, pattern recognition, and intelligent refactoring while maintaining code quality and standards."
     chronologicalOrder: 6
     capability_id: APP_P1_004
     prerequisites:
