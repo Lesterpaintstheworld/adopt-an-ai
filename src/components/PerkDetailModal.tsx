@@ -111,22 +111,29 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
   const [mermaidError, setMermaidError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (open && fullData?.dependencies_visualization?.primary_diagram && !mermaidInitialized) {
+    if (!open || !fullData?.dependencies_visualization?.primary_diagram || mermaidInitialized) {
+      return;
+    }
+
+    const initializeMermaid = async () => {
       setIsLoading(true);
       try {
-        mermaid.initialize({
+        await mermaid.initialize({
           theme: 'default',
           securityLevel: 'loose',
           startOnLoad: true
         });
-        mermaid.contentLoaded();
+        await mermaid.contentLoaded();
         setMermaidInitialized(true);
       } catch (error) {
         setMermaidError(error instanceof Error ? error.message : 'Error initializing diagram');
+        console.error('Mermaid initialization error:', error);
       } finally {
         setIsLoading(false);
       }
-    }
+    };
+
+    initializeMermaid();
   }, [open, fullData?.dependencies_visualization?.primary_diagram, mermaidInitialized]);
 
   useEffect(() => {
@@ -336,7 +343,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                         <ListItem key={index}>
                           <ListItemText
                             primary={
-                              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                              <Box component="div" sx={{ display: 'flex', alignItems: 'center' }}>
                                 {risk.risk}
                                 <SeverityBadge severity={risk.severity} />
                               </Box>
