@@ -16,13 +16,13 @@ const getPerkIconFilename = (perkName: string): string => {
 };
 
 const COLORS = {
-  background: '#1a1a1a',        // Dark gray background
-  surface: '#2d2d2d',          // Lighter surface for cards
-  primary: '#007FFF',          // Bright blue
-  secondary: '#0059B2',        // Darker blue
+  background: '#121212',        // Fond noir
+  surface: '#242424',          // Box grises
+  primary: '#007FFF',          // Bleu pour les accents
+  secondary: '#0059B2',        // Bleu foncé
   text: {
-    primary: '#FFFFFF',        // White text for better contrast
-    secondary: '#CCCCCC'       // Lighter gray for better readability
+    primary: '#FFFFFF',        // Texte blanc
+    secondary: '#CCCCCC'       // Texte gris clair
   }
 };
 
@@ -237,10 +237,10 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
         width: '80%',
         maxWidth: 1200,
         maxHeight: '90vh',
-        bgcolor: COLORS.surface,
+        bgcolor: COLORS.background,
         color: COLORS.text.primary,
         borderRadius: 2,
-        boxShadow: `0 0 24px rgba(0, 127, 255, 0.3)`, // Blue glow
+        boxShadow: 24,
         overflow: 'auto',
         p: 4,
         scrollBehavior: 'smooth',
@@ -338,7 +338,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                 <Grid item xs={12} md={6}>
                   <Paper elevation={2} sx={{ 
                     p: 2,
-                    bgcolor: 'rgba(0, 0, 0, 0.75)', // Fond noir avec 75% d'opacité
+                    bgcolor: COLORS.surface,
                     color: COLORS.text.primary,
                     '& .MuiTypography-root': {
                       color: COLORS.text.primary,
@@ -389,7 +389,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
           <Grid item xs={12}>
             <Paper elevation={2} sx={{ 
               p: 2,
-              bgcolor: 'rgba(0, 0, 0, 0.75)', // Fond noir avec 75% d'opacité
+              bgcolor: COLORS.surface,
             }}>
               <Typography variant="h6" gutterBottom>Description</Typography>
               <Typography variant="body1" paragraph>
@@ -402,7 +402,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
             <Grid item xs={12} md={6}>
               <Paper elevation={2} sx={{ 
                 p: 2,
-                bgcolor: 'rgba(45, 45, 45, 0.95)', // Lighter dark background
+                bgcolor: COLORS.surface,     // Box grises
                 color: COLORS.text.primary, // Ensure text is white
                 '& .MuiTypography-root': {
                   color: COLORS.text.primary,
@@ -991,6 +991,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
           PaperProps={{
             sx: {
               bgcolor: COLORS.background,
+              color: COLORS.text.primary,
               boxShadow: 'none',
               borderRadius: 2,
             },
