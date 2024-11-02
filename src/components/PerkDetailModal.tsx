@@ -149,6 +149,13 @@ interface PerkFullData extends Perk {
       }>;
     };
   };
+  security_requirements?: {
+    access_control?: string[] | any;
+    compliance?: string[] | any;
+    authentication?: string;
+    authorization?: string;
+    data_protection?: string;
+  };
   success_metrics?: {
     operational_kpis?: Array<{
       metric: string;
