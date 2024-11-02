@@ -209,6 +209,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
   const [mermaidInitialized, setMermaidInitialized] = useState(false);
   const [mermaidError, setMermaidError] = useState<string | null>(null);
   const [isImageOpen, setIsImageOpen] = useState(false);
+  const [isVersionHistoryExpanded, setIsVersionHistoryExpanded] = useState(false);
 
   useEffect(() => {
     if (!open || !fullData?.dependencies_visualization?.primary_diagram || mermaidInitialized) {
@@ -367,46 +368,90 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                     p: 2,
                     bgcolor: COLORS.surface,
                     color: COLORS.text.primary,
-                    '& .MuiTypography-root': {
-                      color: COLORS.text.primary,
-                    },
-                    '& .MuiListItemText-primary': {
-                      color: COLORS.text.primary,
-                    },
-                    '& .MuiListItemText-secondary': {
-                      color: COLORS.text.secondary,
-                    },
                   }}>
-                    <Typography variant="h6" gutterBottom>Version History</Typography>
-                    <Timeline>
-                      {fullData.version_control.version_history.map((version, index) => (
-                        <TimelineItem key={index}>
-                          <TimelineSeparator>
-                            <TimelineDot color={index === 0 ? "primary" : "grey"} />
-                            {index < fullData.version_control.version_history.length - 1 && <TimelineConnector />}
-                          </TimelineSeparator>
-                          <TimelineContent>
-                            <Typography variant="subtitle2">
-                              Version {formatValue(version.version)} - {formatValue(version.date)}
-                            </Typography>
-                            <List dense>
-                              {version.changes.map((change, changeIndex) => (
-                                <ListItem key={changeIndex}>
-                                  <ListItemIcon>
-                                    <FiberManualRecordIcon sx={{ fontSize: 8 }} />
-                                  </ListItemIcon>
-                                  <ListItemText primary={change} />
-                                </ListItem>
-                              ))}
-                            </List>
-                            <Typography variant="caption" color="textSecondary">
-                              Reviewed by: {formatValue(version.reviewed_by)}
-                              {version.approved_by && ` | Approved by: ${formatValue(version.approved_by)}`}
-                            </Typography>
-                          </TimelineContent>
-                        </TimelineItem>
-                      ))}
-                    </Timeline>
+                    <Accordion 
+                      expanded={isVersionHistoryExpanded}
+                      onChange={() => setIsVersionHistoryExpanded(!isVersionHistoryExpanded)}
+                      sx={{
+                        bgcolor: 'transparent',
+                        '&:before': {
+                          display: 'none',
+                        },
+                        '& .MuiAccordionSummary-root': {
+                          minHeight: '48px',
+                          '&.Mui-expanded': {
+                            minHeight: '48px',
+                          }
+                        },
+                        '& .MuiAccordionSummary-content': {
+                          margin: '12px 0',
+                          '&.Mui-expanded': {
+                            margin: '12px 0',
+                          }
+                        }
+                      }}
+                    >
+                      <AccordionSummary
+                        expandIcon={<ExpandMoreIcon sx={{ color: COLORS.text.primary }} />}
+                        sx={{ p: 0 }}
+                      >
+                        <Typography variant="h6">Version History</Typography>
+                      </AccordionSummary>
+                      <AccordionDetails sx={{ p: 0, pt: 1 }}>
+                        <Timeline sx={{ 
+                          [`& .MuiTimelineItem-root:before`]: {
+                            flex: 0,
+                            padding: 0
+                          }
+                        }}>
+                          {fullData.version_control.version_history.map((version, index) => (
+                            <TimelineItem key={index} sx={{ minHeight: 'auto' }}>
+                              <TimelineSeparator>
+                                <TimelineDot 
+                                  color={index === 0 ? "primary" : "grey"} 
+                                  sx={{ my: 0.5 }}
+                                />
+                                {index < fullData.version_control.version_history.length - 1 && (
+                                  <TimelineConnector />
+                                )}
+                              </TimelineSeparator>
+                              <TimelineContent sx={{ py: '12px', px: 2 }}>
+                                <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
+                                  Version {formatValue(version.version)} - {formatValue(version.date)}
+                                </Typography>
+                                <List dense sx={{ py: 0 }}>
+                                  {version.changes.map((change, changeIndex) => (
+                                    <ListItem key={changeIndex} sx={{ py: 0 }}>
+                                      <ListItemIcon sx={{ minWidth: 24 }}>
+                                        <FiberManualRecordIcon sx={{ fontSize: 8 }} />
+                                      </ListItemIcon>
+                                      <ListItemText 
+                                        primary={change}
+                                        primaryTypographyProps={{
+                                          variant: 'body2',
+                                          sx: { color: COLORS.text.secondary }
+                                        }}
+                                      />
+                                    </ListItem>
+                                  ))}
+                                </List>
+                                <Typography 
+                                  variant="caption" 
+                                  sx={{ 
+                                    color: COLORS.text.secondary,
+                                    display: 'block',
+                                    mt: 0.5 
+                                  }}
+                                >
+                                  Reviewed by: {formatValue(version.reviewed_by)}
+                                  {version.approved_by && ` | Approved by: ${formatValue(version.approved_by)}`}
+                                </Typography>
+                              </TimelineContent>
+                            </TimelineItem>
+                          ))}
+                        </Timeline>
+                      </AccordionDetails>
+                    </Accordion>
                   </Paper>
                 </Grid>
               )}
