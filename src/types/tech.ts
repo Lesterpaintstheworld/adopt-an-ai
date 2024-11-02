@@ -11,6 +11,7 @@ export interface Perk {
 }
 
 export interface PerkFullData extends Perk {
+  tag: string;
   dependencies_visualization?: {
     primary_diagram?: string;
   };

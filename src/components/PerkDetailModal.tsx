@@ -129,9 +129,7 @@ import {
 } from '@mui/lab';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import CloseIcon from '@mui/icons-material/Close';
-import { Perk } from '../types/tech';
-
-export interface PerkFullData extends Perk {
+export interface PerkFullData {
   tag: string;
   dependencies_visualization?: {
     primary_diagram?: string;
@@ -584,7 +582,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                   lineHeight: 1.6      // Ajustement de l'interligne pour une meilleure lisibilité
                 }}
               >
-                {fullData?.description?.long || perk?.description}
+                {typeof fullData?.description === 'object' ? fullData.description.long : fullData?.description || perk.description}
               </Typography>
             </Paper>
           </Grid>
@@ -610,7 +608,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                   <>
                     <Typography variant="subtitle1">Core Components:</Typography>
                     <List>
-                      {fullData.technical_specifications.core_components.map((component, index) => (
+                      {fullData.technical_specifications?.core_components?.map((component, index) => (
                         <ListItem key={index}>
                           <ListItemText
                             primary={component.name}
@@ -786,7 +784,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
           )}
 
           {/* Monitoring & Maintenance */}
-          {fullData?.monitoring_and_maintenance?.metrics_collection && fullData.monitoring_and_maintenance.metrics_collection.length > 0 && (
+          {fullData?.monitoring_and_maintenance?.metrics_collection?.length > 0 && (
             <Grid item xs={12} md={6}>
               <Paper elevation={2} sx={{ 
                 p: 2,
@@ -1140,7 +1138,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                   <>
                     <Typography variant="subtitle1" sx={{ color: COLORS.text.primary }}>Technical Documentation:</Typography>
                     <List dense>
-                      {fullData.documentation.technical_docs.map((doc: string, index: number) => (
+                      {fullData.documentation?.technical_docs?.map((doc: string, index: number) => (
                         <ListItem key={index}>
                           <ListItemIcon>
                             <DescriptionIcon fontSize="small" />
@@ -1159,7 +1157,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                     <Divider sx={{ my: 2 }} />
                     <Typography variant="subtitle1">Training Materials:</Typography>
                     <List dense>
-                      {fullData.documentation.training_materials.map((material: string, index: number) => (
+                      {fullData.documentation?.training_materials?.map((material: string, index: number) => (
                         <ListItem key={index}>
                           <ListItemIcon>
                             <SchoolIcon fontSize="small" />
