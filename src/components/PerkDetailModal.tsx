@@ -3,6 +3,10 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import mermaid from 'mermaid';
 
+const getPerkIconFilename = (perkName: string): string => {
+  return perkName.toLowerCase().replace(/\s+/g, '-');
+};
+
 const COLORS = {
   background: '#000000',        // Black background
   surface: '#1a1a1a',          // Slightly lighter black for cards
@@ -280,7 +284,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
           <Grid item xs={12} sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
             <Box 
               component="img"
-              src={`/perk-icons/${perk.capability_id}.png`}
+              src={`/perk-icons/${getPerkIconFilename(perk.name)}.png`}
               alt={perk.name}
               sx={{ 
                 width: 64,
@@ -899,7 +903,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
           >
             <Box
               component="img"
-              src={`/perk-icons/${perk.capability_id}.png`}
+              src={`/perk-icons/${getPerkIconFilename(perk.name)}.png`}
               alt={perk.name}
               sx={{
                 width: '100%',
