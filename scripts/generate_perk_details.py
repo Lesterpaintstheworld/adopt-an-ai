@@ -285,36 +285,38 @@ class PerkGenerator:
         self.logger = logging.getLogger(__name__)
         self.model = "claude-3-sonnet-20240229"
         
-        # Get absolute path of script directory
-        script_dir = Path(__file__).parent.absolute()
-        env_path = script_dir / ".env"
-        
-        print(f"Script directory: {script_dir}")
-        print(f"Looking for .env file at: {env_path}")
-        print(f"All .env files in parent directories:")
-        
-        # Search for all .env files in parent directories
-        current = script_dir
-        while current.parent != current:
-            env_files = list(current.glob(".env"))
-            print(f"  {current}: {[str(f) for f in env_files]}")
-            current = current.parent
-        
-        # Load from specific path
-        print(f"\nAttempting to load from: {env_path}")
+        # Search for .env file in current and parent directories
+        current_dir = Path(__file__).parent.absolute()
+        root_dir = current_dir
+        env_path = None
+
+        # Go up until we find .env or hit root
+        while root_dir.parent != root_dir:
+            possible_env = root_dir / ".env"
+            if possible_env.exists():
+                env_path = possible_env
+                break
+            root_dir = root_dir.parent
+
+        if not env_path:
+            raise FileNotFoundError("Could not find .env file in current or parent directories")
+
+        print(f"Found .env file at: {env_path}")
         load_dotenv(dotenv_path=env_path)
         api_key = os.getenv("ANTHROPIC_API_KEY")
         
         print(f"Environment variables loaded: {list(os.environ.keys())}")
         print(f"ANTHROPIC_API_KEY present in environment: {'ANTHROPIC_API_KEY' in os.environ}")
         
-        # Add better error handling for API key
+        # Enhanced API key validation
         if not api_key:
-            raise ValueError("ANTHROPIC_API_KEY not found in .env file!")
+            raise ValueError(f"ANTHROPIC_API_KEY not found in .env file at {env_path}!")
         
-        # Add validation for API key format
-        if not api_key.startswith("sk-"):
-            raise ValueError("ANTHROPIC_API_KEY appears to be invalid - should start with 'sk-'")
+        if not api_key.startswith("sk-ant-"):
+            raise ValueError("ANTHROPIC_API_KEY appears to be invalid - should start with 'sk-ant-'")
+            
+        if len(api_key) < 30:  # Typical Anthropic keys are longer
+            raise ValueError("ANTHROPIC_API_KEY appears too short to be valid")
             
         print(f"Loaded API key ending in: {mask_api_key(api_key)}")
         self.client = AsyncAnthropic(api_key=api_key)
