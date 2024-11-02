@@ -428,6 +428,8 @@ async def main():
     capabilities_to_update = []
     capabilities_found = []
     
+    capabilities_found = []
+    
     # First pass: collect all capabilities needing IDs
     for phase_key, phase_data in tech_tree.items():
         if isinstance(phase_data, dict):
@@ -447,6 +449,11 @@ async def main():
                                 print(f"    Existing ID {item['capability_id']}: {item['name']}")
                             capabilities_found.append(item['capability_id'])
                             order += 1
+    
+    print("\nSummary:")
+    print(f"Total capabilities in tech tree: {len(capabilities_found)}")
+    print(f"Capabilities found: {capabilities_found}")
+    print(f"Missing files: {set(capabilities_found) - set(existing_files)}")
     
     # Save updated tech tree
     if capabilities_to_update:
