@@ -149,6 +149,17 @@ interface PerkFullData extends Perk {
       }>;
     };
   };
+  success_metrics?: {
+    operational_kpis?: Array<{
+      metric: string;
+      current: string | number | Date;
+      target: string | number | Date;
+    }>;
+  };
+  monitoring_and_maintenance?: {
+    metrics_collection?: string[];
+    alerting?: string[];
+  };
   version_control?: {
     version_history: Array<{
       version: string | number;
@@ -686,7 +697,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
             </Grid>
           )}
 
-          {fullData?.success_metrics?.operational_kpis?.length > 0 && (
+          {fullData?.success_metrics?.operational_kpis && fullData.success_metrics.operational_kpis.length > 0 && (
             <Grid item xs={12} md={6}>
               <Paper elevation={2} sx={{ 
                 p: 2,
@@ -718,7 +729,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
           )}
 
           {/* Monitoring & Maintenance */}
-          {fullData?.monitoring_and_maintenance?.metrics_collection?.length > 0 && (
+          {fullData?.monitoring_and_maintenance?.metrics_collection && fullData.monitoring_and_maintenance.metrics_collection.length > 0 && (
             <Grid item xs={12} md={6}>
               <Paper elevation={2} sx={{ 
                 p: 2,
