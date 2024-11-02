@@ -380,7 +380,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                           </TimelineSeparator>
                           <TimelineContent>
                             <Typography variant="subtitle2">
-                              Version {version.version} - {version.date}
+                              Version {formatValue(version.version)} - {formatValue(version.date)}
                             </Typography>
                             <List dense>
                               {version.changes.map((change, changeIndex) => (
@@ -393,8 +393,8 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                               ))}
                             </List>
                             <Typography variant="caption" color="textSecondary">
-                              Reviewed by: {version.reviewed_by}
-                              {version.approved_by && ` | Approved by: ${version.approved_by}`}
+                              Reviewed by: {formatValue(version.reviewed_by)}
+                              {version.approved_by && ` | Approved by: ${formatValue(version.approved_by)}`}
                             </Typography>
                           </TimelineContent>
                         </TimelineItem>
@@ -829,7 +829,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
               }}>
                 <Typography variant="h6" gutterBottom>CMMI Assessment</Typography>
                 <Typography>Current Level: {fullData.cmmi_assessment?.current_level}</Typography>
-                <Typography>Assessment Date: {fullData.cmmi_assessment?.assessment_date}</Typography>
+                <Typography>Assessment Date: {formatValue(fullData.cmmi_assessment?.assessment_date)}</Typography>
                 
                 {Object.entries(fullData.cmmi_assessment.process_areas).map(([area, data]: [string, any]) => data && (
                   <Box key={area} sx={{ mt: 2 }}>
