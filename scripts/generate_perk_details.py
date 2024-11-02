@@ -332,6 +332,19 @@ class PerkGenerator:
             'validation_time': 0
         }
 
+    def clean_text_for_yaml(self, text: str) -> str:
+        """Clean text to ensure it's YAML-safe"""
+        import unicodedata
+        # Normalize Unicode characters
+        text = unicodedata.normalize('NFKD', text)
+        # Convert to ASCII ignoring non-ASCII characters
+        text = text.encode('ascii', 'ignore').decode('ascii')
+        # Escape special YAML characters
+        special_chars = [':', '-', '[', ']', '{', '}', '|', '>', '"', "'"]
+        for char in special_chars:
+            text = text.replace(char, '\\' + char)
+        return text
+
     async def _generate_raw_perk_details(self, perk_data: Dict, template: Dict) -> Dict:
         """Generate raw perk data using Claude"""
         try:
@@ -394,12 +407,17 @@ class PerkGenerator:
                 return None
 
             try:
-                # Clean Markdown backticks from response and encode in UTF-8
-                raw_text = response.content[0].text.encode('utf-8').decode('utf-8')
+                # Use more robust approach for cleaning and encoding
+                raw_text = response.content[0].text
+                
+                # Convert special characters to ASCII equivalents
+                raw_text = unicodedata.normalize('NFKD', raw_text).encode('ascii', 'ignore').decode('ascii')
+                
+                # Clean Markdown backticks
                 if raw_text.startswith('```'):
-                    # Remove first line (```yaml) and last line (```)
                     raw_text = '\n'.join(raw_text.split('\n')[1:-1])
                 
+                # Use SafeLoader for better security
                 result = yaml.safe_load(raw_text)
                 if not result:
                     print("Error: Could not parse YAML response")
@@ -587,8 +605,17 @@ async def main():
                                         detailed_perk = await generator.generate_perk_details(item, template)
                                         
                                         if detailed_perk:
+                                            # Clean data before writing
+                                            cleaned_perk = {}
+                                            for key, value in detailed_perk.items():
+                                                if isinstance(value, str):
+                                                    cleaned_perk[key] = self.clean_text_for_yaml(value)
+                                                else:
+                                                    cleaned_perk[key] = value
+                                                    
                                             with open(perk_file, 'w', encoding='utf-8') as f:
-                                                yaml.dump(detailed_perk, f, sort_keys=False, allow_unicode=True)
+                                                yaml.dump(cleaned_perk, f, sort_keys=False, allow_unicode=True,
+                                                         default_flow_style=False, width=float("inf"))
                                             print(f"Successfully generated {perk_file}")
                                         else:
                                             print(f"Failed to generate details for {item['capability_id']}")
