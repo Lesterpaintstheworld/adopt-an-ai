@@ -418,74 +418,71 @@ const TechTreePage = () => {
             transformOrigin: 'top left',
           }}
         >
-        <Box
-          sx={{
-            position: 'relative',
-            width: (Object.values(techTree).reduce((acc: number, phase: any) => 
-              acc + calculatePhaseWidth(phase), 0) + 300),
-            height: 2000,
-            p: 4,
-            minWidth: '16000px',
-            backgroundImage: 'url(/website/convergence-dark.png)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          }}
-        >
-          <ConnectionLines 
-            positions={positions} 
-            items={allItems}
-            highlightedItem={highlightedItem}
-          />
-          
-          {allItems.map((item) => (
-            <TechItem
-              key={item.name}
-              item={item}
-              phase={item.phase}
-              position={positions[item.name] || { x: 0, y: 0 }}
-              onHover={setHighlightedItem}
+          <Box
+            sx={{
+              position: 'relative',
+              width: (Object.values(techTree).reduce((acc: number, phase: any) => 
+                acc + calculatePhaseWidth(phase), 0) + 300),
+              height: 2000,
+              p: 4,
+              minWidth: '16000px',
+              backgroundImage: 'url(/website/convergence-dark.png)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+            }}
+          >
+            <ConnectionLines 
+              positions={positions} 
+              items={allItems}
               highlightedItem={highlightedItem}
-              onClick={handlePerkClick}
             />
-          ))}
-
-          {/* Phase headers */}
-          {Object.entries(techTree).map(([phaseKey, phaseData]: [string, any], index) => {
-            const previousPhases = Object.values(techTree).slice(0, index);
-            const xPosition = previousPhases.reduce((acc: number, phase: any) => {
-              return acc + calculatePhaseWidth(phase);
-            }, 0);
             
-            return (
-              <Typography
-                key={phaseKey}
-                variant="h5"
-                sx={{
-                  position: 'absolute',
-                  left: xPosition + PHASE_START_PADDING,
-                  top: 20,
-                  width: 280,
-                  textAlign: 'center',
-                }}
-              >
-                {phaseData.name} ({phaseData.period})
-              </Typography>
-            );
-          })}
+            {allItems.map((item) => (
+              <TechItem
+                key={item.name}
+                item={item}
+                phase={item.phase}
+                position={positions[item.name] || { x: 0, y: 0 }}
+                onHover={setHighlightedItem}
+                highlightedItem={highlightedItem}
+                onClick={handlePerkClick}
+              />
+            ))}
+
+            {Object.entries(techTree).map(([phaseKey, phaseData]: [string, any], index) => {
+              const previousPhases = Object.values(techTree).slice(0, index);
+              const xPosition = previousPhases.reduce((acc: number, phase: any) => {
+                return acc + calculatePhaseWidth(phase);
+              }, 0);
+              
+              return (
+                <Typography
+                  key={phaseKey}
+                  variant="h5"
+                  sx={{
+                    position: 'absolute',
+                    left: xPosition + PHASE_START_PADDING,
+                    top: 20,
+                    width: 280,
+                    textAlign: 'center',
+                  }}
+                >
+                  {phaseData.name} ({phaseData.period})
+                </Typography>
+              );
+            })}
+          </Box>
         </Box>
       </Box>
-        </Box>
-      </Box>
-    </Box>
-    <PerkDetailModal
-      open={modalState.isOpen}
-      onClose={() => setModalState(prev => ({ ...prev, isOpen: false }))}
-      perk={modalState.selectedPerk}
-      fullData={modalState.fullData}
-    />
-  </>
-);
+      <PerkDetailModal
+        open={modalState.isOpen}
+        onClose={() => setModalState(prev => ({ ...prev, isOpen: false }))}
+        perk={modalState.selectedPerk}
+        fullData={modalState.fullData}
+      />
+    </>
+  );
 };
 
 export default TechTreePage;
