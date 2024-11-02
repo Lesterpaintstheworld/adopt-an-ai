@@ -359,8 +359,13 @@ class PerkGenerator:
         try:
             # Load tech tree for context
             tech_tree_path = Path("content/tech/tech-tree.yml")
-            with open(tech_tree_path, encoding='utf-8') as f:
-                tech_tree = yaml.safe_load(f)
+            try:
+                with open(tech_tree_path, encoding='utf-8', errors='replace') as f:
+                    tech_tree = yaml.safe_load(f)
+            except UnicodeError:
+                # Fallback to read with different encoding if UTF-8 fails
+                with open(tech_tree_path, encoding='cp1252', errors='replace') as f:
+                    tech_tree = yaml.safe_load(f)
 
             # Extract phase and layer for focused context
             phase, layer = extract_phase_and_layer(perk_data['capability_id'])
@@ -418,10 +423,10 @@ class PerkGenerator:
             try:
                 raw_text = response.content[0].text
                 
-                # Single consistent UTF-8 conversion
-                raw_text = raw_text.encode('utf-8', 'replace').decode('utf-8')
+                # Force UTF-8 encoding and handle problematic characters
+                raw_text = raw_text.encode('utf-8', errors='replace').decode('utf-8')
                 
-                # Clean problematic characters while preserving valid ones
+                # Clean non-printable characters while preserving newlines
                 raw_text = ''.join(c for c in raw_text if c.isprintable() or c in ['\n', '\r', '\t'])
                 
                 # Clean up markdown formatting
@@ -432,7 +437,7 @@ class PerkGenerator:
                 if raw_text.endswith('```'):
                     raw_text = raw_text[:-3]
                 
-                # Parse YAML with safe_load and explicit encoding
+                # Parse YAML with safe_load
                 result = yaml.safe_load(raw_text)
                 
                 if not result:
@@ -440,20 +445,6 @@ class PerkGenerator:
                     print("Raw response:", raw_text)
                     return None
                 
-                # Recursively clean all strings in the result
-                def clean_strings(obj):
-                    if isinstance(obj, str):
-                        # Consistent UTF-8 cleaning
-                        cleaned = obj.encode('utf-8', 'replace').decode('utf-8')
-                        cleaned = ''.join(c for c in cleaned if c.isprintable() or c in ['\n', '\r', '\t'])
-                        return cleaned
-                    elif isinstance(obj, dict):
-                        return {k: clean_strings(v) for k, v in obj.items()}
-                    elif isinstance(obj, list):
-                        return [clean_strings(item) for item in obj]
-                    return obj
-                
-                result = clean_strings(result)
                 return result
                 
             except yaml.YAMLError as e:
