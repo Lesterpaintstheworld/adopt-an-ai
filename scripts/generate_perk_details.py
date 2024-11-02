@@ -6,6 +6,7 @@ from typing import Dict, List, Set
 from datetime import datetime, timedelta
 from anthropic import AsyncAnthropic
 from pathlib import Path
+from dotenv import load_dotenv
 
 # Constants
 VALID_TAGS = {'🤝 SOCIAL', '⚙️ OPERATIONAL', '🎨 CREATIVE', '🧠 COGNITIVE', '🔧 TECHNICAL', '🌐 INTEGRATION'}
@@ -277,9 +278,12 @@ class PerkGenerator:
         setup_logging()
         self.logger = logging.getLogger(__name__)
         self.model = "claude-3-sonnet-20240229"
+        
+        # Load environment variables from .env file
+        load_dotenv()
         api_key = os.getenv("ANTHROPIC_API_KEY")
         if not api_key:
-            raise ValueError("ANTHROPIC_API_KEY not found in environment!")
+            raise ValueError("ANTHROPIC_API_KEY not found in .env file!")
         self.client = AsyncAnthropic(api_key=api_key)
         self.generation_stats = {
             'attempts': 0,
