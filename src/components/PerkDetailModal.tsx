@@ -124,10 +124,10 @@ const MetricProgress = ({ current, target, label }: {
         sx={{
           height: 8,
           borderRadius: 4,
-          backgroundColor: 'rgba(255, 165, 0, 0.2)', // Faded orange background
+          backgroundColor: `${COLORS.primary}33`, // 20% opacity blue background
           '& .MuiLinearProgress-bar': {
             borderRadius: 4,
-            backgroundColor: progress >= 100 ? '#FF8C00' : '#FFA500', // Orange progress bar
+            backgroundColor: progress >= 100 ? COLORS.secondary : COLORS.primary,
           }
         }}
       />
