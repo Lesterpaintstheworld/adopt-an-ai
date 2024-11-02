@@ -73,25 +73,38 @@ interface PerkDetailModalProps {
 }
 
 const MetricProgress = ({ current, target, label }: { 
-  current: string | number;
-  target: string | number;
+  current: string | number | Date;
+  target: string | number | Date;
   label: string;
 }) => {
-  const parseValue = (value: string | number): number => {
-    if (typeof value === 'number') return value;
-    return parseFloat(value.replace('%', ''));
+  const formatValue = (value: string | number | Date): string => {
+    if (value instanceof Date) {
+      return value.toLocaleDateString();
+    }
+    return String(value);
+  };
+
+  const parseValue = (value: string | number | Date): number => {
+    if (value instanceof Date) {
+      return value.getTime();
+    }
+    if (typeof value === 'number') {
+      return value;
+    }
+    const stringValue = String(value);
+    return parseFloat(stringValue.replace('%', '')) || 0;
   };
 
   const currentValue = parseValue(current);
   const targetValue = parseValue(target);
-  const progress = (currentValue / targetValue) * 100;
+  const progress = targetValue !== 0 ? (currentValue / targetValue) * 100 : 0;
 
   return (
     <Box sx={{ width: '100%', mb: 2 }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
         <Typography variant="body2">{label}</Typography>
         <Typography variant="body2">
-          {current} / {target}
+          {formatValue(current)} / {formatValue(target)}
         </Typography>
       </Box>
       <LinearProgress 
