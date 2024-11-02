@@ -421,42 +421,30 @@ class PerkGenerator:
                 print("Error: Empty response from API")
                 return None
 
-            if not response.content:
-                print("Error: Empty response from API")
-                return None
-
+            # Get raw text from API response
             raw_text = response.content[0].text
-            # Nettoyage et normalisation du texte
-            raw_text = self.sanitize_text(raw_text)
-            
-            # Nettoyage du formatage markdown
-            raw_text = raw_text.strip('`yaml\n`')
-            
+            print("Raw response length:", len(raw_text))
+            print("First 100 chars:", raw_text[:100])  # Debug
+
+            # Basic cleanup without encoding manipulation
+            raw_text = raw_text.strip()
+            if raw_text.startswith('```yaml'):
+                raw_text = raw_text[7:]  # Remove ```yaml
+            if raw_text.endswith('```'):
+                raw_text = raw_text[:-3]  # Remove ```
+            raw_text = raw_text.strip()
+
             try:
-                # Parse YAML avec gestion explicite de l'encodage
                 result = yaml.safe_load(raw_text)
-                
-                if result:
-                    # Nettoyer récursivement toutes les chaînes dans le résultat
-                    def clean_dict(d):
-                        if isinstance(d, dict):
-                            return {k: clean_dict(v) for k, v in d.items()}
-                        elif isinstance(d, list):
-                            return [clean_dict(x) for x in d]
-                        elif isinstance(d, str):
-                            return self.sanitize_text(d)
-                        return d
-                    
-                    return clean_dict(result)
-                return None
+                if not result:
+                    print("Warning: YAML parsed to None")
+                    print("Raw text was:", raw_text)
+                    return None
+                return result
                 
             except yaml.YAMLError as e:
                 print("Error parsing YAML response:", e)
-                print("Raw response:", raw_text)
-                return None
-            except Exception as e:
-                print(f"Error processing response: {str(e)}")
-                print("Raw response:", raw_text)
+                print("Problematic content:", raw_text)
                 return None
 
         except Exception as e:
