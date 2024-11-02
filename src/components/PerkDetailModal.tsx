@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
 import mermaid from 'mermaid';
 
 const COLORS = {
@@ -167,6 +169,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
   const [isLoading, setIsLoading] = useState(false);
   const [mermaidInitialized, setMermaidInitialized] = useState(false);
   const [mermaidError, setMermaidError] = useState<string | null>(null);
+  const [isImageOpen, setIsImageOpen] = useState(false);
 
   useEffect(() => {
     if (!open || !fullData?.dependencies_visualization?.primary_diagram || mermaidInitialized) {
@@ -274,25 +277,43 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
         </IconButton>
 
         <Grid container spacing={3} sx={{ mb: 2 }}>
-          <Grid item xs={12}>
-            <Typography variant="h4" component="h2" gutterBottom>
-              {fullData?.name || perk.name}
-            </Typography>
-            <Chip 
-              label={perk.tag} 
+          <Grid item xs={12} sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
+            <Box 
+              component="img"
+              src={`/icons/${perk.capability_id}.png`}
+              alt={perk.name}
               sx={{ 
-                mr: 1,
-                bgcolor: COLORS.primary,
-                color: COLORS.background,
-              }} 
-            />
-            <Chip 
-              label={`ID: ${fullData?.capability_id || perk.capability_id}`}
-              sx={{ 
-                bgcolor: '#FFA500', // Orange background
-                color: '#000000', // Black text
+                width: 64,
+                height: 64,
+                cursor: 'pointer',
+                borderRadius: 1,
+                '&:hover': {
+                  opacity: 0.8,
+                }
               }}
+              onClick={() => setIsImageOpen(true)}
             />
+            <Box>
+              <Typography variant="h4" component="h2" gutterBottom>
+                {fullData?.name || perk.name}
+              </Typography>
+              <Box sx={{ display: 'flex', gap: 1 }}>
+                <Chip 
+                  label={perk.tag} 
+                  sx={{ 
+                    bgcolor: COLORS.primary,
+                    color: COLORS.background,
+                  }} 
+                />
+                <Chip 
+                  label={`ID: ${fullData?.capability_id || perk.capability_id}`}
+                  sx={{ 
+                    bgcolor: '#FFA500',
+                    color: '#000000',
+                  }}
+                />
+              </Box>
+            </Box>
           </Grid>
 
           {isLoading ? (
@@ -843,6 +864,26 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
             </Grid>
           )}
         </Grid>
+
+        <Dialog
+          open={isImageOpen}
+          onClose={() => setIsImageOpen(false)}
+          maxWidth="md"
+          fullWidth
+        >
+          <DialogContent sx={{ p: 0, bgcolor: COLORS.background }}>
+            <Box
+              component="img"
+              src={`/icons/${perk.capability_id}.png`}
+              alt={perk.name}
+              sx={{
+                width: '100%',
+                height: 'auto',
+                display: 'block',
+              }}
+            />
+          </DialogContent>
+        </Dialog>
 
         <Fab
           color="primary"
