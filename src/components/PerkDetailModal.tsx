@@ -450,14 +450,17 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                 <Box sx={{ overflow: 'auto' }}>
                   {fullData.dependencies_visualization.primary_diagram && (
                     <>
-                      {useEffect(() => {
-                        mermaid.initialize({
+                      <div className="mermaid">
+                        {(() => {
+                          useEffect(() => {
+                            mermaid.initialize({
                           theme: 'default',
                           securityLevel: 'loose'
                         });
-                        mermaid.contentLoaded();
-                      }, [fullData.dependencies_visualization.primary_diagram])}
-                      <div className="mermaid">
+                            mermaid.contentLoaded();
+                          }, [fullData.dependencies_visualization.primary_diagram]);
+                          return fullData.dependencies_visualization.primary_diagram;
+                        })()}
                         {fullData.dependencies_visualization.primary_diagram}
                       </div>
                     </>
