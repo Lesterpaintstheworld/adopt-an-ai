@@ -155,10 +155,10 @@ phase_1:
     chronologicalOrder: 8
     capability_id: MLT_P1_002
 
-  - name: Content Generation
+  - name: Voice synthesis
     tag: 🎨 CREATIVE
-    shortDescription: "Generate diverse content types including text, code, and structured data"
-    longDescription: "Advanced content generation system capable of producing high-quality outputs across multiple formats. Features include context-aware generation, style matching, and format-specific optimization while maintaining consistency and accuracy."
+    shortDescription: "Generate diverse voice outputs with natural intonation and emotional expression"
+    longDescription: "Advanced voice generation system capable of producing high-quality speech across multiple languages and styles. Features include emotional expression, accent control, and natural intonation while maintaining consistency and clarity."
     chronologicalOrder: 5
     capability_id: APP_P1_003
     prerequisites:
