@@ -16,13 +16,13 @@ const getPerkIconFilename = (perkName: string): string => {
 };
 
 const COLORS = {
-  background: '#000000',        // Black background
-  surface: '#1a1a1a',          // Slightly lighter black for cards
+  background: '#1a1a1a',        // Dark gray background
+  surface: '#2d2d2d',          // Lighter surface for cards
   primary: '#007FFF',          // Bright blue
   secondary: '#0059B2',        // Darker blue
   text: {
     primary: '#FFFFFF',        // White text for better contrast
-    secondary: '#B0B0B0'       // Light gray for secondary text
+    secondary: '#CCCCCC'       // Lighter gray for better readability
   }
 };
 
@@ -237,7 +237,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
         width: '80%',
         maxWidth: 1200,
         maxHeight: '90vh',
-        bgcolor: COLORS.background,
+        bgcolor: COLORS.surface,
         color: COLORS.text.primary,
         borderRadius: 2,
         boxShadow: `0 0 24px rgba(0, 127, 255, 0.3)`, // Blue glow
@@ -402,7 +402,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
             <Grid item xs={12} md={6}>
               <Paper elevation={2} sx={{ 
                 p: 2,
-                bgcolor: 'rgba(0, 0, 0, 0.75)', // Fond noir avec 75% d'opacité
+                bgcolor: 'rgba(45, 45, 45, 0.95)', // Lighter dark background
                 color: COLORS.text.primary, // Ensure text is white
                 '& .MuiTypography-root': {
                   color: COLORS.text.primary,
