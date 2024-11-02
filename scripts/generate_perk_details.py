@@ -421,14 +421,18 @@ class PerkGenerator:
                 print("Error: Empty response from API")
                 return None
 
-            if response.content:
-                raw_text = response.content[0].text
-                # Nettoyage et normalisation du texte
-                raw_text = self.sanitize_text(raw_text)
-                
-                # Nettoyage du formatage markdown
-                raw_text = raw_text.strip('`yaml\n`')
-                
+            if not response.content:
+                print("Error: Empty response from API")
+                return None
+
+            raw_text = response.content[0].text
+            # Nettoyage et normalisation du texte
+            raw_text = self.sanitize_text(raw_text)
+            
+            # Nettoyage du formatage markdown
+            raw_text = raw_text.strip('`yaml\n`')
+            
+            try:
                 # Parse YAML avec gestion explicite de l'encodage
                 result = yaml.safe_load(raw_text)
                 
@@ -444,6 +448,7 @@ class PerkGenerator:
                         return d
                     
                     return clean_dict(result)
+                return None
                 
             except yaml.YAMLError as e:
                 print("Error parsing YAML response:", e)
