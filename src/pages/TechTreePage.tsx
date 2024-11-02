@@ -7,11 +7,13 @@ import {
   Tooltip,
 } from '@mui/material';
 
-const sanitizePerkData = (perk: Perk): Perk => {
+const sanitizePerkData = (perk: Perk | null): Perk | null => {
+  if (!perk) return null;
+  
   const sanitized = { ...perk };
   // Convert any object values to strings for safe rendering
   Object.keys(sanitized).forEach(key => {
-    if (typeof sanitized[key] === 'object' && sanitized[key] !== null) {
+    if (sanitized[key] && typeof sanitized[key] === 'object') {
       sanitized[key] = JSON.stringify(sanitized[key]);
     }
   });
@@ -383,7 +385,7 @@ const TechTreePage: React.FC<TechTreePageProps> = ({ standalone = false }) => {
 
   const handlePerkClick = async (perk: Perk) => {
     let fullData = null;
-    if (perk.capability_id) {
+    if (perk?.capability_id) {
       fullData = await loadFullPerkData(perk.capability_id);
     }
     setModalState({
