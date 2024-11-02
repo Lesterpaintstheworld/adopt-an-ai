@@ -206,6 +206,27 @@ def validate_metrics_coherence(generated_data):
     
     return inconsistencies
 
+def generate_capability_id(phase_key: str, layer_key: str, order: int) -> str:
+    """Generate a capability ID based on layer, phase and order"""
+    # Map layers to prefixes
+    layer_prefixes = {
+        'compute_layer': 'COM',
+        'model_layer': 'MOD',
+        'agent_layer': 'AGT',
+        'application_layer': 'APP',
+        'ecosystem_layer': 'ECO',
+        'multi_agent_layer': 'MLT'
+    }
+    
+    # Extract phase number (e.g., 'phase_1' -> 'P1')
+    phase_num = f"P{phase_key.split('_')[1]}"
+    
+    # Get prefix for layer
+    prefix = layer_prefixes.get(layer_key, 'UNK')
+    
+    # Format as PREFIX_PHASE_NUMBER (e.g., COM_P1_001)
+    return f"{prefix}_{phase_num}_{order:03d}"
+
 def extract_phase_and_layer(capability_id):
     """Extract phase and layer information from capability ID"""
     try:
@@ -403,20 +424,46 @@ async def main():
     existing_files = [f.stem for f in tech_dir.glob("*.yml") if f.stem not in ['tech-tree', 'COM_template']]
     print(f"Found {len(existing_files)} capability files: {existing_files}")
     
-    print("\nScanning for capabilities to generate:")
+    print("\nScanning tech tree and assigning capability IDs:")
+    capabilities_to_update = []
     capabilities_found = []
+    
+    # First pass: collect all capabilities needing IDs
+    for phase_key, phase_data in tech_tree.items():
+        if isinstance(phase_data, dict):
+            print(f"\nChecking {phase_key}:")
+            for layer_key, layer_items in phase_data.items():
+                if isinstance(layer_items, list):
+                    print(f"  Layer: {layer_key}")
+                    order = 1
+                    for item in layer_items:
+                        if isinstance(item, dict) and 'name' in item:
+                            if 'capability_id' not in item:
+                                new_id = generate_capability_id(phase_key, layer_key, order)
+                                print(f"    Adding ID {new_id} to: {item['name']}")
+                                item['capability_id'] = new_id
+                                capabilities_to_update.append(item)
+                            else:
+                                print(f"    Existing ID {item['capability_id']}: {item['name']}")
+                            capabilities_found.append(item['capability_id'])
+                            order += 1
+    
+    # Save updated tech tree
+    if capabilities_to_update:
+        print(f"\nUpdating {len(capabilities_to_update)} capabilities in tech-tree.yml")
+        with open(tech_tree_path, 'w', encoding='utf-8') as f:
+            yaml.dump(tech_tree, f, sort_keys=False, allow_unicode=True)
     
     generator = PerkGenerator()
     
     try:
-        # Process each phase and layer
+        # Process each capability
         for phase_key, phase_data in tech_tree.items():
             if isinstance(phase_data, dict):
                 for layer_key, layer_items in phase_data.items():
                     if isinstance(layer_items, list):
                         for item in layer_items:
-                            if "capability_id" in item:
-                                capabilities_found.append(item['capability_id'])
+                            if 'capability_id' in item:
                                 perk_file = Path(f"content/tech/{item['capability_id']}.yml")
                                 print(f"\nCapability: {item['capability_id']}")
                                 print(f"Name: {item.get('name', 'N/A')}")
