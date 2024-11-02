@@ -873,11 +873,30 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
           PaperProps={{
             sx: {
               bgcolor: COLORS.background,
-              p: 2,
+              boxShadow: 'none',
+              borderRadius: 2,
             },
           }}
         >
-          <DialogContent>
+          <DialogContent
+            sx={{
+              bgcolor: COLORS.background,
+              p: 2,
+              '&::-webkit-scrollbar': {
+                width: '8px',
+              },
+              '&::-webkit-scrollbar-track': {
+                background: COLORS.surface,
+              },
+              '&::-webkit-scrollbar-thumb': {
+                background: COLORS.primary,
+                borderRadius: '4px',
+                '&:hover': {
+                  background: COLORS.secondary,
+                },
+              },
+            }}
+          >
             <Box
               component="img"
               src={`/icons/${perk.capability_id}.png`}
@@ -887,6 +906,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                 height: 'auto',
                 display: 'block',
                 maxHeight: '80vh',
+                objectFit: 'contain',
               }}
             />
           </DialogContent>
