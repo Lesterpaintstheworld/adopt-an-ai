@@ -395,29 +395,30 @@ const TechTreePage = () => {
   );
 
   return (
-    <Box sx={{ 
-      height: '100vh', 
-      overflow: 'hidden',
-      paddingTop: '64px'
-    }}>
-      <Box
-        ref={containerRef}
-        sx={{
-          position: 'fixed',
-          top: 64,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          overflowX: 'auto',
-          overflowY: 'auto',
-          width: '200vw',
-          height: 'calc(200vh - 128px)',
-          bgcolor: 'transparent',
-          zIndex: 1,
-          transform: 'scale(0.5)',
-          transformOrigin: 'top left',
-        }}
-      >
+    <>
+      <Box sx={{ 
+        height: '100vh', 
+        overflow: 'hidden',
+        paddingTop: '64px'
+      }}>
+        <Box
+          ref={containerRef}
+          sx={{
+            position: 'fixed',
+            top: 64,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            overflowX: 'auto',
+            overflowY: 'auto',
+            width: '200vw',
+            height: 'calc(200vh - 128px)',
+            bgcolor: 'transparent',
+            zIndex: 1,
+            transform: 'scale(0.5)',
+            transformOrigin: 'top left',
+          }}
+        >
         <Box
           sx={{
             position: 'relative',
