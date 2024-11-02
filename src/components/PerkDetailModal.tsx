@@ -580,7 +580,15 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                               <TableCell component="th" scope="row">
                                 {key}
                               </TableCell>
-                              <TableCell>{value}</TableCell>
+                              <TableCell>
+                                {typeof value === 'object' 
+                                  ? Object.entries(value as Record<string, string>).map(([subKey, subValue]) => (
+                                      <div key={subKey}>
+                                        {subKey}: {subValue}
+                                      </div>
+                                    ))
+                                  : value}
+                              </TableCell>
                             </TableRow>
                           ))}
                         </TableBody>
