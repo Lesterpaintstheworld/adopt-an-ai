@@ -466,24 +466,29 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
               <Paper elevation={2} sx={{ p: 2 }}>
                 <Typography variant="h6" gutterBottom>Security Requirements</Typography>
                 
-                <Typography variant="subtitle1">Access Control:</Typography>
-                <List>
-                  {fullData.security_requirements.access_control.map((req, index) => (
-                    <ListItem key={index}>
-                      <ListItemText primary={req} />
-                    </ListItem>
-                  ))}
-                </List>
-
-                <Divider sx={{ my: 2 }} />
-
-                <Typography variant="subtitle1">Compliance:</Typography>
-                <List>
-                  {Array.isArray(fullData.security_requirements.compliance) 
-                    ? fullData.security_requirements.compliance.map((req, index) => (
+                {fullData.security_requirements.access_control && Array.isArray(fullData.security_requirements.access_control) && (
+                  <>
+                    <Typography variant="subtitle1">Access Control:</Typography>
+                    <List>
+                      {fullData.security_requirements.access_control.map((req, index) => (
                         <ListItem key={index}>
                           <ListItemText primary={req} />
                         </ListItem>
+                      ))}
+                    </List>
+                    <Divider sx={{ my: 2 }} />
+                  </>
+                )}
+
+                {fullData.security_requirements.compliance && (
+                  <>
+                    <Typography variant="subtitle1">Compliance:</Typography>
+                    <List>
+                      {Array.isArray(fullData.security_requirements.compliance) 
+                        ? fullData.security_requirements.compliance.map((req, index) => (
+                            <ListItem key={index}>
+                              <ListItemText primary={req} />
+                            </ListItem>
                       ))
                     : fullData.security_requirements.compliance && (
                         <ListItem>
