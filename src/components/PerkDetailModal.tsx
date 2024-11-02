@@ -262,7 +262,10 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: '80%',
+        width: {
+          xs: '95%', // Mobile
+          sm: '80%'  // Desktop
+        },
         maxWidth: 1200,
         maxHeight: '90vh',
         bgcolor: COLORS.background,
@@ -270,7 +273,10 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
         borderRadius: 2,
         boxShadow: 24,
         overflow: 'auto',
-        p: 4,
+        p: {
+          xs: 2,  // Mobile
+          sm: 4   // Desktop
+        },
         scrollBehavior: 'smooth',
         '&::-webkit-scrollbar': {
           width: '8px',
@@ -316,15 +322,21 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
           <CloseIcon />
         </IconButton>
 
-        <Grid container spacing={3} sx={{ mb: 2 }}>
+        <Grid container spacing={{ xs: 1, sm: 3 }} sx={{ mb: 2 }}>
           <Grid item xs={12} sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
             <Box 
               component="img"
               src={`/perk-icons/${getPerkIconFilename(perk.name)}.png`}
               alt={perk.name}
               sx={{ 
-                width: 160,
-                height: 160,
+                width: {
+                  xs: 80,    // Mobile
+                  sm: 160    // Desktop
+                },
+                height: {
+                  xs: 80,    // Mobile
+                  sm: 160    // Desktop
+                },
                 cursor: 'pointer',
                 borderRadius: 1,
                 '&:hover': {
@@ -334,7 +346,17 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
               onClick={() => setIsImageOpen(true)}
             />
             <Box>
-              <Typography variant="h4" component="h2" gutterBottom>
+              <Typography 
+                variant="h4" 
+                component="h2" 
+                gutterBottom
+                sx={{
+                  fontSize: {
+                    xs: '1.5rem',  // Mobile
+                    sm: '2.125rem' // Desktop
+                  }
+                }}
+              >
                 {fullData?.name || perk.name}
               </Typography>
               <Box sx={{ display: 'flex', gap: 1 }}>
@@ -460,7 +482,10 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
 
           <Grid item xs={12}>
             <Paper elevation={2} sx={{ 
-              p: 2,
+              p: {
+                xs: 1,  // Mobile
+                sm: 2   // Desktop
+              },
               bgcolor: COLORS.surface,
               color: COLORS.text.primary,
               '& .MuiTypography-root': {
@@ -971,7 +996,15 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                     <Typography>Performance Metrics</Typography>
                   </AccordionSummary>
                   <AccordionDetails>
-                    <TableContainer>
+                    <TableContainer sx={{ 
+                      overflowX: 'auto',
+                      '& table': {
+                        minWidth: {
+                          xs: '100%',
+                          sm: 'auto'
+                        }
+                      }
+                    }}>
                       <Table size="small">
                         <TableBody>
                           {fullData.technical_specifications.performance_metrics && Object.entries(fullData.technical_specifications.performance_metrics).map(([key, value]) => (
