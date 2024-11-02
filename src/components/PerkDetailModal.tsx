@@ -156,6 +156,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Perk } from '../types/tech';
 
 export interface PerkFullData extends Perk {
+  tag: string;
   dependencies_visualization?: {
     primary_diagram?: string;
   };
