@@ -465,7 +465,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
             </Box>
           ) : (
             <>
-              {fullData?.version_control?.version_history && (
+              {fullData?.version_control?.version_history && fullData.version_control.version_history.length > 0 && (
                 <Grid item xs={12} md={6}>
                   <Paper elevation={2} sx={{ 
                     p: 2,
@@ -993,8 +993,12 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                 }
               }}>
                 <Typography variant="h6" gutterBottom>CMMI Assessment</Typography>
-                <Typography>Current Level: {fullData.cmmi_assessment?.current_level}</Typography>
-                <Typography>Assessment Date: {formatValue(fullData.cmmi_assessment?.assessment_date)}</Typography>
+                {fullData?.cmmi_assessment?.current_level && (
+                  <Typography>Current Level: {fullData.cmmi_assessment.current_level}</Typography>
+                )}
+                {fullData?.cmmi_assessment?.assessment_date && (
+                  <Typography>Assessment Date: {formatValue(fullData.cmmi_assessment.assessment_date)}</Typography>
+                )}
                 
                 {Object.entries(fullData.cmmi_assessment.process_areas).map(([area, data]: [string, any]) => data && (
                   <Box key={area} sx={{ mt: 2 }}>
@@ -1024,7 +1028,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
             </Grid>
           )}
 
-          {fullData?.technical_specifications && (
+          {fullData?.technical_specifications?.core_components && (
             <Grid item xs={12}>
               <Paper elevation={2} sx={{ 
                 p: 2,
