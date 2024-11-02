@@ -285,16 +285,26 @@ class PerkGenerator:
         self.logger = logging.getLogger(__name__)
         self.model = "claude-3-sonnet-20240229"
         
-        # Debug .env file loading
-        env_path = Path(".env")
-        print(f"Looking for .env file at: {env_path.absolute()}")
-        print(f".env file exists: {env_path.exists()}")
+        # Get absolute path of script directory
+        script_dir = Path(__file__).parent.absolute()
+        env_path = script_dir / ".env"
         
-        # Load environment variables from .env file
+        print(f"Script directory: {script_dir}")
+        print(f"Looking for .env file at: {env_path}")
+        print(f"All .env files in parent directories:")
+        
+        # Search for all .env files in parent directories
+        current = script_dir
+        while current.parent != current:
+            env_files = list(current.glob(".env"))
+            print(f"  {current}: {[str(f) for f in env_files]}")
+            current = current.parent
+        
+        # Load from specific path
+        print(f"\nAttempting to load from: {env_path}")
         load_dotenv(dotenv_path=env_path)
         api_key = os.getenv("ANTHROPIC_API_KEY")
         
-        # Debug environment variable loading
         print(f"Environment variables loaded: {list(os.environ.keys())}")
         print(f"ANTHROPIC_API_KEY present in environment: {'ANTHROPIC_API_KEY' in os.environ}")
         
