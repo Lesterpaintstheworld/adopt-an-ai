@@ -73,12 +73,17 @@ interface PerkDetailModalProps {
 }
 
 const MetricProgress = ({ current, target, label }: { 
-  current: string;
-  target: string;
+  current: string | number;
+  target: string | number;
   label: string;
 }) => {
-  const currentValue = parseFloat(current.replace('%', ''));
-  const targetValue = parseFloat(target.replace('%', ''));
+  const parseValue = (value: string | number): number => {
+    if (typeof value === 'number') return value;
+    return parseFloat(value.replace('%', ''));
+  };
+
+  const currentValue = parseValue(current);
+  const targetValue = parseValue(target);
   const progress = (currentValue / targetValue) * 100;
 
   return (
