@@ -871,39 +871,22 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
           maxWidth="md"
           fullWidth
           PaperProps={{
-            style: {
-              backgroundColor: COLORS.background,
-              boxShadow: 'none'
-            }
+            sx: {
+              bgcolor: COLORS.background,
+              p: 2,
+            },
           }}
         >
-          <DialogContent sx={{ 
-            p: 0,
-            bgcolor: COLORS.background,
-            '&::-webkit-scrollbar': {
-              width: '8px'
-            },
-            '&::-webkit-scrollbar-track': {
-              background: COLORS.surface
-            },
-            '&::-webkit-scrollbar-thumb': {
-              background: COLORS.primary,
-              borderRadius: '4px',
-              '&:hover': {
-                background: COLORS.secondary
-              }
-            }
-          }}>
+          <DialogContent>
             <Box
               component="img"
               src={`/icons/${perk.capability_id}.png`}
               alt={perk.name}
               sx={{
                 width: '100%',
-                height: '100%',
-                objectFit: 'contain',
+                height: 'auto',
                 display: 'block',
-                maxHeight: '80vh'
+                maxHeight: '80vh',
               }}
             />
           </DialogContent>
