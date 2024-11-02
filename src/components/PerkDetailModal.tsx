@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import mermaid from 'mermaid';
@@ -129,7 +129,36 @@ import {
 } from '@mui/lab';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import CloseIcon from '@mui/icons-material/Close';
-import { Perk, PerkFullData } from '../types/tech';
+import { Perk } from '../types/tech';
+
+interface PerkFullData extends Perk {
+  dependencies_visualization?: {
+    primary_diagram?: string;
+  };
+  dependencies: {
+    prerequisites: {
+      [key: string]: Array<{
+        capability?: string;
+        criticality?: string;
+      }>;
+    };
+    enables?: {
+      [key: string]: Array<{
+        capability: string;
+        relationship?: string;
+      }>;
+    };
+  };
+  version_control?: {
+    version_history: Array<{
+      version: string | number;
+      date: string | Date;
+      changes: string[];
+      reviewed_by: string;
+      approved_by?: string;
+    }>;
+  };
+}
 
 interface PerkDetailModalProps {
   open: boolean;
@@ -290,20 +319,6 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
           borderRadius: '4px',
           '&:hover': {
             background: COLORS.secondary,
-          },
-        },
-        '&::-webkit-scrollbar': {
-          width: '8px',
-        },
-        '&::-webkit-scrollbar-track': {
-          background: '#f1f1f1',
-          borderRadius: '4px',
-        },
-        '&::-webkit-scrollbar-thumb': {
-          background: '#888',
-          borderRadius: '4px',
-          '&:hover': {
-            background: '#555',
           },
         },
       }}>
