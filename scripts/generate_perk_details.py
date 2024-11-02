@@ -341,19 +341,17 @@ class PerkGenerator:
         """Sanitize text to handle encoding issues"""
         if not isinstance(text, str):
             return text
-    
-        # Replace problematic characters with their closest ASCII equivalent
-        text = text.encode('ascii', 'replace').decode('ascii')
-    
-        # Additional cleaning for YAML compatibility
-        text = text.replace('\u0000', '')  # Remove null bytes
-        text = text.replace('\ufffd', '_') # Replace replacement character
-    
-        # Escape YAML special characters
-        special_chars = [':', '-', '[', ']', '{', '}', '|', '>', '"', "'"]
-        for char in special_chars:
-            text = text.replace(char, '\\' + char)
-    
+        
+        # Use UTF-8 consistently
+        text = text.encode('utf-8', 'replace').decode('utf-8')
+        
+        # Clean problematic characters while preserving valid ones
+        text = ''.join(c for c in text if c.isprintable() or c in ['\n', '\r', '\t'])
+        
+        # Remove null bytes and replacement chars
+        text = text.replace('\u0000', '')
+        text = text.replace('\ufffd', '')
+        
         return text
 
     async def _generate_raw_perk_details(self, perk_data: Dict, template: Dict) -> Dict:
