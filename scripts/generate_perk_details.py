@@ -285,9 +285,18 @@ class PerkGenerator:
         self.logger = logging.getLogger(__name__)
         self.model = "claude-3-sonnet-20240229"
         
+        # Debug .env file loading
+        env_path = Path(".env")
+        print(f"Looking for .env file at: {env_path.absolute()}")
+        print(f".env file exists: {env_path.exists()}")
+        
         # Load environment variables from .env file
-        load_dotenv()
+        load_dotenv(dotenv_path=env_path)
         api_key = os.getenv("ANTHROPIC_API_KEY")
+        
+        # Debug environment variable loading
+        print(f"Environment variables loaded: {list(os.environ.keys())}")
+        print(f"ANTHROPIC_API_KEY present in environment: {'ANTHROPIC_API_KEY' in os.environ}")
         
         # Add better error handling for API key
         if not api_key:
