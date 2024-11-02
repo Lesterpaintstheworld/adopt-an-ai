@@ -274,6 +274,7 @@ phase_1:
       priorities and availability
     chronologicalOrder: 7
     capability_id: COM_P1_004
+    capability_id: COM_P1_004
 phase_2:
   name: Organization
   period: 2027-2028
@@ -488,6 +489,7 @@ phase_2:
       scaling, workload balancing, and automated performance tuning while maintaining
       service quality and minimizing costs.
     chronologicalOrder: 7
+    capability_id: COM_P2_003
     capability_id: COM_P2_003
   - name: Advanced monitoring
     tag: 🔧 TECHNICAL
@@ -1010,4 +1012,6 @@ phase_4:
     prerequisites:
     - Biological compute integration
     - Self-optimizing resources
+    chronologicalOrder: 8
+    capability_id: COM_P4_004
     capability_id: COM_P4_004
