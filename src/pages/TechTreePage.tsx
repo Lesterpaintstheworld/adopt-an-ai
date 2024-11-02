@@ -384,15 +384,26 @@ const TechTreePage: React.FC<TechTreePageProps> = ({ standalone = false }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handlePerkClick = async (perk: Perk) => {
-    let fullData = null;
-    if (perk?.capability_id) {
-      fullData = await loadFullPerkData(perk.capability_id);
+    if (!perk) return; // Protection against null/undefined perks
+    
+    try {
+      let fullData = null;
+      if (perk.capability_id) {
+        fullData = await loadFullPerkData(perk.capability_id);
+      }
+      
+      // Create safe copies of the data before setting state
+      const sanitizedPerk = { ...perk };
+      const sanitizedFullData = fullData ? { ...fullData } : null;
+      
+      setModalState({
+        isOpen: true,
+        selectedPerk: sanitizedPerk,
+        fullData: sanitizedFullData,
+      });
+    } catch (error) {
+      console.error('Error handling perk click:', error);
     }
-    setModalState({
-      isOpen: true,
-      selectedPerk: sanitizePerkData(perk),
-      fullData: fullData ? sanitizePerkData(fullData) : null,
-    });
   };
   
   useEffect(() => {
