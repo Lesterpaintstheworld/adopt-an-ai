@@ -214,19 +214,16 @@ interface PerkFullData extends Perk {
       long_term: string[];
     };
   };
-  future_enhancements?: {
-    planned_upgrades: {
-      short_term: string[];
-      medium_term: string[];
-      long_term: string[];
+  cmmi_assessment?: {
+    current_level: number | string;
+    assessment_date: string | Date;
+    process_areas: {
+      [key: string]: {
+        maturity: string | number;
+        strengths: string[];
+        improvements_needed: string[];
+      };
     };
-  };
-  security_requirements?: {
-    access_control?: string[] | any;
-    compliance?: string[] | any;
-    authentication?: string;
-    authorization?: string;
-    data_protection?: string;
   };
   cmmi_assessment?: {
     current_level: number | string;
@@ -1153,7 +1150,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                   <>
                     <Typography variant="subtitle1" sx={{ color: COLORS.text.primary }}>Technical Documentation:</Typography>
                     <List dense>
-                      {fullData.documentation.technical_docs.map((doc, index) => (
+                      {fullData.documentation.technical_docs.map((doc: string, index: number) => (
                         <ListItem key={index}>
                           <ListItemIcon>
                             <DescriptionIcon fontSize="small" />
@@ -1172,7 +1169,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                     <Divider sx={{ my: 2 }} />
                     <Typography variant="subtitle1">Training Materials:</Typography>
                     <List dense>
-                      {fullData.documentation.training_materials.map((material, index) => (
+                      {fullData.documentation.training_materials.map((material: string, index: number) => (
                         <ListItem key={index}>
                           <ListItemIcon>
                             <SchoolIcon fontSize="small" />
@@ -1210,7 +1207,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                 
                 <Typography variant="subtitle1">Strategies:</Typography>
                 <List dense>
-                  {fullData.deployment.strategies.map((strategy, index) => (
+                  {fullData.deployment.strategies.map((strategy: { strategy?: string; phases?: string[] } | string, index: number) => (
                     <ListItem key={index}>
                       <ListItemIcon>
                         <LaunchIcon fontSize="small" />
