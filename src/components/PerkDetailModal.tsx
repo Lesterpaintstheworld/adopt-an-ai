@@ -479,7 +479,9 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                     <List>
                       {fullData.security_requirements.access_control.map((req, index) => (
                         <ListItem key={index}>
-                          <ListItemText primary={req} />
+                          <ListItemText 
+                            primary={typeof req === 'object' ? JSON.stringify(req) : String(req)}
+                          />
                         </ListItem>
                       ))}
                     </List>
@@ -495,16 +497,16 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                         ? fullData.security_requirements.compliance.map((req, index) => (
                             <ListItem key={index}>
                               <ListItemText 
-                                primary={req?.toString() || ''}
-                                primaryTypographyProps={{ component: 'div' }}
+                                primary={typeof req === 'object' ? JSON.stringify(req) : String(req)}
                               />
                             </ListItem>
                           ))
                         : (
                           <ListItem>
                             <ListItemText 
-                              primary={fullData.security_requirements.compliance?.toString() || ''}
-                              primaryTypographyProps={{ component: 'div' }}
+                              primary={typeof fullData.security_requirements.compliance === 'object' 
+                                ? JSON.stringify(fullData.security_requirements.compliance)
+                                : String(fullData.security_requirements.compliance)}
                             />
                           </ListItem>
                         )
