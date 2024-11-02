@@ -273,6 +273,12 @@ def fix_inconsistencies(generated_data, original_data, inconsistencies):
     
     return fixed_data
 
+def mask_api_key(key):
+    """Show only the last 4 characters of the API key"""
+    if not key:
+        return "None"
+    return f"...{key[-4:]}"
+
 class PerkGenerator:
     def __init__(self):
         setup_logging()
@@ -291,6 +297,7 @@ class PerkGenerator:
         if not api_key.startswith("sk-"):
             raise ValueError("ANTHROPIC_API_KEY appears to be invalid - should start with 'sk-'")
             
+        print(f"Loaded API key ending in: {mask_api_key(api_key)}")
         self.client = AsyncAnthropic(api_key=api_key)
         self.generation_stats = {
             'attempts': 0,
