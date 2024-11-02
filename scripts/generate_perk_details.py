@@ -60,6 +60,22 @@ def validate_perk_data(generated_data: Dict, original_data: Dict, template: Dict
         for field in required_fields:
             if field not in generated_data:
                 inconsistencies.append(f"Missing required field: {field}")
+
+        # Validate security requirements structure
+        if 'security_requirements' in generated_data:
+            security = generated_data['security_requirements']
+            if not isinstance(security, dict):
+                inconsistencies.append("security_requirements must be a dictionary")
+            else:
+                # Ensure compliance is a list
+                if 'compliance' in security and not isinstance(security['compliance'], list):
+                    security['compliance'] = [security['compliance']] if security['compliance'] else []
+                
+                # Ensure other security fields are properly structured
+                required_security_fields = ['authentication', 'authorization', 'data_protection']
+                for field in required_security_fields:
+                    if field not in security:
+                        inconsistencies.append(f"Missing security field: {field}")
         
         # Tag validation
         if 'tag' in original_data:
@@ -495,6 +511,15 @@ class PerkGenerator:
             3. Risks and mitigations
             4. Integration testing
             5. Monitoring requirements
+
+            Important: The security_requirements section must follow this structure:
+            security_requirements:
+              compliance:
+                - requirement1
+                - requirement2
+              authentication: string
+              authorization: string
+              data_protection: string
             
             Return only the YAML content, no other text."""
 
