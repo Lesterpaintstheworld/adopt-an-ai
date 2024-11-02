@@ -113,10 +113,10 @@ const MetricProgress = ({ current, target, label }: {
         sx={{
           height: 8,
           borderRadius: 4,
-          backgroundColor: 'rgba(0,0,0,0.1)',
+          backgroundColor: 'rgba(255, 165, 0, 0.2)', // Faded orange background
           '& .MuiLinearProgress-bar': {
             borderRadius: 4,
-            backgroundColor: progress >= 100 ? 'success.main' : 'primary.main',
+            backgroundColor: progress >= 100 ? '#FF8C00' : '#FFA500', // Orange progress bar
           }
         }}
       />
@@ -192,7 +192,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
       aria-labelledby="perk-detail-modal"
       sx={{
         '& .MuiModal-backdrop': {
-          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          backgroundColor: 'rgba(0, 0, 0, 0.9)', // Darker backdrop
         },
       }}
     >
@@ -204,9 +204,10 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
         width: '80%',
         maxWidth: 1200,
         maxHeight: '90vh',
-        bgcolor: 'background.paper',
+        bgcolor: '#000000', // Black background
+        color: '#FFA500', // Orange text
         borderRadius: 2,
-        boxShadow: 24,
+        boxShadow: '0 0 24px rgba(255, 165, 0, 0.3)', // Orange glow
         overflow: 'auto',
         p: 4,
         scrollBehavior: 'smooth',
@@ -214,14 +215,14 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
           width: '8px',
         },
         '&::-webkit-scrollbar-track': {
-          background: '#f1f1f1',
+          background: '#1a1a1a', // Dark scrollbar track
           borderRadius: '4px',
         },
         '&::-webkit-scrollbar-thumb': {
-          background: '#888',
+          background: '#FFA500', // Orange scrollbar thumb
           borderRadius: '4px',
           '&:hover': {
-            background: '#555',
+            background: '#FF8C00', // Darker orange on hover
           },
         },
         '&::-webkit-scrollbar': {
@@ -240,7 +241,15 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
         },
       }}>
         <IconButton
-          sx={{ position: 'absolute', right: 8, top: 8 }}
+          sx={{ 
+            position: 'absolute', 
+            right: 8, 
+            top: 8,
+            color: '#FFA500', // Orange color
+            '&:hover': {
+              color: '#FF8C00', // Darker orange on hover
+            },
+          }}
           onClick={onClose}
         >
           <CloseIcon />
@@ -251,8 +260,21 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
             <Typography variant="h4" component="h2" gutterBottom>
               {fullData?.name || perk.name}
             </Typography>
-            <Chip label={perk.tag} sx={{ mr: 1 }} />
-            <Chip label={`ID: ${fullData?.capability_id || perk.capability_id}`} />
+            <Chip 
+              label={perk.tag} 
+              sx={{ 
+                mr: 1,
+                bgcolor: '#FFA500', // Orange background
+                color: '#000000', // Black text
+              }} 
+            />
+            <Chip 
+              label={`ID: ${fullData?.capability_id || perk.capability_id}`}
+              sx={{ 
+                bgcolor: '#FFA500', // Orange background
+                color: '#000000', // Black text
+              }}
+            />
           </Grid>
 
           {isLoading ? (
@@ -263,7 +285,20 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
             <>
               {fullData?.version_control?.version_history && (
                 <Grid item xs={12} md={6}>
-                  <Paper elevation={2} sx={{ p: 2 }}>
+                  <Paper elevation={2} sx={{ 
+                    p: 2, 
+                    bgcolor: '#1a1a1a', // Dark background for cards
+                    color: '#FFA500', // Orange text
+                    '& .MuiTypography-root': {
+                      color: '#FFA500', // Orange text for all Typography
+                    },
+                    '& .MuiListItemText-primary': {
+                      color: '#FFA500', // Orange text for list items
+                    },
+                    '& .MuiListItemText-secondary': {
+                      color: '#FF8C00', // Darker orange for secondary text
+                    },
+                  }}>
                     <Typography variant="h6" gutterBottom>Version History</Typography>
                     <Timeline>
                       {fullData.version_control.version_history.map((version, index) => (
@@ -797,6 +832,11 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
             position: 'fixed',
             bottom: 16,
             right: 16,
+            bgcolor: '#FFA500', // Orange background
+            color: '#000000', // Black text
+            '&:hover': {
+              bgcolor: '#FF8C00', // Darker orange on hover
+            },
           }}
           onClick={() => {
             const modalElement = document.querySelector('[role="dialog"]');
