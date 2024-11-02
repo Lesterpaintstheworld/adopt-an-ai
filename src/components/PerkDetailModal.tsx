@@ -837,7 +837,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                     <Divider sx={{ my: 2 }} />
                     <Typography variant="subtitle1">Alerts:</Typography>
                     <List>
-                      {fullData.monitoring_and_maintenance.alerting.map((alert: string, index: number) => (
+                      {fullData?.monitoring_and_maintenance?.alerting?.map((alert: string, index: number) => (
                         <ListItem key={index}>
                           <ListItemText primary={alert} />
                         </ListItem>
