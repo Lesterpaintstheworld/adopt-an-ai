@@ -394,7 +394,13 @@ class PerkGenerator:
                 return None
 
             try:
-                result = yaml.safe_load(response.content[0].text)
+                # Clean Markdown backticks from response
+                raw_text = response.content[0].text
+                if raw_text.startswith('```'):
+                    # Remove first line (```yaml) and last line (```)
+                    raw_text = '\n'.join(raw_text.split('\n')[1:-1])
+                
+                result = yaml.safe_load(raw_text)
                 if not result:
                     print("Error: Could not parse YAML response")
                     print("Raw response:", response.content[0].text)
