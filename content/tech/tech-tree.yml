@@ -1187,14 +1187,6 @@ phase_3:
     prerequisites:
     - Universal creation tools
     - Reality synthesis
-    shortDescription: Systems leveraging quantum computing for revolutionary problem-solving
-      approaches
-    longDescription: Advanced cognitive systems that utilize quantum computing principles
-      and techniques to tackle complex problems previously considered unsolvable.
-      Through novel approaches like quantum annealing, these systems can explore vast
-      solution spaces, identify optimal solutions, and uncover innovative insights
-      beyond the limits of classical computing. This capability represents a significant
-      leap in problem-solving abilities, enabling breakthroughs across various domains.
   - name: Quantum applications
     tag: 🔧 TECHNICAL
     description: Software leveraging quantum computing principles for complex simulations
