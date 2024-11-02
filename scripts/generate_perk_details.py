@@ -297,18 +297,40 @@ class PerkGenerator:
 
     async def _generate_raw_perk_details(self, perk_data: Dict, template: Dict) -> Dict:
         """Generate raw perk data using Claude"""
+        # Load tech tree for context
+        tech_tree_path = Path("content/tech/tech-tree.yml")
+        with open(tech_tree_path, encoding='utf-8') as f:
+            tech_tree = yaml.safe_load(f)
+
+        # Extract phase and layer for focused context
+        phase, layer = extract_phase_and_layer(perk_data['capability_id'])
+        phase_data = tech_tree.get(phase, {})
+        layer_data = phase_data.get(layer, [])
+
         prompt = f"""You are a technical writer creating detailed specifications for AI capabilities.
         
-        Here is the basic perk data:
+        You are working on a comprehensive AI development tech tree. Here is the relevant context:
+        
+        Phase: {phase}
+        Phase Description: {phase_data.get('description', 'N/A')}
+        Phase Period: {phase_data.get('period', 'N/A')}
+        
+        Current Layer: {layer}
+        Layer Capabilities: {yaml.dump(layer_data)}
+        
+        Here is the specific capability to detail:
         {yaml.dump(perk_data)}
         
-        And here is the template to follow:
+        Please follow this template structure:
         {yaml.dump(template)}
         
-        Please generate a detailed specification for this perk following the template structure.
-        The specification should be in YAML format and include realistic technical details.
-        Maintain consistency with the tech tree phase and layer.
-        Use the same capability_id.
+        Generate a detailed specification for this capability following the template.
+        The specification should:
+        1. Be in YAML format
+        2. Include realistic technical details
+        3. Maintain consistency with the tech tree phase and layer
+        4. Use the same capability_id
+        5. Consider dependencies within the same phase and earlier phases
         
         Focus on:
         1. Technical specifications
