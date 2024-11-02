@@ -335,14 +335,17 @@ class PerkGenerator:
 
     def clean_text_for_yaml(self, text: str) -> str:
         """Clean text to ensure it's YAML-safe"""
-        # Normalize Unicode characters
-        text = unicodedata.normalize('NFKD', text)
-        # Convert to ASCII ignoring non-ASCII characters
-        text = text.encode('ascii', 'ignore').decode('ascii')
-        # Escape special YAML characters
+        if not isinstance(text, str):
+            return text
+            
+        # Nettoyer les caractères non-ASCII
+        text = ''.join(char for char in text if ord(char) < 128)
+        
+        # Échapper les caractères spéciaux YAML
         special_chars = [':', '-', '[', ']', '{', '}', '|', '>', '"', "'"]
         for char in special_chars:
             text = text.replace(char, '\\' + char)
+        
         return text
 
     async def _generate_raw_perk_details(self, perk_data: Dict, template: Dict) -> Dict:
@@ -407,24 +410,47 @@ class PerkGenerator:
                 return None
 
             try:
-                # Use more robust approach for cleaning and encoding
-                raw_text = response.content[0].text
+                # Gérer explicitement l'encodage de la réponse
+                raw_text = response.content[0].text.encode('utf-8').decode('utf-8')
                 
-                # Convert special characters to ASCII equivalents
-                raw_text = unicodedata.normalize('NFKD', raw_text).encode('ascii', 'ignore').decode('ascii')
+                # Nettoyer les caractères problématiques
+                raw_text = ''.join(char for char in raw_text if ord(char) < 128)
                 
-                # Clean Markdown backticks
+                # Nettoyer les backticks Markdown
+                if raw_text.startswith('```yaml'):
+                    raw_text = raw_text[7:]
                 if raw_text.startswith('```'):
-                    raw_text = '\n'.join(raw_text.split('\n')[1:-1])
+                    raw_text = raw_text[3:]
+                if raw_text.endswith('```'):
+                    raw_text = raw_text[:-3]
                 
-                # Use SafeLoader for better security
+                # Utiliser le SafeLoader avec gestion explicite de l'encodage
                 result = yaml.safe_load(raw_text)
+                
                 if not result:
                     print("Error: Could not parse YAML response")
                     print("Raw response:", raw_text)
+                    return None
+                    
+                # Nettoyer récursivement toutes les chaînes de caractères dans le résultat
+                def clean_strings(obj):
+                    if isinstance(obj, str):
+                        return ''.join(char for char in obj if ord(char) < 128)
+                    elif isinstance(obj, dict):
+                        return {k: clean_strings(v) for k, v in obj.items()}
+                    elif isinstance(obj, list):
+                        return [clean_strings(item) for item in list]
+                    return obj
+                
+                result = clean_strings(result)
                 return result
+                
             except yaml.YAMLError as e:
                 print("Error parsing YAML response:", e)
+                print("Raw response:", raw_text)
+                return None
+            except Exception as e:
+                print(f"Error processing response: {str(e)}")
                 print("Raw response:", raw_text)
                 return None
 
