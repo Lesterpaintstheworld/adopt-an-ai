@@ -277,14 +277,16 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                     <Typography variant="subtitle1">Enables:</Typography>
                     <List>
                       {Object.entries(fullData.dependencies.enables).map(([category, items]) => (
-                    <ListItem key={category}>
-                      <ListItemText
-                        primary={category}
-                        secondary={items.join(', ')}
-                      />
-                    </ListItem>
-                  ))}
-                </List>
+                        <ListItem key={category}>
+                          <ListItemText
+                            primary={category}
+                            secondary={items.join(', ')}
+                          />
+                        </ListItem>
+                      ))}
+                    </List>
+                  </>
+                )}
               </Paper>
             </Grid>
           )}
