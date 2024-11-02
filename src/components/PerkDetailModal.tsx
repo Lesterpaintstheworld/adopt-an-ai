@@ -325,7 +325,16 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                     <ListItem key={category}>
                       <ListItemText
                         primary={category}
-                        secondary={items.join(', ')}
+                        secondary={
+                          Array.isArray(items) ? 
+                            items.map(item => {
+                              if (typeof item === 'object' && item.capability) {
+                                return item.capability + (item.criticality ? ` (${item.criticality})` : '');
+                              }
+                              return item;
+                            }).join(', ')
+                            : 'Invalid format'
+                        }
                       />
                     </ListItem>
                   ))}
@@ -341,7 +350,16 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                         <ListItem key={category}>
                           <ListItemText
                             primary={category}
-                            secondary={items.join(', ')}
+                            secondary={
+                              Array.isArray(items) ? 
+                                items.map(item => {
+                                  if (typeof item === 'object') {
+                                    return `${item.capability}${item.relationship ? ` (${item.relationship})` : ''}`;
+                                  }
+                                  return item;
+                                }).join(', ')
+                                : 'Invalid format'
+                            }
                           />
                         </ListItem>
                       ))}
