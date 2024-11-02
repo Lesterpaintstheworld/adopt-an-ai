@@ -150,8 +150,8 @@ interface PerkFullData extends Perk {
     };
   };
   security_requirements?: {
-    access_control?: string[] | any;
-    compliance?: string[] | any;
+    access_control?: Array<string | Record<string, any>>;
+    compliance?: Array<string | Record<string, any>> | Record<string, any>;
     authentication?: string;
     authorization?: string;
     data_protection?: string;
@@ -899,7 +899,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                   <>
                     <Typography variant="subtitle1">Access Control:</Typography>
                     <List>
-                      {fullData.security_requirements.access_control.map((req, index) => (
+                      {fullData.security_requirements.access_control.map((req: string | Record<string, any>, index: number) => (
                         <ListItem key={index}>
                           <ListItemText 
                             primary={typeof req === 'object' ? JSON.stringify(req) : String(req)}
@@ -916,7 +916,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                     <Typography variant="subtitle1">Compliance:</Typography>
                     <List>
                       {Array.isArray(fullData.security_requirements.compliance) 
-                        ? fullData.security_requirements.compliance.map((req, index) => (
+                        ? fullData.security_requirements.compliance.map((req: string | Record<string, any>, index: number) => (
                             <ListItem key={index}>
                               <ListItemText 
                                 primary={typeof req === 'object' ? JSON.stringify(req) : String(req)}
