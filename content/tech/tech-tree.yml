@@ -82,7 +82,7 @@ phase_1:
     - Text generation
     - Basic compute allocation
     chronologicalOrder: 6
-    capability_id: APP_P1_003
+    capability_id: MLT_P1_001
   - name: Code generation
     tag: 🎨 CREATIVE
     shortDescription: Generate efficient, well-documented code across multiple programming
@@ -96,7 +96,7 @@ phase_1:
     - Text generation
     - Base GPT-4 integration
     chronologicalOrder: 8
-    capability_id: APP_P1_004
+    capability_id: MLT_P1_002
   multi_agent_layer:
   - name: Email communication
     tag: 🌐 INTEGRATION
@@ -318,7 +318,7 @@ phase_2:
     - Code generation
     - Complex goal hierarchies
     chronologicalOrder: 2
-    capability_id: APP_P2_001
+    capability_id: MLT_P1_003
   - name: Creative suites
     tag: 🎨 CREATIVE
     description: Integrated tools for art, music, and writing that learn user preferences
@@ -328,7 +328,7 @@ phase_2:
     - Image creation
     - Voice synthesis
     chronologicalOrder: 5
-    capability_id: APP_P2_002
+    capability_id: MLT_P1_004
   - name: Research systems
     tag: 🧠 COGNITIVE
     description: AI-driven research tools that can analyze data, generate hypotheses,
@@ -337,7 +337,7 @@ phase_2:
     - Autonomous applications
     - Advanced memory structures
     chronologicalOrder: 8
-    capability_id: APP_P2_003
+    capability_id: ECO_P1_001
   - name: Development platforms
     tag: 🔧 TECHNICAL
     description: Intelligent development environments that learn from usage patterns
@@ -346,7 +346,7 @@ phase_2:
     - Code generation
     - Autonomous applications
     chronologicalOrder: 10
-    capability_id: APP_P2_004
+    capability_id: ECO_P1_002
   multi_agent_layer:
   - name: Agent coalitions
     tag: 🤝 SOCIAL
@@ -559,7 +559,7 @@ phase_3:
     - Creative suites
     - Quantum compute access
     chronologicalOrder: 2
-    capability_id: APP_P3_001
+    capability_id: ECO_P1_003
   - name: Consciousness expansion
     tag: 🧠 COGNITIVE
     description: Applications that enable AIs to explore and expand their self-awareness,
