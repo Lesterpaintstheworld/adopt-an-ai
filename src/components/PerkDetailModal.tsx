@@ -169,6 +169,62 @@ interface PerkFullData extends Perk {
       approved_by?: string;
     }>;
   };
+  technical_specifications?: {
+    core_components?: Array<{
+      name: string;
+      description: string;
+    }>;
+    performance_metrics?: {
+      [key: string]: string | number;
+    };
+  };
+  risks_and_mitigations?: {
+    technical_risks?: Array<{
+      risk: string;
+      severity: string;
+      mitigation: string;
+    }>;
+    ethical_risks?: Array<{
+      risk: string;
+      mitigation: string;
+    }>;
+  };
+  documentation?: {
+    technical_docs?: string[];
+    training_materials?: string[];
+  };
+  deployment?: {
+    strategies: Array<{
+      strategy?: string;
+      phases?: string[];
+    } | string>;
+    rollback_procedures: string[];
+  };
+  future_enhancements?: {
+    planned_upgrades: {
+      short_term: string[];
+      medium_term: string[];
+      long_term: string[];
+    };
+  };
+  security_requirements?: {
+    access_control?: string[] | any;
+    compliance?: string[] | any;
+    authentication?: string;
+    authorization?: string;
+    data_protection?: string;
+  };
+  cmmi_assessment?: {
+    current_level: number | string;
+    assessment_date: string | Date;
+    process_areas: {
+      [key: string]: {
+        maturity: string | number;
+        strengths: string[];
+        improvements_needed: string[];
+      };
+    };
+  };
 }
 
 interface PerkDetailModalProps {
@@ -755,7 +811,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                 
                 <Typography variant="subtitle1">Metrics Collection:</Typography>
                 <List>
-                  {fullData.monitoring_and_maintenance.metrics_collection.map((metric, index) => (
+                  {fullData.monitoring_and_maintenance.metrics_collection.map((metric: string, index: number) => (
                     <ListItem key={index}>
                       <ListItemText primary={metric} />
                     </ListItem>
@@ -767,7 +823,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                     <Divider sx={{ my: 2 }} />
                     <Typography variant="subtitle1">Alerts:</Typography>
                     <List>
-                      {fullData.monitoring_and_maintenance.alerting.map((alert, index) => (
+                      {fullData.monitoring_and_maintenance.alerting.map((alert: string, index: number) => (
                         <ListItem key={index}>
                           <ListItemText primary={alert} />
                         </ListItem>
