@@ -295,8 +295,8 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
               src={`/perk-icons/${getPerkIconFilename(perk.name)}.png`}
               alt={perk.name}
               sx={{ 
-                width: 64,
-                height: 64,
+                width: 96,
+                height: 96,
                 cursor: 'pointer',
                 borderRadius: 1,
                 '&:hover': {
@@ -917,7 +917,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                 width: '100%',
                 height: 'auto',
                 display: 'block',
-                maxHeight: '80vh',
+                maxHeight: '90vh',
                 objectFit: 'contain',
               }}
             />
