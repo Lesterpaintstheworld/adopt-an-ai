@@ -86,10 +86,45 @@ def validate_perk_data(generated_data: Dict, original_data: Dict, template: Dict
     
     return inconsistencies
 
+def load_tech_tree():
+    """Load and validate the tech tree YAML file"""
+    tech_tree_path = Path("content/tech/tech-tree.yml")
+    
+    # First, read the raw content
+    try:
+        with open(tech_tree_path, 'rb') as f:
+            # Read as bytes first to handle any BOM
+            raw_content = f.read()
+            
+        # Try to decode with different encodings
+        for encoding in ['utf-8-sig', 'utf-8', 'cp1252']:
+            try:
+                content = raw_content.decode(encoding)
+                # Try parsing with safe loader for better error handling
+                tech_tree = yaml.safe_load(content)
+                
+                if tech_tree and isinstance(tech_tree, dict):
+                    print(f"Successfully loaded tech tree using {encoding} encoding")
+                    return tech_tree
+                    
+            except UnicodeDecodeError:
+                continue
+            except Exception as e:
+                print(f"Error parsing with {encoding}: {str(e)}")
+                continue
+                
+        raise ValueError("Failed to load tech tree with any encoding")
+        
+    except Exception as e:
+        print(f"Error loading tech tree: {str(e)}")
+        print("File path:", tech_tree_path.absolute())
+        if 'raw_content' in locals():
+            print("Raw content (first 100 bytes):", raw_content[:100])
+        raise
+
 def validate_prerequisites_exist(prereqs: Set[str]) -> bool:
     """Validate that all prerequisites exist in the tech tree"""
-    with open(Path("content/tech/tech-tree.yml")) as f:
-        tech_tree = yaml.safe_load(f)
+    tech_tree = load_tech_tree()
     
     all_capabilities = set()
     for phase in tech_tree.values():
@@ -111,8 +146,7 @@ def validate_chronological_order(data: Dict) -> bool:
     if not phase or not layer:
         return True
         
-    with open(Path("content/tech/tech-tree.yml")) as f:
-        tech_tree = yaml.safe_load(f)
+    tech_tree = load_tech_tree()
     
     layer_items = tech_tree.get(phase, {}).get(layer, [])
     for item in layer_items:
@@ -368,25 +402,9 @@ class PerkGenerator:
             phase, layer = extract_phase_and_layer(perk_data['capability_id'])
             print(f"Generating details for {perk_data['capability_id']} in {phase}, {layer}")
         
-            # Lecture sécurisée du tech tree avec gestion explicite de l'encodage
-            tech_tree_path = Path("content/tech/tech-tree.yml")
-            try:
-                # Essayer d'abord avec UTF-8-SIG
-                with open(tech_tree_path, 'r', encoding='utf-8-sig') as f:
-                    content = f.read()
-                    tech_tree = yaml.safe_load(content)
-            except UnicodeDecodeError:
-                try:
-                    # Si ça échoue, essayer avec UTF-8 standard
-                    with open(tech_tree_path, 'r', encoding='utf-8') as f:
-                        content = f.read()
-                        tech_tree = yaml.safe_load(content)
-                except UnicodeDecodeError:
-                    # En dernier recours, essayer avec CP1252
-                    with open(tech_tree_path, 'r', encoding='cp1252') as f:
-                        content = f.read()
-                        tech_tree = yaml.safe_load(content)
-
+            # Load tech tree with enhanced error handling
+            tech_tree = load_tech_tree()
+            
             if not tech_tree:
                 raise ValueError("Failed to load tech tree data")
 
