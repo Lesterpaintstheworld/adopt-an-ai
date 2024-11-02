@@ -489,14 +489,37 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                             <ListItem key={index}>
                               <ListItemText primary={req} />
                             </ListItem>
-                      ))
-                    : fullData.security_requirements.compliance && (
-                        <ListItem>
-                          <ListItemText primary={fullData.security_requirements.compliance} />
-                        </ListItem>
-                      )
-                  }
-                </List>
+                          ))
+                        : (
+                          <ListItem>
+                            <ListItemText primary={fullData.security_requirements.compliance} />
+                          </ListItem>
+                        )
+                      }
+                    </List>
+                  </>
+                )}
+
+                {fullData.security_requirements.authentication && (
+                  <>
+                    <Typography variant="subtitle1">Authentication:</Typography>
+                    <Typography variant="body1">{fullData.security_requirements.authentication}</Typography>
+                  </>
+                )}
+
+                {fullData.security_requirements.authorization && (
+                  <>
+                    <Typography variant="subtitle1">Authorization:</Typography>
+                    <Typography variant="body1">{fullData.security_requirements.authorization}</Typography>
+                  </>
+                )}
+
+                {fullData.security_requirements.data_protection && (
+                  <>
+                    <Typography variant="subtitle1">Data Protection:</Typography>
+                    <Typography variant="body1">{fullData.security_requirements.data_protection}</Typography>
+                  </>
+                )}
               </Paper>
             </Grid>
           )}
