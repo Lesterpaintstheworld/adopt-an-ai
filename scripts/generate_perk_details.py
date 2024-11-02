@@ -421,12 +421,12 @@ class PerkGenerator:
                 print("Error: Empty response from API")
                 return None
 
-            # Get raw text from API response
-            raw_text = response.content[0].text
+            # Get raw text from API response and force UTF-8
+            raw_text = response.content[0].text.encode('utf-8').decode('utf-8')
             print("Raw response length:", len(raw_text))
             print("First 100 chars:", raw_text[:100])  # Debug
 
-            # Basic cleanup without encoding manipulation
+            # Basic cleanup
             raw_text = raw_text.strip()
             if raw_text.startswith('```yaml'):
                 raw_text = raw_text[7:]  # Remove ```yaml
@@ -434,7 +434,12 @@ class PerkGenerator:
                 raw_text = raw_text[:-3]  # Remove ```
             raw_text = raw_text.strip()
 
+            # Force UTF-8 encoding before YAML parsing
+            raw_text = raw_text.encode('utf-8').decode('utf-8')
+            
             try:
+                # Configure YAML for UTF-8
+                yaml.add_implicit_resolver('tag:yaml.org,2002:str', None)
                 result = yaml.safe_load(raw_text)
                 if not result:
                     print("Warning: YAML parsed to None")
