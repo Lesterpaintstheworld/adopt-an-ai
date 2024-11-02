@@ -10,6 +10,9 @@ from anthropic import AsyncAnthropic
 from pathlib import Path
 from dotenv import load_dotenv
 
+# Configure YAML for proper UTF-8 handling
+yaml.add_representer(str, lambda dumper, data: dumper.represent_scalar('tag:yaml.org,2002:str', data, style='|' if '\n' in data else None))
+
 # Constants
 VALID_TAGS = {'🤝 SOCIAL', '⚙️ OPERATIONAL', '🎨 CREATIVE', '🧠 COGNITIVE', '🔧 TECHNICAL', '🌐 INTEGRATION'}
 LAYER_SPECIFIC_RULES = {
@@ -417,14 +420,11 @@ class PerkGenerator:
             try:
                 raw_text = response.content[0].text
                 
-                # First, decode with 'ignore' to handle any problematic bytes
-                raw_text = raw_text.encode('utf-8', 'ignore').decode('utf-8')
+                # Single consistent UTF-8 conversion
+                raw_text = raw_text.encode('utf-8', 'replace').decode('utf-8')
                 
-                # Additional sanitization steps
+                # Clean problematic characters while preserving valid ones
                 raw_text = ''.join(c for c in raw_text if c.isprintable() or c in ['\n', '\r', '\t'])
-                
-                # Remove any BOM or other invisible characters
-                raw_text = raw_text.replace('\ufeff', '')
                 
                 # Clean up markdown formatting
                 if raw_text.startswith('```yaml'):
@@ -445,8 +445,8 @@ class PerkGenerator:
                 # Recursively clean all strings in the result
                 def clean_strings(obj):
                     if isinstance(obj, str):
-                        # More aggressive string cleaning
-                        cleaned = obj.encode('ascii', 'ignore').decode('ascii')
+                        # Consistent UTF-8 cleaning
+                        cleaned = obj.encode('utf-8', 'replace').decode('utf-8')
                         cleaned = ''.join(c for c in cleaned if c.isprintable() or c in ['\n', '\r', '\t'])
                         return cleaned
                     elif isinstance(obj, dict):
@@ -658,9 +658,10 @@ async def main():
                                                 else:
                                                     cleaned_perk[key] = value
                                                     
-                                            with codecs.open(perk_file, 'w', encoding='utf-8', errors='replace') as f:
+                                            with open(perk_file, 'w', encoding='utf-8') as f:
+                                                f.write('# -*- coding: utf-8 -*-\n')
                                                 yaml.dump(cleaned_perk, f, sort_keys=False, allow_unicode=True,
-                                                         default_flow_style=False, width=float("inf"))
+                                                        default_flow_style=False, width=float("inf"))
                                             print(f"Successfully generated {perk_file}")
                                         else:
                                             print(f"Failed to generate details for {item['capability_id']}")
