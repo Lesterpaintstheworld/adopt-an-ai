@@ -390,6 +390,10 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
             <Paper elevation={2} sx={{ 
               p: 2,
               bgcolor: COLORS.surface,
+              color: COLORS.text.primary,
+              '& .MuiTypography-root': {
+                color: COLORS.text.primary,
+              }
             }}>
               <Typography variant="h6" gutterBottom>Description</Typography>
               <Typography variant="body1" paragraph>
@@ -438,7 +442,17 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
             <Grid item xs={12} md={6}>
               <Paper elevation={2} sx={{ 
                 p: 2,
-                bgcolor: 'rgba(0, 0, 0, 0.75)', // Fond noir avec 75% d'opacité
+                bgcolor: COLORS.surface,     // Box grise
+                color: COLORS.text.primary,  // Texte blanc
+                '& .MuiTypography-root': {
+                  color: COLORS.text.primary,
+                },
+                '& .MuiListItemText-primary': {
+                  color: COLORS.text.primary,
+                },
+                '& .MuiListItemText-secondary': {
+                  color: COLORS.text.secondary,
+                }
               }}>
                 <Typography variant="h6" gutterBottom>Dependencies</Typography>
                 
@@ -497,7 +511,17 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
             <Grid item xs={12}>
               <Paper elevation={2} sx={{ 
                 p: 2,
-                bgcolor: 'rgba(0, 0, 0, 0.75)', // Fond noir avec 75% d'opacité
+                bgcolor: COLORS.surface,     // Box grise
+                color: COLORS.text.primary,  // Texte blanc
+                '& .MuiTypography-root': {
+                  color: COLORS.text.primary,
+                },
+                '& .MuiListItemText-primary': {
+                  color: COLORS.text.primary,
+                },
+                '& .MuiListItemText-secondary': {
+                  color: COLORS.text.secondary,
+                }
               }}>
                 <Typography variant="h6" gutterBottom>Risks and Mitigations</Typography>
                 
