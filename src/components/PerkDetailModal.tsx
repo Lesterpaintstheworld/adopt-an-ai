@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import mermaid from 'mermaid';
 import {
   Modal,
   Box,
@@ -108,17 +109,33 @@ const SeverityBadge = ({ severity }: { severity: string }) => {
 const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [mermaidInitialized, setMermaidInitialized] = useState(false);
+  const [mermaidError, setMermaidError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (fullData?.dependencies_visualization?.primary_diagram && !mermaidInitialized) {
-      mermaid.initialize({
-        theme: 'default',
-        securityLevel: 'loose'
-      });
-      mermaid.contentLoaded();
-      setMermaidInitialized(true);
+    if (open && fullData?.dependencies_visualization?.primary_diagram && !mermaidInitialized) {
+      setIsLoading(true);
+      try {
+        mermaid.initialize({
+          theme: 'default',
+          securityLevel: 'loose',
+          startOnLoad: true
+        });
+        mermaid.contentLoaded();
+        setMermaidInitialized(true);
+      } catch (error) {
+        setMermaidError(error instanceof Error ? error.message : 'Error initializing diagram');
+      } finally {
+        setIsLoading(false);
+      }
     }
-  }, [fullData?.dependencies_visualization?.primary_diagram, mermaidInitialized]);
+  }, [open, fullData?.dependencies_visualization?.primary_diagram, mermaidInitialized]);
+
+  useEffect(() => {
+    if (!open) {
+      setMermaidInitialized(false);
+      setMermaidError(null);
+    }
+  }, [open]);
   
   if (!perk) return null;
 
@@ -478,9 +495,15 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
               <Paper elevation={2} sx={{ p: 2 }}>
                 <Typography variant="h6" gutterBottom>Dependencies Visualization</Typography>
                 <Box sx={{ overflow: 'auto' }}>
-                  <div className="mermaid">
-                    {fullData.dependencies_visualization.primary_diagram}
-                  </div>
+                  {isLoading ? (
+                    <CircularProgress />
+                  ) : mermaidError ? (
+                    <Typography color="error">{mermaidError}</Typography>
+                  ) : (
+                    <div className="mermaid">
+                      {fullData.dependencies_visualization.primary_diagram}
+                    </div>
+                  )}
                 </Box>
               </Paper>
             </Grid>
