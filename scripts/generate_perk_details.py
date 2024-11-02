@@ -338,13 +338,16 @@ class PerkGenerator:
         if not isinstance(text, str):
             return text
             
-        # Nettoyer les caractères non-ASCII
-        text = ''.join(char for char in text if ord(char) < 128)
+        # Normalize and convert to ASCII
+        text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('ascii')
         
-        # Échapper les caractères spéciaux YAML
+        # Escape YAML special characters
         special_chars = [':', '-', '[', ']', '{', '}', '|', '>', '"', "'"]
         for char in special_chars:
             text = text.replace(char, '\\' + char)
+            
+        # Remove any remaining problematic characters
+        text = ''.join(char for char in text if char.isprintable())
         
         return text
 
@@ -411,10 +414,10 @@ class PerkGenerator:
 
             try:
                 # Gérer explicitement l'encodage de la réponse
-                raw_text = response.content[0].text.encode('utf-8').decode('utf-8')
+                raw_text = response.content[0].text
                 
-                # Nettoyer les caractères problématiques
-                raw_text = ''.join(char for char in raw_text if ord(char) < 128)
+                # Handle encoding more gracefully
+                raw_text = unicodedata.normalize('NFKD', raw_text).encode('ascii', 'ignore').decode('ascii')
                 
                 # Nettoyer les backticks Markdown
                 if raw_text.startswith('```yaml'):
@@ -435,11 +438,11 @@ class PerkGenerator:
                 # Nettoyer récursivement toutes les chaînes de caractères dans le résultat
                 def clean_strings(obj):
                     if isinstance(obj, str):
-                        return ''.join(char for char in obj if ord(char) < 128)
+                        return unicodedata.normalize('NFKD', obj).encode('ascii', 'ignore').decode('ascii')
                     elif isinstance(obj, dict):
                         return {k: clean_strings(v) for k, v in obj.items()}
                     elif isinstance(obj, list):
-                        return [clean_strings(item) for item in list]
+                        return [clean_strings(item) for item in items]
                     return obj
                 
                 result = clean_strings(result)
