@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import mermaid from 'mermaid';
-import { Perk } from '../types/tech';
 
 const formatDateValue = (value: any): string => {
   if (value instanceof Date) {
