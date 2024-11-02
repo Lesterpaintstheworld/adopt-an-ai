@@ -3,6 +3,7 @@ import yaml
 import json
 import asyncio
 import logging
+from ruamel.yaml import YAML
 import unicodedata
 import codecs
 from typing import Dict, List, Set
@@ -436,6 +437,11 @@ class PerkGenerator:
                     if clean_item:
                         context_data['capabilities'].append(clean_item)
 
+            # Utiliser json.dumps pour les structures de données complexes
+            perk_data_str = json.dumps(perk_data, indent=2, ensure_ascii=False)
+            template_str = json.dumps(template, indent=2, ensure_ascii=False)
+            capabilities_str = json.dumps(context_data['capabilities'], indent=2, ensure_ascii=False)
+
             prompt = f"""You are a technical writer creating detailed specifications for AI capabilities.
         
             You are working on a comprehensive AI development tech tree. Here is the relevant context:
@@ -445,13 +451,13 @@ class PerkGenerator:
             Phase Period: {context_data['phase_period']}
         
             Current Layer: {context_data['layer']}
-            Layer Capabilities: {json.dumps(context_data['capabilities'], indent=2, ensure_ascii=False)}
+            Layer Capabilities: {capabilities_str}
         
             Here is the specific capability to detail:
-            {yaml.dump(perk_data, allow_unicode=True, default_flow_style=False)}
+            {perk_data_str}
         
             Please follow this template structure:
-            {yaml.dump(template, allow_unicode=True, default_flow_style=False)}
+            {template_str}
             
             Generate a detailed specification for this capability following the template.
             The specification should:
@@ -499,16 +505,18 @@ class PerkGenerator:
             raw_text = raw_text.encode('utf-8').decode('utf-8')
             
             try:
-                # Configure YAML for UTF-8
-                yaml.add_implicit_resolver('tag:yaml.org,2002:str', None)
-                result = yaml.safe_load(raw_text)
+                # Utiliser ruamel.yaml pour le parsing
+                from ruamel.yaml import YAML
+                yaml_parser = YAML(typ='safe')
+                result = yaml_parser.load(raw_text)
+                
                 if not result:
                     print("Warning: YAML parsed to None")
                     print("Raw text was:", raw_text)
                     return None
                 return result
                 
-            except yaml.YAMLError as e:
+            except Exception as e:
                 print("Error parsing YAML response:", e)
                 print("Problematic content:", raw_text)
                 return None
