@@ -270,7 +270,7 @@ class PerkGenerator:
             'validation_time': 0
         }
 
-    async def _generate_raw_perk_details(self, perk_data, template):
+    async def _generate_raw_perk_details(self, perk_data: Dict, template: Dict) -> Dict:
         """Generate raw perk data using Claude"""
         prompt = f"""You are a technical writer creating detailed specifications for AI capabilities.
         
