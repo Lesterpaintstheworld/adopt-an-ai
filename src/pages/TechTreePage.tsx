@@ -457,6 +457,7 @@ const TechTreePage = () => {
             perk={modalState.selectedPerk}
             fullData={modalState.fullData}
           />
+        </>
           
           {/* Phase headers */}
           {Object.entries(techTree).map(([phaseKey, phaseData]: [string, any], index) => {
