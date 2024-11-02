@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Modal,
   Box,
@@ -107,6 +107,18 @@ const SeverityBadge = ({ severity }: { severity: string }) => {
 
 const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [mermaidInitialized, setMermaidInitialized] = useState(false);
+
+  useEffect(() => {
+    if (fullData?.dependencies_visualization?.primary_diagram && !mermaidInitialized) {
+      mermaid.initialize({
+        theme: 'default',
+        securityLevel: 'loose'
+      });
+      mermaid.contentLoaded();
+      setMermaidInitialized(true);
+    }
+  }, [fullData?.dependencies_visualization?.primary_diagram, mermaidInitialized]);
   
   if (!perk) return null;
 
@@ -466,23 +478,9 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
               <Paper elevation={2} sx={{ p: 2 }}>
                 <Typography variant="h6" gutterBottom>Dependencies Visualization</Typography>
                 <Box sx={{ overflow: 'auto' }}>
-                  {fullData.dependencies_visualization.primary_diagram && (
-                    <>
-                      <div className="mermaid">
-                        {(() => {
-                          useEffect(() => {
-                            mermaid.initialize({
-                          theme: 'default',
-                          securityLevel: 'loose'
-                        });
-                            mermaid.contentLoaded();
-                          }, [fullData.dependencies_visualization.primary_diagram]);
-                          return fullData.dependencies_visualization.primary_diagram;
-                        })()}
-                        {fullData.dependencies_visualization.primary_diagram}
-                      </div>
-                    </>
-                  )}
+                  <div className="mermaid">
+                    {fullData.dependencies_visualization.primary_diagram}
+                  </div>
                 </Box>
               </Paper>
             </Grid>
