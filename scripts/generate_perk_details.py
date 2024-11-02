@@ -417,32 +417,38 @@ class PerkGenerator:
             try:
                 raw_text = response.content[0].text
                 
-                # Utiliser 'ignore' au lieu de 'strict' pour l'encodage
+                # First, decode with 'ignore' to handle any problematic bytes
                 raw_text = raw_text.encode('utf-8', 'ignore').decode('utf-8')
                 
-                # Nettoyer les caractères non-ASCII
-                raw_text = ''.join(char for char in raw_text if ord(char) < 128)
+                # Additional sanitization steps
+                raw_text = ''.join(c for c in raw_text if c.isprintable() or c in ['\n', '\r', '\t'])
                 
-                # Nettoyer les backticks Markdown
+                # Remove any BOM or other invisible characters
+                raw_text = raw_text.replace('\ufeff', '')
+                
+                # Clean up markdown formatting
                 if raw_text.startswith('```yaml'):
                     raw_text = raw_text[7:]
-                if raw_text.startswith('```'):
+                elif raw_text.startswith('```'):
                     raw_text = raw_text[3:]
                 if raw_text.endswith('```'):
                     raw_text = raw_text[:-3]
                 
-                # Utiliser le SafeLoader avec gestion explicite de l'encodage
+                # Parse YAML with safe_load and explicit encoding
                 result = yaml.safe_load(raw_text)
                 
                 if not result:
                     print("Error: Could not parse YAML response")
                     print("Raw response:", raw_text)
                     return None
-                    
-                # Nettoyer récursivement toutes les chaînes de caractères dans le résultat
+                
+                # Recursively clean all strings in the result
                 def clean_strings(obj):
                     if isinstance(obj, str):
-                        return unicodedata.normalize('NFKD', obj).encode('ascii', 'ignore').decode('ascii')
+                        # More aggressive string cleaning
+                        cleaned = obj.encode('ascii', 'ignore').decode('ascii')
+                        cleaned = ''.join(c for c in cleaned if c.isprintable() or c in ['\n', '\r', '\t'])
+                        return cleaned
                     elif isinstance(obj, dict):
                         return {k: clean_strings(v) for k, v in obj.items()}
                     elif isinstance(obj, list):
