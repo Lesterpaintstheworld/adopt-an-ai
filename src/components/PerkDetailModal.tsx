@@ -1,6 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
 import mermaid from 'mermaid';
 
+const COLORS = {
+  background: '#000000',        // Black background
+  surface: '#1a1a1a',          // Slightly lighter black for cards
+  primary: '#007FFF',          // Bright blue
+  secondary: '#0059B2',        // Darker blue
+  text: {
+    primary: '#007FFF',        // Bright blue
+    secondary: '#0059B2'       // Darker blue
+  }
+};
+
 const formatValue = (value: any): string => {
   if (value === null || value === undefined) {
     return '';
@@ -204,10 +215,10 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
         width: '80%',
         maxWidth: 1200,
         maxHeight: '90vh',
-        bgcolor: '#000000', // Black background
-        color: '#FFA500', // Orange text
+        bgcolor: COLORS.background,
+        color: COLORS.text.primary,
         borderRadius: 2,
-        boxShadow: '0 0 24px rgba(255, 165, 0, 0.3)', // Orange glow
+        boxShadow: `0 0 24px rgba(0, 127, 255, 0.3)`, // Blue glow
         overflow: 'auto',
         p: 4,
         scrollBehavior: 'smooth',
@@ -215,14 +226,14 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
           width: '8px',
         },
         '&::-webkit-scrollbar-track': {
-          background: '#1a1a1a', // Dark scrollbar track
+          background: COLORS.surface,
           borderRadius: '4px',
         },
         '&::-webkit-scrollbar-thumb': {
-          background: '#FFA500', // Orange scrollbar thumb
+          background: COLORS.primary,
           borderRadius: '4px',
           '&:hover': {
-            background: '#FF8C00', // Darker orange on hover
+            background: COLORS.secondary,
           },
         },
         '&::-webkit-scrollbar': {
@@ -245,9 +256,9 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
             position: 'absolute', 
             right: 8, 
             top: 8,
-            color: '#FFA500', // Orange color
+            color: COLORS.primary,
             '&:hover': {
-              color: '#FF8C00', // Darker orange on hover
+              color: COLORS.secondary,
             },
           }}
           onClick={onClose}
@@ -264,8 +275,8 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
               label={perk.tag} 
               sx={{ 
                 mr: 1,
-                bgcolor: '#FFA500', // Orange background
-                color: '#000000', // Black text
+                bgcolor: COLORS.primary,
+                color: COLORS.background,
               }} 
             />
             <Chip 
@@ -286,17 +297,17 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
               {fullData?.version_control?.version_history && (
                 <Grid item xs={12} md={6}>
                   <Paper elevation={2} sx={{ 
-                    p: 2, 
-                    bgcolor: '#1a1a1a', // Dark background for cards
-                    color: '#FFA500', // Orange text
+                    p: 2,
+                    bgcolor: COLORS.surface,
+                    color: COLORS.text.primary,
                     '& .MuiTypography-root': {
-                      color: '#FFA500', // Orange text for all Typography
+                      color: COLORS.text.primary,
                     },
                     '& .MuiListItemText-primary': {
-                      color: '#FFA500', // Orange text for list items
+                      color: COLORS.text.primary,
                     },
                     '& .MuiListItemText-secondary': {
-                      color: '#FF8C00', // Darker orange for secondary text
+                      color: COLORS.text.secondary,
                     },
                   }}>
                     <Typography variant="h6" gutterBottom>Version History</Typography>
@@ -832,10 +843,10 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
             position: 'fixed',
             bottom: 16,
             right: 16,
-            bgcolor: '#FFA500', // Orange background
-            color: '#000000', // Black text
+            bgcolor: COLORS.primary,
+            color: COLORS.background,
             '&:hover': {
-              bgcolor: '#FF8C00', // Darker orange on hover
+              bgcolor: COLORS.secondary,
             },
           }}
           onClick={() => {
