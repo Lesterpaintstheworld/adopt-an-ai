@@ -207,6 +207,13 @@ interface PerkFullData extends Perk {
       long_term: string[];
     };
   };
+  future_enhancements?: {
+    planned_upgrades: {
+      short_term: string[];
+      medium_term: string[];
+      long_term: string[];
+    };
+  };
   security_requirements?: {
     access_control?: string[] | any;
     compliance?: string[] | any;
@@ -843,7 +850,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                 
                 <Typography variant="subtitle1">Short Term:</Typography>
                 <List>
-                  {fullData.future_enhancements.planned_upgrades.short_term.map((upgrade, index) => (
+                  {fullData.future_enhancements.planned_upgrades.short_term.map((upgrade: string, index: number) => (
                     <ListItem key={index}>
                       <ListItemText primary={upgrade} />
                     </ListItem>
@@ -854,7 +861,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
 
                 <Typography variant="subtitle1">Medium Term:</Typography>
                 <List>
-                  {fullData.future_enhancements.planned_upgrades.medium_term.map((upgrade, index) => (
+                  {fullData.future_enhancements.planned_upgrades.medium_term.map((upgrade: string, index: number) => (
                     <ListItem key={index}>
                       <ListItemText primary={upgrade} />
                     </ListItem>
@@ -865,7 +872,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
 
                 <Typography variant="subtitle1">Long Term:</Typography>
                 <List>
-                  {fullData.future_enhancements.planned_upgrades.long_term.map((upgrade, index) => (
+                  {fullData.future_enhancements.planned_upgrades.long_term.map((upgrade: string, index: number) => (
                     <ListItem key={index}>
                       <ListItemText primary={upgrade} />
                     </ListItem>
