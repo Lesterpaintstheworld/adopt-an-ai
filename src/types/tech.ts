@@ -7,6 +7,7 @@ export interface Perk {
   chronologicalOrder?: number;
   prerequisites?: string[];
   capability_id?: string;
+  [key: string]: any; // Allow string indexing for sanitization
 }
 
 export interface PerkFullData {

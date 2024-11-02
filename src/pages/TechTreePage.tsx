@@ -7,18 +7,6 @@ import {
   Tooltip,
 } from '@mui/material';
 
-const sanitizePerkData = (perk: Perk | null): Perk | null => {
-  if (!perk) return null;
-  
-  const sanitized = { ...perk };
-  // Convert any object values to strings for safe rendering
-  Object.keys(sanitized).forEach(key => {
-    if (sanitized[key] && typeof sanitized[key] === 'object') {
-      sanitized[key] = JSON.stringify(sanitized[key]);
-    }
-  });
-  return sanitized;
-};
 import { TechTree, PhaseData, Perk, PerkFullData } from '../types/tech';
 import PerkDetailModal from '../components/PerkDetailModal';
 
@@ -259,7 +247,6 @@ const mergePerkData = (basicPerk: Perk, fullData: PerkFullData | null): Perk => 
 
 interface TechItemProps {
   item: Perk;
-  phase: string;
   position: { x: number, y: number };
   onHover: (itemName: string | null) => void;
   highlightedItem: string | null;
@@ -464,7 +451,6 @@ const TechTreePage: React.FC<TechTreePageProps> = ({ standalone = false }) => {
               <TechItem
                 key={item.name}
                 item={item}
-                phase={item.phase}
                 position={positions[item.name] || { x: 0, y: 0 }}
                 onHover={setHighlightedItem}
                 highlightedItem={highlightedItem}
