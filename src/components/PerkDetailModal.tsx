@@ -40,7 +40,6 @@ import {
   TimelineDot,
 } from '@mui/lab';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
-import mermaid from 'mermaid';
 import CloseIcon from '@mui/icons-material/Close';
 import { Perk, PerkFullData } from '../types/tech';
 
