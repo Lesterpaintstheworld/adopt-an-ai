@@ -6,6 +6,17 @@ import {
   Chip,
   Tooltip,
 } from '@mui/material';
+
+const sanitizePerkData = (perk: Perk): Perk => {
+  const sanitized = { ...perk };
+  // Convert any object values to strings for safe rendering
+  Object.keys(sanitized).forEach(key => {
+    if (typeof sanitized[key] === 'object' && sanitized[key] !== null) {
+      sanitized[key] = JSON.stringify(sanitized[key]);
+    }
+  });
+  return sanitized;
+};
 import { TechTree, PhaseData, Perk, PerkFullData } from '../types/tech';
 import PerkDetailModal from '../components/PerkDetailModal';
 
@@ -377,8 +388,8 @@ const TechTreePage: React.FC<TechTreePageProps> = ({ standalone = false }) => {
     }
     setModalState({
       isOpen: true,
-      selectedPerk: perk,
-      fullData: fullData,
+      selectedPerk: sanitizePerkData(perk),
+      fullData: fullData ? sanitizePerkData(fullData) : null,
     });
   };
   
