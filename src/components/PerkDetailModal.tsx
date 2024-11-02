@@ -280,7 +280,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
           <Grid item xs={12} sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
             <Box 
               component="img"
-              src={`/icons/${perk.capability_id}.png`}
+              src={`/perk-icons/${perk.capability_id}.png`}
               alt={perk.name}
               sx={{ 
                 width: 64,
@@ -899,7 +899,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
           >
             <Box
               component="img"
-              src={`/icons/${perk.capability_id}.png`}
+              src={`/perk-icons/${perk.capability_id}.png`}
               alt={perk.name}
               sx={{
                 width: '100%',
