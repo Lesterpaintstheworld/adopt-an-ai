@@ -3,7 +3,7 @@ import yaml
 import asyncio
 import logging
 from typing import Dict, List, Set
-from datetime import datetime
+from datetime import datetime, timedelta
 from anthropic import AsyncAnthropic
 from pathlib import Path
 
@@ -334,7 +334,7 @@ class PerkGenerator:
                 if any('metric' in i.lower() for i in inconsistencies):
                     self.generation_stats['metric_fixes'] += 1
                     
-                self.generation_stats['validation_time'] += time.time() - start_time
+                self.generation_stats['validation_time'] += (datetime.now() - start_time).total_seconds()
                 
                 if not inconsistencies:
                     self.generation_stats['successes'] += 1
