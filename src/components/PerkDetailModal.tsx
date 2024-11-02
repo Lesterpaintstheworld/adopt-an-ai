@@ -186,7 +186,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
             </Box>
           ) : (
             <>
-              {fullData?.version_control && (
+              {fullData?.version_control?.version_history && (
                 <Grid item xs={12} md={6}>
                   <Paper elevation={2} sx={{ p: 2 }}>
                     <Typography variant="h6" gutterBottom>Version History</Typography>
@@ -234,7 +234,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
             </Paper>
           </Grid>
 
-          {fullData?.technical_specifications && (
+          {fullData?.technical_specifications?.core_components && (
             <Grid item xs={12} md={6}>
               <Paper elevation={2} sx={{ p: 2 }}>
                 <Typography variant="h6" gutterBottom>Technical Specifications</Typography>
@@ -253,7 +253,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
             </Grid>
           )}
 
-          {fullData?.dependencies && (
+          {fullData?.dependencies?.prerequisites && (
             <Grid item xs={12} md={6}>
               <Paper elevation={2} sx={{ p: 2 }}>
                 <Typography variant="h6" gutterBottom>Dependencies</Typography>
@@ -272,9 +272,11 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
 
                 <Divider sx={{ my: 2 }} />
 
-                <Typography variant="subtitle1">Enables:</Typography>
-                <List>
-                  {Object.entries(fullData.dependencies.enables).map(([category, items]) => (
+                {fullData.dependencies.enables && (
+                  <>
+                    <Typography variant="subtitle1">Enables:</Typography>
+                    <List>
+                      {Object.entries(fullData.dependencies.enables).map(([category, items]) => (
                     <ListItem key={category}>
                       <ListItemText
                         primary={category}
@@ -287,7 +289,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
             </Grid>
           )}
 
-          {fullData?.risks_and_mitigations && (
+          {fullData?.risks_and_mitigations?.technical_risks && (
             <Grid item xs={12}>
               <Paper elevation={2} sx={{ p: 2 }}>
                 <Typography variant="h6" gutterBottom>Risks and Mitigations</Typography>
@@ -311,9 +313,11 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
 
                 <Divider sx={{ my: 2 }} />
 
-                <Typography variant="subtitle1">Ethical Risks:</Typography>
-                <List>
-                  {fullData.risks_and_mitigations.ethical_risks.map((risk, index) => (
+                {fullData.risks_and_mitigations.ethical_risks && (
+                  <>
+                    <Typography variant="subtitle1">Ethical Risks:</Typography>
+                    <List>
+                      {fullData.risks_and_mitigations.ethical_risks.map((risk, index) => (
                     <ListItem key={index}>
                       <ListItemText
                         primary={risk.risk}
@@ -326,7 +330,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
             </Grid>
           )}
 
-          {fullData?.success_metrics && (
+          {fullData?.success_metrics?.operational_kpis && (
             <Grid item xs={12} md={6}>
               <Paper elevation={2} sx={{ p: 2 }}>
                 <Typography variant="h6" gutterBottom>Success Metrics</Typography>
