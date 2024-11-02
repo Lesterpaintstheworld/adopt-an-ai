@@ -1,5 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
 import mermaid from 'mermaid';
+
+const formatValue = (value: any): string => {
+  if (value === null || value === undefined) {
+    return '';
+  }
+  if (typeof value === 'object') {
+    if (Array.isArray(value)) {
+      return value.map(item => formatValue(item)).join(', ');
+    }
+    return Object.entries(value)
+      .map(([key, val]) => `${key}: ${formatValue(val)}`)
+      .join(', ');
+  }
+  return String(value);
+};
 import {
   Modal,
   Box,
@@ -573,18 +588,18 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                     
                     <Typography variant="subtitle2" sx={{ mt: 1 }}>Strengths:</Typography>
                     <List dense>
-                      {data.strengths?.map((strength: string, index: number) => (
+                      {data.strengths?.map((strength: any, index: number) => (
                         <ListItem key={index}>
-                          <ListItemText primary={typeof strength === 'object' ? JSON.stringify(strength) : String(strength)} />
+                          <ListItemText primary={formatValue(strength)} />
                         </ListItem>
                       ))}
                     </List>
 
                     <Typography variant="subtitle2" sx={{ mt: 1 }}>Improvements Needed:</Typography>
                     <List dense>
-                      {data.improvements_needed?.map((improvement: string, index: number) => (
+                      {data.improvements_needed?.map((improvement: any, index: number) => (
                         <ListItem key={index}>
-                          <ListItemText primary={typeof improvement === 'object' ? JSON.stringify(improvement) : String(improvement)} />
+                          <ListItemText primary={formatValue(improvement)} />
                         </ListItem>
                       ))}
                     </List>
@@ -631,13 +646,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                                 {key}
                               </TableCell>
                               <TableCell>
-                                {typeof value === 'object' && value !== null
-                                  ? Object.entries(value as Record<string, string>).map(([subKey, subValue]) => (
-                                      <div key={subKey}>
-                                        {subKey}: {String(subValue)}
-                                      </div>
-                                    ))
-                                  : String(value)}
+                                {formatValue(value)}
                               </TableCell>
                             </TableRow>
                           ))}
@@ -718,7 +727,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                         <RestoreIcon fontSize="small" />
                       </ListItemIcon>
                       <ListItemText 
-                        primary={procedure}
+                        primary={formatValue(procedure)}
                       />
                     </ListItem>
                   ))}
