@@ -31,6 +31,7 @@ phase_1:
 
   application_layer:
     - name: "Text generation"
+      capability_id: "COM_P1_005"
       tag: "🎨 CREATIVE"
       description: "Create various forms of written content, from creative writing to technical documentation, with context awareness"
       prerequisites: ["Base GPT-4 integration", "Basic compute allocation"]
