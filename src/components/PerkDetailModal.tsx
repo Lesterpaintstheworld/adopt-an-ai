@@ -16,6 +16,13 @@ const formatValue = (value: any): string => {
   if (value === null || value === undefined) {
     return '';
   }
+  
+  // Handle Date objects
+  if (value instanceof Date || (typeof value === 'string' && !isNaN(Date.parse(value)))) {
+    const date = value instanceof Date ? value : new Date(value);
+    return date.toLocaleDateString();
+  }
+  
   if (typeof value === 'object') {
     if (Array.isArray(value)) {
       return value.map(item => formatValue(item)).join(', ');
