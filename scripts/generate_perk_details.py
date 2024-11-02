@@ -2,6 +2,7 @@ import os
 import yaml
 import asyncio
 import logging
+import unicodedata
 from typing import Dict, List, Set
 from datetime import datetime, timedelta
 from anthropic import AsyncAnthropic
@@ -334,7 +335,6 @@ class PerkGenerator:
 
     def clean_text_for_yaml(self, text: str) -> str:
         """Clean text to ensure it's YAML-safe"""
-        import unicodedata
         # Normalize Unicode characters
         text = unicodedata.normalize('NFKD', text)
         # Convert to ASCII ignoring non-ASCII characters
@@ -609,7 +609,7 @@ async def main():
                                             cleaned_perk = {}
                                             for key, value in detailed_perk.items():
                                                 if isinstance(value, str):
-                                                    cleaned_perk[key] = self.clean_text_for_yaml(value)
+                                                    cleaned_perk[key] = generator.clean_text_for_yaml(value)
                                                 else:
                                                     cleaned_perk[key] = value
                                                     
