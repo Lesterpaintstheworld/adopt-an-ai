@@ -1,5 +1,6 @@
 import os
 import yaml
+import json
 import asyncio
 import logging
 import unicodedata
@@ -363,34 +364,46 @@ class PerkGenerator:
     async def _generate_raw_perk_details(self, perk_data: Dict, template: Dict) -> Dict:
         """Generate raw perk data using Claude"""
         try:
-            # Lecture du fichier tech tree avec encodage explicite
-            tech_tree_path = Path("content/tech/tech-tree.yml")
-            with open(tech_tree_path, 'r', encoding='utf-8-sig') as f:
-                tech_tree = yaml.safe_load(f)
-
             # Extract phase and layer for focused context
             phase, layer = extract_phase_and_layer(perk_data['capability_id'])
             print(f"Generating details for {perk_data['capability_id']} in {phase}, {layer}")
             
+            # Lecture sécurisée du tech tree
+            tech_tree_path = Path("content/tech/tech-tree.yml")
+            with open(tech_tree_path, 'r', encoding='utf-8-sig') as f:
+                tech_tree = yaml.safe_load(f)
+
             phase_data = tech_tree.get(phase, {})
             layer_data = phase_data.get(layer, [])
+
+            # Préparer les données de contexte de manière sécurisée
+            context_data = {
+                'phase': phase,
+                'phase_description': phase_data.get('description', 'N/A'),
+                'phase_period': phase_data.get('period', 'N/A'),
+                'layer': layer,
+                'capabilities': [
+                    {k: str(v) for k, v in item.items() if isinstance(item, dict)}
+                    for item in layer_data if isinstance(item, dict)
+                ]
+            }
 
             prompt = f"""You are a technical writer creating detailed specifications for AI capabilities.
             
             You are working on a comprehensive AI development tech tree. Here is the relevant context:
             
-            Phase: {phase}
-            Phase Description: {phase_data.get('description', 'N/A')}
-            Phase Period: {phase_data.get('period', 'N/A')}
+            Phase: {context_data['phase']}
+            Phase Description: {context_data['phase_description']}
+            Phase Period: {context_data['phase_period']}
             
-            Current Layer: {layer}
-            Layer Capabilities: {yaml.dump(layer_data)}
+            Current Layer: {context_data['layer']}
+            Layer Capabilities: {json.dumps(context_data['capabilities'], indent=2)}
             
             Here is the specific capability to detail:
-            {yaml.dump(perk_data)}
+            {yaml.dump(perk_data, allow_unicode=True)}
             
             Please follow this template structure:
-            {yaml.dump(template)}
+            {yaml.dump(template, allow_unicode=True)}
             
             Generate a detailed specification for this capability following the template.
             The specification should:
