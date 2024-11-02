@@ -475,6 +475,8 @@ const TechTreePage = () => {
           })}
         </Box>
       </Box>
+        </Box>
+      </Box>
     </Box>
     <PerkDetailModal
       open={modalState.isOpen}
@@ -482,7 +484,8 @@ const TechTreePage = () => {
       perk={modalState.selectedPerk}
       fullData={modalState.fullData}
     />
-  );
+  </>
+);
 };
 
 export default TechTreePage;
