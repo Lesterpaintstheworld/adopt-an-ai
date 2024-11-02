@@ -295,8 +295,23 @@ class PerkGenerator:
         # Force UTF-8 encoding on Windows
         import sys
         if sys.platform.startswith('win'):
-            import locale
-            locale.setlocale(locale.LC_ALL, 'C.UTF-8')
+            try:
+                # Try C.UTF-8 first
+                import locale
+                locale.setlocale(locale.LC_ALL, 'C.UTF-8')
+            except locale.Error:
+                try:
+                    # Then try UTF-8
+                    locale.setlocale(locale.LC_ALL, '.UTF-8')
+                except locale.Error:
+                    try:
+                        # Last attempt with default locale + UTF-8 encoding
+                        locale.setlocale(locale.LC_ALL, '')
+                        import codecs
+                        sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer)
+                        sys.stderr = codecs.getwriter('utf-8')(sys.stderr.buffer)
+                    except:
+                        self.logger.warning("Could not set UTF-8 locale, using system default")
         
         # Search for .env file in current and parent directories
         current_dir = Path(__file__).parent.absolute()
