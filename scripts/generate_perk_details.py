@@ -384,18 +384,18 @@ class PerkGenerator:
 
 def save_generation_stats(stats, output_file="generation_stats.yml"):
     """Save generation statistics to a YAML file"""
-    with open(output_file, 'w') as f:
+    with open(output_file, 'w', encoding='utf-8') as f:
         yaml.dump(stats, f)
 
 async def main():
     # Load template
     template_path = Path("content/tech/COM_template.yml")
-    with open(template_path) as f:
+    with open(template_path, encoding='utf-8') as f:
         template = yaml.safe_load(f)
     
     # Load tech tree
     tech_tree_path = Path("content/tech/tech-tree.yml")
-    with open(tech_tree_path) as f:
+    with open(tech_tree_path, encoding='utf-8') as f:
         tech_tree = yaml.safe_load(f)
     
     generator = PerkGenerator()
@@ -415,7 +415,7 @@ async def main():
                                     detailed_perk = await generator.generate_perk_details(item, template)
                                     
                                     if detailed_perk:
-                                        with open(perk_file, 'w') as f:
+                                        with open(perk_file, 'w', encoding='utf-8') as f:
                                             yaml.dump(detailed_perk, f, sort_keys=False, allow_unicode=True)
                                         print(f"Generated {perk_file}")
                                     else:
