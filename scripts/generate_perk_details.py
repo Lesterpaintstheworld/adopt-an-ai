@@ -442,7 +442,7 @@ class PerkGenerator:
                     elif isinstance(obj, dict):
                         return {k: clean_strings(v) for k, v in obj.items()}
                     elif isinstance(obj, list):
-                        return [clean_strings(item) for item in items]
+                        return [clean_strings(item) for item in obj]
                     return obj
                 
                 result = clean_strings(result)
