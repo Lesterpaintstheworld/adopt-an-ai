@@ -547,7 +547,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
             <Grid item xs={12} md={6}>
               <Paper elevation={2} sx={{ 
                 p: 2,
-                bgcolor: 'rgba(0, 0, 0, 0.75)',
+                bgcolor: COLORS.surface,
                 color: COLORS.text.primary,
                 '& .MuiTypography-root': {
                   color: COLORS.text.primary,
@@ -577,7 +577,26 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
           {/* Monitoring & Maintenance */}
           {fullData?.monitoring_and_maintenance?.metrics_collection?.length > 0 && (
             <Grid item xs={12} md={6}>
-              <Paper elevation={2} sx={{ p: 2 }}>
+              <Paper elevation={2} sx={{ 
+                p: 2,
+                bgcolor: COLORS.surface,
+                color: COLORS.text.primary,
+                '& .MuiTypography-root': {
+                  color: COLORS.text.primary,
+                },
+                '& .MuiListItemText-primary': {
+                  color: COLORS.text.primary,
+                },
+                '& .MuiListItemText-secondary': {
+                  color: COLORS.text.secondary,
+                },
+                '& .MuiTableCell-root': {
+                  color: COLORS.text.primary,
+                },
+                '& .MuiListItemIcon-root': {
+                  color: COLORS.text.primary,
+                }
+              }}>
                 <Typography variant="h6" gutterBottom>Monitoring & Maintenance</Typography>
                 
                 <Typography variant="subtitle1">Metrics Collection:</Typography>
@@ -817,7 +836,16 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
               }}>
                 <Typography variant="h6" gutterBottom>Technical Specifications</Typography>
                 
-                <Accordion>
+                <Accordion sx={{
+                  bgcolor: COLORS.surface,
+                  color: COLORS.text.primary,
+                  '& .MuiAccordionSummary-root': {
+                    color: COLORS.text.primary,
+                  },
+                  '& .MuiAccordionDetails-root': {
+                    color: COLORS.text.primary,
+                  }
+                }}>
                   <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                     <Typography>Core Components</Typography>
                   </AccordionSummary>
@@ -845,7 +873,13 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                         <TableBody>
                           {fullData.technical_specifications.performance_metrics && Object.entries(fullData.technical_specifications.performance_metrics).map(([key, value]) => (
                             <TableRow key={key}>
-                              <TableCell component="th" scope="row">
+                              <TableCell 
+                                component="th" 
+                                scope="row"
+                                sx={{
+                                  color: COLORS.text.primary,
+                                }}
+                              >
                                 {key}
                               </TableCell>
                               <TableCell>
@@ -885,7 +919,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                 
                 {fullData?.documentation?.technical_docs?.length > 0 && (
                   <>
-                    <Typography variant="subtitle1">Technical Documentation:</Typography>
+                    <Typography variant="subtitle1" sx={{ color: COLORS.text.primary }}>Technical Documentation:</Typography>
                     <List dense>
                       {fullData.documentation.technical_docs.map((doc, index) => (
                         <ListItem key={index}>
