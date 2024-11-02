@@ -719,7 +719,18 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                       <ListItemIcon>
                         <LaunchIcon fontSize="small" />
                       </ListItemIcon>
-                      <ListItemText primary={strategy} />
+                      <ListItemText 
+                        primary={typeof strategy === 'string' ? strategy : strategy.strategy}
+                        secondary={strategy.phases && (
+                          <List dense>
+                            {strategy.phases.map((phase: string, phaseIndex: number) => (
+                              <ListItem key={phaseIndex}>
+                                <ListItemText primary={phase} />
+                              </ListItem>
+                            ))}
+                          </List>
+                        )}
+                      />
                     </ListItem>
                   ))}
                 </List>
