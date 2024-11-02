@@ -479,11 +479,18 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
 
                 <Typography variant="subtitle1">Compliance:</Typography>
                 <List>
-                  {fullData.security_requirements.compliance.map((req, index) => (
-                    <ListItem key={index}>
-                      <ListItemText primary={req} />
-                    </ListItem>
-                  ))}
+                  {Array.isArray(fullData.security_requirements.compliance) 
+                    ? fullData.security_requirements.compliance.map((req, index) => (
+                        <ListItem key={index}>
+                          <ListItemText primary={req} />
+                        </ListItem>
+                      ))
+                    : fullData.security_requirements.compliance && (
+                        <ListItem>
+                          <ListItemText primary={fullData.security_requirements.compliance} />
+                        </ListItem>
+                      )
+                  }
                 </List>
               </Paper>
             </Grid>
