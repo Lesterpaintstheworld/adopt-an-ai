@@ -450,15 +450,7 @@ const TechTreePage = () => {
               onClick={handlePerkClick}
             />
           ))}
-          
-          <PerkDetailModal
-            open={modalState.isOpen}
-            onClose={() => setModalState(prev => ({ ...prev, isOpen: false }))}
-            perk={modalState.selectedPerk}
-            fullData={modalState.fullData}
-          />
-        </>
-          
+
           {/* Phase headers */}
           {Object.entries(techTree).map(([phaseKey, phaseData]: [string, any], index) => {
             const previousPhases = Object.values(techTree).slice(0, index);
@@ -485,6 +477,12 @@ const TechTreePage = () => {
         </Box>
       </Box>
     </Box>
+    <PerkDetailModal
+      open={modalState.isOpen}
+      onClose={() => setModalState(prev => ({ ...prev, isOpen: false }))}
+      perk={modalState.selectedPerk}
+      fullData={modalState.fullData}
+    />
   );
 };
 
