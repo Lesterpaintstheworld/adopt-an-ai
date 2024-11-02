@@ -3,6 +3,30 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import mermaid from 'mermaid';
 
+interface Perk {
+  name: string;
+  tag: string;
+  description: string;
+  shortDescription?: string;
+  longDescription?: string;
+  chronologicalOrder?: number;
+  prerequisites?: string[];
+  capability_id?: string;
+  [key: string]: any; // Allows string indexing
+}
+
+const sanitizePerkData = (perk: Perk | null): Perk | null => {
+  if (!perk) return null;
+  
+  const sanitized = { ...perk };
+  Object.keys(sanitized).forEach(key => {
+    if (sanitized[key] && typeof sanitized[key] === 'object') {
+      sanitized[key] = JSON.stringify(sanitized[key]);
+    }
+  });
+  return sanitized;
+};
+
 const formatDateValue = (value: any): string => {
   if (value instanceof Date) {
     return value.toLocaleDateString();
@@ -131,7 +155,7 @@ import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import CloseIcon from '@mui/icons-material/Close';
 import { Perk } from '../types/tech';
 
-interface PerkFullData extends Perk {
+export interface PerkFullData extends Perk {
   dependencies_visualization?: {
     primary_diagram?: string;
   };
