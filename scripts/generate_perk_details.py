@@ -367,43 +367,73 @@ class PerkGenerator:
             # Extract phase and layer for focused context
             phase, layer = extract_phase_and_layer(perk_data['capability_id'])
             print(f"Generating details for {perk_data['capability_id']} in {phase}, {layer}")
-            
-            # Lecture sécurisée du tech tree
+        
+            # Lecture sécurisée du tech tree avec gestion explicite de l'encodage
             tech_tree_path = Path("content/tech/tech-tree.yml")
-            with open(tech_tree_path, 'r', encoding='utf-8-sig') as f:
-                tech_tree = yaml.safe_load(f)
+            try:
+                # Essayer d'abord avec UTF-8-SIG
+                with open(tech_tree_path, 'r', encoding='utf-8-sig') as f:
+                    content = f.read()
+                    tech_tree = yaml.safe_load(content)
+            except UnicodeDecodeError:
+                try:
+                    # Si ça échoue, essayer avec UTF-8 standard
+                    with open(tech_tree_path, 'r', encoding='utf-8') as f:
+                        content = f.read()
+                        tech_tree = yaml.safe_load(content)
+                except UnicodeDecodeError:
+                    # En dernier recours, essayer avec CP1252
+                    with open(tech_tree_path, 'r', encoding='cp1252') as f:
+                        content = f.read()
+                        tech_tree = yaml.safe_load(content)
 
+            if not tech_tree:
+                raise ValueError("Failed to load tech tree data")
+
+            # Nettoyer et valider les données du tech tree
             phase_data = tech_tree.get(phase, {})
+            if not isinstance(phase_data, dict):
+                phase_data = {}
+            
             layer_data = phase_data.get(layer, [])
+            if not isinstance(layer_data, list):
+                layer_data = []
 
-            # Préparer les données de contexte de manière sécurisée
+            # Préparer les données de contexte de manière plus sûre
             context_data = {
-                'phase': phase,
-                'phase_description': phase_data.get('description', 'N/A'),
-                'phase_period': phase_data.get('period', 'N/A'),
-                'layer': layer,
-                'capabilities': [
-                    {k: str(v) for k, v in item.items() if isinstance(item, dict)}
-                    for item in layer_data if isinstance(item, dict)
-                ]
+                'phase': str(phase),
+                'phase_description': str(phase_data.get('description', 'N/A')),
+                'phase_period': str(phase_data.get('period', 'N/A')),
+                'layer': str(layer),
+                'capabilities': []
             }
 
+            # Nettoyer les capacités
+            for item in layer_data:
+                if isinstance(item, dict):
+                    clean_item = {}
+                    for k, v in item.items():
+                        if isinstance(v, (str, int, float, bool)):
+                            clean_item[str(k)] = str(v)
+                    if clean_item:
+                        context_data['capabilities'].append(clean_item)
+
             prompt = f"""You are a technical writer creating detailed specifications for AI capabilities.
-            
+        
             You are working on a comprehensive AI development tech tree. Here is the relevant context:
-            
+        
             Phase: {context_data['phase']}
             Phase Description: {context_data['phase_description']}
             Phase Period: {context_data['phase_period']}
-            
+        
             Current Layer: {context_data['layer']}
-            Layer Capabilities: {json.dumps(context_data['capabilities'], indent=2)}
-            
+            Layer Capabilities: {json.dumps(context_data['capabilities'], indent=2, ensure_ascii=False)}
+        
             Here is the specific capability to detail:
-            {yaml.dump(perk_data, allow_unicode=True)}
-            
+            {yaml.dump(perk_data, allow_unicode=True, default_flow_style=False)}
+        
             Please follow this template structure:
-            {yaml.dump(template, allow_unicode=True)}
+            {yaml.dump(template, allow_unicode=True, default_flow_style=False)}
             
             Generate a detailed specification for this capability following the template.
             The specification should:
