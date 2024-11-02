@@ -353,7 +353,6 @@ const TechItem = ({
           />
         </Box>
       </Paper>
-    </Tooltip>
   );
 };
 
