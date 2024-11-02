@@ -557,32 +557,32 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
           )}
 
           {/* CMMI Assessment */}
-          {fullData?.cmmi_assessment && (
+          {fullData?.cmmi_assessment?.process_areas && (
             <Grid item xs={12}>
               <Paper elevation={2} sx={{ p: 2 }}>
                 <Typography variant="h6" gutterBottom>CMMI Assessment</Typography>
-                <Typography>Current Level: {fullData.cmmi_assessment.current_level}</Typography>
-                <Typography>Assessment Date: {fullData.cmmi_assessment.assessment_date}</Typography>
+                <Typography>Current Level: {fullData.cmmi_assessment?.current_level}</Typography>
+                <Typography>Assessment Date: {fullData.cmmi_assessment?.assessment_date}</Typography>
                 
-                {Object.entries(fullData.cmmi_assessment.process_areas).map(([area, data]: [string, any]) => (
+                {Object.entries(fullData.cmmi_assessment.process_areas).map(([area, data]: [string, any]) => data && (
                   <Box key={area} sx={{ mt: 2 }}>
                     <Typography variant="subtitle1" gutterBottom>{area}:</Typography>
                     <Typography>Maturity: {data.maturity}</Typography>
                     
                     <Typography variant="subtitle2" sx={{ mt: 1 }}>Strengths:</Typography>
                     <List dense>
-                      {data.strengths.map((strength: string, index: number) => (
+                      {data.strengths?.map((strength: string, index: number) => (
                         <ListItem key={index}>
-                          <ListItemText primary={strength} />
+                          <ListItemText primary={typeof strength === 'object' ? JSON.stringify(strength) : String(strength)} />
                         </ListItem>
                       ))}
                     </List>
 
                     <Typography variant="subtitle2" sx={{ mt: 1 }}>Improvements Needed:</Typography>
                     <List dense>
-                      {data.improvements_needed.map((improvement: string, index: number) => (
+                      {data.improvements_needed?.map((improvement: string, index: number) => (
                         <ListItem key={index}>
-                          <ListItemText primary={improvement} />
+                          <ListItemText primary={typeof improvement === 'object' ? JSON.stringify(improvement) : String(improvement)} />
                         </ListItem>
                       ))}
                     </List>
@@ -623,19 +623,19 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                     <TableContainer>
                       <Table size="small">
                         <TableBody>
-                          {Object.entries(fullData.technical_specifications.performance_metrics).map(([key, value]) => (
+                          {fullData.technical_specifications.performance_metrics && Object.entries(fullData.technical_specifications.performance_metrics).map(([key, value]) => (
                             <TableRow key={key}>
                               <TableCell component="th" scope="row">
                                 {key}
                               </TableCell>
                               <TableCell>
-                                {typeof value === 'object' 
+                                {typeof value === 'object' && value !== null
                                   ? Object.entries(value as Record<string, string>).map(([subKey, subValue]) => (
                                       <div key={subKey}>
-                                        {subKey}: {subValue}
+                                        {subKey}: {String(subValue)}
                                       </div>
                                     ))
-                                  : value}
+                                  : String(value)}
                               </TableCell>
                             </TableRow>
                           ))}
