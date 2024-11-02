@@ -238,17 +238,21 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
             <Grid item xs={12} md={6}>
               <Paper elevation={2} sx={{ p: 2 }}>
                 <Typography variant="h6" gutterBottom>Technical Specifications</Typography>
-                <Typography variant="subtitle1">Core Components:</Typography>
-                <List>
-                  {fullData.technical_specifications.core_components.map((component, index) => (
-                    <ListItem key={index}>
-                      <ListItemText
-                        primary={component.name}
-                        secondary={component.description}
-                      />
-                    </ListItem>
-                  ))}
-                </List>
+                {fullData?.technical_specifications?.core_components?.length > 0 && (
+                  <>
+                    <Typography variant="subtitle1">Core Components:</Typography>
+                    <List>
+                      {fullData.technical_specifications.core_components.map((component, index) => (
+                        <ListItem key={index}>
+                          <ListItemText
+                            primary={component.name}
+                            secondary={component.description}
+                          />
+                        </ListItem>
+                      ))}
+                    </List>
+                  </>
+                )}
               </Paper>
             </Grid>
           )}
@@ -296,26 +300,30 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
               <Paper elevation={2} sx={{ p: 2 }}>
                 <Typography variant="h6" gutterBottom>Risks and Mitigations</Typography>
                 
-                <Typography variant="subtitle1">Technical Risks:</Typography>
-                <List>
-                  {fullData.risks_and_mitigations.technical_risks.map((risk, index) => (
-                    <ListItem key={index}>
-                      <ListItemText
-                        primary={
-                          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                            {risk.risk}
-                            <SeverityBadge severity={risk.severity} />
-                          </Box>
-                        }
-                        secondary={`Mitigation: ${risk.mitigation}`}
-                      />
-                    </ListItem>
-                  ))}
-                </List>
+                {fullData?.risks_and_mitigations?.technical_risks?.length > 0 && (
+                  <>
+                    <Typography variant="subtitle1">Technical Risks:</Typography>
+                    <List>
+                      {fullData.risks_and_mitigations.technical_risks.map((risk, index) => (
+                        <ListItem key={index}>
+                          <ListItemText
+                            primary={
+                              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                {risk.risk}
+                                <SeverityBadge severity={risk.severity} />
+                              </Box>
+                            }
+                            secondary={`Mitigation: ${risk.mitigation}`}
+                          />
+                        </ListItem>
+                      ))}
+                    </List>
+                  </>
+                )}
 
                 <Divider sx={{ my: 2 }} />
 
-                {fullData.risks_and_mitigations.ethical_risks && (
+                {fullData?.risks_and_mitigations?.ethical_risks?.length > 0 && (
                   <>
                     <Typography variant="subtitle1">Ethical Risks:</Typography>
                     <List>
@@ -566,31 +574,38 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
               <Paper elevation={2} sx={{ p: 2 }}>
                 <Typography variant="h6" gutterBottom>Documentation</Typography>
                 
-                <Typography variant="subtitle1">Technical Documentation:</Typography>
-                <List dense>
-                  {fullData.documentation.technical_docs.map((doc, index) => (
-                    <ListItem key={index}>
-                      <ListItemIcon>
-                        <DescriptionIcon fontSize="small" />
-                      </ListItemIcon>
-                      <ListItemText primary={doc} />
-                    </ListItem>
-                  ))}
-                </List>
+                {fullData?.documentation?.technical_docs?.length > 0 && (
+                  <>
+                    <Typography variant="subtitle1">Technical Documentation:</Typography>
+                    <List dense>
+                      {fullData.documentation.technical_docs.map((doc, index) => (
+                        <ListItem key={index}>
+                          <ListItemIcon>
+                            <DescriptionIcon fontSize="small" />
+                          </ListItemIcon>
+                          <ListItemText primary={doc} />
+                        </ListItem>
+                      ))}
+                    </List>
+                  </>
+                )}
 
-                <Divider sx={{ my: 2 }} />
-
-                <Typography variant="subtitle1">Training Materials:</Typography>
-                <List dense>
-                  {fullData.documentation.training_materials.map((material, index) => (
-                    <ListItem key={index}>
-                      <ListItemIcon>
-                        <SchoolIcon fontSize="small" />
-                      </ListItemIcon>
-                      <ListItemText primary={material} />
-                    </ListItem>
-                  ))}
-                </List>
+                {fullData?.documentation?.training_materials?.length > 0 && (
+                  <>
+                    <Divider sx={{ my: 2 }} />
+                    <Typography variant="subtitle1">Training Materials:</Typography>
+                    <List dense>
+                      {fullData.documentation.training_materials.map((material, index) => (
+                        <ListItem key={index}>
+                          <ListItemIcon>
+                            <SchoolIcon fontSize="small" />
+                          </ListItemIcon>
+                          <ListItemText primary={material} />
+                        </ListItem>
+                      ))}
+                    </List>
+                  </>
+                )}
               </Paper>
             </Grid>
           )}
