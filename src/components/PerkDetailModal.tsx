@@ -926,7 +926,9 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                           <ListItemIcon>
                             <DescriptionIcon fontSize="small" />
                           </ListItemIcon>
-                          <ListItemText primary={doc} />
+                          <ListItemText 
+                            primary={<Typography color={COLORS.text.primary}>{doc}</Typography>}
+                          />
                         </ListItem>
                       ))}
                     </List>
