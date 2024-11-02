@@ -61,9 +61,16 @@ const formatValue = (value: any): string => {
   }
   
   if (typeof value === 'object') {
+    // Si c'est un objet avec une seule clé qui commence par "Phase"
+    const keys = Object.keys(value);
+    if (keys.length === 1 && keys[0].startsWith('Phase')) {
+      return `${keys[0]}: ${formatValue(value[keys[0]])}`;
+    }
+    
     if (Array.isArray(value)) {
       return value.map(item => formatValue(item)).join(', ');
     }
+    
     // Handle specific object structures
     if (value.strategy && value.phases) {
       return `Strategy: ${value.strategy}, Phases: ${formatValue(value.phases)}`;
