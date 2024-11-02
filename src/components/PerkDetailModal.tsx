@@ -1,19 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import mermaid from 'mermaid';
-
-interface Perk {
-  name: string;
-  tag: string;
-  description: string;
-  shortDescription?: string;
-  longDescription?: string;
-  chronologicalOrder?: number;
-  prerequisites?: string[];
-  capability_id?: string;
-  [key: string]: any; // Allows string indexing
-}
+import { Perk } from '../types/tech';
 
 const sanitizePerkData = (perk: Perk | null): Perk | null => {
   if (!perk) return null;
@@ -533,14 +522,14 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                             padding: 0
                           }
                         }}>
-                          {fullData.version_control.version_history.map((version, index) => (
+                          {fullData?.version_control?.version_history?.map((version, index) => (
                             <TimelineItem key={index} sx={{ minHeight: 'auto' }}>
                               <TimelineSeparator>
                                 <TimelineDot 
                                   color={index === 0 ? "primary" : "grey"} 
                                   sx={{ my: 0.5 }}
                                 />
-                                {index < fullData.version_control.version_history.length - 1 && (
+                                {index < (fullData?.version_control?.version_history?.length ?? 0) - 1 && (
                                   <TimelineConnector />
                                 )}
                               </TimelineSeparator>
@@ -608,7 +597,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                   lineHeight: 1.6      // Ajustement de l'interligne pour une meilleure lisibilité
                 }}
               >
-                {fullData?.description.long || perk.description}
+                {fullData?.description?.long || perk.description}
               </Typography>
             </Paper>
           </Grid>
@@ -763,7 +752,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                   <>
                     <Typography variant="subtitle1">Ethical Risks:</Typography>
                     <List>
-                      {fullData.risks_and_mitigations.ethical_risks.map((risk, index) => (
+                      {fullData?.risks_and_mitigations?.ethical_risks?.map((risk, index) => (
                         <ListItem key={index}>
                           <ListItemText
                             primary={risk.risk}
