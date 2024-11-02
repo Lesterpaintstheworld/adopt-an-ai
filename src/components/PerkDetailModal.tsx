@@ -3,6 +3,20 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import mermaid from 'mermaid';
 
+const formatDateValue = (value: any): string => {
+  if (value instanceof Date) {
+    return value.toLocaleDateString();
+  }
+  if (typeof value === 'string' && !isNaN(Date.parse(value))) {
+    try {
+      return new Date(value).toLocaleDateString();
+    } catch {
+      return value;
+    }
+  }
+  return String(value);
+};
+
 /**
  * Formate le nom du perk pour l'utiliser comme nom de fichier d'icône
  * Exemple: "Agent Coalitions" -> "agent-coalitions"
@@ -122,13 +136,6 @@ const MetricProgress = ({ current, target, label }: {
   target: string | number | Date;
   label: string;
 }) => {
-  const formatValue = (value: string | number | Date): string => {
-    if (value instanceof Date) {
-      return value.toLocaleDateString();
-    }
-    return String(value);
-  };
-
   const parseValue = (value: string | number | Date): number => {
     if (value instanceof Date) {
       return value.getTime();
@@ -149,7 +156,7 @@ const MetricProgress = ({ current, target, label }: {
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
         <Typography variant="body2">{label}</Typography>
         <Typography variant="body2">
-          {formatValue(current)} / {formatValue(target)}
+          {formatDateValue(current)} / {formatDateValue(target)}
         </Typography>
       </Box>
       <LinearProgress 
@@ -158,7 +165,7 @@ const MetricProgress = ({ current, target, label }: {
         sx={{
           height: 8,
           borderRadius: 4,
-          backgroundColor: `${COLORS.primary}33`, // 20% opacity blue background
+          backgroundColor: `${COLORS.primary}33`,
           '& .MuiLinearProgress-bar': {
             borderRadius: 4,
             backgroundColor: progress >= 100 ? COLORS.secondary : COLORS.primary,
