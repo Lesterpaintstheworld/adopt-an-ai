@@ -468,7 +468,14 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
               }
             }}>
               <Typography variant="h6" gutterBottom>Description</Typography>
-              <Typography variant="body1" paragraph>
+              <Typography 
+                variant="body1" 
+                paragraph
+                sx={{ 
+                  fontSize: '1.1rem',  // Augmentation de la taille du texte
+                  lineHeight: 1.6      // Ajustement de l'interligne pour une meilleure lisibilité
+                }}
+              >
                 {fullData?.description.long || perk.description}
               </Typography>
             </Paper>
