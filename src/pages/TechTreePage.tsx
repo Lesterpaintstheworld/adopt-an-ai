@@ -4,7 +4,6 @@ import {
   Typography,
   Paper,
   Chip,
-  Tooltip,
 } from '@mui/material';
 
 import { TechTree, PhaseData, Perk, PerkFullData } from '../types/tech';
@@ -255,7 +254,6 @@ interface TechItemProps {
 
 const TechItem = ({ 
   item, 
-  phase, 
   position,
   onHover,
   highlightedItem,

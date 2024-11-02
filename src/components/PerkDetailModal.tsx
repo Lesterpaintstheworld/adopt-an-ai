@@ -250,17 +250,6 @@ export interface PerkFullData extends Perk {
       };
     };
   };
-  cmmi_assessment?: {
-    current_level: number | string;
-    assessment_date: string | Date;
-    process_areas: {
-      [key: string]: {
-        maturity: string | number;
-        strengths: string[];
-        improvements_needed: string[];
-      };
-    };
-  };
 }
 
 interface PerkDetailModalProps {
@@ -1239,7 +1228,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                       </ListItemIcon>
                       <ListItemText 
                         primary={typeof strategy === 'string' ? strategy : strategy.strategy}
-                        secondary={strategy.phases && (
+                        secondary={typeof strategy === 'object' && strategy.phases && (
                           <List dense>
                             {strategy.phases.map((phase: string, phaseIndex: number) => (
                               <ListItem key={phaseIndex}>
