@@ -1136,7 +1136,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
               }}>
                 <Typography variant="h6" gutterBottom>Documentation</Typography>
                 
-                {fullData?.documentation?.technical_docs?.length > 0 && (
+                {fullData?.documentation?.technical_docs && fullData.documentation.technical_docs.length > 0 && (
                   <>
                     <Typography variant="subtitle1" sx={{ color: COLORS.text.primary }}>Technical Documentation:</Typography>
                     <List dense>
@@ -1154,7 +1154,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                   </>
                 )}
 
-                {fullData?.documentation?.training_materials?.length > 0 && (
+                {fullData?.documentation?.training_materials && fullData.documentation.training_materials.length > 0 && (
                   <>
                     <Divider sx={{ my: 2 }} />
                     <Typography variant="subtitle1">Training Materials:</Typography>
