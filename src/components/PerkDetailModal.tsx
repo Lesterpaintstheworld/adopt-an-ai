@@ -740,7 +740,30 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
           {/* CMMI Assessment */}
           {fullData?.cmmi_assessment?.process_areas && (
             <Grid item xs={12}>
-              <Paper elevation={2} sx={{ p: 2 }}>
+              <Paper elevation={2} sx={{ 
+                p: 2,
+                bgcolor: 'rgba(0, 0, 0, 0.75)',
+                color: COLORS.text.primary,
+                '& .MuiTypography-root': {
+                  color: COLORS.text.primary,
+                },
+                '& .MuiAccordion-root': {
+                  bgcolor: 'rgba(45, 45, 45, 0.95)',
+                  color: COLORS.text.primary,
+                },
+                '& .MuiAccordionSummary-root': {
+                  color: COLORS.text.primary,
+                },
+                '& .MuiAccordionDetails-root': {
+                  color: COLORS.text.primary,
+                },
+                '& .MuiListItemText-primary': {
+                  color: COLORS.text.primary,
+                },
+                '& .MuiListItemText-secondary': {
+                  color: COLORS.text.secondary,
+                }
+              }}>
                 <Typography variant="h6" gutterBottom>CMMI Assessment</Typography>
                 <Typography>Current Level: {fullData.cmmi_assessment?.current_level}</Typography>
                 <Typography>Assessment Date: {fullData.cmmi_assessment?.assessment_date}</Typography>
@@ -775,7 +798,23 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
 
           {fullData?.technical_specifications && (
             <Grid item xs={12}>
-              <Paper elevation={2} sx={{ p: 2 }}>
+              <Paper elevation={2} sx={{ 
+                p: 2,
+                bgcolor: 'rgba(0, 0, 0, 0.75)',
+                color: COLORS.text.primary,
+                '& .MuiTypography-root': {
+                  color: COLORS.text.primary,
+                },
+                '& .MuiListItemText-primary': {
+                  color: COLORS.text.primary,
+                },
+                '& .MuiListItemText-secondary': {
+                  color: COLORS.text.secondary,
+                },
+                '& .MuiTableCell-root': {
+                  color: COLORS.text.primary,
+                }
+              }}>
                 <Typography variant="h6" gutterBottom>Technical Specifications</Typography>
                 
                 <Accordion>
@@ -825,7 +864,23 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
 
           {fullData?.documentation && (
             <Grid item xs={12} md={6}>
-              <Paper elevation={2} sx={{ p: 2 }}>
+              <Paper elevation={2} sx={{ 
+                p: 2,
+                bgcolor: 'rgba(0, 0, 0, 0.75)',
+                color: COLORS.text.primary,
+                '& .MuiTypography-root': {
+                  color: COLORS.text.primary,
+                },
+                '& .MuiListItemText-primary': {
+                  color: COLORS.text.primary,
+                },
+                '& .MuiListItemText-secondary': {
+                  color: COLORS.text.secondary,
+                },
+                '& .MuiListItemIcon-root': {
+                  color: COLORS.text.primary,
+                }
+              }}>
                 <Typography variant="h6" gutterBottom>Documentation</Typography>
                 
                 {fullData?.documentation?.technical_docs?.length > 0 && (
@@ -866,7 +921,23 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
 
           {fullData?.deployment && (
             <Grid item xs={12} md={6}>
-              <Paper elevation={2} sx={{ p: 2 }}>
+              <Paper elevation={2} sx={{ 
+                p: 2,
+                bgcolor: 'rgba(0, 0, 0, 0.75)',
+                color: COLORS.text.primary,
+                '& .MuiTypography-root': {
+                  color: COLORS.text.primary,
+                },
+                '& .MuiListItemText-primary': {
+                  color: COLORS.text.primary,
+                },
+                '& .MuiListItemText-secondary': {
+                  color: COLORS.text.secondary,
+                },
+                '& .MuiListItemIcon-root': {
+                  color: COLORS.text.primary,
+                }
+              }}>
                 <Typography variant="h6" gutterBottom>Deployment</Typography>
                 
                 <Typography variant="subtitle1">Strategies:</Typography>
