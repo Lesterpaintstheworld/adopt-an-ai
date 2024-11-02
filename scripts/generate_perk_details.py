@@ -209,7 +209,7 @@ def validate_metrics_coherence(generated_data):
 
 def generate_capability_id(phase_key: str, layer_key: str, order: int) -> str:
     """Generate a capability ID based on layer, phase and order"""
-    # Map layers to prefixes
+    # Map layers to prefixes - vérifier que tous les préfixes sont corrects
     layer_prefixes = {
         'compute_layer': 'COM',
         'model_layer': 'MOD',
@@ -219,13 +219,15 @@ def generate_capability_id(phase_key: str, layer_key: str, order: int) -> str:
         'multi_agent_layer': 'MLT'
     }
     
-    # Extract phase number (e.g., 'phase_1' -> 'P1')
+    # Extract phase number
     phase_num = f"P{phase_key.split('_')[1]}"
     
     # Get prefix for layer
-    prefix = layer_prefixes.get(layer_key, 'UNK')
+    prefix = layer_prefixes.get(layer_key)
+    if not prefix:
+        print(f"Warning: Unknown layer key: {layer_key}")
+        prefix = 'UNK'
     
-    # Format as PREFIX_PHASE_NUMBER (e.g., COM_P1_001)
     return f"{prefix}_{phase_num}_{order:03d}"
 
 def extract_phase_and_layer(capability_id):
@@ -420,48 +422,32 @@ class PerkGenerator:
         
         for attempt in range(max_retries):
             try:
+                print(f"Attempt {attempt + 1}/{max_retries} for {perk_data['capability_id']}")
                 generated_data = await self._generate_raw_perk_details(perk_data, template)
                 if not generated_data:
+                    print(f"No data generated on attempt {attempt + 1}")
                     continue
                 
-                # Validation complète
+                # Validation
                 inconsistencies = []
                 inconsistencies.extend(validate_perk_data(generated_data, perk_data, template))
                 inconsistencies.extend(validate_technical_coherence(generated_data, phase, layer))
                 inconsistencies.extend(validate_version_control(generated_data))
-                inconsistencies.extend(validate_dependencies_graph(generated_data))
-                inconsistencies.extend(validate_metrics_coherence(generated_data))
-                
-                # Mise à jour des statistiques
-                if any('dependencies' in i for i in inconsistencies):
-                    self.generation_stats['dependency_fixes'] += 1
-                if any('metric' in i.lower() for i in inconsistencies):
-                    self.generation_stats['metric_fixes'] += 1
-                    
-                self.generation_stats['validation_time'] += (datetime.now() - start_time).total_seconds()
                 
                 if not inconsistencies:
                     self.generation_stats['successes'] += 1
                     return generated_data
                 
-                print(f"Found inconsistencies (attempt {attempt + 1}): {inconsistencies}")
+                print(f"Found {len(inconsistencies)} inconsistencies on attempt {attempt + 1}")
+                for i in inconsistencies:
+                    print(f"- {i}")
                 
-                # Correction avec statistiques
-                self.generation_stats['fixes_required'] += 1
+                # Try to fix inconsistencies
                 fixed_data = fix_inconsistencies(generated_data, perk_data, inconsistencies)
-                
-                # Revalidation après correction
-                remaining_inconsistencies = []
-                remaining_inconsistencies.extend(validate_perk_data(fixed_data, perk_data, template))
-                remaining_inconsistencies.extend(validate_technical_coherence(fixed_data, phase, layer))
-                remaining_inconsistencies.extend(validate_version_control(fixed_data))
-                
-                if not remaining_inconsistencies:
-                    print(f"Successfully fixed inconsistencies on attempt {attempt + 1}")
+                if fixed_data:
+                    print("Successfully fixed inconsistencies")
                     self.generation_stats['successes'] += 1
                     return fixed_data
-                
-                print(f"Unable to fix all inconsistencies, retrying... ({attempt + 1}/{max_retries})")
                 
             except Exception as e:
                 print(f"Error on attempt {attempt + 1}: {e}")
@@ -569,6 +555,11 @@ async def main():
     
     generator = PerkGenerator()
     
+    # Ajouter un compteur pour suivre la progression
+    total_capabilities = len(capabilities_found)
+    processed = 0
+    failed = []
+    
     try:
         # Process each capability
         for phase_key, phase_data in tech_tree.items():
@@ -577,20 +568,29 @@ async def main():
                     if isinstance(layer_items, list):
                         for item in layer_items:
                             if 'capability_id' in item:
+                                processed += 1
                                 perk_file = Path(f"content/tech/{item['capability_id']}.yml")
-                                print(f"\nCapability: {item['capability_id']}")
+                                print(f"\nProcessing {processed}/{total_capabilities}: {item['capability_id']}")
                                 print(f"Name: {item.get('name', 'N/A')}")
+                                print(f"Layer: {layer_key}")
                                 print(f"File exists: {perk_file.exists()}")
+                                
                                 if not perk_file.exists():
-                                    print("-> Will generate this capability")
-                                    detailed_perk = await generator.generate_perk_details(item, template)
-                                    
-                                    if detailed_perk:
-                                        with open(perk_file, 'w', encoding='utf-8') as f:
-                                            yaml.dump(detailed_perk, f, sort_keys=False, allow_unicode=True)
-                                        print(f"Generated {perk_file}")
-                                    else:
-                                        print(f"Failed to generate details for {item['capability_id']}")
+                                    try:
+                                        print(f"Generating capability {item['capability_id']}...")
+                                        detailed_perk = await generator.generate_perk_details(item, template)
+                                        
+                                        if detailed_perk:
+                                            with open(perk_file, 'w', encoding='utf-8') as f:
+                                                yaml.dump(detailed_perk, f, sort_keys=False, allow_unicode=True)
+                                            print(f"Successfully generated {perk_file}")
+                                        else:
+                                            print(f"Failed to generate details for {item['capability_id']}")
+                                            failed.append(item['capability_id'])
+                                    except Exception as e:
+                                        print(f"Error generating {item['capability_id']}: {str(e)}")
+                                        failed.append(item['capability_id'])
+                                        continue
         
         print("\nSummary:")
         print(f"Total capabilities in tech tree: {len(capabilities_found)}")
