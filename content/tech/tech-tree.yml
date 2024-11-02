@@ -79,22 +79,15 @@ phase_1:
     - Community access
     - Knowledge sharing
   application_layer:
-  - name: Text generation
-    capability_id: COM_P1_005
+  - name: Code Generation
     tag: 🎨 CREATIVE
-    description: Create various forms of written content, from creative writing to
-      technical documentation, with context awareness
+    shortDescription: "Create and manage code with intelligent generation and optimization"
+    longDescription: "Advanced code generation system that enables automated creation and optimization of software code. Features dynamic code analysis, pattern recognition, and intelligent refactoring while maintaining code quality and standards."
+    chronologicalOrder: 6
+    capability_id: APP_P1_004
     prerequisites:
     - Base GPT-4 integration
     - Basic compute allocation
-    chronologicalOrder: 2
-    shortDescription: Create various forms of written content with context awareness
-    longDescription: 'Advanced text generation system capable of producing high-quality
-      written content across multiple formats and styles. The system maintains context
-      awareness, adapts tone and style based on requirements, and ensures coherent
-      narrative flow while adhering to specified guidelines and quality standards.
-
-      '
   - name: Image creation
     capability_id: COM_P1_006
     tag: 🎨 CREATIVE
@@ -564,42 +557,41 @@ phase_2:
     - Trusted AI identity system
   application_layer:
   - name: Autonomous applications
-    tag: ⚙️ OPERATIONAL
-    description: Self-running programs that can modify their own code, adapt to new
-      requirements, and improve performance without human intervention
-    prerequisites:
-    - Code generation
-    - Complex goal hierarchies
-    chronologicalOrder: 2
-    capability_id: MLT_P1_003
-  - name: Creative suites
     tag: 🎨 CREATIVE
-    description: Integrated tools for art, music, and writing that learn user preferences
-      and develop unique artistic styles
+    shortDescription: "Self-running programs that can modify their own code and adapt to new requirements"
+    longDescription: "Advanced autonomous system capable of self-modification and adaptation. Features include code self-optimization, requirement analysis, and dynamic behavior adjustment while maintaining operational stability."
+    chronologicalOrder: 3
+    capability_id: APP_P2_002
     prerequisites:
     - Text generation
-    - Image creation
-    - Voice synthesis
-    chronologicalOrder: 5
-    capability_id: MLT_P1_004
+    - Basic task execution
+  - name: Creative suites
+    tag: 🎨 CREATIVE
+    shortDescription: "Integrated tools for art, music, and creative content generation"
+    longDescription: "Comprehensive creative toolkit that enables the generation and manipulation of various art forms. Features include multi-modal content creation, style transfer, and collaborative creative workflows."
+    chronologicalOrder: 4
+    capability_id: APP_P2_003
+    prerequisites:
+    - Text generation
+    - Basic task execution
   - name: Research systems
-    tag: 🧠 COGNITIVE
-    description: AI-driven research tools that can analyze data, generate hypotheses,
-      and design experiments autonomously
+    tag: 🎨 CREATIVE
+    shortDescription: "Advanced research and analysis platforms for scientific discovery"
+    longDescription: "Sophisticated research platform that enables automated scientific investigation and discovery. Features include hypothesis generation, experiment design, and result analysis capabilities."
+    chronologicalOrder: 6
+    capability_id: APP_P2_004
     prerequisites:
-    - Autonomous applications
-    - Advanced memory structures
-    chronologicalOrder: 8
-    capability_id: ECO_P1_001
+    - Text generation
+    - Basic task execution
   - name: Development platforms
-    tag: 🔧 TECHNICAL
-    description: Intelligent development environments that learn from usage patterns
-      and suggest optimizations automatically
+    tag: 🎨 CREATIVE
+    shortDescription: "Intelligent development environments for software creation and optimization"
+    longDescription: "Advanced development platform that provides intelligent assistance for software creation. Features include code suggestion, optimization recommendations, and automated testing capabilities."
+    chronologicalOrder: 7
+    capability_id: APP_P2_004
     prerequisites:
-    - Code generation
-    - Autonomous applications
-    chronologicalOrder: 10
-    capability_id: ECO_P1_002
+    - Text generation
+    - Basic task execution
 
   - name: Adaptive Interfaces
     tag: 🎨 CREATIVE
