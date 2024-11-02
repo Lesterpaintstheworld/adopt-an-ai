@@ -606,26 +606,6 @@ phase_2:
     - Text generation
     - Basic task execution
 
-  - name: Adaptive Interfaces
-    tag: 🎨 CREATIVE
-    shortDescription: "Dynamic user interfaces that adapt to user behavior and preferences"
-    longDescription: "Advanced interface system that automatically adjusts to user interaction patterns and preferences. Features include layout optimization, contextual element presentation, and personalized navigation flows."
-    chronologicalOrder: 3
-    capability_id: APP_P2_001
-    prerequisites:
-    - Text generation
-    - Basic task execution
-
-  - name: Knowledge Systems
-    tag: 🎨 CREATIVE
-    shortDescription: "Intelligent knowledge management and retrieval systems"
-    longDescription: "Sophisticated knowledge management platform that organizes, indexes, and serves information intelligently. Features semantic search, contextual recommendations, and automated knowledge synthesis."
-    chronologicalOrder: 4
-    capability_id: APP_P2_002
-    prerequisites:
-    - Text generation
-    - Basic task execution
-
   - name: Process Automation
     tag: 🎨 CREATIVE
     shortDescription: "Advanced workflow automation with intelligent decision making"
