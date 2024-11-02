@@ -784,9 +784,10 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
           )}
 
           {/* Monitoring & Maintenance */}
-          {fullData?.monitoring_and_maintenance?.metrics_collection?.length > 0 && (
+          {fullData && fullData.monitoring_and_maintenance?.metrics_collection && 
+           fullData.monitoring_and_maintenance.metrics_collection.length > 0 && (
             <Grid item xs={12} md={6}>
-              <Paper elevation={2} sx={{ 
+              <Paper elevation={2} sx={{
                 p: 2,
                 bgcolor: COLORS.surface,
                 color: COLORS.text.primary,
@@ -810,20 +811,20 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                 
                 <Typography variant="subtitle1">Metrics Collection:</Typography>
                 <List>
-                  {fullData?.monitoring_and_maintenance?.metrics_collection?.map((metric: string, index: number) => (
+                  {fullData && fullData.monitoring_and_maintenance?.metrics_collection?.map((metric: string, index: number) => (
                     <ListItem key={index}>
                       <ListItemText primary={metric} />
                     </ListItem>
                   ))}
                 </List>
 
-                {fullData?.monitoring_and_maintenance?.alerting && 
+                {fullData && fullData.monitoring_and_maintenance?.alerting && 
                  fullData.monitoring_and_maintenance.alerting.length > 0 && (
                   <>
                     <Divider sx={{ my: 2 }} />
                     <Typography variant="subtitle1">Alerts:</Typography>
                     <List>
-                      {fullData?.monitoring_and_maintenance?.alerting?.map((alert: string, index: number) => (
+                      {fullData && fullData.monitoring_and_maintenance?.alerting?.map((alert: string, index: number) => (
                         <ListItem key={index}>
                           <ListItemText primary={alert} />
                         </ListItem>
