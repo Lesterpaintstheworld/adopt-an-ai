@@ -282,8 +282,15 @@ class PerkGenerator:
         # Load environment variables from .env file
         load_dotenv()
         api_key = os.getenv("ANTHROPIC_API_KEY")
+        
+        # Add better error handling for API key
         if not api_key:
             raise ValueError("ANTHROPIC_API_KEY not found in .env file!")
+        
+        # Add validation for API key format
+        if not api_key.startswith("sk-"):
+            raise ValueError("ANTHROPIC_API_KEY appears to be invalid - should start with 'sk-'")
+            
         self.client = AsyncAnthropic(api_key=api_key)
         self.generation_stats = {
             'attempts': 0,
@@ -437,6 +444,19 @@ class PerkGenerator:
         self.generation_stats['failures'] += 1
         return None
 
+    async def test_api_connection(self):
+        """Test the API connection before starting generation"""
+        try:
+            response = await self.client.messages.create(
+                model=self.model,
+                messages=[{"role": "user", "content": "Test connection"}],
+                max_tokens=10
+            )
+            return True
+        except Exception as e:
+            self.logger.error(f"API connection test failed: {str(e)}")
+            return False
+
     def print_generation_stats(self):
         """Print enhanced generation statistics"""
         print("\nDetailed Generation Statistics:")
@@ -457,6 +477,16 @@ def save_generation_stats(stats, output_file="generation_stats.yml"):
         yaml.dump(stats, f)
 
 async def main():
+    generator = PerkGenerator()
+    
+    # Test API connection first
+    print("Testing API connection...")
+    if not await generator.test_api_connection():
+        print("Failed to connect to Anthropic API. Please check your API key.")
+        return
+        
+    print("API connection successful!")
+    
     # Load template
     template_path = Path("content/tech/COM_template.yml")
     with open(template_path, encoding='utf-8') as f:
