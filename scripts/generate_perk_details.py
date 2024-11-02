@@ -338,16 +338,16 @@ class PerkGenerator:
         if not isinstance(text, str):
             return text
             
-        # Normalize and convert to ASCII
-        text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('ascii')
+        # Encoder puis décoder en ignorant les caractères problématiques
+        text = text.encode('utf-8', 'ignore').decode('utf-8')
+        
+        # Nettoyer les caractères non-ASCII
+        text = ''.join(char for char in text if ord(char) < 128)
         
         # Escape YAML special characters
         special_chars = [':', '-', '[', ']', '{', '}', '|', '>', '"', "'"]
         for char in special_chars:
             text = text.replace(char, '\\' + char)
-            
-        # Remove any remaining problematic characters
-        text = ''.join(char for char in text if char.isprintable())
         
         return text
 
@@ -413,11 +413,13 @@ class PerkGenerator:
                 return None
 
             try:
-                # Gérer explicitement l'encodage de la réponse
                 raw_text = response.content[0].text
                 
-                # Handle encoding more gracefully
-                raw_text = unicodedata.normalize('NFKD', raw_text).encode('ascii', 'ignore').decode('ascii')
+                # Utiliser 'ignore' au lieu de 'strict' pour l'encodage
+                raw_text = raw_text.encode('utf-8', 'ignore').decode('utf-8')
+                
+                # Nettoyer les caractères non-ASCII
+                raw_text = ''.join(char for char in raw_text if ord(char) < 128)
                 
                 # Nettoyer les backticks Markdown
                 if raw_text.startswith('```yaml'):
@@ -642,7 +644,7 @@ async def main():
                                                 else:
                                                     cleaned_perk[key] = value
                                                     
-                                            with open(perk_file, 'w', encoding='utf-8') as f:
+                                            with open(perk_file, 'w', encoding='utf-8', errors='ignore') as f:
                                                 yaml.dump(cleaned_perk, f, sort_keys=False, allow_unicode=True,
                                                          default_flow_style=False, width=float("inf"))
                                             print(f"Successfully generated {perk_file}")
