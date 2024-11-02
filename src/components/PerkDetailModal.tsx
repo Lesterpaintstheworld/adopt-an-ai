@@ -583,11 +583,11 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                         primary={category}
                         secondary={
                           Array.isArray(items) ? 
-                            items.map(item => {
-                              if (typeof item === 'object' && item.capability) {
+                            items.map((item: { capability?: string; criticality?: string } | string) => {
+                              if (typeof item === 'object' && 'capability' in item) {
                                 return item.capability + (item.criticality ? ` (${item.criticality})` : '');
                               }
-                              return item;
+                              return String(item);
                             }).join(', ')
                             : 'Invalid format'
                         }
