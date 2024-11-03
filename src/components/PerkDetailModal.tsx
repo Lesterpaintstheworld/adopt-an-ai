@@ -128,72 +128,7 @@ const formatDateValue = (value: any): string => {
 
 import { COLORS } from '../theme/colors';
 
-const formatValue = (value: any): string => {
-  try {
-    // Cas de base
-    if (value === null || value === undefined) {
-      return '';
-    }
-
-    // Types primitifs
-    if (typeof value === 'string') return value;
-    if (typeof value === 'number') return value.toString();
-    if (typeof value === 'boolean') return value.toString();
-
-    // Dates
-    if (value instanceof Date) {
-      return value.toLocaleDateString();
-    }
-
-    // Tableaux
-    if (Array.isArray(value)) {
-      return value.map(item => formatValue(item)).filter(Boolean).join(', ');
-    }
-
-    // Objets
-    if (typeof value === 'object') {
-      // Cas spéciaux pour les structures courantes dans nos YAML
-      if ('description' in value) {
-        const desc = formatValue(value.description);
-        if ('requirements' in value) {
-          const reqs = formatValue(value.requirements);
-          return `${desc}\nRequirements: ${reqs}`;
-        }
-        return desc;
-      }
-
-      if ('implementation' in value && 'requirement' in value) {
-        return `Implementation: ${formatValue(value.implementation)}\nRequirement: ${formatValue(value.requirement)}`;
-      }
-
-      if ('features' in value && 'requirements' in value) {
-        return `Features: ${formatValue(value.features)}\nRequirements: ${formatValue(value.requirements)}`;
-      }
-
-      // Pour les objets avec une seule clé commençant par "Phase"
-      const keys = Object.keys(value);
-      if (keys.length === 1 && keys[0].startsWith('Phase')) {
-        return `${keys[0]}: ${formatValue(value[keys[0]])}`;
-      }
-
-      // Pour les autres objets, essayer de créer une représentation lisible
-      try {
-        return Object.entries(value)
-          .map(([key, val]) => `${key}: ${formatValue(val)}`)
-          .filter(Boolean)
-          .join('\n');
-      } catch {
-        return JSON.stringify(value, null, 2);
-      }
-    }
-
-    // Fallback pour tout autre type
-    return String(value);
-  } catch (error) {
-    console.error('Error in formatValue:', error);
-    return '[Error formatting value]';
-  }
-};
+import { formatValue } from '../utils/formatters';
 import {
   Modal,
   Box,
