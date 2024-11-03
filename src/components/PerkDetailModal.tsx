@@ -1,5 +1,36 @@
-import { useState, useEffect, FC } from 'react';
+import { useState, useEffect, FC, ReactNode } from 'react';
 import { SxProps } from '@mui/system';
+
+const safeRender = (content: any): ReactNode => {
+  try {
+    if (content === null || content === undefined) {
+      return '';
+    }
+
+    // If it's already a string or number, return directly
+    if (typeof content === 'string' || typeof content === 'number') {
+      return content;
+    }
+
+    // Try to render using formatValue
+    const formattedValue = formatValue(content);
+    if (formattedValue) {
+      return formattedValue;
+    }
+
+    // If formatValue fails or returns empty, fallback to YAML
+    return <pre>{JSON.stringify(content, null, 2)}</pre>;
+  } catch (error) {
+    console.warn('Error rendering content:', error);
+    // Fallback to raw YAML display
+    try {
+      return <pre>{JSON.stringify(content, null, 2)}</pre>;
+    } catch {
+      // Ultimate fallback if JSON stringify fails
+      return <pre>[Complex Object - Unable to Display]</pre>;
+    }
+  }
+};
 
 import IconLoader from './IconLoader';
 import Dialog from '@mui/material/Dialog';
@@ -627,12 +658,13 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
               <Typography 
                 variant="body1" 
                 paragraph
+                component="div"
                 sx={{ 
                   fontSize: '1.1rem',
                   lineHeight: 1.6
                 }}
               >
-                {getDescription(perk, fullData)}
+                {safeRender(getDescription(perk, fullData))}
               </Typography>
             </Paper>
           </Grid>
@@ -1283,7 +1315,11 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                         <RestoreIcon fontSize="small" />
                       </ListItemIcon>
                       <ListItemText 
-                        primary={formatValue(procedure)}
+                        primary={
+                          <Box component="div">
+                            {safeRender(procedure)}
+                          </Box>
+                        }
                       />
                     </ListItem>
                   ))}
