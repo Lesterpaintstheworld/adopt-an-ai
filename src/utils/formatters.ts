@@ -44,7 +44,14 @@ export const formatValue = (value: any): string => {
 
       // Handle nested objects that should be flattened to strings
       if ('certifications' in value || 'standards' in value) {
-        return Object.values(value).flat().join(', ');
+        const values = Object.values(value);
+        const flattened = values.reduce((acc: string[], val) => {
+          if (Array.isArray(val)) {
+            return [...acc, ...val];
+          }
+          return [...acc, String(val)];
+        }, []);
+        return flattened.join(', ');
       }
 
       // General object formatting
