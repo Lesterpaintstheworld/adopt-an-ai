@@ -11,6 +11,15 @@ const getDescription = (perk: Perk | null, fullData: PerkFullData | null): strin
   
   if (fullData?.description) {
     if (typeof fullData.description === 'object') {
+      // Handle object with description and requirements
+      if ('description' in fullData.description && 'requirements' in fullData.description) {
+        return `${fullData.description.description}\nRequirements: ${
+          Array.isArray(fullData.description.requirements) 
+            ? fullData.description.requirements.join(', ')
+            : fullData.description.requirements
+        }`;
+      }
+      // Handle object with short/long description
       return fullData.description.long || fullData.description.short;
     }
     return fullData.description;
@@ -18,6 +27,15 @@ const getDescription = (perk: Perk | null, fullData: PerkFullData | null): strin
   
   if (perk?.description) {
     if (typeof perk.description === 'object') {
+      // Handle object with description and requirements
+      if ('description' in perk.description && 'requirements' in perk.description) {
+        return `${perk.description.description}\nRequirements: ${
+          Array.isArray(perk.description.requirements) 
+            ? perk.description.requirements.join(', ')
+            : perk.description.requirements
+        }`;
+      }
+      // Handle object with short/long description
       return perk.description.long || perk.description.short;
     }
     return perk.description;
