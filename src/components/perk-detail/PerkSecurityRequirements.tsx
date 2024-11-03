@@ -37,7 +37,9 @@ export const PerkSecurityRequirements: FC<PerkSecurityRequirementsProps> = ({
                 <ListItem key={index}>
                   <ListItemText 
                     primary={typeof item === 'object' && item !== null 
-                      ? JSON.stringify(item, null, 2)
+                      ? Object.entries(item)
+                          .map(([key, val]) => `${key}: ${val}`)
+                          .join(', ')
                       : String(item)
                     }
                     primaryTypographyProps={{
