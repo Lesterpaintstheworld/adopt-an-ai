@@ -6,6 +6,7 @@ import BuildIcon from '@mui/icons-material/Build';
 import NetworkCheckIcon from '@mui/icons-material/NetworkCheck';
 import PsychologyIcon from '@mui/icons-material/Psychology';
 import SettingsIcon from '@mui/icons-material/Settings';
+import { ReactElement } from 'react';
 
 export const getTagColor = (tag: string): SxProps => {
   const tagType = tag.split(' ')[1];
@@ -27,7 +28,7 @@ export const getTagColor = (tag: string): SxProps => {
   }
 };
 
-export const getTagIcon = (tag: string) => {
+export const getTagIcon = (tag: string): ReactElement => {
   const iconType = tag.split(' ')[1];
   switch (iconType) {
     case 'CREATIVE':
