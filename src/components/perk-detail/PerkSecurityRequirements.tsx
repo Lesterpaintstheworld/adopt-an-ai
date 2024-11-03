@@ -36,24 +36,20 @@ export const PerkSecurityRequirements: FC<PerkSecurityRequirementsProps> = ({
               securityRequirements.authentication.map((item, index) => (
                 <ListItem key={index}>
                   <ListItemText 
-                    primary={(() => {
-                      if (typeof item === 'object' && item !== null) {
-                        if ('implementation' in item && 'requirement' in item) {
-                          return `${String(item.implementation)} - ${String(item.requirement)}`;
-                        }
-                        if ('description' in item) {
-                          const desc = String(item.description);
-                          const reqs = item.requirements ? 
-                            (Array.isArray(item.requirements) ? 
-                              item.requirements.map(r => String(r)).join(', ') : 
-                              String(item.requirements)
-                            ) : '';
-                          return reqs ? `${desc}\nRequirements: ${reqs}` : desc;
-                        }
-                        return JSON.stringify(item);
-                      }
-                      return String(item);
-                    })()}
+                    primary={typeof item === 'object' && item !== null
+                      ? ('implementation' in item && 'requirement' in item)
+                        ? `${String(item.implementation)} - ${String(item.requirement)}`
+                        : ('description' in item)
+                          ? `${String(item.description)}${
+                              item.requirements 
+                                ? `\nRequirements: ${Array.isArray(item.requirements) 
+                                    ? item.requirements.map(String).join(', ') 
+                                    : String(item.requirements)}`
+                                : ''
+                            }`
+                          : JSON.stringify(item)
+                      : String(item)
+                    }
                     primaryTypographyProps={{
                       variant: 'body2'
                     }}
