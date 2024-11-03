@@ -630,9 +630,45 @@ const TechTreePage: React.FC<TechTreePageProps> = ({ standalone = false }) => {
                 return acc + calculatePhaseWidth(phase);
               }, 0);
 
-              // Safely convert both name and period using our enhanced safeToString function
-              const phaseName = safeToString(phaseData.name);
-              const phasePeriod = safeToString(phaseData.period);
+              // Debug logging
+              console.log('Phase data:', phaseData);
+              console.log('Raw name:', phaseData.name);
+              console.log('Raw period:', phaseData.period);
+
+              // Extra defensive conversion
+              let phaseName = '';
+              let phasePeriod = '';
+
+              try {
+                // Handle name
+                if (typeof phaseData.name === 'object') {
+                  console.log('Name is object:', phaseData.name);
+                  phaseName = safeToString(phaseData.name);
+                } else {
+                  phaseName = String(phaseData.name || '');
+                }
+
+                // Handle period
+                if (typeof phaseData.period === 'object') {
+                  console.log('Period is object:', phaseData.period);
+                  phasePeriod = safeToString(phaseData.period);
+                } else {
+                  phasePeriod = String(phaseData.period || '');
+                }
+
+                // Final safety check
+                if (typeof phaseName !== 'string') phaseName = '[Invalid Name]';
+                if (typeof phasePeriod !== 'string') phasePeriod = '[Invalid Period]';
+
+                console.log('Processed name:', phaseName);
+                console.log('Processed period:', phasePeriod);
+
+              } catch (error) {
+                console.error('Error processing phase data:', error);
+                phaseName = '[Error]';
+                phasePeriod = '';
+              }
+
               return (
                 <Typography
                   key={phaseKey}
@@ -645,7 +681,7 @@ const TechTreePage: React.FC<TechTreePageProps> = ({ standalone = false }) => {
                     textAlign: 'center',
                   }}
                 >
-                  {phaseName} ({phasePeriod})
+                  {`${phaseName} (${phasePeriod})`}
                 </Typography>
               );
             })}
