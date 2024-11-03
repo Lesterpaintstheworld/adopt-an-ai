@@ -368,59 +368,11 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
         </IconButton>
 
         <Grid container spacing={{ xs: 1, sm: 3 }} sx={{ mb: 2 }}>
-          <Grid item xs={12} sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
-            {perk && (
-              <IconLoader
-                perk={perk}
-                onClick={() => setIsImageOpen(true)}
-                sx={{ 
-                  width: {
-                    xs: 80,    // Mobile
-                    sm: 160    // Desktop
-                  },
-                  height: {
-                    xs: 80,    // Mobile
-                    sm: 160    // Desktop
-                  },
-                  cursor: 'pointer',
-                  borderRadius: 1,
-                  '&:hover': {
-                    opacity: 0.8,
-                  }
-                }}
-              />
-            )}
-            <Box>
-              <Typography 
-                variant="h4" 
-                component="h2" 
-                gutterBottom
-                sx={{
-                  fontSize: {
-                    xs: '1.5rem',  // Mobile
-                    sm: '2.125rem' // Desktop
-                  }
-                }}
-              >
-                {fullData?.name || perk?.name || ''}
-              </Typography>
-              <Box sx={{ display: 'flex', gap: 1 }}>
-                <Chip 
-                  label={perk?.tag || ''} 
-                  sx={{ 
-                    bgcolor: COLORS.primary,
-                    color: COLORS.background,
-                  }} 
-                />
-                <Chip 
-                  label={`ID: ${fullData?.capability_id || perk?.capability_id || ''}`}
-                  sx={{ 
-                    bgcolor: '#FFA500',
-                    color: '#000000',
-                  }}
-                />
-              </Box>
-            </Box>
+          <Grid item xs={12}>
+            <PerkHeader 
+              perk={perk} 
+              onImageClick={() => setIsImageOpen(true)} 
+            />
           </Grid>
 
           {isLoading ? (
