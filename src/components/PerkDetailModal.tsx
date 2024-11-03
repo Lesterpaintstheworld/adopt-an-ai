@@ -12,46 +12,44 @@ interface PerkDescription {
 }
 
 const getDescription = (perk: Perk | null, fullData: PerkFullData | null): string => {
+  // Helper function to handle object descriptions
+  const handleObjectDescription = (desc: any): string => {
+    if ('description' in desc && 'requirements' in desc) {
+      const requirements = Array.isArray(desc.requirements) 
+        ? desc.requirements.join(', ')
+        : desc.requirements;
+      return `${desc.description}\n\nRequirements: ${requirements}`;
+    }
+    if ('long' in desc) return desc.long;
+    if ('short' in desc) return desc.short;
+    if ('description' in desc) return desc.description;
+    return JSON.stringify(desc); // Fallback for unknown object structure
+  };
+
+  // Try fullData first
   if (fullData?.longDescription) {
     return fullData.longDescription;
   }
-  
+
   if (fullData?.description) {
     if (typeof fullData.description === 'object') {
-      // Handle object with description and requirements
-      if ('description' in fullData.description && 'requirements' in fullData.description) {
-        return `${fullData.description.description}\nRequirements: ${
-          Array.isArray(fullData.description.requirements) 
-            ? fullData.description.requirements.join(', ')
-            : fullData.description.requirements
-        }`;
-      }
-      // Handle object with short/long description
-      return fullData.description.long || fullData.description.short;
+      return handleObjectDescription(fullData.description);
     }
-    return fullData.description;
+    return String(fullData.description);
   }
-  
+
+  // Then try perk data
   if (perk?.description) {
     if (typeof perk.description === 'object') {
-      // Handle object with description and requirements
-      if ('description' in perk.description && 'requirements' in perk.description) {
-        return `${perk.description.description}\nRequirements: ${
-          Array.isArray(perk.description.requirements) 
-            ? perk.description.requirements.join(', ')
-            : perk.description.requirements
-        }`;
-      }
-      // Handle object with short/long description
-      return perk.description.long || perk.description.short;
+      return handleObjectDescription(perk.description);
     }
-    return perk.description;
+    return String(perk.description);
   }
-  
+
   if (perk?.shortDescription) {
     return perk.shortDescription;
   }
-  
+
   return 'No description available.';
 };
 
