@@ -126,14 +126,24 @@ const formatValue = (value: any): string => {
       return value.map(item => formatValue(item)).join(', ');
     }
     
-    // Handle objects with description and requirements
-    if (value.description && value.requirements) {
-      return `${value.description}\nRequirements: ${formatValue(value.requirements)}`;
+    // Handle implementation/requirement objects
+    if ('implementation' in value && 'requirement' in value) {
+      return `${formatValue(value.implementation)} (Requires: ${formatValue(value.requirement)})`;
+    }
+    
+    // Handle description/requirements objects
+    if ('description' in value && 'requirements' in value) {
+      return `${formatValue(value.description)} (Requirements: ${formatValue(value.requirements)})`;
+    }
+    
+    // Handle features/requirements objects
+    if ('features' in value && 'requirements' in value) {
+      return `Features: ${formatValue(value.features)}\nRequirements: ${formatValue(value.requirements)}`;
     }
     
     // Handle objects with description and features
-    if (value.description && value.features) {
-      return `${value.description}\nFeatures: ${formatValue(value.features)}`;
+    if ('description' in value && 'features' in value) {
+      return `${formatValue(value.description)}\nFeatures: ${formatValue(value.features)}`;
     }
     
     // If it's an object with a single key that starts with "Phase"
@@ -143,13 +153,14 @@ const formatValue = (value: any): string => {
     }
     
     // Handle specific object structures
-    if (value.strategy && value.phases) {
+    if ('strategy' in value && 'phases' in value) {
       return `Strategy: ${value.strategy}, Phases: ${formatValue(value.phases)}`;
     }
-    if (value.current && value.target) {
+    if ('current' in value && 'target' in value) {
       return `Current: ${formatValue(value.current)}, Target: ${formatValue(value.target)}`;
     }
     
+    // For other objects, try to get a meaningful string representation
     try {
       return Object.entries(value)
         .map(([key, val]) => `${key}: ${formatValue(val)}`)
