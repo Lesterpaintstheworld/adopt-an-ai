@@ -2,6 +2,7 @@ import { useState, useEffect, FC, ReactNode } from 'react';
 import { SxProps } from '@mui/system';
 import { PerkVersionHistory } from './perk-detail/PerkVersionHistory';
 import PerkHeader from './perk-detail/PerkHeader';
+import PerkTechnicalSpecs from './perk-detail/PerkTechnicalSpecs';
 
 const safeRender = (content: any): React.ReactNode => {
   try {
@@ -446,39 +447,9 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
             </Paper>
           </Grid>
 
-          {fullData?.technical_specifications?.core_components && (
+          {fullData?.technical_specifications && (
             <Grid item xs={12} md={6}>
-              <Paper elevation={2} sx={{ 
-                p: 2,
-                bgcolor: COLORS.surface,     // Box grises
-                color: COLORS.text.primary, // Ensure text is white
-                '& .MuiTypography-root': {
-                  color: COLORS.text.primary,
-                },
-                '& .MuiListItemText-primary': {
-                  color: COLORS.text.primary,
-                },
-                '& .MuiListItemText-secondary': {
-                  color: COLORS.text.secondary,
-                },
-              }}>
-                <Typography variant="h6" gutterBottom>Technical Specifications</Typography>
-                {fullData?.technical_specifications?.core_components?.length > 0 && (
-                  <>
-                    <Typography variant="subtitle1">Core Components:</Typography>
-                    <List>
-                      {fullData.technical_specifications?.core_components?.map((component, index) => (
-                        <ListItem key={index}>
-                          <ListItemText
-                            primary={component.name}
-                            secondary={component.description}
-                          />
-                        </ListItem>
-                      ))}
-                    </List>
-                  </>
-                )}
-              </Paper>
+              <PerkTechnicalSpecs technicalSpecs={fullData.technical_specifications} />
             </Grid>
           )}
 
