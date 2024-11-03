@@ -46,20 +46,16 @@ export const formatValue = (value: any): string => {
 
       // Handle nested objects that should be flattened to strings
       if (value && typeof value === 'object' && ('certifications' in value || 'standards' in value)) {
-        const certifications = Array.isArray(value.certifications) ? value.certifications : [value.certifications];
-        const standards = Array.isArray(value.standards) ? value.standards : [value.standards];
-        return [...certifications, ...standards]
-          .filter(Boolean)
-          .map(v => {
-            if (typeof v === 'object' && v !== null) {
-              return Object.entries(v)
-                .map(([k, val]) => `${k}: ${formatValue(val)}`)
-                .join(', ');
-            }
-            return formatValue(v);
-          })
-          .filter(v => v !== '')
-          .join(', ');
+        const items = [];
+        if ('certifications' in value) {
+          const certs = Array.isArray(value.certifications) ? value.certifications : [value.certifications];
+          items.push(...certs.map(String));
+        }
+        if ('standards' in value) {
+          const stds = Array.isArray(value.standards) ? value.standards : [value.standards];
+          items.push(...stds.map(String));
+        }
+        return items.filter(Boolean).join(', ');
       }
 
       // General object formatting
