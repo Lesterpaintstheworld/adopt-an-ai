@@ -320,7 +320,10 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
           <Grid item xs={12} sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
             <Box 
               component="img"
-              src={perk?.file_base_name ? `/perk-icons/${perk.file_base_name}.png` : getPerkIconFilename(perk?.name || '')}
+              src={perk?.file_base_name 
+                ? `/perk-icons/${perk.file_base_name}.png`
+                : getPerkIconUrl(perk)
+              }
               alt={perk?.name || ''}
               sx={{ 
                 width: {
@@ -1213,7 +1216,10 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
           >
             <Box
               component="img"
-              src={perk.file_base_name ? `/perk-icons/${perk.file_base_name}.png` : getPerkIconFilename(perk.name)}
+              src={perk.file_base_name 
+                ? `/perk-icons/${perk.file_base_name}.png`
+                : getPerkIconUrl(perk)
+              }
               alt={perk.name}
               sx={{
                 maxWidth: '100%',

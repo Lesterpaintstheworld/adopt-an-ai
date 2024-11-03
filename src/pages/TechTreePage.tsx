@@ -17,7 +17,22 @@ interface ModalState {
 // Local utility function since we don't have access to the utils file
 const getPerkIconUrl = (item: any): string => {
   if (!item) return '';
-  return `/perk-icons/${item.file_base_name}.png`;
+  
+  // Si file_base_name existe, l'utiliser directement
+  if (item.file_base_name) {
+    return `/perk-icons/${item.file_base_name}.png`;
+  }
+  
+  // Sinon, construire le nom à partir du capability_id et du nom
+  if (item.capability_id && item.name) {
+    const sanitizedName = item.name
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-');
+    return `/perk-icons/${sanitizedName}-${item.capability_id}.png`;
+  }
+  
+  return '';
 };
 import CodeIcon from '@mui/icons-material/Code';
 import BrushIcon from '@mui/icons-material/Brush';
