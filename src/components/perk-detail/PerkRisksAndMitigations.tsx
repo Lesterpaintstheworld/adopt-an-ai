@@ -48,7 +48,7 @@ const SeverityChip: FC<{ severity: string }> = ({ severity }) => {
   );
 };
 
-const RiskSection: FC<{ title: string; risks: Risk[] }> = ({ title, risks }) => (
+const RiskSection: FC<{ title: string; risks: Risk[] }> = ({ title, risks = [] }) => (
   <Box mt={2}>
     <Typography variant="subtitle1" gutterBottom>{title}</Typography>
     <List>

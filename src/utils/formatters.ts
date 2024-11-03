@@ -47,11 +47,11 @@ export const formatValue = (value: any): string => {
         const values = Object.values(value);
         const flattened = values.reduce((acc: string[], val) => {
           if (Array.isArray(val)) {
-            return [...acc, ...val];
+            return [...acc, ...val.map(String)];
           }
           return [...acc, String(val)];
         }, []);
-        return flattened.join(', ');
+        return flattened.filter(Boolean).join(', ');
       }
 
       // General object formatting
