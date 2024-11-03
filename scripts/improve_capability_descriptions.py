@@ -240,9 +240,19 @@ async def improve_capability_file(client, file_path: Path, args):
         if not response.content:
             return False
 
+        # Clean up response - remove markdown code blocks
+        response_text = response.content[0].text.strip()
+        if response_text.startswith('```yaml'):
+            response_text = response_text[7:]  # Remove ```yaml
+        if response_text.startswith('```'):
+            response_text = response_text[3:]  # Remove ```
+        if response_text.endswith('```'):
+            response_text = response_text[:-3]  # Remove trailing ```
+        response_text = response_text.strip()
+
         # Parse response and update sections
         try:
-            improved = yaml.safe_load(response.content[0].text)
+            improved = yaml.safe_load(response_text)
             
             # Valider améliorations
             issues = validate_improvements(data, improved)
