@@ -33,15 +33,15 @@ const getDescription = (perk: Perk | null, fullData: PerkFullData | null): strin
 const getPerkIconUrl = (item: any): string => {
   if (!item) return '/perk-icons/default-perk-icon.png';
   
-  // Try with capability_id first
+  // Try with file_base_name first since that's how our icons are named
+  if (item.file_base_name) {
+    return `/perk-icons/${item.file_base_name}.png`;
+  }
+  
+  // Use capability_id as fallback
   if (item.capability_id) {
     const iconPath = `/perk-icons/${item.capability_id}.png`;
     return iconPath;
-  }
-  
-  // Use file_base_name as fallback
-  if (item.file_base_name) {
-    return `/perk-icons/${item.file_base_name}.png`;
   }
   
   // Last resort: use sanitized name
