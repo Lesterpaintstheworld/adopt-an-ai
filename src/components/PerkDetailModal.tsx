@@ -30,31 +30,7 @@ const getDescription = (perk: Perk | null, fullData: PerkFullData | null): strin
   return 'No description available.';
 };
 
-const getPerkIconUrl = (item: any): string => {
-  if (!item) return '/perk-icons/default-perk-icon.png';
-  
-  // Try with file_base_name first since that's how our icons are named
-  if (item.file_base_name) {
-    return `/perk-icons/${item.file_base_name}.png`;
-  }
-  
-  // Use capability_id as fallback
-  if (item.capability_id) {
-    const iconPath = `/perk-icons/${item.capability_id}.png`;
-    return iconPath;
-  }
-  
-  // Last resort: use sanitized name
-  if (item.name) {
-    const sanitizedName = item.name
-      .toLowerCase()
-      .replace(/[^a-z0-9\s-]/g, '')
-      .replace(/\s+/g, '-');
-    return `/perk-icons/${sanitizedName}.png`;
-  }
-  
-  return '/perk-icons/default-perk-icon.png';
-};
+import { getPerkIconUrl } from '../utils/iconUtils';
 
 const formatDateValue = (value: any): string => {
   if (value instanceof Date) {
