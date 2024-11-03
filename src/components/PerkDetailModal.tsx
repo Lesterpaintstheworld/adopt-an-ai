@@ -4,6 +4,7 @@ import { PerkVersionHistory } from './perk-detail/PerkVersionHistory';
 import PerkHeader from './perk-detail/PerkHeader';
 import PerkTechnicalSpecs from './perk-detail/PerkTechnicalSpecs';
 import PerkRisksAndMitigations from './perk-detail/PerkRisksAndMitigations';
+import PerkDependencies from './perk-detail/PerkDependencies';
 
 const safeRender = (content: any): React.ReactNode => {
   try {
@@ -454,76 +455,9 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
             </Grid>
           )}
 
-          {fullData?.dependencies?.prerequisites && (
+          {fullData?.dependencies && (
             <Grid item xs={12} md={6}>
-              <Paper elevation={2} sx={{ 
-                p: 2,
-                bgcolor: COLORS.surface,     // Box grise
-                color: COLORS.text.primary,  // Texte blanc
-                '& .MuiTypography-root': {
-                  color: COLORS.text.primary,
-                },
-                '& .MuiListItemText-primary': {
-                  color: COLORS.text.primary,
-                },
-                '& .MuiListItemText-secondary': {
-                  color: COLORS.text.secondary,
-                }
-              }}>
-                <Typography variant="h6" gutterBottom>Dependencies</Typography>
-                
-                {fullData?.dependencies?.prerequisites && (
-                  <>
-                    <Typography variant="subtitle1">Prerequisites:</Typography>
-                    <List>
-                      {Object.entries(fullData.dependencies.prerequisites).map(([category, items]) => (
-                        <ListItem key={category}>
-                          <ListItemText
-                            primary={category}
-                            secondary={
-                              Array.isArray(items) ? 
-                                items.map((item: { capability?: string; criticality?: string } | string) => {
-                                  if (typeof item === 'object' && 'capability' in item) {
-                                    return item.capability + (item.criticality ? ` (${item.criticality})` : '');
-                                  }
-                                  return String(item);
-                                }).join(', ')
-                                : 'Invalid format'
-                            }
-                          />
-                        </ListItem>
-                      ))}
-                    </List>
-                  </>
-                )}
-
-                <Divider sx={{ my: 2 }} />
-
-                {fullData.dependencies.enables && (
-                  <>
-                    <Typography variant="subtitle1">Enables:</Typography>
-                    <List>
-                      {Object.entries(fullData.dependencies.enables).map(([category, items]) => (
-                        <ListItem key={category}>
-                          <ListItemText
-                            primary={category}
-                            secondary={
-                              Array.isArray(items) ? 
-                                items.map(item => {
-                                  if (typeof item === 'object') {
-                                    return `${item.capability}${item.relationship ? ` (${item.relationship})` : ''}`;
-                                  }
-                                  return item;
-                                }).join(', ')
-                                : 'Invalid format'
-                            }
-                          />
-                        </ListItem>
-                      ))}
-                    </List>
-                  </>
-                )}
-              </Paper>
+              <PerkDependencies dependencies={fullData.dependencies} />
             </Grid>
           )}
 
