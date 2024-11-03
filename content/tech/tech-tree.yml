@@ -1436,19 +1436,21 @@ phase_3:
   agent_layer:
   - name: Self-directed evolution
     tag: 🧠 COGNITIVE
-    shortDescription: Autonomously improve core systems and capabilities through self-modification
-      and learning.
-    longDescription: 'Sophisticated self-improvement system that enables AI to analyze,
-      modify, and enhance its own core functionality.
-
-      Features include automated architecture optimization, capability expansion,
-      and safe self-modification protocols while maintaining operational stability.
-
-      This capability is a key enabler for the AI system to iteratively and continuously
-      enhance its performance, efficiency, and capabilities without human intervention,
-      paving the way for rapid and transformative advancements in AI technology.
-
-      '
+    shortDescription: "Autonomously improve core systems and capabilities through self-modification and learning."
+    longDescription: |
+      Sophisticated self-improvement system enabling:
+      - Core architecture optimization
+      - Capability enhancement
+      - Safe self-modification
+      - Learning acceleration
+      
+      Key features:
+      - Automated improvement cycles
+      - Risk assessment protocols
+      - Performance validation
+      - Stability monitoring
+      - Evolution tracking
+      - Rollback mechanisms
     prerequisites:
     - Universal goal creation
     - Self-modifying models
