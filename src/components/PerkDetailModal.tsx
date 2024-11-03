@@ -456,9 +456,9 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
             </Grid>
           )}
 
-          {fullData?.dependencies && (
+          {fullData && (fullData.dependencies || fullData.dependencies_and_security) && (
             <Grid item xs={12} md={6}>
-              <PerkDependencies dependencies={fullData.dependencies} />
+              <PerkDependencies data={fullData} />
             </Grid>
           )}
 

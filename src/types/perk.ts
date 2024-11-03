@@ -28,6 +28,28 @@ export interface PerkTechnicalSpecification {
   performance_metrics: PerkPerformanceMetrics;
 }
 
+export interface DependencyItem {
+  capability?: string;
+  criticality?: string;
+  relationship?: string;
+  security_aspects?: string[];
+}
+
+export interface DependenciesSection {
+  prerequisites?: Record<string, Array<string | DependencyItem>>;
+  enables?: Record<string, Array<string | DependencyItem>>;
+  security?: {
+    authentication?: string[];
+    authorization?: string[];
+    compliance?: string[];
+    data_protection?: string;
+  };
+  dependencies_visualization?: {
+    format?: string;
+    primary_diagram?: string;
+  };
+}
+
 export interface PerkSecurityRequirements {
   authentication: string[];
   authorization: string[];
@@ -39,11 +61,6 @@ export interface PerkSecurityRequirements {
   };
 }
 
-export interface PerkDependencies {
-  prerequisites: Record<string, string[]>;
-  enables?: Record<string, string[]>;
-}
-
 export interface PerkFullData {
   capability_id: string;
   name: string;
@@ -53,7 +70,8 @@ export interface PerkFullData {
     long: string;
   };
   technical_specifications: PerkTechnicalSpecification;
-  security_requirements: PerkSecurityRequirements;
-  dependencies: PerkDependencies;
+  security_requirements?: PerkSecurityRequirements;
+  dependencies?: DependenciesSection;
+  dependencies_and_security?: DependenciesSection;
   [key: string]: any;
 }

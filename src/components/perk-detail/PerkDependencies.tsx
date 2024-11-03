@@ -47,7 +47,12 @@ const DependencyItem: FC<{ name: string; criticality?: string; relationship?: st
   );
 };
 
-export const PerkDependencies: FC<PerkDependenciesProps> = ({ dependencies }) => {
+export const PerkDependencies: FC<PerkDependenciesProps> = ({ data }) => {
+  // Get the appropriate section based on what's available
+  const dependencySection = data.dependencies_and_security || data.dependencies;
+  const securitySection = data.dependencies_and_security?.security || data.security_requirements;
+
+  if (!dependencySection && !securitySection) return null;
   return (
     <Paper elevation={2} sx={{ 
       p: 2,
