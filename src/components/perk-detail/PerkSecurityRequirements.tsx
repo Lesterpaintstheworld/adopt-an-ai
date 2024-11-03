@@ -1,7 +1,8 @@
 import React from 'react';
 import { Box, Typography, Paper } from '@mui/material';
 import { COLORS } from '../../theme/colors';
-import ReactJson from 'react-json-view';
+import JSONPretty from 'react-json-pretty';
+import 'react-json-pretty/themes/monikai.css';
 
 interface PerkSecurityRequirementsProps {
   securityRequirements: any;  // Accept any YAML structure
@@ -18,18 +19,16 @@ export const PerkSecurityRequirements: React.FC<PerkSecurityRequirementsProps> =
     }}>
       <Typography variant="h6" gutterBottom>Security Requirements</Typography>
       
-      <ReactJson 
-        src={securityRequirements}
-        theme="monokai"
-        style={{ 
-          backgroundColor: 'transparent',
-          padding: '8px',
-          borderRadius: '4px'
+      <JSONPretty 
+        data={securityRequirements}
+        theme={{
+          main: 'line-height:1.3;color:#66d9ef;background:transparent;overflow:auto;',
+          error: 'line-height:1.3;color:#66d9ef;background:transparent;overflow:auto;',
+          key: 'color:#f92672;',
+          string: 'color:#fd971f;',
+          value: 'color:#a6e22e;',
+          boolean: 'color:#ac81fe;',
         }}
-        displayDataTypes={false}
-        enableClipboard={false}
-        displayObjectSize={false}
-        name={false}
       />
 
       {/* Incident Response Section */}
