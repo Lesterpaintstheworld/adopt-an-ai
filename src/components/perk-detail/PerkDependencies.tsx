@@ -111,7 +111,7 @@ const SecuritySection: FC<{ security: PerkSecurityRequirements }> = ({ security 
   </Box>
 );
 
-const DependencyItem: FC<{ name: string; criticality?: string; relationship?: string }> = ({ 
+const DependencyItemComponent: FC<{ name: string; criticality?: string; relationship?: string }> = ({ 
   name, 
   criticality, 
   relationship 
@@ -188,7 +188,7 @@ export const PerkDependencies: FC<PerkDependenciesProps> = ({ data }) => {
                         <List dense>
                           {items.map((item: string | DependencyItem, index: number) => (
                             <ListItem key={index}>
-                              <DependencyItem 
+                              <DependencyItemComponent 
                                 name={typeof item === 'object' ? item.capability || '' : item}
                                 criticality={typeof item === 'object' ? item.criticality : undefined}
                                 relationship={typeof item === 'object' ? item.relationship : undefined}
@@ -216,7 +216,7 @@ export const PerkDependencies: FC<PerkDependenciesProps> = ({ data }) => {
                         <List dense>
                           {items.map((item: string | DependencyItem, index: number) => (
                             <ListItem key={index}>
-                              <DependencyItem 
+                              <DependencyItemComponent 
                                 name={typeof item === 'object' ? item.capability || '' : item}
                                 relationship={typeof item === 'object' ? item.relationship : undefined}
                               />
