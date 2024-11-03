@@ -36,20 +36,22 @@ export const PerkSecurityRequirements: FC<PerkSecurityRequirementsProps> = ({
               securityRequirements.authentication.map((item, index) => (
                 <ListItem key={index}>
                   <ListItemText 
-                    primary={typeof item === 'object' && item !== null
-                      ? ('implementation' in item && 'requirement' in item)
-                        ? `${String(item.implementation)} - ${String(item.requirement)}`
-                        : ('description' in item)
-                          ? `${String(item.description)}${
-                              item.requirements 
-                                ? `\nRequirements: ${Array.isArray(item.requirements) 
-                                    ? item.requirements.map(String).join(', ') 
-                                    : String(item.requirements)}`
-                                : ''
-                            }`
-                          : JSON.stringify(item)
-                      : String(item)
-                    }
+                    primary={(() => {
+                      if (typeof item === 'object' && item !== null) {
+                        if ('implementation' in item && 'requirement' in item) {
+                          return `${String(item.implementation)} - ${String(item.requirement)}`;
+                        }
+                        if ('description' in item && 'requirements' in item) {
+                          const desc = String(item.description);
+                          const reqs = Array.isArray(item.requirements) 
+                            ? item.requirements.map(String).join(', ')
+                            : String(item.requirements);
+                          return `${desc}${reqs ? `\nRequirements: ${reqs}` : ''}`;
+                        }
+                        return JSON.stringify(item);
+                      }
+                      return String(item);
+                    })()}
                     primaryTypographyProps={{
                       variant: 'body2'
                     }}
