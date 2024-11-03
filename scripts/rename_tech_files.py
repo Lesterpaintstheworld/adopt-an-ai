@@ -17,6 +17,25 @@ def sanitize_filename(name):
     name = name.replace(' ', '-').lower()
     return name
 
+def validate_capability_ids(tech_tree):
+    """Valide et corrige les doublons de capability_id."""
+    seen_ids = {}
+    for phase_key, phase in tech_tree.items():
+        for layer_key, items in phase.items():
+            if isinstance(items, list):
+                for item in items:
+                    if 'capability_id' in item:
+                        if item['capability_id'] in seen_ids:
+                            # Générer un nouvel ID unique
+                            base_id = item['capability_id']
+                            counter = 1
+                            while f"{base_id}_{counter}" in seen_ids:
+                                counter += 1
+                            item['capability_id'] = f"{base_id}_{counter}"
+                            logging.warning(f"Duplicate ID found in {phase_key}/{layer_key}. "
+                                         f"Generated new ID: {item['capability_id']}")
+                        seen_ids[item['capability_id']] = f"{phase_key}/{layer_key}"
+
 def check_directories():
     """Vérifie que les répertoires nécessaires existent."""
     dirs = [
@@ -42,6 +61,9 @@ def process_tech_tree(dry_run=False):
     # Lecture du fichier tech-tree.yml
     with open(tech_dir / 'tech-tree.yml', 'r', encoding='utf-8') as f:
         tech_tree = yaml.safe_load(f)
+    
+    # Validation et correction des capability_ids
+    validate_capability_ids(tech_tree)
     
     # Pour suivre les renommages
     renames = []

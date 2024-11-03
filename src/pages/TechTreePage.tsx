@@ -16,14 +16,12 @@ interface ModalState {
 }
 // Local utility function since we don't have access to the utils file
 const getPerkIconUrl = (item: any): string => {
-  if (!item) return '';
+  if (!item) return '/perk-icons/default-perk-icon.png';
   
-  // Si file_base_name existe, l'utiliser directement
   if (item.file_base_name) {
     return `/perk-icons/${item.file_base_name}.png`;
   }
   
-  // Sinon, construire le nom à partir du capability_id et du nom
   if (item.capability_id && item.name) {
     const sanitizedName = item.name
       .toLowerCase()
@@ -32,7 +30,7 @@ const getPerkIconUrl = (item: any): string => {
     return `/perk-icons/${sanitizedName}-${item.capability_id}.png`;
   }
   
-  return '';
+  return '/perk-icons/default-perk-icon.png';
 };
 import CodeIcon from '@mui/icons-material/Code';
 import BrushIcon from '@mui/icons-material/Brush';
@@ -246,17 +244,20 @@ const ConnectionLines = ({
 
 const loadFullPerkData = async (perkId: string, items: Perk[]): Promise<PerkFullData | null> => {
   try {
-    // Find the item corresponding to this ID
     const item = items.find(i => i.capability_id === perkId);
-    if (!item || !item.file_base_name) {
-      return null;
-    }
+    if (!item?.file_base_name) return null;
 
-    // Use file_base_name to load the file
-    const fullData = await import(`../../content/tech/${item.file_base_name}.yml`);
-    return fullData.default;
+    // Use import.meta.glob for dynamic loading
+    const modules = import.meta.glob('../../content/tech/*.yml');
+    const path = `../../content/tech/${item.file_base_name}.yml`;
+    
+    if (modules[path]) {
+      const module = await modules[path]();
+      return module.default;
+    }
+    return null;
   } catch (error) {
-    console.log(`No detailed data found for ${perkId} (${error})`);
+    console.warn(`No detailed data found for ${perkId}`, error);
     return null;
   }
 };
