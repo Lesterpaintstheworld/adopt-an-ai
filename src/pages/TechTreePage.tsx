@@ -242,22 +242,33 @@ const ConnectionLines = ({
 };
 
 
-const loadFullPerkData = async (perkId: string, items: Perk[]): Promise<PerkFullData | null> => {
+const loadFullPerkData = async (perkId: string): Promise<PerkFullData | null> => {
   try {
-    const item = items.find(i => i.capability_id === perkId);
-    if (!item?.file_base_name) return null;
+    // Find the item in the tech tree
+    const item = Object.values(techTree).flatMap(phase => 
+      Object.entries(phase)
+        .filter(([key]) => !['name', 'period', 'description'].includes(key))
+        .flatMap(([_, items]) => items)
+    ).find(item => item.capability_id === perkId);
 
-    // Use import.meta.glob for dynamic loading
-    const modules = import.meta.glob('../../content/tech/*.yml');
-    const path = `../../content/tech/${item.file_base_name}.yml`;
+    if (!item?.file_base_name) {
+      console.warn(`No file_base_name found for perk ${perkId}`);
+      return null;
+    }
+
+    // Use file_base_name to load the file
+    const modules = import.meta.glob('../../content/tech/perks/*.yml');
+    const path = `../../content/tech/perks/${item.file_base_name}.yml`;
     
     if (modules[path]) {
       const module = await modules[path]();
       return module.default;
     }
+    
+    console.warn(`No detail file found at path: ${path}`);
     return null;
   } catch (error) {
-    console.warn(`No detailed data found for ${perkId}`, error);
+    console.error(`Error loading perk data for ${perkId}:`, error);
     return null;
   }
 };
@@ -402,10 +413,13 @@ const TechTreePage: React.FC<TechTreePageProps> = ({ standalone = false }) => {
   const handlePerkClick = async (perk: Perk) => {
     if (!perk) return;
     
+    console.log('Loading details for perk:', perk);
+    
     try {
       let fullData = null;
       if (perk.capability_id) {
         fullData = await loadFullPerkData(perk.capability_id);
+        console.log('Loaded full data:', fullData);
       }
       
       // Create safe copies of the data before setting state
