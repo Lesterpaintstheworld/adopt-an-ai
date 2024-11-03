@@ -7,59 +7,7 @@ import PerkRisksAndMitigations from './perk-detail/PerkRisksAndMitigations';
 import PerkDependencies from './perk-detail/PerkDependencies';
 import PerkSecurityRequirements from './perk-detail/PerkSecurityRequirements';
 
-const safeRender = (content: any): React.ReactNode => {
-  try {
-    // Cas de base
-    if (content === null || content === undefined) {
-      return '';
-    }
-
-    // Types simples
-    if (typeof content === 'string') return content;
-    if (typeof content === 'number') return content.toString();
-    if (typeof content === 'boolean') return content.toString();
-
-    // Handle objects with description and requirements
-    if (typeof content === 'object' && content !== null) {
-      if ('description' in content && 'requirements' in content) {
-        const reqText = Array.isArray(content.requirements) ? 
-          content.requirements.join(', ') : 
-          String(content.requirements);
-        return (
-          <Box>
-            <Typography>{String(content.description)}</Typography>
-            <Typography sx={{ mt: 1 }}>
-              Requirements: {reqText}
-            </Typography>
-          </Box>
-        );
-      }
-    }
-
-    // Conversion en texte formaté
-    const formattedText = formatValue(content);
-
-    // Si le texte contient des sauts de ligne, utiliser pre pour préserver le formatage
-    if (formattedText.includes('\n')) {
-      return (
-        <pre style={{ 
-          whiteSpace: 'pre-wrap', 
-          margin: 0,
-          fontFamily: 'inherit',
-          fontSize: 'inherit'
-        }}>
-          {formattedText}
-        </pre>
-      );
-    }
-
-    return formattedText;
-
-  } catch (error) {
-    console.error('Error in safeRender:', error, 'Content:', content);
-    return <pre>[Error rendering content]</pre>;
-  }
-};
+import { safeRender } from '../../utils/safeRender';
 
 import { getTagIcon, getTagColor } from '../utils/tagStyles';
 import IconLoader from './IconLoader';
