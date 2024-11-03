@@ -564,20 +564,6 @@ phase_2:
     - Trusted AI identity system
     file_base_name: value-exchanges-ECO_P2_004
   application_layer:
-  - name: Reality creation apps
-    tag: 🎨 CREATIVE
-    shortDescription: Generate and maintain complex virtual environments with consistent
-      internal physics and logic
-    longDescription: Advanced virtual environment creation system that enables the
-      design and maintenance of sophisticated digital spaces. Features include custom
-      physics engines, dynamic rule systems, and real-time environment modification
-      while ensuring internal consistency and user immersion.
-    chronologicalOrder: 2
-    capability_id: APP_P2_001
-    prerequisites:
-    - Universal creation tools
-    - Reality synthesis
-    file_base_name: reality-creation-apps-APP_P2_001
   - name: Autonomous Applications
     tag: 🎨 CREATIVE
     shortDescription: Self-running programs that can modify their own code and adapt
