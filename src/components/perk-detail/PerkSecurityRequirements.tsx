@@ -37,14 +37,9 @@ export const PerkSecurityRequirements: FC<PerkSecurityRequirementsProps> = ({
                 <ListItem key={index}>
                   <ListItemText 
                     primary={typeof item === 'object' && 'description' in item ? 
-                      <>
-                        {item.description}
-                        {item.requirements && (
-                          <Typography variant="body2" sx={{ mt: 0.5 }}>
-                            Requirements: {Array.isArray(item.requirements) ? item.requirements.join(', ') : item.requirements}
-                          </Typography>
-                        )}
-                      </>
+                      String(item.description) + (item.requirements ? 
+                        `\nRequirements: ${Array.isArray(item.requirements) ? item.requirements.join(', ') : item.requirements}` 
+                        : '')
                       : String(item)}
                     primaryTypographyProps={{
                       variant: 'body2'
