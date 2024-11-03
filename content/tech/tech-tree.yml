@@ -652,11 +652,11 @@ phase_2:
       for software creation. Features include code suggestion, optimization recommendations,
       and automated testing capabilities.
     chronologicalOrder: 7
-    capability_id: APP_P2_004
+    capability_id: APP_P2_005
     prerequisites:
     - Text generation
     - Basic task execution
-    file_base_name: development-platforms-APP_P2_004
+    file_base_name: development-platforms-APP_P2_005
   multi_agent_layer:
   - name: Agent coalitions
     tag: 🤝 SOCIAL
