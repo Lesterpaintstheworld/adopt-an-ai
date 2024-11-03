@@ -152,11 +152,11 @@ const DependencyItem: FC<{ name: string; criticality?: string; relationship?: st
 };
 
 export const PerkDependencies: FC<PerkDependenciesProps> = ({ data }) => {
-  // Get the appropriate section based on what's available
   const dependencySection = data.dependencies_and_security || data.dependencies;
   const securitySection = data.dependencies_and_security?.security || data.security_requirements;
 
   if (!dependencySection && !securitySection) return null;
+  
   return (
     <Paper elevation={2} sx={{ 
       p: 2,
@@ -173,62 +173,64 @@ export const PerkDependencies: FC<PerkDependenciesProps> = ({ data }) => {
       }
     }}>
       {dependencySection && (
-        <>
+        <Box>
           <Typography variant="h6" gutterBottom>Dependencies</Typography>
           
           {dependencySection.prerequisites && (
-        <>
-          <Typography variant="subtitle1">Prerequisites:</Typography>
-          <List>
-            {Object.entries(dependencySection.prerequisites).map(([category, items]) => (
-              <ListItem key={category}>
-                <ListItemText
-                  primary={category}
-                  secondary={
-                    <List dense>
-                      {items.map((item: string | DependencyItem, index: number) => (
-                        <ListItem key={index}>
-                          <DependencyItem 
-                            name={typeof item === 'object' ? item.capability || '' : item}
-                            criticality={typeof item === 'object' ? item.criticality : undefined}
-                            relationship={typeof item === 'object' ? item.relationship : undefined}
-                          />
-                        </ListItem>
-                      ))}
-                    </List>
-                  }
-                />
-              </ListItem>
-            ))}
-          </List>
-        </>
-      )}
+            <Box>
+              <Typography variant="subtitle1">Prerequisites:</Typography>
+              <List>
+                {Object.entries(dependencySection.prerequisites).map(([category, items]) => (
+                  <ListItem key={category}>
+                    <ListItemText
+                      primary={category}
+                      secondary={
+                        <List dense>
+                          {items.map((item: string | DependencyItem, index: number) => (
+                            <ListItem key={index}>
+                              <DependencyItem 
+                                name={typeof item === 'object' ? item.capability || '' : item}
+                                criticality={typeof item === 'object' ? item.criticality : undefined}
+                                relationship={typeof item === 'object' ? item.relationship : undefined}
+                              />
+                            </ListItem>
+                          ))}
+                        </List>
+                      }
+                    />
+                  </ListItem>
+                ))}
+              </List>
+            </Box>
+          )}
 
-      {dependencySection.enables && (
-        <>
-          <Typography variant="subtitle1" sx={{ mt: 2 }}>Enables:</Typography>
-          <List>
-            {Object.entries(dependencySection.enables).map(([category, items]) => (
-              <ListItem key={category}>
-                <ListItemText
-                  primary={category}
-                  secondary={
-                    <List dense>
-                      {items.map((item: string | DependencyItem, index: number) => (
-                        <ListItem key={index}>
-                          <DependencyItem 
-                            name={typeof item === 'object' ? item.capability || '' : item}
-                            relationship={typeof item === 'object' ? item.relationship : undefined}
-                          />
-                        </ListItem>
-                      ))}
-                    </List>
-                  }
-                />
-              </ListItem>
-            ))}
-          </List>
-        </>
+          {dependencySection.enables && (
+            <Box>
+              <Typography variant="subtitle1" sx={{ mt: 2 }}>Enables:</Typography>
+              <List>
+                {Object.entries(dependencySection.enables).map(([category, items]) => (
+                  <ListItem key={category}>
+                    <ListItemText
+                      primary={category}
+                      secondary={
+                        <List dense>
+                          {items.map((item: string | DependencyItem, index: number) => (
+                            <ListItem key={index}>
+                              <DependencyItem 
+                                name={typeof item === 'object' ? item.capability || '' : item}
+                                relationship={typeof item === 'object' ? item.relationship : undefined}
+                              />
+                            </ListItem>
+                          ))}
+                        </List>
+                      }
+                    />
+                  </ListItem>
+                ))}
+              </List>
+            </Box>
+          )}
+        </Box>
       )}
 
       {securitySection && (
