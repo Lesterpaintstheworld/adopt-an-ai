@@ -30,7 +30,7 @@ const getDescription = (perk: Perk | null, fullData: PerkFullData | null): strin
   return 'No description available.';
 };
 
-const getPerkIconUrl = (item: Perk | null): string => {
+const getPerkIconUrl = (item: any): string => {
   if (!item) return '/perk-icons/default-perk-icon.png';
   
   // Try with capability_id first
