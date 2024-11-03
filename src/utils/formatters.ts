@@ -53,11 +53,12 @@ export const formatValue = (value: any): string => {
           .map(v => {
             if (typeof v === 'object' && v !== null) {
               return Object.entries(v)
-                .map(([k, val]) => `${k}: ${val}`)
+                .map(([k, val]) => `${k}: ${formatValue(val)}`)
                 .join(', ');
             }
-            return String(v);
+            return formatValue(v);
           })
+          .filter(v => v !== '')
           .join(', ');
       }
 
