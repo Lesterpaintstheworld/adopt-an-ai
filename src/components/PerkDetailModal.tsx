@@ -3,34 +3,38 @@ import { SxProps } from '@mui/system';
 
 const safeRender = (content: any): React.ReactNode => {
   try {
+    // Cas de base
     if (content === null || content === undefined) {
       return '';
     }
 
-    // Si c'est déjà une chaîne ou un nombre, retourner directement
-    if (typeof content === 'string' || typeof content === 'number') {
-      return content;
+    // Types simples
+    if (typeof content === 'string') return content;
+    if (typeof content === 'number') return content.toString();
+    if (typeof content === 'boolean') return content.toString();
+
+    // Conversion en texte formaté
+    const formattedText = formatValue(content);
+
+    // Si le texte contient des sauts de ligne, utiliser pre pour préserver le formatage
+    if (formattedText.includes('\n')) {
+      return (
+        <pre style={{ 
+          whiteSpace: 'pre-wrap', 
+          margin: 0,
+          fontFamily: 'inherit',
+          fontSize: 'inherit'
+        }}>
+          {formattedText}
+        </pre>
+      );
     }
 
-    // Convertir en chaîne de caractères avec formatValue
-    const formattedValue = formatValue(content);
-    if (formattedValue) {
-      // Si le texte contient des sauts de ligne, utiliser pre pour préserver le formatage
-      if (formattedValue.includes('\n')) {
-        return <pre style={{ whiteSpace: 'pre-wrap', margin: 0 }}>{formattedValue}</pre>;
-      }
-      return formattedValue;
-    }
+    return formattedText;
 
-    // Fallback en JSON si formatValue échoue
-    return <pre>{JSON.stringify(content, null, 2)}</pre>;
   } catch (error) {
-    console.warn('Error rendering content:', error);
-    try {
-      return <pre>{JSON.stringify(content, null, 2)}</pre>;
-    } catch {
-      return <pre>[Complex Object - Unable to Display]</pre>;
-    }
+    console.error('Error in safeRender:', error, 'Content:', content);
+    return <pre>[Error rendering content]</pre>;
   }
 };
 
@@ -134,68 +138,70 @@ const COLORS = {
 };
 
 const formatValue = (value: any): string => {
-  if (value === null || value === undefined) {
-    return '';
-  }
-  
-  // Handle Date objects
-  if (value instanceof Date) {
-    return value.toLocaleDateString();
-  }
-  
-  // Handle date strings
-  if (typeof value === 'string' && !isNaN(Date.parse(value))) {
-    try {
-      const date = new Date(value);
-      return date.toLocaleDateString();
-    } catch {
-      return value;
+  try {
+    // Cas de base
+    if (value === null || value === undefined) {
+      return '';
     }
-  }
 
-  // Handle arrays
-  if (Array.isArray(value)) {
-    return value.map(item => formatValue(item)).join(', ');
+    // Types primitifs
+    if (typeof value === 'string') return value;
+    if (typeof value === 'number') return value.toString();
+    if (typeof value === 'boolean') return value.toString();
+
+    // Dates
+    if (value instanceof Date) {
+      return value.toLocaleDateString();
+    }
+
+    // Tableaux
+    if (Array.isArray(value)) {
+      return value.map(item => formatValue(item)).filter(Boolean).join(', ');
+    }
+
+    // Objets
+    if (typeof value === 'object') {
+      // Cas spéciaux pour les structures courantes dans nos YAML
+      if ('description' in value) {
+        const desc = formatValue(value.description);
+        if ('requirements' in value) {
+          const reqs = formatValue(value.requirements);
+          return `${desc}\nRequirements: ${reqs}`;
+        }
+        return desc;
+      }
+
+      if ('implementation' in value && 'requirement' in value) {
+        return `Implementation: ${formatValue(value.implementation)}\nRequirement: ${formatValue(value.requirement)}`;
+      }
+
+      if ('features' in value && 'requirements' in value) {
+        return `Features: ${formatValue(value.features)}\nRequirements: ${formatValue(value.requirements)}`;
+      }
+
+      // Pour les objets avec une seule clé commençant par "Phase"
+      const keys = Object.keys(value);
+      if (keys.length === 1 && keys[0].startsWith('Phase')) {
+        return `${keys[0]}: ${formatValue(value[keys[0]])}`;
+      }
+
+      // Pour les autres objets, essayer de créer une représentation lisible
+      try {
+        return Object.entries(value)
+          .map(([key, val]) => `${key}: ${formatValue(val)}`)
+          .filter(Boolean)
+          .join('\n');
+      } catch {
+        return JSON.stringify(value, null, 2);
+      }
+    }
+
+    // Fallback pour tout autre type
+    return String(value);
+  } catch (error) {
+    console.error('Error in formatValue:', error);
+    return '[Error formatting value]';
   }
-  
-  if (typeof value === 'object') {
-    // Handle implementation/requirement objects
-    if ('implementation' in value && 'requirement' in value) {
-      return `${formatValue(value.implementation)} (Requires: ${formatValue(value.requirement)})`;
-    }
-    
-    // Handle description/requirements objects
-    if ('description' in value && 'requirements' in value) {
-      return `${formatValue(value.description)} (Requirements: ${formatValue(value.requirements)})`;
-    }
-    
-    // Handle features/requirements objects
-    if ('features' in value && 'requirements' in value) {
-      return `Features: ${formatValue(value.features)}\nRequirements: ${formatValue(value.requirements)}`;
-    }
-    
-    // Handle objects with description and features
-    if ('description' in value && 'features' in value) {
-      return `${formatValue(value.description)}\nFeatures: ${formatValue(value.features)}`;
-    }
-    
-    // If it's an object with a single key that starts with "Phase"
-    const keys = Object.keys(value);
-    if (keys.length === 1 && keys[0].startsWith('Phase')) {
-      return `${keys[0]}: ${formatValue(value[keys[0]])}`;
-    }
-    
-    // For other objects, try to get a meaningful string representation
-    try {
-      return Object.entries(value)
-        .map(([key, val]) => `${key}: ${formatValue(val)}`)
-        .join(', ');
-    } catch {
-      return JSON.stringify(value);
-    }
-  }
-  
-  return String(value);
 };
 import {
   Modal,
