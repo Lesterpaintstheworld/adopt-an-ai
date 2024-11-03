@@ -169,7 +169,7 @@ const ConnectionLines = ({
       }}
     >
       {items.map((item) => 
-        item.prerequisites?.map((prereq: string) => {
+        item.prerequisites?.map((prereq: string, prereqIndex: number) => {
           const prereqItem = items.find(i => i.name === prereq);
           if (!prereqItem) return null;
 
@@ -211,7 +211,7 @@ const ConnectionLines = ({
             `;
 
           return (
-            <g key={`${prereqItem.capability_id}-to-${item.capability_id}`}>
+            <g key={`${prereqItem.capability_id}-to-${item.capability_id}-${prereqIndex}`}>
               <defs>
                 <marker
                   id={`arrowhead-${isHighlighted ? 'highlighted' : 'normal'}`}
