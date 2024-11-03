@@ -602,13 +602,51 @@ const TechTreePage: React.FC<TechTreePageProps> = ({ standalone = false }) => {
               });
 
               // Force string conversion and handle objects explicitly
-              const renderName = typeof phaseData.name === 'object' 
-                ? JSON.stringify(phaseData.name)
-                : String(phaseData.name || '');
+              // Helper function to safely convert any value to string
+              const safeToString = (value: any): string => {
+                if (value === null || value === undefined) return '';
                 
-              const renderPeriod = typeof phaseData.period === 'object'
-                ? JSON.stringify(phaseData.period)
-                : String(phaseData.period || '');
+                // Handle strings and numbers directly
+                if (typeof value === 'string') return value;
+                if (typeof value === 'number') return String(value);
+                
+                // Handle objects
+                if (typeof value === 'object') {
+                  // Handle arrays
+                  if (Array.isArray(value)) {
+                    return value.map(safeToString).join(', ');
+                  }
+                  
+                  // Handle objects with implementation and requirement
+                  if ('implementation' in value && 'requirement' in value) {
+                    return `${value.implementation}: ${value.requirement}`;
+                  }
+                  
+                  // Handle objects with name or description
+                  if ('name' in value) return String(value.name);
+                  if ('description' in value) return String(value.description);
+                  
+                  // Handle objects with Phase keys
+                  const keys = Object.keys(value);
+                  if (keys.length === 1 && keys[0].startsWith('Phase')) {
+                    return `${keys[0]}: ${safeToString(value[keys[0]])}`;
+                  }
+                  
+                  // Last resort - try to get a meaningful string representation
+                  try {
+                    return Object.values(value).map(v => safeToString(v)).join(' - ');
+                  } catch {
+                    return '[Complex Object]';
+                  }
+                }
+                
+                // Fallback for any other type
+                return String(value);
+              };
+              
+              // Force string conversion and handle objects explicitly
+              const renderName = safeToString(phaseData.name);
+              const renderPeriod = safeToString(phaseData.period);
 
               return (
                 <Typography
