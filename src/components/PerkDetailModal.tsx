@@ -599,74 +599,9 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
           )}
 
           {/* Security Requirements */}
-          {fullData?.security_requirements && (
-            <Grid item xs={12} md={6}>
-              <Paper elevation={2} sx={{ p: 2 }}>
-                <Typography variant="h6" gutterBottom>Security Requirements</Typography>
-                
-                {fullData.security_requirements.access_control && Array.isArray(fullData.security_requirements.access_control) && (
-                  <>
-                    <Typography variant="subtitle1">Access Control:</Typography>
-                    <List>
-                      {fullData.security_requirements.access_control.map((req: string | Record<string, any>, index: number) => (
-                        <ListItem key={index}>
-                          <ListItemText 
-                            primary={typeof req === 'object' ? JSON.stringify(req) : String(req)}
-                          />
-                        </ListItem>
-                      ))}
-                    </List>
-                    <Divider sx={{ my: 2 }} />
-                  </>
-                )}
-
-                {fullData.security_requirements.compliance && (
-                  <>
-                    <Typography variant="subtitle1">Compliance:</Typography>
-                    <List>
-                      {Array.isArray(fullData.security_requirements.compliance) 
-                        ? fullData.security_requirements.compliance.map((req: string | Record<string, any>, index: number) => (
-                            <ListItem key={index}>
-                              <ListItemText 
-                                primary={typeof req === 'object' ? JSON.stringify(req) : String(req)}
-                              />
-                            </ListItem>
-                          ))
-                        : (
-                          <ListItem>
-                            <ListItemText 
-                              primary={typeof fullData.security_requirements.compliance === 'object' 
-                                ? JSON.stringify(fullData.security_requirements.compliance)
-                                : String(fullData.security_requirements.compliance)}
-                            />
-                          </ListItem>
-                        )
-                      }
-                    </List>
-                  </>
-                )}
-
-                {fullData.security_requirements.authentication && (
-                  <>
-                    <Typography variant="subtitle1">Authentication:</Typography>
-                    <Typography variant="body1">{fullData.security_requirements.authentication}</Typography>
-                  </>
-                )}
-
-                {fullData.security_requirements.authorization && (
-                  <>
-                    <Typography variant="subtitle1">Authorization:</Typography>
-                    <Typography variant="body1">{fullData.security_requirements.authorization}</Typography>
-                  </>
-                )}
-
-                {fullData.security_requirements.data_protection && (
-                  <>
-                    <Typography variant="subtitle1">Data Protection:</Typography>
-                    <Typography variant="body1">{fullData.security_requirements.data_protection}</Typography>
-                  </>
-                )}
-              </Paper>
+          {fullData?.security_requirements && !fullData.dependencies_and_security && (
+            <Grid item xs={12}>
+              <PerkSecurityRequirements securityRequirements={fullData.security_requirements} />
             </Grid>
           )}
 
