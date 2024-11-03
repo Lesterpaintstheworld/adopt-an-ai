@@ -1,32 +1,34 @@
 import { useState, useEffect, FC, ReactNode } from 'react';
 import { SxProps } from '@mui/system';
 
-const safeRender = (content: any): ReactNode => {
+const safeRender = (content: any): React.ReactNode => {
   try {
     if (content === null || content === undefined) {
       return '';
     }
 
-    // If it's already a string or number, return directly
+    // Si c'est déjà une chaîne ou un nombre, retourner directement
     if (typeof content === 'string' || typeof content === 'number') {
       return content;
     }
 
-    // Try to render using formatValue
+    // Convertir en chaîne de caractères avec formatValue
     const formattedValue = formatValue(content);
     if (formattedValue) {
+      // Si le texte contient des sauts de ligne, utiliser pre pour préserver le formatage
+      if (formattedValue.includes('\n')) {
+        return <pre style={{ whiteSpace: 'pre-wrap', margin: 0 }}>{formattedValue}</pre>;
+      }
       return formattedValue;
     }
 
-    // If formatValue fails or returns empty, fallback to YAML
+    // Fallback en JSON si formatValue échoue
     return <pre>{JSON.stringify(content, null, 2)}</pre>;
   } catch (error) {
     console.warn('Error rendering content:', error);
-    // Fallback to raw YAML display
     try {
       return <pre>{JSON.stringify(content, null, 2)}</pre>;
     } catch {
-      // Ultimate fallback if JSON stringify fails
       return <pre>[Complex Object - Unable to Display]</pre>;
     }
   }
@@ -150,13 +152,13 @@ const formatValue = (value: any): string => {
       return value;
     }
   }
+
+  // Handle arrays
+  if (Array.isArray(value)) {
+    return value.map(item => formatValue(item)).join(', ');
+  }
   
   if (typeof value === 'object') {
-    // Handle arrays
-    if (Array.isArray(value)) {
-      return value.map(item => formatValue(item)).join(', ');
-    }
-    
     // Handle implementation/requirement objects
     if ('implementation' in value && 'requirement' in value) {
       return `${formatValue(value.implementation)} (Requires: ${formatValue(value.requirement)})`;
@@ -183,21 +185,13 @@ const formatValue = (value: any): string => {
       return `${keys[0]}: ${formatValue(value[keys[0]])}`;
     }
     
-    // Handle specific object structures
-    if ('strategy' in value && 'phases' in value) {
-      return `Strategy: ${value.strategy}, Phases: ${formatValue(value.phases)}`;
-    }
-    if ('current' in value && 'target' in value) {
-      return `Current: ${formatValue(value.current)}, Target: ${formatValue(value.target)}`;
-    }
-    
     // For other objects, try to get a meaningful string representation
     try {
       return Object.entries(value)
         .map(([key, val]) => `${key}: ${formatValue(val)}`)
         .join(', ');
     } catch {
-      return String(value);
+      return JSON.stringify(value);
     }
   }
   
