@@ -593,6 +593,23 @@ const TechTreePage: React.FC<TechTreePageProps> = ({ standalone = false }) => {
                 return String(value);
               };
               
+              // Debug log the phase data
+              console.log(`Rendering phase ${phaseKey}:`, {
+                name: phaseData.name,
+                period: phaseData.period,
+                nameType: typeof phaseData.name,
+                periodType: typeof phaseData.period
+              });
+
+              // Force string conversion and handle objects explicitly
+              const renderName = typeof phaseData.name === 'object' 
+                ? JSON.stringify(phaseData.name)
+                : String(phaseData.name || '');
+                
+              const renderPeriod = typeof phaseData.period === 'object'
+                ? JSON.stringify(phaseData.period)
+                : String(phaseData.period || '');
+
               return (
                 <Typography
                   key={phaseKey}
@@ -605,7 +622,7 @@ const TechTreePage: React.FC<TechTreePageProps> = ({ standalone = false }) => {
                     textAlign: 'center',
                   }}
                 >
-                  {safeToString(phaseData.name)} ({safeToString(phaseData.period)})
+                  {renderName} ({renderPeriod})
                 </Typography>
               );
             })}
