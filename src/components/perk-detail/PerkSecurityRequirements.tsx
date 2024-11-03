@@ -37,9 +37,15 @@ export const PerkSecurityRequirements: FC<PerkSecurityRequirementsProps> = ({
                 <ListItem key={index}>
                   <ListItemText 
                     primary={typeof item === 'object' && item !== null 
-                      ? Object.entries(item)
-                          .map(([key, val]) => `${key}: ${val}`)
-                          .join(', ')
+                      ? (
+                        'implementation' in item && 'requirement' in item
+                          ? `Implementation: ${item.implementation}, Requirement: ${item.requirement}`
+                          : 'certifications' in item && 'standards' in item
+                            ? `Certifications: ${item.certifications}, Standards: ${item.standards}`
+                            : Object.entries(item)
+                                .map(([key, val]) => `${key}: ${val}`)
+                                .join(', ')
+                      )
                       : String(item)
                     }
                     primaryTypographyProps={{
