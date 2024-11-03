@@ -211,7 +211,7 @@ const ConnectionLines = ({
             `;
 
           return (
-            <g key={`${prereq}-${item.name}`}>
+            <g key={`${prereqItem.capability_id}-to-${item.capability_id}`}>
               <defs>
                 <marker
                   id={`arrowhead-${isHighlighted ? 'highlighted' : 'normal'}`}
