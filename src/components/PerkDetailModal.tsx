@@ -216,7 +216,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
   const [isVersionHistoryExpanded, setIsVersionHistoryExpanded] = useState(false);
 
   useEffect(() => {
-    console.log("Modal received new data:", { perk, fullData });
+    // Remove console logging of modal data
   }, [perk, fullData]);
 
   useEffect(() => {
@@ -505,7 +505,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                   if (typeof perk?.description === 'object') {
                     return perk.description.long || perk.description.short || '';
                   }
-                  return perk?.description || '';
+                  return perk?.description || 'No description available.';
                 })()}
               </Typography>
             </Paper>
