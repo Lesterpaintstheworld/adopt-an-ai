@@ -400,20 +400,60 @@ const TechTreePage: React.FC<TechTreePageProps> = ({ standalone = false }) => {
     }
   };
   
+  const validateTechTree = (techTree: TechTree) => {
+    const seenIds = new Set();
+    const errors: string[] = [];
+
+    Object.entries(techTree).forEach(([phaseKey, phaseData]) => {
+      Object.entries(phaseData).forEach(([layerKey, items]) => {
+        if (Array.isArray(items)) {
+          items.forEach((item: any) => {
+            if (item.capability_id) {
+              if (seenIds.has(item.capability_id)) {
+                errors.push(`Duplicate capability_id found: ${item.capability_id} in ${phaseKey}/${layerKey}`);
+              }
+              seenIds.add(item.capability_id);
+            }
+          });
+        }
+      });
+    });
+
+    if (errors.length > 0) {
+      console.error('Tech Tree validation errors:', errors);
+    }
+    
+    return errors.length === 0;
+  };
+
   useEffect(() => {
+    validateTechTree(techTree);
     setPositions(calculateNodePositions(techTree));
   }, []);
 
-  // Flatten all items for easier processing
-  const allItems = Object.entries(techTree as TechTree).flatMap(([phaseKey, phaseData]: [string, PhaseData]) =>
-    Object.entries(phaseData)
+  // Flatten all items for easier processing while avoiding duplicates
+  const allItems = Object.entries(techTree as TechTree).flatMap(([phaseKey, phaseData]: [string, PhaseData]) => {
+    const layerItems = Object.entries(phaseData)
       .filter(([key]) => !['name', 'period', 'description'].includes(key))
-      .flatMap(([_, items]: [string, any]) => {
-        // Sort items within each layer by chronological order
-        const sortedItems = [...items].sort(sortByChronologicalOrder);
-        return sortedItems.map((item: any) => ({ ...item, phase: phaseKey }));
-      })
-  );
+      .flatMap(([layerKey, items]: [string, any]) => {
+        // Verify items is an array
+        if (!Array.isArray(items)) return [];
+        
+        // Filter duplicates based on capability_id
+        const uniqueItems = items.reduce((acc: any[], item: any) => {
+          if (!acc.some(existingItem => existingItem.capability_id === item.capability_id)) {
+            acc.push({ ...item, phase: phaseKey, layer: layerKey });
+          } else {
+            console.warn(`Duplicate capability_id found: ${item.capability_id} in ${phaseKey}/${layerKey}`);
+          }
+          return acc;
+        }, []);
+        
+        return uniqueItems.sort(sortByChronologicalOrder);
+      });
+      
+    return layerItems;
+  });
 
   return (
     <>
@@ -460,17 +500,24 @@ const TechTreePage: React.FC<TechTreePageProps> = ({ standalone = false }) => {
               highlightedItem={highlightedItem}
             />
             
-            {allItems.map((item) => (
-              <TechItem
-                key={item.capability_id}
-                item={item}
-                position={positions[item.capability_id] || { x: 0, y: 0 }}
-                onHover={(itemId) => setHighlightedItem(itemId)}
-                highlightedItem={highlightedItem}
-                onClick={handlePerkClick}
-                allItems={allItems}
-              />
-            ))}
+            {allItems.map((item) => {
+              if (!item.capability_id) {
+                console.warn('Item missing capability_id:', item);
+                return null;
+              }
+              
+              return (
+                <TechItem
+                  key={`${item.phase}-${item.layer}-${item.capability_id}`}
+                  item={item}
+                  position={positions[item.capability_id] || { x: 0, y: 0 }}
+                  onHover={(itemId) => setHighlightedItem(itemId)}
+                  highlightedItem={highlightedItem}
+                  onClick={handlePerkClick}
+                  allItems={allItems}
+                />
+              );
+            })}
 
             {Object.entries(techTree).map(([phaseKey, phaseData]: [string, any], index) => {
               const previousPhases = Object.values(techTree).slice(0, index);
