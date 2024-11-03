@@ -784,21 +784,21 @@ phase_2:
     - Resource sharing networks
     chronologicalOrder: 3
     capability_id: MLT_P2_001
-    shortDescription: Self-forming groups of AIs that collaborate on complex tasks
-      with specialized roles and shared objectives
-    longDescription: 'Agent coalitions are dynamic associations of multiple AI agents
-      that autonomously organize themselves to tackle complex problems. The agents
-      within a coalition specialize in different aspects of the task, leveraging their
-      unique capabilities and knowledge bases. Through effective coordination and
-      communication mechanisms, these coalitions can collaboratively work towards
-      shared objectives, dividing responsibilities and optimizing resource utilization.
-
-      The key features of agent coalitions include self-organization, role specialization,
-      task decomposition, collective decision-making, and distributed problem-solving.
-      This capability enables more sophisticated problem-solving approaches by harnessing
-      the collective intelligence and complementary strengths of multiple AI agents.
-
-      '
+    shortDescription: "Self-forming groups of AIs that collaborate on complex tasks with specialized roles."
+    longDescription: |
+      Dynamic collaboration system enabling:
+      - Autonomous team formation
+      - Role specialization
+      - Task decomposition
+      - Resource sharing
+      
+      Core capabilities:
+      - Coalition management
+      - Skill matching
+      - Goal alignment
+      - Progress tracking
+      - Performance optimization
+      - Knowledge sharing
     file_base_name: agent-coalitions-MLT_P2_001
   - name: Resource sharing networks
     tag: 🌐 INTEGRATION
