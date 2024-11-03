@@ -240,7 +240,7 @@ const mergePerkData = (basicPerk: Perk, fullData: PerkFullData | null): Perk => 
     ...basicPerk,
     name: fullData.name,
     description: typeof fullData.description === 'object' 
-      ? (fullData.description as PerkDescription).short 
+      ? fullData.description.short  // TypeScript now knows this is PerkDescription
       : fullData.description,
   };
 };

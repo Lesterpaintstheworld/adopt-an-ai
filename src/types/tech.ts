@@ -14,6 +14,9 @@ export interface Perk {
 }
 
 export interface PerkFullData extends Perk {
+  name: string;
+  capability_id: string;
+  description: string | PerkDescription;
   tag: string;
   dependencies_visualization?: {
     primary_diagram?: string;
