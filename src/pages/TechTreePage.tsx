@@ -230,12 +230,11 @@ const ConnectionLines = ({
 
 const loadFullPerkData = async (perkId: string): Promise<PerkFullData | null> => {
   try {
-    console.log("Attempting to load data for:", perkId);
     const fullData = await import(`../../content/tech/${perkId}.yml`);
-    console.log("Loaded data:", fullData);
     return fullData.default;
   } catch (error) {
-    console.error("Error loading perk data:", error);
+    // Just log info, not an error since missing files are expected
+    console.log(`No detailed data found for ${perkId}`);
     return null;
   }
 };
@@ -376,16 +375,12 @@ const TechTreePage: React.FC<TechTreePageProps> = ({ standalone = false }) => {
     try {
       let fullData = null;
       if (perk.capability_id) {
-        console.log("Loading data for perk:", perk.capability_id);
         fullData = await loadFullPerkData(perk.capability_id);
-        console.log("Full data loaded:", fullData);
       }
       
       // Create safe copies of the data before setting state
       const sanitizedPerk = { ...perk };
       const sanitizedFullData = fullData ? { ...fullData } : null;
-      
-      console.log("Setting modal state with:", { sanitizedPerk, sanitizedFullData });
       
       setModalState({
         isOpen: true,
