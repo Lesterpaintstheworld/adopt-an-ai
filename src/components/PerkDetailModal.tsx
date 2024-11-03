@@ -11,9 +11,9 @@ interface Perk {
 }
 
 interface PerkFullData {
-  name?: string;
+  name: string;
   tag: string;
-  capability_id?: string;
+  capability_id: string;
   description: string | {
     long: string;
   };
