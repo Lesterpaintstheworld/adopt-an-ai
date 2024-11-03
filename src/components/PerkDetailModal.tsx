@@ -4,6 +4,24 @@ import DialogContent from '@mui/material/DialogContent';
 import mermaid from 'mermaid';
 import { Perk, PerkFullData, PerkDescription } from '../types/tech';
 
+const getPerkIconUrl = (item: Perk | null): string => {
+  if (!item) return '/perk-icons/default-perk-icon.png';
+  
+  if (item.file_base_name) {
+    return `/perk-icons/${item.file_base_name}.png`;
+  }
+  
+  if (item.capability_id && item.name) {
+    const sanitizedName = item.name
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-');
+    return `/perk-icons/${sanitizedName}-${item.capability_id}.png`;
+  }
+  
+  return '/perk-icons/default-perk-icon.png';
+};
+
 const formatDateValue = (value: any): string => {
   if (value instanceof Date) {
     return value.toLocaleDateString();
@@ -16,20 +34,6 @@ const formatDateValue = (value: any): string => {
     }
   }
   return String(value);
-};
-
-/**
- * Formate le nom du perk pour l'utiliser comme nom de fichier d'icône
- * Exemple: "Agent Coalitions" -> "agent-coalitions"
- */
-const getPerkIconFilename = (perkName: string): string => {
-  if (!perkName) return '';
-  // Convertir en minuscules et remplacer les espaces par des tirets
-  const formattedName = perkName.toLowerCase().replace(/\s+/g, '-');
-  // Retirer les caractères spéciaux si nécessaire
-  const sanitizedName = formattedName.replace(/[^a-z0-9-]/g, '');
-  // Retourner le chemin complet
-  return `/perk-icons/${sanitizedName}.png`;
 };
 
 const COLORS = {
@@ -320,10 +324,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
           <Grid item xs={12} sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
             <Box 
               component="img"
-              src={perk?.file_base_name 
-                ? `/perk-icons/${perk.file_base_name}.png`
-                : getPerkIconUrl(perk)
-              }
+              src={getPerkIconUrl(perk)}
               alt={perk?.name || ''}
               sx={{ 
                 width: {
@@ -1216,10 +1217,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
           >
             <Box
               component="img"
-              src={perk.file_base_name 
-                ? `/perk-icons/${perk.file_base_name}.png`
-                : getPerkIconUrl(perk)
-              }
+              src={getPerkIconUrl(perk)}
               alt={perk.name}
               sx={{
                 maxWidth: '100%',
