@@ -342,14 +342,8 @@ phase_1:
       answer questions, and generate text across a wide range of domains and contexts.
   - name: Vector memory system
     tag: 🧠 COGNITIVE
-    shortDescription: Store and retrieve information using semantic search and contextual
-      relationships.
-    longDescription: 'Sophisticated memory architecture that organizes information
-      in high-dimensional vector spaces, enabling nuanced semantic search and relationship
-      mapping. The system supports efficient storage, retrieval, and connection of
-      concepts while maintaining temporal context and relevance scoring.
-
-      '
+    shortDescription: Store and retrieve information using semantic search and universal pattern recognition
+    longDescription: 'Sophisticated memory architecture that organizes information in high-dimensional vector spaces, enabling nuanced semantic search and universal pattern recognition. The system supports efficient storage, retrieval, and connection of concepts while identifying fundamental patterns that reflect universal principles and relationships.'
     prerequisites:
     - Base GPT-4 integration
     - Memory storage allocation
