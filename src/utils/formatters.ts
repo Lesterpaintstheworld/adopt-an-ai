@@ -42,6 +42,11 @@ export const formatValue = (value: any): string => {
         return `${keys[0]}: ${formatValue(value[keys[0]])}`;
       }
 
+      // Handle nested objects that should be flattened to strings
+      if ('certifications' in value || 'standards' in value) {
+        return Object.values(value).flat().join(', ');
+      }
+
       // General object formatting
       try {
         return Object.entries(value)
@@ -49,7 +54,7 @@ export const formatValue = (value: any): string => {
           .filter(Boolean)
           .join('\n');
       } catch {
-        return JSON.stringify(value, null, 2);
+        return JSON.stringify(value);
       }
     }
 
