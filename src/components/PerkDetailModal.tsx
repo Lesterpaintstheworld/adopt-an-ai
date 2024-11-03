@@ -2,15 +2,7 @@ import { useState, useEffect } from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import mermaid from 'mermaid';
-
-interface Perk {
-  name: string;
-  tag: string;
-  capability_id: string;
-  description: string;
-}
-
-interface PerkFullData {
+import { Perk, PerkFullData, PerkDescription } from '../types/tech';
   name: string;
   tag: string;
   capability_id: string;
@@ -691,7 +683,9 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                   lineHeight: 1.6      // Ajustement de l'interligne pour une meilleure lisibilité
                 }}
               >
-                {typeof fullData?.description === 'object' ? fullData.description.long : fullData?.description || perk.description}
+                {typeof fullData?.description === 'object' 
+                  ? (fullData.description as PerkDescription).long 
+                  : fullData?.description || perk.description}
               </Typography>
             </Paper>
           </Grid>
