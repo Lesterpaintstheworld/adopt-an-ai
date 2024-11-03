@@ -207,11 +207,17 @@ const SeverityBadge = ({ severity }: { severity: string }) => {
 };
 
 const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps) => {
+  console.log("PerkDetailModal props:", { open, perk, fullData });
+
   const [isLoading, setIsLoading] = useState(false);
   const [mermaidInitialized, setMermaidInitialized] = useState(false);
   const [mermaidError, setMermaidError] = useState<string | null>(null);
   const [isImageOpen, setIsImageOpen] = useState(false);
   const [isVersionHistoryExpanded, setIsVersionHistoryExpanded] = useState(false);
+
+  useEffect(() => {
+    console.log("Modal received new data:", { perk, fullData });
+  }, [perk, fullData]);
 
   useEffect(() => {
     if (!open || !fullData?.dependencies_visualization?.primary_diagram || mermaidInitialized) {

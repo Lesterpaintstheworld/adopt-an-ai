@@ -230,9 +230,12 @@ const ConnectionLines = ({
 
 const loadFullPerkData = async (perkId: string): Promise<PerkFullData | null> => {
   try {
+    console.log("Attempting to load data for:", perkId);
     const fullData = await import(`../../content/tech/${perkId}.yml`);
+    console.log("Loaded data:", fullData);
     return fullData.default;
-  } catch {
+  } catch (error) {
+    console.error("Error loading perk data:", error);
     return null;
   }
 };
@@ -368,17 +371,21 @@ const TechTreePage: React.FC<TechTreePageProps> = ({ standalone = false }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handlePerkClick = async (perk: Perk) => {
-    if (!perk) return; // Protection against null/undefined perks
+    if (!perk) return;
     
     try {
       let fullData = null;
       if (perk.capability_id) {
+        console.log("Loading data for perk:", perk.capability_id);
         fullData = await loadFullPerkData(perk.capability_id);
+        console.log("Full data loaded:", fullData);
       }
       
       // Create safe copies of the data before setting state
       const sanitizedPerk = { ...perk };
       const sanitizedFullData = fullData ? { ...fullData } : null;
+      
+      console.log("Setting modal state with:", { sanitizedPerk, sanitizedFullData });
       
       setModalState({
         isOpen: true,
