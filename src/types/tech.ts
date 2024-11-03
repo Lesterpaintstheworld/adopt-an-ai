@@ -1,12 +1,15 @@
+export interface PerkDescription {
+  short: string;
+  long: string;
+}
+
 export interface Perk {
   name: string;
   tag: string;
-  description: string;
-  shortDescription?: string;
-  longDescription?: string;
+  description: string | PerkDescription;
   chronologicalOrder?: number;
   prerequisites?: string[];
-  capability_id?: string;
+  capability_id: string;
   [key: string]: any; // Allow string indexing for sanitization
 }
 
