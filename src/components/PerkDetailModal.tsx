@@ -314,8 +314,8 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
           <Grid item xs={12} sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
             <Box 
               component="img"
-              src={perk.file_base_name ? `/perk-icons/${perk.file_base_name}.png` : getPerkIconFilename(perk.name)}
-              alt={perk.name}
+              src={perk?.file_base_name ? `/perk-icons/${perk.file_base_name}.png` : getPerkIconFilename(perk?.name || '')}
+              alt={perk?.name || ''}
               sx={{ 
                 width: {
                   xs: 80,    // Mobile
@@ -345,18 +345,18 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                   }
                 }}
               >
-                {fullData?.name || perk.name}
+                {fullData?.name || perk?.name || ''}
               </Typography>
               <Box sx={{ display: 'flex', gap: 1 }}>
                 <Chip 
-                  label={perk.tag} 
+                  label={perk?.tag || ''} 
                   sx={{ 
                     bgcolor: COLORS.primary,
                     color: COLORS.background,
                   }} 
                 />
                 <Chip 
-                  label={`ID: ${fullData?.capability_id || perk.capability_id}`}
+                  label={`ID: ${fullData?.capability_id || perk?.capability_id || ''}`}
                   sx={{ 
                     bgcolor: '#FFA500',
                     color: '#000000',
@@ -490,15 +490,15 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                 }}
               >
                 {(() => {
-                  // Si on a les données complètes
                   if (fullData?.longDescription) {
                     return fullData.longDescription;
                   }
-                  // Sinon on utilise la description de base du perk
                   if (perk?.shortDescription) {
                     return perk.shortDescription;
                   }
-                  // Fallback sur la description simple si elle existe
+                  if (typeof perk?.description === 'object') {
+                    return perk.description.long || perk.description.short || '';
+                  }
                   return perk?.description || '';
                 })()}
               </Typography>
@@ -559,26 +559,30 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
               }}>
                 <Typography variant="h6" gutterBottom>Dependencies</Typography>
                 
-                <Typography variant="subtitle1">Prerequisites:</Typography>
-                <List>
-                  {Object.entries(fullData.dependencies.prerequisites).map(([category, items]) => (
-                    <ListItem key={category}>
-                      <ListItemText
-                        primary={category}
-                        secondary={
-                          Array.isArray(items) ? 
-                            items.map((item: { capability?: string; criticality?: string } | string) => {
-                              if (typeof item === 'object' && 'capability' in item) {
-                                return item.capability + (item.criticality ? ` (${item.criticality})` : '');
-                              }
-                              return String(item);
-                            }).join(', ')
-                            : 'Invalid format'
-                        }
-                      />
-                    </ListItem>
-                  ))}
-                </List>
+                {fullData?.dependencies?.prerequisites && (
+                  <>
+                    <Typography variant="subtitle1">Prerequisites:</Typography>
+                    <List>
+                      {Object.entries(fullData.dependencies.prerequisites).map(([category, items]) => (
+                        <ListItem key={category}>
+                          <ListItemText
+                            primary={category}
+                            secondary={
+                              Array.isArray(items) ? 
+                                items.map((item: { capability?: string; criticality?: string } | string) => {
+                                  if (typeof item === 'object' && 'capability' in item) {
+                                    return item.capability + (item.criticality ? ` (${item.criticality})` : '');
+                                  }
+                                  return String(item);
+                                }).join(', ')
+                                : 'Invalid format'
+                            }
+                          />
+                        </ListItem>
+                      ))}
+                    </List>
+                  </>
+                )}
 
                 <Divider sx={{ my: 2 }} />
 
