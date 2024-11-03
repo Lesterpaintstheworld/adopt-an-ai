@@ -2,7 +2,14 @@ import { useState, useEffect } from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import mermaid from 'mermaid';
-import { Perk, PerkFullData, PerkDescription } from '../types/tech';
+import { Perk, PerkFullData } from '../types/tech';
+
+interface PerkDescription {
+  description: string;
+  requirements?: string[] | string;
+  long?: string;
+  short?: string;
+}
 
 const getDescription = (perk: Perk | null, fullData: PerkFullData | null): string => {
   if (fullData?.longDescription) {
@@ -596,7 +603,22 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                   lineHeight: 1.6
                 }}
               >
-                {getDescription(perk, fullData)}
+                {typeof perk?.description === 'object' && 'description' in (perk.description as PerkDescription) ? (
+                  <>
+                    {(perk.description as PerkDescription).description}
+                    {(perk.description as PerkDescription).requirements && (
+                      <>
+                        <br /><br />
+                        <strong>Requirements:</strong><br />
+                        {Array.isArray((perk.description as PerkDescription).requirements) 
+                          ? (perk.description as PerkDescription).requirements?.join(', ')
+                          : (perk.description as PerkDescription).requirements}
+                      </>
+                    )}
+                  </>
+                ) : (
+                  getDescription(perk, fullData)
+                )}
               </Typography>
             </Paper>
           </Grid>
