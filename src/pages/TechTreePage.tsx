@@ -258,6 +258,7 @@ interface TechItemProps {
   onHover: (itemName: string | null) => void;
   highlightedItem: string | null;
   onClick: (perk: Perk) => void;
+  allItems: Perk[]; // Added allItems prop
 }
 
 const TechItem = ({ 
@@ -265,7 +266,8 @@ const TechItem = ({
   position,
   onHover,
   highlightedItem,
-  onClick
+  onClick,
+  allItems
 }: TechItemProps) => {
   const [mergedData, setMergedData] = React.useState<Perk>(item);
 
@@ -466,6 +468,7 @@ const TechTreePage: React.FC<TechTreePageProps> = ({ standalone = false }) => {
                 onHover={(itemId) => setHighlightedItem(itemId)}
                 highlightedItem={highlightedItem}
                 onClick={handlePerkClick}
+                allItems={allItems}
               />
             ))}
 
