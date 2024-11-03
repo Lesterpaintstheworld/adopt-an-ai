@@ -5,6 +5,7 @@ import PerkHeader from './perk-detail/PerkHeader';
 import PerkTechnicalSpecs from './perk-detail/PerkTechnicalSpecs';
 import PerkRisksAndMitigations from './perk-detail/PerkRisksAndMitigations';
 import PerkDependencies from './perk-detail/PerkDependencies';
+import PerkSecurityRequirements from './perk-detail/PerkSecurityRequirements';
 
 const safeRender = (content: any): React.ReactNode => {
   try {
@@ -464,6 +465,12 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
           {fullData?.risks_and_mitigations && (
             <Grid item xs={12}>
               <PerkRisksAndMitigations risksAndMitigations={fullData.risks_and_mitigations} />
+            </Grid>
+          )}
+
+          {fullData?.security_requirements && (
+            <Grid item xs={12}>
+              <PerkSecurityRequirements securityRequirements={fullData.security_requirements} />
             </Grid>
           )}
 
