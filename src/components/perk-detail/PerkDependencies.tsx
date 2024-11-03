@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Box, Typography, Paper, List, ListItem, ListItemText, Chip } from '@mui/material';
 import { COLORS } from '../../theme/colors';
-import { PerkDependencies as PerkDependenciesType } from '../../types/perk';
+import { DependencyItem, DependenciesSection, PerkSecurityRequirements } from '../../types/perk';
 
 interface PerkDependenciesProps {
   data: {
@@ -10,6 +10,106 @@ interface PerkDependenciesProps {
     security_requirements?: PerkSecurityRequirements;
   };
 }
+
+const SecuritySection: FC<{ security: PerkSecurityRequirements }> = ({ security }) => (
+  <Box mt={3}>
+    <Typography variant="subtitle1" gutterBottom>Security Requirements</Typography>
+    
+    {security.authentication && (
+      <Box mt={2}>
+        <Typography variant="subtitle2" gutterBottom>Authentication:</Typography>
+        <List dense>
+          {Array.isArray(security.authentication) ? (
+            security.authentication.map((item, index) => (
+              <ListItem key={index}>
+                <ListItemText primary={item} />
+              </ListItem>
+            ))
+          ) : (
+            <ListItem>
+              <ListItemText primary={security.authentication} />
+            </ListItem>
+          )}
+        </List>
+      </Box>
+    )}
+
+    {security.authorization && (
+      <Box mt={2}>
+        <Typography variant="subtitle2" gutterBottom>Authorization:</Typography>
+        <List dense>
+          {Array.isArray(security.authorization) ? (
+            security.authorization.map((item, index) => (
+              <ListItem key={index}>
+                <ListItemText primary={item} />
+              </ListItem>
+            ))
+          ) : (
+            <ListItem>
+              <ListItemText primary={security.authorization} />
+            </ListItem>
+          )}
+        </List>
+      </Box>
+    )}
+
+    {security.compliance && (
+      <Box mt={2}>
+        <Typography variant="subtitle2" gutterBottom>Compliance:</Typography>
+        <List dense>
+          {Array.isArray(security.compliance) ? (
+            security.compliance.map((item, index) => (
+              <ListItem key={index}>
+                <ListItemText primary={item} />
+              </ListItem>
+            ))
+          ) : (
+            <ListItem>
+              <ListItemText primary={security.compliance} />
+            </ListItem>
+          )}
+        </List>
+      </Box>
+    )}
+
+    {security.data_protection && (
+      <Box mt={2}>
+        <Typography variant="subtitle2" gutterBottom>Data Protection:</Typography>
+        <Typography variant="body2">{security.data_protection}</Typography>
+      </Box>
+    )}
+
+    {security.incident_response && (
+      <Box mt={2}>
+        <Typography variant="subtitle2" gutterBottom>Incident Response:</Typography>
+        {security.incident_response.plan && (
+          <>
+            <Typography variant="body2" gutterBottom>Plan:</Typography>
+            <List dense>
+              {security.incident_response.plan.map((item, index) => (
+                <ListItem key={index}>
+                  <ListItemText primary={item} />
+                </ListItem>
+              ))}
+            </List>
+          </>
+        )}
+        {security.incident_response.procedures && (
+          <>
+            <Typography variant="body2" gutterBottom>Procedures:</Typography>
+            <List dense>
+              {security.incident_response.procedures.map((item, index) => (
+                <ListItem key={index}>
+                  <ListItemText primary={item} />
+                </ListItem>
+              ))}
+            </List>
+          </>
+        )}
+      </Box>
+    )}
+  </Box>
+);
 
 const DependencyItem: FC<{ name: string; criticality?: string; relationship?: string }> = ({ 
   name, 
@@ -72,49 +172,25 @@ export const PerkDependencies: FC<PerkDependenciesProps> = ({ data }) => {
         color: COLORS.text.secondary,
       }
     }}>
-      <Typography variant="h6" gutterBottom>Dependencies</Typography>
-      
-      {dependencies.prerequisites && (
+      {dependencySection && (
+        <>
+          <Typography variant="h6" gutterBottom>Dependencies</Typography>
+          
+          {dependencySection.prerequisites && (
         <>
           <Typography variant="subtitle1">Prerequisites:</Typography>
           <List>
-            {Object.entries(dependencies.prerequisites).map(([category, items]) => (
+            {Object.entries(dependencySection.prerequisites).map(([category, items]) => (
               <ListItem key={category}>
                 <ListItemText
                   primary={category}
                   secondary={
                     <List dense>
-                      {items.map((item: any, index: number) => (
+                      {items.map((item: string | DependencyItem, index: number) => (
                         <ListItem key={index}>
                           <DependencyItem 
-                            name={typeof item === 'object' ? item.capability : item}
+                            name={typeof item === 'object' ? item.capability || '' : item}
                             criticality={typeof item === 'object' ? item.criticality : undefined}
-                          />
-                        </ListItem>
-                      ))}
-                    </List>
-                  }
-                />
-              </ListItem>
-            ))}
-          </List>
-        </>
-      )}
-
-      {dependencies.enables && (
-        <>
-          <Typography variant="subtitle1" sx={{ mt: 2 }}>Enables:</Typography>
-          <List>
-            {Object.entries(dependencies.enables).map(([category, items]) => (
-              <ListItem key={category}>
-                <ListItemText
-                  primary={category}
-                  secondary={
-                    <List dense>
-                      {items.map((item: any, index: number) => (
-                        <ListItem key={index}>
-                          <DependencyItem 
-                            name={typeof item === 'object' ? item.capability : item}
                             relationship={typeof item === 'object' ? item.relationship : undefined}
                           />
                         </ListItem>
@@ -128,7 +204,38 @@ export const PerkDependencies: FC<PerkDependenciesProps> = ({ data }) => {
         </>
       )}
 
-      {dependencies.dependencies_visualization?.primary_diagram && (
+      {dependencySection.enables && (
+        <>
+          <Typography variant="subtitle1" sx={{ mt: 2 }}>Enables:</Typography>
+          <List>
+            {Object.entries(dependencySection.enables).map(([category, items]) => (
+              <ListItem key={category}>
+                <ListItemText
+                  primary={category}
+                  secondary={
+                    <List dense>
+                      {items.map((item: string | DependencyItem, index: number) => (
+                        <ListItem key={index}>
+                          <DependencyItem 
+                            name={typeof item === 'object' ? item.capability || '' : item}
+                            relationship={typeof item === 'object' ? item.relationship : undefined}
+                          />
+                        </ListItem>
+                      ))}
+                    </List>
+                  }
+                />
+              </ListItem>
+            ))}
+          </List>
+        </>
+      )}
+
+      {securitySection && (
+        <SecuritySection security={securitySection} />
+      )}
+
+      {dependencySection?.dependencies_visualization?.primary_diagram && (
         <Box mt={3}>
           <Typography variant="subtitle1" gutterBottom>Dependencies Visualization</Typography>
           <Box 
