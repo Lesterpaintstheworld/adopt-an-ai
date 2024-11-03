@@ -120,15 +120,21 @@ phase_1:
   - name: Image creation
     capability_id: COM_P1_006
     tag: 🎨 CREATIVE
-    shortDescription: Generate and manipulate images with precise control over style
-      and composition
-    longDescription: 'Advanced image generation system that combines multiple AI models
-      to create, edit, and enhance visual content with granular control over artistic
-      parameters. The system provides precise control over style, composition, lighting,
-      and other visual elements while maintaining consistency across multiple generations
-      and ensuring high-quality output.
-
-      '
+    shortDescription: "Generate and manipulate images with precise control over style and composition."
+    longDescription: |
+      Advanced image generation system providing:
+      - Multi-model integration for diverse styles
+      - Precise control over visual elements
+      - High-quality consistent outputs
+      - Real-time editing capabilities
+      
+      Key features:
+      - Style transfer and blending
+      - Composition control
+      - Lighting and color management
+      - Resolution upscaling
+      - Batch processing
+      - Version history tracking
     prerequisites:
     - Base GPT-4 integration
     - Basic compute allocation
@@ -181,11 +187,21 @@ phase_1:
     file_base_name: discord-integration-MLT_P1_002
   - name: Voice synthesis
     tag: 🎨 CREATIVE
-    shortDescription: Generate diverse voice outputs with natural intonation and emotional
-      expression
-    longDescription: Advanced voice generation system capable of producing high-quality
-      speech across multiple languages and styles. Features include emotional expression,
-      accent control, and natural intonation while maintaining consistency and clarity.
+    shortDescription: "Generate diverse voice outputs with natural intonation and emotional expression."
+    longDescription: |
+      Sophisticated voice generation system enabling:
+      - Multi-language voice synthesis
+      - Emotional expression control
+      - Natural speech patterns
+      - Real-time voice modification
+      
+      Core capabilities:
+      - Accent and dialect support
+      - Prosody customization
+      - Voice cloning
+      - Audio quality enhancement
+      - Speech rate control
+      - Background noise reduction
     chronologicalOrder: 5
     capability_id: APP_P1_003
     prerequisites:
@@ -242,15 +258,21 @@ phase_1:
   agent_layer:
   - name: Basic task execution
     tag: ⚙️ OPERATIONAL
-    shortDescription: Execute well-defined tasks autonomously with reliable outcomes
-      and basic error handling.
-    longDescription: 'Foundation-level task automation system capable of understanding
-      and executing straightforward instructions with predictable results. The system
-      includes basic error handling, progress monitoring, and status reporting while
-      maintaining audit trails of completed actions. It can handle common tasks like
-      scheduling, data processing, and simple workflow automation.
-
-      '
+    shortDescription: "Execute well-defined tasks autonomously with reliable outcomes and basic error handling."
+    longDescription: |
+      Foundation-level task automation system providing:
+      - Clear instruction processing
+      - Predictable execution flows
+      - Basic error management
+      - Progress monitoring
+      
+      Essential features:
+      - Task scheduling
+      - Status reporting
+      - Audit trail maintenance
+      - Simple workflow automation
+      - Resource usage tracking
+      - Basic recovery mechanisms
     prerequisites:
     - Base GPT-4 integration
     - Basic compute allocation
