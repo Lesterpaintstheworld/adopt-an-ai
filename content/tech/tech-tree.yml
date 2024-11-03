@@ -8,11 +8,15 @@ phase_1:
     tag: 🤝 SOCIAL
     shortDescription: Join a vibrant community of AI developers and enthusiasts sharing
       knowledge and resources.
-    longDescription: Access to a comprehensive ecosystem of forums, workshops, and
-      collaborative spaces where AI developers and enthusiasts come together to share
-      experiences, troubleshoot challenges, and build connections. Members can participate
-      in regular events, access shared resources, and contribute to the collective
-      growth of the AI development community.
+    longDescription: |
+      Access to a comprehensive ecosystem that includes:
+      - Interactive forums and discussion boards
+      - Live workshops and training sessions
+      - Collaborative project spaces
+      - Resource sharing networks
+      - Regular community events
+      
+      Members can actively participate in knowledge sharing, troubleshoot challenges together, and build valuable connections within the AI development community. The platform facilitates both peer-to-peer learning and expert-led sessions.
     chronologicalOrder: 1
     capability_id: ECO_P1_001
     file_base_name: community-access-ECO_P1_001
@@ -20,26 +24,20 @@ phase_1:
     tag: ⚙️ OPERATIONAL
     shortDescription: Trade and exchange AI development resources in a dynamic community
       marketplace.
-    longDescription: 'A sophisticated trading platform where users can buy, sell,
-      and exchange valuable AI development assets including custom prompts, curated
-      training datasets, compute credits, and specialized tools. The marketplace facilitates
-      both direct purchases and bartering arrangements, with built-in rating systems
-      and quality assurance mechanisms.
-
+    longDescription: |
+      A sophisticated trading platform enabling the exchange of AI development assets including:
+      - Custom prompts and training datasets
+      - Compute resources and credits
+      - Specialized development tools
+      - AI models and components
 
       Key features:
-
-      - Asset listings with rich metadata and search capabilities
-
-      - User profiles with reputations and verified badges
-
-      - Secure transactions and escrow services
-
-      - Integrated rating and review systems
-
-      - AI-powered quality analysis and moderation
-
-      '
+      - Secure transaction processing
+      - Quality assurance mechanisms
+      - Reputation system and verified badges
+      - Advanced search and discovery
+      - AI-powered asset validation
+      - Fair pricing mechanisms
     chronologicalOrder: 2
     capability_id: ECO_P1_002
     prerequisites:
