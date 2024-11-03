@@ -1,27 +1,7 @@
 import React, { useState, useEffect, useRef, FC } from 'react';
 import { SxProps } from '@mui/system';
 
-interface IconLoaderProps {
-  perk: { capability_id?: string; name?: string };
-  sx?: SxProps;
-}
-
-const IconLoader: FC<IconLoaderProps> = ({ perk, sx }) => {
-  const [iconUrl, setIconUrl] = useState('/default-perk-icon.png');
-
-  useEffect(() => {
-    getPerkIconUrl(perk).then(setIconUrl);
-  }, [perk]);
-
-  return (
-    <Box 
-      component="img"
-      src={iconUrl}
-      alt={perk?.name || ''}
-      sx={sx}
-    />
-  );
-};
+import IconLoader from '../components/IconLoader';
 import {
   Box,
   Typography,

@@ -1,29 +1,7 @@
 import { useState, useEffect, FC } from 'react';
 import { SxProps } from '@mui/system';
 
-interface IconLoaderProps {
-  perk: { capability_id?: string; name?: string };
-  onClick?: () => void;
-  sx?: SxProps;
-}
-
-const IconLoader: FC<IconLoaderProps> = ({ perk, onClick, sx }) => {
-  const [iconUrl, setIconUrl] = useState('/default-perk-icon.png');
-
-  useEffect(() => {
-    getPerkIconUrl(perk).then(setIconUrl);
-  }, [perk]);
-
-  return (
-    <Box 
-      component="img"
-      src={iconUrl}
-      alt={perk?.name || ''}
-      sx={sx}
-      onClick={onClick}
-    />
-  );
-};
+import IconLoader from './IconLoader';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import mermaid from 'mermaid';
