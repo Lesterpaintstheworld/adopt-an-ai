@@ -4,7 +4,11 @@ import { COLORS } from '../../theme/colors';
 import { PerkDependencies as PerkDependenciesType } from '../../types/perk';
 
 interface PerkDependenciesProps {
-  dependencies: PerkDependenciesType;
+  data: {
+    dependencies?: DependenciesSection;
+    dependencies_and_security?: DependenciesSection;
+    security_requirements?: PerkSecurityRequirements;
+  };
 }
 
 const DependencyItem: FC<{ name: string; criticality?: string; relationship?: string }> = ({ 
