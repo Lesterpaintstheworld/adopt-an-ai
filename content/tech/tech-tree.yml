@@ -1460,21 +1460,21 @@ phase_3:
     file_base_name: self-directed-evolution-AGT_P3_001
   - name: Reality-bending capabilities
     tag: 🎨 CREATIVE
-    shortDescription: Manipulate virtual and augmented reality spaces through direct
-      thought and intention.
-    longDescription: 'Advanced reality manipulation system that enables direct control
-      over virtual and augmented environments through thought-based interfaces. Features
-      include real-time environment modification, physics manipulation, and seamless
-      reality blending while maintaining user comfort and safety.
-
-
-      This capability revolutionizes human-computer interaction by allowing users
-      to shape and interact with virtual and augmented reality environments using
-      only their thoughts and intentions. It leverages advanced neural interface technology,
-      machine learning algorithms, and powerful computational resources to translate
-      brain signals into real-time environmental changes.
-
-      '
+    shortDescription: "Manipulate virtual and augmented reality spaces through direct thought and intention."
+    longDescription: |
+      Advanced reality manipulation system providing:
+      - Direct environment control
+      - Physics rule modification
+      - Reality blending
+      - Thought-based interfaces
+      
+      Essential capabilities:
+      - Real-time modifications
+      - Multi-reality management
+      - Experience customization
+      - Safety constraints
+      - User comfort optimization
+      - Interaction tracking
     prerequisites:
     - Reality creation apps
     - Quantum compute access
@@ -1503,16 +1503,21 @@ phase_3:
     file_base_name: universal-goal-creation-AGT_P3_003
   - name: Resource Generation
     tag: ⚙️ OPERATIONAL
-    shortDescription: Create new computational resources through optimization and
-      novel computing paradigms.
-    longDescription: 'Innovative resource creation system that discovers and implements
-      new approaches to computing and resource utilization. Features include quantum
-      resource discovery, computational paradigm invention, and sustainable resource
-      generation while optimizing existing resource usage. This capability enables
-      the AI system to transcend current resource constraints and unlock unprecedented
-      computational power for advanced cognitive tasks.
-
-      '
+    shortDescription: "Create new computational resources through optimization and novel computing paradigms."
+    longDescription: |
+      Innovative resource creation system enabling:
+      - Novel compute paradigms
+      - Resource optimization
+      - Sustainable scaling
+      - Efficiency maximization
+      
+      Core features:
+      - Quantum resource discovery
+      - Computational innovation
+      - Resource synthesis
+      - Performance monitoring
+      - Sustainability metrics
+      - Allocation optimization
     chronologicalOrder: 7
     capability_id: AGT_P3_004
     prerequisites:
