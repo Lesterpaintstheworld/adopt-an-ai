@@ -244,15 +244,21 @@ phase_1:
     file_base_name: slack-integration-MLT_P1_003
   - name: GitHub integration
     tag: 🌐 INTEGRATION
-    shortDescription: Manage code repositories, review pull requests, and contribute
-      to development workflows.
-    longDescription: Full-featured GitHub integration enabling code review, issue
-      management, and repository maintenance. The system can analyze code changes,
-      provide detailed review comments, manage project boards, and contribute to documentation
-      while following project-specific conventions and best practices. This capability
-      enhances collaboration and streamlines development processes by leveraging the
-      AI's ability to understand code, identify potential issues, and automate routine
-      tasks.
+    shortDescription: "Manage code repositories, review pull requests, and contribute to development workflows."
+    longDescription: |
+      Comprehensive GitHub integration enabling:
+      - Code review and analysis
+      - Pull request management  
+      - Issue tracking
+      - Repository maintenance
+      
+      Key features:
+      - Automated code review
+      - Documentation updates
+      - Project board management
+      - Branch organization
+      - Release coordination
+      - Workflow automation
     prerequisites:
     - Email communication
     - Slack integration
@@ -291,21 +297,21 @@ phase_1:
     file_base_name: basic-task-execution-AGT_P1_001
   - name: Environmental awareness
     tag: 🧠 COGNITIVE
-    shortDescription: Monitor and adapt to changing contexts including time, user
-      preferences, and system states.
-    longDescription: 'Advanced contextual awareness system that continuously tracks
-      and analyzes environmental factors including temporal patterns, user behaviors,
-      system resources, and interaction history. This enables dynamic adaptation of
-      responses and actions based on comprehensive situational understanding and learned
-      patterns.
-
-
-      Key components include multi-sensor data ingestion, temporal pattern recognition,
-      user behavior modeling, system telemetry monitoring, and real-time decision
-      engines. The insights derived will allow the AI system to proactively adjust
-      priorities, predictions, and recommendations aligning with evolving contexts.
-
-      '
+    shortDescription: "Monitor and adapt to changing contexts including time, user preferences, and system states."
+    longDescription: |
+      Advanced contextual awareness system enabling:
+      - Real-time environment monitoring
+      - Context pattern recognition
+      - Adaptive behavior adjustment
+      - State tracking
+      
+      Core capabilities:
+      - Temporal awareness
+      - User preference learning
+      - System state monitoring
+      - Resource tracking
+      - Context prediction
+      - Behavioral optimization
     prerequisites:
     - Basic task execution
     - Resource requests
@@ -318,14 +324,21 @@ phase_1:
     file_base_name: environmental-awareness-AGT_P1_002
   - name: Simple goal setting
     tag: 🧠 COGNITIVE
-    shortDescription: Define and pursue basic objectives with progress tracking and
-      outcome validation.
-    longDescription: Foundational goal management system that enables the AI to establish,
-      track, and work towards clearly defined objectives. The system includes milestone
-      tracking, progress assessment, and basic strategy adjustment capabilities while
-      maintaining focus on user-defined priorities and success criteria. This capability
-      allows the AI to operate autonomously towards specific goals, adapt its approach
-      as needed, and report on overall progress and outcomes.
+    shortDescription: "Define and pursue basic objectives with progress tracking and outcome validation."
+    longDescription: |
+      Foundational goal management system providing:
+      - Objective definition
+      - Progress monitoring
+      - Strategy adjustment
+      - Outcome assessment
+      
+      Essential features:
+      - Milestone tracking
+      - Priority management
+      - Success validation
+      - Resource allocation
+      - Timeline planning
+      - Results reporting
     prerequisites:
     - Basic task execution
     - Environmental awareness
