@@ -485,15 +485,21 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                 variant="body1" 
                 paragraph
                 sx={{ 
-                  fontSize: '1.1rem',  // Augmentation de la taille du texte
-                  lineHeight: 1.6      // Ajustement de l'interligne pour une meilleure lisibilité
+                  fontSize: '1.1rem',
+                  lineHeight: 1.6
                 }}
               >
                 {(() => {
-                  if (typeof fullData?.description === 'object') {
-                    return (fullData.description as PerkDescription).long || '';
+                  // Si on a les données complètes
+                  if (fullData?.longDescription) {
+                    return fullData.longDescription;
                   }
-                  return String(fullData?.description || perk?.description || '');
+                  // Sinon on utilise la description de base du perk
+                  if (perk?.shortDescription) {
+                    return perk.shortDescription;
+                  }
+                  // Fallback sur la description simple si elle existe
+                  return perk?.description || '';
                 })()}
               </Typography>
             </Paper>
