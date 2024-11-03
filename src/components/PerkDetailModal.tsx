@@ -487,9 +487,12 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                   lineHeight: 1.6      // Ajustement de l'interligne pour une meilleure lisibilité
                 }}
               >
-                {typeof fullData?.description === 'object' 
-                  ? ((fullData.description as PerkDescription).long || '')
-                  : (fullData?.description || perk?.description || '')}
+                {(() => {
+                  if (typeof fullData?.description === 'object') {
+                    return (fullData.description as PerkDescription).long || '';
+                  }
+                  return String(fullData?.description || perk?.description || '');
+                })()}
               </Typography>
             </Paper>
           </Grid>
