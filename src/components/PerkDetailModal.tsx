@@ -1,6 +1,7 @@
 import { useState, useEffect, FC, ReactNode } from 'react';
 import { SxProps } from '@mui/system';
 import { PerkVersionHistory } from './perk-detail/PerkVersionHistory';
+import PerkHeader from './perk-detail/PerkHeader';
 
 const safeRender = (content: any): React.ReactNode => {
   try {
