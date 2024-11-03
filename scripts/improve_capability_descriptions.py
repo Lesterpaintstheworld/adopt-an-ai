@@ -9,6 +9,7 @@ import yaml
 import asyncio
 import logging
 from pathlib import Path
+import shutil
 from anthropic import AsyncAnthropic
 from dotenv import load_dotenv
 from collections import defaultdict
