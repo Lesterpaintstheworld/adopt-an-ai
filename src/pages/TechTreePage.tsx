@@ -545,7 +545,7 @@ const TechTreePage: React.FC<TechTreePageProps> = ({ standalone = false }) => {
               );
             })}
 
-            {Object.entries(techTree).map(([phaseKey, phaseData]: [string, any], index) => {
+            {Object.entries(techTree).map(([phaseKey, phaseData]: [string, PhaseData], index) => {
               const previousPhases = Object.values(techTree).slice(0, index);
               const xPosition = previousPhases.reduce((acc: number, phase: any) => {
                 return acc + calculatePhaseWidth(phase);
@@ -563,7 +563,8 @@ const TechTreePage: React.FC<TechTreePageProps> = ({ standalone = false }) => {
                     textAlign: 'center',
                   }}
                 >
-                  {String(phaseData.name)} ({String(phaseData.period)})
+                  {typeof phaseData.name === 'object' ? JSON.stringify(phaseData.name) : String(phaseData.name)} 
+                  ({typeof phaseData.period === 'object' ? JSON.stringify(phaseData.period) : String(phaseData.period)})
                 </Typography>
               );
             })}
