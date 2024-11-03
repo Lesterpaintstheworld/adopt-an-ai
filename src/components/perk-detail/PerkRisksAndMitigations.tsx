@@ -16,11 +16,11 @@ interface Risk {
 }
 
 interface RisksAndMitigations {
-  technical_risks?: Risk[];
-  ethical_risks?: Risk[];
+  technical_risks?: Risk[] | null;
+  ethical_risks?: Risk[] | null;
   operational_risks?: {
-    [key: string]: Risk[];
-  };
+    [key: string]: Risk[] | null;
+  } | null;
 }
 
 interface PerkRisksAndMitigationsProps {
@@ -157,15 +157,15 @@ export const PerkRisksAndMitigations: FC<PerkRisksAndMitigationsProps> = ({ risk
     }}>
       <Typography variant="h6" gutterBottom>Risks and Mitigations</Typography>
       
-      {risksAndMitigations.technical_risks && (
+      {risksAndMitigations.technical_risks?.length > 0 && (
         <RiskSection title="Technical Risks" risks={risksAndMitigations.technical_risks} />
       )}
 
-      {risksAndMitigations.ethical_risks && (
+      {risksAndMitigations.ethical_risks?.length > 0 && (
         <RiskSection title="Ethical Risks" risks={risksAndMitigations.ethical_risks} />
       )}
 
-      {risksAndMitigations.operational_risks && Object.entries(risksAndMitigations.operational_risks).map(([category, risks]) => (
+      {risksAndMitigations.operational_risks && Object.entries(risksAndMitigations.operational_risks).map(([category, risks]) => risks?.length > 0 && (
         <RiskSection 
           key={category}
           title={`${category.charAt(0).toUpperCase() + category.slice(1)} Operational Risks`}
