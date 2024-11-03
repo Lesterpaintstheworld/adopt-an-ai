@@ -126,16 +126,7 @@ const formatDateValue = (value: any): string => {
   return String(value);
 };
 
-const COLORS = {
-  background: '#121212',        // Fond noir
-  surface: '#242424',          // Box grises
-  primary: '#007FFF',          // Bleu pour les accents
-  secondary: '#0059B2',        // Bleu foncé
-  text: {
-    primary: '#FFFFFF',        // Texte blanc
-    secondary: '#CCCCCC'       // Texte gris clair
-  }
-};
+import { COLORS } from '../theme/colors';
 
 const formatValue = (value: any): string => {
   try {
@@ -252,50 +243,7 @@ interface PerkDetailModalProps {
   fullData: PerkFullData | null;
 }
 
-const MetricProgress = ({ current, target, label }: { 
-  current: string | number | Date;
-  target: string | number | Date;
-  label: string;
-}) => {
-  const parseValue = (value: string | number | Date): number => {
-    if (value instanceof Date) {
-      return value.getTime();
-    }
-    if (typeof value === 'number') {
-      return value;
-    }
-    const stringValue = String(value);
-    return parseFloat(stringValue.replace('%', '')) || 0;
-  };
-
-  const currentValue = parseValue(current);
-  const targetValue = parseValue(target);
-  const progress = targetValue !== 0 ? (currentValue / targetValue) * 100 : 0;
-
-  return (
-    <Box sx={{ width: '100%', mb: 2 }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-        <Typography variant="body2">{label}</Typography>
-        <Typography variant="body2">
-          {formatDateValue(current)} / {formatDateValue(target)}
-        </Typography>
-      </Box>
-      <LinearProgress 
-        variant="determinate" 
-        value={Math.min(progress, 100)}
-        sx={{
-          height: 8,
-          borderRadius: 4,
-          backgroundColor: `${COLORS.primary}33`,
-          '& .MuiLinearProgress-bar': {
-            borderRadius: 4,
-            backgroundColor: progress >= 100 ? COLORS.secondary : COLORS.primary,
-          }
-        }}
-      />
-    </Box>
-  );
-};
+import MetricProgress from './MetricProgress';
 
 const SeverityBadge = ({ severity }: { severity: string }) => {
   const getColor = () => {
