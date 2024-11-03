@@ -48,16 +48,22 @@ phase_1:
     file_base_name: resource-marketplace-ECO_P1_002
   - name: Knowledge sharing
     tag: 🤝 SOCIAL
-    shortDescription: Access a comprehensive wiki of AI development guides, case studies,
-      and best practices.
-    longDescription: 'A collaborative knowledge repository containing detailed guides,
-      technical documentation, case studies, and community-maintained best practices
-      for AI development. The wiki features peer review processes, version control,
-      and integration with practical examples and code snippets to support hands-on
-      learning. It serves as a central hub for AI developers to contribute, learn,
-      and stay updated with the latest advancements in the field.
-
-      '
+    shortDescription: Access a comprehensive knowledge base of AI development resources and best practices.
+    longDescription: |
+      A collaborative knowledge repository featuring:
+      - Detailed technical documentation
+      - Interactive tutorials and guides
+      - Real-world case studies
+      - Community-curated best practices
+      - Code examples and snippets
+      
+      Key capabilities:
+      - Version control for content
+      - Peer review system
+      - Integration with development tools
+      - Advanced search and filtering
+      - Contribution tracking and rewards
+      - Knowledge graph visualization
     chronologicalOrder: 3
     capability_id: ECO_P1_003
     prerequisites:
@@ -67,15 +73,21 @@ phase_1:
   - name: Basic governance
     capability_id: COM_P1_004
     tag: 🤝 SOCIAL
-    shortDescription: Foundational governance system enabling democratic participation
-      in platform decisions
-    longDescription: 'A comprehensive governance framework that enables community
-      members to participate in platform decisions through structured voting and feedback
-      mechanisms. The system includes transparent voting processes, proposal submission
-      tools, and basic conflict resolution protocols while maintaining community standards
-      and ensuring fair representation of all stakeholders.
+    shortDescription: Participate in democratic platform decisions through structured voting and feedback.
+    longDescription: |
+      A foundational governance framework enabling:
+      - Community-driven decision making
+      - Transparent voting processes
+      - Structured proposal submissions
+      - Conflict resolution protocols
 
-      '
+      Core features:
+      - Role-based voting rights
+      - Multi-stage proposal review
+      - Automated vote tallying
+      - Decision enforcement mechanisms
+      - Activity tracking and reporting
+      - Community guidelines management
     chronologicalOrder: 4
     prerequisites:
     - Community access
@@ -84,10 +96,21 @@ phase_1:
   application_layer:
   - name: Code Generation
     tag: 🎨 CREATIVE
-    shortDescription: Create and manage code with intelligent generation and optimization
-    longDescription: Advanced code generation system that enables automated creation
-      and optimization of software code. Features dynamic code analysis, pattern recognition,
-      and intelligent refactoring while maintaining code quality and standards.
+    shortDescription: Create and optimize code through intelligent generation and analysis.
+    longDescription: |
+      Advanced code generation system providing:
+      - Contextual code suggestions
+      - Automated refactoring
+      - Performance optimization
+      - Security vulnerability detection
+      
+      Key capabilities:
+      - Multi-language support
+      - Code quality analysis
+      - Pattern recognition
+      - Integration with popular IDEs
+      - Version control compatibility
+      - Customizable code style enforcement
     chronologicalOrder: 6
     capability_id: APP_P1_004
     prerequisites:
