@@ -214,6 +214,12 @@ async def improve_capability_file(client, file_path: Path, args):
             
         start_time = datetime.now()
         
+        # Extraire les métriques existantes pour les préserver
+        existing_metrics = {}
+        if 'technical_specifications' in data:
+            if 'performance_metrics' in data['technical_specifications']:
+                existing_metrics = data['technical_specifications']['performance_metrics']
+        
         # Générer améliorations via Claude
         prompt = f"""You are improving the technical specifications for an AI capability.
         Please enhance these sections of the YAML file to be more detailed and precise:
@@ -223,6 +229,10 @@ async def improve_capability_file(client, file_path: Path, args):
         - integration_testing
         - monitoring_and_maintenance
         - security_requirements
+
+        IMPORTANT: Preserve all existing performance metrics while adding new ones.
+        Existing metrics to preserve:
+        {yaml.dump(existing_metrics, allow_unicode=True)}
 
         Current content:
         {yaml.dump(data, allow_unicode=True)}
@@ -253,6 +263,18 @@ async def improve_capability_file(client, file_path: Path, args):
         # Parse response and update sections
         try:
             improved = yaml.safe_load(response_text)
+            
+            # S'assurer que les métriques existantes sont préservées
+            if 'technical_specifications' in improved and 'performance_metrics' in improved['technical_specifications']:
+                for category, metrics in existing_metrics.items():
+                    if category in improved['technical_specifications']['performance_metrics']:
+                        if isinstance(metrics, dict):
+                            improved['technical_specifications']['performance_metrics'][category].update(metrics)
+                        elif isinstance(metrics, list):
+                            existing_set = set(metrics)
+                            new_metrics = improved['technical_specifications']['performance_metrics'][category]
+                            if isinstance(new_metrics, list):
+                                improved['technical_specifications']['performance_metrics'][category] = list(existing_set.union(new_metrics))
             
             # Valider améliorations
             issues = validate_improvements(data, improved)
