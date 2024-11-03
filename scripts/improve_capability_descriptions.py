@@ -6,8 +6,10 @@ and contain all required fields.
 
 import os
 import yaml
+import json
 import asyncio
 import logging
+import traceback
 from pathlib import Path
 import shutil
 from anthropic import AsyncAnthropic
@@ -210,17 +212,23 @@ async def improve_capability_file(client, file_path: Path, args):
     try:
         data = load_yaml(file_path)
         if not data:
+            logging.error(f"Failed to load YAML from {file_path}")
             return False
             
         start_time = datetime.now()
         
-        # Extraire les métriques existantes pour les préserver
+        # Extraire et logger les métriques existantes
         existing_metrics = {}
         if 'technical_specifications' in data:
             if 'performance_metrics' in data['technical_specifications']:
                 existing_metrics = data['technical_specifications']['performance_metrics']
-        
-        # Générer améliorations via Claude
+                logging.info(f"Existing metrics found: {json.dumps(existing_metrics, indent=2)}")
+            else:
+                logging.info("No existing performance metrics found in technical_specifications")
+        else:
+            logging.info("No technical_specifications section found")
+
+        # Log le prompt pour debug
         prompt = f"""You are improving the technical specifications for an AI capability.
         Please enhance these sections of the YAML file to be more detailed and precise:
         - technical_specifications
@@ -240,6 +248,8 @@ async def improve_capability_file(client, file_path: Path, args):
         Provide only the improved YAML content for those sections, maintaining the same structure.
         Do not modify other sections."""
 
+        logging.debug(f"Sending prompt to Claude:\n{prompt}")
+
         response = await client.messages.create(
             model=args.model,
             messages=[{"role": "user", "content": prompt}],
@@ -248,33 +258,52 @@ async def improve_capability_file(client, file_path: Path, args):
         )
 
         if not response.content:
+            logging.error("Empty response from Claude")
             return False
 
-        # Clean up response - remove markdown code blocks
+        # Clean up response and log
         response_text = response.content[0].text.strip()
         if response_text.startswith('```yaml'):
-            response_text = response_text[7:]  # Remove ```yaml
+            response_text = response_text[7:]
         if response_text.startswith('```'):
-            response_text = response_text[3:]  # Remove ```
+            response_text = response_text[3:]
         if response_text.endswith('```'):
-            response_text = response_text[:-3]  # Remove trailing ```
+            response_text = response_text[:-3]
         response_text = response_text.strip()
+        
+        logging.debug(f"Cleaned response from Claude:\n{response_text}")
 
-        # Parse response and update sections
         try:
             improved = yaml.safe_load(response_text)
+            if not improved:
+                logging.error("Failed to parse Claude's response as YAML")
+                return False
+                
+            logging.info("Successfully parsed Claude's response")
+            
+            # Log les métriques avant fusion
+            if 'technical_specifications' in improved and 'performance_metrics' in improved['technical_specifications']:
+                logging.info(f"Generated metrics before merge: {json.dumps(improved['technical_specifications']['performance_metrics'], indent=2)}")
             
             # S'assurer que les métriques existantes sont préservées
             if 'technical_specifications' in improved and 'performance_metrics' in improved['technical_specifications']:
                 for category, metrics in existing_metrics.items():
                     if category in improved['technical_specifications']['performance_metrics']:
                         if isinstance(metrics, dict):
+                            logging.info(f"Merging dict metrics for category {category}")
                             improved['technical_specifications']['performance_metrics'][category].update(metrics)
                         elif isinstance(metrics, list):
+                            logging.info(f"Merging list metrics for category {category}")
                             existing_set = set(metrics)
                             new_metrics = improved['technical_specifications']['performance_metrics'][category]
                             if isinstance(new_metrics, list):
                                 improved['technical_specifications']['performance_metrics'][category] = list(existing_set.union(new_metrics))
+                    else:
+                        logging.info(f"Adding missing category {category}")
+                        improved['technical_specifications']['performance_metrics'][category] = metrics
+                
+                # Log les métriques après fusion
+                logging.info(f"Final metrics after merge: {json.dumps(improved['technical_specifications']['performance_metrics'], indent=2)}")
             
             # Valider améliorations
             issues = validate_improvements(data, improved)
@@ -282,6 +311,20 @@ async def improve_capability_file(client, file_path: Path, args):
                 logging.warning(f"Validation issues detected for {file_path}:")
                 for issue in issues:
                     logging.warning(f"- {issue}")
+                # Log plus de détails sur les métriques manquantes
+                if "Essential metrics were removed" in issues:
+                    orig_metrics = set()
+                    new_metrics = set()
+                    if 'technical_specifications' in data:
+                        for metrics in data['technical_specifications'].get('performance_metrics', {}).values():
+                            if isinstance(metrics, list):
+                                orig_metrics.update(metrics)
+                    if 'technical_specifications' in improved:
+                        for metrics in improved['technical_specifications'].get('performance_metrics', {}).values():
+                            if isinstance(metrics, list):
+                                new_metrics.update(metrics)
+                    missing = orig_metrics - new_metrics
+                    logging.warning(f"Missing metrics: {missing}")
                 if not args.force:
                     return False
             
@@ -308,10 +351,14 @@ async def improve_capability_file(client, file_path: Path, args):
             
         except Exception as e:
             logging.error(f"Error processing {file_path}: {e}")
+            logging.error(f"Exception type: {type(e)}")
+            logging.error(f"Exception traceback: {traceback.format_exc()}")
             return False, [], [str(e)], datetime.now() - start_time
             
     except Exception as e:
         logging.error(f"Error processing {file_path}: {str(e)}")
+        logging.error(f"Exception type: {type(e)}")
+        logging.error(f"Exception traceback: {traceback.format_exc()}")
         return False, [], [str(e)], timedelta()
 
 async def main():
