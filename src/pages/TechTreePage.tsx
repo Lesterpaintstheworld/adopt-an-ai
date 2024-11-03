@@ -102,29 +102,27 @@ const calculatePhaseWidth = (phaseData: any) => {
 // Helper to calculate item positions
 const calculateNodePositions = (techTree: any) => {
   const positions: { [key: string]: { x: number, y: number } } = {};
-  let currentX = 0; // Track the cumulative x position
+  let currentX = 0;
   
   Object.entries(techTree).forEach(([_phaseKey, phaseData]: [string, any]) => {
     const phaseWidth = calculatePhaseWidth(phaseData);
     
-    // Handle all non-metadata entries (layers)
     Object.entries(phaseData)
       .filter(([key]) => !['name', 'period', 'description'].includes(key))
       .forEach(([_layerKey, items]: [string, any], layerIndex) => {
-        // Process each item in the layer
         items.forEach((item: any) => {
-          if (!item.chronologicalOrder) {
-            console.warn(`Missing chronologicalOrder for item: ${item.name}`);
+          if (!item.capability_id) {
+            console.warn(`Missing capability_id for item: ${item.name}`);
           }
           
-          positions[item.name] = {
+          positions[item.capability_id] = {
             x: currentX + ((item.chronologicalOrder || 1) * CHRONOLOGICAL_SPACING),
             y: layerIndex * (ITEM_HEIGHT + LAYER_PADDING) + 100
           };
         });
       });
     
-    currentX += phaseWidth; // Move to next phase
+    currentX += phaseWidth;
   });
   
   return positions;
@@ -157,13 +155,16 @@ const ConnectionLines = ({
     >
       {items.map((item) => 
         item.prerequisites?.map((prereq: string) => {
-          const start = positions[prereq];
-          const end = positions[item.name];
+          const prereqItem = items.find(i => i.name === prereq);
+          if (!prereqItem) return null;
+
+          const start = positions[prereqItem.capability_id];
+          const end = positions[item.capability_id];
           if (!start || !end) return null;
 
           const isHighlighted = 
-            highlightedItem === item.name || 
-            highlightedItem === prereq;
+            highlightedItem === item.capability_id || 
+            highlightedItem === prereqItem.capability_id;
 
           // Calculate path points
           const startX = start.x + 280; // Exit from right side of prerequisite
@@ -282,7 +283,7 @@ const TechItem = ({
     <Paper
         elevation={2}
         onClick={() => onClick(item)}
-        onMouseEnter={() => onHover(item.name)}
+        onMouseEnter={() => onHover(item.capability_id)}
         onMouseLeave={() => onHover(null)}
         sx={{
           position: 'absolute',
@@ -300,7 +301,12 @@ const TechItem = ({
             zIndex: 10,
           },
           backgroundColor: 'rgba(0, 0, 0, 0.75)', // All boxes are black with 75% opacity
-          fontWeight: item.name === highlightedItem || (item.prerequisites || []).includes(highlightedItem || '') ? 'bold' : 'normal',
+          fontWeight: item.capability_id === highlightedItem || 
+                     (item.prerequisites || []).some(prereq => {
+                       const prereqItem = allItems.find(i => i.name === prereq);
+                       return prereqItem?.capability_id === highlightedItem;
+                     })
+                     ? 'bold' : 'normal',
         }}
       >
         <Box
@@ -454,10 +460,10 @@ const TechTreePage: React.FC<TechTreePageProps> = ({ standalone = false }) => {
             
             {allItems.map((item) => (
               <TechItem
-                key={item.name}
+                key={item.capability_id}
                 item={item}
-                position={positions[item.name] || { x: 0, y: 0 }}
-                onHover={setHighlightedItem}
+                position={positions[item.capability_id] || { x: 0, y: 0 }}
+                onHover={(itemId) => setHighlightedItem(itemId)}
                 highlightedItem={highlightedItem}
                 onClick={handlePerkClick}
               />
