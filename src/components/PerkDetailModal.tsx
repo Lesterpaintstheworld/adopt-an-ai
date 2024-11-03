@@ -1168,14 +1168,17 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
         <Dialog
           open={isImageOpen}
           onClose={() => setIsImageOpen(false)}
-          maxWidth="md"
-          fullWidth
+          maxWidth={false}
           PaperProps={{
             sx: {
               bgcolor: COLORS.background,
               color: COLORS.text.primary,
               boxShadow: 'none',
               borderRadius: 2,
+              width: '90vw',
+              height: '90vh',
+              maxWidth: '1600px',
+              maxHeight: '1200px'
             },
           }}
         >
@@ -1183,6 +1186,10 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
             sx={{
               bgcolor: COLORS.background,
               p: 2,
+              height: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               '&::-webkit-scrollbar': {
                 width: '8px',
               },
@@ -1203,12 +1210,12 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
               src={perk.file_base_name ? `/perk-icons/${perk.file_base_name}.png` : getPerkIconFilename(perk.name)}
               alt={perk.name}
               sx={{
-                width: '100%',
+                maxWidth: '100%',
+                maxHeight: '100%',
+                width: 'auto',
                 height: 'auto',
-                display: 'block',
-                minHeight: '500px',
-                maxHeight: '90vh',
                 objectFit: 'contain',
+                display: 'block',
               }}
             />
           </DialogContent>
