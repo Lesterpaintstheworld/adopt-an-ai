@@ -40,6 +40,7 @@ const safeRender = (content: any): React.ReactNode => {
   }
 };
 
+import { getTagIcon, getTagColor } from '../utils/tagStyles';
 import IconLoader from './IconLoader';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
