@@ -23,11 +23,13 @@ const formatDateValue = (value: any): string => {
  * Exemple: "Agent Coalitions" -> "agent-coalitions"
  */
 const getPerkIconFilename = (perkName: string): string => {
+  if (!perkName) return '';
   // Convertir en minuscules et remplacer les espaces par des tirets
   const formattedName = perkName.toLowerCase().replace(/\s+/g, '-');
-  
   // Retirer les caractères spéciaux si nécessaire
-  return formattedName.replace(/[^a-z0-9-]/g, '');
+  const sanitizedName = formattedName.replace(/[^a-z0-9-]/g, '');
+  // Retourner le chemin complet
+  return `/perk-icons/${sanitizedName}.png`;
 };
 
 const COLORS = {
@@ -312,7 +314,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
           <Grid item xs={12} sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
             <Box 
               component="img"
-              src={`/perk-icons/${getPerkIconFilename(perk.name)}.png`}
+              src={getPerkIconFilename(perk.name)}
               alt={perk.name}
               sx={{ 
                 width: {
@@ -1188,7 +1190,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
           >
             <Box
               component="img"
-              src={`/perk-icons/${getPerkIconFilename(perk.name)}.png`}
+              src={getPerkIconFilename(perk.name)}
               alt={perk.name}
               sx={{
                 width: '100%',
