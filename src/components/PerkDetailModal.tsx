@@ -19,6 +19,21 @@ const safeRender = (content: any): React.ReactNode => {
     if (typeof content === 'number') return content.toString();
     if (typeof content === 'boolean') return content.toString();
 
+    // Handle objects with description and requirements
+    if (typeof content === 'object' && content !== null) {
+      if ('description' in content && 'requirements' in content) {
+        return (
+          <>
+            <div>{content.description}</div>
+            <div>Requirements: {Array.isArray(content.requirements) ? 
+              content.requirements.join(', ') : 
+              content.requirements}
+            </div>
+          </>
+        );
+      }
+    }
+
     // Conversion en texte formaté
     const formattedText = formatValue(content);
 
