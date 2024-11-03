@@ -191,18 +191,46 @@ def validate_improvements(original: dict, improved: dict) -> list:
         if not orig_deps.issubset(new_deps):
             issues.append("Original dependencies were removed")
             
-    # Check essential metrics are preserved
+    # Check essential metrics and constraints are preserved
     if 'technical_specifications' in original:
         orig_metrics = set()
         new_metrics = set()
-        for metrics in original['technical_specifications'].get('performance_metrics', {}).values():
-            if isinstance(metrics, list):
-                orig_metrics.update(metrics)
-        for metrics in improved['technical_specifications'].get('performance_metrics', {}).values():
-            if isinstance(metrics, list):
-                new_metrics.update(metrics)
+        orig_constraints = set()
+        new_constraints = set()
+        
+        orig_perf_metrics = original['technical_specifications'].get('performance_metrics', {})
+        new_perf_metrics = improved['technical_specifications'].get('performance_metrics', {})
+        
+        # Collect metrics
+        for category, metrics in orig_perf_metrics.items():
+            if category != 'constraints':  # Skip constraints when collecting metrics
+                if isinstance(metrics, dict):
+                    orig_metrics.update(str(k) for k in metrics.keys())
+                elif isinstance(metrics, list):
+                    orig_metrics.update(str(m) for m in metrics)
+                    
+        for category, metrics in new_perf_metrics.items():
+            if category != 'constraints':  # Skip constraints when collecting metrics
+                if isinstance(metrics, dict):
+                    new_metrics.update(str(k) for k in metrics.keys())
+                elif isinstance(metrics, list):
+                    new_metrics.update(str(m) for m in metrics)
+        
+        # Collect constraints separately
+        if 'constraints' in orig_perf_metrics:
+            orig_constraints.update(str(c) for c in orig_perf_metrics['constraints'])
+        if 'constraints' in new_perf_metrics:
+            new_constraints.update(str(c) for c in new_perf_metrics['constraints'])
+        
+        # Check metrics
         if not orig_metrics.issubset(new_metrics):
-            issues.append("Essential metrics were removed")
+            missing_metrics = orig_metrics - new_metrics
+            issues.append(f"Essential metrics were removed: {missing_metrics}")
+            
+        # Check constraints
+        if not orig_constraints.issubset(new_constraints):
+            missing_constraints = orig_constraints - new_constraints
+            issues.append(f"Essential constraints were removed: {missing_constraints}")
             
     return issues
 
