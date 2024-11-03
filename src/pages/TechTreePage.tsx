@@ -239,12 +239,9 @@ const mergePerkData = (basicPerk: Perk, fullData: PerkFullData | null): Perk => 
   return {
     ...basicPerk,
     name: fullData.name,
-    description: typeof fullData.description === 'object' && fullData.description !== null
-      ? (fullData.description as { short: string }).short 
-      : String(fullData.description),
-    longDescription: typeof fullData.description === 'object' && fullData.description !== null
-      ? (fullData.description as { long: string }).long
-      : String(fullData.description),
+    description: typeof fullData.description === 'object' 
+      ? (fullData.description as PerkDescription).short 
+      : fullData.description,
   };
 };
 
