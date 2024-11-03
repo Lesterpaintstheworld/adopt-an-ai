@@ -563,7 +563,7 @@ const TechTreePage: React.FC<TechTreePageProps> = ({ standalone = false }) => {
                     textAlign: 'center',
                   }}
                 >
-                  {phaseData.name} ({phaseData.period})
+                  {String(phaseData.name)} ({String(phaseData.period)})
                 </Typography>
               );
             })}
