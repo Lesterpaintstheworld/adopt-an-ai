@@ -40,14 +40,14 @@ const safeToString = (value: any): string => {
     return '';
   }
 
-  // Handle primitive types
+  // Handle primitive types directly
   if (typeof value === 'string') return value;
   if (typeof value === 'number') return String(value);
   if (typeof value === 'boolean') return String(value);
 
-  // Handle arrays
+  // Handle arrays by recursively converting elements and joining
   if (Array.isArray(value)) {
-    return value.map(safeToString).join(', ');
+    return value.map(item => safeToString(item)).filter(Boolean).join(', ');
   }
 
   // Handle objects
@@ -57,26 +57,32 @@ const safeToString = (value: any): string => {
       return value.toLocaleDateString();
     }
 
-    // Handle objects with implementation/requirement
+    // Handle specific object structures
     if ('implementation' in value && 'requirement' in value) {
-      return `${safeToString(value.implementation)}: ${safeToString(value.requirement)}`;
+      return `${safeToString(value.implementation)} - ${safeToString(value.requirement)}`;
     }
 
-    // Handle objects with description fields
+    if ('description' in value && 'requirements' in value) {
+      return `${safeToString(value.description)} (${safeToString(value.requirements)})`;
+    }
+
     if ('description' in value) {
       return safeToString(value.description);
     }
 
-    // Handle objects with name fields
     if ('name' in value) {
       return safeToString(value.name);
     }
 
-    // Handle objects with long/short descriptions
-    if ('long' in value) return safeToString(value.long);
-    if ('short' in value) return safeToString(value.short);
+    if ('long' in value) {
+      return safeToString(value.long);
+    }
 
-    // Handle objects with single Phase key
+    if ('short' in value) {
+      return safeToString(value.short);
+    }
+
+    // Handle objects with a single Phase key
     const keys = Object.keys(value);
     if (keys.length === 1 && keys[0].startsWith('Phase')) {
       return `${keys[0]}: ${safeToString(value[keys[0]])}`;
@@ -84,16 +90,22 @@ const safeToString = (value: any): string => {
 
     // For other objects, try to get a meaningful string representation
     try {
+      // Convert object values to string and join them
       return Object.values(value)
         .map(v => safeToString(v))
         .filter(Boolean)
         .join(' - ');
     } catch {
-      return '[Complex Object]';
+      // Last resort - try direct string conversion
+      try {
+        return String(value);
+      } catch {
+        return '[Complex Object]';
+      }
     }
   }
 
-  // Fallback - try to convert to string
+  // Final fallback
   try {
     return String(value);
   } catch {
@@ -618,31 +630,9 @@ const TechTreePage: React.FC<TechTreePageProps> = ({ standalone = false }) => {
                 return acc + calculatePhaseWidth(phase);
               }, 0);
 
-              // Explicitly handle the phase name and period
-              let phaseName = '';
-              let phasePeriod = '';
-
-              try {
-                // Handle phase name
-                if (typeof phaseData.name === 'object') {
-                  phaseName = safeToString(phaseData.name);
-                } else {
-                  phaseName = String(phaseData.name || '');
-                }
-
-                // Handle phase period
-                if (typeof phaseData.period === 'object') {
-                  phasePeriod = safeToString(phaseData.period);
-                } else {
-                  phasePeriod = String(phaseData.period || '');
-                }
-              } catch (error) {
-                console.error('Error processing phase data:', error);
-                phaseName = '[Error]';
-                phasePeriod = '';
-              }
-
-              // Only render strings, not objects
+              // Safely convert both name and period using our enhanced safeToString function
+              const phaseName = safeToString(phaseData.name);
+              const phasePeriod = safeToString(phaseData.period);
               return (
                 <Typography
                   key={phaseKey}
