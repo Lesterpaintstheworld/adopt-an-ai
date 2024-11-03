@@ -122,8 +122,6 @@ def parse_args():
                        help="Don't save changes, just show what would be done")
     parser.add_argument("--force", action="store_true",
                        help="Force changes even with validation issues")
-    parser.add_argument("--backup-dir", type=str,
-                       help="Directory for backups (default: same as source files)")
     parser.add_argument("--skip-sections", type=str, nargs="+",
                        help="Sections to skip modifying")
     parser.add_argument("--focus-sections", type=str, nargs="+",
@@ -206,29 +204,17 @@ def validate_improvements(original: dict, improved: dict) -> list:
             
     return issues
 
-def backup_file(file_path: Path) -> Path:
-    """Create a backup copy of the file"""
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    backup_path = file_path.parent / f"{file_path.stem}_backup_{timestamp}{file_path.suffix}"
-    import shutil
-    shutil.copy2(file_path, backup_path)
-    return backup_path
 
 async def improve_capability_file(client, file_path: Path, args):
-    """Improve a single capability file's descriptions"""
+    """Améliore un fichier de capacité"""
     try:
-        # Create backup
-        if not args.dry_run:
-            backup_path = backup_file(file_path)
-            logging.info(f"Created backup: {backup_path}")
-            
         data = load_yaml(file_path)
         if not data:
             return False
             
         start_time = datetime.now()
         
-        # Generate improved descriptions using Claude
+        # Générer améliorations via Claude
         prompt = f"""You are improving the technical specifications for an AI capability.
         Please enhance these sections of the YAML file to be more detailed and precise:
         - technical_specifications
@@ -258,7 +244,7 @@ async def improve_capability_file(client, file_path: Path, args):
         try:
             improved = yaml.safe_load(response.content[0].text)
             
-            # Validate improvements
+            # Valider améliorations
             issues = validate_improvements(data, improved)
             if issues:
                 logging.warning(f"Validation issues detected for {file_path}:")
@@ -290,10 +276,6 @@ async def improve_capability_file(client, file_path: Path, args):
             
         except Exception as e:
             logging.error(f"Error processing {file_path}: {e}")
-            if not args.dry_run:
-                # Restore backup on error
-                shutil.copy2(backup_path, file_path)
-                logging.info(f"Restored backup after error")
             return False, [], [str(e)], datetime.now() - start_time
             
     except Exception as e:
