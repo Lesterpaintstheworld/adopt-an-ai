@@ -550,6 +550,18 @@ const TechTreePage: React.FC<TechTreePageProps> = ({ standalone = false }) => {
               const xPosition = previousPhases.reduce((acc: number, phase: any) => {
                 return acc + calculatePhaseWidth(phase);
               }, 0);
+
+              // Helper function to safely convert any value to string
+              const safeToString = (value: any): string => {
+                if (typeof value === 'string') return value;
+                if (typeof value === 'number') return String(value);
+                if (typeof value === 'object' && value !== null) {
+                  if ('name' in value) return String(value.name);
+                  if ('description' in value) return String(value.description);
+                  return JSON.stringify(value);
+                }
+                return String(value || '');
+              };
               
               return (
                 <Typography
@@ -563,8 +575,7 @@ const TechTreePage: React.FC<TechTreePageProps> = ({ standalone = false }) => {
                     textAlign: 'center',
                   }}
                 >
-                  {typeof phaseData.name === 'object' ? JSON.stringify(phaseData.name) : String(phaseData.name)} 
-                  ({typeof phaseData.period === 'object' ? JSON.stringify(phaseData.period) : String(phaseData.period)})
+                  {safeToString(phaseData.name)} ({safeToString(phaseData.period)})
                 </Typography>
               );
             })}
