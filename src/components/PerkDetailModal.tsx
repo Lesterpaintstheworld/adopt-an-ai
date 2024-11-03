@@ -1,4 +1,29 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FC } from 'react';
+import { SxProps } from '@mui/system';
+
+interface IconLoaderProps {
+  perk: { capability_id?: string; name?: string };
+  onClick?: () => void;
+  sx?: SxProps;
+}
+
+const IconLoader: FC<IconLoaderProps> = ({ perk, onClick, sx }) => {
+  const [iconUrl, setIconUrl] = useState('/default-perk-icon.png');
+
+  useEffect(() => {
+    getPerkIconUrl(perk).then(setIconUrl);
+  }, [perk]);
+
+  return (
+    <Box 
+      component="img"
+      src={iconUrl}
+      alt={perk?.name || ''}
+      sx={sx}
+      onClick={onClick}
+    />
+  );
+};
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import mermaid from 'mermaid';
@@ -53,7 +78,24 @@ const getDescription = (perk: Perk | null, fullData: PerkFullData | null): strin
   return 'No description available.';
 };
 
-import { getPerkIconUrl } from '../utils/iconUtils';
+export const getPerkIconUrl = (perk: { capability_id?: string; name?: string }) => {
+  if (!perk?.capability_id) {
+    return '/default-perk-icon.png'; // Fallback icon
+  }
+
+  // Try to load the specific perk icon
+  const iconUrl = `/perk-icons/${perk.capability_id}.png`;
+
+  // Create an image element to test if the icon exists
+  const img = new Image();
+  img.src = iconUrl;
+
+  // Return either the specific icon URL or fallback
+  return new Promise<string>((resolve) => {
+    img.onload = () => resolve(iconUrl);
+    img.onerror = () => resolve('/default-perk-icon.png');
+  });
+};
 
 const formatDateValue = (value: any): string => {
   if (value instanceof Date) {
@@ -424,27 +466,27 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
 
         <Grid container spacing={{ xs: 1, sm: 3 }} sx={{ mb: 2 }}>
           <Grid item xs={12} sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
-            <Box 
-              component="img"
-              src={getPerkIconUrl(perk)}
-              alt={perk?.name || ''}
-              sx={{ 
-                width: {
-                  xs: 80,    // Mobile
-                  sm: 160    // Desktop
-                },
-                height: {
-                  xs: 80,    // Mobile
-                  sm: 160    // Desktop
-                },
-                cursor: 'pointer',
-                borderRadius: 1,
-                '&:hover': {
-                  opacity: 0.8,
-                }
-              }}
-              onClick={() => setIsImageOpen(true)}
-            />
+            {perk && (
+              <IconLoader
+                perk={perk}
+                onClick={() => setIsImageOpen(true)}
+                sx={{ 
+                  width: {
+                    xs: 80,    // Mobile
+                    sm: 160    // Desktop
+                  },
+                  height: {
+                    xs: 80,    // Mobile
+                    sm: 160    // Desktop
+                  },
+                  cursor: 'pointer',
+                  borderRadius: 1,
+                  '&:hover': {
+                    opacity: 0.8,
+                  }
+                }}
+              />
+            )}
             <Box>
               <Typography 
                 variant="h4" 
