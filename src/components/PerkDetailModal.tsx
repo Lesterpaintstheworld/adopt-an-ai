@@ -22,15 +22,10 @@ const safeRender = (content: any): React.ReactNode => {
     // Handle objects with description and requirements
     if (typeof content === 'object' && content !== null) {
       if ('description' in content && 'requirements' in content) {
-        return (
-          <>
-            <div>{content.description}</div>
-            <div>Requirements: {Array.isArray(content.requirements) ? 
-              content.requirements.join(', ') : 
-              content.requirements}
-            </div>
-          </>
-        );
+        const reqText = Array.isArray(content.requirements) ? 
+          content.requirements.join(', ') : 
+          String(content.requirements);
+        return `${content.description}\nRequirements: ${reqText}`;
       }
     }
 
