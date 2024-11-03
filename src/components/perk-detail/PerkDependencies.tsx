@@ -249,7 +249,7 @@ export const PerkDependencies: FC<PerkDependenciesProps> = ({ data }) => {
             }}
           >
             <div className="mermaid">
-              {dependencies.dependencies_visualization.primary_diagram}
+              {dependencySection.dependencies_visualization.primary_diagram}
             </div>
           </Box>
         </Box>
