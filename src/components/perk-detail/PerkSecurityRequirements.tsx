@@ -38,13 +38,15 @@ export const PerkSecurityRequirements: FC<PerkSecurityRequirementsProps> = ({
                   <ListItemText 
                     primary={typeof item === 'object' && item !== null 
                       ? (
-                        'implementation' in item && 'requirement' in item
-                          ? `${item.implementation} - ${item.requirement}`
-                          : 'certifications' in item && 'standards' in item
-                            ? `${item.certifications} - ${item.standards}`
-                            : Object.entries(item)
-                                .map(([key, val]) => `${key}: ${val}`)
-                                .join(', ')
+                        'description' in item && 'requirements' in item
+                          ? `${item.description} - ${item.requirements}`
+                          : 'implementation' in item && 'requirement' in item
+                            ? `${item.implementation} - ${item.requirement}`
+                            : 'certifications' in item && 'standards' in item
+                              ? `${item.certifications} - ${item.standards}`
+                              : Object.entries(item)
+                                  .map(([key, val]) => `${key}: ${val}`)
+                                  .join(', ')
                       )
                       : String(item)
                     }
