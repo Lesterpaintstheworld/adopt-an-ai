@@ -270,6 +270,13 @@ const MermaidDiagram = ({ diagram }: { diagram: string }) => {
 const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps) => {
   console.log("PerkDetailModal props:", { open, perk, fullData });
 
+  useEffect(() => {
+    if (open && perk) {
+      console.log('Modal opened with perk:', perk);
+      console.log('Full data:', fullData);
+    }
+  }, [open, perk, fullData]);
+
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingDetails, setIsLoadingDetails] = useState(false);
   const [mermaidInitialized, setMermaidInitialized] = useState(false);

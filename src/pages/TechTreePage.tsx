@@ -257,11 +257,15 @@ const loadFullPerkData = async (perkId: string): Promise<PerkFullData | null> =>
     }
 
     // Use file_base_name to load the file
-    const modules = import.meta.glob('../../content/tech/perks/*.yml');
+    const modules = import.meta.glob('../../content/tech/perks/*.yml', { eager: true });
     const path = `../../content/tech/perks/${item.file_base_name}.yml`;
     
-    if (modules[path]) {
-      const module = await modules[path]();
+    console.log('Trying to load perk details from:', path);
+    console.log('Available modules:', Object.keys(modules));
+    
+    if (path in modules) {
+      const module = modules[path];
+      console.log('Loaded module:', module);
       return module.default;
     }
     
@@ -425,6 +429,11 @@ const TechTreePage: React.FC<TechTreePageProps> = ({ standalone = false }) => {
       // Create safe copies of the data before setting state
       const sanitizedPerk = { ...perk };
       const sanitizedFullData = fullData ? { ...fullData } : null;
+      
+      console.log('Setting modal state with:', {
+        sanitizedPerk,
+        sanitizedFullData
+      });
       
       setModalState({
         isOpen: true,
