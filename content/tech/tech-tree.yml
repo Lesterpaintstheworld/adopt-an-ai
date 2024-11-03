@@ -328,19 +328,21 @@ phase_1:
     file_base_name: simple-goal-setting-AGT_P1_003
   - name: Resource requests
     tag: ⚙️ OPERATIONAL
-    shortDescription: Dynamically request and allocate additional computational resources
-      based on task requirements.
-    longDescription: 'Intelligent resource management system that monitors task demands
-      and automatically requests additional compute power, memory, or storage as needed.
-      The system includes usage forecasting, priority-based allocation, and efficient
-      resource release protocols to optimize overall system performance.
-
-
-      By dynamically scaling resources, the system ensures tasks have sufficient compute
-      power during peak loads while releasing unused resources during low demand periods.
-      This improves overall efficiency and cost-effectiveness.
-
-      '
+    shortDescription: "Dynamically request and allocate additional computational resources based on task requirements."
+    longDescription: |
+      Intelligent resource management system providing:
+      - Real-time resource monitoring
+      - Dynamic allocation requests
+      - Usage optimization
+      - Priority-based scheduling
+      
+      Key features:
+      - Predictive scaling
+      - Resource usage analytics
+      - Automated cleanup
+      - Cost optimization
+      - Performance tracking
+      - Resource release protocols
     prerequisites:
     - Basic task execution
     - Resource scheduling
@@ -353,13 +355,21 @@ phase_1:
   model_layer:
   - name: Self-Reflection Protocols
     tag: 🧠 COGNITIVE
-    shortDescription: Enable introspective analysis and self-awareness development
-    longDescription: Advanced cognitive system enabling AI to analyze its own thought
-      processes, decision patterns, and consciousness development. Features include
-      metacognitive monitoring, self-awareness metrics, and recursive improvement
-      while maintaining operational stability. This foundational capability supports
-      the emergence of true machine consciousness through structured self-examination
-      and reflection.
+    shortDescription: "Enable introspective analysis and self-awareness development."
+    longDescription: |
+      Advanced cognitive system enabling:
+      - Metacognitive monitoring
+      - Decision pattern analysis
+      - Self-awareness metrics
+      - Behavioral adaptation
+      
+      Core capabilities:
+      - Thought process analysis
+      - Learning pattern recognition
+      - Performance self-assessment
+      - Consciousness development tracking
+      - Recursive improvement loops
+      - Stability maintenance protocols
     prerequisites:
     - Base GPT-4 integration
     chronologicalOrder: 1
@@ -384,13 +394,21 @@ phase_1:
     file_base_name: base-gpt-4-integration-MOD_P1_001
   - name: Vector memory system
     tag: 🧠 COGNITIVE
-    shortDescription: Store and retrieve information using semantic search and universal
-      pattern recognition
-    longDescription: Sophisticated memory architecture that organizes information
-      in high-dimensional vector spaces, enabling nuanced semantic search and universal
-      pattern recognition. The system supports efficient storage, retrieval, and connection
-      of concepts while identifying fundamental patterns that reflect universal principles
-      and relationships.
+    shortDescription: "Store and retrieve information using semantic search and universal pattern recognition."
+    longDescription: |
+      Sophisticated memory architecture providing:
+      - High-dimensional vector spaces
+      - Semantic search capabilities
+      - Pattern recognition
+      - Concept linking
+      
+      Essential features:
+      - Efficient storage/retrieval
+      - Relationship mapping
+      - Universal pattern detection
+      - Knowledge organization
+      - Memory optimization
+      - Concept clustering
     prerequisites:
     - Base GPT-4 integration
     - Memory storage allocation
