@@ -11,6 +11,63 @@ import logging
 from pathlib import Path
 from anthropic import AsyncAnthropic
 from dotenv import load_dotenv
+from collections import defaultdict
+from datetime import datetime, timedelta
+
+class ImprovementStats:
+    def __init__(self):
+        self.processed = 0
+        self.successful = 0
+        self.failed = 0
+        self.validation_issues = 0
+        self.sections_improved = defaultdict(int)
+        self.common_issues = defaultdict(int)
+        self.processing_time = timedelta()
+        
+    def add_file_stats(self, file_path, success, issues, sections, duration):
+        self.processed += 1
+        if success:
+            self.successful += 1
+        else:
+            self.failed += 1
+        self.validation_issues += len(issues)
+        for section in sections:
+            self.sections_improved[section] += 1
+        for issue in issues:
+            self.common_issues[issue] += 1
+        self.processing_time += duration
+        
+    def print_summary(self):
+        print("\nStatistiques d'amélioration:")
+        print(f"Fichiers traités: {self.processed}")
+        print(f"Réussis: {self.successful}")
+        print(f"Échoués: {self.failed}")
+        print(f"Problèmes de validation: {self.validation_issues}")
+        print("\nSections améliorées:")
+        for section, count in self.sections_improved.items():
+            print(f"- {section}: {count}")
+        print("\nProblèmes fréquents:")
+        for issue, count in self.common_issues.items():
+            print(f"- {issue}: {count}")
+        print(f"\nTemps total: {self.processing_time}")
+
+def setup_logging(args):
+    """Configure le système de logging"""
+    log_format = '%(asctime)s - %(levelname)s - %(message)s'
+    if args.debug:
+        level = logging.DEBUG
+    else:
+        level = logging.INFO
+        
+    # Logger vers fichier et console
+    logging.basicConfig(
+        level=level,
+        format=log_format,
+        handlers=[
+            logging.FileHandler('improve_capabilities.log'),
+            logging.StreamHandler()
+        ]
+    )
 
 def setup_api():
     """Setup and validate Anthropic API access"""
@@ -62,6 +119,14 @@ def parse_args():
                        help="Enable debug logging")
     parser.add_argument("--dry-run", action="store_true",
                        help="Don't save changes, just show what would be done")
+    parser.add_argument("--force", action="store_true",
+                       help="Force changes even with validation issues")
+    parser.add_argument("--backup-dir", type=str,
+                       help="Directory for backups (default: same as source files)")
+    parser.add_argument("--skip-sections", type=str, nargs="+",
+                       help="Sections to skip modifying")
+    parser.add_argument("--focus-sections", type=str, nargs="+",
+                       help="Only focus on these sections")
     return parser.parse_args()
 
 def load_yaml(file_path):
@@ -107,53 +172,132 @@ def process_phase(phase_data):
             for capability in layer:
                 improve_capability(capability)
 
+def validate_improvements(original: dict, improved: dict) -> list:
+    """Validate that improvements are coherent"""
+    issues = []
+    
+    # Check critical sections still exist
+    critical_sections = ['technical_specifications', 'operational_states', 
+                        'risks_and_mitigations', 'security_requirements']
+    for section in critical_sections:
+        if section in original and section not in improved:
+            issues.append(f"Section {section} missing in improved version")
+            
+    # Check dependencies consistency
+    if 'dependencies' in original and 'dependencies' in improved:
+        orig_deps = set(str(d) for d in original['dependencies'].get('prerequisites', []))
+        new_deps = set(str(d) for d in improved['dependencies'].get('prerequisites', []))
+        if not orig_deps.issubset(new_deps):
+            issues.append("Original dependencies were removed")
+            
+    # Check essential metrics are preserved
+    if 'technical_specifications' in original:
+        orig_metrics = set()
+        new_metrics = set()
+        for metrics in original['technical_specifications'].get('performance_metrics', {}).values():
+            if isinstance(metrics, list):
+                orig_metrics.update(metrics)
+        for metrics in improved['technical_specifications'].get('performance_metrics', {}).values():
+            if isinstance(metrics, list):
+                new_metrics.update(metrics)
+        if not orig_metrics.issubset(new_metrics):
+            issues.append("Essential metrics were removed")
+            
+    return issues
+
+def backup_file(file_path: Path) -> Path:
+    """Create a backup copy of the file"""
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    backup_path = file_path.parent / f"{file_path.stem}_backup_{timestamp}{file_path.suffix}"
+    import shutil
+    shutil.copy2(file_path, backup_path)
+    return backup_path
+
 async def improve_capability_file(client, file_path: Path, args):
     """Improve a single capability file's descriptions"""
-    data = load_yaml(file_path)
-    if not data:
-        return False
-        
-    # Generate improved descriptions using Claude
-    prompt = f"""You are improving the technical specifications for an AI capability.
-    Please enhance these sections of the YAML file to be more detailed and precise:
-    - technical_specifications
-    - operational_states
-    - risks_and_mitigations
-    - integration_testing
-    - monitoring_and_maintenance
-    - security_requirements
-
-    Current content:
-    {yaml.dump(data, allow_unicode=True)}
-
-    Provide only the improved YAML content for those sections, maintaining the same structure.
-    Do not modify other sections."""
-
-    response = await client.messages.create(
-        model=args.model,
-        messages=[{"role": "user", "content": prompt}],
-        max_tokens=args.max_tokens,
-        temperature=args.temperature
-    )
-
-    if not response.content:
-        return False
-
-    # Parse response and update sections
     try:
-        improved = yaml.safe_load(response.content[0].text)
-        for section in ['technical_specifications', 'operational_states', 
-                       'risks_and_mitigations', 'integration_testing',
-                       'monitoring_and_maintenance', 'security_requirements']:
-            if section in improved:
-                data[section] = improved[section]
-                
+        # Create backup
         if not args.dry_run:
-            save_yaml(file_path, data)
-        return True
+            backup_path = backup_file(file_path)
+            logging.info(f"Created backup: {backup_path}")
+            
+        data = load_yaml(file_path)
+        if not data:
+            return False
+            
+        start_time = datetime.now()
+        
+        # Generate improved descriptions using Claude
+        prompt = f"""You are improving the technical specifications for an AI capability.
+        Please enhance these sections of the YAML file to be more detailed and precise:
+        - technical_specifications
+        - operational_states
+        - risks_and_mitigations
+        - integration_testing
+        - monitoring_and_maintenance
+        - security_requirements
+
+        Current content:
+        {yaml.dump(data, allow_unicode=True)}
+
+        Provide only the improved YAML content for those sections, maintaining the same structure.
+        Do not modify other sections."""
+
+        response = await client.messages.create(
+            model=args.model,
+            messages=[{"role": "user", "content": prompt}],
+            max_tokens=args.max_tokens,
+            temperature=args.temperature
+        )
+
+        if not response.content:
+            return False
+
+        # Parse response and update sections
+        try:
+            improved = yaml.safe_load(response.content[0].text)
+            
+            # Validate improvements
+            issues = validate_improvements(data, improved)
+            if issues:
+                logging.warning(f"Validation issues detected for {file_path}:")
+                for issue in issues:
+                    logging.warning(f"- {issue}")
+                if not args.force:
+                    return False
+            
+            sections_improved = []
+            for section in ['technical_specifications', 'operational_states', 
+                           'risks_and_mitigations', 'integration_testing',
+                           'monitoring_and_maintenance', 'security_requirements']:
+                if section in improved:
+                    if args.skip_sections and section in args.skip_sections:
+                        continue
+                    if args.focus_sections and section not in args.focus_sections:
+                        continue
+                    data[section] = improved[section]
+                    sections_improved.append(section)
+                    
+            if not args.dry_run:
+                save_yaml(file_path, data)
+                logging.info(f"Saved improvements to {file_path}")
+            else:
+                logging.info("Dry run - no changes saved")
+                
+            duration = datetime.now() - start_time
+            return True, sections_improved, issues, duration
+            
+        except Exception as e:
+            logging.error(f"Error processing {file_path}: {e}")
+            if not args.dry_run:
+                # Restore backup on error
+                shutil.copy2(backup_path, file_path)
+                logging.info(f"Restored backup after error")
+            return False, [], [str(e)], datetime.now() - start_time
+            
     except Exception as e:
-        logging.error(f"Error processing {file_path}: {e}")
-        return False
+        logging.error(f"Error processing {file_path}: {str(e)}")
+        return False, [], [str(e)], timedelta()
 
 async def main():
     """Main entry point"""
