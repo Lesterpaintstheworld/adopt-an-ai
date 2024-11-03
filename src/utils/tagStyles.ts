@@ -6,7 +6,7 @@ import BuildIcon from '@mui/icons-material/Build';
 import NetworkCheckIcon from '@mui/icons-material/NetworkCheck';
 import PsychologyIcon from '@mui/icons-material/Psychology';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 
 export const getTagColor = (tag: string): SxProps => {
   const tagType = tag.split(' ')[1];
@@ -32,18 +32,18 @@ export const getTagIcon = (tag: string): ReactElement => {
   const iconType = tag.split(' ')[1];
   switch (iconType) {
     case 'CREATIVE':
-      return <BrushIcon />;
+      return React.createElement(BrushIcon);
     case 'TECHNICAL':
-      return <BuildIcon />;
+      return React.createElement(BuildIcon);
     case 'SOCIAL':
-      return <PeopleIcon />;
+      return React.createElement(PeopleIcon);
     case 'INTEGRATION':
-      return <NetworkCheckIcon />;
+      return React.createElement(NetworkCheckIcon);
     case 'COGNITIVE':
-      return <PsychologyIcon />;
+      return React.createElement(PsychologyIcon);
     case 'OPERATIONAL':
-      return <SettingsIcon />;
+      return React.createElement(SettingsIcon);
     default:
-      return <CodeIcon />;
+      return React.createElement(CodeIcon);
   }
 };
