@@ -3,6 +3,7 @@ import { SxProps } from '@mui/system';
 import { PerkVersionHistory } from './perk-detail/PerkVersionHistory';
 import PerkHeader from './perk-detail/PerkHeader';
 import PerkTechnicalSpecs from './perk-detail/PerkTechnicalSpecs';
+import PerkRisksAndMitigations from './perk-detail/PerkRisksAndMitigations';
 
 const safeRender = (content: any): React.ReactNode => {
   try {
@@ -526,64 +527,9 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
             </Grid>
           )}
 
-          {fullData?.risks_and_mitigations?.technical_risks && (
+          {fullData?.risks_and_mitigations && (
             <Grid item xs={12}>
-              <Paper elevation={2} sx={{ 
-                p: 2,
-                bgcolor: COLORS.surface,     // Box grise
-                color: COLORS.text.primary,  // Texte blanc
-                '& .MuiTypography-root': {
-                  color: COLORS.text.primary,
-                },
-                '& .MuiListItemText-primary': {
-                  color: COLORS.text.primary,
-                },
-                '& .MuiListItemText-secondary': {
-                  color: COLORS.text.secondary,
-                }
-              }}>
-                <Typography variant="h6" gutterBottom>Risks and Mitigations</Typography>
-                
-                {fullData?.risks_and_mitigations?.technical_risks?.length > 0 && (
-                  <>
-                    <Typography variant="subtitle1">Technical Risks:</Typography>
-                    <List>
-                      {fullData.risks_and_mitigations.technical_risks.map((risk, index) => (
-                        <ListItem key={index}>
-                          <ListItemText
-                            primary={
-                              <Box component="div" sx={{ display: 'flex', alignItems: 'center' }}>
-                                {risk.risk}
-                                <SeverityBadge severity={risk.severity} />
-                              </Box>
-                            }
-                            secondary={`Mitigation: ${risk.mitigation}`}
-                          />
-                        </ListItem>
-                      ))}
-                    </List>
-                  </>
-                )}
-
-                <Divider sx={{ my: 2 }} />
-
-                {fullData?.risks_and_mitigations?.ethical_risks && 
-                 fullData.risks_and_mitigations.ethical_risks.length > 0 && (
-                  <>
-                    <Typography variant="subtitle1">Ethical Risks:</Typography>
-                    <List>
-                      {fullData?.risks_and_mitigations?.ethical_risks?.map((risk, index) => (
-                        <ListItem key={index}>
-                          <ListItemText
-                            primary={risk.risk}
-                            secondary={`Mitigation: ${risk.mitigation}`}
-                          />
-                        </ListItem>
-                      ))}
-                    </List>
-                  </>
-                )}
-              </Paper>
+              <PerkRisksAndMitigations risksAndMitigations={fullData.risks_and_mitigations} />
             </Grid>
           )}
 
