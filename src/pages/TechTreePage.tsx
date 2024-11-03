@@ -244,13 +244,19 @@ const ConnectionLines = ({
 };
 
 
-const loadFullPerkData = async (perkId: string): Promise<PerkFullData | null> => {
+const loadFullPerkData = async (perkId: string, items: Perk[]): Promise<PerkFullData | null> => {
   try {
-    const fullData = await import(`../../content/tech/${perkId}.yml`);
+    // Find the item corresponding to this ID
+    const item = items.find(i => i.capability_id === perkId);
+    if (!item || !item.file_base_name) {
+      return null;
+    }
+
+    // Use file_base_name to load the file
+    const fullData = await import(`../../content/tech/${item.file_base_name}.yml`);
     return fullData.default;
   } catch (error) {
-    // Just log info, not an error since missing files are expected
-    console.log(`No detailed data found for ${perkId}`);
+    console.log(`No detailed data found for ${perkId} (${error})`);
     return null;
   }
 };
@@ -289,12 +295,12 @@ const TechItem = ({
   useEffect(() => {
     const loadData = async () => {
       if (item.capability_id) {
-        const fullData = await loadFullPerkData(item.capability_id);
+        const fullData = await loadFullPerkData(item.capability_id, allItems);
         setMergedData(mergePerkData(item, fullData));
       }
     };
     loadData();
-  }, [item]);
+  }, [item, allItems]);
 
   return (
     <Paper
