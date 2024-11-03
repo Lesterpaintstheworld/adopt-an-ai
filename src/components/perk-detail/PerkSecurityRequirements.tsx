@@ -135,7 +135,14 @@ export const PerkSecurityRequirements: FC<PerkSecurityRequirementsProps> = ({
         <Box mt={2}>
           <Typography variant="subtitle1" gutterBottom>Data Protection</Typography>
           <Typography variant="body2">
-            {securityRequirements.data_protection}
+            {typeof securityRequirements.data_protection === 'object'
+              ? (
+                'description' in securityRequirements.data_protection && 'requirements' in securityRequirements.data_protection
+                  ? `${securityRequirements.data_protection.description} - ${securityRequirements.data_protection.requirements}`
+                  : JSON.stringify(securityRequirements.data_protection)
+              )
+              : securityRequirements.data_protection
+            }
           </Typography>
         </Box>
       )}
