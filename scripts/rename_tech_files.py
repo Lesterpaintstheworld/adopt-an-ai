@@ -21,7 +21,7 @@ def check_directories():
     """Vérifie que les répertoires nécessaires existent."""
     dirs = [
         Path('content/tech'),
-        Path('public/website/ai-icons')
+        Path('public/perk-icons')
     ]
     for dir_path in dirs:
         if not dir_path.exists():
@@ -33,7 +33,7 @@ def process_tech_tree(dry_run=False):
     
     # Chemins des répertoires
     tech_dir = Path('content/tech')
-    icons_dir = Path('public/website/ai-icons')
+    icons_dir = Path('public/perk-icons')
     
     # Backup du tech-tree.yml
     shutil.copy2(tech_dir / 'tech-tree.yml', tech_dir / 'tech-tree.yml.backup')

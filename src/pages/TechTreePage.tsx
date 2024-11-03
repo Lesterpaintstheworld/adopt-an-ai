@@ -17,7 +17,7 @@ interface ModalState {
 // Local utility function since we don't have access to the utils file
 const getPerkIconUrl = (item: any): string => {
   if (!item) return '';
-  return `/website/ai-icons/${item.file_base_name}.png`;
+  return `/perk-icons/${item.file_base_name}.png`;
 };
 import CodeIcon from '@mui/icons-material/Code';
 import BrushIcon from '@mui/icons-material/Brush';
