@@ -36,7 +36,7 @@ export const PerkSecurityRequirements: FC<PerkSecurityRequirementsProps> = ({
               securityRequirements.authentication.map((item, index) => (
                 <ListItem key={index}>
                   <ListItemText 
-                    primary={item}
+                    primary={typeof item === 'object' ? item.description || JSON.stringify(item) : item}
                     primaryTypographyProps={{
                       variant: 'body2'
                     }}

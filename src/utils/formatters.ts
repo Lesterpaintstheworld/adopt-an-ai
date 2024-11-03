@@ -26,7 +26,9 @@ export const formatValue = (value: any): string => {
       if ('description' in value) {
         const desc = formatValue(value.description);
         if ('requirements' in value) {
-          const reqs = formatValue(value.requirements);
+          const reqs = Array.isArray(value.requirements) ? 
+            value.requirements.map(r => formatValue(r)).join(', ') :
+            formatValue(value.requirements);
           return `${desc}\nRequirements: ${reqs}`;
         }
         return desc;

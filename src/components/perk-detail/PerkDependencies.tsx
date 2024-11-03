@@ -189,7 +189,10 @@ export const PerkDependencies: FC<PerkDependenciesProps> = ({ data }) => {
                           {items.map((item: string | DependencyItem, index: number) => (
                             <ListItem key={index}>
                               <DependencyItemComponent 
-                                name={typeof item === 'object' ? item.capability || '' : item}
+                                name={typeof item === 'object' ? 
+                                  item.capability || item.description || JSON.stringify(item) : 
+                                  String(item)
+                                }
                                 criticality={typeof item === 'object' ? item.criticality : undefined}
                                 relationship={typeof item === 'object' ? item.relationship : undefined}
                               />
