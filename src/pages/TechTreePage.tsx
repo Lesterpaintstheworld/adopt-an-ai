@@ -14,7 +14,11 @@ interface ModalState {
   selectedPerk: Perk | null;
   fullData: PerkFullData | null;
 }
-import { getPerkIconUrl } from '../utils/perkIconUrl';
+// Local utility function since we don't have access to the utils file
+const getPerkIconUrl = (item: any): string => {
+  if (!item) return '';
+  return `/website/ai-icons/${item.file_base_name}.png`;
+};
 import CodeIcon from '@mui/icons-material/Code';
 import BrushIcon from '@mui/icons-material/Brush';
 import PeopleIcon from '@mui/icons-material/People';
@@ -306,7 +310,7 @@ const TechItem = ({
           }}
         >
           <img 
-            src={getPerkIconUrl(item.name)}
+            src={getPerkIconUrl(item)}
             alt={item.name}
             style={{
               width: '100%',
