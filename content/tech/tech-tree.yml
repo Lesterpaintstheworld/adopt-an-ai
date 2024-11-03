@@ -172,21 +172,6 @@ phase_1:
     - Basic compute allocation
     file_base_name: voice-synthesis-APP_P1_003
   multi_agent_layer:
-  - name: Email communication
-    tag: 🌐 INTEGRATION
-    shortDescription: Autonomously manage email correspondence with natural language
-      understanding and context awareness.
-    longDescription: Sophisticated email management system that can read, compose,
-      and manage email correspondence independently. Features include understanding
-      email context, maintaining conversation threads, prioritizing messages, and
-      generating appropriate responses while adhering to communication styles and
-      professional standards.
-    prerequisites:
-    - Text generation
-    - Basic task execution
-    chronologicalOrder: 3
-    capability_id: MLT_P1_001_1
-    file_base_name: email-communication-MLT_P1_001_1
   - name: Discord integration
     tag: 🌐 INTEGRATION
     shortDescription: Participate naturally in Discord communities while managing
