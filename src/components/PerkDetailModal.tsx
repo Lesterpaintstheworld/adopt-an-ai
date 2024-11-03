@@ -78,14 +78,25 @@ const formatValue = (value: any): string => {
   }
   
   if (typeof value === 'object') {
-    // Si c'est un objet avec une seule clé qui commence par "Phase"
+    // Handle arrays
+    if (Array.isArray(value)) {
+      return value.map(item => formatValue(item)).join(', ');
+    }
+    
+    // Handle objects with description and requirements
+    if (value.description && value.requirements) {
+      return `${value.description}\nRequirements: ${formatValue(value.requirements)}`;
+    }
+    
+    // Handle objects with description and features
+    if (value.description && value.features) {
+      return `${value.description}\nFeatures: ${formatValue(value.features)}`;
+    }
+    
+    // If it's an object with a single key that starts with "Phase"
     const keys = Object.keys(value);
     if (keys.length === 1 && keys[0].startsWith('Phase')) {
       return `${keys[0]}: ${formatValue(value[keys[0]])}`;
-    }
-    
-    if (Array.isArray(value)) {
-      return value.map(item => formatValue(item)).join(', ');
     }
     
     // Handle specific object structures
@@ -95,6 +106,7 @@ const formatValue = (value: any): string => {
     if (value.current && value.target) {
       return `Current: ${formatValue(value.current)}, Target: ${formatValue(value.target)}`;
     }
+    
     try {
       return Object.entries(value)
         .map(([key, val]) => `${key}: ${formatValue(val)}`)
@@ -103,6 +115,7 @@ const formatValue = (value: any): string => {
       return String(value);
     }
   }
+  
   return String(value);
 };
 import {
