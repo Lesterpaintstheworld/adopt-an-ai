@@ -488,8 +488,8 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                 }}
               >
                 {typeof fullData?.description === 'object' 
-                  ? (fullData.description as PerkDescription).long 
-                  : fullData?.description || perk.description}
+                  ? ((fullData.description as PerkDescription).long || '')
+                  : (fullData?.description || perk?.description || '')}
               </Typography>
             </Paper>
           </Grid>
@@ -640,7 +640,8 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
 
                 <Divider sx={{ my: 2 }} />
 
-                {fullData?.risks_and_mitigations?.ethical_risks?.length > 0 && (
+                {fullData?.risks_and_mitigations?.ethical_risks && 
+                 fullData.risks_and_mitigations.ethical_risks.length > 0 && (
                   <>
                     <Typography variant="subtitle1">Ethical Risks:</Typography>
                     <List>
