@@ -39,9 +39,9 @@ export const PerkSecurityRequirements: FC<PerkSecurityRequirementsProps> = ({
                     primary={typeof item === 'object' && item !== null 
                       ? (
                         'implementation' in item && 'requirement' in item
-                          ? `Implementation: ${item.implementation}, Requirement: ${item.requirement}`
+                          ? `${item.implementation} - ${item.requirement}`
                           : 'certifications' in item && 'standards' in item
-                            ? `Certifications: ${item.certifications}, Standards: ${item.standards}`
+                            ? `${item.certifications} - ${item.standards}`
                             : Object.entries(item)
                                 .map(([key, val]) => `${key}: ${val}`)
                                 .join(', ')
