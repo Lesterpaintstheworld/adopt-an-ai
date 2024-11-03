@@ -1,5 +1,6 @@
 import { useState, useEffect, FC, ReactNode } from 'react';
 import { SxProps } from '@mui/system';
+import { PerkVersionHistory } from './perk-detail/PerkVersionHistory';
 
 const safeRender = (content: any): React.ReactNode => {
   try {
@@ -383,30 +384,20 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
             <>
               {fullData?.version_control?.version_history && fullData.version_control.version_history.length > 0 && (
                 <Grid item xs={12} md={6}>
-                  <Paper elevation={2} sx={{ 
-                    p: 2,
-                    bgcolor: COLORS.surface,
-                    color: COLORS.text.primary,
-                  }}>
+                  <Paper elevation={2} sx={{ p: 2, bgcolor: COLORS.surface }}>
                     <Accordion 
                       expanded={isVersionHistoryExpanded}
                       onChange={() => setIsVersionHistoryExpanded(!isVersionHistoryExpanded)}
                       sx={{
                         bgcolor: 'transparent',
-                        '&:before': {
-                          display: 'none',
-                        },
+                        '&:before': { display: 'none' },
                         '& .MuiAccordionSummary-root': {
                           minHeight: '48px',
-                          '&.Mui-expanded': {
-                            minHeight: '48px',
-                          }
+                          '&.Mui-expanded': { minHeight: '48px' }
                         },
                         '& .MuiAccordionSummary-content': {
                           margin: '12px 0',
-                          '&.Mui-expanded': {
-                            margin: '12px 0',
-                          }
+                          '&.Mui-expanded': { margin: '12px 0' }
                         }
                       }}
                     >
@@ -417,58 +408,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                         <Typography variant="h6">Version History</Typography>
                       </AccordionSummary>
                       <AccordionDetails sx={{ p: 0, pt: 1 }}>
-                        <Timeline sx={{ 
-                          [`& .MuiTimelineItem-root:before`]: {
-                            flex: 0,
-                            padding: 0
-                          }
-                        }}>
-                          {fullData?.version_control?.version_history?.map((version, index) => (
-                            <TimelineItem key={index} sx={{ minHeight: 'auto' }}>
-                              <TimelineSeparator>
-                                <TimelineDot 
-                                  color={index === 0 ? "primary" : "grey"} 
-                                  sx={{ my: 0.5 }}
-                                />
-                                {index < (fullData?.version_control?.version_history?.length ?? 0) - 1 && (
-                                  <TimelineConnector />
-                                )}
-                              </TimelineSeparator>
-                              <TimelineContent sx={{ py: '12px', px: 2 }}>
-                                <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-                                  Version {formatValue(version.version)} - {formatValue(version.date)}
-                                </Typography>
-                                <List dense sx={{ py: 0 }}>
-                                  {version.changes.map((change, changeIndex) => (
-                                    <ListItem key={changeIndex} sx={{ py: 0 }}>
-                                      <ListItemIcon sx={{ minWidth: 24 }}>
-                                        <FiberManualRecordIcon sx={{ fontSize: 8 }} />
-                                      </ListItemIcon>
-                                      <ListItemText 
-                                        primary={change}
-                                        primaryTypographyProps={{
-                                          variant: 'body2',
-                                          sx: { color: COLORS.text.secondary }
-                                        }}
-                                      />
-                                    </ListItem>
-                                  ))}
-                                </List>
-                                <Typography 
-                                  variant="caption" 
-                                  sx={{ 
-                                    color: COLORS.text.secondary,
-                                    display: 'block',
-                                    mt: 0.5 
-                                  }}
-                                >
-                                  Reviewed by: {formatValue(version.reviewed_by)}
-                                  {version.approved_by && ` | Approved by: ${formatValue(version.approved_by)}`}
-                                </Typography>
-                              </TimelineContent>
-                            </TimelineItem>
-                          ))}
-                        </Timeline>
+                        <PerkVersionHistory versionHistory={fullData?.version_control?.version_history || []} />
                       </AccordionDetails>
                     </Accordion>
                   </Paper>
