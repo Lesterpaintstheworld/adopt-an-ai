@@ -3,6 +3,22 @@ import { Box, Typography, Paper, List, ListItem, ListItemText } from '@mui/mater
 import { COLORS } from '../../theme/colors';
 import { PerkSecurityRequirements as SecurityRequirementsType } from '../../types/perk';
 
+const renderSecurityItem = (item: any): string => {
+  if (typeof item === 'string') {
+    return item;
+  }
+  if (typeof item === 'object' && item !== null) {
+    if ('description' in item && 'requirements' in item) {
+      const requirements = Array.isArray(item.requirements) 
+        ? item.requirements.join(', ') 
+        : item.requirements;
+      return `${item.description} - ${requirements}`;
+    }
+    return JSON.stringify(item);
+  }
+  return String(item);
+};
+
 interface PerkSecurityRequirementsProps {
   securityRequirements: SecurityRequirementsType;
 }
@@ -142,19 +158,66 @@ export const PerkSecurityRequirements: FC<PerkSecurityRequirementsProps> = ({
         <Box mt={2}>
           <Typography variant="subtitle1" gutterBottom>Data Protection</Typography>
           <Typography variant="body2">
-            {typeof securityRequirements.data_protection === 'object' && securityRequirements.data_protection !== null
-              ? (
-                'description' in securityRequirements.data_protection && 'requirements' in securityRequirements.data_protection
-                  ? `${securityRequirements.data_protection.description} - ${
-                      Array.isArray(securityRequirements.data_protection.requirements)
-                        ? securityRequirements.data_protection.requirements.join(', ')
-                        : securityRequirements.data_protection.requirements
-                    }`
-                  : JSON.stringify(securityRequirements.data_protection)
-              )
-              : String(securityRequirements.data_protection)
-            }
+            {renderSecurityItem(securityRequirements.data_protection)}
           </Typography>
+        </Box>
+      )}
+
+      {/* Security Standards Section */}
+      {securityRequirements.security_standards && (
+        <Box mt={2}>
+          <Typography variant="subtitle1" gutterBottom>Security Standards</Typography>
+          <List dense>
+            {Array.isArray(securityRequirements.security_standards)
+              ? securityRequirements.security_standards.map((item, index) => (
+                  <ListItem key={index}>
+                    <ListItemText
+                      primary={renderSecurityItem(item)}
+                      primaryTypographyProps={{
+                        variant: 'body2',
+                      }}
+                    />
+                  </ListItem>
+                ))
+              : <ListItem>
+                  <ListItemText
+                    primary={renderSecurityItem(securityRequirements.security_standards)}
+                    primaryTypographyProps={{
+                      variant: 'body2',
+                    }}
+                  />
+                </ListItem>
+            }
+          </List>
+        </Box>
+      )}
+
+      {/* Security Controls Section */}
+      {securityRequirements.security_controls && (
+        <Box mt={2}>
+          <Typography variant="subtitle1" gutterBottom>Security Controls</Typography>
+          <List dense>
+            {Array.isArray(securityRequirements.security_controls)
+              ? securityRequirements.security_controls.map((item, index) => (
+                  <ListItem key={index}>
+                    <ListItemText
+                      primary={renderSecurityItem(item)}
+                      primaryTypographyProps={{
+                        variant: 'body2',
+                      }}
+                    />
+                  </ListItem>
+                ))
+              : <ListItem>
+                  <ListItemText
+                    primary={renderSecurityItem(securityRequirements.security_controls)}
+                    primaryTypographyProps={{
+                      variant: 'body2',
+                    }}
+                  />
+                </ListItem>
+            }
+          </List>
         </Box>
       )}
 
