@@ -34,6 +34,73 @@ const CHRONOLOGICAL_SPACING = 400; // Augmenté de 200 à 400 pour plus d'espace
 const PHASE_START_PADDING = 200;
 const PHASE_PADDING = 200;
 
+const safeToString = (value: any): string => {
+  // Handle null/undefined
+  if (value === null || value === undefined) {
+    return '';
+  }
+
+  // Handle primitive types
+  if (typeof value === 'string') return value;
+  if (typeof value === 'number') return String(value);
+  if (typeof value === 'boolean') return String(value);
+
+  // Handle arrays
+  if (Array.isArray(value)) {
+    return value.map(safeToString).join(', ');
+  }
+
+  // Handle objects
+  if (typeof value === 'object') {
+    // Handle Date objects
+    if (value instanceof Date) {
+      return value.toLocaleDateString();
+    }
+
+    // Handle objects with implementation/requirement
+    if ('implementation' in value && 'requirement' in value) {
+      return `${safeToString(value.implementation)}: ${safeToString(value.requirement)}`;
+    }
+
+    // Handle objects with description fields
+    if ('description' in value) {
+      return safeToString(value.description);
+    }
+
+    // Handle objects with name fields
+    if ('name' in value) {
+      return safeToString(value.name);
+    }
+
+    // Handle objects with long/short descriptions
+    if ('long' in value) return safeToString(value.long);
+    if ('short' in value) return safeToString(value.short);
+
+    // Handle objects with single Phase key
+    const keys = Object.keys(value);
+    if (keys.length === 1 && keys[0].startsWith('Phase')) {
+      return `${keys[0]}: ${safeToString(value[keys[0]])}`;
+    }
+
+    // For other objects, try to get a meaningful string representation
+    try {
+      return Object.values(value)
+        .map(v => safeToString(v))
+        .filter(Boolean)
+        .join(' - ');
+    } catch {
+      return '[Complex Object]';
+    }
+  }
+
+  // Fallback - try to convert to string
+  try {
+    return String(value);
+  } catch {
+    return '[Unknown Value]';
+  }
+};
+
 const getTagColor = (tag: string) => {
   const tagType = tag.split(' ')[1];
   switch (tagType) {
