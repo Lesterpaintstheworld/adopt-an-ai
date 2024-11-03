@@ -172,20 +172,6 @@ phase_1:
     - Basic compute allocation
     file_base_name: voice-synthesis-APP_P1_003
   multi_agent_layer:
-  - name: Discord integration
-    tag: 🌐 INTEGRATION
-    shortDescription: Participate naturally in Discord communities while managing
-      channels and interactions.
-    longDescription: Advanced Discord integration enabling AI participation in server
-      conversations, channel management, and community engagement. The system understands
-      server context, maintains appropriate tone for different channels, and can handle
-      moderation tasks while following server-specific rules and customs.
-    prerequisites:
-    - Text generation
-    - Basic task execution
-    chronologicalOrder: 5
-    capability_id: MLT_P1_002_1
-    file_base_name: discord-integration-MLT_P1_002_1
   - name: Slack integration
     tag: 🌐 INTEGRATION
     shortDescription: Operate seamlessly within Slack workspaces with full workflow
@@ -1736,20 +1722,6 @@ phase_4:
     chronologicalOrder: 1
     capability_id: APP_P4_001
     file_base_name: universal-creation-tools-APP_P4_001
-  - name: Reality creation apps
-    tag: 🎨 CREATIVE
-    shortDescription: Generate and maintain complex virtual environments with consistent
-      internal physics and logic
-    longDescription: Advanced virtual environment creation system that enables the
-      design and maintenance of sophisticated digital spaces. Features include custom
-      physics engines, dynamic rule systems, and real-time environment modification
-      while ensuring internal consistency and user immersion.
-    chronologicalOrder: 2
-    capability_id: APP_P2_001_1
-    prerequisites:
-    - Universal creation tools
-    - Reality synthesis
-    file_base_name: reality-creation-apps-APP_P2_001_1
   - name: Harmonic interfaces
     tag: 🌐 INTEGRATION
     description: Self-adapting interfaces that perfectly match any user's mental model
