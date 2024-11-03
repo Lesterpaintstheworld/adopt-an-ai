@@ -601,22 +601,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                   lineHeight: 1.6
                 }}
               >
-                {typeof perk?.description === 'object' && 'description' in (perk.description as PerkDescription) ? (
-                  <>
-                    {(perk.description as PerkDescription).description}
-                    {(perk.description as PerkDescription).requirements && (
-                      <>
-                        <br /><br />
-                        <strong>Requirements:</strong><br />
-                        {Array.isArray((perk.description as PerkDescription).requirements) 
-                          ? (perk.description as PerkDescription).requirements?.join(', ')
-                          : (perk.description as PerkDescription).requirements}
-                      </>
-                    )}
-                  </>
-                ) : (
-                  getDescription(perk, fullData)
-                )}
+                {getDescription(perk, fullData)}
               </Typography>
             </Paper>
           </Grid>
