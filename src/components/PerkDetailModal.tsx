@@ -4,6 +4,32 @@ import DialogContent from '@mui/material/DialogContent';
 import mermaid from 'mermaid';
 import { Perk, PerkFullData, PerkDescription } from '../types/tech';
 
+const getDescription = (perk: Perk | null, fullData: PerkFullData | null): string => {
+  if (fullData?.longDescription) {
+    return fullData.longDescription;
+  }
+  
+  if (fullData?.description) {
+    if (typeof fullData.description === 'object') {
+      return fullData.description.long || fullData.description.short;
+    }
+    return fullData.description;
+  }
+  
+  if (perk?.description) {
+    if (typeof perk.description === 'object') {
+      return perk.description.long || perk.description.short;
+    }
+    return perk.description;
+  }
+  
+  if (perk?.shortDescription) {
+    return perk.shortDescription;
+  }
+  
+  return 'No description available.';
+};
+
 const getPerkIconUrl = (item: Perk | null): string => {
   if (!item) return '/perk-icons/default-perk-icon.png';
   
@@ -210,14 +236,63 @@ const SeverityBadge = ({ severity }: { severity: string }) => {
   );
 };
 
+const MermaidDiagram = ({ diagram }: { diagram: string }) => {
+  const [error, setError] = useState<string | null>(null);
+  
+  useEffect(() => {
+    const renderDiagram = async () => {
+      try {
+        await mermaid.contentLoaded();
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Error rendering diagram');
+        console.error('Mermaid render error:', err);
+      }
+    };
+    
+    renderDiagram();
+  }, [diagram]);
+  
+  if (error) {
+    return (
+      <Box sx={{ p: 2, color: 'error.main' }}>
+        <Typography variant="body2">Failed to render diagram: {error}</Typography>
+      </Box>
+    );
+  }
+  
+  return (
+    <div className="mermaid">
+      {diagram}
+    </div>
+  );
+};
+
 const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps) => {
   console.log("PerkDetailModal props:", { open, perk, fullData });
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingDetails, setIsLoadingDetails] = useState(false);
   const [mermaidInitialized, setMermaidInitialized] = useState(false);
   const [mermaidError, setMermaidError] = useState<string | null>(null);
   const [isImageOpen, setIsImageOpen] = useState(false);
   const [isVersionHistoryExpanded, setIsVersionHistoryExpanded] = useState(false);
+
+  useEffect(() => {
+    if (!open || !perk?.capability_id) return;
+    
+    const loadDetails = async () => {
+      setIsLoadingDetails(true);
+      try {
+        // Any additional data loading can go here
+      } catch (error) {
+        console.error('Error loading perk details:', error);
+      } finally {
+        setIsLoadingDetails(false);
+      }
+    };
+    
+    loadDetails();
+  }, [open, perk?.capability_id]);
 
   useEffect(() => {
     // Remove console logging of modal data
@@ -499,18 +574,7 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                   lineHeight: 1.6
                 }}
               >
-                {(() => {
-                  if (fullData?.longDescription) {
-                    return fullData.longDescription;
-                  }
-                  if (perk?.shortDescription) {
-                    return perk.shortDescription;
-                  }
-                  if (typeof perk?.description === 'object') {
-                    return perk.description.long || perk.description.short || '';
-                  }
-                  return perk?.description || 'No description available.';
-                })()}
+                {getDescription(perk, fullData)}
               </Typography>
             </Paper>
           </Grid>
@@ -888,12 +952,8 @@ const PerkDetailModal = ({ open, onClose, perk, fullData }: PerkDetailModalProps
                 <Box sx={{ overflow: 'auto' }}>
                   {isLoading ? (
                     <CircularProgress />
-                  ) : mermaidError ? (
-                    <Typography color="error">{mermaidError}</Typography>
                   ) : (
-                    <div className="mermaid">
-                      {fullData.dependencies_visualization.primary_diagram}
-                    </div>
+                    <MermaidDiagram diagram={fullData.dependencies_visualization.primary_diagram} />
                   )}
                 </Box>
               </Paper>
