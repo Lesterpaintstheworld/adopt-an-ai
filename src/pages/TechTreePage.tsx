@@ -618,10 +618,31 @@ const TechTreePage: React.FC<TechTreePageProps> = ({ standalone = false }) => {
                 return acc + calculatePhaseWidth(phase);
               }, 0);
 
-              // Extract and format name and period separately
-              const phaseName = safeToString(phaseData.name || '');
-              const phasePeriod = safeToString(phaseData.period || '');
+              // Explicitly handle the phase name and period
+              let phaseName = '';
+              let phasePeriod = '';
 
+              try {
+                // Handle phase name
+                if (typeof phaseData.name === 'object') {
+                  phaseName = safeToString(phaseData.name);
+                } else {
+                  phaseName = String(phaseData.name || '');
+                }
+
+                // Handle phase period
+                if (typeof phaseData.period === 'object') {
+                  phasePeriod = safeToString(phaseData.period);
+                } else {
+                  phasePeriod = String(phaseData.period || '');
+                }
+              } catch (error) {
+                console.error('Error processing phase data:', error);
+                phaseName = '[Error]';
+                phasePeriod = '';
+              }
+
+              // Only render strings, not objects
               return (
                 <Typography
                   key={phaseKey}
