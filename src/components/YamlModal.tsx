@@ -6,6 +6,7 @@ import {
   IconButton,
   Box,
   useTheme,
+  Typography,
 } from '@mui/material';
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
 import yaml from 'react-syntax-highlighter/dist/esm/languages/hljs/yaml';
@@ -38,6 +39,12 @@ export const YamlModal: React.FC<YamlModalProps> = ({
   data
 }) => {
   const theme = useTheme();
+
+  // Extract story from data if it exists
+  const story = data?.story || '';
+  // Create a copy of data without the story for YAML display
+  const yamlData = { ...data };
+  delete yamlData?.story;
 
   return (
     <Dialog 
@@ -90,6 +97,30 @@ export const YamlModal: React.FC<YamlModalProps> = ({
         }}
       >
         <Box sx={{ p: 2 }}>
+          {/* Story Section */}
+          {story && (
+            <Box sx={{ mb: 4 }}>
+              <Typography
+                variant="body1"
+                sx={{
+                  color: '#fff',
+                  lineHeight: 1.8,
+                  fontSize: '1.1rem',
+                  whiteSpace: 'pre-wrap',
+                  fontFamily: '"Inter", "Roboto", "Helvetica Neue", sans-serif',
+                  marginBottom: 4,
+                  padding: '20px',
+                  backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                  borderRadius: '8px',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                }}
+              >
+                {story}
+              </Typography>
+            </Box>
+          )}
+
+          {/* YAML Section */}
           <SyntaxHighlighter
             language="yaml"
             style={darkTheme}
@@ -104,7 +135,7 @@ export const YamlModal: React.FC<YamlModalProps> = ({
             }}
             showLineNumbers={false}
           >
-            {data?.story ? data.story : parseYaml(data)}
+            {parseYaml(yamlData)}
           </SyntaxHighlighter>
         </Box>
       </DialogContent>
