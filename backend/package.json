@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "cross-env PATH=\"%PATH%;C:\\Program Files\\PostgreSQL\\17\\bin\" node server.js",
-    "dev": "cross-env PATH=\"%PATH%;C:\\Program Files\\PostgreSQL\\17\\bin\" nodemon server.js"
+    "dev": "cross-env PATH=\"%PATH%;C:\\Program Files\\PostgreSQL\\17\\bin\" nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "cors": "^2.8.5",
