@@ -19,6 +19,18 @@ interface PerkItem {
   capability_id: string;
   name: string;
 }
+
+interface PhaseData {
+  name: string;
+  period: string;
+  description: string;
+  [key: string]: any;
+}
+
+interface PerkItem {
+  capability_id: string;
+  name: string;
+}
 import MissionModal from '../components/MissionModal';
 import { getPerkIconUrl } from '../utils/iconUtils';
 
@@ -512,7 +524,7 @@ const MissionsPage: React.FC = () => {
                   }}>
                     Requirements: {
                       typeof mission.requirements === 'object' && mission.requirements !== null
-                        ? Object.entries(mission.requirements as MissionRequirements)
+                        ? Object.entries(mission.requirements as Record<string, unknown>)
                             .map(([key, value]) => `${key}: ${String(value)}`)
                             .join(', ')
                         : Array.isArray(mission.requirements)
@@ -561,11 +573,13 @@ const MissionsPage: React.FC = () => {
                         src={getPerkIconUrl({ 
                           name: Object.values(techTree)
                             .flatMap(phase => 
-                              Object.entries(phase)
+                              Object.entries(phase as PhaseData)
                                 .filter(([key]) => !['name', 'period', 'description'].includes(key))
-                                .flatMap(([_, items]) => items)
+                                .flatMap(([_, items]) => items as PerkItem[])
                             )
-                            .find((item: any) => item?.capability_id === mission.mainPrerequisite)?.name || 'Unknown',
+                            .find((item): item is PerkItem => 
+                              item?.capability_id === mission.mainPrerequisite
+                            )?.name || 'Unknown',
                           capability_id: mission.mainPrerequisite 
                         })}
                         alt="Required Perk"
