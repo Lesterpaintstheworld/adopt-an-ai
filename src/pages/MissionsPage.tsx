@@ -16,7 +16,12 @@ const getPhaseLabel = (phase: Phase): string => {
       return phase;
   }
 };
-import { mockMissions } from '../data/mockMissions';
+import { loadAllMissions } from '../utils/missionUtils';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import techTree from '../../content/tech/tech-tree.yml';
 import { 
   Box, 
@@ -71,7 +76,7 @@ const MissionsPage: React.FC = () => {
     status: 'all',
     phase: 'all'
   });
-  const [missions, setMissions] = useState<Mission[]>(mockMissions);
+  const [missions, setMissions] = useState<Mission[]>([]);
   const [activeMissions, setActiveMissions] = useState<Mission[]>([]);
   const [userResources, setUserResources] = useState({
     xp: 0,
@@ -81,8 +86,17 @@ const MissionsPage: React.FC = () => {
     activeMissionLimit: 3
   });
 
+  useEffect(() => {
+    const loadMissions = async () => {
+      const loadedMissions = await loadAllMissions();
+      setMissions(loadedMissions);
+    };
+    
+    loadMissions();
+  }, []);
+
   const filterMissions = (filters: Filters) => {
-    let filteredMissions = [...mockMissions];
+    let filteredMissions = [...missions];
 
     if (filters.category) {
       filteredMissions = filteredMissions.filter(
