@@ -63,7 +63,7 @@ def load_perk_details(perk_id: str, tech_tree: dict) -> dict:
         return None
 
 async def generate_mission(client: AsyncAnthropic, perk_data: dict, difficulty: str) -> dict:
-    prompt = f"""You are designing an AI training mission that leverages a specific capability/perk.
+    prompt = f"""You are designing a highly specific, detailed AI training mission that leverages a capability/perk.
     
     Perk Details:
     Name: {perk_data.get('name')}
@@ -71,27 +71,68 @@ async def generate_mission(client: AsyncAnthropic, perk_data: dict, difficulty: 
     Story: {perk_data.get('story', 'No story available')}
     
     Create a {difficulty} difficulty training mission that:
-    1. Uses this perk as its main prerequisite
-    2. Challenges the AI to master this capability
-    3. Has clear objectives and rewards
-    4. Fits the theme and context of the perk
+    1. Directly applies this specific perk's capabilities
+    2. Has concrete, measurable objectives
+    3. Includes detailed success criteria
+    4. Provides specific scenarios and examples
+    5. Defines clear step-by-step tasks
+    6. Specifies exact resource requirements
+    7. Lists precise evaluation metrics
+    8. Details expected outcomes and deliverables
     
     Return the mission data in this YAML format:
     ```yaml
     id: [unique_id]
-    title: [engaging title]
-    description: [2-3 sentences describing the mission]
+    title: [engaging, specific title]
+    description: |
+      [3-4 detailed sentences describing the exact nature of the mission]
+      
+    objectives:
+      - [specific objective 1]
+      - [specific objective 2]
+      - [specific objective 3]
+    
+    tasks:
+      - step: [detailed step 1]
+        details: [specific instructions]
+      - step: [detailed step 2]
+        details: [specific instructions]
+      - step: [detailed step 3]
+        details: [specific instructions]
+    
+    success_criteria:
+      - [measurable criterion 1]
+      - [measurable criterion 2]
+      - [measurable criterion 3]
+    
+    evaluation_metrics:
+      - metric: [specific metric 1]
+        target: [quantifiable target]
+      - metric: [specific metric 2]
+        target: [quantifiable target]
+    
     difficulty: {difficulty}
     category: [Communication|Creativity|Problem Solving|Research]
     duration: [estimated time, e.g. "2h", "4h"]
     mainPrerequisite: {perk_data.get('capability_id')}
-    requirements: [list of basic requirements]
+    
+    requirements:
+      compute: [specific compute requirements]
+      memory: [specific memory requirements]
+      capabilities: [list of required capabilities]
+      
     rewards:
       xp: [amount]
       capabilities: [list of new capabilities gained]
-    phase: [same as the perk's phase]
+      resources: [list of resources earned]
+    
+    deliverables:
+      - [specific output 1]
+      - [specific output 2]
+      - [specific output 3]
     ```
     
+    Make the mission highly specific to this perk's capabilities and ensure all details are concrete and measurable.
     Return only the YAML, no additional text."""
 
     try:

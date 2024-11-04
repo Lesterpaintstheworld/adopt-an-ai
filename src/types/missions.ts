@@ -7,16 +7,31 @@ export interface Mission {
   id: string;
   title: string;
   description: string;
+  objectives: string[];
+  tasks: {
+    step: string;
+    details: string;
+  }[];
+  success_criteria: string[];
+  evaluation_metrics: {
+    metric: string;
+    target: string;
+  }[];
   difficulty: Difficulty;
   category: Category;
   duration: string;
   mainPrerequisite?: string;
-  requirements: string[];
+  requirements: {
+    compute: string;
+    memory: string;
+    capabilities: string[];
+  };
   rewards: {
     xp?: number;
     capabilities?: string[];
     resources?: string[];
   };
+  deliverables: string[];
   status: Status;
   phase: Phase;
 }
