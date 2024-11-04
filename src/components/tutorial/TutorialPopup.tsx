@@ -1,4 +1,11 @@
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography } from '@mui/material';
+import { 
+  Dialog, 
+  DialogTitle, 
+  DialogContent, 
+  DialogActions, 
+  Button, 
+  Typography 
+} from '@mui/material';
 import { useTutorial } from '../../contexts/TutorialContext';
 
 export const TutorialPopup = () => {
