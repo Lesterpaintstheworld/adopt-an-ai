@@ -1,6 +1,6 @@
 import { Box, Container } from '@mui/material';
 import { Header } from './Header';
-import Footer from './Footer.tsx';
+import { Footer } from './Footer';
 import { Outlet } from 'react-router-dom';
 import SideMenu from '../SideMenu';
 
