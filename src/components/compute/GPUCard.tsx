@@ -46,7 +46,6 @@ interface AvailableGPU extends BaseGPU {
 
 interface GPUCardProps {
   gpu: OwnedGPU | AvailableGPU;
-  owned: boolean;
 }
 
 const isOwnedGPU = (gpu: OwnedGPU | AvailableGPU): gpu is OwnedGPU => {
@@ -57,7 +56,7 @@ const isAvailableGPU = (gpu: OwnedGPU | AvailableGPU): gpu is AvailableGPU => {
   return 'availability' in gpu;
 };
 
-export default function GPUCard({ gpu, owned }: GPUCardProps) {
+export default function GPUCard({ gpu }: GPUCardProps) {
   const renderContent = () => {
     if (isOwnedGPU(gpu)) {
       return (

@@ -1,4 +1,4 @@
-import { Box, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import ModelCard from './ModelCard';
