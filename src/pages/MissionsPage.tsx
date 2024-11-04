@@ -92,8 +92,17 @@ const MissionsPage: React.FC = () => {
 
   useEffect(() => {
     const loadMissions = async () => {
-      const loadedMissions = await loadAllMissions();
-      setMissions(loadedMissions);
+      try {
+        const loadedMissions = await loadAllMissions();
+        if (loadedMissions.length === 0) {
+          console.warn('No missions loaded, using default state');
+          // Optionally set some default missions or show a message
+        } else {
+          setMissions(loadedMissions);
+        }
+      } catch (error) {
+        console.error('Error loading missions:', error);
+      }
     };
     
     loadMissions();
@@ -384,7 +393,7 @@ const MissionsPage: React.FC = () => {
       ) : (
         <Grid container spacing={3}>
         {missions.map((mission) => (
-          <Grid item xs={12} sm={6} md={4} key={mission.id}>
+          <Grid item xs={12} sm={6} md={4} key={`${mission.id}-${mission.capability_id}`}>
             <Card sx={{
               height: '100%', // Make all cards same height
               display: 'flex',
