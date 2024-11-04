@@ -6,10 +6,14 @@ import {
   IconButton,
   Box,
   useTheme,
-  Typography
 } from '@mui/material';
+import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
+import yaml from 'react-syntax-highlighter/dist/esm/languages/hljs/yaml';
+import { atomOneDark, atomOneLight } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { parseYaml } from '../utils/yamlFormatter';
 import CloseIcon from '@mui/icons-material/Close';
+
+SyntaxHighlighter.registerLanguage('yaml', yaml);
 
 interface YamlModalProps {
   open: boolean;
@@ -64,19 +68,18 @@ export const YamlModal: React.FC<YamlModalProps> = ({
       </DialogTitle>
       <DialogContent dividers>
         <Box sx={{ p: 1 }}>
-          <pre style={{ 
-            margin: 0,
-            whiteSpace: 'pre-wrap',
-            wordWrap: 'break-word',
-            fontFamily: 'monospace',
-            fontSize: '14px',
-            backgroundColor: theme.palette.mode === 'dark' ? '#1a1a1a' : '#f5f5f5',
-            padding: '12px',
-            borderRadius: '4px',
-            color: theme.palette.mode === 'dark' ? '#e6e6e6' : '#333'
-          }}>
+          <SyntaxHighlighter
+            language="yaml"
+            style={theme.palette.mode === 'dark' ? atomOneDark : atomOneLight}
+            customStyle={{
+              margin: 0,
+              borderRadius: '4px',
+              fontSize: '14px',
+            }}
+            showLineNumbers
+          >
             {parseYaml(data)}
-          </pre>
+          </SyntaxHighlighter>
         </Box>
       </DialogContent>
     </Dialog>
