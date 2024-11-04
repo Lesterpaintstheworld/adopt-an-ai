@@ -22,8 +22,30 @@ const StyledCard = styled(Card)(({ theme }) => ({
   }
 }));
 
+interface BaseGPU {
+  id: string;
+  name: string;
+  memory: number;
+}
+
+interface OwnedGPU extends BaseGPU {
+  usage: number;
+  temperature: number;
+  power: number;
+  status: 'active' | 'idle' | 'offline';
+}
+
+interface AvailableGPU extends BaseGPU {
+  performance: string;
+  price: {
+    hourly: number;
+    monthly: number;
+  };
+  availability: 'available' | 'limited' | 'unavailable';
+}
+
 interface GPUCardProps {
-  gpu: any; // Use proper type from previous interfaces
+  gpu: OwnedGPU | AvailableGPU;
   owned: boolean;
 }
 
