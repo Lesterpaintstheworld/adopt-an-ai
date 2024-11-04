@@ -76,8 +76,8 @@ const SideMenu = () => {
                   opacity: isCollapsed ? 0 : 1,
                   transition: 'opacity 0.2s',
                   display: isCollapsed ? 'none' : 'block',
-                  ml: 'auto',
                   flexShrink: 0,
+                  ml: 0,
                 }}
               />
             </ListItemButton>
