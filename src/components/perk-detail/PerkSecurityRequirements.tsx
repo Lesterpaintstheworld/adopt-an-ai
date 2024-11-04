@@ -24,30 +24,63 @@ interface PerkSecurityRequirementsProps {
 const renderRequirement = (requirement: string | SecurityRequirement) => {
   if (!requirement) return null;
   
+  // Handle string requirements
   if (typeof requirement === 'string') {
     return requirement;
   }
   
+  // Handle nested objects
+  const renderNestedObject = (obj: any): ReactNode => {
+    if (typeof obj === 'string') return obj;
+    if (Array.isArray(obj)) {
+      return (
+        <List dense>
+          {obj.map((item, index) => (
+            <ListItem key={index}>
+              <ListItemText primary={typeof item === 'string' ? item : renderNestedObject(item)} />
+            </ListItem>
+          ))}
+        </List>
+      );
+    }
+    if (typeof obj === 'object' && obj !== null) {
+      return (
+        <Box>
+          {Object.entries(obj).map(([key, value], index) => (
+            <Box key={index} sx={{ mt: 1 }}>
+              <Typography variant="subtitle2" sx={{ textTransform: 'capitalize' }}>
+                {key.replace(/_/g, ' ')}:
+              </Typography>
+              {renderNestedObject(value)}
+            </Box>
+          ))}
+        </Box>
+      );
+    }
+    return String(obj);
+  };
+
   return (
     <Box>
       {requirement.description && (
         <Typography variant="body2">{requirement.description}</Typography>
       )}
       {requirement.requirements && (
-        Array.isArray(requirement.requirements) ? (
-          <List dense>
-            {requirement.requirements.map((req, index) => (
-              <ListItem key={index}>
-                <ListItemText primary={req} />
-              </ListItem>
-            ))}
-          </List>
-        ) : (
-          <Typography variant="body2" sx={{ mt: 1 }}>
-            {requirement.requirements}
-          </Typography>
-        )
+        <Box sx={{ mt: 1 }}>
+          {renderNestedObject(requirement.requirements)}
+        </Box>
       )}
+      {/* Handle other potential nested objects */}
+      {Object.entries(requirement)
+        .filter(([key]) => !['description', 'requirements'].includes(key))
+        .map(([key, value], index) => (
+          <Box key={index} sx={{ mt: 1 }}>
+            <Typography variant="subtitle2" sx={{ textTransform: 'capitalize' }}>
+              {key.replace(/_/g, ' ')}:
+            </Typography>
+            {renderNestedObject(value)}
+          </Box>
+        ))}
     </Box>
   );
 };
