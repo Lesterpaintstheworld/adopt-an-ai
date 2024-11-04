@@ -11,6 +11,7 @@ import {
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
 import yaml from 'react-syntax-highlighter/dist/esm/languages/hljs/yaml';
 import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { getPerkIconUrl } from '../utils/iconUtils';
 
 const darkTheme = {
   ...atomOneDark,
@@ -45,6 +46,9 @@ export const YamlModal: React.FC<YamlModalProps> = ({
   // Create a copy of data without the story for YAML display
   const yamlData = { ...data };
   delete yamlData?.story;
+
+  // Get the perk icon URL
+  const iconUrl = data?.capability_id ? getPerkIconUrl(data.capability_id) : null;
 
   return (
     <Dialog 
@@ -97,6 +101,33 @@ export const YamlModal: React.FC<YamlModalProps> = ({
         }}
       >
         <Box sx={{ p: 2 }}>
+          {/* Perk Icon Section */}
+          {iconUrl && (
+            <Box 
+              sx={{ 
+                mb: 4,
+                display: 'flex',
+                justifyContent: 'center',
+                backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                borderRadius: '8px',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                padding: '20px',
+              }}
+            >
+              <img
+                src={iconUrl}
+                alt={title}
+                style={{
+                  maxWidth: '100%',
+                  height: 'auto',
+                  maxHeight: '300px',
+                  borderRadius: '4px',
+                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+                }}
+              />
+            </Box>
+          )}
+
           {/* Story Section */}
           {story && (
             <Box sx={{ mb: 4 }}>
