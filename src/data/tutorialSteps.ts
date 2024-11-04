@@ -22,6 +22,18 @@ export const pageTutorials = {
   gpus: {
     title: "GPU Resources",
     content: "Your AIs need GPUs to run and learn effectively. Manage your compute resources here to keep your AIs performing at their best."
+  },
+  compute: {
+    title: "Compute Resources",
+    content: "Manage and monitor your compute resources to ensure optimal performance for your AI workloads."
+  },
+  models: {
+    title: "AI Models",
+    content: "Browse, train and manage your AI models. Access pre-trained models or create custom ones tailored to your needs."
+  },
+  myais: {
+    title: "My AIs",
+    content: "View and manage your personal AI assistants. Monitor their progress and customize their capabilities."
   }
 } as const;
 
