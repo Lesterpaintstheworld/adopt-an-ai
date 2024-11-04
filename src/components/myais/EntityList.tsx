@@ -102,8 +102,9 @@ const EntityList: React.FC<EntityListProps> = ({ entities, selectedId, onSelect 
               <ListItemText
                 primary={entity.name}
                 secondary={
-                  <Box sx={{ width: '100%' }}>
+                  <Box component="div" sx={{ width: '100%' }}>
                     <Typography 
+                      component="div"
                       variant="body2" 
                       color="text.secondary"
                       sx={{ mb: 0.5 }}
@@ -114,14 +115,14 @@ const EntityList: React.FC<EntityListProps> = ({ entities, selectedId, onSelect 
                       type={entity.currentFocus.type}
                       value={entity.currentFocus.progress}
                     />
-                    <Box sx={{ display: 'flex', gap: 2 }}>
-                      <Typography variant="caption" color="text.secondary">
+                    <Box component="div" sx={{ display: 'flex', gap: 2 }}>
+                      <Typography component="div" variant="caption" color="text.secondary">
                         🧠 {entity.consciousness}
                       </Typography>
-                      <Typography variant="caption" color="text.secondary">
+                      <Typography component="div" variant="caption" color="text.secondary">
                         🎨 {entity.creativity}
                       </Typography>
-                      <Typography variant="caption" color="text.secondary">
+                      <Typography component="div" variant="caption" color="text.secondary">
                         🤝 {entity.relationships}
                       </Typography>
                     </Box>
