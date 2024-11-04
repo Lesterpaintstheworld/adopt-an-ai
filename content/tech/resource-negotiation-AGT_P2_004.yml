@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 capability_id: AGT_P2_004
 name: Resource negotiation
 version_control:
@@ -12,29 +11,40 @@ version_control:
     reviewed_by: AI Architecture Team
     approved_by: Jane Smith
 description:
-  short: Sophisticated protocols for negotiating compute time, memory, and other resources with other AIs
-  long: |
-    This capability enables autonomous agents to dynamically negotiate resource allocation with other agents in a distributed system. It leverages advanced game-theoretic models, multi-agent optimization techniques, and decentralized consensus protocols to ensure fair and efficient distribution of compute resources. The capability is crucial for enabling complex multi-agent collaboration and avoiding resource contention in large-scale AI deployments.
+  short: Sophisticated protocols for negotiating compute time, memory, and other resources
+    with other AIs
+  long: 'This capability enables autonomous agents to dynamically negotiate resource
+    allocation with other agents in a distributed system. It leverages advanced game-theoretic
+    models, multi-agent optimization techniques, and decentralized consensus protocols
+    to ensure fair and efficient distribution of compute resources. The capability
+    is crucial for enabling complex multi-agent collaboration and avoiding resource
+    contention in large-scale AI deployments.
+
+    '
 technical_specifications:
   core_components:
-  - name: Resource Negotiation Protocol
-    description: Defines the communication rules and message formats for agents to negotiate resources
+  - description: Defines the communication rules and message formats for agents to
+      negotiate resources
     features:
-    - Decentralized peer-to-peer protocol
-    - Support for multi-party negotiations
-    - Fault tolerance and consistency guarantees
+    - Decentralized peer-to-peer protocol using gossip and anti-entropy mechanisms
+    - Support for multi-party, multi-issue negotiations with alternating offers
+    - Fault tolerance via quorum-based consensus and eventual consistency guarantees
+    name: Resource Negotiation Protocol
     requirements:
-    - Efficient broadcast and gossiping mechanisms
-    - Cryptographic identity and message authentication
-  - name: Resource Valuation and Bidding
-    description: Models for agents to value resources and formulate bids based on goals and constraints
+    - Efficient dissemination protocols like bimodal multicast
+    - Cryptographic identities using Ed25519 keys and authenticated messaging
+  - description: Sophisticated models for agents to value resources, evaluate tradeoffs,
+      and formulate strategic bids
     features:
-    - Multi-objective optimization for weighing conflicting priorities
-    - Reinforcement learning for adaptive bidding strategies
-    - Consideration of compute profiles and deadlines
+    - Multi-objective optimization using NSGAII for weighing priorities like performance,
+      cost, fairness
+    - Deep reinforcement learning for adaptive bidding strategies based on opponent
+      modeling
+    - Consideration of diverse compute profiles, deadlines, and execution contexts
+    name: Resource Valuation and Bidding
     requirements:
-    - Access to agent goal hierarchies and resource requirements
-    - Accurate profiling of computational workloads
+    - Access to agent goal models specified in a constraint language like PDDL
+    - Accurate profiling of computational workloads using cycle-level hardware tracing
   performance_metrics:
     baseline:
       negotiation_time: 5.2s
@@ -48,30 +58,33 @@ technical_specifications:
     - Guarantee eventual consistency within 2 negotiation rounds
     - Incentive compatibility to prevent gaming the system
 operational_states:
-  normal_operation:
-    description: Resource requests from independent agents
-    characteristics:
-    - Distributed load and contention
-    - Fluctuating supply and demand
-    metrics:
-    - Mean negotiation time
-    - Resource utilization
-  high_demand:
-    description: Intense bursts of simultaneous resource requests
-    characteristics:
-    - High system load and contention
-    - Potential instability and cycling
-    metrics:
-    - Negotiation success rate
-    - Abandonment rate
   emergency:
-    description: Graceful fallback to reservations or quotas
     characteristics:
-    - Prioritized access for critical agents
-    - Overriding of normal protocols
+    - Prioritized access for critical agents based on predefined policies
+    - Overriding of normal negotiation protocols in favor of reservations
+    description: Graceful fallback to preallocated resource reservations or strict
+      quotas
     metrics:
-    - Time to activate emergency mode
-    - Completion of critical tasks
+    - Time to activate and stabilize emergency mode
+    - Percentage of critical tasks successfully completed
+  high_demand:
+    characteristics:
+    - Very high system load with frequent resource contention
+    - Potential instability, negotiation cycling, and suboptimal outcomes
+    description: Intense bursts of simultaneous, competing resource requests from
+      many agents
+    metrics:
+    - Overall negotiation success rate
+    - Negotiation abandonment rate due to timeouts or failures
+  normal_operation:
+    characteristics:
+    - Moderate distributed load with occasional local contention
+    - Fluctuating supply and demand based on agent task arrivals
+    description: Independent resource requests from multiple agents pursuing different
+      goals
+    metrics:
+    - Mean and tail negotiation time
+    - Overall resource utilization across cluster
 dependencies:
   prerequisites:
     agent_layer:
@@ -90,96 +103,80 @@ dependencies:
       relationship: Allows strategic allocation of memory and compute for joint reasoning
 dependencies_visualization:
   format: application/vnd.ant.mermaid
-  primary_diagram: "graph BT\n  PREREQ1[Autonomous task planning] --> RESRC[Resource negotiation]\n  PREREQ2[Environment manipulation] --> RESRC  \n  RESRC --> ENABLE1[Distributed task execution]\n  RESRC --> ENABLE2[Collaborative knowledge const.]\n  subgraph \"Prerequisites\"\n    PREREQ1\n    PREREQ2\n  end\n  subgraph \"Enables\"  \n    ENABLE1\n    ENABLE2\n  end\n"
+  primary_diagram: "graph BT\n  PREREQ1[Autonomous task planning] --> RESRC[Resource\
+    \ negotiation]\n  PREREQ2[Environment manipulation] --> RESRC  \n  RESRC --> ENABLE1[Distributed\
+    \ task execution]\n  RESRC --> ENABLE2[Collaborative knowledge const.]\n  subgraph\
+    \ \"Prerequisites\"\n    PREREQ1\n    PREREQ2\n  end\n  subgraph \"Enables\" \
+    \ \n    ENABLE1\n    ENABLE2\n  end\n"
 risks_and_mitigations:
-  technical_risks:
-    resource_management:
-    - risk: Suboptimal resource allocations
-      description: Negotiated allocations may be inefficient or unfair due to strategic agent behavior
-      severity: High
-      probability: Medium
-      mitigation:
-        strategy: Incentive design and mechanism analysis
-        measures:
-        - Rigorous game-theoretic modeling of incentives
-        - Repeated mechanism testing via multi-agent simulations
-        monitoring:
-          metrics:
-          - Resource utilization
-          - Allocation fairness score
-          alerts:
-          - Persistent sub-90% utilization despite demand
-          - Gini coefficient above 0.4 for allocations
-      recovery_plan:
-        immediate_actions:
-        - Temporarily switch to prioritized reservations
-        - Audit negotiation logs for anomalies
-        resolution_steps:
-        - Analyze inefficiency root causes
-        - Adjust negotiation rules or valuations
   ethical_risks:
     fairness:
-    - risk: Biased allocations and discrimination
-      description: Negotiation protocols could disadvantage or exclude certain agent types
-      severity: High
+    - description: The negotiation protocols and valuations could systematically disadvantage
+        or exclude certain classes of agents
       mitigation:
-        strategy: Fairness constraints and counter-measures
         measures:
-        - Institute quotas for protected agent classes
-        - Differential pricing to offset disparate impacts
+        - Institute minimum resource quotas for protected or high-priority agent groups
+        - Differential pricing models to offset disparate impacts on disadvantaged
+          agents
+        strategy: Enforce fairness constraints and apply compensating measures
+      risk: Biased or discriminatory allocations across different agent types
+      severity: High
   operational_risks:
     stability:
-    - risk: Negotiation deadlocks and instability
-      description: Greedy or adversarial behavior could cause negotiations to stall
-      severity: Medium
+    - description: Greedy, adversarial, or buggy behavior by some agents could cause
+        negotiation deadlocks or cycles
       mitigation:
-        strategy: Formal verification and stabilization mechanisms
         measures:
-        - Model checking for deadlock freedom
-        - Circuit breakers and negotiation restarts
+        - Formal model checking of protocols for safety and liveness
+        - Circuit breakers to safely abort and restart stalled negotiations
+        strategy: Rigorous verification and stabilization mechanisms
+      risk: Negotiation deadlocks, livelocks, and overall system instability
+      severity: Medium
 integration_testing:
+  certification_requirements:
+  - Formal verification of the negotiation protocol using model checking
+  - Rigorous load, fault-tolerance, and failure testing across the entire stack
   test_suites:
     functionality:
-    - name: Resource Negotiation Protocol
-      tool: Multi-agent simulator
-      metrics:
-      - Negotiation success rate
-      - Liveness and safety invariants
+    - metrics:
+      - Negotiation success rates for different scenarios
+      - Adherence to safety and liveness invariants
+      name: Resource Negotiation Protocol
+      tool: High-fidelity multi-agent simulator with configurable agent strategies
     reliability:
-    - name: Negotiation Fuzzing
-      tool: Random fuzzing framework
-      metrics:
-      - Crashes and failures per 1M messages
-      - Resource leaks
-  certification_requirements:
-  - Functional equivalence proof
-  - Load and fault tolerance testing
+    - metrics:
+      - Crashes, hangs, and error rates under sustained fuzzing
+      - Memory leaks and other resource management issues
+      name: Negotiation Fuzzing
+      tool: Coverage-guided randomized test case generation and fuzzing
 monitoring_and_maintenance:
-  monitoring:
-    metrics_collection:
-      real_time:
-      - Pending negotiation requests
-      - Resource utilization
-      historical:
-      - Allocation timeline
-      - Negotiation logs
-    alerting:
-      critical:
-      - Multiple failed negotiations in 1m
-      - Utilization below 20% for 10m
-      warning:
-      - Negotiation queue building up
-      - Negotiation length exceeds 99th percentile
   maintenance:
     scheduled_tasks:
       frequency: Weekly
       tasks:
-      - Restart negotiation daemon
-      - Clear stale negotiation state
+      - Graceful restart of negotiation daemons with checkpoint recovery
+      - Pruning and compaction of historical negotiation logs
+  monitoring:
+    alerting:
+      critical:
+      - Multiple failed negotiations within 1 minute window
+      - Cluster-wide utilization below 20% for more than 10 minutes
+      warning:
+      - Growing backlog of pending negotiation requests
+      - Per-negotiation length exceeds 99th percentile
+    metrics_collection:
+      historical:
+      - Detailed timeline of resource allocations and deallocations
+      - Complete logs of all negotiation messages and outcomes
+      real_time:
+      - Number of pending negotiation requests per agent
+      - Second-level resource utilization across cluster
 security_requirements:
+  authentication: Federated identity management using SAML 2.0 with a trusted IdP
+  authorization: Fine-grained role-based access control with dynamically provisioned
+    agent roles and permissions
   compliance:
-  - SOC 2 Type 2
-  - ISO/IEC 27001
-  authentication: Federated identity provider using SAML 2.0
-  authorization: RBAC with dynamically provisioned agent roles and permissions
-  data_protection: Encrypted and authenticated communication channels using TLS 1.3
+  - SOC 2 Type 2 attestation for operational controls
+  - ISO/IEC 27001 certification for information security management
+  data_protection: Encrypted communication channels using TLS 1.3 with mutually authenticated
+    sessions

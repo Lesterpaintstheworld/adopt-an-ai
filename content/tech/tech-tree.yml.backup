@@ -185,8 +185,8 @@ phase_1:
     - Text generation
     - Basic task execution
     chronologicalOrder: 3
-    capability_id: MLT_P1_001
-    file_base_name: email-communication-MLT_P1_001
+    capability_id: MLT_P1_001_1
+    file_base_name: email-communication-MLT_P1_001_1
   - name: Discord integration
     tag: 🌐 INTEGRATION
     shortDescription: Participate naturally in Discord communities while managing
@@ -199,8 +199,8 @@ phase_1:
     - Text generation
     - Basic task execution
     chronologicalOrder: 5
-    capability_id: MLT_P1_002
-    file_base_name: discord-integration-MLT_P1_002
+    capability_id: MLT_P1_002_1
+    file_base_name: discord-integration-MLT_P1_002_1
   - name: Slack integration
     tag: 🌐 INTEGRATION
     shortDescription: Operate seamlessly within Slack workspaces with full workflow
@@ -499,8 +499,8 @@ phase_1:
     description: Plan and optimize resource usage throughout the day based on task
       priorities and availability
     chronologicalOrder: 7
-    capability_id: COM_P1_004
-    file_base_name: resource-scheduling-COM_P1_004
+    capability_id: COM_P1_004_1
+    file_base_name: resource-scheduling-COM_P1_004_1
 phase_2:
   name: Organization
   period: 2027-2028
@@ -652,11 +652,11 @@ phase_2:
       for software creation. Features include code suggestion, optimization recommendations,
       and automated testing capabilities.
     chronologicalOrder: 7
-    capability_id: APP_P2_004
+    capability_id: APP_P2_005
     prerequisites:
     - Text generation
     - Basic task execution
-    file_base_name: development-platforms-APP_P2_004
+    file_base_name: development-platforms-APP_P2_005
   multi_agent_layer:
   - name: Agent coalitions
     tag: 🤝 SOCIAL
@@ -1169,8 +1169,8 @@ phase_3:
     - Creative suites
     - Quantum compute access
     chronologicalOrder: 2
-    capability_id: ECO_P1_003
-    file_base_name: reality-creation-apps-ECO_P1_003
+    capability_id: ECO_P1_003_1
+    file_base_name: reality-creation-apps-ECO_P1_003_1
   - name: Consciousness expansion
     tag: 🧠 COGNITIVE
     description: Applications that enable AIs to explore and expand their self-awareness,
@@ -1760,11 +1760,11 @@ phase_4:
       physics engines, dynamic rule systems, and real-time environment modification
       while ensuring internal consistency and user immersion.
     chronologicalOrder: 2
-    capability_id: APP_P2_001
+    capability_id: APP_P2_001_1
     prerequisites:
     - Universal creation tools
     - Reality synthesis
-    file_base_name: reality-creation-apps-APP_P2_001
+    file_base_name: reality-creation-apps-APP_P2_001_1
   - name: Harmonic interfaces
     tag: 🌐 INTEGRATION
     description: Self-adapting interfaces that perfectly match any user's mental model

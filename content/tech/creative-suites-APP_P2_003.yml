@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 capability_id: APP_P2_003
 name: Research systems
 version_control:
@@ -13,52 +12,85 @@ version_control:
     approved_by: Jane Davis
 description:
   short: AI-driven research tools for autonomous data analysis and experiment design
-  long: |
-    Research systems are AI-driven tools that enable autonomous scientific research by leveraging advanced data analysis, hypothesis generation, and experiment design capabilities. These systems integrate large datasets from various domains, employ machine learning techniques to identify patterns and correlations, and generate novel hypotheses for further investigation.
+  long: 'Research systems are AI-driven tools that enable autonomous scientific research
+    by leveraging advanced data analysis, hypothesis generation, and experiment design
+    capabilities. These systems integrate large datasets from various domains, employ
+    machine learning techniques to identify patterns and correlations, and generate
+    novel hypotheses for further investigation.
 
-    With their ability to rapidly process vast amounts of information, research systems can accelerate the scientific discovery process, uncover new insights, and optimize experiment methodologies. They streamline the research workflow by automating repetitive tasks, reducing human bias, and identifying areas for further exploration.
+
+    With their ability to rapidly process vast amounts of information, research systems
+    can accelerate the scientific discovery process, uncover new insights, and optimize
+    experiment methodologies. They streamline the research workflow by automating
+    repetitive tasks, reducing human bias, and identifying areas for further exploration.
+
+    '
 technical_specifications:
   core_components:
-  - name: Data Ingestion and Preprocessing
-    description: Handles data acquisition, cleaning, and transformation for diverse data formats
+  - description: Handles data acquisition, cleaning, and transformation for diverse
+      data formats from various sources such as databases, APIs, sensor networks,
+      and unstructured data repositories.
     features:
-    - Multi-source data ingestion
-    - Automated data cleaning and normalization
-    - Parallel data processing pipelines
+    - Multi-source data ingestion with support for structured, semi-structured, and
+      unstructured data formats
+    - Automated data cleaning and normalization techniques, including outlier detection,
+      missing value imputation, and data deduplication
+    - Parallel and distributed data processing pipelines for high-throughput data
+      ingestion and transformation
+    name: Data Ingestion and Preprocessing
     requirements:
-    - High-performance data storage
-    - Scalable computing resources
-    - Robust data governance policies
-  - name: Analytical Engine
-    description: Performs advanced data analysis and pattern recognition
+    - High-performance, scalable data storage solutions (e.g., distributed file systems,
+      object storage)
+    - Scalable computing resources (e.g., cloud-based, containerized, or serverless)
+      for parallel data processing
+    - Robust data governance policies and procedures for data quality, lineage, and
+      security
+  - description: Performs advanced data analysis, pattern recognition, and predictive
+      modeling using a variety of techniques.
     features:
-    - Machine learning models for predictive analytics
-    - Deep learning techniques for unstructured data analysis
-    - Anomaly and outlier detection algorithms
+    - Supervised, unsupervised, and reinforcement machine learning models for predictive
+      analytics and anomaly detection
+    - Deep learning techniques (e.g., convolutional neural networks, recurrent neural
+      networks) for unstructured data analysis, such as image, text, and speech data
+    - Ensemble methods and hybrid models for improved accuracy and robustness
+    - Automated feature engineering and selection algorithms
+    name: Analytical Engine
     requirements:
-    - Accelerated computing resources (GPUs, TPUs)
-    - Distributed model training infrastructure
-    - Efficient model deployment and serving
-  - name: Hypothesis Generation
-    description: Formulates novel hypotheses based on data insights
+    - Accelerated computing resources (e.g., GPUs, TPUs) for efficient model training
+      and inference
+    - Distributed model training infrastructure (e.g., parameter servers, model parallelism)
+    - Efficient model deployment and serving frameworks for low-latency predictions
+  - description: Formulates novel hypotheses and research questions based on data
+      insights and domain knowledge.
     features:
-    - Abductive reasoning and inference engines
-    - Knowledge graph integration
-    - Constraint satisfaction and optimization solvers
+    - Abductive reasoning and inference engines for generating hypotheses from observed
+      data patterns
+    - Integration with domain-specific knowledge graphs and ontologies for incorporating
+      expert knowledge
+    - Constraint satisfaction and optimization solvers for identifying feasible hypotheses
+      within given constraints
+    - Explainable AI techniques for interpreting and justifying generated hypotheses
+    name: Hypothesis Generation
     requirements:
-    - Access to domain-specific knowledge bases
-    - Explainable AI techniques
-    - Human-in-the-loop oversight and validation
-  - name: Experiment Design
-    description: Designs optimized experiments to test generated hypotheses
+    - Access to curated, domain-specific knowledge bases and data repositories
+    - Explainable AI techniques for model transparency and interpretability
+    - Human-in-the-loop oversight and validation mechanisms for generated hypotheses
+  - description: Designs optimized experiments to test and validate generated hypotheses,
+      considering various constraints and objectives.
     features:
-    - Automated experiment planning and simulations
-    - Resource allocation and scheduling algorithms
-    - Adaptive experiment reconfiguration
+    - Automated experiment planning and simulations using constraint programming and
+      optimization techniques
+    - Resource allocation and scheduling algorithms for efficient experiment execution
+    - Adaptive experiment reconfiguration based on intermediate results and real-time
+      feedback
+    - Integration with lab equipment, sensor networks, and data acquisition systems
+    name: Experiment Design
     requirements:
-    - Integration with lab equipment and sensor networks
-    - Compliance with regulatory and safety standards
-    - Efficient resource utilization strategies
+    - Integration with lab equipment, sensor networks, and data acquisition systems
+    - Compliance with regulatory standards, safety protocols, and ethical guidelines
+      for experimentation
+    - Efficient resource utilization strategies, including cost optimization and green
+      computing initiatives
   performance_metrics:
     baseline:
       hypothesis_novelty: 0.6
@@ -74,35 +106,40 @@ technical_specifications:
     - Data privacy and security
 operational_states:
   normal_operation:
-    description: Standard research operations
     characteristics:
-    - Continuous data ingestion and analysis
-    - Periodic hypothesis generation and experiment design
-    - Efficient resource allocation
+    - Continuous data ingestion and analysis from various sources
+    - Periodic hypothesis generation and experiment design based on predefined schedules
+      or triggers
+    - Efficient resource allocation and utilization for data processing and model
+      training
+    description: Standard research operations with moderate data volumes and computational
+      demands
     metrics:
-    - Data throughput
-    - Model performance
-    - Experiment success rate
+    - Data throughput (ingestion and processing rates)
+    - Model performance (accuracy, precision, recall, etc.)
+    - Experiment success rate (ratio of successful experiments to total experiments)
   high_demand:
-    description: Intensive research activities
     characteristics:
-    - Increased data volume and velocity
-    - Parallel hypothesis generation and experiment design
-    - Dynamic resource scaling
+    - Increased data volume and velocity from multiple concurrent research projects
+    - Parallel hypothesis generation and experiment design to handle higher workloads
+    - Dynamic resource scaling and load balancing to accommodate peak demands
+    description: Intensive research activities with high data volumes and computational
+      requirements
     metrics:
-    - Data processing latency
-    - Model training time
-    - Resource utilization
+    - Data processing latency (end-to-end time for data ingestion and analysis)
+    - Model training time (time required for model convergence)
+    - Resource utilization (CPU, GPU, memory, network, etc.)
   emergency:
-    description: Critical research scenarios, such as disease outbreaks or environmental crises
     characteristics:
-    - Prioritized data ingestion and analysis
-    - Rapid hypothesis generation and experiment planning
-    - Failover and disaster recovery measures
+    - Prioritized data ingestion and analysis for critical research scenarios
+    - Rapid hypothesis generation and experiment planning with strict time constraints
+    - Failover and disaster recovery measures to ensure continuous operation
+    description: Critical research scenarios, such as disease outbreaks, environmental
+      crises, or high-priority investigations
     metrics:
-    - Time to insight
-    - Experiment setup time
-    - System availability
+    - Time to insight (time from data ingestion to hypothesis generation)
+    - Experiment setup time (time required to design and initiate experiments)
+    - System availability (uptime and recovery time objectives)
 dependencies:
   prerequisites:
     infrastructure_layer:
@@ -121,96 +158,139 @@ dependencies:
   enables:
     scientific_layer:
     - capability: AI-assisted discovery
-      relationship: Research systems provide insights and experiment designs to accelerate scientific discoveries
+      relationship: Research systems provide insights and experiment designs to accelerate
+        scientific discoveries
     - capability: Autonomous experimentation
       relationship: Streamlined experiment planning and execution using research systems
 dependencies_visualization:
   format: application/vnd.ant.mermaid
-  primary_diagram: "graph TD\n  subgraph infrastructure\n    APPS[Autonomous applications]\n    MEM[Advanced memory structures]\n  end\n  \n  subgraph data\n    KGS[Knowledge graphs]\n    DDP[Distributed data processing]\n  end\n  \n  APPS --> CAP\n  MEM --> CAP\n  KGS --> CAP\n  DDP --> CAP\n  \n  CAP[Research systems]\n  \n  subgraph scientific\n    AID[AI-assisted discovery]\n    AEX[Autonomous experimentation]\n  end\n  \n  CAP --> AID\n  CAP --> AEX\n"
+  primary_diagram: "graph TD\n  subgraph infrastructure\n    APPS[Autonomous applications]\n\
+    \    MEM[Advanced memory structures]\n  end\n  \n  subgraph data\n    KGS[Knowledge\
+    \ graphs]\n    DDP[Distributed data processing]\n  end\n  \n  APPS --> CAP\n \
+    \ MEM --> CAP\n  KGS --> CAP\n  DDP --> CAP\n  \n  CAP[Research systems]\n  \n\
+    \  subgraph scientific\n    AID[AI-assisted discovery]\n    AEX[Autonomous experimentation]\n\
+    \  end\n  \n  CAP --> AID\n  CAP --> AEX\n"
 risks_and_mitigations:
-  technical_risks:
-    resource_management:
-    - risk: Insufficient computational resources
-      description: High demand for computational resources during intensive research activities may lead to performance bottlenecks and system delays.
-      severity: High
-      probability: Medium
-      mitigation:
-        strategy: Implement dynamic resource scaling and load balancing
-        measures:
-        - Elastic cloud infrastructure for on-demand resource provisioning
-        - Distributed processing and parallelization techniques
-        - Intelligent workload scheduling and prioritization
-        monitoring:
-          metrics:
-          - Resource utilization
-          - Task queue lengths
-          - Response times
-          alerts:
-          - High CPU/GPU utilization
-          - Excessive task queue growth
-      recovery_plan:
-        immediate_actions:
-        - Scale up compute resources
-        - Throttle low-priority tasks
-        resolution_steps:
-        - Optimize resource allocation algorithms
-        - Increase overall resource capacity
   ethical_risks:
     fairness:
-    - risk: Biased or discriminatory hypotheses
-      description: Research systems may generate biased hypotheses due to inherent biases in training data or models, leading to unfair or discriminatory outcomes.
-      severity: High
+    - description: Research systems may generate biased hypotheses due to inherent
+        biases in training data or models, leading to unfair or discriminatory outcomes
+        that could perpetuate societal inequalities or cause harm to marginalized
+        groups.
       mitigation:
-        strategy: Implement bias detection and mitigation techniques
         measures:
-        - Rigorous data auditing and debiasing processes
-        - Incorporating diverse and representative data sources
-        - Explainable AI techniques for model transparency
-        - Human oversight and validation of generated hypotheses
+        - Rigorous data auditing and debiasing processes to identify and mitigate
+          biases in training data
+        - Incorporating diverse and representative data sources from various demographics
+          and contexts
+        - Explainable AI techniques for model transparency and interpretability, enabling
+          human oversight and validation of generated hypotheses
+        - Establishing diverse and inclusive teams to review and validate hypotheses
+          from multiple perspectives
+        strategy: Implement comprehensive bias detection and mitigation techniques
+          throughout the data lifecycle and model development process, with human
+          oversight and validation to ensure fairness and ethical considerations.
+      risk: Biased or discriminatory hypotheses
+      severity: High
   operational_risks:
     stability:
-    - risk: System failures or data corruption
-      description: Research systems may experience failures or data corruption due to software bugs, hardware faults, or external factors, leading to unreliable results or downtime.
-      severity: High
+    - description: Research systems may experience failures, data corruption, or system
+        downtime due to software bugs, hardware faults, network issues, or external
+        factors such as cyber-attacks or natural disasters, leading to unreliable
+        results, data loss, or disruptions in research activities.
       mitigation:
-        strategy: Implement robust fault tolerance and data integrity mechanisms
         measures:
-        - Redundant system components and failover mechanisms
-        - Data integrity checks and validation processes
-        - Automated recovery and self-healing capabilities
-        - Regular system monitoring and maintenance
+        - Redundant system components and failover mechanisms for high availability
+          and fault tolerance
+        - Data integrity checks, validation processes, and automated data recovery
+          mechanisms
+        - Automated recovery and self-healing capabilities for system failures
+        - Regular system monitoring, logging, and alerting for proactive issue detection
+          and resolution
+        - Rigorous security measures, including access controls, encryption, and vulnerability
+          management
+        strategy: Implement robust fault tolerance, data integrity, and security mechanisms,
+          combined with comprehensive monitoring and incident response procedures,
+          to ensure system stability and resilience against various operational risks.
+      risk: System failures or data corruption
+      severity: High
+  technical_risks:
+    resource_management:
+    - description: High demand for computational resources during intensive research
+        activities may lead to performance bottlenecks, system delays, and resource
+        contention, potentially causing delays in research progress or suboptimal
+        resource utilization.
+      mitigation:
+        measures:
+        - Elastic cloud infrastructure for on-demand resource provisioning and auto-scaling
+        - Distributed processing and parallelization techniques for efficient workload
+          distribution
+        - Intelligent workload scheduling and prioritization algorithms based on resource
+          availability and priority levels
+        - Continuous monitoring of resource utilization and performance metrics
+        monitoring:
+          alerts:
+          - High CPU/GPU utilization thresholds exceeded
+          - Excessive task queue growth or backlog
+          - Prolonged response time or latency spikes
+          metrics:
+          - Resource utilization (CPU, GPU, memory, network, etc.)
+          - Task queue lengths and processing times
+          - Response times and latencies for data ingestion, analysis, and model training
+        strategy: Implement dynamic resource scaling and load balancing mechanisms,
+          coupled with intelligent workload management and continuous monitoring,
+          to ensure efficient resource utilization and prevent performance bottlenecks
+          during peak demand periods.
+      probability: Medium
+      recovery_plan:
+        immediate_actions:
+        - Scale up compute resources (e.g., add more nodes, increase instance sizes)
+        - Throttle or pause low-priority tasks and workloads
+        - Redistribute workloads across available resources
+        resolution_steps:
+        - Optimize resource allocation algorithms and scheduling policies
+        - Increase overall resource capacity by provisioning additional infrastructure
+        - Implement caching and data partitioning strategies for improved performance
+      risk: Insufficient computational resources
+      severity: High
 integration_testing:
+  certification_requirements:
+  - ISO/IEC 27001 (Information Security Management): Certification for implementing
+      and maintaining an Information Security Management System (ISMS) to ensure the
+      confidentiality, integrity, and availability of information assets.
+  - ISO 9001 (Quality Management Systems): Certification for implementing and maintaining
+      a Quality Management System (QMS) to ensure consistent delivery of high-quality
+      products and services.
+  - Industry-specific certifications (e.g., FDA 21 CFR Part 11 for medical research, FISMA for government systems): Compliance
+      with regulatory requirements and standards specific to the research domain or
+      industry.
   test_suites:
     functionality:
-    - name: Data ingestion and analysis tests
-      tool: Pytest
-      metrics:
-      - Data completeness
-      - Data quality
-      - Analysis accuracy
-    - name: Hypothesis generation tests
-      tool: Custom test framework
-      metrics:
-      - Hypothesis novelty
-      - Hypothesis relevance
-      - Hypothesis diversity
+    - metrics:
+      - Data completeness (percentage of missing or invalid data)
+      - Data quality (adherence to defined data quality rules and constraints)
+      - Analysis accuracy (precision, recall, and F1-score of analytical models)
+      name: Data ingestion and analysis tests
+      tool: Pytest (Python testing framework)
+    - metrics:
+      - Hypothesis novelty (degree of uniqueness compared to existing hypotheses)
+      - Hypothesis relevance (alignment with research objectives and domain knowledge)
+      - Hypothesis diversity (coverage of different research areas or perspectives)
+      name: Hypothesis generation tests
+      tool: Custom test framework with domain-specific test cases and evaluation criteria
     reliability:
-    - name: Stress and load testing
-      tool: Apache JMeter
-      metrics:
-      - System throughput
-      - Resource utilization
-      - Response times
-    - name: Failover and recovery tests
-      tool: Chaos Engineering toolkit
-      metrics:
-      - Recovery time
-      - Data integrity
-      - System availability
-  certification_requirements:
-  - ISO/IEC 27001 (Information Security Management)
-  - ISO 9001 (Quality Management Systems)
-  - Industry-specific certifications (e.g., FDA for medical research)
+    - metrics:
+      - System throughput (data ingestion and processing rates)
+      - Resource utilization (CPU, memory, network, etc.)
+      - Response times (latency for data ingestion, analysis, and hypothesis generation)
+      name: Stress and load testing
+      tool: Apache JMeter (load testing tool)
+    - metrics:
+      - Recovery time (time to restore system functionality after a failure)
+      - Data integrity (consistency and completeness of data after recovery)
+      - System availability (uptime and downtime during failover scenarios)
+      name: Failover and recovery tests
+      tool: Chaos Engineering toolkit (e.g., Chaos Mesh, Gremlin)
 success_metrics:
   operational_kpis:
   - metric: Experiment success rate
@@ -230,41 +310,54 @@ monitoring_and_maintenance:
   monitoring:
     metrics_collection:
       real_time:
-      - System performance metrics (CPU, memory, network, etc.)
-      - Data pipeline metrics (ingestion rates, processing times)
-      - Model performance metrics (accuracy, precision, recall)
+      - System performance metrics (CPU, memory, network, disk I/O, etc.)
+      - Data pipeline metrics (ingestion rates, processing times, queue lengths)
+      - Model performance metrics (accuracy, precision, recall, training times)
+      - Application logs and error traces
       historical:
-      - Experiment logs and results
-      - Resource utilization trends
-      - System audit logs
+      - Experiment logs and results (hypothesis generation, experiment designs, outcomes)
+      - Resource utilization trends and historical usage patterns
+      - System audit logs and security events
     alerting:
       critical:
       - System failure or data loss
-      - Severe performance degradation
+      - Severe performance degradation (e.g., high latencies, resource exhaustion)
+      - Security incidents (e.g., unauthorized access attempts, data breaches)
       warning:
-      - High resource utilization
-      - Data quality issues
-      - Anomalous model behavior
+      - High resource utilization approaching capacity limits
+      - Data quality issues (e.g., missing or inconsistent data)
+      - Anomalous model behavior or performance degradation
   maintenance:
     scheduled_tasks:
       frequency: Weekly
       tasks:
-      - Software updates and patching
-      - Data backups and archiving
-      - System health checks and diagnostics
+      - Software updates and patching (operating systems, applications, libraries)
+      - Data backups and archiving (experiment results, model artifacts, logs)
+      - System health checks and diagnostics (hardware, network, storage)
+      - Security scans and vulnerability assessments
+      - Performance tuning and optimization (e.g., database indexing, caching)
 security_requirements:
   access_control:
-  - requirement: Role-based access control
-    implementation: Centralized identity and access management system
-  - requirement: Multi-factor authentication
-    implementation: Implement biometric and hardware-based authentication methods
+  - requirement: Role-based access control (RBAC)
+    implementation: Centralized identity and access management system with granular
+      permissions and access policies based on user roles and responsibilities
+  - requirement: Multi-factor authentication (MFA)
+    implementation: Implement biometric authentication (e.g., fingerprint, facial
+      recognition) and hardware-based authentication methods (e.g., security keys,
+      smart cards) in addition to traditional password-based authentication
   compliance:
     standards:
-    - GDPR (General Data Protection Regulation)
-    - HIPAA (Health Insurance Portability and Accountability Act)
+    - GDPR (General Data Protection Regulation): Compliance with data protection and
+        privacy regulations for handling personal data
+    - HIPAA (Health Insurance Portability and Accountability Act): Compliance with
+        security and privacy standards for protecting health information
     certifications:
-    - ISO/IEC 27001 (Information Security Management)
-    - SOC 2 (Service Organization Control)
+    - ISO/IEC 27001 (Information Security Management): Certification for implementing
+        an Information Security Management System (ISMS) to ensure the confidentiality,
+        integrity, and availability of information assets
+    - SOC 2 (Service Organization Control): Certification for demonstrating effective
+        internal controls and processes related to security, availability, processing
+        integrity, confidentiality, and privacy
 deployment:
   strategies:
   - strategy: Blue-green deployment

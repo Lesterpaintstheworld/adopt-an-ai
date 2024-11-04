@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 capability_id: AGT_P2_002
 name: Complex goal hierarchies
 version_control:
@@ -12,46 +11,71 @@ version_control:
     reviewed_by: AI Systems Architecture Team
     approved_by: Jane Smith
 description:
-  short: Management of multiple interdependent objectives with dynamic prioritization and resource allocation
-  long: |
-    This capability enables AI agents to effectively manage complex hierarchies of goals, objectives, and sub-tasks. It facilitates dynamic prioritization and allocation of resources based on changing conditions and dependencies between goals. This is a critical capability for sophisticated AI systems that must juggle diverse, interconnected objectives while adapting to evolving environments and contexts. Key features include:
+  short: Management of multiple interdependent objectives with dynamic prioritization
+    and resource allocation
+  long: 'This capability enables AI agents to effectively manage complex hierarchies
+    of goals, objectives, and sub-tasks. It facilitates dynamic prioritization and
+    allocation of resources based on changing conditions and dependencies between
+    goals. This is a critical capability for sophisticated AI systems that must juggle
+    diverse, interconnected objectives while adapting to evolving environments and
+    contexts. Key features include:
+
 
     - Hierarchical goal decomposition and structuring
+
     - Dependency mapping and conflict resolution
+
     - Dynamic priority adjustment based on context
+
     - Intelligent resource allocation algorithms
+
     - Continuous monitoring and replanning
+
+    '
 technical_specifications:
   core_components:
-  - name: Goal Management System
-    description: Central component for representing, decomposing, and managing goals
+  - description: Central component for representing, decomposing, and managing complex
+      goal hierarchies
     features:
-    - Hierarchical goal modeling
-    - Goal dependency analysis
-    - Conflict detection and resolution
+    - Expressive goal modeling language supporting hierarchical goal structures, dependencies,
+      and constraints
+    - Scalable distributed goal database for storing and querying large goal sets
+    - Efficient goal dependency analysis algorithms with bounded computational complexity
+    - Automated goal conflict detection and resolution strategies
+    name: Goal Management System
     requirements:
-    - Expressive goal modeling language
-    - Scalable goal database
-    - Efficient dependency algorithms
-  - name: Priority Engine
-    description: Dynamically determines goal priorities based on context and dependencies
+    - Expressive yet formally defined goal modeling language
+    - Horizontally scalable and highly available goal database
+    - Parallel and incremental dependency analysis algorithms
+    - Configurable conflict resolution policies and heuristics
+  - description: Dynamically determines priorities for goals based on context, dependencies,
+      and organizational policies
     features:
-    - Multi-factor priority calculation
-    - Rule-based prioritization policies
-    - Machine learning models for adaptive prioritization
+    - Multi-factor priority calculation supporting weighted criteria like importance,
+      urgency, cost, and dependencies
+    - Extensible rule engine for encoding organization-specific prioritization policies
+    - Machine learning models for adaptive prioritization based on historical data
+      and outcomes
+    - Temporal smoothing and damping of priority fluctuations for system stability
+    name: Priority Engine
     requirements:
-    - Access to real-time context data
-    - Integration with Goal Management System
-  - name: Resource Allocation Optimizer
-    description: Allocates available resources optimally across active goals
+    - Access to real-time context data streams (e.g. events, sensor data, external
+      factors)
+    - Tight integration with Goal Management System for goal metadata
+    - Ability to encode and update prioritization rules and models
+  - description: Optimally allocates available resources across active goals while
+      satisfying constraints
     features:
-    - Constraint satisfaction algorithms
-    - Parallel task scheduling
-    - Resource negotiation protocols
+    - Constraint satisfaction algorithms for resource-goal assignment
+    - Parallel task scheduling and resource reservation mechanisms
+    - Decentralized resource negotiation protocols for dynamic reallocation
+    - Proactive resource planning and over-provisioning strategies
+    name: Resource Allocation Optimizer
     requirements:
-    - Up-to-date resource inventory
-    - Integration with Goal Management System
-    - Interface with Resource Negotiation capability
+    - Up-to-date inventory of available resources and capabilities
+    - Integration with Goal Management System for resource requirements
+    - Interface with Resource Negotiation capability for decentralized optimization
+    - Configurable policies for resource overprovisioning
   performance_metrics:
     baseline:
       goal_throughput: 100 goals/sec
@@ -65,33 +89,34 @@ technical_specifications:
     - Near real-time performance for interactive applications
     - Bounded computational complexity for large goal sets
 operational_states:
-  normal_operation:
-    description: Steady workflow with moderate goal complexity
-    characteristics:
-    - Well-defined goal hierarchies
-    - Stable resource availability
-    - Infrequent major priority shifts
-    metrics:
-    - Average goal depth
-    - Resource contention rate
-  high_demand:
-    description: Rapidly evolving goals and resource constraints
-    characteristics:
-    - Highly dynamic goal space
-    - Frequent resource redistribution
-    - Significant priority volatility
-    metrics:
-    - Goal churn rate
-    - Resource reallocation frequency
   emergency:
-    description: Critical failure or attack scenario
     characteristics:
-    - Conflicting high-priority goals
-    - Rapidly degrading resources
-    - Adversarial goal injection
+    - Presence of conflicting high-priority goals
+    - Rapidly degrading or adversely constrained resources
+    - Potential adversarial injection of malicious goals
+    description: Critical failure scenario or active attack on the system
     metrics:
-    - Critical resource levels
-    - Threat detection rates
+    - Critical resource levels breaching emergency thresholds
+    - Threat detection rates from security monitoring
+  high_demand:
+    characteristics:
+    - Highly dynamic and volatile goal space
+    - Frequent redistribution of resources across goals
+    - Significant priority volatility and rapid priority shifts
+    description: Rapidly evolving goals and resource constraints requiring continuous
+      adaptation
+    metrics:
+    - Goal churn rate (additions, updates, deletions)
+    - Resource reallocation frequency across goal hierarchies
+  normal_operation:
+    characteristics:
+    - Well-defined and relatively stable goal hierarchies
+    - Sufficient resource availability with moderate contention
+    - Infrequent major priority shifts for goals
+    description: Regular steady-state workflow with moderate goal complexity
+    metrics:
+    - Average depth of goal hierarchies
+    - Resource contention rates across goals
 dependencies:
   prerequisites:
     agent_layer:
@@ -110,85 +135,85 @@ dependencies:
       relationship: Provides mechanisms to adjust and reprioritize goals during recovery
 dependencies_visualization:
   format: application/vnd.ant.mermaid
-  primary_diagram: |
-    graph TD
-      CAP[Complex Goal <br> Hierarchies]
-      PLAN[Autonomous <br> Task Planning]
-      NEGOT[Resource <br> Negotiation]
-
-      PLAN --> CAP
-      NEGOT --> CAP
-
-      CAP --> COORD[Distributed <br> Coordination]
-      CAP --> REPAIR[Self-Repair]
+  primary_diagram: "graph TD\n  CAP[Complex Goal <br> Hierarchies]\n  PLAN[Autonomous\
+    \ <br> Task Planning]\n  NEGOT[Resource <br> Negotiation]\n\n  PLAN --> CAP\n\
+    \  NEGOT --> CAP\n\n  CAP --> COORD[Distributed <br> Coordination]\n  CAP -->\
+    \ REPAIR[Self-Repair]\n"
 risks_and_mitigations:
-  technical_risks:
-    resource_management:
-    - risk: Resource Starvation
-      description: Inability to secure required resources leads to goal failure
-      severity: High
-      probability: Medium
-      mitigation:
-        strategy: Proactive resource planning and graceful degradation
-        measures:
-        - Multi-phase resource reservation
-        - Flexible goal decomposition
-        - Resource usage monitoring
-        monitoring:
-          metrics:
-          - Reserved resource levels
-          - Actual resource utilization
-          alerts:
-          - Reservation deficit exceeds threshold
-          - Utilization spike detected
-      recovery_plan:
-        immediate_actions:
-        - Deactivate non-critical goals
-        - Transfer active tasks to available resources
-        resolution_steps:
-        - Acquire additional resources
-        - Renegotiate resource allocations
-        - Resume deactivated goals
   ethical_risks:
     fairness:
-    - risk: Bias in Goal Prioritization
-      description: Systematic prejudice in priority algorithms discriminates against certain goals
-      severity: Medium
+    - description: Systematic prejudice or bias in priority algorithms leads to discriminatory
+        treatment of certain goals
       mitigation:
-        strategy: Auditing and feedback mechanisms for priority models
         measures:
-        - Adversarial testing for biased outputs
-        - Human oversight and adjustment capabilities
+        - Rigorous adversarial testing for biased outputs across goal categories
+        - Human oversight, auditing, and adjustment capabilities for priority models
+        - Transparency through interpretable prioritization factors and decision logs
+        strategy: Comprehensive auditing, testing, human oversight, and feedback mechanisms
+          for priority models
+      risk: Bias and Unfair Discrimination in Goal Prioritization
+      severity: Medium
   operational_risks:
     stability:
-    - risk: Thrashing and Oscillations
-      description: Rapidly changing priorities cause system instability
-      severity: High
+    - description: Rapidly fluctuating priorities cause system instability, thrashing
+        and oscillations
       mitigation:
-        strategy: Intelligent filters and damping mechanisms
         measures:
-        - Temporal smoothing of priorities
-        - Hysteresis for priority changes
-        - Rate limiting for goal injections
+        - Temporal smoothing of priorities with configurable time windows
+        - Intelligent hysteresis policies for priority changes
+        - Rate limiting and throttling mechanisms for goal injections
+        strategy: Intelligent filtering, damping, and control mechanisms to stabilize
+          the system
+      risk: Priority Volatility and Oscillations
+      severity: High
+  technical_risks:
+    resource_management:
+    - description: Inability to secure and reserve required resources leads to critical
+        goal failures
+      mitigation:
+        measures:
+        - Multi-phase resource reservation and overprovisioning strategies
+        - Dynamic goal decomposition into feasible sub-goals given resources
+        - Continuous resource usage monitoring and forecasting
+        monitoring:
+          alerts:
+          - Reserved resource deficit exceeds threshold
+          - Utilization spike detected deviating from forecasts
+          metrics:
+          - Levels of reserved resources across resource pools
+          - Actual resource utilization across goals
+        strategy: Proactive resource planning, overprovisioning and graceful load
+          shedding
+      probability: Medium
+      recovery_plan:
+        immediate_actions:
+        - Deactivate and shed non-critical goals to free up resources
+        - Transfer active tasks to available resources while preserving high priorities
+        resolution_steps:
+        - Acquire additional resources from resource providers
+        - Renegotiate and rebalance resource allocations across goals
+        - Resume deactivated goals based on new resource availability
+      risk: Critical Resource Starvation and Shortage
+      severity: High
 integration_testing:
+  certification_requirements:
+  - IEC 61508 Functional Safety for Industrial Process Control
+  - ISO 26262 Automotive Functional Safety for Self-Driving Vehicles
   test_suites:
     functionality:
-    - name: Goal Lifecycle
-      tool: Automated Test Framework
-      metrics:
-      - Goal creation rate
-      - Dependency mapping accuracy
-      - Priority consistency
+    - metrics:
+      - Goal creation and update throughput
+      - Goal dependency mapping accuracy
+      - Priority consistency across goal hierarchies
+      name: Goal Lifecycle and Prioritization
+      tool: Automated Functional Test Framework
     reliability:
-    - name: Long-running Chaos Tests
-      tool: Chaos Mesh
-      metrics:
-      - Goal survivability
+    - metrics:
+      - Goal survivability under resource constraints
       - Resource starvation resistance
-      - Priority stability
-  certification_requirements:
-  - IEC 61508 Functional Safety
-  - ISO 26262 Automotive Functional Safety
+      - Priority stability and temporal smoothness
+      name: Long-Running Chaos and Fuzz Testing
+      tool: Chaos Mesh for Fault Injection Testing
 success_metrics:
   operational_kpis:
   - metric: Goal Completion Rate
@@ -202,36 +227,40 @@ success_metrics:
     target: 25
     current: 12
 monitoring_and_maintenance:
-  monitoring:
-    metrics_collection:
-      real_time:
-      - Resource utilization
-      - Priority distributions
-      - Goal injection rate
-      historical:
-      - Goal completion logs
-      - Resource allocation history
-    alerting:
-      critical:
-      - Resource exhaustion imminent
-      - Unresolved priority deadlock
-      warning:
-      - Resource fragmentation detected
-      - Goal dependency cycles formed
   maintenance:
     scheduled_tasks:
       frequency: Weekly
       tasks:
-      - Goal dependency graph pruning
-      - Priority model retraining
-      - Resource negotiation policy updates
+      - Goal dependency graph pruning and optimization
+      - Retraining of priority prediction models
+      - Review and updating of prioritization rule policies
+      - Auditing of resource negotiation outcomes
+  monitoring:
+    alerting:
+      critical:
+      - Imminent resource exhaustion across critical resource pools
+      - Unresolvable priority deadlock across goal hierarchies
+      warning:
+      - Resource fragmentation and skewed utilization detected
+      - Cyclic goal dependencies formed impacting prioritization
+    metrics_collection:
+      historical:
+      - Comprehensive logs of goal lifecycles and outcomes
+      - Resource allocation decisions and negotiation history
+      real_time:
+      - Multi-dimensional resource utilization metrics
+      - Statistical distributions of goal priorities
+      - Goal injection and update rates across hierarchies
 security_requirements:
+  authentication: Integrate with centralized secure identity and access management
+    for goal authorization
+  authorization: Mandatory multi-level role-based access controls for goal visibility,
+    creation, and editing
   compliance:
-  - IEC 62443 Industrial Security
-  - NIST 800-53 Security Controls
-  authentication: Integrated secure identity management for goal authorization
-  authorization: Multi-level role-based access controls for goal visibility and editing
-  data_protection: Encryption of goal data in transit and at rest to prevent tampering
+  - IEC 62443 Industrial Network and System Security
+  - NIST 800-53 Security and Privacy Controls for Federal Information Systems
+  data_protection: End-to-end encryption of goal data in transit and at rest to prevent
+    tampering or information leaks
 deployment:
   strategies:
   - strategy: Blue-Green Deployment

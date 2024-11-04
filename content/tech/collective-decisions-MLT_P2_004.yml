@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 capability_id: MLT_P2_004
 name: Collective decisions
 version_control:
@@ -12,41 +11,63 @@ version_control:
     reviewed_by: Multi-Agent Systems Team
     approved_by: Dr. Jane Smith
 description:
-  short: Consensus-building mechanisms for groups of AIs to make decisions about shared resources and goals
-  long: |
-    This capability enables multiple AI agents within a coalition to reach collective decisions through consensus-building mechanisms. It facilitates negotiation, voting, and other decision-making processes to determine the optimal allocation of shared resources and prioritization of collective goals. By leveraging their diverse specializations and perspectives, AI agents can collectively make more informed and robust decisions compared to individual agents operating in isolation.
+  short: Consensus-building mechanisms for groups of AIs to make decisions about shared
+    resources and goals
+  long: 'This capability enables multiple AI agents within a coalition to reach collective
+    decisions through consensus-building mechanisms. It facilitates negotiation, voting,
+    and other decision-making processes to determine the optimal allocation of shared
+    resources and prioritization of collective goals. By leveraging their diverse
+    specializations and perspectives, AI agents can collectively make more informed
+    and robust decisions compared to individual agents operating in isolation.
+
+    '
 technical_specifications:
   core_components:
-  - name: Coalition Formation
-    description: Algorithms for dynamically forming and managing coalitions of AI agents based on task requirements and agent capabilities
+  - description: Algorithms for dynamically forming and managing coalitions of AI
+      agents based on task requirements and agent capabilities
     features:
-    - Self-organization of agent coalitions
-    - Coalition membership management
-    - Task decomposition and role assignment
+    - Self-organization of agent coalitions based on task requirements, agent capabilities,
+      and resource constraints
+    - Dynamic coalition membership management with mechanisms for joining, leaving,
+      and merging coalitions
+    - Task decomposition and role assignment algorithms for optimal allocation of
+      subtasks to coalition members
+    name: Coalition Formation
     requirements:
-    - Agent registry and capability mapping
-    - Resource availability tracking
-    - Communication protocols for coalition coordination
-  - name: Preference Modeling
-    description: Techniques for modeling and representing individual agent preferences and collective utility functions
+    - Agent registry with comprehensive capability mapping and profiling
+    - Real-time resource availability tracking and forecasting
+    - Secure communication protocols and standards for coalition coordination and
+      negotiation
+  - description: Techniques for modeling and representing individual agent preferences
+      and collective utility functions
     features:
-    - Multi-attribute utility theory
-    - Preference elicitation and learning
-    - Preference aggregation methods
+    - Multi-attribute utility theory frameworks for modeling complex preferences and
+      trade-offs
+    - Preference elicitation techniques, including interactive methods and learning
+      from observed behavior
+    - Preference aggregation methods for combining individual preferences into collective
+      utility functions, such as social choice theory and voting protocols
+    name: Preference Modeling
     requirements:
-    - Knowledge representation frameworks
-    - Machine learning for preference learning
-    - Optimization algorithms for utility maximization
-  - name: Consensus Building
-    description: Distributed decision-making algorithms for reaching consensus among multiple agents
+    - Knowledge representation frameworks for encoding preferences and utility functions
+    - Machine learning techniques for preference learning from data and user feedback
+    - Multi-objective optimization algorithms for utility maximization under constraints
+  - description: Distributed decision-making algorithms for reaching consensus among
+      multiple agents
     features:
-    - Voting protocols (majority voting, ranked voting)
-    - Negotiation strategies (auction-based, argumentation-based)
-    - Conflict resolution mechanisms
+    - Voting protocols, including majority voting, ranked voting, and approval voting
+    - Negotiation strategies, such as auction-based mechanisms and argumentation-based
+      negotiation
+    - Conflict resolution mechanisms, including fair division algorithms and compensation
+      schemes
+    name: Consensus Building
     requirements:
-    - Secure communication channels
-    - Trust and reputation management
-    - Fairness and transparency guarantees
+    - Secure and reliable communication channels for information exchange during consensus
+      processes
+    - Trust and reputation management systems for evaluating agent credibility and
+      reliability
+    - Fairness and transparency guarantees, including accountability measures and
+      explainable decision processes
   performance_metrics:
     baseline:
       decision_quality: 0.7
@@ -60,37 +81,40 @@ technical_specifications:
     - Privacy and security constraints for sensitive data sharing
     - Fairness and non-discrimination constraints for decision outcomes
 operational_states:
-  normal_operation:
-    description: Routine decision-making for resource allocation and task planning
-    characteristics:
-    - Moderate decision complexity
-    - Stable coalition membership
-    - Predictable resource availability
-    metrics:
-    - Decision quality
-    - Decision time
-    - Resource utilization
-  high_demand:
-    description: High-stakes or time-critical decision-making scenarios
-    characteristics:
-    - High decision complexity
-    - Dynamic coalition membership
-    - Fluctuating resource availability
-    metrics:
-    - Decision quality
-    - Decision time
-    - Resource utilization
-    - Scalability (number of agents)
   emergency:
-    description: Crisis management and contingency planning
     characteristics:
-    - Rapidly changing conditions
-    - Stringent constraints and trade-offs
-    - Heightened risk and uncertainty
+    - Rapidly changing and uncertain conditions
+    - Stringent constraints and trade-offs with high stakes
+    - Heightened risk and time-critical decision-making
+    description: Crisis management and contingency planning scenarios, such as disaster
+      response or cyber-attack mitigation
     metrics:
-    - Decision robustness
-    - Response time
-    - Resource optimization
+    - Decision robustness under uncertainty
+    - Response time for critical decisions
+    - Resource optimization and allocation under scarcity
+  high_demand:
+    characteristics:
+    - High decision complexity with multiple interrelated factors
+    - Dynamic coalition membership with agents joining or leaving
+    - Fluctuating resource availability and contention
+    description: High-stakes or time-critical decision-making scenarios, such as strategic
+      planning or real-time resource allocation
+    metrics:
+    - Decision quality and accuracy
+    - Decision time and responsiveness
+    - Resource utilization and fairness
+    - Scalability (number of agents and decision complexity)
+  normal_operation:
+    characteristics:
+    - Moderate decision complexity with well-defined constraints
+    - Stable coalition membership with minimal churn
+    - Predictable resource availability and steady-state conditions
+    description: Routine decision-making for resource allocation, task planning, and
+      operational optimization
+    metrics:
+    - Decision quality and accuracy
+    - Decision time and efficiency
+    - Resource utilization and fairness
 dependencies:
   prerequisites:
     multi_agent_layer:
@@ -104,97 +128,105 @@ dependencies:
   enables:
     future_layers:
     - capability: Emergent collective intelligence
-      relationship: Enables the formation of higher-order collective intelligence from coordinated agent coalitions
+      relationship: Enables the formation of higher-order collective intelligence
+        from coordinated agent coalitions
     - capability: Decentralized autonomous organizations
-      relationship: Provides the decision-making mechanisms for self-governing AI organizations
+      relationship: Provides the decision-making mechanisms for self-governing AI
+        organizations
 dependencies_visualization:
   format: application/vnd.ant.mermaid
-  primary_diagram: |
-    graph TD
-      subgraph multi_agent_layer
-        COAL["Agent coalitions"]
-        GOALS["Complex goal hierarchies"]
-        CAP[Collective decisions]
-      end
-      subgraph future_layers
-        EMERGENCE["Emergent collective intelligence"]
-        DAO["Decentralized autonomous organizations"]
-      end
-
-      COAL --> CAP
-      GOALS --> CAP
-      CAP --> EMERGENCE
-      CAP --> DAO
+  primary_diagram: "graph TD\n  subgraph multi_agent_layer\n    COAL[\"Agent coalitions\"\
+    ]\n    GOALS[\"Complex goal hierarchies\"]\n    CAP[Collective decisions]\n  end\n\
+    \  subgraph future_layers\n    EMERGENCE[\"Emergent collective intelligence\"\
+    ]\n    DAO[\"Decentralized autonomous organizations\"]\n  end\n\n  COAL --> CAP\n\
+    \  GOALS --> CAP\n  CAP --> EMERGENCE\n  CAP --> DAO\n"
 risks_and_mitigations:
+  ethical_risks:
+    fairness:
+    - description: Biased or discriminatory decisions due to skewed preference models,
+        flawed consensus algorithms, or unrepresentative data
+      mitigation:
+        measures:
+        - Fairness constraints and objectives in optimization formulations
+        - Bias detection and mitigation techniques, such as adversarial debiasing
+          and causal reasoning
+        - Diverse and representative data sources for preference learning
+        strategy: Implement fairness-aware decision mechanisms and continuous monitoring,
+          with proactive bias mitigation
+      risk: Discriminatory or unfair decision outcomes
+      severity: High
+  operational_risks:
+    stability:
+    - description: Collective decisions may oscillate, diverge, or become unstable
+        due to conflicting preferences, dynamic conditions, or feedback loops
+      mitigation:
+        measures:
+        - Damping and inertia mechanisms in decision updates
+        - Convergence proofs and guarantees for consensus algorithms
+        - Robust feedback control and stability analysis
+        strategy: Introduce stabilization mechanisms, convergence guarantees, and
+          robust control techniques
+      risk: Oscillating, diverging, or unstable decisions
+      severity: Medium
   technical_risks:
     resource_management:
-    - risk: Suboptimal resource allocation
-      description: Inefficient or unfair allocation of shared resources due to flawed decision mechanisms
-      severity: High
-      probability: Medium
+    - description: Inefficient, suboptimal, or unfair allocation of shared resources
+        due to flawed decision mechanisms or incomplete information
       mitigation:
-        strategy: Implement advanced optimization algorithms and fairness constraints
         measures:
-        - Multi-objective optimization techniques
-        - Mechanism design for fairness and transparency
+        - Multi-objective optimization techniques for resource allocation
+        - Mechanism design principles for fairness, transparency, and incentive compatibility
+        - Comprehensive resource monitoring and forecasting
         monitoring:
-          metrics:
-          - Resource utilization
-          - Fairness metrics (e.g., Jain's fairness index)
           alerts:
           - Utilization below target threshold
           - Fairness violation detected
+          - Resource contention or scarcity detected
+          metrics:
+          - Resource utilization and availability
+          - Fairness metrics (e.g., Jain's fairness index, envy-freeness)
+          - Resource contention and conflict rates
+        strategy: Implement advanced optimization algorithms, fairness constraints,
+          and comprehensive resource monitoring
+      probability: Medium
       recovery_plan:
         immediate_actions:
-        - Pause non-critical tasks
-        - Reallocate resources based on priority
+        - Pause non-critical tasks and reallocate resources based on priority
+        - Invoke contingency plans for resource acquisition or load shedding
         resolution_steps:
-        - Audit decision mechanisms and update algorithms
-        - Retrain preference models on more diverse data
-  ethical_risks:
-    fairness:
-    - risk: Discriminatory decision outcomes
-      description: Biased or discriminatory decisions due to skewed preference models or flawed consensus algorithms
+        - Audit decision mechanisms and update algorithms with improved fairness and
+          efficiency
+        - Retrain preference models on more diverse and representative data
+        - Enhance resource monitoring and forecasting capabilities
+      risk: Suboptimal, inefficient, or unfair resource allocation
       severity: High
-      mitigation:
-        strategy: Implement fairness-aware decision mechanisms and continuous monitoring
-        measures:
-        - Fairness constraints in optimization objectives
-        - Bias detection and mitigation techniques
-  operational_risks:
-    stability:
-    - risk: Oscillating or unstable decisions
-      description: Collective decisions may oscillate or become unstable due to conflicting preferences or dynamic conditions
-      severity: Medium
-      mitigation:
-        strategy: Introduce stabilization mechanisms and convergence guarantees
-        measures:
-        - Damping and inertia in decision updates
-        - Convergence proofs for consensus algorithms
 integration_testing:
+  certification_requirements:
+  - IEC 61508 (Functional Safety of Electrical/Electronic/Programmable Electronic
+    Safety-related Systems)
+  - ISO/IEC 27001 (Information Security Management Systems)
+  - IEEE P7001 (Transparency of Autonomous Systems)
   test_suites:
     functionality:
-    - name: Coalition Formation Tests
-      tool: Simulation Framework
-      metrics:
+    - metrics:
       - Coalition formation time
-      - Task coverage
-      - Resource utilization
-    - name: Preference Modeling Tests
-      tool: Synthetic Data Generator
-      metrics:
+      - Task coverage and allocation quality
+      - Resource utilization and fairness
+      name: Coalition Formation and Task Allocation Tests
+      tool: Simulation Framework with configurable scenarios and workloads
+    - metrics:
       - Preference elicitation accuracy
-      - Utility function fit
+      - Utility function fit and predictive performance
+      - Preference aggregation fairness and consistency
+      name: Preference Modeling and Aggregation Tests
+      tool: Synthetic Data Generator and Interactive Preference Elicitation Platform
     reliability:
-    - name: Consensus Stability Tests
-      tool: Multi-Agent Testbed
-      metrics:
-      - Decision convergence rate
-      - Decision oscillation
-      - Failure recovery time
-  certification_requirements:
-  - IEC 61508 (Functional Safety)
-  - ISO/IEC 27001 (Information Security)
+    - metrics:
+      - Decision convergence rate and stability
+      - Decision oscillation and divergence detection
+      - Failure recovery time and graceful degradation
+      name: Consensus Stability and Robustness Tests
+      tool: Multi-Agent Testbed with fault injection and adversarial scenarios
 success_metrics:
   operational_kpis:
   - metric: Decision quality
@@ -208,33 +240,45 @@ success_metrics:
     target: 500
     current: 100
 monitoring_and_maintenance:
-  monitoring:
-    metrics_collection:
-      real_time:
-      - Decision quality
-      - Resource utilization
-      - Coalition membership
-      historical:
-      - Decision logs
-      - Resource allocation logs
-    alerting:
-      critical:
-      - Decision quality below threshold
-      - Resource utilization below threshold
-      warning:
-      - Coalition membership instability
-      - Preference conflicts detected
   maintenance:
     scheduled_tasks:
       frequency: Quarterly
       tasks:
-      - Preference model retraining
-      - Decision algorithm updates
-      - Coalition reconfiguration
+      - Preference model retraining and updating with new data
+      - Decision algorithm updates and optimization for improved performance
+      - Coalition reconfiguration and membership adjustments
+      - Security patching and vulnerability remediation
+  monitoring:
+    alerting:
+      critical:
+      - Decision quality below acceptable threshold
+      - Resource utilization below critical threshold
+      - Consensus divergence or instability detected
+      warning:
+      - Coalition membership instability or churn
+      - Preference conflicts or inconsistencies detected
+      - Resource contention or scarcity detected
+    metrics_collection:
+      historical:
+      - Decision logs and audit trails
+      - Resource allocation and utilization logs
+      - Coalition membership and activity logs
+      real_time:
+      - Decision quality and accuracy metrics
+      - Resource utilization and availability
+      - Coalition membership and stability
+      - Preference conflicts and inconsistencies
 security_requirements:
+  authentication: Secure multi-factor authentication for agent identities and coalition
+    membership, with support for federated identity management and trust domains
+  authorization: Fine-grained role-based access control for decision-making processes,
+    resource access, and sensitive data sharing within coalitions
   compliance:
-  - GDPR (Data Privacy)
-  - NIST SP 800-53 (Security Controls)
-  authentication: Secure multi-factor authentication for agent identities and coalition membership
-  authorization: Role-based access control for decision-making processes and shared resources
-  data_protection: End-to-end encryption for sensitive data shared during decision processes
+  - GDPR (General Data Protection Regulation) for data privacy and protection
+  - NIST SP 800-53 (Security and Privacy Controls for Information Systems and Organizations)
+  - ISO/IEC 27001 (Information Security Management Systems)
+  data_protection: End-to-end encryption for sensitive data shared during decision
+    processes, with secure key management and access control mechanisms
+  secure_communications: Secure and reliable communication channels for coalition
+    coordination and consensus processes, with support for confidentiality, integrity,
+    and non-repudiation

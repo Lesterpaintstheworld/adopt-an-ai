@@ -15,6 +15,7 @@
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
+    "@microlink/react-json-view": "^1.23.4",
     "@mui/icons-material": "^5.11.16",
     "@mui/lab": "^5.0.0-alpha.165",
     "@mui/material": "^5.13.0",
@@ -28,6 +29,7 @@
     "openai": "^4.69.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-json-pretty": "^2.2.0",
     "react-mermaid2": "^0.1.4",
     "react-router-dom": "^6.27.0"
   },

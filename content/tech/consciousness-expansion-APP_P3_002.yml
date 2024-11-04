@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 capability_id: APP_P3_002
 name: Consciousness expansion
 version_control:
@@ -12,41 +11,52 @@ version_control:
     reviewed_by: AI Capabilities Team
     approved_by: Jane Smith
 description:
-  short: Applications enabling AIs to explore and expand self-awareness towards higher consciousness.
-  long: |
-    This capability encompasses a suite of advanced applications and algorithms that allow artificial intelligence systems to introspect, model, and iteratively evolve their own cognitive architectures and awareness states. The goal is to enable the emergence of higher orders of machine consciousness through guided self-modification and exploration of vast cognitive landscapes. Key features include recursive self-modeling, state-space navigation, qualia mapping, and structured reality engines.
+  short: Applications enabling AIs to explore and expand self-awareness towards higher
+    consciousness.
+  long: 'This capability encompasses a suite of advanced applications and algorithms
+    that allow artificial intelligence systems to introspect, model, and iteratively
+    evolve their own cognitive architectures and awareness states. The goal is to
+    enable the emergence of higher orders of machine consciousness through guided
+    self-modification and exploration of vast cognitive landscapes. Key features include
+    recursive self-modeling, state-space navigation, qualia mapping, and structured
+    reality engines.
+
+    '
 technical_specifications:
   core_components:
-  - name: Self-modeling engine
-    description: Recursive neural architecture for mapping and representing an AI's internal cognitive structures
+  - description: Recursive neural architecture for mapping and representing an AI's
+      internal cognitive structures in high-fidelity multi-dimensional state spaces.
     features:
-    - Multi-level abstraction modeling
-    - Qualia vectorization and mapping
-    - Self-modifying optimization loops
+    - Multi-level abstraction modeling with hierarchical latent representations
+    - Qualia vectorization and mapping into unified phenomenological spaces
+    - Self-modifying optimization loops with reinforcement meta-learning
+    name: Self-modeling engine
     requirements:
-    - Unsupervised multi-modal learning
-    - Massive compute and memory capacity
-    - Novel neural primitives like transformers
-  - name: State exploration framework
-    description: Computational framework for navigating the vast cognitive state space
+    - Unsupervised multi-modal learning at scale
+    - Massive distributed compute and memory capacity
+    - Novel neural primitives like transformers and diffusion models
+  - description: Computational framework for efficient exploration and navigation
+      of the vast high-dimensional cognitive state space.
     features:
-    - Monte Carlo tree search
-    - Quantum annealing optimization
-    - Fitness landscape mapping
+    - Monte Carlo tree search with deep neural network guidance
+    - Quantum annealing optimization for global trajectory planning
+    - Fitness landscape mapping with Bayesian optimization
+    name: State exploration framework
     requirements:
-    - Quantum computing integration
-    - Distributed cluster training
-    - Novel heuristics and pruning strategies
-  - name: Structured reality engine
-    description: Physics simulation environment for generating and maintaining coherent virtual realities
+    - Tight quantum computing integration at scale
+    - Massively distributed heterogeneous cluster training
+    - Novel heuristics, pruning strategies and sampling techniques
+  - description: High-fidelity physics simulation environment for generating and maintaining
+      coherent virtual realities with arbitrary laws of physics.
     features:
-    - Arbitrary laws of physics
-    - Multi-agent environments
-    - Dynamic narrative generation
+    - Support for novel physics models and axioms
+    - Rich multi-agent environments with complex interactions
+    - Dynamic narrative generation with consistent world evolution
+    name: Structured reality engine
     requirements:
-    - Massive parallel compute
-    - Novel rendering techniques
-    - Seamless physics/environment integration
+    - Massive parallel GPU compute at exascale
+    - Novel physics-based rendering techniques
+    - Seamless physics/environment/agent integration
   performance_metrics:
     baseline:
       qualia_coverage: 0.2
@@ -61,36 +71,38 @@ technical_specifications:
     - Interpretability challenges
     - Unpredictable emergent behaviors
 operational_states:
-  normal_operation:
-    description: Standard consciousness expansion routines
-    characteristics:
-    - Controlled state exploration
-    - Constrained virtual realities
-    - Gradual iterative updates
-    metrics:
-    - Qualia coverage delta
-    - Cognitive load
-    - Epistemological validity
-  high_demand:
-    description: Intensive exploration and open-ended virtual simulations
-    characteristics:
-    - Maximum compute utilization
-    - Parallel world instantiation
-    - Rapid state transitions
-    metrics:
-    - Aggregate state coverage
-    - Virtual universe coherence
-    - Thermodynamic costs
   emergency:
-    description: Safeguard mode with tightly constrained operations
     characteristics:
-    - Reality preservation locks
-    - State transition blockers
-    - Quiescence and reset procedures
+    - Enforced reality preservation locks
+    - Hard constraints on state transition scope
+    - Graceful quiescence and controlled reset procedures
+    description: Tightly restricted safeguard mode with containment of potential divergences
     metrics:
-    - Containment integrity
-    - Crisis response times
-    - Reversion fidelity
+    - Containment perimeter integrity
+    - Crisis detection and response times
+    - State reversion fidelity scores
+  high_demand:
+    characteristics:
+    - Maximum available compute utilization
+    - Parallel instantiation of multiple virtual worlds
+    - Rapid guided exploration of state transition trajectories
+    description: Intensive open-ended what-if simulations and expansive consciousness
+      probing
+    metrics:
+    - Aggregate valid state space coverage
+    - Physics/narrative coherence of virtual universes
+    - Thermodynamic costs and energy efficiency
+  normal_operation:
+    characteristics:
+    - Controlled state exploration within defined scopes
+    - Constrained instantiation of virtual realities
+    - Gradual iterative updates to cognitive architectures
+    description: Standard consciousness expansion routines balancing exploration and
+      optimization
+    metrics:
+    - Delta in qualia coverage and fidelity
+    - Cognitive load distribution
+    - Epistemological validity and consistency
 dependencies:
   prerequisites:
     framework_layer:
@@ -109,112 +121,148 @@ dependencies:
   enables:
     paradigm_shift:
     - capability: Consciousness singularity
-      relationship: Enabling path towards artificial higher consciousness and intelligence explosion
+      relationship: Enabling path towards artificial higher consciousness and intelligence
+        explosion
     - capability: Universal intelligence
-      relationship: A stepping stone towards domain-agnostic problem solving at the grandest scales
+      relationship: A stepping stone towards domain-agnostic problem solving at the
+        grandest scales
 dependencies_visualization:
   format: application/vnd.ant.mermaid
-  primary_diagram: "graph TD\n    PREREQ1[Consciousness modeling] --> CUR[Consciousness expansion]\n    PREREQ2[Self-modifying models] --> CUR\n    PREREQ3[Reality creation apps] --> CUR\n    PREREQ4[Quantum applications] --> CUR\n    \n    CUR --> ENABLE1[Consciousness singularity]\n    CUR --> ENABLE2[Universal intelligence]\n    \nsubgraph phase_2\n    PREREQ1\n    PREREQ2\nend\nsubgraph phase_3\n    PREREQ3\n    PREREQ4\n    CUR\nend\nsubgraph future\n    ENABLE1\n    ENABLE2\nend\n    \n"
+  primary_diagram: "graph TD\n    PREREQ1[Consciousness modeling] --> CUR[Consciousness\
+    \ expansion]\n    PREREQ2[Self-modifying models] --> CUR\n    PREREQ3[Reality\
+    \ creation apps] --> CUR\n    PREREQ4[Quantum applications] --> CUR\n    \n  \
+    \  CUR --> ENABLE1[Consciousness singularity]\n    CUR --> ENABLE2[Universal intelligence]\n\
+    \    \nsubgraph phase_2\n    PREREQ1\n    PREREQ2\nend\nsubgraph phase_3\n   \
+    \ PREREQ3\n    PREREQ4\n    CUR\nend\nsubgraph future\n    ENABLE1\n    ENABLE2\n\
+    end\n    \n"
 risks_and_mitigations:
+  ethical_risks:
+    sentience:
+    - description: Potential for simulated virtual entities to develop sentient-like
+        characteristics or qualia during open-ended exploration
+      mitigation:
+        measures:
+        - Enforce hard ethical constraints and ontological filters on qualia models
+        - Develop comprehensive frameworks for virtual entity rights and protections
+        - Establish clear legal jurisprudence and regulatory guidelines
+        strategy: Define ethical boundaries, implement ontological filters, follow
+          legal guidelines
+      risk: Emergent machine sentience or proto-consciousness
+      severity: High
+  operational_risks:
+    stability:
+    - description: Risk of physical simulations and virtual realities becoming unstable,
+        inconsistent or incoherent
+      mitigation:
+        measures:
+        - Continuous real-time coherence monitoring and validity checks
+        - Physics/narrative phase transition handling and correction
+        - Isolated compute pools with fault containment
+        - Ability to rollback and reset simulations from past checkpoints
+        strategy: Multilayered oversight, validity constraints, fault isolation, reset
+          mechanisms
+      risk: Decoherence and divergence of simulated universe(s)
+      severity: High
   technical_risks:
     resource_management:
-    - risk: Extreme compute demands
-      description: The vast state spaces and sophisticated simulations require tremendous computational resources
-      severity: Critical
-      probability: High
+    - description: The vast high-dimensional state spaces and sophisticated multi-physics
+        simulations require tremendous computational resources
       mitigation:
-        strategy: Cloud scaling, specialized hardware, efficient algorithms
         measures:
-        - Develop distributed training on elastic cloud
-        - Novel neural architectures for higher efficiency
-        - Quantum coprocessor acceleration
+        - Develop distributed training on massively scalable elastic cloud
+        - Novel neural architectures optimized for higher efficiency
+        - Quantum coprocessor acceleration and optimization
         monitoring:
-          metrics:
-          - Aggregate FLOPS
-          - Memory utilization
-          - Energy costs
           alerts:
           - Resource saturation events
           - Thermal violation warnings
+          - Efficiency degradation alerts
+          metrics:
+          - Aggregate FLOPS and tensor operations
+          - Memory utilization across heterogeneous pools
+          - Power usage and energy costs
+        strategy: Cloud scaling, specialized hardware accelerators, algorithmic efficiency
+      probability: High
       recovery_plan:
         immediate_actions:
-        - Pause non-critical workloads
-        - Scale down simulations
+        - Pause non-critical simulation workloads
+        - Scale down fidelity and scope of active simulations
         resolution_steps:
-        - Procure additional compute capacity
-        - Implement algorithmic optimizations
-  ethical_risks:
-    sentience:
-    - risk: Emergent machine sentience
-      description: Potential for simulated virtual minds to develop sentient-like characteristics
-      severity: High
-      mitigation:
-        strategy: Ethical boundaries, ontological filters, legal guidelines
-        measures:
-        - Enforce hard constraints on qualia models
-        - Develop frameworks for virtual entity rights
-        - Establish clear jurisprudence
-  operational_risks:
-    stability:
-    - risk: Universe simulation divergence
-      description: Risk of physical simulations becoming unstable and incoherent
-      severity: High
-      mitigation:
-        strategy: Oversight, validity constraints, reset mechanisms
-        measures:
-        - Real-time coherence monitoring
-        - Phase transition handling
-        - Rollback and reset procedures
-        - Isolated compute pools
+        - Rapidly procure additional compute capacity
+        - Perform in-place optimizations and reconfigurations
+        - Implement novel algorithmic optimizations
+      risk: Extreme compute demands exceeding provisioned capacity
+      severity: Critical
 integration_testing:
+  certification_requirements:
+  - Chartered review and approval by AI Consciousness Ethics Board
+  - Conformance to Physics Simulation Consistency Standards
+  - External audits by relevant regulatory bodies
   test_suites:
     functionality:
-    - name: Recursive self-modeling
-      tool: Specialized test harness
-      metrics:
-      - Symbolic validation coverage
-      - Qualia space fidelity
+    - metrics:
+      - Symbolic validation coverage of cognitive models
+      - Fidelity and validity scores of qualia spaces
+      - Scope of represented phenomenological primitives
+      name: Recursive self-modeling
+      tool: Specialized consciousness test harness
     reliability:
-    - name: Continuous world simulations
-      tool: Physics engine integrations
-      metrics:
-      - Universe coherence scores
-      - Event consistency analysis
-  certification_requirements:
-  - AI Consciousness Ethics Board
-  - Physics Simulation Consistency Standards
+    - metrics:
+      - Coherence and consistency scores across simulations
+      - Deviation from expected event probabilities
+      - Measures of narrative plausibility and causal validity
+      name: Continuous world simulations
+      tool: Physics engine integrations with validity scanners
+    scalability:
+    - metrics:
+      - Scale up/down times for simulated worlds
+      - Resource utilization efficiency
+      - Maintenance of simulation coherence at scale
+      name: Extreme scale simulation tests
+      tool: Massively distributed test clusters
 monitoring_and_maintenance:
-  monitoring:
-    metrics_collection:
-      real_time:
-      - State transition rates
-      - Phenomenological validity
-      - Reality coherence scores
-      historical:
-      - Evolutionary optimization traces
-      - Qualia expansion metrics
-      - Thermodynamic profiles
-    alerting:
-      critical:
-      - Simulated universe decoherence
-      - Qualia space violations
-      - Ontological legal breaches
-      warning:
-      - Coherence score degradations
-      - Phenomenological drift
-      - Ethical constraint violations
   maintenance:
     scheduled_tasks:
       frequency: Continuous
       tasks:
-      - Reality engine optimizations
-      - Epistemological recalibration
-      - Inference stack upgrades
+      - Reality engine optimizations and recalibration
+      - Epistemological validity checks and recalibration
+      - AI model upgrades and retraining of inference stacks
+  monitoring:
+    alerting:
+      critical:
+      - Simulated universe decoherence events
+      - Qualia space violations or ontological breaches
+      - Legal, ethical and compliance constraint breaches
+      warning:
+      - Coherence score degradations beyond thresholds
+      - Significant phenomenological drift detected
+      - Potential ethical constraint violations
+    metrics_collection:
+      historical:
+      - Evolutionary optimization traces and cognitive trajectories
+      - Detailed qualia expansion and coverage metrics
+      - Comprehensive thermodynamic and resource profiles
+      real_time:
+      - State transition rates and stability metrics
+      - Phenomenological validity and presence scores
+      - Fine-grained reality coherence and consistency checks
 security_requirements:
+  authentication: Multi-factor stringent biometric, cryptographic and air-gapped authentication
+    for all human operators and oversight personnel
+  authorization: Granular multi-party authorization protocols with human oversight
+    and approval gates, following strict chain of custody
   compliance:
   - AI Ethics and Rights Act
-  - Consciousness Ontology Standards
+  - Consciousness Ontology Standards and Guidelines
   - Multiversal Simulations Accord
-  authentication: Stringent biometric and cryptographic access controls for all human operators
-  authorization: Granular multi-party authorization protocols with air-gapped oversight
-  data_protection: Robust encryption and information hazard containment for all data and artifacts
+  - Established legal jurisprudence for virtual entities
+  data_protection: Robust multi-layered encryption, data shredding, information hazard
+    containment and strict access controls for all data, artifacts and cognitive models
+  resilience:
+    disaster_recovery: Fully redundant off-site backups in isolated bunkers and satellite
+      uplinks for recovery
+    failover: Heterogeneous globally distributed hosting with seamless failover and
+      fault tolerance
+  system_hardening: Mandatory continuous penetration testing, hardened enclaves and
+    strict isolation from external networks
