@@ -553,29 +553,34 @@ const TechTreePage: React.FC<TechTreePageProps> = ({ standalone = false }) => {
     setPositions(calculateNodePositions(techTree));
   }, []);
 
-  // Flatten all items for easier processing while avoiding duplicates
-  const allItems = Object.entries(techTree as TechTree).flatMap(([phaseKey, phaseData]: [string, PhaseData]) => {
-    const layerItems = Object.entries(phaseData)
-      .filter(([key]) => !['name', 'period', 'description'].includes(key))
-      .flatMap(([layerKey, items]: [string, any]) => {
-        // Verify items is an array
-        if (!Array.isArray(items)) return [];
-        
-        // Filter duplicates based on capability_id
-        const uniqueItems = items.reduce((acc: Perk[], item: Perk) => {
-          if (!acc.some(existingItem => existingItem.capability_id === item.capability_id)) {
-            acc.push({ ...item, phase: phaseKey, layer: layerKey });
-          } else {
-            console.warn(`Duplicate capability_id found: ${item.capability_id} in ${phaseKey}/${layerKey}`);
-          }
-          return acc;
-        }, []);
-        
-        return uniqueItems.sort(sortByChronologicalOrder);
-      });
-      
-    return layerItems;
-  });
+  // Get all unique items from tech tree with phase and layer info
+  const allItems = React.useMemo(() => {
+    const seen = new Set<string>();
+    return Object.entries(techTree as TechTree).flatMap(([phaseKey, phaseData]: [string, PhaseData]) =>
+      Object.entries(phaseData)
+        .filter(([key]) => !['name', 'period', 'description'].includes(key))
+        .flatMap(([layerKey, items]: [string, any]) => {
+          if (!Array.isArray(items)) return [];
+          
+          return items
+            .filter((item: Perk) => {
+              if (!item.capability_id) return false;
+              if (seen.has(item.capability_id)) {
+                console.warn(`Duplicate capability_id found: ${item.capability_id} in ${phaseKey}/${layerKey}`);
+                return false;
+              }
+              seen.add(item.capability_id);
+              return true;
+            })
+            .map((item: Perk) => ({
+              ...item,
+              phase: phaseKey,
+              layer: layerKey
+            }))
+            .sort(sortByChronologicalOrder);
+        })
+    );
+  }, []);
 
   return (
     <>
