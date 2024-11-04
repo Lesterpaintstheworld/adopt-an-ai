@@ -51,6 +51,8 @@ const SideMenu = () => {
                 justifyContent: isCollapsed ? 'center' : 'flex-start',
                 px: 2.5,
                 whiteSpace: 'nowrap',
+                display: 'flex',
+                alignItems: 'center',
               }}
             >
               <Box
@@ -64,6 +66,8 @@ const SideMenu = () => {
                   mr: isCollapsed ? 0 : 2,
                   transition: 'margin 0.2s',
                   objectPosition: 'left',
+                  flexShrink: 0,
+                  maxWidth: '100%',
                 }}
               />
               <ListItemText 
@@ -72,6 +76,8 @@ const SideMenu = () => {
                   opacity: isCollapsed ? 0 : 1,
                   transition: 'opacity 0.2s',
                   display: isCollapsed ? 'none' : 'block',
+                  ml: 'auto',
+                  flexShrink: 0,
                 }}
               />
             </ListItemButton>
