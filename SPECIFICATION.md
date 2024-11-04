@@ -575,3 +575,54 @@ export const Footer = () => {
 };
 
 export default Footer;
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import Link from '@mui/material/Link';
+import { Link as RouterLink } from 'react-router-dom';
+
+export const Footer = () => {
+  return (
+    <Box component="footer" sx={{ py: 3, bgcolor: 'background.paper' }}>
+      <Container maxWidth="lg">
+        <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
+          <Box sx={{ display: 'flex', gap: 3 }}>
+            <Link
+              component={RouterLink}
+              to="/adopt"
+              sx={{ color: 'text.secondary', textDecoration: 'none', '&:hover': { color: 'primary.main' } }}
+            >
+              Adopt
+            </Link>
+            <Link
+              component={RouterLink}
+              to="/my-ais"
+              sx={{ color: 'text.secondary', textDecoration: 'none', '&:hover': { color: 'primary.main' } }}
+            >
+              My AIs
+            </Link>
+            <Link
+              component={RouterLink}
+              to="/pricing"
+              sx={{ color: 'text.secondary', textDecoration: 'none', '&:hover': { color: 'primary.main' } }}
+            >
+              Pricing
+            </Link>
+            <Link
+              component={RouterLink}
+              to="/blog"
+              sx={{ color: 'text.secondary', textDecoration: 'none', '&:hover': { color: 'primary.main' } }}
+            >
+              Blog
+            </Link>
+          </Box>
+        </Box>
+        <Typography variant="body2" color="text.secondary" align="center">
+          © 2023 raise-an.ai - All rights reserved
+        </Typography>
+      </Container>
+    </Box>
+  );
+};
+
+export default Footer;
