@@ -42,7 +42,14 @@ const SideMenu = () => {
       
       <List>
         {menuItems.map((item) => (
-          <ListItem key={item.path} disablePadding>
+          <ListItem 
+            key={item.path} 
+            disablePadding
+            sx={{
+              borderBottom: '1px solid',
+              borderColor: 'rgba(0, 163, 255, 0.1)'
+            }}
+          >
             <ListItemButton 
               component={RouterLink} 
               to={item.path}
