@@ -21,7 +21,7 @@ const darkTheme = {
   }
 };
 import { parseYaml } from '../utils/yamlFormatter';
-import { getPerkIconUrl } from '../utils/iconUtils';
+import { getPerkIconUrl, getPerkIllustrationUrl } from '../utils/iconUtils';
 import CloseIcon from '@mui/icons-material/Close';
 
 SyntaxHighlighter.registerLanguage('yaml', yaml);
@@ -167,6 +167,27 @@ export const YamlModal: React.FC<YamlModalProps> = ({
               >
                 {story}
               </Typography>
+            </Box>
+          )}
+
+          {/* Illustration Section */}
+          {data?.capability_id && (
+            <Box sx={{ mb: 4 }}>
+              <img
+                src={getPerkIllustrationUrl(data)}
+                alt={`Illustration for ${title}`}
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  borderRadius: '8px',
+                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                }}
+                onError={(e) => {
+                  // Hide the image if it fails to load
+                  (e.target as HTMLImageElement).style.display = 'none';
+                }}
+              />
             </Box>
           )}
 
