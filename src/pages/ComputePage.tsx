@@ -1,5 +1,7 @@
-import { Box, Typography, Paper } from '@mui/material';
+import { Box, Typography, Paper, Divider } from '@mui/material';
 import { TutorialHighlight } from '../components/tutorial/TutorialHighlight';
+import MyComputeSection from '../components/compute/MyComputeSection';
+import AvailableComputeSection from '../components/compute/AvailableComputeSection';
 
 export default function ComputePage() {
   return (
@@ -12,6 +14,22 @@ export default function ComputePage() {
       >
         Compute
       </Typography>
+
+      {/* My Compute Section */}
+      <Paper 
+        elevation={3}
+        sx={{ 
+          p: 3,
+          mb: 4,
+          backgroundColor: 'background.paper',
+          backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0))',
+        }}
+      >
+        <Typography variant="h2" gutterBottom>My Compute</Typography>
+        <MyComputeSection />
+      </Paper>
+
+      {/* Available GPUs Section */}
       <Paper 
         elevation={3}
         sx={{ 
@@ -19,12 +37,9 @@ export default function ComputePage() {
           backgroundColor: 'background.paper',
           backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0))',
         }}
-        data-tour="compute-description"
       >
-        <Typography variant="h2" gutterBottom>Computing Resources</Typography>
-        <Typography variant="body1" paragraph>
-          Manage and monitor your AI computing resources and infrastructure.
-        </Typography>
+        <Typography variant="h2" gutterBottom>Available GPUs</Typography>
+        <AvailableComputeSection />
       </Paper>
     </Box>
   );
