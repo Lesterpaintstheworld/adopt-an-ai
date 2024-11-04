@@ -203,9 +203,14 @@ async def process_all_perks(client: AsyncAnthropic):
             # Generate story
             story = await generate_story(client, perk_details, tech_tree)
             if story:
-                save_perk_with_story(perk_id, perk_name, story)
-                processed += 1
-                logging.info(f"Successfully generated story for {perk_id}")
+                perk_name = perk.get('name')  # Get name from the perk data
+                if perk_name:
+                    save_perk_with_story(perk_id, perk_name, story)
+                    processed += 1
+                    logging.info(f"Successfully generated story for {perk_id}")
+                else:
+                    logging.error(f"Missing name for perk {perk_id}")
+                    failed.append(perk_id)
             else:
                 failed.append(perk_id)
                 
