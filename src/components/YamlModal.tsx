@@ -11,7 +11,6 @@ import {
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
 import yaml from 'react-syntax-highlighter/dist/esm/languages/hljs/yaml';
 import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-import { getPerkIconUrl } from '../utils/iconUtils';
 
 const darkTheme = {
   ...atomOneDark,
@@ -48,7 +47,7 @@ export const YamlModal: React.FC<YamlModalProps> = ({
   const yamlData = { ...data };
   delete yamlData?.story;
 
-  const iconUrl = data ? getPerkIconUrl(data) : null;
+  const iconUrl = data?.file_base_name ? `/website/icons/${data.file_base_name}.png` : null;
 
   return (
     <Dialog 
