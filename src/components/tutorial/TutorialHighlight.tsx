@@ -89,12 +89,6 @@ export const TutorialHighlight = ({ pageKey }: { pageKey: PageKey }) => {
     }
   };
 
-  useEffect(() => {
-    if (user?.tutorialProgress?.dismissedPages?.includes(pageKey)) {
-      setVisible(false);
-    }
-  }, [user, pageKey]);
-
   if (!visible || !tutorial) return null;
 
   return (
