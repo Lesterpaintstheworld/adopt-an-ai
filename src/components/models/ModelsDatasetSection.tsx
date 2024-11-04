@@ -1,5 +1,6 @@
 import { Box, Grid } from '@mui/material';
 import { useRef, useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import { useInfiniteScroll } from '../../hooks/useInfiniteScroll';
 import ModelCard from './ModelCard';
 
@@ -96,7 +97,17 @@ export default function ModelsDatasetSection() {
           key={model.id}
           ref={index === models.length - 1 ? lastCardRef : null}
         >
-          <ModelCard model={model} type="available" />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ 
+              duration: 0.5,
+              delay: index % 4 * 0.1,
+              ease: "easeOut"
+            }}
+          >
+            <ModelCard model={model} type="available" />
+          </motion.div>
         </Grid>
       ))}
     </Grid>
