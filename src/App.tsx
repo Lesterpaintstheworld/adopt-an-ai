@@ -2,6 +2,11 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import { theme } from './utils/theme';
 import { MainLayout } from './components/layout/MainLayout';
+import GovernancePage from './pages/GovernancePage';
+import TeamPage from './pages/TeamPage';
+import OSPage from './pages/OSPage';
+import TrainingPage from './pages/TrainingPage';
+import GPUsPage from './pages/GPUsPage';
 import StandaloneTechTreePage from './pages/StandaloneTechTreePage';
 import HomePage from './pages/HomePage';
 import PaymentSuccessPage from './pages/PaymentSuccessPage';
@@ -36,6 +41,11 @@ function App() {
             <Route path="/adopt" element={<AdoptPage />} />
             <Route path="/my-ais" element={<MyAIsPage />} />
             <Route path="/pricing" element={<PricingPage />} />
+            <Route path="/governance" element={<GovernancePage />} />
+            <Route path="/team" element={<TeamPage />} />
+            <Route path="/os" element={<OSPage />} />
+            <Route path="/training" element={<TrainingPage />} />
+            <Route path="/gpus" element={<GPUsPage />} />
             <Route path="*" element={
               <div style={{ padding: '20px' }}>
                 <h1>404 - Page Not Found</h1>
