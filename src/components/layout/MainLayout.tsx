@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import { Header } from './Header';
 import Footer from './Footer';
 import { Outlet } from 'react-router-dom';
@@ -16,7 +16,7 @@ export const MainLayout = () => {
         minHeight: 'calc(100vh - 64px)' // Hauteur totale moins header
       }}>
         <SideMenu />
-        <Box 
+        <Container 
           component="main" 
           sx={{ 
             flex: 1,
@@ -25,7 +25,7 @@ export const MainLayout = () => {
           }}
         >
           <Outlet />
-        </Box>
+        </Container>
       </Box>
       
       <Footer />
