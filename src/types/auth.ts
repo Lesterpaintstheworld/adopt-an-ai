@@ -6,6 +6,11 @@ export interface User {
   googleId: string;
   createdAt?: string;
   lastLogin?: string;
+  tutorialCompleted: boolean;
+  tutorialProgress: {
+    lastStep: number;
+    completedSteps: number[];
+  };
 }
 
 export interface AuthState {
