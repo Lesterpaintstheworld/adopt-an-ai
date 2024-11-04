@@ -10,7 +10,7 @@ import { pageTutorials, PageKey } from '../../data/tutorialSteps';
  * @param {PageKey} props.pageKey - The key identifying the current page
  * @returns {JSX.Element | null} The tutorial highlight component or null if already dismissed
  */
-export const TutorialHighlight = ({ pageKey }: { pageKey: PageKey }) => {
+export const TutorialHighlight = ({ pageKey }: { pageKey: keyof typeof pageTutorials }) => {
   const { user, updateUser, isAuthenticated } = useAuth();
   const [visible, setVisible] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
