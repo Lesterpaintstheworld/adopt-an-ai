@@ -45,8 +45,7 @@ export const YamlModal: React.FC<YamlModalProps> = ({
   // Update icon URL when data changes
   useEffect(() => {
     if (data) {
-      const url = getPerkIconUrl(data);
-      setIconUrl(url);
+      setIconUrl(getPerkIconUrl(data));
     }
   }, [data]);
 
