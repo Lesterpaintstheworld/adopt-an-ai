@@ -1,7 +1,6 @@
 import { Box, Grid } from '@mui/material';
 import { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { useInfiniteScroll } from '../../hooks/useInfiniteScroll';
 import ModelCard from './ModelCard';
 
 interface AvailableModel {
