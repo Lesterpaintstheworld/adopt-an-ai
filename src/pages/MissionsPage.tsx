@@ -16,13 +16,14 @@ const getPhaseLabel = (phase: Phase): string => {
       return phase;
   }
 };
-import { loadAllMissions } from '../utils/missionUtils';
+import { loadAllMissions, loadMissionsForPerk } from '../utils/missionUtils';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import techTree from '../../content/tech/tech-tree.yml';
+import { useEffect } from 'react';
 import { 
   Box, 
   Container, 
