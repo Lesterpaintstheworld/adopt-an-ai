@@ -2,13 +2,13 @@ import yaml from 'js-yaml';
 
 export const parseYaml = (data: any): string => {
   try {
-    const options = {
+    const options: yaml.DumpOptions = {
       indent: 2,
       lineWidth: 120,
       noRefs: true,
       sortKeys: true,
       noCompatMode: true,
-      quotingType: '"',
+      quotingType: '"' as const,
       forceQuotes: false,
     };
 

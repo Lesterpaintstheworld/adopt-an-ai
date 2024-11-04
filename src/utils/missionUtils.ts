@@ -2,7 +2,7 @@ import { Mission } from '../types/missions';
 
 export const loadMissionsForPerk = async (perkId: string): Promise<Mission[]> => {
   try {
-    const modules = import.meta.glob('../../content/missions/*.yml', { eager: true });
+    const modules = import.meta.glob('../../content/missions/*.yml', { eager: true }) as Record<string, { default: Mission[] }>;
     const path = `../../content/missions/${perkId}-missions.yml`;
     
     if (path in modules) {
@@ -20,7 +20,7 @@ export const loadMissionsForPerk = async (perkId: string): Promise<Mission[]> =>
 
 export const loadAllMissions = async (): Promise<Mission[]> => {
   try {
-    const modules = import.meta.glob('../../content/missions/*.yml', { eager: true });
+    const modules = import.meta.glob('../../content/missions/*.yml', { eager: true }) as Record<string, { default: Mission[] }>;
     const allMissions: Mission[] = [];
     
     for (const path in modules) {
