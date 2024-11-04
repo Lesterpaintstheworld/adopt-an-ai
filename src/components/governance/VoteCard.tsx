@@ -68,22 +68,7 @@ export default function VoteCard({
             Vote Progress
           </Typography>
           <Box sx={{ position: 'relative', height: 8 }}>
-            {/* Yes votes bar (background) */}
-            <LinearProgress 
-              variant="determinate"
-              value={yesPercentage}
-              sx={{
-                height: '100%',
-                borderRadius: 4,
-                backgroundColor: 'rgba(46, 204, 113, 0.1)',
-                '& .MuiLinearProgress-bar': {
-                  backgroundColor: 'rgba(46, 204, 113, 0.8)',
-                },
-                position: 'absolute',
-                width: '100%',
-              }}
-            />
-            {/* No votes bar (foreground) */}
+            {/* No votes bar (background) */}
             <LinearProgress 
               variant="determinate"
               value={100 - yesPercentage}
@@ -100,6 +85,22 @@ export default function VoteCard({
                 },
                 position: 'absolute',
                 width: '100%',
+              }}
+            />
+            {/* Yes votes bar (foreground) */}
+            <LinearProgress 
+              variant="determinate"
+              value={yesPercentage}
+              sx={{
+                height: '100%',
+                borderRadius: 4,
+                backgroundColor: 'rgba(46, 204, 113, 0.1)',
+                '& .MuiLinearProgress-bar': {
+                  backgroundColor: 'rgba(46, 204, 113, 0.8)',
+                },
+                position: 'absolute',
+                width: '100%',
+                zIndex: 1,
               }}
             />
           </Box>
