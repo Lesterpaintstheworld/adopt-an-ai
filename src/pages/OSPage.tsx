@@ -1,8 +1,10 @@
 import { Box, Typography, Paper } from '@mui/material';
+import { TutorialHighlight } from '../components/tutorial/TutorialHighlight';
 
 export default function OSPage() {
   return (
     <Box sx={{ p: 4 }}>
+      <TutorialHighlight pageKey="os" />
       <Typography 
         variant="h1" 
         gutterBottom
