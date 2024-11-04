@@ -60,10 +60,10 @@ const SideMenu = () => {
                 src={item.icon}
                 alt={item.text}
                 sx={{
-                  width: '80px',
+                  width: '60px',
                   height: '40px',
                   objectFit: 'contain',
-                  mr: isCollapsed ? 0 : 1,
+                  mr: isCollapsed ? 0 : 0.5,
                   transition: 'margin 0.2s',
                   objectPosition: 'left',
                   flexShrink: 0,
