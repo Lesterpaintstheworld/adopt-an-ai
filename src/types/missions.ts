@@ -9,6 +9,7 @@ export interface Mission {
   difficulty: Difficulty;
   category: Category;
   duration: string;
+  mainPrerequisite?: string;
   requirements: string[];
   rewards: {
     xp?: number;
