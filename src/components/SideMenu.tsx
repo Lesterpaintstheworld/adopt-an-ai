@@ -24,12 +24,13 @@ const SideMenu = () => {
         flexShrink: 0,
         borderRight: '1px solid',
         borderColor: 'divider',
-        height: 'calc(100vh - 64px)', // Hauteur totale moins la hauteur du header
+        height: 'calc(100vh - 64px)',
         position: 'sticky',
-        top: 64, // Hauteur du header
+        top: 64,
         backgroundColor: 'background.paper',
         transition: 'width 0.2s',
         overflow: 'hidden',
+        backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0))',
       }}
     >
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 1 }}>

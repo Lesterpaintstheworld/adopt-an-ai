@@ -7,9 +7,10 @@ export const Header = () => {
       position="fixed"
       sx={{
         zIndex: (theme) => theme.zIndex.drawer + 1,
-        backgroundColor: (theme) => theme.palette.background.default,
+        backgroundColor: 'background.paper',
         borderBottom: '1px solid',
         borderColor: 'divider',
+        backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0))',
       }}
     >
       <Toolbar>
