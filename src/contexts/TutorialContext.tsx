@@ -20,7 +20,18 @@ export const TutorialProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     const checkTutorialStatus = async () => {
       if (user) {
         try {
-          const response = await fetch(`/api/users/${user.id}/tutorial-status`);
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/api/users/${user.id}/tutorial-status`, {
+            headers: {
+              'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
+              'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+          });
+          
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          
           const data = await response.json();
           setIsTutorialComplete(data.isComplete);
         } catch (error) {
@@ -43,11 +54,25 @@ export const TutorialProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const skipTutorial = async () => {
     if (user) {
       try {
-        await fetch(`/api/users/${user.id}/tutorial-status`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/users/${user.id}/tutorial-status`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('auth_token')}`
+          },
+          credentials: 'include',
           body: JSON.stringify({ isComplete: true })
         });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        if (data.success) {
+          setIsTutorialComplete(true);
+          setCurrentStep(0);
+        }
       } catch (error) {
         console.error('Error updating tutorial status:', error);
       }
