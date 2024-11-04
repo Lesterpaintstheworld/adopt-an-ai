@@ -164,13 +164,15 @@ const MissionsPage: React.FC = () => {
       return;
     }
 
+    // When mission is available, show the modal
     if (mission.status === 'available') {
       if (activeMissions.length >= userResources.activeMissionLimit) {
+        // Optionally show a notification that limit is reached
         return;
       }
-      
-      setSelectedMission(mission);
+      setSelectedMission(mission); // This opens the modal
     }
+    // Handle in_progress missions
     else if (mission.status === 'in_progress') {
       const updatedMissions: Mission[] = missions.map(m => 
         m.id === mission.id ? { ...m, status: 'completed' as const } : m
