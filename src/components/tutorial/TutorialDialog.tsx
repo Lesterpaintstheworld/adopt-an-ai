@@ -5,8 +5,7 @@ import { pageTutorials, PageKey } from '../../data/tutorialSteps';
 
 export const TutorialHighlight = ({ pageKey }: { pageKey: PageKey }) => {
   const { user, isAuthenticated } = useAuth();
-  const [visible, setVisible] = useState(true);
-  const [currentStep, setCurrentStep] = useState(0);
+  const [visible, setVisible] = useState(false);
 
   const tutorial = pageTutorials[pageKey];
 
