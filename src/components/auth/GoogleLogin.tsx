@@ -74,10 +74,6 @@ export const GoogleLogin = () => {
         }),
       });
 
-      // Log the raw response first
-      const responseText = await authResponse.text();
-      console.log('Auth response:', responseText);
-
       if (!authResponse.ok) {
         const errorText = await authResponse.text();
         console.log('Full auth error response:', {
@@ -88,14 +84,10 @@ export const GoogleLogin = () => {
         throw new Error(`Authentication failed: ${authResponse.status} - ${errorText}`);
       }
 
-      // Parse the response only if it's not empty
-      if (responseText) {
-        try {
-          const data = JSON.parse(responseText);
-          login(data.user, data.token);
-        } catch (e) {
-          throw new Error(`Failed to parse auth response: ${e.message}`);
-        }
+      // Parse the successful response
+      const data = await authResponse.json();
+      if (data) {
+        login(data.user, data.token);
       } else {
         throw new Error('Empty response from auth server');
       }
