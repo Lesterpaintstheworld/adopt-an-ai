@@ -4,6 +4,7 @@ import { ProtectedRoute } from './components/auth/ProtectedRoute';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { AuthProvider } from './contexts/AuthContext';
+import { TutorialProvider } from './contexts/TutorialContext';
 import { theme } from './utils/theme';
 import { MainLayout } from './components/layout/MainLayout';
 import GovernancePage from './pages/GovernancePage';
@@ -34,7 +35,8 @@ function App() {
       onScriptLoadError={() => console.error('Google Script failed to load')}
     >
       <AuthProvider>
-        <ThemeProvider theme={theme}>
+        <TutorialProvider>
+          <ThemeProvider theme={theme}>
       <CssBaseline />
       <BrowserRouter>
         <Routes>
@@ -68,7 +70,8 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-        </ThemeProvider>
+          </ThemeProvider>
+        </TutorialProvider>
       </AuthProvider>
     </GoogleOAuthProvider>
   );
