@@ -1,4 +1,16 @@
 export const pageTutorials = {
+  os: [
+    {
+      target: '[data-tour="os-title"]',
+      content: "Welcome to KinOS, our specialized operating system for AI development.",
+      placement: 'bottom',
+    },
+    {
+      target: '[data-tour="os-description"]',
+      content: "Learn about how KinOS provides a secure environment for AI systems.",
+      placement: 'top',
+    }
+  ],
   gpus: {
     title: "Gestion des GPUs",
     content: "Ici vous pourrez gérer vos ressources de calcul pour entraîner votre IA."
