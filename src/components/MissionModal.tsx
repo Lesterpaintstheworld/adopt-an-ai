@@ -48,9 +48,9 @@ const MissionModal: React.FC<MissionModalProps> = ({
   const getRequiredPerkName = () => {
     return Object.values(techTree)
       .flatMap(phase => 
-        Object.entries(phase)
+        Object.entries(phase as Record<string, unknown>)
           .filter(([key]) => !['name', 'period', 'description'].includes(key))
-          .flatMap(([_, items]) => items)
+          .flatMap(([_, items]) => items as Array<{ capability_id: string; name: string }>)
       )
       .find(item => 
         item && 

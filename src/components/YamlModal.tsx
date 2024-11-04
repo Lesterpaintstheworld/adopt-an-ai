@@ -5,7 +5,6 @@ import {
   DialogContent,
   IconButton,
   Box,
-  useTheme,
   Typography,
 } from '@mui/material';
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';

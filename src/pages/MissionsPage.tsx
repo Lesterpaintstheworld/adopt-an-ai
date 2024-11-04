@@ -492,8 +492,8 @@ const MissionsPage: React.FC = () => {
                   }}>
                     Requirements: {
                       typeof mission.requirements === 'object' 
-                        ? Object.entries(mission.requirements)
-                            .map(([key, value]) => `${key}: ${value}`)
+                        ? Object.entries(mission.requirements as Record<string, unknown>)
+                            .map(([key, value]) => `${key}: ${String(value)}`)
                             .join(', ')
                         : Array.isArray(mission.requirements)
                         ? mission.requirements.join(', ')
@@ -506,7 +506,7 @@ const MissionsPage: React.FC = () => {
                     Rewards: {mission.rewards ? (
                       <>
                         {mission.rewards.xp ? `${mission.rewards.xp} XP` : ''}
-                        {mission.rewards.capabilities?.length > 0 && 
+                        {mission.rewards?.capabilities && mission.rewards.capabilities.length > 0 && 
                           `${mission.rewards.xp ? ', ' : ''}${mission.rewards.capabilities.join(', ')}`}
                       </>
                     ) : 'None'}
