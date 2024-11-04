@@ -27,10 +27,43 @@ def load_tech_tree():
         logging.error(f"Error loading tech tree: {e}")
         raise
 
-def load_perk_details(perk_id: str) -> dict:
-    """Load detailed perk data from its YAML file"""
-    perk_path = Path(f"content/tech/{perk_id}.yml")
+def get_perk_filename(perk_id: str, perk_name: str) -> str:
+    """Generate the correct filename format for a perk"""
+    # Convert name to filename-safe format
+    safe_name = perk_name.lower().replace(' ', '-')
+    # Remove special characters
+    safe_name = ''.join(c for c in safe_name if c.isalnum() or c == '-')
+    return f"{safe_name}-{perk_id}"
+
+def load_perk_details(perk_id: str, tech_tree: dict) -> dict:
+    """Load detailed perk data using the correct filename format"""
+    # Find the perk in tech tree to get its name
+    perk_name = None
+    for phase in tech_tree.values():
+        for layer in phase.values():
+            if isinstance(layer, list):
+                for item in layer:
+                    if item.get('capability_id') == perk_id:
+                        perk_name = item.get('name')
+                        break
+                if perk_name:
+                    break
+        if perk_name:
+            break
+    
+    if not perk_name:
+        logging.error(f"Could not find name for perk {perk_id} in tech tree")
+        return None
+        
+    filename = get_perk_filename(perk_id, perk_name)
+    perk_path = Path(f"content/tech/{filename}.yml")
+    
     try:
+        logging.info(f"Loading perk details from {perk_path}")
+        if not perk_path.exists():
+            logging.warning(f"Perk file not found at {perk_path}")
+            return None
+            
         with open(perk_path, 'r', encoding='utf-8') as f:
             return yaml.safe_load(f)
     except Exception as e:
@@ -106,17 +139,27 @@ async def generate_story(client: AsyncAnthropic, perk_data: dict, tech_tree: dic
         logging.error(f"Error generating story: {e}")
         return None
 
-def save_perk_with_story(perk_id: str, story: str):
-    """Save the generated story back to the perk's YAML file"""
-    perk_path = Path(f"content/tech/{perk_id}.yml")
+def save_perk_with_story(perk_id: str, perk_name: str, story: str):
+    """Save the generated story using the correct filename format"""
+    filename = get_perk_filename(perk_id, perk_name)
+    perk_path = Path(f"content/tech/{filename}.yml")
+    
     try:
-        with open(perk_path, 'r', encoding='utf-8') as f:
-            perk_data = yaml.safe_load(f)
+        if not perk_path.exists():
+            perk_data = {
+                'capability_id': perk_id,
+                'name': perk_name
+            }
+        else:
+            with open(perk_path, 'r', encoding='utf-8') as f:
+                perk_data = yaml.safe_load(f) or {}
         
         perk_data['story'] = story
         
         with open(perk_path, 'w', encoding='utf-8') as f:
             yaml.dump(perk_data, f, allow_unicode=True, sort_keys=False)
+            
+        logging.info(f"Successfully saved story to {perk_path}")
             
     except Exception as e:
         logging.error(f"Error saving story for {perk_id}: {e}")
@@ -146,7 +189,7 @@ async def process_all_perks(client: AsyncAnthropic):
             logging.info(f"Processing {perk_id} ({processed + 1}/{total_perks})")
             
             # Load full perk details
-            perk_details = load_perk_details(perk_id)
+            perk_details = load_perk_details(perk_id, tech_tree)
             if not perk_details:
                 failed.append(perk_id)
                 continue
@@ -160,7 +203,7 @@ async def process_all_perks(client: AsyncAnthropic):
             # Generate story
             story = await generate_story(client, perk_details, tech_tree)
             if story:
-                save_perk_with_story(perk_id, story)
+                save_perk_with_story(perk_id, perk_name, story)
                 processed += 1
                 logging.info(f"Successfully generated story for {perk_id}")
             else:
