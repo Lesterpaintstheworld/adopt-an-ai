@@ -165,7 +165,7 @@ app.post('/api/users/:userId/tutorial-status', async (req, res) => {
     
     const result = await pool.query(query, [
       isComplete, 
-      progress || '{"lastStep": 0, "completedSteps": []}'::jsonb,
+      progress || JSON.stringify({"lastStep": 0, "completedSteps": []}),
       userId
     ]);
 
