@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Mission, Difficulty, Status, Phase } from '../types/missions';
+import { getPerkIconUrl } from '../utils/iconUtils';
 
 const getPhaseLabel = (phase: Phase): string => {
   switch (phase) {
