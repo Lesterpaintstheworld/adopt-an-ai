@@ -20,7 +20,8 @@ const SideMenu = () => {
     <Box
       component="nav"
       sx={{
-        width: isCollapsed ? 60 : 240,
+        width: isCollapsed ? 60 : 'auto',
+        maxWidth: isCollapsed ? 60 : 300,
         flexShrink: 0,
         borderRight: '1px solid',
         borderColor: 'divider',
@@ -47,8 +48,9 @@ const SideMenu = () => {
               to={item.path}
               sx={{
                 minHeight: 48,
-                justifyContent: isCollapsed ? 'center' : 'initial',
+                justifyContent: isCollapsed ? 'center' : 'flex-start',
                 px: 2.5,
+                whiteSpace: 'nowrap',
               }}
             >
               <Box
@@ -61,6 +63,7 @@ const SideMenu = () => {
                   objectFit: 'contain',
                   mr: isCollapsed ? 0 : 2,
                   transition: 'margin 0.2s',
+                  objectPosition: 'left',
                 }}
               />
               <ListItemText 
