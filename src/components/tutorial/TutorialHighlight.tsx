@@ -19,21 +19,22 @@ export const TutorialHighlight = ({ pageKey }: { pageKey: PageKey }) => {
 
   useEffect(() => {
     console.log('TutorialHighlight mounted for page:', pageKey);
-    console.log('User tutorial progress:', user?.tutorialProgress);
     console.log('Tutorial content:', tutorial);
     console.log('Is visible:', visible);
-    console.log('Is authenticated:', isAuthenticated);
     
-    if (user?.tutorialProgress?.dismissedPages?.includes(pageKey)) {
-      console.log('Page already dismissed');
+    // Check localStorage for non-authenticated users
+    const localTutorialStatus = localStorage.getItem('tutorial_status');
+    if (localTutorialStatus) {
+      const { dismissedPages = [] } = JSON.parse(localTutorialStatus);
+      if (dismissedPages.includes(pageKey)) {
+        console.log('Page already dismissed in localStorage');
+        setVisible(false);
+      }
+    } else if (isAuthenticated && user?.tutorialProgress?.dismissedPages?.includes(pageKey)) {
+      console.log('Page already dismissed in user progress');
       setVisible(false);
     }
-  }, [user, pageKey, isAuthenticated]);
-
-  if (!isAuthenticated || !user) {
-    console.log('User not authenticated');
-    return null;
-  }
+  }, [pageKey, user, isAuthenticated]);
 
   if (!visible || !tutorial) {
     console.log('TutorialHighlight not showing because:', {
@@ -44,43 +45,47 @@ export const TutorialHighlight = ({ pageKey }: { pageKey: PageKey }) => {
   }
 
   const handleNext = async () => {
-    if (!user?.id) {
-      console.error('No user ID available');
-      return;
-    }
+    if (isAuthenticated && user?.id) {
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/users/${user.id}/tutorial-status`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('auth_token')}`
+          },
+          credentials: 'include',
+          body: JSON.stringify({
+            isComplete: false,
+            progress: {
+              ...user.tutorialProgress,
+              dismissedPages: [...(user.tutorialProgress?.dismissedPages || []), pageKey]
+            }
+          })
+        });
 
-    try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/users/${user.id}/tutorial-status`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('auth_token')}`
-        },
-        credentials: 'include',
-        body: JSON.stringify({
-          isComplete: false,
-          progress: {
-            ...user.tutorialProgress,
-            dismissedPages: [...(user.tutorialProgress?.dismissedPages || []), pageKey]
-          }
-        })
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      
-      updateUser({
-        tutorialProgress: data.data.tutorial_progress || {
-          ...user.tutorialProgress,
-          dismissedPages: [...(user.tutorialProgress?.dismissedPages || []), pageKey]
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
-      });
+
+        const data = await response.json();
+        if (data.success) {
+          setVisible(false);
+        }
+      } catch (error) {
+        console.error('Failed to update tutorial status:', error);
+      }
+    } else {
+      // Handle non-authenticated user case
+      const existingStatus = localStorage.getItem('tutorial_status');
+      const currentStatus = existingStatus ? JSON.parse(existingStatus) : { dismissedPages: [] };
+      
+      localStorage.setItem('tutorial_status', JSON.stringify({
+        ...currentStatus,
+        dismissedPages: [...(currentStatus.dismissedPages || []), pageKey],
+        lastUpdated: new Date().toISOString()
+      }));
+      
       setVisible(false);
-    } catch (error) {
-      console.error('Failed to update tutorial status:', error);
     }
   };
 
