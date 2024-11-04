@@ -40,12 +40,14 @@ export const YamlModal: React.FC<YamlModalProps> = ({
   data
 }) => {
   const theme = useTheme();
-  const [iconUrl, setIconUrl] = useState<string | null>(null);
+  const [iconUrl, setIconUrl] = useState<string>('');
 
   // Update icon URL when data changes
   useEffect(() => {
     if (data) {
       setIconUrl(getPerkIconUrl(data));
+    } else {
+      setIconUrl('');
     }
   }, [data]);
 
@@ -108,7 +110,7 @@ export const YamlModal: React.FC<YamlModalProps> = ({
       >
         <Box sx={{ p: 2 }}>
           {/* Perk Icon Section */}
-          {iconUrl && (
+          {iconUrl !== '' && (
             <Box 
               sx={{ 
                 mb: 4,
