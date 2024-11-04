@@ -177,26 +177,28 @@ const calculatePhaseWidth = (phaseData: any) => {
 };
 
 // Helper to calculate item positions
-const calculateNodePositions = (techTree: any) => {
+const calculateNodePositions = (techTree: TechTree) => {
   const positions: { [key: string]: { x: number, y: number } } = {};
   let currentX = 0;
   
-  Object.entries(techTree).forEach(([_phaseKey, phaseData]: [string, any]) => {
+  Object.entries(techTree).forEach(([_phaseKey, phaseData]: [string, PhaseData]) => {
     const phaseWidth = calculatePhaseWidth(phaseData);
     
     Object.entries(phaseData)
       .filter(([key]) => !['name', 'period', 'description'].includes(key))
       .forEach(([_layerKey, items]: [string, any], layerIndex) => {
-        items.forEach((item: any) => {
-          if (!item.capability_id) {
-            console.warn(`Missing capability_id for item: ${item.name}`);
-          }
-          
-          positions[item.capability_id] = {
-            x: currentX + ((item.chronologicalOrder || 1) * CHRONOLOGICAL_SPACING),
-            y: layerIndex * (ITEM_HEIGHT + LAYER_PADDING) + 100
-          };
-        });
+        if (Array.isArray(items)) {
+          items.forEach((item: Perk) => {
+            if (!item.capability_id) {
+              console.warn(`Missing capability_id for item: ${item.name}`);
+            }
+            
+            positions[item.capability_id] = {
+              x: currentX + ((item.chronologicalOrder || 1) * CHRONOLOGICAL_SPACING),
+              y: layerIndex * (ITEM_HEIGHT + LAYER_PADDING) + 100
+            };
+          });
+        }
       });
     
     currentX += phaseWidth;
@@ -318,11 +320,11 @@ const ConnectionLines = ({
 
 const loadFullPerkData = async (perkId: string): Promise<PerkFullData | null> => {
   try {
-    // Find the item in the tech tree
-    const item = Object.values(techTree).flatMap(phase => 
-      Object.entries(phase)
+    // Find the item in the tech tree with proper type assertions
+    const item = Object.values(techTree as TechTree).flatMap(phase => 
+      Object.entries(phase as PhaseData)
         .filter(([key]) => !['name', 'period', 'description'].includes(key))
-        .flatMap(([_, items]) => items)
+        .flatMap(([_, items]) => items as Perk[])
     ).find(item => item.capability_id === perkId);
 
     if (!item?.file_base_name) {
@@ -331,15 +333,11 @@ const loadFullPerkData = async (perkId: string): Promise<PerkFullData | null> =>
     }
 
     // Use file_base_name to load the file
-    const modules = import.meta.glob('../../content/tech/*.yml', { eager: true });
+    const modules = import.meta.glob('../../content/tech/*.yml', { eager: true }) as Record<string, { default: PerkFullData }>;
     const path = `../../content/tech/${item.file_base_name}.yml`;
-    
-    console.log('Trying to load perk details from:', path);
-    console.log('Available modules:', Object.keys(modules));
     
     if (path in modules) {
       const module = modules[path];
-      console.log('Loaded module:', module);
       return module.default;
     }
     
@@ -564,7 +562,7 @@ const TechTreePage: React.FC<TechTreePageProps> = ({ standalone = false }) => {
         if (!Array.isArray(items)) return [];
         
         // Filter duplicates based on capability_id
-        const uniqueItems = items.reduce((acc: any[], item: any) => {
+        const uniqueItems = items.reduce((acc: Perk[], item: Perk) => {
           if (!acc.some(existingItem => existingItem.capability_id === item.capability_id)) {
             acc.push({ ...item, phase: phaseKey, layer: layerKey });
           } else {
