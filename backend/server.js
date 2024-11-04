@@ -58,17 +58,19 @@ app.post('/api/auth/google', async (req, res) => {
       INSERT INTO users (
         id, 
         email, 
-        name, 
+        name,
+        username,
         picture, 
         google_id,
         tutorial_completed,
         tutorial_progress
       ) 
-      VALUES ($1, $2, $3, $4, $5, $6, $7)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
       ON CONFLICT (google_id)
       DO UPDATE SET 
         email = EXCLUDED.email,
         name = EXCLUDED.name,
+        username = EXCLUDED.username,
         picture = EXCLUDED.picture,
         updated_at = CURRENT_TIMESTAMP
       RETURNING *;
@@ -78,6 +80,7 @@ app.post('/api/auth/google', async (req, res) => {
       userData.googleId,
       userData.email,
       userData.name,
+      userData.email.split('@')[0], // Use email local part as username
       userData.picture,
       userData.googleId,
       false,
