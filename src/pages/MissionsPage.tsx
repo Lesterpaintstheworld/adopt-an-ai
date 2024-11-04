@@ -1,5 +1,24 @@
 import React, { useState } from 'react';
 import { Mission, Difficulty, Status, Phase } from '../types/missions';
+
+interface MissionRequirements {
+  compute?: string;
+  memory?: string;
+  capabilities?: string[];
+  [key: string]: any;
+}
+
+interface PhaseData {
+  name: string;
+  period: string;
+  description: string;
+  [key: string]: any;
+}
+
+interface PerkItem {
+  capability_id: string;
+  name: string;
+}
 import MissionModal from '../components/MissionModal';
 import { getPerkIconUrl } from '../utils/iconUtils';
 
@@ -493,11 +512,11 @@ const MissionsPage: React.FC = () => {
                   }}>
                     Requirements: {
                       typeof mission.requirements === 'object' && mission.requirements !== null
-                        ? Object.entries(mission.requirements as Record<string, unknown>)
+                        ? Object.entries(mission.requirements as MissionRequirements)
                             .map(([key, value]) => `${key}: ${String(value)}`)
                             .join(', ')
                         : Array.isArray(mission.requirements)
-                        ? mission.requirements.join(', ')
+                        ? (mission.requirements as string[]).join(', ')
                         : String(mission.requirements)
                     }
                   </Typography>
