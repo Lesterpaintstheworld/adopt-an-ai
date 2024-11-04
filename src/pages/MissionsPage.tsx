@@ -579,7 +579,7 @@ const MissionsPage: React.FC = () => {
                               .filter(([key]) => !['name', 'period', 'description'].includes(key))
                               .flatMap(([_, items]) => items)
                           )
-                          .find(item => item.capability_id === mission.mainPrerequisite)?.name || 'Unknown Perk'}
+                          .find((item: any) => item && typeof item === 'object' && 'capability_id' in item && item.capability_id === mission.mainPrerequisite)?.name || 'Unknown Perk'}
                       </Typography>
                     </Box>
                   </Box>
