@@ -22,6 +22,7 @@ const darkTheme = {
   }
 };
 import { parseYaml } from '../utils/yamlFormatter';
+import { getPerkIconUrl } from '../utils/iconUtils';
 import CloseIcon from '@mui/icons-material/Close';
 
 SyntaxHighlighter.registerLanguage('yaml', yaml);
@@ -47,13 +48,7 @@ export const YamlModal: React.FC<YamlModalProps> = ({
   const yamlData = { ...data };
   delete yamlData?.story;
 
-  // Get the perk icon URL
-  const getIconUrl = (data: any) => {
-    if (!data?.file_base_name) return null;
-    return `/website/icons/${data.file_base_name}.png`;
-  };
-
-  const iconUrl = getIconUrl(data);
+  const iconUrl = data ? getPerkIconUrl(data) : null;
 
   return (
     <Dialog 
