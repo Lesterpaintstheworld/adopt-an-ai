@@ -12,6 +12,7 @@ export const mockMissions: Mission[] = [
     requirements: ['Basic AI Core'],
     rewards: { xp: 100 },
     status: 'available',
+    phase: 'phase_1'
   },
   {
     id: '2',
@@ -24,6 +25,7 @@ export const mockMissions: Mission[] = [
     requirements: ['Basic AI Core', 'Language Module'],
     rewards: { xp: 200, capabilities: ['Creative Writing'] },
     status: 'locked',
+    phase: 'phase_1'
   },
   {
     id: '7',

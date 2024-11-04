@@ -1,5 +1,20 @@
 import React, { useState } from 'react';
-import { Mission, Difficulty, Status } from '../types/missions';
+import { Mission, Difficulty, Status, Phase } from '../types/missions';
+
+const getPhaseLabel = (phase: Phase): string => {
+  switch (phase) {
+    case 'phase_1':
+      return 'Proliferation';
+    case 'phase_2':
+      return 'Organization';
+    case 'phase_3':
+      return 'Transcendence';
+    case 'phase_4':
+      return 'Harmony';
+    default:
+      return phase;
+  }
+};
 import { mockMissions } from '../data/mockMissions';
 import { 
   Box, 
@@ -26,6 +41,7 @@ interface Filters {
   category: string | null;
   difficulty: Difficulty | 'all';
   status: Status | 'all';
+  phase: Phase | 'all';
 }
 
 
@@ -50,7 +66,8 @@ const MissionsPage: React.FC = () => {
   const [filters, setFilters] = useState<Filters>({
     category: null,
     difficulty: 'all',
-    status: 'all'
+    status: 'all',
+    phase: 'all'
   });
   const [missions, setMissions] = useState<Mission[]>(mockMissions);
   const [activeMissions, setActiveMissions] = useState<Mission[]>([]);
@@ -80,6 +97,12 @@ const MissionsPage: React.FC = () => {
     if (filters.status !== 'all') {
       filteredMissions = filteredMissions.filter(
         mission => mission.status === filters.status
+      );
+    }
+
+    if (filters.phase !== 'all') {
+      filteredMissions = filteredMissions.filter(
+        mission => mission.phase === filters.phase
       );
     }
 
@@ -254,6 +277,29 @@ const MissionsPage: React.FC = () => {
             <MenuItem value="completed">Completed</MenuItem>
           </Select>
         </FormControl>
+
+        <FormControl sx={{ minWidth: 120 }}>
+          <InputLabel>Phase</InputLabel>
+          <Select
+            value={filters.phase}
+            label="Phase"
+            onChange={(event: SelectChangeEvent<Phase | 'all'>) => {
+              const newFilters = {
+                ...filters,
+                phase: event.target.value as Phase | 'all'
+              };
+              setFilters(newFilters);
+              filterMissions(newFilters);
+            }}
+            size="small"
+          >
+            <MenuItem value="all">All Phases</MenuItem>
+            <MenuItem value="phase_1">Proliferation</MenuItem>
+            <MenuItem value="phase_2">Organization</MenuItem>
+            <MenuItem value="phase_3">Transcendence</MenuItem>
+            <MenuItem value="phase_4">Harmony</MenuItem>
+          </Select>
+        </FormControl>
       </Box>
 
       {/* Active Missions */}
@@ -320,6 +366,28 @@ const MissionsPage: React.FC = () => {
                       label={mission.duration}
                       size="small"
                       variant="outlined"
+                    />
+                    <Chip
+                      label={getPhaseLabel(mission.phase)}
+                      size="small"
+                      sx={{
+                        bgcolor: (theme) => {
+                          switch (mission.phase) {
+                            case 'phase_1':
+                              return theme.palette.info.main;
+                            case 'phase_2':
+                              return theme.palette.success.main;
+                            case 'phase_3':
+                              return theme.palette.warning.main;
+                            case 'phase_4':
+                              return theme.palette.error.main;
+                            default:
+                              return theme.palette.grey[500];
+                          }
+                        },
+                        color: '#fff',
+                        fontWeight: 'bold',
+                      }}
                     />
                   </Box>
                 }

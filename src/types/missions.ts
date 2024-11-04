@@ -1,6 +1,7 @@
 export type Difficulty = 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert';
 export type Status = 'available' | 'in_progress' | 'locked' | 'completed';
 export type Category = 'Communication' | 'Creativity' | 'Problem Solving' | 'Research';
+export type Phase = 'phase_1' | 'phase_2' | 'phase_3' | 'phase_4';
 
 export interface Mission {
   id: string;
@@ -17,4 +18,5 @@ export interface Mission {
     resources?: string[];
   };
   status: Status;
+  phase: Phase;
 }
