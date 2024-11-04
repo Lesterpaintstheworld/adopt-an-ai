@@ -67,19 +67,42 @@ export default function VoteCard({
           <Typography variant="body2" color="text.secondary" gutterBottom>
             Vote Progress
           </Typography>
-          <LinearProgress 
-            variant="buffer"
-            value={yesPercentage}
-            valueBuffer={100}
-            sx={{
-              height: 8,
-              borderRadius: 4,
-              backgroundColor: 'rgba(255, 0, 0, 0.2)',
-              '& .MuiLinearProgress-bar': {
-                backgroundColor: 'rgba(0, 255, 0, 0.6)',
-              }
-            }}
-          />
+          <Box sx={{ position: 'relative', height: 8 }}>
+            {/* Yes votes bar (background) */}
+            <LinearProgress 
+              variant="determinate"
+              value={yesPercentage}
+              sx={{
+                height: '100%',
+                borderRadius: 4,
+                backgroundColor: 'rgba(0, 255, 0, 0.1)',
+                '& .MuiLinearProgress-bar': {
+                  backgroundColor: 'rgba(0, 255, 0, 0.6)',
+                },
+                position: 'absolute',
+                width: '100%',
+              }}
+            />
+            {/* No votes bar (foreground) */}
+            <LinearProgress 
+              variant="determinate"
+              value={100 - yesPercentage}
+              sx={{
+                height: '100%',
+                borderRadius: 4,
+                backgroundColor: 'transparent',
+                '& .MuiLinearProgress-bar': {
+                  backgroundColor: 'rgba(255, 0, 0, 0.6)',
+                  transform: 'none !important',
+                  transition: 'none',
+                  right: 0,
+                  left: 'unset',
+                },
+                position: 'absolute',
+                width: '100%',
+              }}
+            />
+          </Box>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 1 }}>
             <Typography variant="body2" color="success.main">
               Yes: {yesVotes} ({yesPercentage.toFixed(1)}%)
