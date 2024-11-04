@@ -8,8 +8,9 @@ const menuItems = [
   { text: 'Governance', path: '/governance', icon: '/images/governance.png' },
   { text: 'Missions', path: '/missions', icon: '/images/missions.png' },
   { text: 'AI Team', path: '/team', icon: '/images/team.png' },
-  { text: 'Compute', path: '/compute', icon: '/images/os.png' },
-  { text: 'Models', path: '/models', icon: '/images/training.png' },
+  { text: 'OS', path: '/os', icon: '/images/os.png' },
+  { text: 'Models', path: '/models', icon: '/images/models.png' },
+  { text: 'Compute', path: '/compute', icon: '/images/compute.png' },
 ];
 
 const SideMenu = () => {
