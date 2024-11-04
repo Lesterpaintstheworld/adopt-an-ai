@@ -337,6 +337,39 @@ const MissionsPage: React.FC = () => {
                     {mission.rewards.capabilities && 
                       `, ${mission.rewards.capabilities.join(', ')}`}
                   </Typography>
+                  {mission.mainPrerequisite && (
+                    <Box sx={{ 
+                      display: 'flex', 
+                      alignItems: 'center',
+                      gap: 1,
+                      mt: 1
+                    }}>
+                      <Typography variant="caption" color="text.secondary">
+                        Required Perk:
+                      </Typography>
+                      <Box
+                        component="img"
+                        src={getPerkIconUrl({ capability_id: mission.mainPrerequisite })}
+                        alt="Required Perk"
+                        sx={{
+                          width: 32,
+                          height: 32,
+                          borderRadius: '4px',
+                          objectFit: 'cover',
+                          boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                          opacity: mission.status === 'locked' ? 0.5 : 1,
+                          filter: mission.status === 'locked' ? 'grayscale(100%)' : 'none',
+                          transition: 'all 0.2s ease',
+                          '&:hover': {
+                            transform: 'scale(1.1)',
+                          }
+                        }}
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).style.display = 'none';
+                        }}
+                      />
+                    </Box>
+                  )}
                 </Box>
               </CardContent>
               <CardActions>
