@@ -524,147 +524,31 @@ optimization:
   - cache_filter_results
   - preload_next_page
 ```
-import { Box, Container, Grid, Typography, Link, IconButton } from '@mui/material';
+import { Box, Container, Typography, Link } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 export const Footer = () => {
   return (
-    <Box
-      component="footer"
-      sx={{
+    <Box 
+      component="footer" 
+      sx={{ 
+        py: 3, 
+        px: 2,
+        mt: 'auto',
         backgroundColor: 'background.paper',
         borderTop: '1px solid',
-        borderColor: 'divider',
-        py: 6,
-        mt: 'auto'
+        borderColor: 'divider'
       }}
     >
-      <Container maxWidth="lg">
-        <Grid container spacing={4}>
-          {/* Company Info */}
-          <Grid item xs={12} md={4}>
-            <Typography variant="h6" color="text.primary" gutterBottom>
-              raise-an.ai
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Fostering the development of independent AI through innovative training and evolution.
-            </Typography>
-          </Grid>
-
-          {/* Quick Links */}
-          <Grid item xs={12} md={4}>
-            <Typography variant="h6" color="text.primary" gutterBottom>
-              Quick Links
-            </Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-              <Link
-                component={RouterLink}
-                to="/tech-tree"
-                color="text.secondary"
-                sx={{ textDecoration: 'none', '&:hover': { color: 'primary.main' } }}
-              >
-                Tech Tree
-              </Link>
-              <Link
-                component={RouterLink}
-                to="/my-ais"
-                color="text.secondary"
-                sx={{ textDecoration: 'none', '&:hover': { color: 'primary.main' } }}
-              >
-                My AIs
-              </Link>
-              <Link
-                component={RouterLink}
-                to="/missions"
-                color="text.secondary"
-                sx={{ textDecoration: 'none', '&:hover': { color: 'primary.main' } }}
-              >
-                Missions
-              </Link>
-              <Link
-                component={RouterLink}
-                to="/blog"
-                color="text.secondary"
-                sx={{ textDecoration: 'none', '&:hover': { color: 'primary.main' } }}
-              >
-                Blog
-              </Link>
-            </Box>
-          </Grid>
-
-          {/* Social Links */}
-          <Grid item xs={12} md={4}>
-            <Typography variant="h6" color="text.primary" gutterBottom>
-              Connect With Us
-            </Typography>
-            <Box sx={{ display: 'flex', gap: 2 }}>
-              <IconButton
-                component="a"
-                href="https://github.com/raise-an-ai"
-                target="_blank"
-                rel="noopener noreferrer"
-                sx={{ color: 'text.secondary', '&:hover': { color: 'primary.main' } }}
-              >
-                <GitHubIcon />
-              </IconButton>
-              <IconButton
-                component="a"
-                href="https://twitter.com/raise_an_ai"
-                target="_blank"
-                rel="noopener noreferrer"
-                sx={{ color: 'text.secondary', '&:hover': { color: 'primary.main' } }}
-              >
-                <TwitterIcon />
-              </IconButton>
-              <IconButton
-                component="a"
-                href="https://linkedin.com/company/raise-an-ai"
-                target="_blank"
-                rel="noopener noreferrer"
-                sx={{ color: 'text.secondary', '&:hover': { color: 'primary.main' } }}
-              >
-                <LinkedInIcon />
-              </IconButton>
-            </Box>
-          </Grid>
-        </Grid>
-
-        {/* Copyright */}
-        <Typography 
-          variant="body2" 
-          color="text.secondary" 
-          align="center"
-          sx={{ mt: 4, borderTop: '1px solid', borderColor: 'divider', pt: 2 }}
-        >
-          © {new Date().getFullYear()} raise-an.ai. All rights reserved.
-        </Typography>
-      </Container>
-    </Box>
-  );
-};
-
-export default Footer;
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
-import { Link as RouterLink } from 'react-router-dom';
-
-export const Footer = () => {
-  return (
-    <Box component="footer" sx={{ py: 3, bgcolor: 'background.paper' }}>
       <Container maxWidth="lg">
         <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
           <Box sx={{ display: 'flex', gap: 3 }}>
             <Link
               component={RouterLink}
-              to="/adopt"
+              to="/tech-tree"
               sx={{ color: 'text.secondary', textDecoration: 'none', '&:hover': { color: 'primary.main' } }}
             >
-              Adopt
+              Tech Tree
             </Link>
             <Link
               component={RouterLink}
@@ -675,10 +559,10 @@ export const Footer = () => {
             </Link>
             <Link
               component={RouterLink}
-              to="/pricing"
+              to="/missions"
               sx={{ color: 'text.secondary', textDecoration: 'none', '&:hover': { color: 'primary.main' } }}
             >
-              Pricing
+              Missions
             </Link>
             <Link
               component={RouterLink}
@@ -690,7 +574,7 @@ export const Footer = () => {
           </Box>
         </Box>
         <Typography variant="body2" color="text.secondary" align="center">
-          © 2023 raise-an.ai - All rights reserved
+          © {new Date().getFullYear()} raise-an.ai - All rights reserved
         </Typography>
       </Container>
     </Box>
