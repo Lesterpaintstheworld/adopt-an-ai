@@ -1,4 +1,4 @@
-import { Box, Typography, Paper, Divider } from '@mui/material';
+import { Box, Typography, Paper } from '@mui/material';
 import { TutorialHighlight } from '../components/tutorial/TutorialHighlight';
 import MyComputeSection from '../components/compute/MyComputeSection';
 import AvailableComputeSection from '../components/compute/AvailableComputeSection';
