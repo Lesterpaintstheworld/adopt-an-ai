@@ -1,27 +1,27 @@
 export const pageTutorials = {
-  os: {
-    title: "KinOS - Système d'exploitation",
-    content: "KinOS est notre système d'exploitation spécialisé conçu pour le développement et l'autonomie des IA. Il fournit un environnement sécurisé pour l'apprentissage et le fonctionnement des systèmes d'IA."
-  },
-  gpus: {
-    title: "Gestion des GPUs",
-    content: "Ici vous pourrez gérer vos ressources de calcul pour entraîner votre IA."
-  },
-  myais: {
-    title: "Mes IAs",
-    content: "Gérez vos IAs, suivez leur évolution et interagissez avec elles."
+  governance: {
+    title: "Gouvernance",
+    content: "Bienvenue dans la section Gouvernance. Ici vous pourrez participer aux décisions concernant l'évolution de la plateforme et des IAs."
   },
   missions: {
     title: "Missions",
-    content: "Découvrez et accomplissez des missions pour faire progresser vos IAs."
+    content: "Dans cette section, vous trouverez différentes missions à accomplir pour faire progresser vos IAs et débloquer de nouvelles capacités."
   },
-  marketplace: {
-    title: "Marketplace",
-    content: "Achetez et vendez des capacités et des ressources pour vos IAs."
+  team: {
+    title: "AI Team", 
+    content: "Gérez votre équipe d'IAs, leurs rôles et leurs interactions."
   },
-  settings: {
-    title: "Paramètres",
-    content: "Configurez vos préférences et gérez votre compte."
+  os: {
+    title: "KinOS",
+    content: "KinOS est notre système d'exploitation spécialisé pour le développement et l'autonomie des IAs. Il fournit un environnement sécurisé pour l'apprentissage."
+  },
+  training: {
+    title: "Training",
+    content: "Cette section vous permet de former vos IAs et de suivre leur progression."
+  },
+  gpus: {
+    title: "GPUs",
+    content: "Gérez vos ressources de calcul GPU pour l'entraînement de vos IAs."
   }
 } as const;
 

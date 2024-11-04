@@ -1,3 +1,11 @@
+import { Box, Typography } from '@mui/material';
+import { TutorialHighlight } from '../components/tutorial/TutorialHighlight';
+
 export default function GovernancePage() {
-  return <div className="p-4"><h1>Governance</h1></div>;
+  return (
+    <Box sx={{ p: 4 }}>
+      <TutorialHighlight pageKey="governance" />
+      <Typography variant="h1">Governance</Typography>
+    </Box>
+  );
 }
