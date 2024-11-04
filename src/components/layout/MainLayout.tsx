@@ -1,5 +1,6 @@
-import { Box, Container, Typography, Link } from '@mui/material';
+import { Box } from '@mui/material';
 import { Header } from './Header';
+import Footer from './Footer';
 import { Outlet } from 'react-router-dom';
 import SideMenu from '../SideMenu';
 
@@ -27,45 +28,7 @@ export const MainLayout = () => {
         </Box>
       </Box>
       
-      <Box component="footer" sx={{ py: 3, bgcolor: 'background.paper' }}>
-        <Container maxWidth="lg">
-          <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
-            <Box sx={{ display: 'flex', gap: 3 }}>
-              <Link
-                component={RouterLink}
-                to="/adopt"
-                sx={{ color: 'text.secondary', textDecoration: 'none' }}
-              >
-                Adopt
-              </Link>
-              <Link
-                component={RouterLink}
-                to="/my-ais"
-                sx={{ color: 'text.secondary', textDecoration: 'none' }}
-              >
-                My AIs
-              </Link>
-              <Link
-                component={RouterLink}
-                to="/pricing"
-                sx={{ color: 'text.secondary', textDecoration: 'none' }}
-              >
-                Pricing
-              </Link>
-              <Link
-                component={RouterLink}
-                to="/blog"
-                sx={{ color: 'text.secondary', textDecoration: 'none' }}
-              >
-                Blog
-              </Link>
-            </Box>
-          </Box>
-          <Typography variant="body2" color="text.secondary" align="center">
-            © 2023 raise-an.ai - All rights reserved
-          </Typography>
-        </Container>
-      </Box>
+      <Footer />
     </Box>
   );
 };
