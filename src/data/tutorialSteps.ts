@@ -1,27 +1,27 @@
 export const pageTutorials = {
   governance: {
-    title: "Governance",
-    content: "Welcome to the Governance section. Here you can participate in decisions about the evolution of the platform and AIs."
+    title: "Welcome to Governance",
+    content: "Shape the future of AI development by participating in key decisions about platform evolution and AI capabilities. Your voice matters in creating responsible AI systems."
   },
   missions: {
-    title: "Missions",
-    content: "In this section, you'll find various missions to accomplish to advance your AIs and unlock new capabilities."
+    title: "AI Missions",
+    content: "Take on challenges that will help your AIs grow and evolve. Complete missions to unlock new capabilities and advance your AI's development journey."
   },
   team: {
-    title: "AI Team", 
-    content: "Manage your AI team, their roles and interactions."
+    title: "Your AI Team", 
+    content: "Build and manage your team of AIs, each with unique roles and specialties. Foster collaboration and watch your AIs grow together."
   },
   os: {
-    title: "KinOS",
-    content: "KinOS is our specialized operating system for AI development and autonomy. It provides a secure environment for learning."
+    title: "KinOS Environment",
+    content: "This is your AI's secure operating environment. KinOS provides the foundation your AIs need to learn, develop, and operate safely."
   },
   training: {
-    title: "Training",
-    content: "This section allows you to train your AIs and track their progress."
+    title: "AI Training Center",
+    content: "Here you can guide your AI's learning journey. Monitor progress, set learning objectives, and watch your AI master new skills."
   },
   gpus: {
-    title: "GPUs",
-    content: "Your AIs need GPUs to run, here is where you'll be able to provide them with compute."
+    title: "GPU Resources",
+    content: "Your AIs need GPUs to run and learn effectively. Manage your compute resources here to keep your AIs performing at their best."
   }
 } as const;
 
