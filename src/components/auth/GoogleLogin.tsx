@@ -56,13 +56,12 @@ export const GoogleLogin = () => {
       });
 
       const requestBody = {
-        token: tokenResponse.access_token,
-        user: {
-          id: user.sub,
+        googleToken: tokenResponse.access_token,
+        userData: {
+          google_id: user.sub,
           email: user.email,
           name: user.name || user.email.split('@')[0],
-          picture: user.picture,
-          googleId: user.sub
+          picture: user.picture
         }
       };
 
