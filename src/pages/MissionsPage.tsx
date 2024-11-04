@@ -480,9 +480,13 @@ const MissionsPage: React.FC = () => {
                   <Typography variant="caption" display="block" sx={{ 
                     color: 'rgba(255,255,255,0.6)'
                   }}>
-                    Rewards: {mission.rewards.xp} XP
-                    {mission.rewards.capabilities && 
-                      `, ${mission.rewards.capabilities.join(', ')}`}
+                    Rewards: {mission.rewards ? (
+                      <>
+                        {mission.rewards.xp ? `${mission.rewards.xp} XP` : ''}
+                        {mission.rewards.capabilities?.length > 0 && 
+                          `${mission.rewards.xp ? ', ' : ''}${mission.rewards.capabilities.join(', ')}`}
+                      </>
+                    ) : 'None'}
                   </Typography>
                 </Box>
 
