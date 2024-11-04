@@ -108,9 +108,7 @@ export const GoogleLogin = () => {
     onError: () => setError('Google login failed'),
     flow: 'implicit',
     scope: 'email profile',
-    ux_mode: 'popup',
     prompt: 'select_account',
-    cookiePolicy: 'single_host_origin',
   });
 
   return (
