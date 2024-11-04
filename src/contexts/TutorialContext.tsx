@@ -12,13 +12,13 @@ interface TutorialContextType {
 const TutorialContext = createContext<TutorialContextType | undefined>(undefined);
 
 export const TutorialProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { user } = useAuth();
+  const { user, isAuthenticated } = useAuth();
   const [isTutorialComplete, setIsTutorialComplete] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
 
   useEffect(() => {
     const checkTutorialStatus = async () => {
-      if (user) {
+      if (isAuthenticated && user) {
         try {
           const response = await fetch(`${import.meta.env.VITE_API_URL}/api/users/${user.id}/tutorial-status`, {
             headers: {
@@ -37,11 +37,16 @@ export const TutorialProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         } catch (error) {
           console.error('Error checking tutorial status:', error);
         }
+      } else {
+        const localTutorialStatus = localStorage.getItem('tutorial_status');
+        if (localTutorialStatus) {
+          setIsTutorialComplete(JSON.parse(localTutorialStatus).isComplete);
+        }
       }
     };
     
     checkTutorialStatus();
-  }, [user]);
+  }, [user, isAuthenticated]);
 
   const startTutorial = () => {
     setCurrentStep(1);
@@ -52,7 +57,7 @@ export const TutorialProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   };
 
   const skipTutorial = async () => {
-    if (user) {
+    if (isAuthenticated && user) {
       try {
         const response = await fetch(`${import.meta.env.VITE_API_URL}/api/users/${user.id}/tutorial-status`, {
           method: 'POST',
@@ -76,9 +81,14 @@ export const TutorialProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       } catch (error) {
         console.error('Error updating tutorial status:', error);
       }
+    } else {
+      localStorage.setItem('tutorial_status', JSON.stringify({ 
+        isComplete: true,
+        lastUpdated: new Date().toISOString()
+      }));
+      setIsTutorialComplete(true);
+      setCurrentStep(0);
     }
-    setIsTutorialComplete(true);
-    setCurrentStep(0);
   };
 
   return (
