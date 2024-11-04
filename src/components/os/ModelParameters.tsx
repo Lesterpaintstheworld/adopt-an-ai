@@ -3,10 +3,24 @@ import { styled } from '@mui/material/styles';
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   height: '100%',
-  padding: theme.spacing(2),
-  backgroundColor: 'rgba(0, 0, 0, 0.6)',
-  backdropFilter: 'blur(10px)',
+  padding: theme.spacing(3),
+  backgroundColor: 'rgba(0, 0, 0, 0.4)',
+  backdropFilter: 'blur(20px)',
   border: '1px solid rgba(255, 255, 255, 0.1)',
+  '& .MuiListItem-root': {
+    borderRadius: theme.shape.borderRadius,
+    marginBottom: theme.spacing(1),
+    backgroundColor: 'rgba(255, 255, 255, 0.03)',
+    '&:hover': {
+      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    }
+  },
+  '& .MuiListItemText-primary': {
+    fontWeight: 500,
+  },
+  '& .MuiListItemText-secondary': {
+    color: 'rgba(255, 255, 255, 0.5)',
+  }
 }));
 
 interface Parameter {

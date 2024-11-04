@@ -38,6 +38,7 @@ export default function OSPage() {
       display: 'flex', 
       height: 'calc(100vh - 64px)',
       overflow: 'hidden',
+      backgroundColor: 'rgba(0, 0, 0, 0.2)',
     }}>
       <ModelSideMenu 
         models={models}
@@ -45,10 +46,15 @@ export default function OSPage() {
         onSelectModel={setSelectedModelId}
       />
       
-      <Box sx={{ flexGrow: 1, p: 3, overflow: 'auto' }}>
+      <Box sx={{ 
+        flexGrow: 1, 
+        p: 4,
+        overflow: 'auto',
+        transition: 'all 0.3s ease',
+      }}>
         <TutorialHighlight pageKey="os" />
         
-        <Grid container spacing={3} sx={{ height: '100%' }}>
+        <Grid container spacing={4} sx={{ height: '100%' }}>
           {/* System Prompt - Left half */}
           <Grid item xs={6} sx={{ height: '100%' }}>
             <SystemPrompt 

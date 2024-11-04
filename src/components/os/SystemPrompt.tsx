@@ -3,10 +3,25 @@ import { styled } from '@mui/material/styles';
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   height: '100%',
-  padding: theme.spacing(2),
-  backgroundColor: 'rgba(0, 0, 0, 0.6)',
-  backdropFilter: 'blur(10px)',
+  padding: theme.spacing(3),
+  backgroundColor: 'rgba(0, 0, 0, 0.4)',
+  backdropFilter: 'blur(20px)',
   border: '1px solid rgba(255, 255, 255, 0.1)',
+  '& .MuiTextField-root': {
+    marginTop: theme.spacing(2),
+  },
+  '& .MuiOutlinedInput-root': {
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    '& fieldset': {
+      borderColor: 'rgba(255, 255, 255, 0.1)',
+    },
+    '&:hover fieldset': {
+      borderColor: 'rgba(255, 255, 255, 0.2)',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: theme.palette.primary.main,
+    }
+  }
 }));
 
 interface SystemPromptProps {

@@ -4,10 +4,27 @@ import BuildIcon from '@mui/icons-material/Build';
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   height: '100%',
-  padding: theme.spacing(2),
-  backgroundColor: 'rgba(0, 0, 0, 0.6)',
-  backdropFilter: 'blur(10px)',
+  padding: theme.spacing(3),
+  backgroundColor: 'rgba(0, 0, 0, 0.4)',
+  backdropFilter: 'blur(20px)',
   border: '1px solid rgba(255, 255, 255, 0.1)',
+  transition: 'all 0.3s ease',
+  '&:hover': {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    transform: 'translateY(-2px)',
+  },
+  '& .MuiTypography-h6': {
+    marginBottom: theme.spacing(2),
+    fontSize: '1.2rem',
+    fontWeight: 600,
+  },
+  '& .MuiListItem-root': {
+    padding: theme.spacing(1.5),
+    borderRadius: theme.shape.borderRadius,
+    '&:hover': {
+      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    }
+  }
 }));
 
 interface Tool {
