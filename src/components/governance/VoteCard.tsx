@@ -75,9 +75,9 @@ export default function VoteCard({
               sx={{
                 height: '100%',
                 borderRadius: 4,
-                backgroundColor: 'rgba(0, 255, 0, 0.1)',
+                backgroundColor: 'rgba(46, 204, 113, 0.1)',
                 '& .MuiLinearProgress-bar': {
-                  backgroundColor: 'rgba(0, 255, 0, 0.6)',
+                  backgroundColor: 'rgba(46, 204, 113, 0.8)',
                 },
                 position: 'absolute',
                 width: '100%',
