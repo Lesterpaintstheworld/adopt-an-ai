@@ -12,28 +12,26 @@ import { pageTutorials, PageKey } from '../../data/tutorialSteps';
  */
 export const TutorialHighlight = ({ pageKey }: { pageKey: PageKey }) => {
   const { user, updateUser, isAuthenticated } = useAuth();
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
 
   const tutorial = pageTutorials[pageKey];
 
   useEffect(() => {
-    console.log('TutorialHighlight mounted for page:', pageKey);
-    console.log('Tutorial content:', tutorial);
-    console.log('Is visible:', visible);
-    
-    // Check localStorage for non-authenticated users
-    const localTutorialStatus = localStorage.getItem('tutorial_status');
-    if (localTutorialStatus) {
-      const { dismissedPages = [] } = JSON.parse(localTutorialStatus);
-      if (dismissedPages.includes(pageKey)) {
-        console.log('Page already dismissed in localStorage');
-        setVisible(false);
+    const checkVisibility = () => {
+      const localTutorialStatus = localStorage.getItem('tutorial_status');
+      if (localTutorialStatus) {
+        const { dismissedPages = [] } = JSON.parse(localTutorialStatus);
+        if (dismissedPages.includes(pageKey)) {
+          return false;
+        }
+      } else if (isAuthenticated && user?.tutorialProgress?.dismissedPages?.includes(pageKey)) {
+        return false;
       }
-    } else if (isAuthenticated && user?.tutorialProgress?.dismissedPages?.includes(pageKey)) {
-      console.log('Page already dismissed in user progress');
-      setVisible(false);
-    }
+      return true;
+    };
+
+    setVisible(checkVisibility());
   }, [pageKey, user, isAuthenticated]);
 
   if (!visible || !tutorial) {
@@ -119,7 +117,7 @@ export const TutorialHighlight = ({ pageKey }: { pageKey: PageKey }) => {
         <Button 
           onClick={handleNext}
           variant="contained"
-          aria-label="Marquer comme lu"
+          aria-label="Mark as read"
           sx={{ 
             backgroundColor: '#ff9800',
             '&:hover': {
@@ -127,7 +125,7 @@ export const TutorialHighlight = ({ pageKey }: { pageKey: PageKey }) => {
             }
           }}
         >
-          J'ai compris
+          I understand
         </Button>
       </Box>
     </Paper>

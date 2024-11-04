@@ -1,27 +1,27 @@
 export const pageTutorials = {
   governance: {
-    title: "Gouvernance",
-    content: "Bienvenue dans la section Gouvernance. Ici vous pourrez participer aux décisions concernant l'évolution de la plateforme et des IAs."
+    title: "Governance",
+    content: "Welcome to the Governance section. Here you can participate in decisions about the evolution of the platform and AIs."
   },
   missions: {
     title: "Missions",
-    content: "Dans cette section, vous trouverez différentes missions à accomplir pour faire progresser vos IAs et débloquer de nouvelles capacités."
+    content: "In this section, you'll find various missions to accomplish to advance your AIs and unlock new capabilities."
   },
   team: {
     title: "AI Team", 
-    content: "Gérez votre équipe d'IAs, leurs rôles et leurs interactions."
+    content: "Manage your AI team, their roles and interactions."
   },
   os: {
     title: "KinOS",
-    content: "KinOS est notre système d'exploitation spécialisé pour le développement et l'autonomie des IAs. Il fournit un environnement sécurisé pour l'apprentissage."
+    content: "KinOS is our specialized operating system for AI development and autonomy. It provides a secure environment for learning."
   },
   training: {
     title: "Training",
-    content: "Cette section vous permet de former vos IAs et de suivre leur progression."
+    content: "This section allows you to train your AIs and track their progress."
   },
   gpus: {
     title: "GPUs",
-    content: "Gérez vos ressources de calcul GPU pour l'entraînement de vos IAs."
+    content: "Manage your GPU computing resources for training your AIs."
   }
 } as const;
 
