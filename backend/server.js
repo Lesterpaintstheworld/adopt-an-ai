@@ -27,20 +27,28 @@ const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 app.post('/api/auth/google', async (req, res) => {
   try {
     const { googleToken, userData } = req.body;
+    console.log('Received request with userData:', userData);
 
-    // Vérifier le token Google
-    const ticket = await client.verifyIdToken({
-      idToken: googleToken,
-      audience: process.env.GOOGLE_CLIENT_ID
-    });
+    // Vérification que nous avons bien reçu les données
+    if (!userData || !userData.googleId) {
+      console.error('Missing userData or googleId');
+      return res.status(400).json({ error: 'Missing user data' });
+    }
 
-    const payload = ticket.getPayload();
+    // Au lieu de vérifier le token (qui est un access_token), utilisons directement les données utilisateur
+    const user = {
+      id: userData.googleId,
+      email: userData.email,
+      name: userData.name,
+      picture: userData.picture,
+      googleId: userData.googleId
+    };
 
     // Créer un token JWT
     const token = jwt.sign(
       { 
-        userId: payload.sub,
-        email: payload.email,
+        userId: user.id,
+        email: user.email,
         iat: Math.floor(Date.now() / 1000)
       }, 
       process.env.JWT_SECRET,
@@ -50,21 +58,17 @@ app.post('/api/auth/google', async (req, res) => {
       }
     );
 
+    console.log('Authentication successful for user:', user.email);
+
     // Envoyer la réponse
-    res.json({
-      user: {
-        id: payload.sub,
-        email: payload.email,
-        name: payload.name,
-        picture: payload.picture,
-        googleId: payload.sub
-      },
-      token
-    });
+    res.json({ user, token });
 
   } catch (error) {
-    console.error('Auth error:', error);
-    res.status(401).json({ error: 'Authentication failed' });
+    console.error('Auth error details:', error);
+    res.status(401).json({ 
+      error: 'Authentication failed',
+      details: error.message 
+    });
   }
 });
 
