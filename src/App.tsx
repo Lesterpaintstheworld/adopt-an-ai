@@ -29,7 +29,10 @@ function App() {
   console.log('App rendering...');
   
   return (
-    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+    <GoogleOAuthProvider 
+      clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}
+      onScriptLoadError={() => console.error('Google Script failed to load')}
+    >
       <AuthProvider>
         <ThemeProvider theme={theme}>
       <CssBaseline />
