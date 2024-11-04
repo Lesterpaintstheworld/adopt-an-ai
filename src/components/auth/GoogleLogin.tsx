@@ -19,18 +19,23 @@ export const GoogleLogin = () => {
         throw new Error('Invalid token response');
       }
 
-      const userInfo = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+      console.log('Got Google token:', tokenResponse.access_token.substring(0, 10) + '...');
+
+      const userInfoResponse = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
         headers: { 
           Authorization: `Bearer ${tokenResponse.access_token}`,
           'Content-Type': 'application/json'
         },
       });
       
-      if (!userInfo.ok) {
-        throw new Error('Failed to get user info');
+      if (!userInfoResponse.ok) {
+        const errorText = await userInfoResponse.text();
+        console.error('User info error:', errorText);
+        throw new Error(`Failed to get user info: ${userInfoResponse.status}`);
       }
 
-      const user = await userInfo.json();
+      const user = await userInfoResponse.json();
+      console.log('Got user info:', { ...user, sub: user.sub?.substring(0, 5) + '...' });
 
       // Validate user data
       if (!user.sub || !user.email) {
@@ -53,13 +58,25 @@ export const GoogleLogin = () => {
         }),
       });
 
+      // Log the raw response first
+      const responseText = await authResponse.text();
+      console.log('Auth response:', responseText);
+
       if (!authResponse.ok) {
-        const errorData = await authResponse.json();
-        throw new Error(errorData.message || 'Authentication failed');
+        throw new Error(`Authentication failed: ${authResponse.status} - ${responseText}`);
       }
 
-      const { user: userData, token } = await authResponse.json();
-      login(userData, token);
+      // Parse the response only if it's not empty
+      if (responseText) {
+        try {
+          const data = JSON.parse(responseText);
+          login(data.user, data.token);
+        } catch (e) {
+          throw new Error(`Failed to parse auth response: ${e.message}`);
+        }
+      } else {
+        throw new Error('Empty response from auth server');
+      }
       
     } catch (error) {
       console.error('Login error:', error);
