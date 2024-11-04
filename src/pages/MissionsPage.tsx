@@ -415,7 +415,15 @@ const MissionsPage: React.FC = () => {
                 </Typography>
                 <Box sx={{ mt: 2 }}>
                   <Typography variant="caption" display="block">
-                    Requirements: {mission.requirements.join(', ')}
+                    Requirements: {
+                      typeof mission.requirements === 'object' 
+                        ? Object.entries(mission.requirements)
+                            .map(([key, value]) => `${key}: ${value}`)
+                            .join(', ')
+                        : Array.isArray(mission.requirements)
+                        ? mission.requirements.join(', ')
+                        : String(mission.requirements)
+                    }
                   </Typography>
                   <Typography variant="caption" display="block" sx={{ mt: 1 }}>
                     Rewards: {mission.rewards.xp} XP
