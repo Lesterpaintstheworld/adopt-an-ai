@@ -11,7 +11,6 @@ import GovernancePage from './pages/GovernancePage';
 import TeamPage from './pages/TeamPage';
 import ComputePage from './pages/ComputePage';
 import ModelsPage from './pages/ModelsPage';
-import GPUsPage from './pages/GPUsPage';
 import StandaloneTechTreePage from './pages/StandaloneTechTreePage';
 import HomePage from './pages/HomePage';
 import PaymentSuccessPage from './pages/PaymentSuccessPage';
@@ -60,7 +59,6 @@ function App() {
             <Route path="/team" element={<TeamPage />} />
             <Route path="/compute" element={<ComputePage />} />
             <Route path="/models" element={<ModelsPage />} />
-            <Route path="/gpus" element={<GPUsPage />} />
             <Route path="*" element={
               <div style={{ padding: '20px' }}>
                 <h1>404 - Page Not Found</h1>
