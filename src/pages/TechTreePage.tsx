@@ -1,6 +1,4 @@
-import React, { useState, useEffect, useRef, FC } from 'react';
-import { SxProps } from '@mui/system';
-
+import React, { useState, useEffect, useRef } from 'react';
 import IconLoader from '../components/IconLoader';
 import {
   Box,
@@ -11,6 +9,20 @@ import {
 
 import { TechTree, PhaseData, Perk, PerkFullData } from '../types/tech';
 import YamlModal from '../components/YamlModal';
+
+const isPerk = (item: unknown): item is Perk => {
+  return item !== null && 
+         typeof item === 'object' && 
+         'capability_id' in item &&
+         'name' in item;
+};
+
+const isPhaseData = (data: unknown): data is PhaseData => {
+  return data !== null && 
+         typeof data === 'object' && 
+         'name' in data &&
+         'period' in data;
+};
 
 interface ModalState {
   isOpen: boolean;
@@ -495,7 +507,7 @@ interface TechTreePageProps {
   standalone?: boolean;
 }
 
-const TechTreePage: React.FC<TechTreePageProps> = ({ standalone = false }) => {
+const TechTreePage = ({ standalone = false }: TechTreePageProps): JSX.Element => {
   const [positions, setPositions] = useState<Record<string, { x: number, y: number }>>({});
   const [highlightedItem, setHighlightedItem] = useState<string | null>(null);
   const [modalState, setModalState] = useState<ModalState>({
@@ -527,18 +539,22 @@ const TechTreePage: React.FC<TechTreePageProps> = ({ standalone = false }) => {
     const errors: string[] = [];
 
     Object.entries(techTree).forEach(([phaseKey, phaseData]) => {
-      Object.entries(phaseData).forEach(([layerKey, items]) => {
-        if (Array.isArray(items)) {
-          items.forEach((item: any) => {
-            if (item.capability_id) {
-              if (seenIds.has(item.capability_id)) {
-                errors.push(`Duplicate capability_id found: ${item.capability_id} in ${phaseKey}/${layerKey}`);
+      if (!isPhaseData(phaseData)) return;
+
+      Object.entries(phaseData)
+        .filter(([key]) => !['name', 'period', 'description'].includes(key))
+        .forEach(([layerKey, items]) => {
+          if (Array.isArray(items)) {
+            items.forEach(item => {
+              if (isPerk(item)) {
+                if (seenIds.has(item.capability_id)) {
+                  errors.push(`Duplicate capability_id found: ${item.capability_id} in ${phaseKey}/${layerKey}`);
+                }
+                seenIds.add(item.capability_id);
               }
-              seenIds.add(item.capability_id);
-            }
-          });
-        }
-      });
+            });
+          }
+        });
     });
 
     if (errors.length > 0) {
