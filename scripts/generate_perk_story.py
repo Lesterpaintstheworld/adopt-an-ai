@@ -115,20 +115,34 @@ async def generate_story(client: AsyncAnthropic, perk_data: dict, tech_tree: dic
     # Build richer context
     phase_context = get_phase_context(tech_tree, phase_key)
     prereq_context = get_prerequisites_context(tech_tree, perk_data.get('prerequisites', []))
-    
-    # Get related capabilities in same phase/layer for additional context
     related_capabilities = get_related_capabilities(tech_tree, phase_key, perk_data)
     
-    prompt = f"""You are writing a narrative story about the development and real-world impact of AI capabilities.
-    Write a detailed, concrete story about this AI capability that focuses on practical applications and tangible outcomes.
+    # Get layer name from capability_id prefix
+    layer_mapping = {
+        'COM': 'Compute Layer - Foundation of processing and resources',
+        'MOD': 'Model Layer - Core AI capabilities and cognition', 
+        'AGT': 'Agent Layer - Individual AI behavior and autonomy',
+        'APP': 'Application Layer - Practical tools and interfaces',
+        'ECO': 'Ecosystem Layer - Collaborative systems and frameworks',
+        'MLT': 'Multi-Agent Layer - Coordination between AI entities'
+    }
+    layer_prefix = perk_data['capability_id'].split('_')[0]
+    layer_context = layer_mapping.get(layer_prefix, 'Unknown Layer')
+    
+    prompt = f"""You are writing a narrative story about the development and real-world impact of AI capabilities 
+    within the Great Convergence framework - a vision of AI evolution through distinct phases toward harmonious integration.
+
+    This capability exists within:
+    Layer: {layer_context}
+    Phase Context: {phase_context}
+    
+    This positioning means the capability should reflect the appropriate level of advancement and integration
+    for its phase, while fulfilling its layer's specific role in the overall AI stack.
 
     Capability Details:
     Name: {perk_data['name']}
     Technical Description: {perk_data.get('description', '')}
     Technical Specifications: {json.dumps(perk_data.get('technical_specifications', {}), indent=2)}
-    
-    Phase Context:
-    {phase_context}
     
     Prerequisites and Their Context:
     {prereq_context}
@@ -137,19 +151,21 @@ async def generate_story(client: AsyncAnthropic, perk_data: dict, tech_tree: dic
     {related_capabilities}
 
     Write a 5-6 paragraph story that:
-    1. Opens with a specific example of how this capability is being used in practice
-    2. Explains the technical foundations and how it builds upon prerequisites
-    3. Describes its immediate impact on AI systems through concrete examples
-    4. Explores real-world applications and benefits through specific use cases
-    5. Concludes with near-term possibilities it enables, grounded in current technology trends
+    1. Opens with a specific example of how this capability is being used in practice, appropriate to its phase and layer
+    2. Explains the technical foundations and how it builds upon prerequisites within its layer
+    3. Describes its immediate impact on AI systems through concrete examples, highlighting its role in the layer
+    4. Explores real-world applications and benefits through specific use cases aligned with the phase goals
+    5. Concludes with near-term possibilities it enables, showing progression toward the next phase
     
     Guidelines:
+    - Frame the capability within its specific layer's purpose and phase's level of advancement
     - Use concrete examples and specific scenarios rather than abstract concepts
     - Include technical details but explain them through practical applications
     - Focus on realistic outcomes rather than speculative possibilities
     - Maintain a professional but engaging tone
     - Include relevant metrics and measurements where appropriate
     - Reference how actual organizations or industries might utilize this capability
+    - Show how it contributes to the broader goals of its phase and layer
     
     Return only the story text, no additional formatting or metadata."""
 
