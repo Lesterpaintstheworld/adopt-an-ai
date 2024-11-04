@@ -1,5 +1,5 @@
 import { Box, Grid } from '@mui/material';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { useInfiniteScroll } from '../../hooks/useInfiniteScroll';
 import GPUCard from './GPUCard';
 
