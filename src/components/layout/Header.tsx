@@ -35,13 +35,6 @@ export const Header = () => {
           </Button>
           <Button 
             component={RouterLink} 
-            to="/missions"
-            sx={{ color: (theme) => theme.palette.text.primary }}
-          >
-            Missions
-          </Button>
-          <Button 
-            component={RouterLink} 
             to="/adopt"
             sx={{ color: (theme) => theme.palette.text.primary }}
           >
