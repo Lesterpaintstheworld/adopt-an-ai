@@ -366,23 +366,52 @@ const MissionsPage: React.FC = () => {
         <Grid container spacing={3}>
         {missions.map((mission) => (
           <Grid item xs={12} sm={6} md={4} key={mission.id}>
-            <Card>
+            <Card sx={{
+              height: '100%', // Make all cards same height
+              display: 'flex',
+              flexDirection: 'column',
+              bgcolor: 'rgba(0, 0, 0, 0.75)',
+              backdropFilter: 'blur(8px)',
+              borderRadius: '12px',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              transition: 'all 0.2s ease',
+              '&:hover': {
+                transform: 'translateY(-4px)',
+                boxShadow: '0 8px 24px rgba(0,0,0,0.2)',
+              }
+            }}>
               <CardHeader
-                title={mission.title}
+                title={
+                  <Typography variant="h6" sx={{ 
+                    fontSize: '1.1rem',
+                    fontWeight: 600,
+                    color: '#fff',
+                    textShadow: '0 1px 2px rgba(0,0,0,0.3)'
+                  }}>
+                    {mission.title}
+                  </Typography>
+                }
                 subheader={
-                  <Box sx={{ display: 'flex', gap: 1, mt: 1 }}>
+                  <Box sx={{ display: 'flex', gap: 1, mt: 1, flexWrap: 'wrap' }}>
                     <Chip
                       label={mission.difficulty}
                       size="small"
                       sx={{
                         bgcolor: difficultyColors[mission.difficulty],
                         color: 'white',
+                        fontWeight: 600,
+                        fontSize: '0.75rem'
                       }}
                     />
                     <Chip
                       label={mission.duration}
                       size="small"
                       variant="outlined"
+                      sx={{ 
+                        color: 'rgba(255,255,255,0.8)',
+                        borderColor: 'rgba(255,255,255,0.2)',
+                        fontSize: '0.75rem'
+                      }}
                     />
                     <Chip
                       label={getPhaseLabel(mission.phase)}
@@ -390,31 +419,54 @@ const MissionsPage: React.FC = () => {
                       sx={{
                         bgcolor: (theme) => {
                           switch (mission.phase) {
-                            case 'phase_1':
-                              return theme.palette.info.main;
-                            case 'phase_2':
-                              return theme.palette.success.main;
-                            case 'phase_3':
-                              return theme.palette.warning.main;
-                            case 'phase_4':
-                              return theme.palette.error.main;
-                            default:
-                              return theme.palette.grey[500];
+                            case 'phase_1': return theme.palette.info.main;
+                            case 'phase_2': return theme.palette.success.main;
+                            case 'phase_3': return theme.palette.warning.main;
+                            case 'phase_4': return theme.palette.error.main;
+                            default: return theme.palette.grey[500];
                           }
                         },
                         color: '#fff',
-                        fontWeight: 'bold',
+                        fontWeight: 600,
+                        fontSize: '0.75rem'
                       }}
                     />
                   </Box>
                 }
+                sx={{
+                  pb: 1,
+                  '& .MuiCardHeader-content': {
+                    overflow: 'hidden'
+                  }
+                }}
               />
-              <CardContent>
-                <Typography variant="body2" color="text.secondary">
+              <CardContent sx={{ 
+                flexGrow: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 2,
+                pb: 1
+              }}>
+                <Typography 
+                  variant="body2" 
+                  color="text.secondary"
+                  sx={{ 
+                    color: 'rgba(255,255,255,0.7)',
+                    display: '-webkit-box',
+                    WebkitLineClamp: 3,
+                    WebkitBoxOrient: 'vertical',
+                    overflow: 'hidden',
+                    lineHeight: 1.5
+                  }}
+                >
                   {mission.description}
                 </Typography>
-                <Box sx={{ mt: 2 }}>
-                  <Typography variant="caption" display="block">
+                
+                <Box sx={{ mt: 'auto' }}>
+                  <Typography variant="caption" display="block" sx={{ 
+                    color: 'rgba(255,255,255,0.6)',
+                    mb: 0.5 
+                  }}>
                     Requirements: {
                       typeof mission.requirements === 'object' 
                         ? Object.entries(mission.requirements)
@@ -425,81 +477,88 @@ const MissionsPage: React.FC = () => {
                         : String(mission.requirements)
                     }
                   </Typography>
-                  <Typography variant="caption" display="block" sx={{ mt: 1 }}>
+                  <Typography variant="caption" display="block" sx={{ 
+                    color: 'rgba(255,255,255,0.6)'
+                  }}>
                     Rewards: {mission.rewards.xp} XP
                     {mission.rewards.capabilities && 
                       `, ${mission.rewards.capabilities.join(', ')}`}
                   </Typography>
-                  {mission.mainPrerequisite && (
-                    <Box sx={{ 
-                      display: 'flex', 
+                </Box>
+
+                {mission.mainPrerequisite && (
+                  <Box sx={{ 
+                    display: 'flex', 
+                    alignItems: 'center',
+                    gap: 1,
+                    mt: 1,
+                    p: 1,
+                    bgcolor: 'rgba(0,0,0,0.2)',
+                    borderRadius: '8px',
+                    border: '1px solid rgba(255,255,255,0.1)'
+                  }}>
+                    <Typography variant="caption" color="text.secondary" sx={{
+                      color: 'rgba(255,255,255,0.6)',
+                      flexShrink: 0
+                    }}>
+                      Required:
+                    </Typography>
+                    <Box sx={{
+                      display: 'flex',
                       alignItems: 'center',
                       gap: 1,
-                      mt: 1
+                      overflow: 'hidden'
                     }}>
-                      <Typography variant="caption" color="text.secondary">
-                        Required Perk:
-                      </Typography>
-                      <Box sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: 1,
-                        backgroundColor: 'rgba(0, 0, 0, 0.05)',
-                        padding: '4px 8px',
-                        borderRadius: '4px',
-                        border: '1px solid rgba(0, 0, 0, 0.1)'
-                      }}>
-                        <Box
-                          component="img"
-                          src={getPerkIconUrl({ 
-                            name: Object.values(techTree)
-                              .flatMap(phase => 
-                                Object.entries(phase)
-                                  .filter(([key]) => !['name', 'period', 'description'].includes(key))
-                                  .flatMap(([_, items]) => items)
-                              )
-                              .find(item => item.capability_id === mission.mainPrerequisite)?.name || 'Unknown',
-                            capability_id: mission.mainPrerequisite 
-                          })}
-                          alt="Required Perk"
-                          sx={{
-                            width: 32,
-                            height: 32,
-                            borderRadius: '4px',
-                            objectFit: 'cover',
-                            boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-                            opacity: mission.status === 'locked' ? 0.5 : 1,
-                            filter: mission.status === 'locked' ? 'grayscale(100%)' : 'none',
-                            transition: 'all 0.2s ease',
-                            '&:hover': {
-                              transform: 'scale(1.1)',
-                            }
-                          }}
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).style.display = 'none';
-                          }}
-                        />
-                        <Typography 
-                          variant="caption" 
-                          sx={{
-                            color: mission.status === 'locked' ? 'text.disabled' : 'text.primary',
-                            fontWeight: 500
-                          }}
-                        >
-                          {Object.values(techTree)
+                      <Box
+                        component="img"
+                        src={getPerkIconUrl({ 
+                          name: Object.values(techTree)
                             .flatMap(phase => 
                               Object.entries(phase)
                                 .filter(([key]) => !['name', 'period', 'description'].includes(key))
                                 .flatMap(([_, items]) => items)
                             )
-                            .find(item => item.capability_id === mission.mainPrerequisite)?.name || 'Unknown Perk'}
-                        </Typography>
-                      </Box>
+                            .find(item => item.capability_id === mission.mainPrerequisite)?.name || 'Unknown',
+                          capability_id: mission.mainPrerequisite 
+                        })}
+                        alt="Required Perk"
+                        sx={{
+                          width: 24,
+                          height: 24,
+                          borderRadius: '4px',
+                          objectFit: 'cover',
+                          flexShrink: 0,
+                          boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                          opacity: mission.status === 'locked' ? 0.5 : 1,
+                          filter: mission.status === 'locked' ? 'grayscale(100%)' : 'none',
+                        }}
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).style.display = 'none';
+                        }}
+                      />
+                      <Typography 
+                        variant="caption" 
+                        sx={{
+                          color: mission.status === 'locked' ? 'text.disabled' : 'text.primary',
+                          fontWeight: 500,
+                          whiteSpace: 'nowrap',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis'
+                        }}
+                      >
+                        {Object.values(techTree)
+                          .flatMap(phase => 
+                            Object.entries(phase)
+                              .filter(([key]) => !['name', 'period', 'description'].includes(key))
+                              .flatMap(([_, items]) => items)
+                          )
+                          .find(item => item.capability_id === mission.mainPrerequisite)?.name || 'Unknown Perk'}
+                      </Typography>
                     </Box>
-                  )}
-                </Box>
+                  </Box>
+                )}
               </CardContent>
-              <CardActions>
+              <CardActions sx={{ p: 2, pt: 0 }}>
                 <Button
                   variant="contained"
                   color={mission.status === 'in_progress' ? 'secondary' : 'primary'}
@@ -510,6 +569,15 @@ const MissionsPage: React.FC = () => {
                   }
                   onClick={() => handleMissionAction(mission)}
                   fullWidth
+                  sx={{
+                    textTransform: 'none',
+                    fontWeight: 600,
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
+                    '&:disabled': {
+                      bgcolor: 'rgba(255,255,255,0.1)',
+                      color: 'rgba(255,255,255,0.3)'
+                    }
+                  }}
                 >
                   {mission.status === 'in_progress'
                     ? 'Complete'
