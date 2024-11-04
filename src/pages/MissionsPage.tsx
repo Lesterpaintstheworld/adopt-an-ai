@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Mission, Difficulty, Status, Phase } from '../types/missions';
 import { getPerkIconUrl } from '../utils/iconUtils';
+import MissionModal from '../components/MissionModal';
 
 const getPhaseLabel = (phase: Phase): string => {
   switch (phase) {
@@ -86,6 +87,8 @@ const MissionsPage: React.FC = () => {
     memory: 50, // percent
     activeMissionLimit: 3
   });
+  const [selectedMission, setSelectedMission] = useState<Mission | null>(null);
+  const [isStartingMission, setIsStartingMission] = useState(false);
 
   useEffect(() => {
     const loadMissions = async () => {
@@ -156,7 +159,7 @@ const MissionsPage: React.FC = () => {
     filterMissions(newFilters);
   };
 
-  const handleMissionAction = (mission: Mission) => {
+  const handleMissionAction = async (mission: Mission) => {
     if (mission.status === 'locked') {
       return;
     }
@@ -165,12 +168,8 @@ const MissionsPage: React.FC = () => {
       if (activeMissions.length >= userResources.activeMissionLimit) {
         return;
       }
-
-      const updatedMissions: Mission[] = missions.map(m => 
-        m.id === mission.id ? { ...m, status: 'in_progress' as const } : m
-      );
-      setMissions(updatedMissions);
-      setActiveMissions([...activeMissions, mission]);
+      
+      setSelectedMission(mission);
     }
     else if (mission.status === 'in_progress') {
       const updatedMissions: Mission[] = missions.map(m => 
@@ -187,6 +186,23 @@ const MissionsPage: React.FC = () => {
           ...(mission.rewards.capabilities || [])
         ]
       }));
+    }
+  };
+
+  const handleStartMission = async (mission: Mission) => {
+    setIsStartingMission(true);
+    
+    try {
+      const updatedMissions: Mission[] = missions.map(m => 
+        m.id === mission.id ? { ...m, status: 'in_progress' as const } : m
+      );
+      setMissions(updatedMissions);
+      setActiveMissions([...activeMissions, mission]);
+      setSelectedMission(null);
+    } catch (error) {
+      console.error('Error starting mission:', error);
+    } finally {
+      setIsStartingMission(false);
     }
   };
 
@@ -601,6 +617,15 @@ const MissionsPage: React.FC = () => {
         </Grid>
       )}
     </Container>
+    {selectedMission && (
+      <MissionModal
+        open={!!selectedMission}
+        onClose={() => setSelectedMission(null)}
+        mission={selectedMission}
+        onStart={handleStartMission}
+        isStarting={isStartingMission}
+      />
+    )}
   );
 };
 
