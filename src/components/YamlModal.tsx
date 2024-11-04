@@ -115,7 +115,8 @@ export const YamlModal: React.FC<YamlModalProps> = ({
               sx={{ 
                 mb: 4,
                 display: 'flex',
-                justifyContent: 'center',
+                alignItems: 'center',
+                gap: 3,
                 backgroundColor: 'rgba(255, 255, 255, 0.05)',
                 borderRadius: '8px',
                 border: '1px solid rgba(255, 255, 255, 0.1)',
@@ -126,13 +127,23 @@ export const YamlModal: React.FC<YamlModalProps> = ({
                 src={iconUrl}
                 alt={title}
                 style={{
-                  maxWidth: '100%',
+                  maxWidth: '200px',
                   height: 'auto',
-                  maxHeight: '300px',
+                  maxHeight: '200px',
                   borderRadius: '4px',
                   boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
                 }}
               />
+              <Typography 
+                variant="h4" 
+                sx={{ 
+                  color: '#fff',
+                  fontWeight: 600,
+                  textShadow: '0 2px 4px rgba(0,0,0,0.3)',
+                }}
+              >
+                {title}
+              </Typography>
             </Box>
           )}
 
