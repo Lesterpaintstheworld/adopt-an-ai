@@ -9,13 +9,17 @@ interface TutorialStep {
 
 const tutorialSteps: TutorialStep[] = [
   {
-    title: "Bienvenue sur la page GPUs!",
-    content: "Ici vous pourrez gérer vos ressources de calcul pour entraîner votre IA."
+    title: "Welcome to raise-an.ai",
+    content: "This platform will help you develop and nurture your own AI assistant through guided missions and resource management."
   },
   {
-    title: "Gestion des GPUs",
-    content: "Vous pouvez allouer et désallouer des GPUs selon vos besoins."
+    title: "Resource Management",
+    content: "Here you can manage your compute resources. Allocate GPUs wisely to optimize your AI's training and development."
   },
+  {
+    title: "Training Progress",
+    content: "Monitor your AI's progress through various capabilities and unlock new features as you advance."
+  }
 ];
 
 export const TutorialHighlight = () => {
@@ -101,13 +105,18 @@ export const TutorialHighlight = () => {
 
   return (
     <Paper
-      elevation={3}
+      elevation={4}
       sx={{
         position: 'relative',
-        p: 3,
+        p: 4,
         mb: 4,
         border: '2px solid #ff9800',
         backgroundColor: 'rgba(255, 152, 0, 0.08)',
+        transition: 'all 0.3s ease-in-out',
+        '&:hover': {
+          transform: 'translateY(-2px)',
+          boxShadow: theme => theme.shadows[6],
+        },
         '&::before': {
           content: '""',
           position: 'absolute',
@@ -116,6 +125,7 @@ export const TutorialHighlight = () => {
           right: 0,
           height: '4px',
           backgroundColor: '#ff9800',
+          transition: 'width 0.3s ease-in-out',
         }
       }}
     >
@@ -125,10 +135,26 @@ export const TutorialHighlight = () => {
       <Typography sx={{ mb: 2 }}>
         {tutorialSteps[currentStep]?.content}
       </Typography>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          Étape {currentStep + 1} sur {tutorialSteps.length}
-        </Typography>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 3 }}>
+        <Box>
+          <Typography variant="body2" sx={{ color: 'text.secondary', mb: 1 }}>
+            Step {currentStep + 1} of {tutorialSteps.length}
+          </Typography>
+          <Box sx={{ 
+            width: '200px', 
+            height: '4px', 
+            backgroundColor: 'rgba(255, 152, 0, 0.2)',
+            borderRadius: '2px',
+          }}>
+            <Box sx={{ 
+              width: `${((currentStep + 1) / tutorialSteps.length) * 100}%`,
+              height: '100%',
+              backgroundColor: '#ff9800',
+              transition: 'width 0.3s ease-in-out',
+              borderRadius: '2px',
+            }} />
+          </Box>
+        </Box>
         <Button 
           onClick={handleNext}
           variant="contained"
