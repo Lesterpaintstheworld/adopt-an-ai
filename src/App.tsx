@@ -9,8 +9,8 @@ import { theme } from './utils/theme';
 import { MainLayout } from './components/layout/MainLayout';
 import GovernancePage from './pages/GovernancePage';
 import TeamPage from './pages/TeamPage';
-import OSPage from './pages/OSPage';
-import TrainingPage from './pages/TrainingPage';
+import ComputePage from './pages/ComputePage';
+import ModelsPage from './pages/ModelsPage';
 import GPUsPage from './pages/GPUsPage';
 import StandaloneTechTreePage from './pages/StandaloneTechTreePage';
 import HomePage from './pages/HomePage';
@@ -58,8 +58,8 @@ function App() {
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/governance" element={<GovernancePage />} />
             <Route path="/team" element={<TeamPage />} />
-            <Route path="/os" element={<OSPage />} />
-            <Route path="/training" element={<TrainingPage />} />
+            <Route path="/compute" element={<ComputePage />} />
+            <Route path="/models" element={<ModelsPage />} />
             <Route path="/gpus" element={<GPUsPage />} />
             <Route path="*" element={
               <div style={{ padding: '20px' }}>
