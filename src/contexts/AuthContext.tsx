@@ -68,11 +68,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const login = (user: User, token: string) => {
+    const userWithDefaultTutorial = {
+      ...user,
+      tutorialProgress: user.tutorialProgress || {
+        lastStep: 0,
+        completedSteps: [],
+        dismissedPages: []
+      }
+    };
+    
     localStorage.setItem('auth_token', token);
-    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('user', JSON.stringify(userWithDefaultTutorial));
     setAuth({
       isAuthenticated: true,
-      user,
+      user: userWithDefaultTutorial,
       loading: false
     });
   };
