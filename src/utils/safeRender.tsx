@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Box, Typography, List, ListItem, ListItemText } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { formatValue } from './formatters';
 
 export const safeRender = (content: any): ReactNode => {
@@ -26,44 +26,56 @@ export const safeRender = (content: any): ReactNode => {
       return content;
     }
 
-    // Handle objects with description and requirements
+    // Handle objects
     if (typeof content === 'object') {
+      // Special case for objects with description and requirements
       if ('description' in content && 'requirements' in content) {
-        const reqText = Array.isArray(content.requirements) ? 
-          content.requirements.join(', ') : 
-          String(content.requirements);
         return (
           <Box>
             <Typography>{String(content.description)}</Typography>
             <Typography sx={{ mt: 1 }}>
-              Requirements: {reqText}
+              Requirements: {Array.isArray(content.requirements) ? 
+                content.requirements.join(', ') : 
+                String(content.requirements)}
             </Typography>
           </Box>
         );
       }
 
-      // If text contains newlines, preserve formatting
-      const formattedText = formatValue(content);
-      if (typeof formattedText === 'string' && formattedText.includes('\n')) {
-        return (
-          <pre style={{ 
-            whiteSpace: 'pre-wrap', 
-            margin: 0,
-            fontFamily: 'inherit',
-            fontSize: 'inherit'
-          }}>
-            {formattedText}
-          </pre>
-        );
-      }
+      // Try to convert object to string using formatValue
+      try {
+        const formattedText = formatValue(content);
+        
+        // If result is still an object, stringify it
+        if (typeof formattedText === 'object') {
+          return JSON.stringify(formattedText);
+        }
 
-      return formattedText;
+        // Handle multiline strings
+        if (typeof formattedText === 'string' && formattedText.includes('\n')) {
+          return (
+            <pre style={{ 
+              whiteSpace: 'pre-wrap', 
+              margin: 0,
+              fontFamily: 'inherit',
+              fontSize: 'inherit'
+            }}>
+              {formattedText}
+            </pre>
+          );
+        }
+
+        return formattedText;
+      } catch {
+        // Fallback to JSON stringify if formatValue fails
+        return JSON.stringify(content);
+      }
     }
 
     // Convert any other types to string
     return String(content);
   } catch (error) {
     console.error('Error in safeRender:', error, 'Content:', content);
-    return <pre>[Error rendering content]</pre>;
+    return '[Error rendering content]';
   }
 };
