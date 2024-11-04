@@ -39,7 +39,6 @@ export const YamlModal: React.FC<YamlModalProps> = ({
   title = 'Details',
   data
 }) => {
-  const theme = useTheme();
   const [iconUrl, setIconUrl] = useState<string>('');
 
   // Update icon URL when data changes

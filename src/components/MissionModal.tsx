@@ -12,7 +12,6 @@ import {
   ListItemIcon,
   ListItemText,
   Button,
-  Divider,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
@@ -47,14 +46,16 @@ const MissionModal: React.FC<MissionModalProps> = ({
   isStarting = false,
 }) => {
   const getRequiredPerkName = () => {
-    return Object.values(techTree as TechTree)
+    return Object.values(techTree)
       .flatMap(phase => 
-        Object.entries(phase as PhaseData)
+        Object.entries(phase)
           .filter(([key]) => !['name', 'period', 'description'].includes(key))
-          .flatMap(([_, items]: [string, Perk[]]) => items)
+          .flatMap(([_, items]) => items)
       )
-      .find((item): item is Perk => 
-        item && typeof item === 'object' && 'capability_id' in item && 
+      .find(item => 
+        item && 
+        typeof item === 'object' && 
+        'capability_id' in item && 
         item.capability_id === mission.mainPrerequisite
       )?.name || 'Unknown Perk';
   };

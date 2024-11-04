@@ -17,12 +17,7 @@ const getPhaseLabel = (phase: Phase): string => {
       return phase;
   }
 };
-import { loadAllMissions, loadMissionsForPerk } from '../utils/missionUtils';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import { loadAllMissions } from '../utils/missionUtils';
 import techTree from '../../content/tech/tech-tree.yml';
 import { useEffect } from 'react';
 import { 
@@ -393,7 +388,7 @@ const MissionsPage: React.FC = () => {
       ) : (
         <Grid container spacing={3}>
         {missions.map((mission) => (
-          <Grid item xs={12} sm={6} md={4} key={`${mission.id}-${mission.capability_id}`}>
+          <Grid item xs={12} sm={6} md={4} key={mission.id}>
             <Card sx={{
               height: '100%', // Make all cards same height
               display: 'flex',
