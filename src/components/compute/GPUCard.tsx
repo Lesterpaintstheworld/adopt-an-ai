@@ -58,73 +58,84 @@ const isAvailableGPU = (gpu: OwnedGPU | AvailableGPU): gpu is AvailableGPU => {
 };
 
 export default function GPUCard({ gpu, owned }: GPUCardProps) {
+  const renderContent = () => {
+    if (isOwnedGPU(gpu)) {
+      return (
+        <>
+          <Box sx={{ mb: 2 }}>
+            <Typography variant="body2" color="text.secondary">
+              Usage
+            </Typography>
+            <LinearProgress 
+              variant="determinate" 
+              value={gpu.usage} 
+              sx={{ mt: 1 }}
+            />
+          </Box>
+          <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
+            <Chip 
+              label={`${gpu.temperature}°C`}
+              size="small"
+              color={gpu.temperature > 80 ? "error" : "default"}
+            />
+            <Chip 
+              label={`${gpu.power}W`}
+              size="small"
+            />
+            <Chip 
+              label={gpu.status}
+              size="small"
+              color={gpu.status === 'active' ? "success" : "default"}
+            />
+          </Box>
+        </>
+      );
+    }
+    
+    if (isAvailableGPU(gpu)) {
+      return (
+        <>
+          <Box sx={{ mb: 2 }}>
+            <Typography variant="body2" color="text.secondary">
+              Performance: {gpu.performance}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Memory: {gpu.memory}GB
+            </Typography>
+          </Box>
+          <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
+            <Chip 
+              label={`$${gpu.price.hourly}/hour`}
+              size="small"
+              color="primary"
+            />
+            <Chip 
+              label={gpu.availability}
+              size="small"
+              color={gpu.availability === 'available' ? "success" : "warning"}
+            />
+          </Box>
+          <Button 
+            variant="contained" 
+            fullWidth
+            disabled={gpu.availability === 'unavailable'}
+          >
+            Rent GPU
+          </Button>
+        </>
+      );
+    }
+    
+    return null;
+  };
+
   return (
     <StyledCard>
       <CardContent>
         <Typography variant="h6" gutterBottom>
           {gpu.name}
         </Typography>
-        
-        {isOwnedGPU(gpu) ? (
-          <>
-            <Box sx={{ mb: 2 }}>
-              <Typography variant="body2" color="text.secondary">
-                Usage
-              </Typography>
-              <LinearProgress 
-                variant="determinate" 
-                value={gpu.usage} 
-                sx={{ mt: 1 }}
-              />
-            </Box>
-            <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
-              <Chip 
-                label={`${gpu.temperature}°C`}
-                size="small"
-                color={gpu.temperature > 80 ? "error" : "default"}
-              />
-              <Chip 
-                label={`${gpu.power}W`}
-                size="small"
-              />
-              <Chip 
-                label={gpu.status}
-                size="small"
-                color={gpu.status === 'active' ? "success" : "default"}
-              />
-            </Box>
-          </>
-        ) : isAvailableGPU(gpu) ? (
-          <>
-            <Box sx={{ mb: 2 }}>
-              <Typography variant="body2" color="text.secondary">
-                Performance: {gpu.performance}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Memory: {gpu.memory}GB
-              </Typography>
-            </Box>
-            <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
-              <Chip 
-                label={`$${gpu.price.hourly}/hour`}
-                size="small"
-                color="primary"
-              />
-              <Chip 
-                label={gpu.availability}
-                size="small"
-                color={gpu.availability === 'available' ? "success" : "warning"}
-              />
-            </Box>
-            <Button 
-              variant="contained" 
-              fullWidth
-              disabled={gpu.availability === 'unavailable'}
-            >
-              Rent GPU
-            </Button>
-          </>
-        ) : null}
+        {renderContent()}
       </CardContent>
     </StyledCard>
   );
