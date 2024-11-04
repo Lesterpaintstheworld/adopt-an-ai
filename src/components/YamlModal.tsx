@@ -48,7 +48,15 @@ export const YamlModal: React.FC<YamlModalProps> = ({
   delete yamlData?.story;
 
   // Get the perk icon URL
-  const iconUrl = data?.capability_id ? getPerkIconUrl(data.capability_id) : null;
+  const getIconUrl = (data: any) => {
+    if (!data?.capability_id || !data?.name) return null;
+    
+    // Convert name to filename-safe format
+    const safeName = data.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    return `/website/icons/${safeName}-${data.capability_id}.png`;
+  };
+
+  const iconUrl = getIconUrl(data);
 
   return (
     <Dialog 
