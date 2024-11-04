@@ -11,11 +11,37 @@ import { pageTutorials, PageKey } from '../../data/tutorialSteps';
  * @returns {JSX.Element | null} The tutorial highlight component or null if already dismissed
  */
 export const TutorialHighlight = ({ pageKey }: { pageKey: PageKey }) => {
-  const { user, updateUser } = useAuth();
+  const { user, updateUser, isAuthenticated } = useAuth();
   const [visible, setVisible] = useState(true);
   const [currentStep, setCurrentStep] = useState(0);
 
   const tutorial = pageTutorials[pageKey];
+
+  useEffect(() => {
+    console.log('TutorialHighlight mounted for page:', pageKey);
+    console.log('User tutorial progress:', user?.tutorialProgress);
+    console.log('Tutorial content:', tutorial);
+    console.log('Is visible:', visible);
+    console.log('Is authenticated:', isAuthenticated);
+    
+    if (user?.tutorialProgress?.dismissedPages?.includes(pageKey)) {
+      console.log('Page already dismissed');
+      setVisible(false);
+    }
+  }, [user, pageKey, isAuthenticated]);
+
+  if (!isAuthenticated || !user) {
+    console.log('User not authenticated');
+    return null;
+  }
+
+  if (!visible || !tutorial) {
+    console.log('TutorialHighlight not showing because:', {
+      visible,
+      hasTutorial: !!tutorial
+    });
+    return null;
+  }
 
   const handleNext = async () => {
     if (!user?.id) {
