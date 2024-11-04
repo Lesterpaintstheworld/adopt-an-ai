@@ -65,7 +65,7 @@ app.post('/api/auth/google', async (req, res) => {
         tutorial_progress
       ) 
       VALUES ($1, $2, $3, $4, $5, $6, $7)
-      ON CONFLICT (google_id) 
+      ON CONFLICT (google_id)
       DO UPDATE SET 
         email = EXCLUDED.email,
         name = EXCLUDED.name,

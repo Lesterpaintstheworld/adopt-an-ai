@@ -58,7 +58,7 @@ export const GoogleLogin = () => {
       const requestBody = {
         googleToken: tokenResponse.access_token,
         userData: {
-          google_id: user.sub,
+          googleId: user.sub,
           email: user.email,
           name: user.name || user.email.split('@')[0],
           picture: user.picture
