@@ -3,8 +3,9 @@ import { Box, Typography, Paper, List, ListItem, ListItemText } from '@mui/mater
 import { COLORS } from '../../theme/colors';
 
 interface SecurityRequirement {
-  description: string;
-  requirements: string | string[];
+  description?: string;
+  requirements?: string | string[];
+  [key: string]: any;
 }
 
 interface PerkSecurityRequirementsProps {
@@ -12,30 +13,40 @@ interface PerkSecurityRequirementsProps {
     data_protection?: string | SecurityRequirement;
     security_standards?: Array<string | SecurityRequirement>;
     security_controls?: Array<string | SecurityRequirement>;
+    incident_response?: {
+      plan?: string[];
+      procedures?: string[];
+    };
     [key: string]: any;
   };
 }
 
 const renderRequirement = (requirement: string | SecurityRequirement) => {
+  if (!requirement) return null;
+  
   if (typeof requirement === 'string') {
     return requirement;
   }
   
   return (
     <Box>
-      <Typography variant="body2">{requirement.description}</Typography>
-      {Array.isArray(requirement.requirements) ? (
-        <List dense>
-          {requirement.requirements.map((req, index) => (
-            <ListItem key={index}>
-              <ListItemText primary={req} />
-            </ListItem>
-          ))}
-        </List>
-      ) : (
-        <Typography variant="body2" sx={{ mt: 1 }}>
-          {requirement.requirements}
-        </Typography>
+      {requirement.description && (
+        <Typography variant="body2">{requirement.description}</Typography>
+      )}
+      {requirement.requirements && (
+        Array.isArray(requirement.requirements) ? (
+          <List dense>
+            {requirement.requirements.map((req, index) => (
+              <ListItem key={index}>
+                <ListItemText primary={req} />
+              </ListItem>
+            ))}
+          </List>
+        ) : (
+          <Typography variant="body2" sx={{ mt: 1 }}>
+            {requirement.requirements}
+          </Typography>
+        )
       )}
     </Box>
   );
