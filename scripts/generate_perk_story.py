@@ -235,13 +235,7 @@ async def process_all_perks(client: AsyncAnthropic):
                 failed.append(perk_id)
                 continue
                 
-            # Check if story already exists and skip if needed
-            if 'story' in perk_details:
-                logging.info(f"Story already exists for {perk_id}, skipping...")
-                processed += 1
-                continue
-                
-            # Generate story
+            # Generate new story regardless of whether one exists
             story = await generate_story(client, perk_details, tech_tree)
             if story:
                 perk_name = perk.get('name')  # Get name from the perk data
