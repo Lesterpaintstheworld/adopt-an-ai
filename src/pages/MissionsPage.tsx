@@ -451,7 +451,16 @@ const MissionsPage: React.FC = () => {
                       }}>
                         <Box
                           component="img"
-                          src={getPerkIconUrl({ capability_id: mission.mainPrerequisite })}
+                          src={getPerkIconUrl({ 
+                            name: Object.values(techTree)
+                              .flatMap(phase => 
+                                Object.entries(phase)
+                                  .filter(([key]) => !['name', 'period', 'description'].includes(key))
+                                  .flatMap(([_, items]) => items)
+                              )
+                              .find(item => item.capability_id === mission.mainPrerequisite)?.name || 'Unknown',
+                            capability_id: mission.mainPrerequisite 
+                          })}
                           alt="Required Perk"
                           sx={{
                             width: 32,
