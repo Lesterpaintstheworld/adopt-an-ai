@@ -9,6 +9,8 @@ export const GoogleLogin = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
   const handleGoogleResponse = async (tokenResponse: any) => {
     try {
       setLoading(true);
@@ -42,11 +44,13 @@ export const GoogleLogin = () => {
         throw new Error('Invalid user data');
       }
 
-      const authResponse = await fetch('/api/auth/google', {
+      const authResponse = await fetch(`${API_URL}/api/auth/google`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify({
           googleToken: tokenResponse.access_token,
           userData: {
@@ -92,6 +96,8 @@ export const GoogleLogin = () => {
     flow: 'implicit',
     scope: 'email profile',
     ux_mode: 'popup',
+    prompt: 'select_account',
+    cookiePolicy: 'single_host_origin',
   });
 
   return (
