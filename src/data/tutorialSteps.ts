@@ -21,7 +21,7 @@ export const pageTutorials = {
   },
   gpus: {
     title: "GPUs",
-    content: "Manage your GPU computing resources for training your AIs."
+    content: "Your AIs need GPUs to run, here is where you'll be able to provide them with compute."
   }
 } as const;
 
