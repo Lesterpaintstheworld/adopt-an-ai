@@ -3,32 +3,14 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { pageTutorials, PageKey } from '../../data/tutorialSteps';
 
-interface TutorialHighlightProps {
-  pageKey: PageKey;
-}
-
-export const TutorialHighlight = ({ pageKey }: TutorialHighlightProps) => {
+export const TutorialHighlight = ({ pageKey }: { pageKey: PageKey }) => {
   const { user, updateUser } = useAuth();
-  const [visible, setVisible] = useState(false);
-  const [dismissed, setDismissed] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const [currentStep, setCurrentStep] = useState(0);
 
-  useEffect(() => {
-    if (user && (!user.tutorialProgress?.dismissedPages || !user.tutorialProgress.dismissedPages.includes(pageKey))) {
-      setVisible(true);
-    }
-  }, [user, pageKey]);
+  const tutorial = pageTutorials[pageKey];
 
   const handleNext = async () => {
-    if (currentStep < tutorialSteps.length - 1) {
-      setCurrentStep(prev => prev + 1);
-      await updateTutorialProgress(currentStep + 1);
-    } else {
-      await completeTutorial();
-      setVisible(false);
-    }
-  };
-
-  const updateTutorialProgress = async (step: number) => {
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/users/${user?.id}/tutorial-status`, {
         method: 'POST',
@@ -39,53 +21,33 @@ export const TutorialHighlight = ({ pageKey }: TutorialHighlightProps) => {
         body: JSON.stringify({
           isComplete: false,
           progress: {
-            lastStep: step,
-            completedSteps: [...(user?.tutorialProgress?.completedSteps || []), step]
+            ...user?.tutorialProgress,
+            dismissedPages: [...(user?.tutorialProgress?.dismissedPages || []), pageKey]
           }
         })
       });
 
       if (response.ok) {
-        const data = await response.json();
         updateUser({
-          tutorialProgress: data.data.tutorial_progress
-        });
-      }
-    } catch (error) {
-      console.error('Failed to update tutorial progress:', error);
-    }
-  };
-
-  const completeTutorial = async () => {
-    try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/users/${user?.id}/tutorial-status`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify({
-          isComplete: true,
-          progress: {
-            lastStep: tutorialSteps.length - 1,
-            completedSteps: Array.from({ length: tutorialSteps.length }, (_, i) => i)
+          tutorialProgress: {
+            ...user?.tutorialProgress,
+            dismissedPages: [...(user?.tutorialProgress?.dismissedPages || []), pageKey]
           }
-        })
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        updateUser({
-          tutorialCompleted: true,
-          tutorialProgress: data.data.tutorial_progress
         });
+        setVisible(false);
       }
     } catch (error) {
-      console.error('Failed to complete tutorial:', error);
+      console.error('Failed to update tutorial status:', error);
     }
   };
 
-  if (!visible) return null;
+  useEffect(() => {
+    if (user?.tutorialProgress?.dismissedPages?.includes(pageKey)) {
+      setVisible(false);
+    }
+  }, [user, pageKey]);
+
+  if (!visible || !tutorial) return null;
 
   return (
     <Paper
@@ -100,45 +62,16 @@ export const TutorialHighlight = ({ pageKey }: TutorialHighlightProps) => {
         '&:hover': {
           transform: 'translateY(-2px)',
           boxShadow: theme => theme.shadows[6],
-        },
-        '&::before': {
-          content: '""',
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: '4px',
-          backgroundColor: '#ff9800',
-          transition: 'width 0.3s ease-in-out',
         }
       }}
     >
       <Typography variant="h6" sx={{ color: '#ff9800', mb: 1 }}>
-        {tutorialSteps[currentStep]?.title}
+        {tutorial.title}
       </Typography>
       <Typography sx={{ mb: 2 }}>
-        {tutorialSteps[currentStep]?.content}
+        {tutorial.content}
       </Typography>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 3 }}>
-        <Box>
-          <Typography variant="body2" sx={{ color: 'text.secondary', mb: 1 }}>
-            Step {currentStep + 1} of {tutorialSteps.length}
-          </Typography>
-          <Box sx={{ 
-            width: '200px', 
-            height: '4px', 
-            backgroundColor: 'rgba(255, 152, 0, 0.2)',
-            borderRadius: '2px',
-          }}>
-            <Box sx={{ 
-              width: `${((currentStep + 1) / tutorialSteps.length) * 100}%`,
-              height: '100%',
-              backgroundColor: '#ff9800',
-              transition: 'width 0.3s ease-in-out',
-              borderRadius: '2px',
-            }} />
-          </Box>
-        </Box>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Button 
           onClick={handleNext}
           variant="contained"
@@ -149,7 +82,7 @@ export const TutorialHighlight = ({ pageKey }: TutorialHighlightProps) => {
             }
           }}
         >
-          {currentStep < tutorialSteps.length - 1 ? 'Suivant' : 'Terminer'}
+          J'ai compris
         </Button>
       </Box>
     </Paper>
