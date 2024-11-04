@@ -1,5 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ThemeProvider, CssBaseline } from '@mui/material';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { AuthProvider } from './contexts/AuthContext';
 import { theme } from './utils/theme';
 import { MainLayout } from './components/layout/MainLayout';
 import GovernancePage from './pages/GovernancePage';
@@ -25,7 +27,9 @@ function App() {
   console.log('App rendering...');
   
   return (
-    <ThemeProvider theme={theme}>
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+      <AuthProvider>
+        <ThemeProvider theme={theme}>
       <CssBaseline />
       <BrowserRouter>
         <Routes>
@@ -55,7 +59,9 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-    </ThemeProvider>
+        </ThemeProvider>
+      </AuthProvider>
+    </GoogleOAuthProvider>
   );
 }
 
