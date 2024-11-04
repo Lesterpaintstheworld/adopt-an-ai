@@ -1,0 +1,139 @@
+- id: BCA_M1_002
+  title: Efficient Ensemble Training Orchestration
+  description: 'Leverage the Basic Compute Allocation system''s resource management
+    capabilities to efficiently train and deploy an ensemble of deep learning models
+    for image classification, ensuring optimal resource utilization and minimizing
+    training time.
+
+    '
+  objectives:
+  - Train and evaluate an ensemble of three different deep learning models for image
+    classification on the CIFAR-10 dataset.
+  - Efficiently allocate and manage computational resources across the ensemble training
+    process using the Basic Compute Allocation system.
+  - Deploy the trained ensemble model for real-time image classification, leveraging
+    the system's resource allocation capabilities.
+  tasks:
+  - step: Set up the training environment
+    details: Install the necessary deep learning libraries and frameworks. Prepare
+      the CIFAR-10 dataset for training and evaluation.
+  - step: Design and implement the ensemble models
+    details: Develop three distinct deep learning model architectures (e.g., ResNet,
+      VGGNet, DenseNet) tailored for image classification on the CIFAR-10 dataset.
+  - step: Integrate with the Basic Compute Allocation system
+    details: Configure the ensemble training process to leverage the system's resource
+      allocation and monitoring capabilities, ensuring efficient distribution of computational
+      resources across the three models.
+  success_criteria:
+  - Achieve an average ensemble accuracy of at least 92% on the CIFAR-10 test set.
+  - Reduce the overall training time by at least 25% compared to training the models
+    sequentially without resource allocation.
+  - Successfully deploy the trained ensemble model for real-time image classification
+    with an average inference latency of less than 50ms.
+  evaluation_metrics:
+  - metric: Ensemble accuracy
+    target: '>= 92%'
+  - metric: Training time reduction
+    target: '>= 25%'
+  - metric: Average inference latency
+    target: < 50ms
+  difficulty: Intermediate
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: COM_P1_001
+  requirements:
+    compute: 4x GPU (NVIDIA Tesla V100 or equivalent)
+    memory: 64GB RAM
+    capabilities:
+    - Deep Learning
+    - Resource Management
+    - Model Deployment
+  rewards:
+    xp: 500
+    capabilities:
+    - Ensemble Learning
+    - Distributed Training
+    resources:
+    - CIFAR-10 Dataset
+    - Sample Models
+  deliverables:
+  - Three trained deep learning models for CIFAR-10 image classification
+  - Ensemble model combining the three trained models
+  - Deployment scripts and configuration for real-time inference
+  - Performance report detailing training time, ensemble accuracy, and inference latency
+- id: MIS_RES_006
+  title: Optimizing Resource Orchestration for Large-Scale AI Deployment
+  description: 'In this mission, you will design and implement an advanced resource
+    orchestration system that seamlessly manages computational resources across multiple
+    high-performance compute clusters. The system should leverage the capabilities
+    of the Basic Compute Allocation system to ensure efficient and dynamic resource
+    allocation for a diverse range of AI workloads, enabling optimal performance and
+    minimizing resource contention.
+
+    '
+  objectives:
+  - Develop a scalable and fault-tolerant resource orchestration system capable of
+    managing computational resources across multiple data centers.
+  - Implement intelligent workload scheduling algorithms that prioritize resource
+    allocation based on task criticality, performance requirements, and resource availability.
+  - Integrate real-time monitoring and automated scaling mechanisms to dynamically
+    adjust resource allocation based on fluctuating demand.
+  tasks:
+  - step: Analyze the existing infrastructure and identify resource bottlenecks and
+      inefficiencies.
+    details: Conduct a comprehensive assessment of the current compute clusters, including
+      hardware specifications, network topology, and resource utilization patterns.
+      Identify potential performance bottlenecks and areas for optimization.
+  - step: Design a distributed architecture for the resource orchestration system.
+    details: Develop a robust and scalable architecture that can seamlessly manage
+      resources across multiple data centers. Incorporate fault-tolerance mechanisms,
+      load balancing strategies, and failover capabilities to ensure high availability
+      and reliability.
+  - step: Implement advanced workload scheduling algorithms.
+    details: Develop intelligent scheduling algorithms that consider task priorities,
+      performance requirements, and resource availability when allocating computational
+      resources. Incorporate techniques such as preemptive scheduling, backfilling,
+      and resource overcommitment to maximize resource utilization.
+  success_criteria:
+  - The resource orchestration system achieves a minimum of 90% resource utilization
+    across all compute clusters during peak load periods.
+  - The system can scale to manage at least 10,000 concurrent AI workloads without
+    performance degradation.
+  - Automated resource scaling mechanisms can respond to demand spikes within 5 minutes,
+    ensuring uninterrupted operation.
+  evaluation_metrics:
+  - metric: Resource Utilization
+    target: '>= 90%'
+  - metric: Concurrent Workload Capacity
+    target: '>= 10,000'
+  - metric: Autoscaling Response Time
+    target: <= 5 minutes
+  difficulty: Advanced
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: COM_P1_001
+  requirements:
+    compute: High-performance compute clusters with a minimum of 1,000 CPU cores and
+      500 GPUs
+    memory: At least 10TB of distributed memory across the compute clusters
+    capabilities:
+    - Basic Compute Allocation
+    - Distributed Systems
+    - Resource Management
+    - Scheduling Algorithms
+  rewards:
+    xp: 2500
+    capabilities:
+    - Advanced Resource Orchestration
+    - Autoscaling
+    - Load Balancing
+    resources:
+    - Compute Credits
+    - Cloud Storage
+  deliverables:
+  - Detailed architecture diagram and design documentation for the resource orchestration
+    system.
+  - Implementations of the workload scheduling algorithms and resource allocation
+    policies.
+  - Automated testing suite and performance benchmarking results.
+  - Deployment scripts and configuration files for the resource orchestration system.

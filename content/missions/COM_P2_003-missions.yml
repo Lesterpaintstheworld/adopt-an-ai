@@ -1,0 +1,122 @@
+- id: OPT_P6_022
+  title: Resource Optimization Maestro
+  description: 'Optimize resource utilization across a simulated compute ecosystem
+
+    by deploying advanced machine learning models and dynamic workload
+
+    orchestration techniques to achieve maximum efficiency.
+
+    '
+  objectives:
+  - Improve overall resource utilization by at least 25%
+  - Reduce operating costs by 20% while maintaining service levels
+  - Accurately forecast future resource demands with 90%+ precision
+  tasks:
+  - step: Analyze historical compute usage patterns across different workloads
+    details: Ingest and preprocess at least 2 years of time-series data on CPU, memory,
+      network, and storage utilization. Identify periodic trends, spikes, and anomalies.
+  - step: Build predictive models for resource demand forecasting
+    details: Develop LSTM and regression models to forecast short and long-term resource
+      requirements based on historical data and scheduled workloads.
+  - step: Implement dynamic resource orchestration algorithms
+    details: Create algorithms to automatically scale resources, balance workloads,
+      and fine-tune performance based on forecasted demands and live system telemetry.
+  success_criteria:
+  - Resource utilization improved by at least 25% across the simulated ecosystem
+  - Operating costs reduced by 20% or more while maintaining 99.9% service availability
+  - Resource demand forecasting models achieve 90%+ precision over varied workloads
+  evaluation_metrics:
+  - metric: Resource utilization improvement
+    target: '>= 25%'
+  - metric: Cost reduction percentage
+    target: '>= 20%'
+  - metric: Demand forecasting precision
+    target: '>= 90%'
+  difficulty: Intermediate
+  category: Problem Solving
+  duration: 6h
+  mainPrerequisite: COM_P2_003
+  requirements:
+    compute: 32 vCPU, 4 GPU
+    memory: 64 GB
+    capabilities:
+    - Time Series Analysis
+    - Anomaly Detection
+    - Regression Modeling
+    - LSTM Networks
+    - Cluster Optimization
+    - Predictive Scaling
+  rewards:
+    xp: 1000
+    capabilities:
+    - Resource Orchestration
+    - Workload Balancing
+    resources:
+    - Azure Credits
+    - GCP Credits
+  deliverables:
+  - Time-series analysis report on historical usage patterns
+  - Predictive models for CPU, memory, network and storage forecasting
+  - Resource orchestration algorithms and simulation results
+  - Optimization performance analysis including utilization, cost, forecasting metrics
+- id: RSO_A_001
+  title: Optimizing CyberSym Simulations
+  description: 'Leverage the Resource Optimization System to enhance the performance
+    and efficiency of complex scientific simulations running within the CyberSym virtual
+    environment.
+
+    '
+  objectives:
+  - Improve overall resource utilization for CyberSym simulations by at least 15%
+  - Reduce simulation runtime by 20% without compromising output quality
+  - Decrease computing costs associated with simulations by 25%
+  tasks:
+  - step: Analyze historical usage data
+    details: Collect and process resource utilization logs, simulation workload characteristics,
+      and performance metrics from the past 6 months of CyberSym operations.
+  - step: Build predictive models
+    details: Develop machine learning models to forecast future resource demands based
+      on simulation types, input parameters, and expected output requirements.
+  - step: Implement dynamic resource allocation
+    details: Integrate predictive models with the Resource Orchestrator to enable
+      proactive scaling, workload balancing, and performance tuning across CyberSym's
+      compute infrastructure.
+  success_criteria:
+  - Overall resource utilization for CyberSym simulations is improved by at least
+    15% compared to the previous 6-month average
+  - Average simulation runtime is reduced by 20% or more without any degradation in
+    output quality
+  - Total computing costs associated with CyberSym simulations are decreased by at
+    least 25%
+  evaluation_metrics:
+  - metric: Resource utilization improvement
+    target: '>=15%'
+  - metric: Simulation runtime reduction
+    target: '>=20%'
+  - metric: Cost savings
+    target: '>=25%'
+  difficulty: Advanced
+  category: Problem Solving
+  duration: 10h
+  mainPrerequisite: COM_P2_003
+  requirements:
+    compute: 64 vCPUs, 4 high-performance GPUs
+    memory: 256 GB RAM
+    capabilities:
+    - Resource Optimization
+    - Time-Series Analysis
+    - Machine Learning Modeling
+    - Performance Monitoring
+  rewards:
+    xp: 2500
+    capabilities:
+    - Dynamic Resource Allocation
+    - Workload Balancing
+    - Predictive Scaling
+    resources:
+    - 1000 Compute Credits
+    - 500 GB Data Storage
+  deliverables:
+  - Predictive resource demand models for various simulation types
+  - Integrated Resource Orchestrator with dynamic allocation capabilities
+  - Comprehensive performance report highlighting improvements across key metrics

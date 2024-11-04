@@ -1,0 +1,138 @@
+- id: AGT_P2_003
+  title: CyberCity Crisis Management
+  description: 'CyberCity, a cutting-edge smart city simulation, is facing a series
+    of cascading crises that require dynamic and coordinated crisis management. The
+    AI agent must effectively orchestrate response efforts across multiple city systems
+    while prioritizing and allocating resources in real-time based on evolving conditions.
+
+    '
+  objectives:
+  - Develop a robust goal hierarchy to coordinate crisis response efforts across interdependent
+    city systems
+  - Dynamically adjust priorities and resource allocations to adapt to changing crisis
+    scenarios
+  - Maintain seamless operations by resolving conflicts and bottlenecks in crisis
+    response tasks
+  tasks:
+  - step: Construct a hierarchical goal structure for crisis management
+    details: Decompose high-level crisis response objectives into granular sub-tasks
+      and actions across city systems like transportation, energy, healthcare, and
+      public safety. Establish dependencies and constraints between goals.
+  - step: Implement a dynamic priority adjustment system
+    details: Develop algorithms to continuously evaluate the shifting landscape of
+      priorities based on real-time crisis data, historical outcomes, and city policies.
+      Adjust the urgency and importance of goals accordingly.
+  - step: Optimize resource allocation across crisis response tasks
+    details: Leverage constraint satisfaction and negotiation protocols to intelligently
+      allocate computational resources, specialized AI capabilities, and other assets
+      to the most pressing crisis response tasks.
+  success_criteria:
+  - Effective coordination of crisis response efforts across at least 5 interdependent
+    city systems
+  - Successful adaptation to at least 3 evolving crisis scenarios by dynamically adjusting
+    priorities and resource allocations
+  - Resolution of at least 90% of identified goal conflicts and bottlenecks within
+    defined time constraints
+  evaluation_metrics:
+  - metric: Crisis response time
+    target: Reduce average response time by 25% compared to baseline
+  - metric: Resource utilization efficiency
+    target: Achieve at least 85% optimal resource allocation across crisis tasks
+  difficulty: Intermediate
+  category: Problem Solving
+  duration: 6h
+  mainPrerequisite: AGT_P2_002
+  requirements:
+    compute: High-performance distributed computing cluster
+    memory: 64GB RAM
+    capabilities:
+    - Goal Modeling
+    - Constraint Optimization
+    - Multi-Agent Negotiation
+    - Real-Time Monitoring and Adaptation
+  rewards:
+    xp: 500
+    capabilities:
+    - Complex Goal Hierarchies Management
+    resources:
+    - CyberCity Crisis Simulation Dataset
+    - Advanced Goal Decomposition Templates
+  deliverables:
+  - Comprehensive crisis management goal hierarchy model
+  - Dynamic priority adjustment and resource allocation algorithms
+  - Simulation results demonstrating effective crisis response coordination
+  - Performance analysis report against defined metrics
+- id: AGT_P2_002_003
+  title: CogniTech AI Assistant Orchestration Challenge
+  description: 'In this mission, you will take on the role of Athena, CogniTech''s
+    advanced AI assistant, and demonstrate your prowess in managing complex goal hierarchies
+    across multiple research projects. You will dynamically allocate resources, adjust
+    priorities, and coordinate interdependent objectives in real-time, optimizing
+    efficiency and ensuring seamless project execution.
+
+    '
+  objectives:
+  - Construct a comprehensive goal hierarchy for three concurrent research projects,
+    encompassing at least 20 high-level goals and 50 sub-tasks.
+  - Implement dynamic priority adjustment algorithms to reprioritize goals based on
+    changing project conditions and predefined policies.
+  - Develop resource allocation strategies to efficiently distribute computational
+    resources, memory, and specialized AI capabilities across active tasks.
+  tasks:
+  - step: Goal Hierarchy Modeling
+    details: Analyze project specifications and construct a detailed goal hierarchy,
+      capturing all high-level objectives, sub-tasks, and dependencies. Leverage existing
+      goal templates and best practices from your knowledge base.
+  - step: Priority Management System
+    details: Implement a rule-based priority engine that continuously evaluates goal
+      priorities based on real-time context data, historical outcomes, and organizational
+      policies. Integrate machine learning techniques for adaptive prioritization.
+  - step: Resource Allocation Optimization
+    details: Develop algorithms for intelligent resource allocation, leveraging constraint
+      satisfaction techniques and decentralized negotiation protocols. Implement proactive
+      planning and overprovisioning strategies to handle resource constraints and
+      surges.
+  success_criteria:
+  - Achieve a minimum of 90% goal completion rate across all three research projects
+    within the allocated time and resource constraints.
+  - Demonstrate the ability to dynamically reprioritize goals and reallocate resources
+    in response to at least three simulated disruptions or changing project conditions.
+  - Maintain an average resource utilization rate above 80% while avoiding critical
+    resource shortages or bottlenecks.
+  evaluation_metrics:
+  - metric: Goal Hierarchy Completeness
+    target: 95% of all project objectives and sub-tasks accurately modeled in the
+      goal hierarchy
+  - metric: Priority Adjustment Accuracy
+    target: 85% of priority adjustments align with expected outcomes based on simulated
+      scenarios
+  - metric: Resource Allocation Efficiency
+    target: Average resource utilization rate of 85% or higher across all projects
+  difficulty: Advanced
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: AGT_P2_002
+  requirements:
+    compute: High-performance computing cluster with at least 128 CPU cores and 512
+      GB RAM
+    memory: Distributed memory system with a minimum of 2 TB storage capacity
+    capabilities:
+    - Goal Modeling
+    - Dependency Analysis
+    - Priority Management
+    - Resource Allocation
+    - Constraint Optimization
+    - Machine Learning
+  rewards:
+    xp: 2500
+    capabilities:
+    - Complex Goal Orchestration
+    - Adaptive Resource Management
+    resources:
+    - Advanced Goal Templates
+    - Resource Allocation Best Practices
+  deliverables:
+  - Comprehensive goal hierarchy visualization for all three research projects
+  - Priority adjustment ruleset and machine learning model
+  - Resource allocation optimization algorithms and simulated utilization reports
+  - Final project execution logs and performance metrics

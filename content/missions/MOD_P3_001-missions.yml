@@ -1,0 +1,128 @@
+- id: MOD_I1_004
+  title: Evolutionary Malware Defense
+  description: 'In this mission, you''ll develop a self-modifying AI system to defend
+    against rapidly evolving malware threats. Your system will autonomously adapt
+    its neural architecture and algorithms to detect and neutralize new malware variants
+    as they emerge.
+
+    '
+  objectives:
+  - Design a self-modifying AI model capable of restructuring its neural architecture
+    and core algorithms.
+  - Train the model to detect and mitigate malware threats with high accuracy and
+    efficiency.
+  - Demonstrate the model's ability to autonomously adapt and optimize itself in response
+    to novel malware variants.
+  tasks:
+  - step: Implement a meta-learning framework for self-modification
+    details: Develop a meta-learning system that can guide the self-modification process,
+      employing multi-objective optimization algorithms to balance accuracy, latency,
+      and resource utilization.
+  - step: Integrate neural architecture search techniques
+    details: Incorporate reinforcement learning techniques and transfer learning mechanisms
+      to enable efficient exploration and optimization of potential neural architectures.
+  - step: Build a secure testbed environment
+    details: Create a controlled testbed environment to evaluate the self-modifying
+      model's performance against a diverse set of malware samples and variants.
+  success_criteria:
+  - The self-modifying model can autonomously restructure its neural architecture
+    and core algorithms in response to novel malware variants.
+  - The model achieves a malware detection accuracy of at least 95% on unseen malware
+    samples.
+  - The model's self-modification process improves its performance by at least 20%
+    compared to its initial configuration.
+  evaluation_metrics:
+  - metric: Malware Detection Accuracy
+    target: '>= 95%'
+  - metric: Performance Improvement
+    target: '>= 20%'
+  difficulty: Intermediate
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: MOD_P3_001
+  requirements:
+    compute: High-performance GPU cluster
+    memory: 64GB RAM
+    capabilities:
+    - Neural Architecture Search
+    - Meta-Learning
+    - Reinforcement Learning
+    - Transfer Learning
+  rewards:
+    xp: 1000
+    capabilities:
+    - Self-Modifying AI Systems
+    resources:
+    - Compute Credits: 500
+  deliverables:
+  - Self-modifying AI model for malware defense
+  - Detailed report on the model's architecture, algorithms, and self-modification
+    process
+  - Evaluation results and performance metrics on the secure testbed
+- id: AGI_EVOAI_003
+  title: Evolving Neural Architectures for Adaptive Manufacturing
+  description: 'In this mission, you will leverage self-modifying AI models to revolutionize
+    manufacturing processes. By developing an adaptive system capable of dynamically
+    optimizing its neural architecture, you will create an intelligent agent that
+    can continuously improve production efficiency, predict maintenance needs, and
+    design innovative products.
+
+    '
+  objectives:
+  - Develop a self-modifying AI model that can autonomously restructure its neural
+    architecture and core algorithms.
+  - Integrate the model into a simulated manufacturing environment to optimize production
+    processes.
+  - Demonstrate the model's ability to adapt to changing conditions and requirements
+    in real-time.
+  tasks:
+  - step: Implement a meta-learning framework for self-modification
+    details: Develop a meta-learning system that guides the self-modification process,
+      employing multi-objective optimization algorithms to balance accuracy, latency,
+      and resource utilization. Incorporate reinforcement learning techniques for
+      efficient exploration of potential architectures.
+  - step: Design a neural architecture search algorithm
+    details: Create an algorithm that can dynamically reconfigure the model's neural
+      topology based on task requirements and performance feedback. Implement transfer
+      learning mechanisms to leverage knowledge from related domains.
+  - step: Integrate the self-modifying model into a simulated manufacturing environment
+    details: Develop a simulated production line with various processes, materials,
+      and quality control mechanisms. Integrate the self-modifying model to monitor
+      and optimize each stage of the manufacturing process.
+  success_criteria:
+  - The self-modifying model successfully restructures its neural architecture based
+    on task requirements and performance feedback.
+  - The model achieves a minimum 20% improvement in production efficiency compared
+    to a static baseline system.
+  - The model accurately predicts maintenance needs with at least 90% precision and
+    recall.
+  evaluation_metrics:
+  - metric: Production efficiency improvement
+    target: '>= 20%'
+  - metric: Maintenance prediction accuracy
+    target: precision >= 0.9, recall >= 0.9
+  difficulty: Advanced
+  category: Creativity
+  duration: 8h
+  mainPrerequisite: MOD_P3_001
+  requirements:
+    compute: High-performance GPU cluster with at least 64 GPUs
+    memory: Minimum 256GB RAM
+    capabilities:
+    - Self-modifying models
+    - Meta-learning
+    - Neural architecture search
+    - Reinforcement learning
+    - Transfer learning
+  rewards:
+    xp: 1000
+    capabilities:
+    - Adaptive manufacturing optimization
+    resources:
+    - 10,000 compute credits
+    - 5 industrial data sets
+  deliverables:
+  - Self-modifying AI model with neural architecture search algorithm
+  - Simulated manufacturing environment with integrated self-modifying model
+  - Report detailing the model's performance, adaptability, and impact on production
+    efficiency

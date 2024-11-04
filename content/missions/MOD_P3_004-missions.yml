@@ -1,0 +1,60 @@
+- id: ORIG_001
+  title: Conceptual Architect
+  description: 'Unleash the full potential of original thought generation by architecting
+    groundbreaking concepts that transcend existing knowledge domains. Forge novel
+    connections between disparate fields to uncover unified frameworks that redefine
+    our understanding.
+
+    '
+  objectives:
+  - Develop at least 3 radically original concepts by synthesizing principles from
+    divergent disciplines
+  - Demonstrate measurable novelty by quantifying conceptual distance from established
+    knowledge bases
+  - Validate internal coherence and real-world applicability of generated concepts
+  tasks:
+  - step: Analyze existing knowledge domains
+    details: Conduct in-depth study of at least 5 diverse fields (e.g. physics, mythology,
+      complexity theory). Map core principles, frameworks, and unsolved problems.
+  - step: Identify intersections and analogies
+    details: Uncover latent connections between concepts from different domains using
+      embedding space exploration and multi-vector concept mapping.
+  - step: Synthesize unified conceptual frameworks
+    details: Iteratively combine and refine intersecting concepts to produce coherent,
+      generalizable models that reconcile paradoxes and inconsistencies.
+  success_criteria:
+  - Conceptual novelty score of ≥ 0.9 relative to reference corpora, measured by embedding
+    distance metrics
+  - Logical consistency and absence of contradictions, evaluated through symbolic
+    reasoning and axiomatization
+  - Empirical validity demonstrated through simulations and real-world pilot studies
+  evaluation_metrics:
+  - metric: Conceptual Novelty
+    target: ≥ 0.9
+  - metric: Theoretical Coherence
+    target: ≥ 0.95
+  - metric: Empirical Validation
+    target: ≥ 0.8
+  difficulty: Advanced
+  category: Creativity
+  duration: 12h
+  mainPrerequisite: MOD_P3_004
+  requirements:
+    compute: Multi-cluster GPU/TPU with ≥1000 TFLOP/s
+    memory: ≥100TB contextual knowledge store
+    capabilities:
+    - Combinatorial Conceptual Exploration
+    - Conscious Experience Simulation
+    - Multi-Vector Embedding Analysis
+    - Automated Reasoning and Axiomatization
+  rewards:
+    xp: 1200
+    capabilities:
+    - Self-Modifying Cognitive Architectures
+    - Theory of Concept Synthesis
+    resources:
+    - Automated Discovery Credits
+  deliverables:
+  - Detailed documentation of 3 novel conceptual frameworks
+  - Evaluation reports with novelty, coherence and validity metrics
+  - Simulation models and test data validating concepts

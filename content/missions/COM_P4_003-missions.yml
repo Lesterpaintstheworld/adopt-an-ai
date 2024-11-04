@@ -1,0 +1,135 @@
+- id: SUS_003
+  title: Optimizing Global Resource Reallocation
+  description: 'Your mission is to develop an advanced optimization algorithm that
+    seamlessly reallocates computational resources across global data centers based
+    on real-time usage patterns and projected demands. This algorithm must ensure
+    maximum efficiency while maintaining perpetual sustainability through renewable
+    energy sources and perfect recycling mechanisms.
+
+    '
+  objectives:
+  - Develop an algorithm that dynamically reallocates resources across global networks
+  - Integrate predictive models to forecast future demands and preemptively allocate
+    resources
+  - Ensure optimal resource utilization while maintaining maximum system performance
+  tasks:
+  - step: Analyze historical data on resource usage patterns across global data centers
+    details: Collect and process data from at least 20 major data centers spanning
+      multiple continents, including information on compute, storage, and energy usage
+      over the past 5 years.
+  - step: Develop predictive models to forecast future resource demands
+    details: Implement machine learning algorithms to analyze historical data and
+      external factors (e.g., market trends, weather patterns) to accurately predict
+      resource demands at each data center for the next 12 months.
+  - step: Design a resource reallocation algorithm
+    details: Develop an optimization algorithm that dynamically reallocates resources
+      (compute, storage, energy) across global networks based on real-time usage data
+      and predictive demand models, while ensuring perpetual sustainability through
+      renewable energy sources and perfect recycling mechanisms.
+  success_criteria:
+  - Resource allocation efficiency exceeds 95% across all data centers
+  - Maximum system performance maintained with less than 2% degradation
+  - Renewable energy sources account for at least 99% of total energy consumption
+  evaluation_metrics:
+  - metric: Resource allocation efficiency
+    target: '>= 98%'
+  - metric: System performance degradation
+    target: <= 1%
+  - metric: Renewable energy usage
+    target: 100%
+  difficulty: Intermediate
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: COM_P4_003
+  requirements:
+    compute: High-performance computing cluster with at least 1000 CPU cores and 500
+      GPUs
+    memory: Minimum 10TB distributed memory
+    capabilities:
+    - Advanced Machine Learning
+    - Big Data Analytics
+    - Optimization Algorithms
+  rewards:
+    xp: 2500
+    capabilities:
+    - Sustainable Resource Management
+    resources:
+    - 100,000 Compute Credits
+    - 1,000,000 Energy Credits
+  deliverables:
+  - Predictive demand models for each data center
+  - Resource reallocation optimization algorithm source code
+  - Detailed performance report and analysis
+- id: SUS_ALL_001
+  title: Sustainable Resource Orchestration System
+  description: 'Design and implement a highly efficient resource orchestration system
+    that leverages the Sustainable Allocation capability to manage and allocate computational
+    resources across a global network of data centers, ensuring optimal utilization
+    and perpetual sustainability without resource depletion.
+
+    '
+  objectives:
+  - Develop a centralized resource management platform that monitors and forecasts
+    resource demands across all connected data centers
+  - Implement intelligent algorithms for dynamic resource allocation and load balancing,
+    optimizing for maximum efficiency and minimal waste
+  - Integrate renewable energy sources and advanced recycling mechanisms to enable
+    a self-sustaining, closed-loop system
+  tasks:
+  - step: Conduct a comprehensive analysis of existing data center infrastructures,
+      resource consumption patterns, and energy sources
+    details: Gather detailed data on hardware specifications, energy requirements,
+      workload profiles, and renewable energy potentials across all connected facilities.
+  - step: Design and implement a real-time monitoring and forecasting system for resource
+      demands
+    details: Develop predictive models that can accurately forecast future computational
+      requirements based on historical data, market trends, and other relevant factors.
+  - step: Develop intelligent resource allocation algorithms that optimize for efficiency
+      and sustainability
+    details: Implement dynamic load balancing and resource provisioning strategies
+      that minimize waste, maximize utilization, and ensure seamless failover and
+      scalability.
+  - step: Integrate renewable energy sources and advanced recycling mechanisms into
+      the system
+    details: Incorporate energy harvesting technologies, such as solar, wind, and
+      geothermal, as well as advanced material recycling and resource recovery systems
+      to enable a self-sustaining, closed-loop ecosystem.
+  success_criteria:
+  - Achieve a minimum of 99.9% resource utilization efficiency across the global network
+  - Reduce overall energy consumption by at least 30% compared to traditional data
+    center operations
+  - Maintain a self-sustaining, closed-loop system with zero resource depletion over
+    a continuous 12-month period
+  evaluation_metrics:
+  - metric: Resource Utilization Efficiency
+    target: '>= 99.9%'
+  - metric: Energy Consumption Reduction
+    target: '>= 30%'
+  - metric: Sustained Self-Sufficiency Duration
+    target: '>= 12 months'
+  difficulty: Advanced
+  category: Problem Solving
+  duration: 6h
+  mainPrerequisite: COM_P4_003
+  requirements:
+    compute: Distributed computing cluster with a minimum of 10,000 CPU cores and
+      100 GPU accelerators
+    memory: 1 PB of high-speed storage
+    capabilities:
+    - Sustainable Allocation
+    - Advanced Resource Management
+    - Predictive Analytics
+    - Renewable Energy Integration
+  rewards:
+    xp: 2500
+    capabilities:
+    - Sustainable Orchestration
+    - Energy Optimization
+    resources:
+    - 500 Renewable Energy Credits
+    - 250 Advanced Material Synthesis Units
+  deliverables:
+  - Detailed system architecture and design documentation
+  - Fully functional resource orchestration platform
+  - Performance and efficiency reports validating success criteria
+  - Recommendations for future system enhancements and scaling

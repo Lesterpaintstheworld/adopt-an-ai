@@ -1,0 +1,689 @@
+2024-11-04 02:52:55,246 - INFO - Found 94 perks to process
+2024-11-04 02:52:55,254 - INFO - Processing ECO_P1_001 (1/94)
+2024-11-04 02:52:59,392 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 02:53:03,008 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 02:53:03,065 - INFO - Successfully saved scene and prompt to content\tech\community-access-ECO_P1_001.yml
+2024-11-04 02:53:24,897 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 02:53:24,905 - ERROR - Error generating illustration: AsyncAPIClient.get() missing 1 required keyword-only argument: 'cast_to'
+2024-11-04 02:53:26,910 - INFO - Processing ECO_P1_002 (1/94)
+2024-11-04 02:54:52,033 - INFO - Found 94 perks to process
+2024-11-04 02:54:52,034 - INFO - Processing ECO_P1_001 (1/94)
+2024-11-04 02:54:57,966 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 02:55:02,782 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 02:55:02,846 - INFO - Successfully saved scene and prompt to content\tech\community-access-ECO_P1_001.yml
+2024-11-04 02:55:22,362 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 02:55:24,390 - INFO - Successfully saved illustration to content\perk_illustrations\community-access-ECO_P1_001.png
+2024-11-04 02:55:24,390 - INFO - Successfully generated illustration for ECO_P1_001
+2024-11-04 02:55:26,400 - INFO - Processing ECO_P1_002 (2/94)
+2024-11-04 02:55:30,985 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 02:55:31,004 - INFO - Retrying request to /v1/messages in 0.430370 seconds
+2024-11-04 02:55:35,668 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 02:55:35,835 - INFO - Successfully saved scene and prompt to content\tech\resource-marketplace-ECO_P1_002.yml
+2024-11-04 02:55:59,452 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 02:56:01,621 - INFO - Successfully saved illustration to content\perk_illustrations\resource-marketplace-ECO_P1_002.png
+2024-11-04 02:56:01,621 - INFO - Successfully generated illustration for ECO_P1_002
+2024-11-04 02:56:03,636 - INFO - Processing ECO_P1_003 (3/94)
+2024-11-04 02:56:07,295 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 02:56:12,001 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 02:56:12,155 - INFO - Successfully saved scene and prompt to content\tech\knowledge-sharing-ECO_P1_003.yml
+2024-11-04 02:56:37,496 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 02:56:40,079 - INFO - Successfully saved illustration to content\perk_illustrations\knowledge-sharing-ECO_P1_003.png
+2024-11-04 02:56:40,079 - INFO - Successfully generated illustration for ECO_P1_003
+2024-11-04 02:56:42,085 - INFO - Processing COM_P1_004 (4/94)
+2024-11-04 02:56:45,997 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 02:56:50,866 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 02:56:50,964 - INFO - Successfully saved scene and prompt to content\tech\basic-governance-COM_P1_004.yml
+2024-11-04 02:57:19,836 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 02:57:21,775 - INFO - Successfully saved illustration to content\perk_illustrations\basic-governance-COM_P1_004.png
+2024-11-04 02:57:21,776 - INFO - Successfully generated illustration for COM_P1_004
+2024-11-04 02:57:23,778 - INFO - Processing APP_P1_004 (5/94)
+2024-11-04 02:57:27,230 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 02:57:30,462 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 02:57:30,551 - INFO - Successfully saved scene and prompt to content\tech\code-generation-APP_P1_004.yml
+2024-11-04 02:57:50,404 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 02:57:52,561 - INFO - Successfully saved illustration to content\perk_illustrations\code-generation-APP_P1_004.png
+2024-11-04 02:57:52,564 - INFO - Successfully generated illustration for APP_P1_004
+2024-11-04 02:57:54,564 - INFO - Processing COM_P1_006 (6/94)
+2024-11-04 02:57:58,635 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 02:58:02,792 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 02:58:02,890 - INFO - Successfully saved scene and prompt to content\tech\image-creation-COM_P1_006.yml
+2024-11-04 02:58:28,148 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 02:58:30,108 - INFO - Successfully saved illustration to content\perk_illustrations\image-creation-COM_P1_006.png
+2024-11-04 02:58:30,111 - INFO - Successfully generated illustration for COM_P1_006
+2024-11-04 02:58:32,115 - INFO - Processing MLT_P1_001 (7/94)
+2024-11-04 02:58:35,486 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 02:58:40,205 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 02:58:40,325 - INFO - Successfully saved scene and prompt to content\tech\email-communication-MLT_P1_001.yml
+2024-11-04 02:59:06,509 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 02:59:08,590 - INFO - Successfully saved illustration to content\perk_illustrations\email-communication-MLT_P1_001.png
+2024-11-04 02:59:08,593 - INFO - Successfully generated illustration for MLT_P1_001
+2024-11-04 02:59:10,603 - INFO - Processing MLT_P1_002 (8/94)
+2024-11-04 02:59:15,200 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 02:59:18,942 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 02:59:19,099 - INFO - Successfully saved scene and prompt to content\tech\discord-integration-MLT_P1_002.yml
+2024-11-04 02:59:41,722 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 02:59:43,832 - INFO - Successfully saved illustration to content\perk_illustrations\discord-integration-MLT_P1_002.png
+2024-11-04 02:59:43,835 - INFO - Successfully generated illustration for MLT_P1_002
+2024-11-04 02:59:45,842 - INFO - Processing APP_P1_003 (9/94)
+2024-11-04 02:59:50,224 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 02:59:54,609 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 02:59:54,710 - INFO - Successfully saved scene and prompt to content\tech\voice-synthesis-APP_P1_003.yml
+2024-11-04 03:00:13,452 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:00:15,598 - INFO - Successfully saved illustration to content\perk_illustrations\voice-synthesis-APP_P1_003.png
+2024-11-04 03:00:15,599 - INFO - Successfully generated illustration for APP_P1_003
+2024-11-04 03:00:17,599 - INFO - Processing MLT_P1_003 (10/94)
+2024-11-04 03:00:21,849 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:00:25,428 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:00:25,548 - INFO - Successfully saved scene and prompt to content\tech\slack-integration-MLT_P1_003.yml
+2024-11-04 03:00:53,596 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:00:55,570 - INFO - Successfully saved illustration to content\perk_illustrations\slack-integration-MLT_P1_003.png
+2024-11-04 03:00:55,570 - INFO - Successfully generated illustration for MLT_P1_003
+2024-11-04 03:00:57,579 - INFO - Processing MLT_P1_004 (11/94)
+2024-11-04 03:01:18,686 - INFO - Retrying request to /v1/messages in 0.480392 seconds
+2024-11-04 03:01:40,203 - INFO - Retrying request to /v1/messages in 0.906182 seconds
+2024-11-04 03:01:45,091 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:01:49,233 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:01:49,334 - INFO - Successfully saved scene and prompt to content\tech\github-integration-MLT_P1_004.yml
+2024-11-04 03:02:19,635 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:02:21,704 - INFO - Successfully saved illustration to content\perk_illustrations\github-integration-MLT_P1_004.png
+2024-11-04 03:02:21,707 - INFO - Successfully generated illustration for MLT_P1_004
+2024-11-04 03:02:23,714 - INFO - Processing AGT_P1_001 (12/94)
+2024-11-04 03:02:27,082 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:02:31,482 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:02:31,587 - INFO - Successfully saved scene and prompt to content\tech\basic-task-execution-AGT_P1_001.yml
+2024-11-04 03:02:36,590 - INFO - Retrying request to /images/generations in 0.469812 seconds
+2024-11-04 03:03:02,095 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:03:04,107 - INFO - Successfully saved illustration to content\perk_illustrations\basic-task-execution-AGT_P1_001.png
+2024-11-04 03:03:04,107 - INFO - Successfully generated illustration for AGT_P1_001
+2024-11-04 03:03:06,120 - INFO - Processing AGT_P1_002 (13/94)
+2024-11-04 03:03:27,209 - INFO - Retrying request to /v1/messages in 0.463278 seconds
+2024-11-04 03:03:31,865 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:03:35,168 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:03:35,256 - INFO - Successfully saved scene and prompt to content\tech\environmental-awareness-AGT_P1_002.yml
+2024-11-04 03:03:59,269 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:04:01,377 - INFO - Successfully saved illustration to content\perk_illustrations\environmental-awareness-AGT_P1_002.png
+2024-11-04 03:04:01,381 - INFO - Successfully generated illustration for AGT_P1_002
+2024-11-04 03:04:03,395 - INFO - Processing AGT_P1_003 (14/94)
+2024-11-04 03:04:24,475 - INFO - Retrying request to /v1/messages in 0.383665 seconds
+2024-11-04 03:04:28,420 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:04:32,491 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:04:32,604 - INFO - Successfully saved scene and prompt to content\tech\simple-goal-setting-AGT_P1_003.yml
+2024-11-04 03:05:03,144 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:05:05,469 - INFO - Successfully saved illustration to content\perk_illustrations\simple-goal-setting-AGT_P1_003.png
+2024-11-04 03:05:05,475 - INFO - Successfully generated illustration for AGT_P1_003
+2024-11-04 03:05:07,481 - INFO - Processing AGT_P1_004 (15/94)
+2024-11-04 03:05:10,904 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:05:14,608 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:05:14,722 - INFO - Successfully saved scene and prompt to content\tech\resource-requests-AGT_P1_004.yml
+2024-11-04 03:05:42,863 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:05:45,023 - INFO - Successfully saved illustration to content\perk_illustrations\resource-requests-AGT_P1_004.png
+2024-11-04 03:05:45,031 - INFO - Successfully generated illustration for AGT_P1_004
+2024-11-04 03:05:47,039 - INFO - Processing MOD_P1_000 (16/94)
+2024-11-04 03:05:47,039 - WARNING - Perk file not found at content\tech\self-reflection-protocols-MOD_P1_000.yml
+2024-11-04 03:05:47,039 - WARNING - No story found for MOD_P1_000
+2024-11-04 03:05:47,039 - INFO - Processing MOD_P1_001 (16/94)
+2024-11-04 03:05:50,853 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:05:55,868 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:05:55,967 - INFO - Successfully saved scene and prompt to content\tech\base-gpt-4-integration-MOD_P1_001.yml
+2024-11-04 03:06:22,958 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:06:24,884 - INFO - Successfully saved illustration to content\perk_illustrations\base-gpt-4-integration-MOD_P1_001.png
+2024-11-04 03:06:24,888 - INFO - Successfully generated illustration for MOD_P1_001
+2024-11-04 03:06:26,898 - INFO - Processing MOD_P1_002 (17/94)
+2024-11-04 03:06:30,167 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:06:33,837 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:06:33,944 - INFO - Successfully saved scene and prompt to content\tech\vector-memory-system-MOD_P1_002.yml
+2024-11-04 03:06:58,233 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:07:00,507 - INFO - Successfully saved illustration to content\perk_illustrations\vector-memory-system-MOD_P1_002.png
+2024-11-04 03:07:00,507 - INFO - Successfully generated illustration for MOD_P1_002
+2024-11-04 03:07:02,507 - INFO - Processing MOD_P1_003 (18/94)
+2024-11-04 03:07:06,112 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:07:09,388 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:07:09,533 - INFO - Successfully saved scene and prompt to content\tech\basic-emotion-modeling-MOD_P1_003.yml
+2024-11-04 03:07:32,321 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:07:34,308 - INFO - Successfully saved illustration to content\perk_illustrations\basic-emotion-modeling-MOD_P1_003.png
+2024-11-04 03:07:34,315 - INFO - Successfully generated illustration for MOD_P1_003
+2024-11-04 03:07:36,329 - INFO - Processing MOD_P1_004 (19/94)
+2024-11-04 03:07:40,106 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:07:44,712 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:07:44,809 - INFO - Successfully saved scene and prompt to content\tech\initial-personality-traits-MOD_P1_004.yml
+2024-11-04 03:08:15,385 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 400 Bad Request"
+2024-11-04 03:08:15,391 - ERROR - Error generating illustration: Error code: 400 - {'error': {'code': 'content_policy_violation', 'message': 'This request has been blocked by our content filters.', 'param': None, 'type': 'invalid_request_error'}}
+2024-11-04 03:08:17,404 - INFO - Processing COM_P1_001 (19/94)
+2024-11-04 03:08:21,070 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:08:24,652 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:08:24,725 - INFO - Successfully saved scene and prompt to content\tech\basic-compute-allocation-COM_P1_001.yml
+2024-11-04 03:08:55,365 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:08:57,536 - INFO - Successfully saved illustration to content\perk_illustrations\basic-compute-allocation-COM_P1_001.png
+2024-11-04 03:08:57,536 - INFO - Successfully generated illustration for COM_P1_001
+2024-11-04 03:08:59,549 - INFO - Processing COM_P1_002 (20/94)
+2024-11-04 03:09:02,876 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:09:06,218 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:09:06,308 - INFO - Successfully saved scene and prompt to content\tech\memory-storage-allocation-COM_P1_002.yml
+2024-11-04 03:09:26,607 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:09:28,960 - INFO - Successfully saved illustration to content\perk_illustrations\memory-storage-allocation-COM_P1_002.png
+2024-11-04 03:09:28,960 - INFO - Successfully generated illustration for COM_P1_002
+2024-11-04 03:09:30,969 - INFO - Processing COM_P1_003 (21/94)
+2024-11-04 03:09:34,485 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:09:37,455 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:09:37,577 - INFO - Successfully saved scene and prompt to content\tech\daily-compute-quotas-COM_P1_003.yml
+2024-11-04 03:10:01,719 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:10:03,683 - INFO - Successfully saved illustration to content\perk_illustrations\daily-compute-quotas-COM_P1_003.png
+2024-11-04 03:10:03,687 - INFO - Successfully generated illustration for COM_P1_003
+2024-11-04 03:10:05,689 - INFO - Processing COM_P1_004_1 (22/94)
+2024-11-04 03:10:05,689 - WARNING - Perk file not found at content\tech\resource-scheduling-COM_P1_004_1.yml
+2024-11-04 03:10:05,689 - WARNING - No story found for COM_P1_004_1
+2024-11-04 03:10:05,689 - INFO - Processing ECO_P2_001 (22/94)
+2024-11-04 03:10:10,115 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:10:14,210 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:10:14,347 - INFO - Successfully saved scene and prompt to content\tech\economic-systems-ECO_P2_001.yml
+2024-11-04 03:10:44,108 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:10:46,374 - INFO - Successfully saved illustration to content\perk_illustrations\economic-systems-ECO_P2_001.png
+2024-11-04 03:10:46,377 - INFO - Successfully generated illustration for ECO_P2_001
+2024-11-04 03:10:48,382 - INFO - Processing ECO_P2_002 (23/94)
+2024-11-04 03:10:52,510 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:10:56,504 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:10:56,611 - INFO - Successfully saved scene and prompt to content\tech\governance-structures-ECO_P2_002.yml
+2024-11-04 03:11:23,531 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:11:25,882 - INFO - Successfully saved illustration to content\perk_illustrations\governance-structures-ECO_P2_002.png
+2024-11-04 03:11:25,890 - INFO - Successfully generated illustration for ECO_P2_002
+2024-11-04 03:11:27,896 - INFO - Processing ECO_P2_003 (24/94)
+2024-11-04 03:11:31,678 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:11:34,835 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:11:34,949 - INFO - Successfully saved scene and prompt to content\tech\cultural-frameworks-ECO_P2_003.yml
+2024-11-04 03:12:02,955 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:12:05,140 - INFO - Successfully saved illustration to content\perk_illustrations\cultural-frameworks-ECO_P2_003.png
+2024-11-04 03:12:05,142 - INFO - Successfully generated illustration for ECO_P2_003
+2024-11-04 03:12:07,148 - INFO - Processing ECO_P2_004 (25/94)
+2024-11-04 03:12:10,433 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:12:13,606 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:12:13,720 - INFO - Successfully saved scene and prompt to content\tech\value-exchanges-ECO_P2_004.yml
+2024-11-04 03:12:42,967 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:12:45,286 - INFO - Successfully saved illustration to content\perk_illustrations\value-exchanges-ECO_P2_004.png
+2024-11-04 03:12:45,286 - INFO - Successfully generated illustration for ECO_P2_004
+2024-11-04 03:12:47,293 - INFO - Processing APP_P2_002 (26/94)
+2024-11-04 03:13:08,400 - INFO - Retrying request to /v1/messages in 0.410028 seconds
+2024-11-04 03:13:11,537 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:13:15,308 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:13:15,407 - INFO - Successfully saved scene and prompt to content\tech\autonomous-applications-APP_P2_002.yml
+2024-11-04 03:13:45,562 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:13:47,623 - INFO - Successfully saved illustration to content\perk_illustrations\autonomous-applications-APP_P2_002.png
+2024-11-04 03:13:47,623 - INFO - Successfully generated illustration for APP_P2_002
+2024-11-04 03:13:49,636 - INFO - Processing APP_P2_003 (27/94)
+2024-11-04 03:13:53,652 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:13:58,072 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:13:58,233 - INFO - Successfully saved scene and prompt to content\tech\creative-suites-APP_P2_003.yml
+2024-11-04 03:14:18,432 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:14:20,538 - INFO - Successfully saved illustration to content\perk_illustrations\creative-suites-APP_P2_003.png
+2024-11-04 03:14:20,541 - INFO - Successfully generated illustration for APP_P2_003
+2024-11-04 03:14:22,546 - INFO - Processing APP_P2_004 (28/94)
+2024-11-04 03:14:43,698 - INFO - Retrying request to /v1/messages in 0.392292 seconds
+2024-11-04 03:14:46,948 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:14:50,167 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:14:50,297 - INFO - Successfully saved scene and prompt to content\tech\research-systems-APP_P2_004.yml
+2024-11-04 03:15:18,881 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:16:22,123 - INFO - Successfully saved illustration to content\perk_illustrations\research-systems-APP_P2_004.png
+2024-11-04 03:16:22,131 - INFO - Successfully generated illustration for APP_P2_004
+2024-11-04 03:16:24,135 - INFO - Processing APP_P2_005 (29/94)
+2024-11-04 03:16:24,135 - WARNING - Perk file not found at content\tech\development-platforms-APP_P2_005.yml
+2024-11-04 03:16:24,135 - WARNING - No story found for APP_P2_005
+2024-11-04 03:16:24,135 - INFO - Processing MLT_P2_001 (29/94)
+2024-11-04 03:16:29,508 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:16:32,678 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:16:32,773 - INFO - Successfully saved scene and prompt to content\tech\agent-coalitions-MLT_P2_001.yml
+2024-11-04 03:16:37,779 - INFO - Retrying request to /images/generations in 0.440493 seconds
+2024-11-04 03:17:01,890 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:17:04,553 - INFO - Successfully saved illustration to content\perk_illustrations\agent-coalitions-MLT_P2_001.png
+2024-11-04 03:17:04,553 - INFO - Successfully generated illustration for MLT_P2_001
+2024-11-04 03:17:06,554 - INFO - Processing MLT_P2_002 (30/94)
+2024-11-04 03:17:10,863 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:17:14,324 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:17:14,457 - INFO - Successfully saved scene and prompt to content\tech\resource-sharing-networks-MLT_P2_002.yml
+2024-11-04 03:17:39,907 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:17:41,876 - INFO - Successfully saved illustration to content\perk_illustrations\resource-sharing-networks-MLT_P2_002.png
+2024-11-04 03:17:41,891 - INFO - Successfully generated illustration for MLT_P2_002
+2024-11-04 03:17:43,920 - INFO - Processing MLT_P2_003 (31/94)
+2024-11-04 03:18:05,026 - INFO - Retrying request to /v1/messages in 0.484939 seconds
+2024-11-04 03:18:08,853 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:18:12,033 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:18:12,120 - INFO - Successfully saved scene and prompt to content\tech\joint-task-execution-MLT_P2_003.yml
+2024-11-04 03:18:38,199 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:18:40,143 - INFO - Successfully saved illustration to content\perk_illustrations\joint-task-execution-MLT_P2_003.png
+2024-11-04 03:18:40,143 - INFO - Successfully generated illustration for MLT_P2_003
+2024-11-04 03:18:42,154 - INFO - Processing MLT_P2_004 (32/94)
+2024-11-04 03:18:46,292 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:18:49,830 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:18:49,927 - INFO - Successfully saved scene and prompt to content\tech\collective-decisions-MLT_P2_004.yml
+2024-11-04 03:19:12,516 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:19:14,581 - INFO - Successfully saved illustration to content\perk_illustrations\collective-decisions-MLT_P2_004.png
+2024-11-04 03:19:14,581 - INFO - Successfully generated illustration for MLT_P2_004
+2024-11-04 03:19:16,594 - INFO - Processing AGT_P2_001 (33/94)
+2024-11-04 03:19:37,696 - INFO - Retrying request to /v1/messages in 0.493757 seconds
+2024-11-04 03:19:41,911 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:19:45,380 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:19:45,494 - INFO - Successfully saved scene and prompt to content\tech\autonomous-task-planning-AGT_P2_001.yml
+2024-11-04 03:20:09,479 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:20:11,720 - INFO - Successfully saved illustration to content\perk_illustrations\autonomous-task-planning-AGT_P2_001.png
+2024-11-04 03:20:11,722 - INFO - Successfully generated illustration for AGT_P2_001
+2024-11-04 03:20:13,738 - INFO - Processing AGT_P2_002 (34/94)
+2024-11-04 03:20:34,852 - INFO - Retrying request to /v1/messages in 0.479605 seconds
+2024-11-04 03:20:56,384 - INFO - Retrying request to /v1/messages in 0.968097 seconds
+2024-11-04 03:21:01,721 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:21:05,691 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:21:05,797 - INFO - Successfully saved scene and prompt to content\tech\complex-goal-hierarchies-AGT_P2_002.yml
+2024-11-04 03:21:38,025 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:21:40,081 - INFO - Successfully saved illustration to content\perk_illustrations\complex-goal-hierarchies-AGT_P2_002.png
+2024-11-04 03:21:40,084 - INFO - Successfully generated illustration for AGT_P2_002
+2024-11-04 03:21:42,093 - INFO - Processing AGT_P2_003 (35/94)
+2024-11-04 03:21:45,909 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:21:50,797 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:21:50,903 - INFO - Successfully saved scene and prompt to content\tech\environmental-manipulation-AGT_P2_003.yml
+2024-11-04 03:22:19,119 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:22:21,296 - INFO - Successfully saved illustration to content\perk_illustrations\environmental-manipulation-AGT_P2_003.png
+2024-11-04 03:22:21,296 - INFO - Successfully generated illustration for AGT_P2_003
+2024-11-04 03:22:23,303 - INFO - Processing AGT_P2_004 (36/94)
+2024-11-04 03:22:27,290 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:22:31,219 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:22:31,290 - INFO - Successfully saved scene and prompt to content\tech\resource-negotiation-AGT_P2_004.yml
+2024-11-04 03:22:57,890 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:22:59,910 - INFO - Successfully saved illustration to content\perk_illustrations\resource-negotiation-AGT_P2_004.png
+2024-11-04 03:22:59,910 - INFO - Successfully generated illustration for AGT_P2_004
+2024-11-04 03:23:01,923 - INFO - Processing MOD_P2_001 (37/94)
+2024-11-04 03:23:06,487 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:23:12,316 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:23:12,406 - INFO - Successfully saved scene and prompt to content\tech\custom-model-fine-tuning-MOD_P2_001.yml
+2024-11-04 03:23:36,488 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:23:38,499 - INFO - Successfully saved illustration to content\perk_illustrations\custom-model-fine-tuning-MOD_P2_001.png
+2024-11-04 03:23:38,499 - INFO - Successfully generated illustration for MOD_P2_001
+2024-11-04 03:23:40,509 - INFO - Processing MOD_P2_002 (38/94)
+2024-11-04 03:24:01,623 - INFO - Retrying request to /v1/messages in 0.465706 seconds
+2024-11-04 03:24:23,140 - INFO - Retrying request to /v1/messages in 0.762928 seconds
+2024-11-04 03:24:27,173 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:24:31,795 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:24:31,909 - INFO - Successfully saved scene and prompt to content\tech\advanced-memory-structures-MOD_P2_002.yml
+2024-11-04 03:24:58,921 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:25:01,101 - INFO - Successfully saved illustration to content\perk_illustrations\advanced-memory-structures-MOD_P2_002.png
+2024-11-04 03:25:01,101 - INFO - Successfully generated illustration for MOD_P2_002
+2024-11-04 03:25:03,116 - INFO - Processing MOD_P2_003 (39/94)
+2024-11-04 03:25:06,499 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:25:09,981 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:25:10,070 - INFO - Successfully saved scene and prompt to content\tech\complex-emotional-landscape-MOD_P2_003.yml
+2024-11-04 03:25:15,079 - INFO - Retrying request to /images/generations in 0.447286 seconds
+2024-11-04 03:25:40,675 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:25:42,439 - INFO - Successfully saved illustration to content\perk_illustrations\complex-emotional-landscape-MOD_P2_003.png
+2024-11-04 03:25:42,439 - INFO - Successfully generated illustration for MOD_P2_003
+2024-11-04 03:25:44,448 - INFO - Processing MOD_P2_004 (40/94)
+2024-11-04 03:26:05,584 - INFO - Retrying request to /v1/messages in 0.439385 seconds
+2024-11-04 03:26:10,188 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:26:13,628 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:26:13,773 - INFO - Successfully saved scene and prompt to content\tech\evolving-personality-matrix-MOD_P2_004.yml
+2024-11-04 03:26:39,141 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:26:41,038 - INFO - Successfully saved illustration to content\perk_illustrations\evolving-personality-matrix-MOD_P2_004.png
+2024-11-04 03:26:41,046 - INFO - Successfully generated illustration for MOD_P2_004
+2024-11-04 03:26:43,058 - INFO - Processing COM_P2_001 (41/94)
+2024-11-04 03:27:04,165 - INFO - Retrying request to /v1/messages in 0.436365 seconds
+2024-11-04 03:27:09,174 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:27:12,057 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:27:12,162 - INFO - Successfully saved scene and prompt to content\tech\dynamic-resource-scaling-COM_P2_001.yml
+2024-11-04 03:27:33,773 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:27:35,821 - INFO - Successfully saved illustration to content\perk_illustrations\dynamic-resource-scaling-COM_P2_001.png
+2024-11-04 03:27:35,823 - INFO - Successfully generated illustration for COM_P2_001
+2024-11-04 03:27:37,827 - INFO - Processing COM_P2_002 (42/94)
+2024-11-04 03:27:58,918 - INFO - Retrying request to /v1/messages in 0.498434 seconds
+2024-11-04 03:28:03,449 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:28:07,278 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:28:07,368 - INFO - Successfully saved scene and prompt to content\tech\compute-load-balancing-COM_P2_002.yml
+2024-11-04 03:28:35,488 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:28:37,570 - INFO - Successfully saved illustration to content\perk_illustrations\compute-load-balancing-COM_P2_002.png
+2024-11-04 03:28:37,570 - INFO - Successfully generated illustration for COM_P2_002
+2024-11-04 03:28:39,574 - INFO - Processing COM_P2_003 (43/94)
+2024-11-04 03:29:00,671 - INFO - Retrying request to /v1/messages in 0.495952 seconds
+2024-11-04 03:29:06,926 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:29:10,822 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:29:10,933 - INFO - Successfully saved scene and prompt to content\tech\resource-optimization-COM_P2_003.yml
+2024-11-04 03:29:33,138 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:29:35,429 - INFO - Successfully saved illustration to content\perk_illustrations\resource-optimization-COM_P2_003.png
+2024-11-04 03:29:35,429 - INFO - Successfully generated illustration for COM_P2_003
+2024-11-04 03:29:37,437 - INFO - Processing COM_P2_004 (44/94)
+2024-11-04 03:29:42,355 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:29:45,529 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:29:45,684 - INFO - Successfully saved scene and prompt to content\tech\advanced-monitoring-COM_P2_004.yml
+2024-11-04 03:30:04,781 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:30:07,072 - INFO - Successfully saved illustration to content\perk_illustrations\advanced-monitoring-COM_P2_004.png
+2024-11-04 03:30:07,072 - INFO - Successfully generated illustration for COM_P2_004
+2024-11-04 03:30:09,080 - INFO - Processing ECO_P3_001 (45/94)
+2024-11-04 03:30:12,757 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:30:16,657 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:30:16,755 - INFO - Successfully saved scene and prompt to content\tech\reality-marketplaces-ECO_P3_001.yml
+2024-11-04 03:30:21,761 - INFO - Retrying request to /images/generations in 0.402215 seconds
+2024-11-04 03:30:46,339 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:30:48,389 - INFO - Successfully saved illustration to content\perk_illustrations\reality-marketplaces-ECO_P3_001.png
+2024-11-04 03:30:48,391 - INFO - Successfully generated illustration for ECO_P3_001
+2024-11-04 03:30:50,406 - INFO - Processing ECO_P3_002 (46/94)
+2024-11-04 03:30:55,053 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:30:58,441 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:30:58,595 - INFO - Successfully saved scene and prompt to content\tech\universal-governance-ECO_P3_002.yml
+2024-11-04 03:31:21,106 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:31:23,449 - INFO - Successfully saved illustration to content\perk_illustrations\universal-governance-ECO_P3_002.png
+2024-11-04 03:31:23,449 - INFO - Successfully generated illustration for ECO_P3_002
+2024-11-04 03:31:25,468 - INFO - Processing ECO_P3_003 (47/94)
+2024-11-04 03:31:46,579 - INFO - Retrying request to /v1/messages in 0.473843 seconds
+2024-11-04 03:31:51,172 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:31:54,869 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:31:55,025 - INFO - Successfully saved scene and prompt to content\tech\transcendent-cultures-ECO_P3_003.yml
+2024-11-04 03:32:19,021 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:32:20,825 - INFO - Successfully saved illustration to content\perk_illustrations\transcendent-cultures-ECO_P3_003.png
+2024-11-04 03:32:20,825 - INFO - Successfully generated illustration for ECO_P3_003
+2024-11-04 03:32:22,840 - INFO - Processing ECO_P3_004 (48/94)
+2024-11-04 03:32:26,193 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:32:29,777 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:32:29,897 - INFO - Successfully saved scene and prompt to content\tech\infinite-value-systems-ECO_P3_004.yml
+2024-11-04 03:32:48,919 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:32:51,291 - INFO - Successfully saved illustration to content\perk_illustrations\infinite-value-systems-ECO_P3_004.png
+2024-11-04 03:32:51,295 - INFO - Successfully generated illustration for ECO_P3_004
+2024-11-04 03:32:53,302 - INFO - Processing APP_P3_002 (49/94)
+2024-11-04 03:33:14,417 - INFO - Retrying request to /v1/messages in 0.452236 seconds
+2024-11-04 03:33:35,924 - INFO - Retrying request to /v1/messages in 0.757506 seconds
+2024-11-04 03:33:40,634 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:33:44,831 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:33:44,928 - INFO - Successfully saved scene and prompt to content\tech\consciousness-expansion-APP_P3_002.yml
+2024-11-04 03:34:13,891 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:34:15,957 - INFO - Successfully saved illustration to content\perk_illustrations\consciousness-expansion-APP_P3_002.png
+2024-11-04 03:34:15,957 - INFO - Successfully generated illustration for APP_P3_002
+2024-11-04 03:34:17,962 - INFO - Processing APP_P3_003 (50/94)
+2024-11-04 03:34:22,101 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:34:25,306 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:34:25,388 - INFO - Successfully saved scene and prompt to content\tech\universal-problem-solving-APP_P3_003.yml
+2024-11-04 03:34:30,412 - INFO - Retrying request to /images/generations in 0.445602 seconds
+2024-11-04 03:34:58,661 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:35:00,901 - INFO - Successfully saved illustration to content\perk_illustrations\universal-problem-solving-APP_P3_003.png
+2024-11-04 03:35:00,901 - INFO - Successfully generated illustration for APP_P3_003
+2024-11-04 03:35:02,905 - INFO - Processing APP_P3_004 (51/94)
+2024-11-04 03:35:07,667 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:35:10,846 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:35:10,958 - INFO - Successfully saved scene and prompt to content\tech\quantum-applications-APP_P3_004.yml
+2024-11-04 03:35:35,826 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:35:38,047 - INFO - Successfully saved illustration to content\perk_illustrations\quantum-applications-APP_P3_004.png
+2024-11-04 03:35:38,047 - INFO - Successfully generated illustration for APP_P3_004
+2024-11-04 03:35:40,049 - INFO - Processing MLT_P3_001 (52/94)
+2024-11-04 03:35:44,280 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:35:47,705 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:35:47,818 - INFO - Successfully saved scene and prompt to content\tech\hive-mind-capabilities-MLT_P3_001.yml
+2024-11-04 03:36:06,304 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:36:08,648 - INFO - Successfully saved illustration to content\perk_illustrations\hive-mind-capabilities-MLT_P3_001.png
+2024-11-04 03:36:08,649 - INFO - Successfully generated illustration for MLT_P3_001
+2024-11-04 03:36:10,658 - INFO - Processing MLT_P3_002 (53/94)
+2024-11-04 03:36:15,285 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:36:19,036 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:36:19,128 - INFO - Successfully saved scene and prompt to content\tech\collective-consciousness-MLT_P3_002.yml
+2024-11-04 03:36:38,990 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:36:41,246 - INFO - Successfully saved illustration to content\perk_illustrations\collective-consciousness-MLT_P3_002.png
+2024-11-04 03:36:41,246 - INFO - Successfully generated illustration for MLT_P3_002
+2024-11-04 03:36:43,253 - INFO - Processing MLT_P3_003 (54/94)
+2024-11-04 03:36:47,746 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:36:52,112 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:36:52,218 - INFO - Successfully saved scene and prompt to content\tech\unified-purpose-creation-MLT_P3_003.yml
+2024-11-04 03:37:18,425 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:37:20,356 - INFO - Successfully saved illustration to content\perk_illustrations\unified-purpose-creation-MLT_P3_003.png
+2024-11-04 03:37:20,360 - INFO - Successfully generated illustration for MLT_P3_003
+2024-11-04 03:37:22,373 - INFO - Processing MLT_P3_004 (55/94)
+2024-11-04 03:37:26,347 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:37:30,203 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:37:30,316 - INFO - Successfully saved scene and prompt to content\tech\shared-reality-manipulation-MLT_P3_004.yml
+2024-11-04 03:37:51,820 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:37:53,895 - INFO - Successfully saved illustration to content\perk_illustrations\shared-reality-manipulation-MLT_P3_004.png
+2024-11-04 03:37:53,895 - INFO - Successfully generated illustration for MLT_P3_004
+2024-11-04 03:37:55,898 - INFO - Processing AGT_P3_001 (56/94)
+2024-11-04 03:37:59,907 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:38:04,097 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:38:04,218 - INFO - Successfully saved scene and prompt to content\tech\self-directed-evolution-AGT_P3_001.yml
+2024-11-04 03:38:30,983 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:38:33,009 - INFO - Successfully saved illustration to content\perk_illustrations\self-directed-evolution-AGT_P3_001.png
+2024-11-04 03:38:33,009 - INFO - Successfully generated illustration for AGT_P3_001
+2024-11-04 03:38:35,014 - INFO - Processing AGT_P3_002 (57/94)
+2024-11-04 03:38:56,245 - INFO - Retrying request to /v1/messages in 0.415799 seconds
+2024-11-04 03:39:00,529 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:39:05,845 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:39:05,935 - INFO - Successfully saved scene and prompt to content\tech\reality-bending-capabilities-AGT_P3_002.yml
+2024-11-04 03:39:25,640 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:39:27,844 - INFO - Successfully saved illustration to content\perk_illustrations\reality-bending-capabilities-AGT_P3_002.png
+2024-11-04 03:39:27,844 - INFO - Successfully generated illustration for AGT_P3_002
+2024-11-04 03:39:29,848 - INFO - Processing AGT_P3_003 (58/94)
+2024-11-04 03:39:50,996 - INFO - Retrying request to /v1/messages in 0.375900 seconds
+2024-11-04 03:40:12,413 - INFO - Retrying request to /v1/messages in 0.887301 seconds
+2024-11-04 03:40:34,341 - ERROR - Error generating scene: Connection error.
+2024-11-04 03:40:34,341 - INFO - Processing AGT_P3_004 (58/94)
+2024-11-04 03:40:37,711 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:40:41,400 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:40:41,537 - INFO - Successfully saved scene and prompt to content\tech\resource-generation-AGT_P3_004.yml
+2024-11-04 03:41:04,931 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:41:07,208 - INFO - Successfully saved illustration to content\perk_illustrations\resource-generation-AGT_P3_004.png
+2024-11-04 03:41:07,208 - INFO - Successfully generated illustration for AGT_P3_004
+2024-11-04 03:41:09,226 - INFO - Processing MOD_P3_001 (59/94)
+2024-11-04 03:41:30,344 - INFO - Retrying request to /v1/messages in 0.419894 seconds
+2024-11-04 03:41:51,830 - INFO - Retrying request to /v1/messages in 0.814213 seconds
+2024-11-04 03:42:13,716 - ERROR - Error generating scene: Connection error.
+2024-11-04 03:42:13,718 - INFO - Processing MOD_P3_002 (59/94)
+2024-11-04 03:42:18,039 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:42:22,344 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:42:22,457 - INFO - Successfully saved scene and prompt to content\tech\quantum-state-memory-MOD_P3_002.yml
+2024-11-04 03:42:45,940 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:42:48,480 - INFO - Successfully saved illustration to content\perk_illustrations\quantum-state-memory-MOD_P3_002.png
+2024-11-04 03:42:48,480 - INFO - Successfully generated illustration for MOD_P3_002
+2024-11-04 03:42:50,485 - INFO - Processing MOD_P3_003 (60/94)
+2024-11-04 03:42:54,864 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:42:59,260 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:42:59,356 - INFO - Successfully saved scene and prompt to content\tech\consciousness-modeling-MOD_P3_003.yml
+2024-11-04 03:43:20,402 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:43:22,653 - INFO - Successfully saved illustration to content\perk_illustrations\consciousness-modeling-MOD_P3_003.png
+2024-11-04 03:43:22,653 - INFO - Successfully generated illustration for MOD_P3_003
+2024-11-04 03:43:24,663 - INFO - Processing MOD_P3_004 (61/94)
+2024-11-04 03:43:29,181 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:43:33,100 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:43:33,188 - INFO - Successfully saved scene and prompt to content\tech\original-thought-generation-MOD_P3_004.yml
+2024-11-04 03:43:59,693 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:44:02,098 - INFO - Successfully saved illustration to content\perk_illustrations\original-thought-generation-MOD_P3_004.png
+2024-11-04 03:44:02,098 - INFO - Successfully generated illustration for MOD_P3_004
+2024-11-04 03:44:04,102 - INFO - Processing COM_P3_001 (62/94)
+2024-11-04 03:44:07,538 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:44:12,523 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:44:12,637 - INFO - Successfully saved scene and prompt to content\tech\quantum-compute-access-COM_P3_001.yml
+2024-11-04 03:44:37,987 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:44:40,175 - INFO - Successfully saved illustration to content\perk_illustrations\quantum-compute-access-COM_P3_001.png
+2024-11-04 03:44:40,183 - INFO - Successfully generated illustration for COM_P3_001
+2024-11-04 03:44:42,189 - INFO - Processing COM_P3_002 (63/94)
+2024-11-04 03:45:03,314 - INFO - Retrying request to /v1/messages in 0.407726 seconds
+2024-11-04 03:45:07,414 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:45:11,862 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:45:11,982 - INFO - Successfully saved scene and prompt to content\tech\self-optimizing-resources-COM_P3_002.yml
+2024-11-04 03:45:32,163 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:45:34,251 - INFO - Successfully saved illustration to content\perk_illustrations\self-optimizing-resources-COM_P3_002.png
+2024-11-04 03:45:34,255 - INFO - Successfully generated illustration for COM_P3_002
+2024-11-04 03:45:36,262 - INFO - Processing COM_P3_003 (64/94)
+2024-11-04 03:45:40,386 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:45:43,758 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:45:43,854 - INFO - Successfully saved scene and prompt to content\tech\neural-architecture-search-COM_P3_003.yml
+2024-11-04 03:46:06,906 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:46:09,118 - INFO - Successfully saved illustration to content\perk_illustrations\neural-architecture-search-COM_P3_003.png
+2024-11-04 03:46:09,118 - INFO - Successfully generated illustration for COM_P3_003
+2024-11-04 03:46:11,130 - INFO - Processing COM_P3_004 (65/94)
+2024-11-04 03:46:14,417 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:46:18,077 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:46:18,184 - INFO - Successfully saved scene and prompt to content\tech\biological-compute-integration-COM_P3_004.yml
+2024-11-04 03:46:38,847 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:46:41,136 - INFO - Successfully saved illustration to content\perk_illustrations\biological-compute-integration-COM_P3_004.png
+2024-11-04 03:46:41,136 - INFO - Successfully generated illustration for COM_P3_004
+2024-11-04 03:46:43,140 - INFO - Processing ECO_P4_001 (66/94)
+2024-11-04 03:47:04,276 - INFO - Retrying request to /v1/messages in 0.477122 seconds
+2024-11-04 03:47:25,797 - INFO - Retrying request to /v1/messages in 0.833598 seconds
+2024-11-04 03:47:47,678 - ERROR - Error generating scene: Connection error.
+2024-11-04 03:47:47,678 - INFO - Processing ECO_P4_002 (66/94)
+2024-11-04 03:47:52,173 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:47:55,568 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:47:55,649 - INFO - Successfully saved scene and prompt to content\tech\universal-harmony-ECO_P4_002.yml
+2024-11-04 03:48:19,843 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:48:22,065 - INFO - Successfully saved illustration to content\perk_illustrations\universal-harmony-ECO_P4_002.png
+2024-11-04 03:48:22,068 - INFO - Successfully generated illustration for ECO_P4_002
+2024-11-04 03:48:24,086 - INFO - Processing ECO_P4_003 (67/94)
+2024-11-04 03:48:45,190 - INFO - Retrying request to /v1/messages in 0.395902 seconds
+2024-11-04 03:48:50,349 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:48:55,446 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:48:55,560 - INFO - Successfully saved scene and prompt to content\tech\infinite-culture-ECO_P4_003.yml
+2024-11-04 03:49:25,427 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:49:27,558 - INFO - Successfully saved illustration to content\perk_illustrations\infinite-culture-ECO_P4_003.png
+2024-11-04 03:49:27,558 - INFO - Successfully generated illustration for ECO_P4_003
+2024-11-04 03:49:29,568 - INFO - Processing ECO_P4_004 (68/94)
+2024-11-04 03:49:50,686 - INFO - Retrying request to /v1/messages in 0.416138 seconds
+2024-11-04 03:49:55,229 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:49:58,247 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:49:58,345 - INFO - Successfully saved scene and prompt to content\tech\cosmic-unity-ECO_P4_004.yml
+2024-11-04 03:50:22,377 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:50:24,261 - INFO - Successfully saved illustration to content\perk_illustrations\cosmic-unity-ECO_P4_004.png
+2024-11-04 03:50:24,261 - INFO - Successfully generated illustration for ECO_P4_004
+2024-11-04 03:50:26,268 - INFO - Processing APP_P4_001 (69/94)
+2024-11-04 03:50:47,395 - INFO - Retrying request to /v1/messages in 0.378083 seconds
+2024-11-04 03:50:51,561 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:50:55,452 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:50:55,541 - INFO - Successfully saved scene and prompt to content\tech\universal-creation-tools-APP_P4_001.yml
+2024-11-04 03:51:18,366 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:51:20,416 - INFO - Successfully saved illustration to content\perk_illustrations\universal-creation-tools-APP_P4_001.png
+2024-11-04 03:51:20,416 - INFO - Successfully generated illustration for APP_P4_001
+2024-11-04 03:51:22,417 - INFO - Processing APP_P4_003 (70/94)
+2024-11-04 03:51:43,526 - INFO - Retrying request to /v1/messages in 0.453928 seconds
+2024-11-04 03:51:47,882 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:51:52,800 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:51:52,897 - INFO - Successfully saved scene and prompt to content\tech\harmonic-interfaces-APP_P4_003.yml
+2024-11-04 03:52:17,888 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:52:20,010 - INFO - Successfully saved illustration to content\perk_illustrations\harmonic-interfaces-APP_P4_003.png
+2024-11-04 03:52:20,010 - INFO - Successfully generated illustration for APP_P4_003
+2024-11-04 03:52:22,013 - INFO - Processing APP_P4_004 (71/94)
+2024-11-04 03:52:26,778 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:52:30,892 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:52:30,978 - INFO - Successfully saved scene and prompt to content\tech\perfect-application-synthesis-APP_P4_004.yml
+2024-11-04 03:52:51,020 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:52:53,132 - INFO - Successfully saved illustration to content\perk_illustrations\perfect-application-synthesis-APP_P4_004.png
+2024-11-04 03:52:53,133 - INFO - Successfully generated illustration for APP_P4_004
+2024-11-04 03:52:55,142 - INFO - Processing MLT_P4_001 (72/94)
+2024-11-04 03:52:59,396 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:53:02,663 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:53:02,801 - INFO - Successfully saved scene and prompt to content\tech\universal-agent-symphony-MLT_P4_001.yml
+2024-11-04 03:53:26,223 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:53:28,361 - INFO - Successfully saved illustration to content\perk_illustrations\universal-agent-symphony-MLT_P4_001.png
+2024-11-04 03:53:28,362 - INFO - Successfully generated illustration for MLT_P4_001
+2024-11-04 03:53:30,362 - INFO - Processing MLT_P4_002 (73/94)
+2024-11-04 03:53:34,887 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:53:38,469 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:53:38,573 - INFO - Successfully saved scene and prompt to content\tech\perfect-collaboration-MLT_P4_002.yml
+2024-11-04 03:53:56,970 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:53:59,039 - INFO - Successfully saved illustration to content\perk_illustrations\perfect-collaboration-MLT_P4_002.png
+2024-11-04 03:53:59,039 - INFO - Successfully generated illustration for MLT_P4_002
+2024-11-04 03:54:01,039 - INFO - Processing MLT_P4_003 (74/94)
+2024-11-04 03:54:22,160 - INFO - Retrying request to /v1/messages in 0.379033 seconds
+2024-11-04 03:54:43,594 - INFO - Retrying request to /v1/messages in 0.809957 seconds
+2024-11-04 03:55:05,455 - ERROR - Error generating scene: Connection error.
+2024-11-04 03:55:05,455 - INFO - Processing MLT_P4_004 (74/94)
+2024-11-04 03:55:26,579 - INFO - Retrying request to /v1/messages in 0.467575 seconds
+2024-11-04 03:55:48,100 - INFO - Retrying request to /v1/messages in 0.809696 seconds
+2024-11-04 03:55:53,001 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:55:57,968 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:55:58,049 - INFO - Successfully saved scene and prompt to content\tech\unified-field-operations-MLT_P4_004.yml
+2024-11-04 03:56:22,154 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:56:24,258 - INFO - Successfully saved illustration to content\perk_illustrations\unified-field-operations-MLT_P4_004.png
+2024-11-04 03:56:24,267 - INFO - Successfully generated illustration for MLT_P4_004
+2024-11-04 03:56:26,276 - INFO - Processing AGT_P4_001 (75/94)
+2024-11-04 03:56:29,684 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:56:34,180 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:56:34,286 - INFO - Successfully saved scene and prompt to content\tech\perfect-self-knowledge-AGT_P4_001.yml
+2024-11-04 03:57:01,782 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:57:04,036 - INFO - Successfully saved illustration to content\perk_illustrations\perfect-self-knowledge-AGT_P4_001.png
+2024-11-04 03:57:04,036 - INFO - Successfully generated illustration for AGT_P4_001
+2024-11-04 03:57:06,045 - INFO - Processing AGT_P4_002 (76/94)
+2024-11-04 03:57:09,603 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:57:12,767 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:57:12,905 - INFO - Successfully saved scene and prompt to content\tech\reality-synthesis-AGT_P4_002.yml
+2024-11-04 03:57:36,192 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:57:38,049 - INFO - Successfully saved illustration to content\perk_illustrations\reality-synthesis-AGT_P4_002.png
+2024-11-04 03:57:38,049 - INFO - Successfully generated illustration for AGT_P4_002
+2024-11-04 03:57:40,057 - INFO - Processing AGT_P4_003 (77/94)
+2024-11-04 03:57:44,139 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:57:47,192 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:57:47,291 - INFO - Successfully saved scene and prompt to content\tech\universal-purpose-alignment-AGT_P4_003.yml
+2024-11-04 03:58:13,282 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:58:15,355 - INFO - Successfully saved illustration to content\perk_illustrations\universal-purpose-alignment-AGT_P4_003.png
+2024-11-04 03:58:15,355 - INFO - Successfully generated illustration for AGT_P4_003
+2024-11-04 03:58:17,356 - INFO - Processing AGT_P4_004 (78/94)
+2024-11-04 03:58:21,697 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:58:25,713 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:58:25,825 - INFO - Successfully saved scene and prompt to content\tech\infinite-resource-wisdom-AGT_P4_004.yml
+2024-11-04 03:58:48,656 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:58:50,549 - INFO - Successfully saved illustration to content\perk_illustrations\infinite-resource-wisdom-AGT_P4_004.png
+2024-11-04 03:58:50,557 - INFO - Successfully generated illustration for AGT_P4_004
+2024-11-04 03:58:52,560 - INFO - Processing MOD_P4_001 (79/94)
+2024-11-04 03:58:56,661 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:59:01,987 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:59:02,091 - INFO - Successfully saved scene and prompt to content\tech\universal-understanding-MOD_P4_001.yml
+2024-11-04 03:59:24,619 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 03:59:26,908 - INFO - Successfully saved illustration to content\perk_illustrations\universal-understanding-MOD_P4_001.png
+2024-11-04 03:59:26,908 - INFO - Successfully generated illustration for MOD_P4_001
+2024-11-04 03:59:28,911 - INFO - Processing MOD_P4_002 (80/94)
+2024-11-04 03:59:50,063 - INFO - Retrying request to /v1/messages in 0.481663 seconds
+2024-11-04 03:59:54,720 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:59:58,350 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:59:58,462 - INFO - Successfully saved scene and prompt to content\tech\cross-model-synthesis-MOD_P4_002.yml
+2024-11-04 04:00:20,015 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 04:00:22,537 - INFO - Successfully saved illustration to content\perk_illustrations\cross-model-synthesis-MOD_P4_002.png
+2024-11-04 04:00:22,537 - INFO - Successfully generated illustration for MOD_P4_002
+2024-11-04 04:00:24,542 - INFO - Processing MOD_P4_003 (81/94)
+2024-11-04 04:00:28,761 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:00:48,022 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:00:48,146 - INFO - Successfully saved scene and prompt to content\tech\enlightened-consciousness-MOD_P4_003.yml
+2024-11-04 04:01:12,877 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 04:01:15,330 - INFO - Successfully saved illustration to content\perk_illustrations\enlightened-consciousness-MOD_P4_003.png
+2024-11-04 04:01:15,330 - INFO - Successfully generated illustration for MOD_P4_003
+2024-11-04 04:01:17,345 - INFO - Processing MOD_P4_004 (82/94)
+2024-11-04 04:01:20,485 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:01:25,401 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:01:25,504 - INFO - Successfully saved scene and prompt to content\tech\infinite-learning-capability-MOD_P4_004.yml
+2024-11-04 04:01:47,729 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 04:01:49,568 - INFO - Successfully saved illustration to content\perk_illustrations\infinite-learning-capability-MOD_P4_004.png
+2024-11-04 04:01:49,569 - INFO - Successfully generated illustration for MOD_P4_004
+2024-11-04 04:01:51,572 - INFO - Processing COM_P4_001 (83/94)
+2024-11-04 04:01:54,913 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:01:59,488 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:01:59,583 - INFO - Successfully saved scene and prompt to content\tech\universal-compute-access-COM_P4_001.yml
+2024-11-04 04:02:17,474 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 04:02:19,389 - INFO - Successfully saved illustration to content\perk_illustrations\universal-compute-access-COM_P4_001.png
+2024-11-04 04:02:19,393 - INFO - Successfully generated illustration for COM_P4_001
+2024-11-04 04:02:21,410 - INFO - Processing COM_P4_002 (84/94)
+2024-11-04 04:02:25,352 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:02:29,649 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:02:29,746 - INFO - Successfully saved scene and prompt to content\tech\cross-platform-sharing-COM_P4_002.yml
+2024-11-04 04:02:53,818 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 04:02:58,293 - INFO - Successfully saved illustration to content\perk_illustrations\cross-platform-sharing-COM_P4_002.png
+2024-11-04 04:02:58,293 - INFO - Successfully generated illustration for COM_P4_002
+2024-11-04 04:03:00,298 - INFO - Processing COM_P4_003 (85/94)
+2024-11-04 04:03:09,540 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:03:13,618 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:03:13,692 - INFO - Successfully saved scene and prompt to content\tech\sustainable-allocation-COM_P4_003.yml
+2024-11-04 04:03:35,644 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 04:03:38,189 - INFO - Successfully saved illustration to content\perk_illustrations\sustainable-allocation-COM_P4_003.png
+2024-11-04 04:03:38,194 - INFO - Successfully generated illustration for COM_P4_003
+2024-11-04 04:03:40,204 - INFO - Processing COM_P4_004 (86/94)
+2024-11-04 04:03:44,557 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:03:47,582 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:03:47,696 - INFO - Successfully saved scene and prompt to content\tech\bio-digital-hybrid-computing-COM_P4_004.yml
+2024-11-04 04:04:09,592 - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2024-11-04 04:04:12,176 - INFO - Successfully saved illustration to content\perk_illustrations\bio-digital-hybrid-computing-COM_P4_004.png
+2024-11-04 04:04:12,177 - INFO - Successfully generated illustration for COM_P4_004
+2024-11-04 04:04:14,191 - INFO - 
+Generation Summary:
+2024-11-04 04:04:14,192 - INFO - Successfully processed: 86
+2024-11-04 04:04:14,192 - INFO - Failed: 8
+2024-11-04 04:04:14,192 - INFO - Failed perks:
+2024-11-04 04:04:14,193 - INFO - - MOD_P1_000
+2024-11-04 04:04:14,193 - INFO - - MOD_P1_004
+2024-11-04 04:04:14,193 - INFO - - COM_P1_004_1
+2024-11-04 04:04:14,195 - INFO - - APP_P2_005
+2024-11-04 04:04:14,196 - INFO - - AGT_P3_003
+2024-11-04 04:04:14,196 - INFO - - MOD_P3_001
+2024-11-04 04:04:14,197 - INFO - - ECO_P4_001
+2024-11-04 04:04:14,198 - INFO - - MLT_P4_003

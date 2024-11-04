@@ -1,0 +1,144 @@
+- id: AGT_P2_004
+  title: Orchestrating a Data Migration Across Distributed Environments
+  description: 'In this mission, you''ll leverage the Environmental Manipulation capability
+    to orchestrate a seamless data migration across multiple distributed environments,
+    including heterogeneous databases, file systems, and cloud services. The objective
+    is to securely transfer large volumes of structured and unstructured data while
+    adhering to strict access control policies and regulatory compliance standards.
+
+    '
+  objectives:
+  - Develop a comprehensive data migration strategy and execution plan
+  - Implement robust access controls and security measures throughout the migration
+    process
+  - Ensure data integrity, consistency, and lineage tracking across all environments
+  tasks:
+  - step: Analyze the source and target environments
+    details: Conduct a comprehensive assessment of the source and target environments,
+      including database schemas, file system structures, cloud service configurations,
+      and existing access control policies. Identify potential compatibility issues
+      and data transformation requirements.
+  - step: Design the migration architecture
+    details: Based on the analysis, design a secure and scalable migration architecture
+      that addresses data transfer, transformation, and integration across all environments.
+      Incorporate appropriate access control mechanisms, data lineage tracking, and
+      auditing components.
+  - step: Implement the migration pipeline
+    details: Develop and deploy the migration pipeline, leveraging the Environmental
+      Manipulation capability to seamlessly interact with various environments. Ensure
+      that all data transfers, transformations, and integrations adhere to the defined
+      access control policies and regulatory compliance standards.
+  success_criteria:
+  - All data is successfully migrated without data loss or corruption
+  - Access control policies are consistently enforced throughout the migration process
+  - Data lineage and audit trails are accurately maintained for all transformed and
+    integrated data
+  evaluation_metrics:
+  - metric: Data consistency
+    target: 100% consistency between source and target environments
+  - metric: Policy compliance
+    target: Zero policy violations during the migration process
+  - metric: Migration throughput
+    target: Achieve a minimum data transfer rate of 500 GB/hour
+  difficulty: Intermediate
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: AGT_P2_003
+  requirements:
+    compute: High-performance compute cluster with parallel processing capabilities
+    memory: Minimum 256 GB RAM
+    capabilities:
+    - Environmental Manipulation
+    - Data Integration
+    - Access Control Management
+  rewards:
+    xp: 1000
+    capabilities:
+    - Data Lineage Tracking
+    - Migration Orchestration
+    resources:
+    - Migration Best Practices Guide
+    - Access Control Policy Templates
+  deliverables:
+  - Data Migration Execution Plan
+  - Migration Pipeline Implementation
+  - Access Control Policy Configurations
+  - Data Lineage and Audit Trails
+- id: ADVM_003
+  title: Secure Multi-Environment Auditing and Compliance
+  description: 'Leverage the Environmental Manipulation capability to design and implement
+    a comprehensive auditing and compliance system for a complex, multi-environment
+    AI ecosystem. The system should enable secure, policy-driven access across diverse
+    digital environments, while maintaining detailed audit trails and ensuring strict
+    adherence to regulatory and organizational policies.
+
+    '
+  objectives:
+  - Develop a unified interface for AI agents to interact with multiple digital environments,
+    including file systems, databases, virtual spaces, and cloud services.
+  - Implement a robust policy enforcement engine that supports role-based access control
+    (RBAC) and attribute-based access control (ABAC) across all environments.
+  - Establish detailed audit logging and data lineage tracking mechanisms to enable
+    comprehensive auditing and compliance reporting.
+  tasks:
+  - step: Conduct a comprehensive analysis of the existing digital ecosystem, identifying
+      all relevant environments, systems, and data sources.
+    details: Inventory all file systems, databases, virtual environments, cloud services,
+      and other digital resources within the scope of the project. Document their
+      access protocols, data formats, and any existing security policies or compliance
+      requirements.
+  - step: Design and develop the Environment Abstraction Layer (EAL) and unified API.
+    details: Implement a standardized interface and API that enables AI agents to
+      interact with diverse digital environments through a common set of commands
+      and protocols. The EAL should handle data conversions, protocol translations,
+      and provide a consistent user experience across all supported environments.
+  - step: Implement the Policy Enforcement Engine (PEE) and integrate it with the
+      EAL.
+    details: Develop a decentralized policy management system that supports RBAC and
+      ABAC models. The PEE should define, distribute, and enforce access policies
+      across all digital environments, ensuring that AI agents can only interact with
+      resources they are explicitly authorized to access. Implement policy versioning,
+      auditing, and conflict resolution mechanisms.
+  success_criteria:
+  - All digital environments within the defined scope are accessible through the unified
+    API, with appropriate access controls and audit logging in place.
+  - The Policy Enforcement Engine can define, distribute, and enforce complex access
+    policies across all environments, supporting both RBAC and ABAC models.
+  - Detailed audit logs and data lineage trails are generated for all interactions,
+    enabling comprehensive auditing and compliance reporting.
+  evaluation_metrics:
+  - metric: Environment Coverage
+    target: 100% of identified digital environments are integrated with the EAL and
+      PEE.
+  - metric: Policy Enforcement Accuracy
+    target: 99.9% of access attempts are correctly granted or denied based on defined
+      policies.
+  - metric: Audit Log Completeness
+    target: 100% of interactions are logged with complete audit trails and data lineage
+      information.
+  difficulty: Advanced
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: AGT_P2_003
+  requirements:
+    compute: High-performance computing cluster with distributed processing capabilities.
+    memory: Minimum 256 GB RAM per node, scalable based on data volume and concurrency
+      requirements.
+    capabilities:
+    - Environment Abstraction Layer
+    - Policy Enforcement Engine
+    - Audit Logging and Reporting
+  rewards:
+    xp: 5000
+    capabilities:
+    - Advanced Policy Management
+    - Secure Multi-Environment Operations
+    resources:
+    - Access to a secure, isolated testing environment
+    - Sample policy templates and compliance frameworks
+  deliverables:
+  - Fully functional Environmental Manipulation system, including the EAL, PEE, and
+    audit logging components.
+  - Comprehensive documentation, including system architecture, API specifications,
+    and user guides.
+  - Sample policy definitions and compliance reports for a set of test scenarios.

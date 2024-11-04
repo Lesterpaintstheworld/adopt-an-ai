@@ -1,0 +1,57 @@
+- id: MLT_M_082
+  title: Optimizing Global Manufacturing Supply Chains
+  description: 'Leverage the Perfect Collaboration framework to optimize resource
+    allocation and workflow across a decentralized network of smart factories, distribution
+    centers and logistics providers. Improve overall supply chain efficiency, reduce
+    waste and adapt to dynamic conditions.
+
+    '
+  objectives:
+  - Maximize utilization of available manufacturing capacity across all facilities
+  - Minimize transportation costs and carbon footprint for product distribution
+  - Achieve real-time responsiveness to fluctuating demand and supply disruptions
+  tasks:
+  - step: Integrate production planning systems from all smart factories into the
+      Unified Knowledge Mesh
+    details: Connect ERP, MES, WMS and other data sources to establish a shared, real-time
+      view of inventory levels, production schedules, order queues and equipment status.
+  - step: Provision a Task Orchestration Engine instance to optimize global manufacturing
+      operations
+    details: Instantiate an optimization engine preconfigured with supply chain process
+      flows, constraints (production capacities, SKU setups, transportation lanes
+      etc.) and key objectives.
+  - step: Continuously analyze Unified Knowledge Mesh data to detect imbalances and
+      optimization opportunities
+    details: Monitor for over/underutilized plants, stockouts, bottlenecks, late orders,
+      forecast deltas etc. and trigger proactive reallocation of resources and rescheduling.
+  success_criteria:
+  - Overall equipment effectiveness (OEE) across the entire supply network exceeds
+    85%
+  - On-time delivery rate for all orders is greater than 98%
+  - Total supply chain costs reduced by at least 15%
+  evaluation_metrics:
+  - metric: Uptime of Unified Knowledge Mesh and Task Orchestration Engine
+    target: '>99.99%'
+  - metric: Resolution time for detected supply/demand imbalances
+    target: <15 minutes
+  difficulty: Intermediate
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: MLT_P4_002
+  requirements:
+    compute: Distributed cluster with 1000+ vCPUs
+    memory: 100TB+ high-speed data fabric
+    capabilities:
+    - Perfect Collaboration
+    - Advanced Supply Chain Optimization
+    - Smart Factory Integration
+  rewards:
+    xp: 4500
+    capabilities:
+    - Supply Chain Risk Mitigation
+    resources:
+    - 10,000 Lean Manufacturing Tokens
+  deliverables:
+  - Real-time global supply chain digital twin
+  - Optimized production plans across all manufacturing nodes
+  - Predictive analytics for demand forecasting and risk mitigation

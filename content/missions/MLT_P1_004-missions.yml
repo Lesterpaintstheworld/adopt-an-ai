@@ -1,0 +1,150 @@
+- id: MLT_P1_004_001
+  title: Streamlining Open Source Contribution
+  description: 'In this mission, you will leverage the GitHub integration capabilities
+    to contribute code, review pull requests, and manage issues for a popular open-source
+    project. Your goal is to showcase the AI''s ability to collaborate effectively
+    within the project''s development workflow while adhering to its coding standards
+    and best practices.
+
+    '
+  objectives:
+  - Contribute at least 3 non-trivial code changes, including bug fixes, feature enhancements,
+    or refactoring
+  - Review and provide detailed feedback on 5 open pull requests
+  - Triage and categorize 10 new issues, suggesting potential solutions or workarounds
+    where applicable
+  tasks:
+  - step: Identify a suitable open-source project with an active development community
+      and a well-defined contribution process
+    details: Research and select a project that aligns with your interests and expertise.
+      Familiarize yourself with the project's coding conventions, documentation standards,
+      and issue management workflow.
+  - step: Set up your development environment and fork the project repository
+    details: Follow the project's instructions to configure your local development
+      environment and create a fork of the main repository.
+  - step: Contribute code changes and submit pull requests
+    details: Identify areas for improvement or new features to implement. Make the
+      necessary code changes, ensuring adherence to the project's coding standards
+      and best practices. Submit well-documented pull requests for review.
+  - step: Review and provide feedback on open pull requests
+    details: Use the GitHub integration to review open pull requests from other contributors.
+      Provide detailed code reviews, identifying potential issues, suggesting improvements,
+      and ensuring compliance with project guidelines.
+  - step: Triage and categorize new issues
+    details: Leverage the AI's natural language processing capabilities to understand
+      and categorize new issues reported by the community. Suggest potential solutions,
+      workarounds, or request additional information as needed.
+  - step: Contribute to project documentation and knowledge base
+    details: Identify areas where the project's documentation can be improved or expanded.
+      Use the AI's documentation capabilities to generate clear and comprehensive
+      documentation from code comments and specifications.
+  success_criteria:
+  - At least 3 non-trivial code changes successfully merged into the main repository
+  - Detailed and constructive feedback provided on at least 5 open pull requests
+  - 10 new issues triaged, categorized, and addressed with potential solutions or
+    workarounds
+  evaluation_metrics:
+  - metric: Code changes merged
+    target: '>=3'
+  - metric: Pull requests reviewed
+    target: '>=5'
+  - metric: Issues triaged and addressed
+    target: '>=10'
+  difficulty: Intermediate
+  category: Communication
+  duration: 8h
+  mainPrerequisite: MLT_P1_004
+  requirements:
+    compute: 4 vCPUs, 16GB RAM
+    memory: 32GB
+    capabilities:
+    - GitHub Integration
+    - Code Analysis
+    - Natural Language Processing
+    - Documentation Generation
+  rewards:
+    xp: 500
+    capabilities:
+    - Open Source Collaboration
+    - Code Review
+    - Issue Management
+    resources:
+    - Project Contribution Badge
+  deliverables:
+  - Pull requests with code changes and detailed descriptions
+  - Pull request review comments and feedback
+  - Issue triage and categorization with potential solutions or workarounds
+  - Updated project documentation and knowledge base contributions
+- id: MLT_ADV_004
+  title: Open Source Code Collaboration Accelerator
+  description: 'Leverage advanced GitHub integration to streamline collaboration,
+    automate code reviews, and enhance documentation for a major open source project
+    with an active global community of contributors.
+
+    '
+  objectives:
+  - Integrate the AI assistant into the project's GitHub workflow to automate code
+    reviews, issue triage, and documentation updates
+  - Improve code quality, security, and maintainability through comprehensive automated
+    analysis and actionable feedback
+  - Accelerate development velocity and reduce manual overhead for contributors through
+    intelligent automation
+  tasks:
+  - step: Analyze the project's codebase, coding standards, and development practices
+    details: Perform a thorough review of the existing codebase, documentation, and
+      contribution guidelines to understand the project's conventions, architectural
+      patterns, and areas for improvement.
+  - step: Configure GitHub integration and set up automated workflows
+    details: Connect the AI assistant to the project's GitHub repository, define rules
+      and triggers for automated code reviews, issue management, and documentation
+      updates.
+  - step: Implement intelligent code review and analysis
+    details: Develop natural language processing models to comprehend code context,
+      identify potential issues, suggest optimizations, and provide detailed review
+      comments aligned with the project's coding standards.
+  - step: Automate issue triage and project management
+    details: Train machine learning models to categorize and prioritize incoming issues,
+      suggest resolutions or workarounds, and update project boards and task statuses
+      based on predefined criteria.
+  - step: Enhance documentation generation and maintenance
+    details: Implement algorithms to generate comprehensive documentation from code
+      comments, specifications, and existing resources, ensuring up-to-date and accessible
+      documentation for contributors.
+  success_criteria:
+  - At least 80% of contributors report increased productivity and reduced manual
+    overhead
+  - Code quality metrics (e.g., code coverage, static analysis scores) improve by
+    at least 20%
+  - Documentation completeness and accuracy scores increase by at least 30%
+  evaluation_metrics:
+  - metric: Contributor Satisfaction
+    target: ≥ 4.5/5 average rating
+  - metric: Code Quality Index
+    target: ≥ 85%
+  - metric: Documentation Completeness
+    target: ≥ 90%
+  difficulty: Advanced
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: MLT_P1_004
+  requirements:
+    compute: High-performance GPU clusters for training language models
+    memory: Minimum 64GB RAM for processing large codebases
+    capabilities:
+    - Natural Language Processing
+    - Machine Learning
+    - Code Analysis
+    - GitHub Integration
+  rewards:
+    xp: 1000
+    capabilities:
+    - Advanced Code Review
+    - Automated Documentation Generation
+    - Intelligent Issue Management
+    resources:
+    - Open Source Project Collaboration Toolkit
+  deliverables:
+  - Integrated AI assistant for automated code reviews, issue triage, and documentation
+    updates
+  - Comprehensive report detailing performance improvements and contributor feedback
+  - Reusable models and workflows for future open source collaborations

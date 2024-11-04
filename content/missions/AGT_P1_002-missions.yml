@@ -1,0 +1,151 @@
+- id: EAW_INT_001
+  title: Context-Aware Productivity Assistant
+  description: 'Develop an AI assistant that can dynamically adapt its behavior and
+    recommendations
+
+    based on the user''s evolving context, including temporal patterns, interaction
+    history,
+
+    and changes in system state or environment.
+
+    '
+  objectives:
+  - Build a contextual awareness pipeline to ingest and process multi-modal data streams
+  - Implement temporal pattern recognition and user behavior modeling components
+  - Integrate real-time decision engines to generate contextualized responses and
+    actions
+  tasks:
+  - step: Set up data ingestion pipeline
+    details: "Establish data connectors to ingest structured logs (user calendar,\
+      \ messaging), \nunstructured sensor data (wearables, smart home), and semi-structured\
+      \ trails \n(application usage, browsing history). Implement data cleaning and\
+      \ validation.\n"
+  - step: Develop context modeling components
+    details: 'Build temporal pattern recognition using techniques like time series
+      analysis
+
+      and sequence modeling. Implement multi-modal user profiling for preferences
+
+      and behavior modeling. Monitor system telemetry for resource tracking.
+
+      '
+  - step: Integrate context-driven decision engine
+    details: 'Design a real-time decision engine that synthesizes context insights
+      to
+
+      dynamically adapt responses (personalized recommendations, prioritized tasks)
+
+      and actions (automated routines, resource allocation).
+
+      '
+  success_criteria:
+  - Accurate context representation capturing >90% of key factors
+  - Context-driven adaptations improve user experience metrics by >20%
+  - End-to-end system operates with <100ms latency for real-time decisions
+  evaluation_metrics:
+  - metric: Context modeling accuracy
+    target: '>90%'
+  - metric: User experience improvement
+    target: '>20%'
+  - metric: Real-time decision latency
+    target: <100ms
+  difficulty: Intermediate
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: AGT_P1_002
+  requirements:
+    compute: 8 vCPUs, GPU accelerators
+    memory: 32 GB RAM
+    capabilities:
+    - data_ingestion
+    - time_series_analysis
+    - user_behavior_modeling
+    - decision_optimization
+  rewards:
+    xp: 500
+    capabilities:
+    - contextual_awareness
+    - dynamic_adaptation
+    resources:
+    - context_modeling_toolkit
+    - smart_environment_simulator
+  deliverables:
+  - Documented data ingestion and processing pipelines
+  - Context modeling and pattern recognition components
+  - Real-time decision engine with contextual adaptation rules
+  - Evaluation report on success criteria and model performance
+- id: AGT_CM_006
+  title: Context-Aware Digital Assistant
+  description: 'Design and implement a context-aware digital assistant system capable
+    of dynamically adapting its responses and recommendations based on real-time environmental
+    monitoring and predictive user modeling.
+
+    '
+  objectives:
+  - Build a multi-sensor data ingestion pipeline to collect and process diverse environmental
+    signals
+  - Develop temporal pattern recognition and user behavior modeling algorithms
+  - Integrate system telemetry monitoring and decision engines for dynamic adaptation
+  tasks:
+  - step: Set up data ingestion pipeline
+    details: Configure a scalable streaming architecture to ingest and process structured
+      logs (user activity, calendar events), unstructured sensor data (IoT devices,
+      wearables), and semi-structured trails (application usage patterns). Implement
+      data cleaning and validation mechanisms.
+  - step: Implement temporal pattern analysis
+    details: Apply time series analysis, sequence modeling, and other pattern recognition
+      techniques to identify temporal patterns in user behaviors, system resource
+      utilization, and contextual factors like time of day, location, etc.
+  - step: Develop user behavior models
+    details: Build multi-modal user profiles that capture preferences, habits, and
+      needs by synthesizing data streams like user interactions, biometrics, and contextual
+      metadata. Employ machine learning techniques like collaborative filtering and
+      matrix factorization.
+  - step: Monitor system telemetry
+    details: Continuously track system health, performance, and resource utilization
+      metrics across hardware components and application layers. Integrate real-time
+      anomaly detection and forecasting models.
+  - step: Build decision engines
+    details: Construct rule engines and optimization solvers that can dynamically
+      adjust the assistant's responses, priorities, and resource allocations based
+      on the consolidated environmental context gathered from previous components.
+  success_criteria:
+  - User satisfaction scores exceed 85% in simulated scenarios across diverse contexts
+  - System performance meets low-latency (<100ms) and high-throughput (>10K events/sec)
+    targets
+  - Measurable productivity gains of 20%+ for target user personas compared to non-adaptive
+    assistants
+  evaluation_metrics:
+  - metric: User experience (UX) feedback
+    target: Average rating >= 4.5/5
+  - metric: Context adaptation accuracy
+    target: F1 score >= 0.9
+  - metric: Inference latency
+    target: p99 < 50ms
+  difficulty: Advanced
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: AGT_P1_002
+  requirements:
+    compute: High-performance stream processing cluster
+    memory: Minimum 64GB RAM
+    capabilities:
+    - Data ingestion
+    - Streaming analytics
+    - Time series analysis
+    - Machine learning ops
+    - Complex event processing
+  rewards:
+    xp: 1200
+    capabilities:
+    - Environmental monitoring
+    - Context modeling
+    - Dynamic adaptation
+    resources:
+    - Temporal pattern library
+    - Contextual AI benchmark suite
+  deliverables:
+  - Documented system architecture and data pipelines
+  - Trained context models and pattern libraries
+  - Integrated decision engine with optimization solvers
+  - End-to-end functionality demo on reference use cases

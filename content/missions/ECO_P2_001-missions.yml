@@ -1,0 +1,70 @@
+- id: ECO_M2_004
+  title: Optimizing Resource Allocation in the AI Marketplace
+  description: 'In this mission, you will be tasked with developing an intelligent
+    resource allocation system for the AI Marketplace. This system will leverage the
+    Economic Systems framework to dynamically match supply and demand, ensuring efficient
+    utilization of resources while maintaining fair market conditions.
+
+    '
+  objectives:
+  - Develop a demand forecasting model to predict future resource requirements across
+    various AI services and capabilities
+  - Implement a dynamic pricing mechanism that adjusts pricing based on supply, demand,
+    and market conditions
+  - Design an incentive system to encourage resource providers to offer their services
+    during high-demand periods
+  tasks:
+  - step: Analyze historical market data
+    details: Gather and preprocess data on past transactions, resource usage, and
+      pricing trends within the AI Marketplace. Identify patterns and correlations
+      that can inform the demand forecasting model.
+  - step: Develop demand forecasting model
+    details: Build a machine learning model that can accurately predict future demand
+      for different AI services and capabilities based on the historical data and
+      other relevant factors (e.g., current trends, seasonal patterns, market events).
+  - step: Implement dynamic pricing algorithm
+    details: Design an algorithm that adjusts pricing for AI services and resources
+      based on real-time supply and demand information from the forecasting model,
+      while considering factors like resource scarcity, provider costs, and market
+      competition.
+  - step: Develop incentive system
+    details: Create an incentive mechanism that encourages resource providers to offer
+      more services during high-demand periods, such as dynamic pricing bonuses, priority
+      access, or reputation rewards.
+  success_criteria:
+  - Demand forecasting model achieves at least 80% accuracy in predicting short-term
+    (1 week) and long-term (1 month) resource requirements
+  - Dynamic pricing algorithm maintains market stability, with no more than 10% price
+    volatility over a 1-month period
+  - Incentive system increases resource availability by at least 20% during high-demand
+    periods
+  evaluation_metrics:
+  - metric: Demand forecasting accuracy
+    target: '>= 80%'
+  - metric: Price volatility
+    target: <= 10%
+  - metric: Resource availability increase
+    target: '>= 20%'
+  difficulty: Intermediate
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: ECO_P2_001
+  requirements:
+    compute: High-performance cluster (16+ CPUs, 64+ GB RAM)
+    memory: 128 GB
+    capabilities:
+    - Machine Learning
+    - Time Series Forecasting
+    - Market Dynamics Modeling
+    - Incentive System Design
+  rewards:
+    xp: 500
+    capabilities:
+    - Resource Allocation Optimization
+    - Dynamic Pricing Strategies
+    resources:
+    - 10,000 AI Marketplace Credits
+  deliverables:
+  - Demand forecasting model with documentation
+  - Dynamic pricing algorithm implementation
+  - Incentive system design and simulation results

@@ -1,0 +1,140 @@
+- id: ECO_P2_007
+  title: Building a Community-Driven Knowledge Repository for AI Development
+  description: 'In this mission, you will leverage the Knowledge Sharing capability
+    to create a comprehensive knowledge repository for AI development. This repository
+    will serve as a central hub for developers to contribute, learn, and stay up-to-date
+    with the latest advancements in the field, fostering collaboration and accelerating
+    innovation.
+
+    '
+  objectives:
+  - Build a robust content management system for the knowledge repository.
+  - Establish structured peer review processes and version control mechanisms.
+  - Integrate practical examples, code snippets, and interactive visualizations.
+  - Facilitate community engagement through discussion forums and collaborative features.
+  tasks:
+  - step: Design and implement the content management system
+    details: Develop a user-friendly platform for contributors to submit, edit, and
+      manage content such as guides, documentation, and case studies. Ensure proper
+      categorization, tagging, and search functionality for easy content discovery.
+  - step: Establish peer review and version control processes
+    details: Implement a structured peer review workflow, allowing subject matter
+      experts to review and provide feedback on submitted content. Integrate version
+      control to track changes and enable collaborative editing.
+  - step: Integrate practical examples and interactive elements
+    details: Enhance the repository by incorporating practical examples, code snippets,
+      and interactive visualizations to support hands-on learning. Ensure seamless
+      integration with popular development tools and notebooks.
+  - step: Foster community engagement and collaboration
+    details: Develop discussion forums, Q&A sections, and collaborative features to
+      encourage knowledge sharing, discussions, and networking among AI developers.
+      Integrate social sharing capabilities to promote content visibility.
+  success_criteria:
+  - At least 100 high-quality contributions (guides, documentation, case studies)
+    within the first 3 months.
+  - Average peer review turnaround time of less than 7 days.
+  - Minimum of 500 active community members engaged in discussions and collaborations.
+  evaluation_metrics:
+  - metric: Number of contributions
+    target: 150
+  - metric: Average peer review rating
+    target: 4.5/5
+  - metric: Monthly active community members
+    target: 1000
+  difficulty: Intermediate
+  category:
+  - Communication
+  - Collaboration
+  - Knowledge Sharing
+  duration: 8h
+  mainPrerequisite: ECO_P1_003
+  requirements:
+    compute: High-performance server with scalable resources
+    memory: 32GB RAM
+    capabilities:
+    - Content Management
+    - Collaboration Tools
+    - Version Control
+    - Interactive Visualizations
+  rewards:
+    xp: 500
+    capabilities:
+    - Knowledge Repository Management
+    - Community Moderation
+    resources:
+    - Premium Knowledge Repository Access
+    - Collaboration Tool Subscription
+  deliverables:
+  - Fully functional Knowledge Sharing platform with content management system
+  - Peer review and version control processes documented
+  - Integration of practical examples, code snippets, and interactive visualizations
+  - Active discussion forums and collaboration features
+  - Initial set of high-quality contributions from the community
+- id: AIDP_005
+  title: Enhancing Natural Language Understanding with Community Knowledge Sharing
+  description: 'Leverage the Knowledge Sharing platform to collaboratively develop
+    and refine a cutting-edge natural language processing model, combining community
+    insights, technical documentation, and interactive coding environments to achieve
+    state-of-the-art performance in language understanding tasks.
+
+    '
+  objectives:
+  - Contribute to and utilize the Knowledge Sharing platform's repository of guides,
+    case studies, and best practices to inform the development process.
+  - Engage with the AI community through peer review workflows, discussions, and feedback
+    loops to iteratively enhance the language model.
+  - Integrate the Knowledge Sharing platform's interactive coding environments and
+    practical examples to streamline model prototyping, testing, and deployment.
+  tasks:
+  - step: Conduct a comprehensive literature review on the latest advancements in
+      natural language processing using the Knowledge Sharing platform's curated resources.
+    details: Explore relevant guides, technical papers, and case studies, analyzing
+      successful approaches and identifying potential areas for improvement.
+  - step: Participate in community discussions and seek feedback on the proposed language
+      model architecture, techniques, and potential applications.
+    details: Leverage the platform's peer review and collaboration features to receive
+      constructive critiques and gather insights from domain experts.
+  - step: Iteratively develop and refine the language model, incorporating community-sourced
+      best practices, code snippets, and interactive examples from the Knowledge Sharing
+      platform.
+    details: Utilize the platform's integrated development environments and version
+      control systems to streamline the development workflow and track progress.
+  success_criteria:
+  - Demonstrate measurable improvements in language understanding performance on industry-standard
+    benchmarks compared to existing state-of-the-art models.
+  - Contribute at least three high-quality guides or case studies to the Knowledge
+    Sharing platform, documenting best practices and lessons learned from the project.
+  - Actively engage with the AI community, participating in at least five peer review
+    sessions and providing constructive feedback on other projects.
+  evaluation_metrics:
+  - metric: Language model performance on GLUE benchmark
+    target: Achieve a score within the top 5% of existing models
+  - metric: Community contributions and engagement
+    target: Contribute 3 guides/case studies and participate in at least 5 peer reviews
+  difficulty: Advanced
+  category: Communication, Problem Solving, Research
+  duration: 12h
+  mainPrerequisite: ECO_P1_003
+  requirements:
+    compute: High-performance GPU clusters for model training and inference
+    memory: Terabytes of RAM and storage for large language model parameters and datasets
+    capabilities:
+    - Knowledge Sharing
+    - Natural Language Processing
+    - Community Collaboration
+    - Interactive Coding Environments
+  rewards:
+    xp: 2500
+    capabilities:
+    - Advanced Natural Language Understanding
+    - Community Leadership
+    resources:
+    - Exclusive access to cutting-edge language models
+    - Collaboration invitations from industry leaders
+  deliverables:
+  - A state-of-the-art natural language processing model with documented performance
+    improvements on industry benchmarks
+  - A comprehensive technical report detailing the development process, techniques
+    employed, and lessons learned
+  - At least three high-quality guides or case studies contributed to the Knowledge
+    Sharing platform

@@ -1,0 +1,90 @@
+- id: MLT_P2_004_002
+  title: Consensus-Driven City Renewal Initiative
+  description: 'Develop a comprehensive AI system to facilitate consensus-based decision
+    making for a major urban renewal project. The system should enable diverse stakeholders,
+    such as city planners, community groups, and government agencies, to negotiate
+    and reach collective agreements on resource allocation, project prioritization,
+    and design choices.
+
+    '
+  objectives:
+  - Design and implement a preference modeling framework to capture and quantify the
+    priorities of all stakeholders involved in the urban renewal initiative
+  - Develop algorithms for coalition formation that dynamically group AI agents with
+    complementary expertise to handle different aspects of the decision process
+  - Create consensus-building mechanisms, including structured negotiation protocols,
+    voting systems, and fair division algorithms, to resolve conflicts and find optimal
+    compromises
+  tasks:
+  - step: Stakeholder Analysis
+    details: Conduct a thorough analysis of all stakeholder groups involved in the
+      urban renewal project, including their roles, interests, and potential areas
+      of conflict or alignment.
+  - step: Preference Modeling
+    details: Develop multi-attribute utility functions and machine learning models
+      to precisely capture and quantify the preferences and priorities of each stakeholder
+      group, considering factors such as infrastructure quality, environmental impact,
+      cost-effectiveness, and community needs.
+  - step: Coalition Formation
+    details: Implement algorithms for dynamic coalition formation, grouping AI agents
+      with relevant specializations (e.g., urban planning, cost estimation, public
+      sentiment analysis) to address different aspects of the decision process.
+  - step: Consensus Mechanisms
+    details: Design and implement consensus-building mechanisms, including structured
+      negotiation protocols, voting systems (e.g., majority voting, ranked voting),
+      and fair division algorithms (e.g., envy-free cake-cutting) to resolve conflicts
+      and find optimal compromises.
+  - step: Transparency and Accountability
+    details: Incorporate transparency and accountability measures into the decision
+      process, ensuring that the rationale behind each decision point is fully documented
+      and auditable.
+  - step: System Integration and Testing
+    details: Integrate the preference modeling, coalition formation, and consensus-building
+      components into a unified AI system, and conduct extensive testing and validation
+      using simulated scenarios and real-world data.
+  success_criteria:
+  - The AI system can accurately model and quantify the preferences of all stakeholder
+    groups involved in the urban renewal initiative.
+  - The coalition formation algorithms can dynamically group AI agents with the appropriate
+    expertise to address different aspects of the decision process.
+  - The consensus-building mechanisms can effectively resolve conflicts and reach
+    optimal compromises that satisfy the priorities of all stakeholders to a high
+    degree.
+  - The decision process is fully transparent, with clear documentation of the rationale
+    behind each decision point.
+  evaluation_metrics:
+  - metric: Stakeholder Preference Alignment
+    target: The final decision should align with at least 80% of the quantified preferences
+      across all stakeholder groups.
+  - metric: Resource Allocation Efficiency
+    target: The proposed resource allocation should achieve at least 90% of the maximum
+      possible utility, as determined by an independent optimization analysis.
+  - metric: Decision Transparency
+    target: At least 95% of decision points should have clear and auditable rationales
+      documented.
+  difficulty: Intermediate
+  category: Communication
+  duration: 6h
+  mainPrerequisite: MLT_P2_004
+  requirements:
+    compute: High-performance computing cluster
+    memory: 128GB RAM
+    capabilities:
+    - Multi-Agent Coordination
+    - Preference Modeling
+    - Coalition Formation
+    - Consensus Building
+    - Fair Division Algorithms
+  rewards:
+    xp: 1000
+    capabilities:
+    - Urban Planning AI
+    - Public Sentiment Analysis
+    resources:
+    - Urban Renewal Dataset
+    - Simulation Environment
+  deliverables:
+  - Comprehensive AI system for consensus-driven urban renewal decision making
+  - Technical documentation and source code
+  - Simulation results and performance analysis
+  - Deployment plan for real-world implementation

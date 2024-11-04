@@ -21,7 +21,6 @@
     "@mui/material": "^5.13.0",
     "@stripe/react-stripe-js": "^2.8.1",
     "@stripe/stripe-js": "^4.9.0",
-    "@types/js-yaml": "^4.0.9",
     "dotenv": "^16.4.1",
     "framer-motion": "^11.11.10",
     "js-yaml": "^4.1.0",
@@ -31,15 +30,18 @@
     "react-dom": "^18.3.1",
     "react-json-pretty": "^2.2.0",
     "react-mermaid2": "^0.1.4",
-    "react-router-dom": "^6.27.0"
+    "react-router-dom": "^6.27.0",
+    "react-syntax-highlighter": "^15.6.1"
   },
   "devDependencies": {
     "@modyfi/vite-plugin-yaml": "^1.1.0",
     "@rollup/plugin-yaml": "^4.1.2",
+    "@types/js-yaml": "^4.0.9",
     "@types/markdown-it": "^13.0.7",
     "@types/node": "^22.8.5",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
+    "@types/react-syntax-highlighter": "^15.5.13",
     "@vitejs/plugin-react": "^4.0.0",
     "cross-env": "^7.0.3",
     "gray-matter": "^4.0.3",

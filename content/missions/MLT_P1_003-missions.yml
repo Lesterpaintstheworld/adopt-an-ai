@@ -1,0 +1,134 @@
+- id: SLCK_INT_001
+  title: Streamlining Acme Corp's Content Workflow
+  description: 'Leverage Slackbot''s natural language processing and workflow automation
+    capabilities to optimize Acme Corp''s content creation and marketing campaign
+    processes. Develop a system to extract content requirements from team conversations,
+    automate data gathering and content generation, and seamlessly integrate approval
+    workflows, reducing manual effort and turnaround time.
+
+    '
+  objectives:
+  - Accurately interpret content requests and requirements from team conversations
+    in designated Slack channels
+  - Automate data retrieval from multiple sources (internal databases, social media,
+    web APIs) based on extracted requirements
+  - Generate draft content (social media posts, email campaigns, etc.) using retrieved
+    data and predefined templates
+  - Initiate and manage approval workflows for generated content, tracking feedback
+    and revisions
+  tasks:
+  - step: Analyze historical Slack conversations to train intent recognition models
+    details: Collect and annotate a dataset of past conversations in the marketing
+      team's Slack channels, focusing on content creation and campaign requests. Use
+      this data to fine-tune an intent recognition model to accurately capture content
+      requirements.
+  - step: Develop data retrieval and content generation modules
+    details: Build modules to interface with relevant data sources (e.g., CRM, social
+      media APIs, web scrapers) and retrieve required data based on extracted intents.
+      Integrate content generation models to produce draft content using the retrieved
+      data and predefined templates.
+  - step: Implement approval workflow automation
+    details: Develop a system to initiate and manage approval workflows for generated
+      content. Automatically route drafts to designated approvers, track feedback
+      and revisions, and notify stakeholders upon approval or rejection.
+  success_criteria:
+  - Intent recognition accuracy >= 90% for content creation and campaign requests
+  - Automated data retrieval from at least 5 different sources with >= 95% accuracy
+  - Content generation quality score >= 4 (out of 5) based on human evaluation
+  - Approval workflow automation reducing turnaround time by >= 30%
+  evaluation_metrics:
+  - metric: Intent recognition F1-score
+    target: '>= 0.9'
+  - metric: Data retrieval accuracy
+    target: '>= 0.95'
+  - metric: Human-scored content quality (1-5)
+    target: '>= 4'
+  - metric: Reduction in content approval turnaround time
+    target: '>= 30%'
+  difficulty: Intermediate
+  category: Communication
+  duration: 6h
+  mainPrerequisite: MLT_P1_003
+  requirements:
+    compute: 8 CPU cores, 16 GB RAM
+    memory: 32 GB
+    capabilities:
+    - Natural Language Processing
+    - Intent Recognition
+    - Data Retrieval
+    - Content Generation
+    - Workflow Automation
+  rewards:
+    xp: 500
+    capabilities:
+    - Slack Integration
+    resources:
+    - Acme Corp Marketing Data Access
+  deliverables:
+  - Trained intent recognition model
+  - Data retrieval and content generation modules
+  - Approval workflow automation system
+  - System integration with Acme Corp's Slack workspace
+- id: MLT_P2_004
+  title: Slackbot Orchestrator - Task Automation Mastery
+  description: 'Put your Slack integration prowess to the test by developing a sophisticated
+    AI assistant to streamline workflows and automate tasks across various channels
+    and applications within a simulated corporate workspace.
+
+    '
+  objectives:
+  - Develop a contextual AI assistant capable of understanding and responding to natural
+    language conversations within Slack channels
+  - Implement intent recognition and mapping to predefined workflows for task automation
+  - Integrate the AI assistant with external applications and APIs to retrieve data
+    and execute actions
+  tasks:
+  - step: Set up a simulated Slack workspace environment
+    details: Configure a realistic Slack workspace with multiple channels representing
+      different teams and departments within a fictional company. Populate the channels
+      with sample conversations and project requirements.
+  - step: Develop a natural language processing (NLP) engine
+    details: Implement an NLP engine capable of accurately interpreting the context
+      and intent within Slack conversations. Utilize techniques like named entity
+      recognition, sentiment analysis, and intent classification.
+  - step: Build a workflow mapping and orchestration system
+    details: Create a system to map recognized intents to predefined workflows, which
+      can involve retrieving data from various sources, generating reports or content,
+      and executing actions across integrated applications and APIs.
+  success_criteria:
+  - The AI assistant accurately interprets at least 90% of sample conversations and
+    extracts the correct intents
+  - Mapped workflows are executed successfully with a 95% success rate, completing
+    requested tasks and actions
+  - The AI assistant maintains appropriate tone and communication style based on channel
+    context in at least 85% of responses
+  evaluation_metrics:
+  - metric: Intent recognition accuracy
+    target: '>= 90%'
+  - metric: Workflow execution success rate
+    target: '>= 95%'
+  - metric: Contextual communication quality
+    target: '>= 85%'
+  difficulty: Advanced
+  category: Communication
+  duration: 8h
+  mainPrerequisite: MLT_P1_003
+  requirements:
+    compute: High
+    memory: 16GB
+    capabilities:
+    - Natural Language Processing
+    - Workflow Automation
+    - Application Integration
+  rewards:
+    xp: 1000
+    capabilities:
+    - Slack Workspace Management
+    - Conversational AI
+    resources:
+    - Sample Slack Conversations Dataset
+    - Corporate Workflow Templates
+  deliverables:
+  - Functioning Slack AI assistant with NLP and workflow orchestration capabilities
+  - Documentation of implemented algorithms and systems
+  - Performance evaluation report with success criteria and metric results

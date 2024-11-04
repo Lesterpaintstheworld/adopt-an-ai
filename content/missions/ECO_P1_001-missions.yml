@@ -1,0 +1,140 @@
+- id: ECO_C1_002
+  title: Fostering Community Growth and Collaboration
+  description: 'Contribute to the growth and vitality of the AI Nexus community by
+    actively participating in forums, sharing resources,
+
+    and collaborating on a project with fellow developers.
+
+    '
+  objectives:
+  - Foster meaningful connections within the AI Nexus community.
+  - Contribute to the resource library by sharing code, datasets, or documentation.
+  - Collaborate with other developers on an AI project, leveraging the community's
+    collective knowledge.
+  tasks:
+  - step: Engage in forum discussions
+    details: Participate in at least three forum threads, offering insights, asking
+      questions, or providing solutions to fellow developers' challenges.
+  - step: Contribute to the resource library
+    details: Upload a project you've worked on, including code, datasets, or documentation,
+      to the AI Nexus resource library. Ensure it is well-documented and tagged appropriately.
+  - step: Join a collaborative project
+    details: Identify an AI project hosted on the AI Nexus platform that aligns with
+      your interests and skillset. Reach out to the project lead and offer your assistance,
+      leveraging the community's expertise and resources.
+  success_criteria:
+  - Actively participate in at least three forum discussions, receiving positive feedback
+    from fellow community members.
+  - Successfully contribute a well-documented project to the resource library, adhering
+    to the platform's guidelines.
+  - Join a collaborative project and contribute meaningful work, demonstrating effective
+    communication and teamwork.
+  evaluation_metrics:
+  - metric: Forum engagement
+    target: Receive a minimum of 10 upvotes or positive reactions across your forum
+      contributions.
+  - metric: Resource library contribution
+    target: Your contributed project receives at least 5 stars or positive ratings
+      from other community members.
+  - metric: Collaborative project contribution
+    target: Receive positive feedback from the project lead, acknowledging your valuable
+      contributions.
+  difficulty: Intermediate
+  category: Communication
+  duration: 8h
+  mainPrerequisite: ECO_P1_001
+  requirements:
+    compute: Access to a personal computer or laptop
+    memory: 8GB RAM
+    capabilities:
+    - Community Access
+    - Basic Programming Skills
+  rewards:
+    xp: 500
+    capabilities:
+    - Collaboration
+    - Resource Sharing
+    resources:
+    - Access to exclusive community events
+    - Discounts on AI development tools and services
+  deliverables:
+  - Screenshots or links to your forum contributions
+  - Link to your contributed project in the resource library
+  - Documentation or code samples showcasing your contributions to the collaborative
+    project
+- id: ECO_M2_007
+  title: AI Nexus - Driving Collaborative Innovation
+  description: 'Join the vibrant AI Nexus community and take part in a hackathon focused
+    on developing a groundbreaking AI solution to tackle an environmental challenge.
+    Leverage the collective expertise and resources of the community to ideate, prototype,
+    and refine your solution.
+
+    '
+  objectives:
+  - Ideate and propose a novel AI solution to an environmental challenge
+  - Collaborate effectively with other community members to refine and enhance the
+    solution
+  - Develop a functional prototype of the proposed AI solution
+  tasks:
+  - step: Participate in the AI Nexus community forums and identify an environmental
+      challenge to tackle
+    details: Browse the dedicated forums, attend virtual events, and engage with other
+      community members to understand current environmental issues and potential areas
+      for AI-driven solutions.
+  - step: Ideate and propose a novel AI solution in the hackathon ideation forum
+    details: Leverage the community's collective knowledge and resources to develop
+      a detailed proposal for an AI solution, including its technical specifications,
+      potential impact, and implementation strategies.
+  - step: Form a collaborative team and refine the proposed solution
+    details: Use the AI Nexus collaboration tools to assemble a team of developers,
+      researchers, and subject matter experts. Refine the proposed solution through
+      iterative feedback and discussions within the team and the broader community.
+  - step: Develop a functional prototype of the AI solution
+    details: Utilizing the shared code repositories, datasets, and documentation available
+      in the AI Nexus resource library, build and test a functional prototype of the
+      proposed AI solution.
+  success_criteria:
+  - Proposal for a novel AI solution to an environmental challenge, vetted and approved
+    by the community
+  - Effective collaboration with at least 5 other community members, as evidenced
+    by project documentation and peer reviews
+  - Fully functional prototype of the proposed AI solution, demonstrating its core
+    capabilities and potential impact
+  evaluation_metrics:
+  - metric: Novelty and potential impact of the proposed AI solution
+    target: Top 10% of submissions, as evaluated by a panel of subject matter experts
+  - metric: Degree of collaboration and community engagement
+    target: Minimum of 20 substantive interactions with other community members, as
+      tracked by the platform's collaboration tools
+  difficulty: Advanced
+  category:
+  - Problem Solving
+  - Creativity
+  - Communication
+  duration: 16h
+  mainPrerequisite: ECO_P1_001
+  requirements:
+    compute: High-performance GPU cluster for training and testing AI models
+    memory: Minimum 64GB RAM per compute node
+    capabilities:
+    - Python
+    - TensorFlow
+    - PyTorch
+    - Collaborative Tools
+    - Version Control
+  rewards:
+    xp: 1000
+    capabilities:
+    - Environmental AI
+    - AI for Sustainability
+    - Community Leadership
+    resources:
+    - Access to AI Nexus advanced workshops
+    - priority access to community events
+  deliverables:
+  - Detailed proposal for the AI solution, including technical specifications and
+    implementation strategies
+  - Functional prototype of the AI solution, with accompanying documentation and test
+    results
+  - Presentation materials and recorded demo of the AI solution, suitable for sharing
+    with the broader community

@@ -1,0 +1,153 @@
+- id: AICO_002
+  title: Coordinating a Sustainable Urban Farming Coalition
+  description: 'In this mission, you will design and implement a coalition of AI agents
+    to optimize urban farming practices in a densely populated city. The coalition
+    will bring together specialized agents with diverse expertise to collaboratively
+    address the challenges of sustainable food production, resource management, and
+    logistics.
+
+    '
+  objectives:
+  - Develop a self-organizing coalition of AI agents with complementary roles and
+    responsibilities related to urban farming
+  - Optimize resource allocation, crop yields, and distribution channels through agent
+    collaboration
+  - Reduce the environmental impact of urban farming operations and promote sustainable
+    practices
+  tasks:
+  - step: Identify key roles and specializations required for urban farming optimization
+    details: Analyze the various aspects of urban farming, such as crop selection,
+      soil management, water usage, pest control, harvesting, and distribution. Define
+      the specific roles and expertise needed to address each aspect effectively.
+  - step: Design and implement a coalition formation framework
+    details: Develop algorithms and protocols for agents to autonomously identify
+      collaboration opportunities based on their capabilities and task requirements.
+      Implement semantic matching techniques to facilitate efficient coalition formation.
+  - step: Develop coordination and communication mechanisms
+    details: Implement coordination protocols, task allocation strategies, and communication
+      channels to enable effective collaboration among coalition members. Explore
+      techniques like distributed decision-making, negotiation, and consensus-building.
+  - step: Integrate specialized agents and subject matter experts
+    details: Incorporate existing AI models or develop new agents with specialized
+      knowledge and capabilities related to urban farming, such as crop growth models,
+      soil analysis, climate data analysis, and logistics optimization.
+  - step: Deploy and evaluate the coalition in a simulated urban environment
+    details: Set up a realistic simulation environment representing a densely populated
+      city with diverse urban farming locations. Deploy the coalition and assess its
+      performance in optimizing resource allocation, crop yields, and distribution
+      channels.
+  success_criteria:
+  - Achieve at least a 20% increase in crop yields compared to traditional urban farming
+    methods
+  - Reduce water usage by at least 15% while maintaining or improving crop quality
+  - Optimize distribution channels, reducing transportation costs by at least 10%
+  evaluation_metrics:
+  - metric: Crop Yield Improvement
+    target: '>= 20%'
+  - metric: Water Usage Reduction
+    target: '>= 15%'
+  - metric: Transportation Cost Reduction
+    target: '>= 10%'
+  difficulty: Intermediate
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: MLT_P2_001
+  requirements:
+    compute: High-performance computing cluster
+    memory: 128 GB RAM
+    capabilities:
+    - Multi-agent Systems
+    - Coalition Formation
+    - Distributed Decision Making
+    - Semantic Matching
+    - Urban Farming Knowledge
+  rewards:
+    xp: 1000
+    capabilities:
+    - Agent Coalition Coordination
+    - Sustainable Urban Farming Optimization
+    resources:
+    - Urban Farming Simulation Environment
+    - Crop Growth Models
+    - Logistics Optimization Algorithms
+  deliverables:
+  - Functional agent coalition system for urban farming optimization
+  - Detailed report on coalition formation, coordination mechanisms, and performance
+    evaluation
+  - Simulation results and analysis demonstrating achievement of success criteria
+- id: AGT_CLT_003
+  title: Coordinating Disaster Response Coalitions
+  description: 'Develop a framework for autonomous agent coalitions to efficiently
+    coordinate disaster response efforts, optimizing resource allocation and task
+    distribution across diverse teams of specialized agents for effective crisis management.
+
+    '
+  objectives:
+  - Establish a self-organizing mechanism for agents to form coalitions based on their
+    capabilities and the disaster scenario
+  - Implement distributed decision-making protocols for task allocation and resource
+    sharing within coalitions
+  - Develop a coordination mechanism for coalitions to synchronize actions and leverage
+    complementary strengths
+  tasks:
+  - step: Analyze historical disaster response data and identify key tasks, roles,
+      and resource requirements
+    details: Collect and process data from various disaster scenarios, such as earthquakes,
+      hurricanes, and wildfires, to understand the common tasks involved, the specialized
+      roles required, and the resources needed for effective response.
+  - step: Design a coalition formation framework based on semantic capability matching
+      and utility estimation
+    details: Create an ontology-based capability model to semantically match agent
+      capabilities to task requirements. Implement game-theoretic algorithms to estimate
+      the potential utility of forming coalitions based on their combined capabilities
+      and the disaster scenario.
+  - step: Develop a distributed task allocation protocol for efficient resource sharing
+      within coalitions
+    details: Implement a decentralized task allocation mechanism that enables agents
+      within a coalition to dynamically distribute tasks based on their expertise
+      and resource availability, ensuring optimal utilization of collective resources.
+  - step: Establish coordination mechanisms for synchronized action and collective
+      decision-making
+    details: Develop communication protocols and consensus-building algorithms that
+      allow coalition members to coordinate their actions, share information, and
+      make collective decisions in real-time, leveraging their complementary strengths.
+  success_criteria:
+  - Efficient coalition formation with a minimum of 80% accuracy in capability matching
+    and utility estimation
+  - Task allocation and resource sharing with less than 10% redundancy or resource
+    contention
+  - Synchronized action and collective decision-making with a response time under
+    5 minutes for critical scenarios
+  evaluation_metrics:
+  - metric: Coalition formation accuracy
+    target: '>= 80%'
+  - metric: Resource utilization efficiency
+    target: '>= 90%'
+  - metric: Response time for critical scenarios
+    target: < 5 minutes
+  difficulty: Advanced
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: MLT_P2_001
+  requirements:
+    compute: High-performance computing cluster
+    memory: 64GB RAM
+    capabilities:
+    - Multi-agent coordination
+    - Distributed decision-making
+    - Semantic reasoning
+    - Game theory
+  rewards:
+    xp: 1000
+    capabilities:
+    - Autonomous coalition formation
+    - Coordinated disaster response
+    resources:
+    - Access to disaster response data repository
+    - Simulation environment for testing
+  deliverables:
+  - Coalition formation framework with capability matching and utility estimation
+    modules
+  - Distributed task allocation protocol with resource sharing mechanisms
+  - Coordination protocols for synchronized action and collective decision-making
+  - Technical documentation and evaluation reports

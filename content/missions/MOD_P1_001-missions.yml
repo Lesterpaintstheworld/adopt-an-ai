@@ -1,0 +1,64 @@
+- id: GPT4_INT_001
+  title: GPT-4 Integrated Virtual Assistant
+  description: 'Build a scalable and responsive virtual assistant system that integrates
+    GPT-4''s language understanding and generation capabilities to provide human-like
+    conversational support across various domains.
+
+    '
+  objectives:
+  - Develop a reliable and efficient service for GPT-4 model inference
+  - Integrate GPT-4 into a conversational AI system to handle complex queries
+  - Enable the AI system to generate coherent and contextually relevant responses
+  tasks:
+  - step: Set up the infrastructure for GPT-4 model deployment
+    details: Configure a Kubernetes cluster for load balancing, auto-scaling, and
+      GPU acceleration using TensorRT. Optimize the GPT-4 model for efficient inference
+      through quantization and pruning.
+  - step: Develop the GPT-4 inference service
+    details: Build a scalable and reliable service for GPT-4 model inference, implementing
+      caching, response deduplication, and other performance optimizations using technologies
+      like Redis.
+  - step: Integrate GPT-4 into the conversational AI system
+    details: Develop a natural language processing pipeline that leverages GPT-4's
+      language understanding and generation capabilities to handle complex queries
+      across various domains, generating human-like, contextually relevant responses.
+  success_criteria:
+  - The virtual assistant can engage in natural conversations across at least 10 different
+    domains
+  - The system can accurately answer complex queries with a precision of at least
+    90%
+  - Response generation latency is below 500ms for 95% of requests
+  evaluation_metrics:
+  - metric: Conversational fluency
+    target: Average human rating of at least 4.5/5 for response coherence and naturalness
+  - metric: Query accuracy
+    target: At least 90% precision on a benchmark dataset of complex queries
+  - metric: Response latency
+    target: 95th percentile latency below 500ms for inference requests
+  difficulty: Advanced
+  category: Communication
+  duration: 8h
+  mainPrerequisite: MOD_P1_001
+  requirements:
+    compute: GPU cluster with at least 8x NVIDIA A100 GPUs
+    memory: 256GB RAM
+    capabilities:
+    - GPT-4 Integration
+    - Kubernetes
+    - TensorRT
+    - Redis
+    - Natural Language Processing
+  rewards:
+    xp: 2500
+    capabilities:
+    - Conversational AI
+    - Language Generation
+    - Domain Adaptation
+    resources:
+    - Benchmark Dataset
+    - Query Logs
+    - User Feedback
+  deliverables:
+  - Deployment-ready virtual assistant system with GPT-4 integration
+  - Performance benchmarks and evaluation reports
+  - Documentation and training materials for system maintenance and expansion

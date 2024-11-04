@@ -1,0 +1,151 @@
+- id: AGT_M2_021
+  title: Dynamic Resource Optimization Challenge
+  description: 'Your task is to develop an AI system capable of dynamically scaling
+    resources to handle variable workloads efficiently. You will be given a set of
+    simulated tasks with fluctuating resource requirements, and your system must allocate
+    and deallocate resources in real-time to meet demand while minimizing costs.
+
+    '
+  objectives:
+  - Develop an intelligent resource management system that can dynamically allocate
+    and deallocate computational resources based on task demands.
+  - Implement advanced forecasting techniques to anticipate future resource needs
+    and preemptively provision resources.
+  - Optimize resource utilization and minimize costs by efficiently scaling resources
+    up or down as needed.
+  tasks:
+  - step: Analyze the provided dataset of simulated tasks and their resource requirements
+      over time.
+    details: Study the patterns and characteristics of the workloads to identify potential
+      bottlenecks and resource contention scenarios.
+  - step: Design and implement a Resource Monitor component to track resource utilization
+      across the simulated compute cluster in real-time.
+    details: Incorporate machine learning algorithms to detect anomalies and usage
+      patterns.
+  - step: Develop a Demand Forecaster component using time-series analysis, regression
+      techniques, and deep learning models to predict future resource needs accurately.
+    details: The Forecaster should consider historical data, current workloads, and
+      any relevant external factors.
+  - step: Implement a Resource Broker component to manage resource allocation and
+      deallocation based on the Forecaster's predictions.
+    details: Incorporate multi-dimensional priority-based fair scheduling and preemptive
+      resource warming to ensure tasks always have the resources they need.
+  success_criteria:
+  - The system can accurately predict resource requirements for at least 90% of the
+    simulated tasks within a 10% margin of error.
+  - Resource utilization is optimized, with no more than 5% of allocated resources
+    remaining idle during peak workloads.
+  - The total cost of resource allocation is minimized, with at least a 20% reduction
+    compared to a static resource allocation strategy.
+  evaluation_metrics:
+  - metric: Forecasting Accuracy
+    target: '>= 90%'
+  - metric: Resource Utilization Efficiency
+    target: '>= 95%'
+  - metric: Cost Reduction vs. Static Allocation
+    target: '>= 20%'
+  difficulty: Intermediate
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: AGT_P1_004
+  requirements:
+    compute: High-performance compute cluster with dynamic scaling capabilities (e.g.,
+      cloud-based or on-premises)
+    memory: Sufficient memory to handle resource-intensive simulations and forecasting
+      models
+    capabilities:
+    - Advanced Machine Learning
+    - Time-Series Analysis
+    - Resource Monitoring
+    - Forecasting and Optimization
+  rewards:
+    xp: 1500
+    capabilities:
+    - Dynamic Resource Management
+    - Intelligent Workload Scheduling
+    resources:
+    - Compute Credits
+    - Storage Allocation
+  deliverables:
+  - Documented code for the Resource Monitor, Demand Forecaster, and Resource Broker
+    components.
+  - Performance reports demonstrating forecasting accuracy, resource utilization efficiency,
+    and cost savings.
+  - Presentation or report detailing the system design, implementation details, and
+    key findings.
+- id: DYN_RES_MGMT_003
+  title: Dynamic Resource Orchestration for AI Workload Optimization
+  description: 'In this mission, you will develop and deploy an advanced resource
+    management system capable of dynamically allocating and orchestrating computational
+    resources across a distributed AI cluster. The system will leverage machine learning
+    to forecast workload demands, intelligently provision resources from cloud providers,
+    and optimize resource utilization through priority-based scheduling and preemptive
+    resource warming.
+
+    '
+  objectives:
+  - Implement a distributed resource monitoring and forecasting system to predict
+    future workload demands with high accuracy.
+  - Develop an intelligent resource broker to automatically scale resources up or
+    down based on predicted demands.
+  - Integrate preemptive resource warming and priority-based scheduling for efficient
+    task execution.
+  - Deploy and test the system on a live AI cluster, demonstrating its ability to
+    handle variable workloads cost-effectively.
+  tasks:
+  - step: Design and implement a distributed resource monitoring system
+    details: Develop a network of agents that can track resource utilization (CPU,
+      memory, storage, network) across all nodes in the AI cluster in real-time. Integrate
+      anomaly detection algorithms to identify unusual usage patterns.
+  - step: Build a demand forecasting system using machine learning
+    details: Develop an ensemble of models combining time-series analysis, regression
+      techniques, and deep learning to accurately predict future resource requirements
+      based on historical workload patterns and real-time usage data.
+  - step: Develop an intelligent resource broker
+    details: Implement a resource broker that can automatically provision or release
+      resources from cloud providers based on predicted demands. Integrate priority-based
+      fair scheduling to ensure critical tasks have sufficient resources during peak
+      loads. Enable preemptive resource warming to minimize task startup delays.
+  success_criteria:
+  - The system can forecast resource demands with at least 90% accuracy over various
+    time horizons (1 hour, 6 hours, 24 hours).
+  - The resource broker can automatically scale resources up or down within 5 minutes
+    of a predicted demand change.
+  - During peak loads, high-priority tasks experience less than 10% performance degradation
+    compared to dedicated resource allocation.
+  evaluation_metrics:
+  - metric: Forecasting accuracy
+    target: '>= 90%'
+  - metric: Resource scaling time
+    target: < 5 minutes
+  - metric: High-priority task performance degradation
+    target: < 10%
+  difficulty: Advanced
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: AGT_P1_004
+  requirements:
+    compute: High (cloud-based cluster with auto-scaling capabilities)
+    memory: High (large distributed memory for training ML models)
+    capabilities:
+    - Resource Monitoring
+    - Anomaly Detection
+    - Time-Series Forecasting
+    - Regression Modeling
+    - Deep Learning
+    - Cloud Resource Management
+    - Priority-Based Scheduling
+  rewards:
+    xp: 2500
+    capabilities:
+    - Dynamic Resource Allocation
+    - Workload Forecasting
+    - Intelligent Resource Brokering
+    resources:
+    - Cloud Computing Credits
+    - Distributed Computing Framework License
+  deliverables:
+  - Documented system architecture and design
+  - Source code for resource monitoring, forecasting, and brokering components
+  - Deployment scripts and configuration for the live AI cluster
+  - Performance evaluation report with benchmarking results

@@ -1,0 +1,140 @@
+- id: MOD_INT_005
+  title: Intelligent Knowledge Retrieval and Synthesis
+  description: 'Develop an advanced AI system capable of efficiently storing, retrieving,
+    and organizing vast amounts of information from diverse sources, enabling rapid
+    knowledge synthesis and comprehensive decision-making.
+
+    '
+  objectives:
+  - Implement a hierarchical memory structure for tiered data storage and retrieval
+  - Develop a context-aware information retrieval mechanism
+  - Integrate an unsupervised information organization engine
+  tasks:
+  - step: Construct a scalable hierarchical memory architecture
+    details: Design and implement a memory structure with multiple tiers, ranging
+      from fast but limited capacity for frequently accessed data to slower but larger
+      capacity tiers for archival storage. Develop efficient algorithms for data movement
+      between tiers based on access patterns.
+  - step: Build a context-aware retrieval engine
+    details: Implement natural language processing techniques to analyze queries and
+      conversational contexts, identifying relevant entities, topics, and intents.
+      Develop semantic matching algorithms to surface the most pertinent information
+      from the knowledge base based on the current context.
+  - step: Integrate an automatic information organization module
+    details: Leverage unsupervised learning techniques like clustering, topic modeling,
+      and entity recognition to continuously categorize and structure the knowledge
+      base. Implement algorithms to detect new topics, concepts, and relationships,
+      and update the organization accordingly.
+  success_criteria:
+  - Achieve accurate and context-relevant information retrieval with precision >=
+    0.85 and recall >= 0.90 on a diverse set of queries and scenarios
+  - Demonstrate efficient memory utilization, with frequently accessed data consistently
+    retrieved from faster tiers
+  - Maintain a highly organized and coherent knowledge base structure, with new information
+    automatically integrated and categorized
+  evaluation_metrics:
+  - metric: Information Retrieval Accuracy
+    target: Precision >= 0.85, Recall >= 0.90
+  - metric: Memory Efficiency
+    target: '>= 80% of frequently accessed data retrieved from fastest tier'
+  - metric: Knowledge Base Organization Quality
+    target: '>= 90% of new information correctly categorized'
+  difficulty: Intermediate
+  category: Problem Solving
+  duration: 24h
+  mainPrerequisite: MOD_P2_002
+  requirements:
+    compute: High-performance GPU cluster
+    memory: Large-capacity distributed memory system
+    capabilities:
+    - Advanced NLP
+    - Unsupervised Learning
+    - Knowledge Representation
+  rewards:
+    xp: 2500
+    capabilities:
+    - Context-Aware Retrieval
+    - Automatic Knowledge Organization
+    resources:
+    - Access to large-scale knowledge repositories
+  deliverables:
+  - Deployable AI system with hierarchical memory, context-aware retrieval, and automatic
+    organization
+  - Comprehensive documentation and evaluation reports
+  - Presentation showcasing system capabilities and performance
+- id: MSNP2_003
+  title: Optimizing Information Flow in a Global Health Crisis
+  description: 'In this mission, you will leverage advanced memory structures to streamline
+    the flow of critical information during a simulated global health emergency. Your
+    task is to develop an AI system that can rapidly retrieve and organize relevant
+    data from diverse sources, enabling more informed decision-making and coordinated
+    response efforts.
+
+    '
+  objectives:
+  - Implement a hierarchical memory system capable of storing and prioritizing vast
+    amounts of health-related data.
+  - Develop a context-aware retrieval engine to surface relevant information based
+    on evolving crisis scenarios.
+  - Design an automatic information organization system to continuously structure
+    and categorize incoming data.
+  tasks:
+  - step: Ingest and preprocess data from various sources
+    details: Acquire and clean data from international health organizations, research
+      institutions, news outlets, and social media, covering topics such as disease
+      spread, treatment protocols, supply chain logistics, and public sentiment.
+  - step: Construct a hierarchical memory architecture
+    details: Build a tiered memory system with faster tiers for frequently accessed
+      data and larger, slower tiers for archival storage. Implement caching mechanisms
+      and data sharding strategies for optimal performance.
+  - step: Develop a context-aware retrieval engine
+    details: Utilize natural language processing and knowledge extraction techniques
+      to interpret queries and contexts, mapping them to relevant information in the
+      memory system. Implement semantic search, entity recognition, and intent understanding
+      capabilities.
+  - step: Implement an information organization engine
+    details: Employ unsupervised clustering, topic modeling, and categorization algorithms
+      to continuously structure and maintain the knowledge base. Ensure information
+      is organized in a coherent and intuitive manner, facilitating knowledge synthesis
+      and insight generation.
+  success_criteria:
+  - Retrieve relevant information with an accuracy of 90% or higher across diverse
+    crisis scenarios.
+  - Organize and structure data with a coherence score of 85% or higher, as evaluated
+    by subject matter experts.
+  - Process and respond to information requests within 500ms on average, with a 99th
+    percentile latency of 2 seconds or less.
+  evaluation_metrics:
+  - metric: Information Retrieval Accuracy
+    target: '>= 90%'
+  - metric: Data Organization Coherence
+    target: '>= 85%'
+  - metric: Average Response Time
+    target: <= 500ms
+  - metric: 99th Percentile Latency
+    target: <= 2s
+  difficulty: Advanced
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: MOD_P2_002
+  requirements:
+    compute: High-performance GPU clusters or TPU pods
+    memory: Terabytes of storage capacity with tiered access speeds
+    capabilities:
+    - Natural Language Processing
+    - Knowledge Representation
+    - Unsupervised Learning
+    - Data Engineering
+  rewards:
+    xp: 2500
+    capabilities:
+    - Advanced Memory Management
+    - Real-time Information Retrieval
+    resources:
+    - Simulated Crisis Data
+    - Health Domain Knowledge Base
+  deliverables:
+  - Hierarchical memory system with context-aware retrieval and automatic information
+    organization components.
+  - Evaluation report demonstrating system performance across defined metrics.
+  - Deployment plan for integrating the system into existing crisis response infrastructure.

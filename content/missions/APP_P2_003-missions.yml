@@ -1,0 +1,145 @@
+- id: BIO_RS_002
+  title: AI-Driven Cancer Therapy Optimization
+  description: 'Leverage BioCure''s advanced AI research system to analyze a vast
+    dataset of cancer patient data, published literature, and experimental results.
+    Autonomously identify patterns, generate novel hypotheses, and design optimized
+    treatment protocols using a combination of targeted therapies to enhance patient
+    outcomes.
+
+    '
+  objectives:
+  - Ingest and integrate large datasets from various sources related to cancer research
+  - Utilize machine learning techniques to identify patterns and correlations within
+    the data
+  - Generate innovative hypotheses for optimizing cancer treatment protocols
+  - Design comprehensive experimental plans to test proposed hypotheses
+  tasks:
+  - step: Data Integration
+    details: Consolidate data from BioCure's internal databases, public repositories,
+      and partner institutions, including patient medical records, genomic profiles,
+      clinical trial results, and published research papers.
+  - step: Pattern Discovery
+    details: Apply advanced machine learning algorithms to analyze the integrated
+      dataset, uncovering hidden patterns, correlations, and potential causal relationships
+      relevant to cancer treatment and patient outcomes.
+  - step: Hypothesis Generation
+    details: Leverage the AI system's knowledge graph and reasoning capabilities to
+      autonomously formulate novel hypotheses for optimizing cancer treatment protocols,
+      considering factors such as genetic mutations, metabolic pathways, and drug
+      combinations.
+  - step: Experiment Design
+    details: Utilize optimization techniques and resource allocation algorithms to
+      design comprehensive experimental plans for rigorously testing the generated
+      hypotheses, taking into account available lab equipment, regulatory guidelines,
+      and ethical considerations.
+  success_criteria:
+  - Successful integration of at least 10 TB of data from diverse sources
+  - Identification of at least 3 previously unknown patterns or correlations within
+    the data
+  - Generation of at least 2 well-supported, innovative hypotheses for optimizing
+    cancer treatment
+  - Design of at least 1 comprehensive experimental plan for testing a proposed hypothesis
+  evaluation_metrics:
+  - metric: Data Integration Completeness
+    target: 95% of relevant data sources successfully integrated
+  - metric: Pattern Discovery Significance
+    target: At least 2 identified patterns with a statistical significance of p <
+      0.01
+  - metric: Hypothesis Novelty
+    target: At least 1 hypothesis with a novelty score of 4 or higher (on a scale
+      of 1-5)
+  - metric: Experiment Design Efficiency
+    target: Proposed experimental plan utilizes 80% or more of available resources
+  difficulty: Intermediate
+  category: Research
+  duration: 8h
+  mainPrerequisite: APP_P2_003
+  requirements:
+    compute: High-performance computing cluster with at least 500 TFLOPS
+    memory: 2 PB of high-speed storage
+    capabilities:
+    - Advanced Machine Learning
+    - Knowledge Representation and Reasoning
+    - Experimental Design Optimization
+  rewards:
+    xp: 1200
+    capabilities:
+    - Drug Synergy Modeling
+    - Clinical Trial Simulation
+    resources:
+    - 100 BioCure Research Credits
+    - Access to proprietary cancer dataset
+  deliverables:
+  - Report detailing identified patterns, generated hypotheses, and proposed experimental
+    plans
+  - Annotated dataset with highlighted insights and patterns
+  - Executable code for hypothesis generation and experiment design algorithms
+- id: APP_P2_003
+  title: Accelerating Cancer Drug Discovery with AI-Driven Research Systems
+  description: 'In this mission, you will leverage BioCure''s cutting-edge AI-driven
+    research system to accelerate the discovery of a promising new cancer therapy.
+    By harnessing the system''s advanced data analysis, hypothesis generation, and
+    experiment design capabilities, you will uncover novel insights and optimize the
+    development process.
+
+    '
+  objectives:
+  - Analyze large datasets related to cancer genetics, drug compounds, and clinical
+    trials to identify patterns and correlations
+  - Generate novel hypotheses for potential cancer treatment strategies based on data
+    insights
+  - Design optimized experimental protocols to rigorously test the proposed hypotheses
+  tasks:
+  - step: Ingest and preprocess relevant data sources
+    details: Integrate large datasets from published literature, genomic databases,
+      drug compound libraries, and clinical trial results into the AI system. Perform
+      data cleaning, normalization, and feature extraction as needed.
+  - step: Perform advanced data analysis and pattern recognition
+    details: Utilize the AI system's machine learning algorithms to analyze the integrated
+      datasets and identify intricate patterns, correlations, and potential biomarkers
+      related to cancer development and treatment response.
+  - step: Generate novel hypotheses for cancer treatment strategies
+    details: Based on the data insights, leverage the AI system's hypothesis generation
+      capabilities to formulate innovative research questions and potential treatment
+      approaches, such as targeted drug combinations or personalized therapies.
+  - step: Design optimized experimental protocols
+    details: Use the AI system's experiment design tools to create detailed experimental
+      protocols to rigorously test the proposed hypotheses. Optimize the protocols
+      for resource efficiency, regulatory compliance, and ethical considerations.
+  success_criteria:
+  - Identify at least 3 significant data insights related to cancer treatment
+  - Generate at least 2 novel and scientifically sound hypotheses for potential cancer
+    therapies
+  - Design at least 1 optimized experimental protocol with a clear methodology and
+    resource allocation plan
+  evaluation_metrics:
+  - metric: Number of identified data insights
+    target: '>=3'
+  - metric: Number of generated hypotheses
+    target: '>=2'
+  - metric: Experimental protocol optimization score
+    target: '>=90%'
+  difficulty: Advanced
+  category: Research
+  duration: 8h
+  mainPrerequisite: APP_P2_003
+  requirements:
+    compute: High-performance computing cluster
+    memory: 256GB RAM
+    capabilities:
+    - Advanced data analysis
+    - Machine learning
+    - Hypothesis generation
+    - Experiment design optimization
+  rewards:
+    xp: 1000
+    capabilities:
+    - Cancer research expertise
+    - AI-driven drug discovery
+    resources:
+    - Access to BioCure's cancer research data repository
+    - Compute credits for running simulations
+  deliverables:
+  - Detailed report on identified data insights and their significance
+  - Documented hypotheses for potential cancer treatment strategies
+  - Optimized experimental protocol with resource allocation plan

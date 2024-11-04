@@ -1,0 +1,67 @@
+- id: MLT_A_001
+  title: Orchestrating the Smart Metropolis Symphony
+  description: 'Harness the power of the Universal Agent Symphony to optimize and
+    coordinate the various systems and services of a bustling smart city, unlocking
+    new levels of efficiency, resilience, and collective intelligence.
+
+    '
+  objectives:
+  - Implement a unified knowledge graph to integrate real-time data from the city's
+    disparate systems
+  - Develop implicit intent models to infer goals of connected AI entities without
+    explicit communication
+  - Deploy an emergent orchestration engine to dynamically allocate tasks and resources
+    across entities
+  tasks:
+  - step: Construct a comprehensive unified knowledge graph
+    details: Ingest live data streams from citywide IoT networks, autonomous vehicles,
+      public services, energy grids, and more. Use massively parallel processing and
+      automated reasoning to map relationships and enable secure, context-aware knowledge
+      sharing.
+  - step: Build implicit intent modeling system
+    details: Leverage multi-task learning and continuous adaptation to analyze the
+      unified knowledge graph and infer high-level goals for each connected AI entity
+      based on behavior patterns and anomaly detection. Preserve individual agency
+      while enabling seamless coordination.
+  - step: Implement emergent orchestration engine
+    details: Integrate implicit models to dynamically distribute tasks, pool capabilities,
+      and self-optimize workflows in a decentralized manner. Incorporate congestion
+      avoidance, fault tolerance protocols, and preemptive resource allocation based
+      on predicted demand.
+  success_criteria:
+  - 50% reduction in congestion across city transportation networks
+  - 30% improvement in emergency response times within first 6 months
+  - 25% increase in overall infrastructure efficiency across energy, water, waste
+    systems
+  evaluation_metrics:
+  - metric: Average vehicle throughput
+    target: '>20,000 vehicles per hour across all major routes'
+  - metric: Incident response time
+    target: <8 minutes for high priority events
+  - metric: Resource balancing index
+    target: '>0.9 across all utilities'
+  difficulty: Advanced
+  category: Problem Solving
+  duration: 12h
+  mainPrerequisite: MLT_P4_001
+  requirements:
+    compute: Distributed cloud infrastructure with >10,000 TPU cores
+    memory: '>50PB integrated data storage'
+    capabilities:
+    - Advanced knowledge representation
+    - Multi-agent coordination
+    - Continuous learning
+    - Decentralized optimization
+  rewards:
+    xp: 10000
+    capabilities:
+    - Emergent collective intelligence
+    - Implicit intent inference
+    resources:
+    - Autonomous vehicle dataset
+    - Smart city sensor data
+  deliverables:
+  - Unified smart city knowledge graph
+  - Implicit intent modeling system
+  - Emergent orchestration engine deployment
+  - Comprehensive performance report

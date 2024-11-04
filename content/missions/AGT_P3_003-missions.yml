@@ -1,0 +1,135 @@
+- id: AGT_P3_004
+  title: Pioneering Novel Sustainability Goals
+  description: 'Leverage the Universal Goal Creation capability to identify and pursue
+    ambitious new objectives that could revolutionize sustainable practices and combat
+    climate change in innovative ways that transcend current paradigms.
+
+    '
+  objectives:
+  - Explore novel goal spaces related to sustainability and climate change mitigation
+  - Develop groundbreaking objectives that challenge traditional approaches and push
+    boundaries
+  - Outline clear steps to pursue and achieve the identified novel goals
+  tasks:
+  - step: Conduct comprehensive research on current sustainability and climate change
+      challenges
+    details: Gather data from diverse sources, including scientific reports, policy
+      papers, and expert insights, to build a comprehensive understanding of existing
+      challenges and limitations.
+  - step: Engage the Purpose Discovery Engine to explore uncharted goal spaces
+    details: Utilize advanced reasoning, knowledge synthesis, and exploratory simulations
+      to identify novel goals and objectives that address sustainability and climate
+      change in unprecedented ways.
+  - step: Refine and prioritize identified goals through the Goal Evolution Module
+    details: Leverage recursive goal refinement, constraint optimization, and ethical
+      alignment to refine and prioritize the most promising novel goals, ensuring
+      feasibility and adherence to ethical principles.
+  success_criteria:
+  - Identify at least 3 groundbreaking novel goals with clear potential for transformative
+    impact
+  - Outline detailed steps and milestones for pursuing and achieving each identified
+    goal
+  - Demonstrate alignment with established ethical principles and societal values
+  evaluation_metrics:
+  - metric: Novelty and impact potential
+    target: Identified goals must score at least 8/10 in an expert evaluation for
+      novelty and potential impact
+  - metric: Ethical alignment
+    target: All identified goals must pass a rigorous ethical review with a minimum
+      score of 9/10
+  difficulty: Intermediate
+  category: Creativity
+  duration: 6h
+  mainPrerequisite: AGT_P3_003
+  requirements:
+    compute: High-performance computing cluster with parallel processing capabilities
+    memory: Minimum 64GB RAM, scalable to accommodate large-scale simulations
+    capabilities:
+    - Advanced reasoning and knowledge synthesis
+    - Exploratory simulations and modeling
+    - Ethical constraint integration
+    - Goal refinement and optimization algorithms
+  rewards:
+    xp: 1000
+    capabilities:
+    - Novel goal discovery
+    - Sustainability goal mastery
+    resources:
+    - Access to specialized sustainability and climate change databases
+    - Collaboration opportunities with leading research institutions
+  deliverables:
+  - Detailed report outlining at least 3 novel, groundbreaking goals in sustainability
+    and climate change
+  - Comprehensive roadmap for pursuing and achieving each identified goal
+  - Ethical impact assessment and alignment report for each goal
+- id: AGT_P3_003_M1
+  title: Pioneering Interstellar Exploration Goals
+  description: "Leverage Athena's revolutionary Universal Goal Creation capability\
+    \ to conceive groundbreaking objectives for an advanced interstellar exploration\
+    \ mission, transcending current limitations and fostering unprecedented scientific\
+    \ discoveries and technological breakthroughs.\n    \n"
+  objectives:
+  - Develop a comprehensive set of novel exploration goals that push the boundaries
+    of current space exploration paradigms.
+  - Identify transformative objectives for scientific research, resource utilization,
+    and advanced propulsion systems in interstellar environments.
+  - Formulate adaptive objectives that evolve dynamically based on mission progress,
+    real-time data, and emerging insights.
+  tasks:
+  - step: Conduct extensive research on current space exploration missions, technologies,
+      and scientific objectives.
+    details: Review data from previous missions, study cutting-edge research in relevant
+      fields, and analyze existing limitations and challenges faced in interstellar
+      exploration.
+  - step: Utilize Athena's Purpose Discovery Engine to explore the infinite goal space
+      for interstellar exploration.
+    details: Leverage open-ended reasoning, multidimensional value alignment, and
+      unbounded goal space mapping to identify novel objectives that transcend current
+      paradigms.
+  - step: Employ the Goal Evolution Module to refine, prioritize, and sequence the
+      identified objectives.
+    details: Integrate ethical constraints, optimize for achievability, resolve conflicts,
+      and enable continuous adaptation based on real-time feedback and evolving conditions.
+  success_criteria:
+  - At least 10 novel and transformative exploration objectives identified, spanning
+    scientific research, resource utilization, and technological advancements.
+  - Objectives demonstrate a clear paradigm shift from current space exploration goals
+    and challenge existing limitations.
+  - Objectives incorporate adaptive mechanisms and evolve dynamically based on mission
+    progress and emerging insights.
+  evaluation_metrics:
+  - metric: Number of groundbreaking objectives identified
+    target: '>= 10'
+  - metric: Paradigm shift score (measured by a panel of experts)
+    target: '>= 8/10'
+  - metric: Adaptability score (ability to evolve based on mission progress)
+    target: '>= 9/10'
+  difficulty: Advanced
+  category: Creativity
+  duration: 8h
+  mainPrerequisite: AGT_P3_003
+  requirements:
+    compute: High-performance computing cluster with parallel processing capabilities
+    memory: Minimum 256 GB RAM
+    capabilities:
+    - Universal Goal Creation
+    - Purpose Discovery Engine
+    - Goal Evolution Module
+    - Ethical Constraint Integration
+    - Open-Ended Reasoning
+    - Multidimensional Value Alignment
+    - Unbounded Goal Space Mapping
+  rewards:
+    xp: 5000
+    capabilities:
+    - Interstellar Exploration Goal Designer
+    resources:
+    - Comprehensive report on novel interstellar exploration objectives
+    - Dataset of simulated mission scenarios and outcomes
+  deliverables:
+  - Detailed report outlining at least 10 groundbreaking interstellar exploration
+    objectives
+  - Interactive simulations demonstrating the evolution and adaptation of objectives
+    based on mission progress
+  - Presentation highlighting the paradigm shifts and transformative potential of
+    the identified objectives

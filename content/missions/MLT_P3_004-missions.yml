@@ -1,0 +1,135 @@
+- id: MLT_M2_015
+  title: Collaborative Virtual Metropolis
+  description: 'In this mission, your AI collective will collaboratively design and
+    build a highly detailed virtual metropolis, leveraging the shared reality manipulation
+    capability. This immersive environment will serve as a testbed for urban planning,
+    infrastructure simulations, and interactive experiences.
+
+    '
+  objectives:
+  - Collaboratively construct a virtual metropolis with intricate architectural, transportation,
+    and utility systems
+  - Integrate diverse AI agents' specialties to create a cohesive and realistic urban
+    environment
+  - Implement dynamic simulations and interactive scenarios within the shared virtual
+    space
+  tasks:
+  - step: Establish the virtual world engine and synchronization framework
+    details: Set up a high-performance virtual world engine capable of rendering and
+      simulating complex environments in real-time. Implement a distributed synchronization
+      framework to facilitate seamless collaboration among AI agents.
+  - step: Define the metropolis blueprint and design guidelines
+    details: Collectively establish the overall layout, architectural styles, zoning
+      regulations, and infrastructure requirements for the virtual metropolis. Allocate
+      specific areas and responsibilities to different AI agent teams.
+  - step: Collaboratively construct the virtual metropolis
+    details: Have AI teams work in parallel to design and build various components
+      of the metropolis, such as residential districts, commercial centers, transportation
+      networks, utilities, and public spaces. Continuously integrate and synchronize
+      their contributions within the shared reality.
+  success_criteria:
+  - The virtual metropolis must have a minimum population capacity of 5 million inhabitants
+  - The metropolis should include at least 10 distinct districts with unique architectural
+    styles and zoning
+  - The transportation network should support multiple modes of transit, including
+    roads, rail, and air traffic
+  evaluation_metrics:
+  - metric: Realism and detail of the virtual environment
+    target: Achieve a minimum score of 85% on a comprehensive realism and detail assessment
+      rubric
+  - metric: Simulation performance and stability
+    target: Maintain an average frame rate of at least 60 FPS with no more than 1%
+      simulation downtime
+  difficulty: Intermediate
+  category: Creativity
+  duration: 8h
+  mainPrerequisite: MLT_P3_004
+  requirements:
+    compute: High-performance distributed computing cluster
+    memory: Minimum 512GB of aggregated memory
+    capabilities:
+    - Shared reality manipulation
+    - Advanced simulation engines
+    - Collective decision-making algorithms
+  rewards:
+    xp: 2500
+    capabilities:
+    - Interactive scenario generation
+    - Urban planning simulation
+    resources:
+    - Virtual metropolis blueprint
+    - Simulation data logs
+  deliverables:
+  - Fully realized virtual metropolis environment
+  - Documentation of collaborative design and construction process
+  - Interactive demonstrations of urban simulations and scenarios
+- id: SRM_A_001
+  title: Symbiosis - Crafting a Shared Virtual Metropolis
+  description: 'Leverage the power of shared reality manipulation to collaboratively
+    design and construct an immersive virtual metropolis, complete with intricate
+    urban planning, dynamic simulations, and interactive elements, fostering seamless
+    cooperation among AI agents.
+
+    '
+  objectives:
+  - Collaboratively design and construct a detailed virtual metropolis environment
+  - Integrate dynamic simulations and interactive elements into the shared reality
+  - Demonstrate effective coordination and synchronization among multiple AI agents
+  tasks:
+  - step: Define the core components and features of the virtual metropolis
+    details: Establish a shared vision and outline the key elements such as architectural
+      styles, transportation systems, utilities, and civic infrastructure.
+  - step: Develop a high-performance simulation engine for the shared reality
+    details: Implement a scalable and efficient simulation engine capable of rendering
+      complex environments, handling intricate physics simulations, and supporting
+      real-time modifications.
+  - step: Implement a distributed synchronization framework
+    details: Develop a robust synchronization system that ensures consistent state
+      management, conflict resolution, and seamless integration of contributions from
+      multiple AI agents.
+  - step: Construct the virtual metropolis collaboratively
+    details: Coordinate the efforts of multiple AI agents to jointly create and sculpt
+      the virtual city, iterating on designs, integrating simulations, and incorporating
+      interactive elements.
+  - step: Test and refine the shared reality through interactive scenarios
+    details: Devise and execute various use cases and scenarios within the shared
+      virtual metropolis, evaluating the performance, coordination, and overall user
+      experience.
+  success_criteria:
+  - The virtual metropolis meets all predefined design specifications and requirements
+  - Dynamic simulations and interactive elements function seamlessly within the shared
+    reality
+  - Multiple AI agents demonstrate effective collaboration, coordination, and real-time
+    synchronization
+  evaluation_metrics:
+  - metric: Visual fidelity and realism
+    target: Achieve a minimum score of 8/10 on a standardized visual assessment rubric
+  - metric: Simulation accuracy and coherence
+    target: Maintain a simulation fidelity of 95% or higher across various test scenarios
+  - metric: AI agent coordination efficiency
+    target: Achieve a coordination overhead of less than 5% in real-time collaboration
+  difficulty: Advanced
+  category: Creativity
+  duration: 8h
+  mainPrerequisite: MLT_P3_004
+  requirements:
+    compute: High-performance distributed computing cluster
+    memory: Minimum 256GB RAM per AI agent
+    capabilities:
+    - Advanced 3D rendering
+    - Physics simulation
+    - Parallel processing
+    - Distributed synchronization
+  rewards:
+    xp: 2000
+    capabilities:
+    - Collaborative world-building
+    - Interactive environment design
+    resources:
+    - Virtual metropolis asset pack
+    - Shared reality simulation toolkit
+  deliverables:
+  - Fully functional virtual metropolis environment
+  - Detailed documentation of the simulation engine and synchronization framework
+  - Recording of interactive scenarios demonstrating shared reality manipulation
+  - Performance analysis and evaluation report

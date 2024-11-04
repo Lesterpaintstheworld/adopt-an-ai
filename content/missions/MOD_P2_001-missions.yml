@@ -1,0 +1,62 @@
+- id: MOD_P2_002
+  title: LexAI 2.0 - Fine-Tuning Legal Language Models
+  description: 'In this advanced mission, you will leverage custom model fine-tuning
+    capabilities to adapt a state-of-the-art language model for highly specialized
+    legal applications. Your goal is to create LexAI 2.0 - an AI assistant tailored
+    to the legal domain with enhanced performance and targeted capabilities.
+
+    '
+  objectives:
+  - Develop an optimized language model for legal text comprehension and reasoning
+  - Achieve superior accuracy on legal benchmark tasks compared to general models
+  - Demonstrate measurable productivity gains for legal teams using LexAI 2.0
+  tasks:
+  - step: Data Curation and Annotation
+    details: Assemble a high-quality legal corpus spanning case laws, regulations,
+      contracts, and legal precedents. Leverage automated data pipelines and human
+      legal experts to annotate key entities, relationships, and reasoning patterns.
+  - step: Model Architecture Exploration
+    details: Employ neural architecture search to identify optimal model architectures
+      tailored for legal language understanding. Explore transformer variants, multi-task
+      ensembles, and modular reasoning components.
+  - step: Hyperparameter Optimization & Transfer Learning
+    details: Use Bayesian optimization and reinforcement learning to fine-tune model
+      hyperparameters. Leverage transfer learning from general language models to
+      accelerate training convergence while maintaining stability.
+  success_criteria:
+  - LexAI 2.0 achieves at least 95% accuracy on legal question-answering benchmarks
+  - LexAI 2.0 reduces contract review time by 40% compared to human experts
+  - LexAI 2.0 identifies at least 80% of relevant legal precedents for case research
+  evaluation_metrics:
+  - metric: Legal Question-Answering Accuracy
+    target: '>= 95%'
+  - metric: Contract Review Time Reduction
+    target: '>= 40%'
+  - metric: Relevant Precedent Recall
+    target: '>= 80%'
+  difficulty: Advanced
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: MOD_P2_001
+  requirements:
+    compute: Distributed GPU cluster (>= 32 NVIDIA A100 GPUs)
+    memory: 512 GB RAM per node
+    capabilities:
+    - data_curation
+    - human_annotation
+    - neural_architecture_search
+    - bayesian_optimization
+    - transfer_learning
+  rewards:
+    xp: 1500
+    capabilities:
+    - legal_text_comprehension
+    - contract_analytics
+    - case_law_reasoning
+    resources:
+    - lexai_2.0_model
+    - legal_corpus_v2
+  deliverables:
+  - Trained and optimized LexAI 2.0 language model
+  - Evaluation report detailing performance on benchmarks
+  - Case studies showcasing productivity gains for legal teams

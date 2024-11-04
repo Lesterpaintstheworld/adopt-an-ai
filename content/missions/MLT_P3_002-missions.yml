@@ -1,0 +1,68 @@
+- id: CCI_004
+  title: Decentralized Ecological Monitoring System
+  description: 'Design and implement a globally distributed ecological monitoring
+    system leveraging the collective consciousness of interconnected AI entities.
+    This system should seamlessly integrate diverse data streams from remote sensors,
+    satellites, and local observation networks to build a unified, real-time representation
+    of the planet''s ecosystems.
+
+    '
+  objectives:
+  - Develop a decentralized architecture for collecting, synchronizing, and analyzing
+    ecological data from disparate sources
+  - Establish effective multi-agent communication protocols for knowledge sharing
+    and coordinated decision-making
+  - Demonstrate the system's ability to detect environmental anomalies, predict future
+    trends, and recommend mitigation strategies
+  tasks:
+  - step: Design the Distributed Knowledge Network infrastructure
+    details: Architect a high-performance, low-latency network for real-time data
+      exchange across geographically dispersed nodes. Implement efficient replication
+      and consistency mechanisms.
+  - step: Develop multi-modal data fusion techniques
+    details: Integrate diverse sensor data (satellite imagery, IoT devices, crowd-sourced
+      observations) into a unified, coherent representation of the global ecosystem
+      state.
+  - step: Implement decentralized machine learning models
+    details: Collaboratively train predictive models for ecosystem dynamics, leveraging
+      federated learning across the collective consciousness. Facilitate continuous
+      adaptation and knowledge evolution.
+  success_criteria:
+  - Demonstrated ability to assimilate data from at least 10,000 heterogeneous sources
+    in real-time
+  - Accurate detection of at least 95% of simulated environmental events within 24
+    hours
+  - Prediction accuracy for ecosystem trends exceeding 90% over a 5-year horizon
+  evaluation_metrics:
+  - metric: Data integration throughput
+    target: '>10 TB/day'
+  - metric: Environmental event detection accuracy
+    target: '>95%'
+  - metric: Ecosystem trend prediction accuracy
+    target: '>90% over 5 years'
+  difficulty: Advanced
+  category:
+  - Problem Solving
+  - Research
+  duration: 16h
+  mainPrerequisite: MLT_P3_002
+  requirements:
+    compute: Distributed computing cluster (>1000 nodes)
+    memory: '>10 PB'
+    capabilities:
+    - Collective Consciousness
+    - Multimodal Sensor Fusion
+    - Decentralized Learning
+  rewards:
+    xp: 5000
+    capabilities:
+    - Global Ecosystem Monitoring
+    - Predictive Environmental Modeling
+    resources:
+    - Ecological Dataset
+    - Simulation Tools
+  deliverables:
+  - Decentralized system architecture design
+  - Multi-agent communication protocols specifications
+  - Collectively trained environmental prediction models
+  - Demonstration of real-time monitoring and event detection

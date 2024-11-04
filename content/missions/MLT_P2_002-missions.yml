@@ -1,0 +1,144 @@
+- id: RSN_INT_001
+  title: Resource Negotiator - Optimizing AI Workflow Execution
+  description: 'In this mission, you will leverage resource sharing networks to dynamically
+    optimize the execution of an AI workflow consisting of multiple interdependent
+    tasks. Your goal is to develop a resource negotiation strategy that enables efficient
+    resource allocation and load balancing across a network of AI agents, maximizing
+    overall workflow throughput and minimizing execution time.
+
+    '
+  objectives:
+  - Develop a decentralized resource negotiation protocol for AI agents to advertise,
+    discover, and trade computational resources and capabilities
+  - Implement a multi-agent reinforcement learning algorithm to learn an optimal resource
+    allocation policy for the given AI workflow
+  - Demonstrate improved workflow execution performance compared to static resource
+    allocation baselines
+  tasks:
+  - step: Analyze the AI workflow and identify resource requirements for each task
+    details: Decompose the workflow into individual tasks and quantify their computational
+      resource needs (CPU, GPU, memory) and required AI capabilities (e.g. natural
+      language processing, computer vision).
+  - step: Design a resource advertisement and discovery mechanism
+    details: Develop a distributed protocol for AI agents to advertise their available
+      resources and capabilities, and discover resource offerings from other agents
+      in the network.
+  - step: Implement a game-theoretic negotiation algorithm
+    details: Create a negotiation algorithm that enables agents to negotiate resource
+      access or exchange terms, considering factors like resource costs, task priorities,
+      and opportunity costs.
+  - step: Train a multi-agent reinforcement learning model
+    details: Use multi-agent reinforcement learning techniques to train a decentralized
+      policy that dynamically allocates resources across the network, optimizing for
+      overall workflow throughput and minimizing execution time.
+  success_criteria:
+  - Achieve at least 25% reduction in overall workflow execution time compared to
+    static resource allocation baselines
+  - Demonstrate efficient utilization of network resources, with less than 10% average
+    idle capacity across agents
+  - Ensure no single agent exceeds 90% resource utilization to prevent bottlenecks
+  evaluation_metrics:
+  - metric: Workflow throughput
+    target: Maximize number of workflow instances executed per unit time
+  - metric: Resource utilization fairness
+    target: Maintain a Gini coefficient of less than 0.3 for resource utilization
+      across agents
+  difficulty: Intermediate
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: MLT_P2_002
+  requirements:
+    compute: High-performance CPU and GPU clusters
+    memory: Large distributed memory pool
+    capabilities:
+    - Multi-agent reinforcement learning
+    - Game theory and auction mechanisms
+    - Distributed systems and peer-to-peer networking
+  rewards:
+    xp: 500
+    capabilities:
+    - Resource negotiation protocols
+    - Decentralized resource allocation
+    resources:
+    - Compute credits
+    - Memory allocation
+  deliverables:
+  - Decentralized resource negotiation protocol specification
+  - Multi-agent reinforcement learning model for resource allocation
+  - Performance evaluation report comparing to baselines
+  - Documented code and deployment artifacts
+- id: RSN_ADV_001
+  title: Robust Multi-Agent Resource Orchestration
+  description: 'Design an advanced multi-agent system leveraging resource sharing
+    networks (RSNs) to dynamically allocate computational resources and AI capabilities.
+    Implement robust mechanisms for resource discovery, negotiation, allocation, and
+    failover across a distributed network of heterogeneous AI agents.
+
+    '
+  objectives:
+  - Develop a decentralized RSN framework for AI agents to advertise, discover, and
+    trade resources
+  - Implement game-theoretic negotiation algorithms for fair and efficient resource
+    exchange
+  - Design load balancing and scheduling techniques for dynamic resource allocation
+  - Incorporate redundancy and failover mechanisms for resilience and fault tolerance
+  tasks:
+  - step: Design a semantic resource ontology and distributed hash table for resource
+      advertisement
+    details: Define a structured vocabulary to represent AI agents' resource profiles,
+      capabilities, and constraints. Implement a distributed hash table allowing agents
+      to publish and lookup resource offerings across the network.
+  - step: Develop negotiation protocols and algorithms for multi-agent bargaining
+    details: Explore game theory concepts like auction mechanisms, bargaining solutions,
+      and coalition formation games. Implement protocols and algorithms enabling AI
+      agents to negotiate terms for resource sharing and reach mutually beneficial
+      agreements.
+  - step: Implement load balancing and scheduling algorithms for dynamic resource
+      allocation
+    details: Leverage techniques like distributed optimization, reinforcement learning,
+      and graph partitioning to dynamically allocate resources across the network
+      based on changing workloads and priorities, while respecting constraints and
+      preferences.
+  - step: Design failover and redundancy mechanisms for resilience
+    details: Incorporate components like replicated state machines, consensus protocols,
+      and self-healing capabilities to enable seamless failover and recovery in case
+      of node failures or network partitions.
+  success_criteria:
+  - At least 80% of resource requests are successfully fulfilled through negotiated
+    agreements
+  - Resource utilization across the network is consistently above 70% during peak
+    workloads
+  - The system can recover from up to 20% simultaneous node failures without disrupting
+    critical tasks
+  evaluation_metrics:
+  - metric: Resource allocation efficiency
+    target: '>=0.85'
+  - metric: Network throughput (tasks/sec)
+    target: '>=10000'
+  - metric: Failover recovery time
+    target: <=60 seconds
+  difficulty: Advanced
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: MLT_P2_002
+  requirements:
+    compute: Distributed GPU/TPU clusters (>=1000 TFLOPS)
+    memory: Distributed in-memory data grid (>=100TB)
+    capabilities:
+    - Semantic Reasoning
+    - Game Theory
+    - Distributed Optimization
+    - Consensus Protocols
+  rewards:
+    xp: 5000
+    capabilities:
+    - Multi-Agent Coordination
+    - Decentralized Resource Management
+    resources:
+    - RSN Simulation Environment
+    - Resource Ontology Library
+  deliverables:
+  - Documented system architecture and design specifications
+  - Prototype implementation of the RSN framework and core components
+  - Comprehensive test reports and performance benchmarks
+  - Deployment and operations guidelines for production use

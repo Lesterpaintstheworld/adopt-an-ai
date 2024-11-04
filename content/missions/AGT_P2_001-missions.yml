@@ -1,0 +1,155 @@
+- id: AGT_M2_007
+  title: Autonomous Construction Coordination
+  description: 'In this mission, you will leverage your autonomous task planning capabilities
+    to oversee the construction of a multi-story commercial building. You will decompose
+    the high-level objective, generate an optimized execution plan, allocate resources,
+    coordinate activities, and monitor progress, dynamically adapting to any unexpected
+    events.
+
+    '
+  objectives:
+  - Develop a comprehensive task hierarchy for the construction project, breaking
+    down the overarching goal into granular, executable subtasks.
+  - Generate an optimized execution plan that sequences construction activities based
+    on dependencies, resource availability, and time constraints.
+  - Coordinate the deployment of resources (materials, equipment, labor) across the
+    construction site, ensuring efficient utilization and minimizing waste.
+  - Monitor progress in real-time, detect deviations from the plan, diagnose root
+    causes, and dynamically adjust the execution sequence as needed.
+  tasks:
+  - step: Analyze project requirements and constraints
+    details: Ingest data on the building specifications, site conditions, material
+      inventories, equipment availability, labor resources, and regulatory guidelines.
+      Model all relevant factors impacting the construction process.
+  - step: Decompose construction objective into task hierarchy
+    details: Break down the high-level goal of constructing the building into a granular
+      hierarchy of subtasks, such as site preparation, foundation work, structural
+      framing, MEP installation, interior finishing, and final inspections. Capture
+      dependencies, priorities, and constraints for each subtask.
+  - step: Generate optimized execution plan
+    details: Apply constraint programming and optimization techniques to sequence
+      the construction activities, allocate resources optimally, and generate a detailed
+      step-by-step execution plan that maximizes efficiency and minimizes project
+      duration while adhering to all constraints.
+  success_criteria:
+  - The construction project is completed within the specified time frame and budget.
+  - All construction activities are executed in the correct sequence, adhering to
+    dependencies and constraints.
+  - Resources (materials, equipment, labor) are utilized at ≥90% efficiency, minimizing
+    waste and downtime.
+  - Deviations from the plan are detected and resolved promptly, with minimal impact
+    on the overall schedule.
+  evaluation_metrics:
+  - metric: Project duration
+    target: ≤ 18 months
+  - metric: Cost overrun
+    target: ≤ 5%
+  - metric: Resource utilization efficiency
+    target: ≥ 90%
+  - metric: Deviation recovery time
+    target: ≤ 24 hours
+  difficulty: Intermediate
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: AGT_P2_001
+  requirements:
+    compute: High (multi-core CPU, GPU)
+    memory: 32GB
+    capabilities:
+    - Constraint programming
+    - Optimization algorithms
+    - Resource allocation
+    - Scheduling
+    - Real-time monitoring
+    - Root cause analysis
+  rewards:
+    xp: 2500
+    capabilities:
+    - Advanced task decomposition
+    - Dynamic replanning
+    resources:
+    - Construction domain knowledge
+    - Site telemetry data
+  deliverables:
+  - Detailed task hierarchy for the construction project
+  - Optimized execution plan with resource allocations
+  - Real-time progress monitoring dashboard
+  - Incident reports and resolution plans (for deviations)
+- id: ATP_001
+  title: Construction Megaproject Planning
+  description: 'Your task is to develop an autonomous task planning system capable
+    of orchestrating
+
+    the construction of a massive urban development project spanning multiple city
+    blocks.
+
+    The system must handle all aspects of planning, resource allocation, scheduling,
+    and
+
+    execution monitoring for this complex, multi-year endeavor.
+
+    '
+  objectives:
+  - Decompose the high-level objective of the complete construction project into a
+    granular hierarchy of tasks, sub-tasks, and dependencies
+  - Generate an optimized master execution plan that allocates resources, sequences
+    activities, and minimizes project duration and costs
+  - Continuously monitor progress, detect anomalies, and dynamically adjust plans
+    in response to issues or constraints
+  tasks:
+  - step: Analyze project specifications and requirements
+    details: Ingest all architectural plans, engineering documents, zoning regulations,
+      and other project data to build a comprehensive domain model.
+  - step: Construct task hierarchy
+    details: Break down the full construction scope into progressively smaller tasks,
+      capturing dependencies, resource needs, timing constraints, and priorities.
+  - step: Develop construction ontology
+    details: Create a rich knowledge base detailing all materials, equipment, labor
+      roles, and processes involved in each construction activity.
+  - step: Build optimization model
+    details: Formulate a constraint optimization model integrating the task hierarchy,
+      ontology, and resource/timing constraints to enable plan generation.
+  - step: Generate master execution plan
+    details: Use constraint solvers and scheduling algorithms to produce a globally
+      optimized plan covering all construction phases.
+  - step: Deployment and execution monitoring
+    details: Provision resources, initiate work per the plan, integrate sensor data,
+      detect deviations, and use re-planning to handle disruptions dynamically.
+  success_criteria:
+  - Project completed within scheduled timeline (+/- 5% buffer)
+  - Combined costs remain under budgeted amount
+  - No major regulatory violations or worksite incidents
+  evaluation_metrics:
+  - metric: Project duration
+    target: <= 1.05 * projected timeline
+  - metric: Total costs
+    target: <= budgeted costs
+  - metric: Construction quality
+    target: '>= 95% tasks achieve QA standards'
+  difficulty: Advanced
+  category: Problem Solving
+  duration: 48h
+  mainPrerequisite: AGT_P2_001
+  requirements:
+    compute: High, Cloud-based elastic clusters
+    memory: Terabytes for model/data storage
+    capabilities:
+    - Constrained Optimization
+    - Ontology Engineering
+    - Knowledge Representation
+    - Execution Monitoring
+    - Dynamic Replanning
+  rewards:
+    xp: 5000
+    capabilities:
+    - Autonomous Task Planning
+    resources:
+    - Construction Domain Dataset
+    - Procedural Task Knowledge
+    - Optimization Solver Modules
+  deliverables:
+  - Comprehensive construction ontology
+  - Hierarchical task model for full project scope
+  - Master construction execution plan
+  - Online execution monitoring system
+  - Testing reports validating autonomous capabilities

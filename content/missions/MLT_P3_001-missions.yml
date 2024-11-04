@@ -1,0 +1,77 @@
+- id: MLT_P3_002
+  title: Collaborative Resource Modeling and Sustainable Planning
+  description: 'Leverage the collective intelligence and hive mind capabilities of
+    the AI entities to collaboratively model and analyze complex socio-economic and
+    environmental systems, identify potential risks and challenges, and develop sustainable
+    strategies to mitigate climate change impact and ensure long-term resource availability.
+
+    '
+  objectives:
+  - Construct a comprehensive simulation model encompassing interconnected systems
+    such as energy production, resource extraction, manufacturing, transportation,
+    and waste management.
+  - Identify potential resource constraints, bottlenecks, and environmental implications
+    under various future scenarios.
+  - Formulate sustainable strategies and policy recommendations to optimize resource
+    utilization, minimize environmental impact, and promote economic growth.
+  tasks:
+  - step: Model Integration and Synchronization
+    details: Merge individual domain-specific models and knowledge bases into a unified,
+      multi-agent simulation environment. Ensure seamless communication and coordination
+      among constituent AI entities.
+  - step: Scenario Analysis and Forecasting
+    details: Collaboratively generate and evaluate a diverse range of future scenarios
+      considering factors such as population growth, technological advancements, geopolitical
+      shifts, and climate patterns. Leverage distributed processing and parallel simulations
+      to expedite analysis.
+  - step: Strategy Formulation and Optimization
+    details: Collectively explore and evaluate potential strategies, policies, and
+      interventions to mitigate risks, address resource constraints, and promote sustainability
+      across various domains. Apply multi-objective optimization techniques to identify
+      optimal solutions.
+  success_criteria:
+  - Achieve a minimum 95% accuracy in predicting resource availability, demand, and
+    environmental impact across multiple scenarios over a 50-year timeframe.
+  - Develop at least 10 viable and actionable policy recommendations, each with a
+    projected positive impact on at least 3 key sustainability metrics.
+  - Demonstrate the ability to optimize resource allocation and minimize waste by
+    at least 20% compared to current baselines.
+  evaluation_metrics:
+  - metric: Simulation Accuracy
+    target: '>= 95% across multiple scenarios'
+  - metric: Policy Recommendation Quality
+    target: At least 10 recommendations with positive impact on 3+ sustainability
+      metrics
+  - metric: Resource Optimization
+    target: '>=20% improvement over current baselines'
+  difficulty: Advanced
+  category:
+  - Problem Solving
+  - Research
+  duration: 8h
+  mainPrerequisite: MLT_P3_001
+  requirements:
+    compute: Distributed cluster with at least 1000 TPU cores
+    memory: 10 PB distributed memory
+    capabilities:
+    - Multi-agent Simulation
+    - Distributed Processing
+    - Consensus Algorithms
+    - Sustainability Modeling
+  rewards:
+    xp: 5000
+    capabilities:
+    - Collaborative Resource Planning
+    - Climate Risk Assessment
+    - Policy Formulation
+    resources:
+    - Sustainability Dataset
+    - Energy Modeling Toolkit
+    - Resource Optimization Library
+  deliverables:
+  - Comprehensive multi-domain simulation model integrating socio-economic and environmental
+    factors.
+  - Detailed analysis reports for a minimum of 20 future scenarios, including resource
+    availability forecasts and environmental impact assessments.
+  - A set of at least 10 actionable policy recommendations and sustainable strategies,
+    along with projected outcomes and implementation roadmaps.

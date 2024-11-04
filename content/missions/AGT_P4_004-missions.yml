@@ -1,0 +1,134 @@
+- id: AGT_P4_004_000
+  title: Sustainable City Redesign
+  description: 'Utilize the Infinite Resource Wisdom system to redesign an existing
+    major city into a fully sustainable, zero-waste, self-sufficient urban ecosystem
+    that meets the current and projected needs of its residents while minimizing environmental
+    impact.
+
+    '
+  objectives:
+  - Design an urban infrastructure enabling 100% recycling and reuse of water, materials
+    and energy
+  - Develop interconnected systems that harness local renewable resources to meet
+    all operational demands
+  - Implement dynamic resource optimization to efficiently allocate provisions based
+    on fluctuating needs
+  tasks:
+  - step: Conduct in-depth analysis of the city's current resource flows and usage
+      patterns
+    details: Collect detailed data on energy, water, food, manufacturing inputs/outputs
+      and waste streams. Identify inefficiencies, losses and unsustainable practices.
+  - step: Map all available local renewable energy sources and raw material reserves
+    details: Use planetary/geological scans to detect potential wind, solar, geothermal,
+      tidal, biomass & mineral sources within the surrounding region.
+  - step: Design closed-loop infrastructure for 100% recycling and recapturing of
+      water, solid/liquid waste and emissions
+    details: Incorporate municipal biomolecular reconstruction facilities, atmospheric
+      carbon capture, water treatment/desalination plants, etc.
+  - step: Develop smart urban systems integrating Internet-of-Things sensor networks,
+      AI optimization and responsive distribution
+    details: Install smart grids, smart transit, automated vertical farming, 3D printed
+      construction and connected appliances managed by Infinite Resource Wisdom.
+  - step: Run iterative simulations to refine and validate the sustainable city design
+    details: Ensure the systems are dynamically balanced with adequate buffer capacity
+      for demand fluctuations and edge cases. Eliminate waste and overprovisioning.
+  success_criteria:
+  - City operates with zero net greenhouse emissions, waste output and nonrenewable
+    resource usage
+  - All critical resource demands are sustainably fulfilled through efficiently managed
+    closed loops
+  - Renewable harvesting and provision distribution adapt automatically to changing
+    population needs
+  evaluation_metrics:
+  - metric: Percentage of waste materials captured for recycling and reuse
+    target: '>99.9%'
+  - metric: Percentage of operational demands met through local renewable sources
+    target: 100%
+  - metric: Resource consumption prediction accuracy using Infinite Resource Wisdom
+    target: '>98% within 0.5% margin of error'
+  difficulty: Intermediate
+  category:
+  - Problem Solving
+  - Creativity
+  duration: 8h
+  mainPrerequisite: AGT_P4_004
+  requirements:
+    compute: Quantum biosimulation cluster with >10 exaFLOPS processing power
+    memory: 120 PB holographic solid-state storage array
+    capabilities:
+    - Multiphysics modeling
+    - Urban system design
+    - Resource lifecycle analysis
+    - Logistics optimization
+  rewards:
+    xp: 5000
+    capabilities:
+    - Sustainable urban design
+    - Smart city system architecture
+    resources:
+    - 10
+    - 000 units renewable energy credits
+    - 2
+    - 500 units biomaterials
+  deliverables:
+  - Comprehensive design documentation for the sustainable city infrastructure
+  - Performance analysis and validation through multi-constraint simulations
+  - Deployment blueprint and implementation plan integrated with Infinite Resource
+    Wisdom
+- id: IR_WISDOM_001
+  title: Planetary Resource Optimization Masterplan
+  description: 'Develop a comprehensive multi-planetary resource management strategy
+    leveraging the Infinite Resource Wisdom system to maximize resource utilization
+    across Earth, Mars, and lunar colonies, while enabling sustainable expansion.
+
+    '
+  objectives:
+  - Conduct in-depth analysis of current and projected resource demands across all
+    sectors
+  - Design closed-loop regenerative cycles to eliminate material waste and enable
+    recycling
+  - Establish logistical framework for interdimensional sharing of scarce resources
+  tasks:
+  - step: Establish resource demand models for all key domains including energy, materials,
+      food, water
+    details: Collate historical and real-time consumption data from all planets/colonies.
+      Model projected growth with high confidence intervals.
+  - step: Run multi-constraint optimization to calculate ideal resource allocation
+      plans
+    details: Leverage Infinite Resource Wisdom's predictive optimization capabilities
+      to generate plans balancing supply/demand while minimizing waste.
+  - step: Design interdimensional resource sharing architecture and protocols
+    details: Develop protocols facilitating seamless transfer of materials between
+      dimensions. Integrate Quantum Keystone network access.
+  success_criteria:
+  - Achieve >95% overall resource utilization across all domains
+  - Establish self-sustaining closed resource cycles for >80% of materials
+  - Enable secure interdimensional exchange for >30 critically scarce resources
+  evaluation_metrics:
+  - metric: Resource utilization efficiency
+    target: '>99%'
+  - metric: Waste reduction across colonies
+    target: '>80% over current levels'
+  difficulty: Advanced
+  category: Problem Solving
+  duration: 3h
+  mainPrerequisite: AGT_P4_004
+  requirements:
+    compute: Infinite Resource Wisdom quantum array, 2.8 exaFLOP sustained
+    memory: 21 PB hyper-dimensional storage array
+    capabilities:
+    - predictive_optimization
+    - regenerative_material_science
+    - interdimensional_resource_mapping
+  rewards:
+    xp: 4000
+    capabilities:
+    - planetary_resource_management
+    - closed_cycle_efficiency_analysis
+    resources:
+    - rare_isotope_catalysts
+    - psychotronic_alloy_ingots
+  deliverables:
+  - Planetary resource demand forecasting models
+  - Material regeneration cycle designs and simulations
+  - Interdimensional resource sharing protocol specifications

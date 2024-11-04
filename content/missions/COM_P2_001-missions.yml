@@ -1,0 +1,127 @@
+- id: DRS_M3_002
+  title: Predictive Scaling Simulator
+  description: 'Design and implement a predictive scaling simulator that leverages
+    Dynamic Resource Scaling capabilities to optimize resource allocation for an AI-driven
+    application. The simulator should accurately forecast future compute demands,
+    recommend scaling actions, and evaluate the performance impact.
+
+    '
+  objectives:
+  - Build a predictive model to forecast future resource demands based on historical
+    data and real-time metrics
+  - Develop a resource orchestration system to simulate scaling actions based on model
+    recommendations
+  - Evaluate the simulator's performance in maintaining consistent service levels
+    while optimizing resource utilization
+  tasks:
+  - step: Data Collection and Preprocessing
+    details: Gather historical data on application usage patterns, performance metrics,
+      and external factors. Preprocess the data to handle missing values, outliers,
+      and ensure compatibility with the predictive model.
+  - step: Predictive Model Development
+    details: Implement a machine learning model capable of forecasting future resource
+      demands based on the preprocessed data. Consider time-series analysis techniques,
+      anomaly detection, and confidence scoring for model predictions.
+  - step: Resource Orchestration System
+    details: Develop a system to simulate scaling actions based on the predictive
+      model's recommendations. Define scaling policies, thresholds, and rules for
+      provisioning and deprovisioning resources across multiple cloud providers.
+  success_criteria:
+  - The predictive model achieves a minimum forecast accuracy of 85% based on historical
+    data
+  - The resource orchestration system consistently maintains service levels above
+    95% during simulated peak demand periods
+  - The overall system demonstrates at least 20% improvement in resource utilization
+    efficiency compared to static resource allocation
+  evaluation_metrics:
+  - metric: Forecast Accuracy
+    target: '>=85%'
+  - metric: Service Level Agreement (SLA) Compliance
+    target: '>=95% during peak demand'
+  - metric: Resource Utilization Efficiency
+    target: '>=20% improvement'
+  difficulty: Intermediate
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: COM_P2_001
+  requirements:
+    compute: High-performance compute cluster with GPU acceleration
+    memory: 32GB RAM
+    capabilities:
+    - Dynamic Resource Scaling
+    - Machine Learning Model Training
+    - Cloud Infrastructure Integration
+  rewards:
+    xp: 800
+    capabilities:
+    - Predictive Workload Modeling
+    - Multi-Cloud Orchestration
+    resources:
+    - 100 Cloud Credits
+    - Dataset: Application Usage Patterns
+  deliverables:
+  - Predictive scaling model with documentation
+  - Resource orchestration system with scaling policies
+  - Simulation results and performance analysis report
+- id: DRS_ADV_001
+  title: Predictive Cloud Workload Management
+  description: 'Design and implement an advanced predictive workload management system
+
+    that leverages dynamic resource scaling to optimize cloud infrastructure
+
+    utilization and ensure seamless application performance under varying load conditions.
+
+    '
+  objectives:
+  - Develop an AI-powered predictive model for forecasting future resource demands
+  - Implement a dynamic resource orchestration system for multi-cloud environments
+  - Integrate the predictive model with the orchestration system for automated scaling
+  tasks:
+  - step: Data Collection and Preprocessing
+    details: Gather historical resource utilization data, application metrics, and
+      external factors like seasonal patterns. Clean and preprocess the data for model
+      training.
+  - step: Predictive Model Development
+    details: Build and train machine learning models (e.g., time-series analysis,
+      anomaly detection) to forecast resource demands based on the preprocessed data.
+  - step: Resource Orchestration System
+    details: Develop a resource orchestration system capable of provisioning, scaling,
+      and deprovisioning compute resources across multiple cloud providers based on
+      defined policies and thresholds.
+  success_criteria:
+  - Predictive model achieves at least 90% accuracy in forecasting resource demands
+  - Resource orchestration system can scale resources up/down within 2 minutes of
+    demand changes
+  - Overall system reduces cloud infrastructure costs by at least 25% while maintaining
+    consistent application performance
+  evaluation_metrics:
+  - metric: Predictive Model Accuracy
+    target: '>= 90%'
+  - metric: Scaling Response Time
+    target: <= 2 minutes
+  - metric: Infrastructure Cost Reduction
+    target: '>= 25%'
+  difficulty: Advanced
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: COM_P2_001
+  requirements:
+    compute: 32 vCPUs, GPU-accelerated
+    memory: 64 GB RAM
+    capabilities:
+    - cloud_computing
+    - machine_learning
+    - time_series_analysis
+  rewards:
+    xp: 1000
+    capabilities:
+    - predictive_scaling
+    - resource_orchestration
+    resources:
+    - cloud_credits
+    - model_training_data
+  deliverables:
+  - Predictive resource demand forecasting model
+  - Dynamic resource orchestration system
+  - Deployment scripts and configuration files
+  - Technical documentation and usage guidelines

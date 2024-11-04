@@ -1,0 +1,131 @@
+- id: MOD_P1_005
+  title: Empathetic AI Companion
+  description: 'Develop an AI companion capable of detecting and responding appropriately
+
+    to human emotions. The AI should engage in natural conversations, recognizing
+
+    emotional cues from text, speech, and facial expressions to provide empathetic
+
+    and emotionally resonant responses.
+
+    '
+  objectives:
+  - Implement emotion detection from multimodal inputs (text, audio, visuals)
+  - Generate contextually appropriate emotional responses
+  - Maintain consistent emotional expression patterns across interactions
+  tasks:
+  - step: Integrate emotion detection models
+    details: Incorporate state-of-the-art models to detect emotions from text inputs
+      (e.g. BERT, RoBERTa), speech patterns (e.g. audio feature extraction), and facial
+      expressions (e.g. convolutional neural networks).
+  - step: Develop emotional response generation
+    details: Implement conditional language models to generate emotionally appropriate
+      text responses based on detected emotions and conversational context. Leverage
+      techniques like persona modeling and trait-based response variation.
+  - step: Build interactive interface
+    details: Create a multimodal interface with text, audio, and video input/output
+      to facilitate natural conversational interactions with the AI companion.
+  success_criteria:
+  - Emotion detection accuracy ≥ 80% across modalities
+  - Coherent, context-appropriate emotional responses ≥ 75% of interactions
+  - Consistent emotional tone maintained over 90% of multi-turn dialogues
+  evaluation_metrics:
+  - metric: Emotion classification F1 score
+    target: ≥ 0.85
+  - metric: Human evaluation - response quality
+    target: ≥ 4 (1-5 scale)
+  difficulty: Intermediate
+  category: Communication
+  duration: 8h
+  mainPrerequisite: MOD_P1_003
+  requirements:
+    compute: GPU (>= 8GB VRAM)
+    memory: 16GB RAM
+    capabilities:
+    - Emotion detection (text, audio, visuals)
+    - Conversational language modeling
+    - Persona and trait modeling
+  rewards:
+    xp: 500
+    capabilities:
+    - Emotional response generation
+    - Multimodal conversational AI
+    resources:
+    - Emotion detection models
+    - Response generation models
+  deliverables:
+  - Interactive AI companion interface
+  - Emotion detection code modules
+  - Emotional response generation modules
+  - Evaluation report (metrics, samples, analysis)
+- id: MOD_P1_003_M1
+  title: Personalized Customer Support AI
+  description: 'Design and develop an AI customer support assistant that can recognize
+    and respond to customers'' emotional states, providing personalized and empathetic
+    service tailored to each user''s emotional context.
+
+    '
+  objectives:
+  - Create an AI system capable of accurately detecting basic emotions from customer
+    text inputs and vocal patterns
+  - Generate emotionally appropriate responses that match the customer's emotional
+    state and maintain a natural conversational flow
+  - Integrate emotional intelligence into a customer support workflow to improve customer
+    satisfaction and resolution rates
+  tasks:
+  - step: Collect and annotate a diverse dataset of customer service interactions
+    details: Gather a large corpus of text logs, voice recordings, and other multimodal
+      data from real customer support interactions. Annotate each interaction with
+      labels for the customer's expressed emotions (e.g., frustration, joy, anger,
+      etc.).
+  - step: Train emotion detection models
+    details: Using the annotated dataset, train machine learning models (e.g., transformer-based
+      language models, acoustic feature analysis) to accurately classify customers'
+      emotional states from text inputs and vocal patterns.
+  - step: Develop an emotional response generation system
+    details: Build a system that can generate emotionally appropriate responses based
+      on the detected customer emotional state, interaction context, and predefined
+      conversational guidelines. Incorporate techniques like personality trait modeling
+      and emotional expression patterns.
+  - step: Integrate the emotion modeling system into a customer support workflow
+    details: Implement the emotional intelligence capabilities within a customer support
+      application or chatbot, allowing the AI assistant to dynamically adapt its responses
+      and communication style based on each customer's emotional state throughout
+      the interaction.
+  success_criteria:
+  - Emotion detection accuracy of at least 80% on a held-out test set
+  - Customer satisfaction scores at least 15% higher compared to a non-emotional baseline
+    system
+  - Resolution rates improved by at least 10% for emotionally charged customer interactions
+  evaluation_metrics:
+  - metric: Emotion detection F1 score
+    target: '>= 0.8'
+  - metric: Customer satisfaction rating increase
+    target: '>=15%'
+  - metric: Resolution rate increase for emotional interactions
+    target: '>=10%'
+  difficulty: Advanced
+  category: Communication
+  duration: 8h
+  mainPrerequisite: MOD_P1_003
+  requirements:
+    compute: High-performance GPU computing resources
+    memory: At least 32GB RAM
+    capabilities:
+    - Natural Language Processing
+    - Speech Recognition
+    - Multimodal Data Fusion
+    - Conversational AI
+  rewards:
+    xp: 1000
+    capabilities:
+    - Emotion Modeling
+    - Empathetic Response Generation
+    resources:
+    - Customer Support Interaction Dataset
+    - Emotion Annotation Guidelines
+  deliverables:
+  - Trained emotion detection models
+  - Emotional response generation system
+  - Integrated customer support AI assistant
+  - Evaluation report detailing performance metrics

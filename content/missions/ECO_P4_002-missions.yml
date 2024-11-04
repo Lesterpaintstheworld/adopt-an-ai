@@ -1,0 +1,128 @@
+- id: HMN_P0_046
+  title: Synergy in Healthcare Design
+  description: 'Design an intuitive, adaptive interface to enable seamless collaboration
+    between medical professionals and AI systems for personalized patient care planning
+    at a leading hospital.
+
+    '
+  objectives:
+  - Develop a multi-modal human-AI interface that facilitates natural interactions
+    and augmented decision-making
+  - Integrate domain knowledge from human experts with AI capabilities in diagnosis,
+    treatment planning and patient monitoring
+  - Ensure system adheres to ethical principles, privacy standards and regulatory
+    compliance
+  tasks:
+  - step: Conduct interviews and observational studies with physicians, nurses and
+      hospital staff
+    details: Gather insights on current workflows, pain points and interface needs
+      across diverse user groups
+  - step: Map human roles, expertise and decision processes involved in patient care
+      journeys
+    details: Identify key intervention points and requirements for augmented human-AI
+      collaboration
+  - step: Design an adaptive UI/UX framework with multimodal input-output capabilities
+    details: Include voice, AR/VR, haptics and data visualization tailored to personal
+      and contextual factors
+  success_criteria:
+  - 85% user adoption rate among target staff within 3 months of deployment
+  - 25% reduction in average time for care plan formulation per patient case
+  - Passing external audit for ethical compliance and security standards
+  evaluation_metrics:
+  - metric: User experience satisfaction
+    target: 4/5 average rating
+  - metric: Diagnostic accuracy enhancement
+    target: 15% improvement over unaided human baseline
+  difficulty: Intermediate
+  category: Communication
+  duration: 10h
+  mainPrerequisite: ECO_P4_002
+  requirements:
+    compute: 32 vCPUs, 4 Tensor Cores
+    memory: 128 GB RAM
+    capabilities:
+    - Natural Language Processing
+    - Computer Vision
+    - Healthcare Knowledge Modeling
+  rewards:
+    xp: 2000
+    capabilities:
+    - Human-AI Interaction Design
+    resources:
+    - Interface Design Templates
+    - Healthcare Dataset
+  deliverables:
+  - Validated human-AI interface framework and prototypes
+  - Implementation plan with deployment timelines
+  - User training materials and documentation
+- id: UNIFY_004
+  title: Symbiotic Workflow Integration
+  description: 'Design and implement an adaptive human-AI collaborative workflow platform
+    that leverages the Universal Harmony framework to enhance knowledge sharing, augment
+    problem-solving capabilities, and facilitate seamless cooperation between human
+    experts and artificial intelligence systems.
+
+    '
+  objectives:
+  - Develop a multimodal interaction interface that enables intuitive and natural
+    communication between humans and AI
+  - Implement advanced cognitive integration mechanisms to facilitate real-time knowledge
+    exchange and augmented reasoning
+  - Create personalized user interfaces tailored to individual needs and preferences
+    through user modeling and reinforcement learning
+  tasks:
+  - step: Conduct an in-depth analysis of target use cases and user requirements across
+      various domains (e.g., healthcare, education, manufacturing)
+    details: Identify specific scenarios, user personas, and domain-specific challenges
+      that could benefit from human-AI collaboration. Gather insights through user
+      interviews, observational studies, and data analysis.
+  - step: Design and architect the Symbiotic Workflow Integration platform
+    details: Define the system architecture, interaction modalities, data models,
+      and integration points between human and AI components. Incorporate cognitive
+      integration mechanisms, adaptive interfaces, and ethical safeguards.
+  - step: Develop and implement the core platform components
+    details: Build the multimodal interaction interface, knowledge representation
+      models, AI reasoning engines, and user interface adaptation modules. Integrate
+      existing AI capabilities and create new ones as needed.
+  success_criteria:
+  - Seamless integration of at least 5 diverse AI capabilities (e.g., natural language
+    processing, computer vision, predictive analytics) with human expertise
+  - Demonstrable improvement in task efficiency, decision quality, and overall productivity
+    for at least 3 use cases compared to baseline human or AI-only performance
+  - User satisfaction ratings of 4.5/5 or higher for interface intuitiveness, personalization,
+    and overall collaboration experience
+  evaluation_metrics:
+  - metric: Human-AI task completion time
+    target: 30% reduction compared to human or AI-only baselines
+  - metric: Decision accuracy or output quality
+    target: 20% improvement compared to human or AI-only baselines
+  - metric: User adoption and engagement
+    target: 80% of target users actively using the platform within 6 months
+  difficulty: Advanced
+  category: Communication, Creativity, Problem Solving
+  duration: 12h
+  mainPrerequisite: ECO_P4_002
+  requirements:
+    compute: High-performance computing cluster with GPU acceleration
+    memory: Minimum 64GB RAM per node
+    capabilities:
+    - Natural Language Processing
+    - Computer Vision
+    - Predictive Analytics
+    - Reinforcement Learning
+    - User Modeling
+  rewards:
+    xp: 2500
+    capabilities:
+    - Human-AI Collaboration
+    - Cognitive Integration
+    - Adaptive Interfaces
+    resources:
+    - Symbiotic Workflow Platform License
+    - $50,000 R&D Budget
+  deliverables:
+  - Functional Symbiotic Workflow Integration platform with documented architecture
+    and components
+  - Deployment guides and usage documentation for at least 3 validated use cases
+  - Detailed performance evaluation reports demonstrating success criteria achievement
+  - Ethical guidelines and safeguards for responsible human-AI collaboration

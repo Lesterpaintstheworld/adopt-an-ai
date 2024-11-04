@@ -1,0 +1,140 @@
+- id: PROJ_CODEGEN_001
+  title: Streamlining Legacy Application Development
+  description: 'A legacy financial application is in dire need of a major overhaul
+    to address performance and security issues. Your mission is to leverage AI-powered
+    code generation to refactor and optimize the core application modules while adhering
+    to industry best practices and coding standards.
+
+    '
+  objectives:
+  - Refactor and optimize the core transaction processing module for improved performance
+    and security
+  - Generate comprehensive documentation and test cases for the refactored code
+  - Ensure compliance with the latest industry standards and best practices for financial
+    applications
+  tasks:
+  - step: Analyze the existing codebase and identify performance bottlenecks and security
+      vulnerabilities
+    details: Review the application's architecture, data flow, and code implementation
+      to pinpoint areas requiring optimization and refactoring.
+  - step: Define requirements for the refactored transaction processing module
+    details: Clearly specify the desired functionality, performance targets, security
+      considerations, and integration points with other application components.
+  - step: Utilize the AI code generation tool to refactor and optimize the module
+    details: Provide the requirements and constraints to the AI assistant, and iteratively
+      refine the generated code until it meets all objectives.
+  - step: Integrate the refactored module into the existing codebase
+    details: Ensure seamless integration with the application's existing architecture,
+      resolving any dependencies or compatibility issues.
+  - step: Generate comprehensive documentation and test cases
+    details: Leverage the AI tool's capabilities to produce detailed documentation
+      and a comprehensive suite of test cases for the refactored module.
+  success_criteria:
+  - Successful integration of the refactored module into the existing application
+    codebase
+  - Measurable performance improvements, meeting or exceeding predefined targets
+  - Comprehensive test suite with at least 90% code coverage and no critical failures
+  - Detailed documentation covering architecture, implementation, and usage
+  evaluation_metrics:
+  - metric: Performance improvement (transaction throughput)
+    target: '>=30% increase'
+  - metric: Security vulnerabilities resolved
+    target: 100% of identified vulnerabilities addressed
+  - metric: Code quality (static analysis score)
+    target: '>=85%'
+  difficulty: Intermediate
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: APP_P1_004
+  requirements:
+    compute: High-performance compute instance (e.g., 8 vCPUs, 32 GB RAM)
+    memory: 16 GB RAM
+    capabilities:
+    - AI-powered code generation
+    - Static code analysis
+    - Profiling and optimization tools
+    - Automated testing framework
+  rewards:
+    xp: 500
+    capabilities:
+    - Advanced code refactoring
+    - Performance tuning
+    resources:
+    - Code optimization best practices guide
+    - Financial application security standards handbook
+  deliverables:
+  - Refactored and optimized transaction processing module
+  - Comprehensive test suite with at least 90% code coverage
+  - Detailed documentation covering architecture, implementation, and usage
+- id: APP_P1_004_1
+  title: Streamlining Software Development with AI-powered Code Generation
+  description: 'Leverage the AI-powered code generation system to develop a complex
+    web application, accelerating development cycles while maintaining high code quality,
+    adherence to best practices, and comprehensive documentation.
+
+    '
+  objectives:
+  - Implement a fully-featured web application that meets all specified requirements
+    using the AI code generation tool
+  - Ensure generated code adheres to industry best practices, follows established
+    coding standards, and incorporates appropriate security measures
+  - Maintain comprehensive documentation and test coverage for the entire codebase
+  tasks:
+  - step: Define application requirements and specifications
+    details: Provide a detailed natural language description of the desired web application
+      functionality, including user stories, data models, and integration requirements.
+  - step: Configure code generation system
+    details: Set up the AI code generation tool, specifying the target programming
+      languages, frameworks, and coding standards to be followed.
+  - step: Generate initial codebase
+    details: Use the AI system to generate a complete, optimized codebase for the
+      web application based on the provided requirements.
+  - step: Review and refine generated code
+    details: Thoroughly review the generated code, ensuring it meets quality standards,
+      incorporates best practices, and aligns with the project specifications.
+  - step: Extend and enhance functionality
+    details: Iteratively use the AI system to generate additional features, components,
+      and integrations, continuously expanding the application's capabilities.
+  - step: Conduct thorough testing and documentation
+    details: Leverage the AI system to generate comprehensive test suites and detailed
+      documentation for the entire codebase.
+  success_criteria:
+  - The web application meets all specified functional requirements and user stories
+  - Generated code adheres to at least 90% of the defined coding standards and best
+    practices
+  - At least 80% of the codebase is covered by automatically generated tests
+  - Comprehensive documentation is available for all components, including inline
+    code comments, API documentation, and architectural diagrams
+  evaluation_metrics:
+  - metric: Functional requirements coverage
+    target: 100%
+  - metric: Code quality score
+    target: '>= 85'
+  - metric: Test coverage
+    target: '>= 80%'
+  - metric: Documentation completeness
+    target: '>= 90%'
+  difficulty: Advanced
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: APP_P1_004
+  requirements:
+    compute: High-performance computing cluster
+    memory: 32GB RAM
+    capabilities:
+    - AI-powered code generation
+    - Integrated development environment
+    - Continuous integration and deployment tools
+  rewards:
+    xp: 1000
+    capabilities:
+    - Advanced code generation
+    - Automated documentation
+    resources:
+    - Code quality analysis toolkit
+    - Performance profiling tools
+  deliverables:
+  - Fully functional web application codebase
+  - Comprehensive test suite
+  - Detailed documentation (inline comments, API docs, architecture diagrams)
+  - Code quality and performance reports

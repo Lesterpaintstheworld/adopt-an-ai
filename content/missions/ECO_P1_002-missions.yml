@@ -1,0 +1,145 @@
+- id: RMK_INT_001
+  title: Curating a World-Class AI Dataset
+  description: 'In this mission, you will leverage the power of the ResourXchange
+    marketplace
+
+    to curate a comprehensive and high-quality dataset for a specific AI
+
+    development task, showcasing your expertise in data curation and resource
+
+    management.
+
+    '
+  objectives:
+  - Identify a real-world AI development task that requires a large and diverse dataset
+  - Source and acquire relevant data assets from the ResourXchange marketplace
+  - Clean, preprocess, and integrate the acquired data into a unified dataset
+  - Validate the dataset's quality and suitability for the target task
+  - List the curated dataset on the ResourXchange marketplace for sale or exchange
+  tasks:
+  - step: Research and select an AI development task
+    details: Conduct thorough research to identify a relevant and challenging AI task
+      that requires a large and diverse dataset. Consider domains such as computer
+      vision, natural language processing, or predictive analytics. Define the task's
+      objectives, use cases, and data requirements.
+  - step: Search and acquire data assets
+    details: Utilize the ResourXchange marketplace's advanced search capabilities
+      to find and acquire relevant data assets, such as labeled datasets, raw data
+      sources, and specialized tools. Leverage user reviews, ratings, and metadata
+      to evaluate the quality and suitability of each asset.
+  - step: Curate and integrate the dataset
+    details: Clean, preprocess, and integrate the acquired data assets into a unified
+      dataset, following best practices for data curation and quality assurance. Apply
+      techniques such as data cleaning, normalization, and augmentation to enhance
+      the dataset's quality and diversity.
+  success_criteria:
+  - The curated dataset meets the specified objectives and requirements for the target
+    AI development task
+  - The dataset exhibits high quality, diversity, and consistency, as validated through
+    rigorous testing and evaluation
+  - The dataset listing on the ResourXchange marketplace receives positive reviews
+    and attracts buyers or trading partners
+  evaluation_metrics:
+  - metric: Dataset size
+    target: Minimum of 100,000 individual data points or instances
+  - metric: Data diversity
+    target: Samples spanning at least 10 distinct categories or classes
+  - metric: Data quality score
+    target: Automated quality evaluation score of 90% or higher
+  difficulty: Intermediate
+  category: Research
+  duration: 8h
+  mainPrerequisite: ECO_P1_002
+  requirements:
+    compute: High-performance compute resources for data preprocessing and analysis
+    memory: Minimum 32GB RAM for handling large datasets
+    capabilities:
+    - Data Curation
+    - Quality Assurance
+    - AI Development
+  rewards:
+    xp: 2500
+    capabilities:
+    - Advanced Data Management
+    - ResourXchange Trading
+    resources:
+    - ResourXchange credits based on dataset sale or exchange value
+  deliverables:
+  - A well-documented, curated dataset tailored for the selected AI development task
+  - A comprehensive dataset listing on the ResourXchange marketplace, including metadata,
+    quality metrics, and usage guidelines
+  - A detailed report outlining the data curation process, techniques used, and validation
+    results
+- id: RSX_A_0034
+  title: Building an AI-Powered Asset Exchange Platform
+  description: 'In this mission, you will leverage the Resource Marketplace perk to
+    design and prototype an AI-powered platform for exchanging AI development assets.
+    The platform will facilitate the buying, selling, and trading of resources like
+    custom prompts, curated datasets, compute credits, and specialized tools within
+    the global AI community.
+
+    '
+  objectives:
+  - Design a robust asset management system with AI-powered content analysis and metadata
+    enrichment
+  - Develop a sophisticated marketplace engine facilitating complex transactions,
+    negotiations, and bartering arrangements
+  - Implement a reputation and trust scoring system to ensure quality contributions
+    and foster a self-regulating community
+  tasks:
+  - step: Analyze the Resource Marketplace perk and identify key features and requirements
+    details: Study the perk description, break down core functionalities, and define
+      technical specifications.
+  - step: Design the asset management system architecture
+    details: Develop a schema for asset metadata, define content analysis pipelines,
+      and plan federated search integration.
+  - step: Prototype the marketplace engine
+    details: Implement secure payment processing, escrow services, dispute resolution,
+      and bartering mechanisms.
+  - step: Develop the reputation and trust scoring algorithm
+    details: Design an algorithm that incentivizes quality contributions and maintains
+      community trust.
+  - step: Build a user interface and experience
+    details: Create user profiles, asset listings, search/browse capabilities, transaction
+      flows, and rating/review systems.
+  success_criteria:
+  - Asset management system accurately categorizes and enriches metadata for at least
+    90% of test assets
+  - Marketplace engine supports at least 3 transaction models (purchase, barter, negotiation)
+    with secure payments
+  - Reputation system correctly identifies and rewards high-quality contributions
+    in at least 85% of test cases
+  evaluation_metrics:
+  - metric: Asset metadata accuracy
+    target: '>= 90%'
+  - metric: Transaction success rate
+    target: '>= 95%'
+  - metric: Reputation scoring precision
+    target: '>= 85%'
+  difficulty: Advanced
+  category:
+  - Problem Solving
+  - Creativity
+  duration: 16h
+  mainPrerequisite: ECO_P1_002
+  requirements:
+    compute: High (GPU instances for AI workloads)
+    memory: 32GB+
+    capabilities:
+    - Asset management
+    - Marketplace integration
+    - AI content analysis
+    - Reputation scoring
+  rewards:
+    xp: 2500
+    capabilities:
+    - Advanced asset exchange
+    - Secure transactions
+    - Community moderation
+    resources:
+    - Platform credits
+    - Sample datasets
+  deliverables:
+  - Functional prototype of the AI-powered asset exchange platform
+  - Technical documentation and architecture diagrams
+  - Test reports validating success criteria and evaluation metrics

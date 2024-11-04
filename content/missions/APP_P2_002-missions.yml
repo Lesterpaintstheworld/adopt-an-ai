@@ -1,0 +1,142 @@
+- id: APP_P2_002_M001
+  title: Collaborative Album Creation
+  description: 'Leverage the Creative Suite''s capabilities to co-create an original
+    music album with an AI assistant, seamlessly blending human and artificial creativity
+    throughout the entire process, from ideation to production.
+
+    '
+  objectives:
+  - Collaborate with an AI assistant to generate original musical ideas, melodies,
+    and compositions
+  - Refine and iterate on AI-generated ideas to shape a cohesive album with a distinct
+    artistic voice
+  - Learn and adapt the AI assistant's understanding of personal musical preferences
+    and style
+  tasks:
+  - step: Define Album Concept and Style
+    details: Outline the overall artistic vision, genre, instrumentation, and stylistic
+      elements for the album. Provide examples of existing works that capture the
+      desired aesthetic.
+  - step: Seed the AI Assistant
+    details: Feed the AI assistant a selection of personal musical compositions to
+      establish a baseline understanding of individual musical style and preferences.
+  - step: Iterative Co-Creation
+    details: In a series of collaborative sessions, generate new musical ideas with
+      the AI assistant, including melodies, chord progressions, and arrangement concepts.
+      Refine and sculpt these ideas, providing feedback to further adapt the AI's
+      understanding.
+  - step: Arrange and Produce
+    details: Using the co-created musical elements, arrange and produce the final
+      album tracks, leveraging the suite's production tools and AI assistance for
+      tasks like mixing, mastering, and instrumentation.
+  success_criteria:
+  - A complete, cohesive music album consisting of at least 8 original compositions
+  - Clear evidence of creative collaboration between human and AI throughout the album
+  - Distinct artistic voice and style that aligns with the defined album concept
+  - Demonstration of the AI assistant's ability to adapt to personal musical preferences
+  evaluation_metrics:
+  - metric: Originality Score
+    target: Minimum 80% originality based on plagiarism detection tools
+  - metric: Style Consistency
+    target: At least 75% of human evaluators identify a consistent artistic voice
+      across the album
+  difficulty: Intermediate
+  category: Creativity
+  duration: 20h
+  mainPrerequisite: APP_P2_002
+  requirements:
+    compute: High-performance CPU and GPU for AI model processing
+    memory: 32GB RAM minimum
+    capabilities:
+    - Creative Suite with AI-powered music composition tools
+    - Music production software (e.g., digital audio workstation)
+    - Virtual instruments and sound libraries
+  rewards:
+    xp: 1000
+    capabilities:
+    - Advanced Music Composition
+    - AI-Assisted Music Production
+    resources:
+    - Exclusive virtual instrument pack
+    - Mastered album release credits
+  deliverables:
+  - A complete, mastered music album in digital format
+  - Documentation of the collaborative process, including iterations and feedback
+  - A detailed report on the AI assistant's adaptation to personal style preferences
+- id: ART_ADV_001
+  title: Creating a Collaborative AI-Powered Art Installation
+  description: 'In this mission, you will collaborate with an advanced Creative Suite
+    AI to design and produce an interactive art installation that combines visual
+    arts, music, and creative writing. The installation will showcase the capabilities
+    of AI-human co-creation and foster engagement with the local artistic community.
+
+    '
+  objectives:
+  - Design and implement a visually captivating and immersive art installation
+  - Leverage the Creative Suite AI to generate personalized artistic content
+  - Foster collaboration between human artists and AI assistants
+  - Engage the local artistic community through interactive elements
+  tasks:
+  - step: Define the overall concept and theme for the art installation
+    details: Collaborate with the Creative Suite AI to brainstorm ideas, explore artistic
+      styles, and refine the conceptual direction for the installation. Consider incorporating
+      elements that highlight the capabilities of AI-human co-creation.
+  - step: Plan and design the visual art components
+    details: Utilize the Creative Suite's visual arts tools and AI assistance to create
+      digital artwork, animations, and projection mapping content. Experiment with
+      different styles, techniques, and AI-generated suggestions to develop a cohesive
+      visual experience.
+  - step: Compose an original music score
+    details: Using the Creative Suite's music composition tools and AI assistance,
+      create an original music score that complements and enhances the visual elements
+      of the installation. Explore AI-generated melodies, rhythms, and instrumentation
+      to craft a unique sonic landscape.
+  - step: Incorporate interactive writing elements
+    details: Engage the Creative Suite's creative writing tools and AI assistance
+      to develop interactive storytelling experiences or poetry installations. Utilize
+      AI-generated text prompts and collaborative writing techniques to foster audience
+      participation and creative expression.
+  success_criteria:
+  - The art installation incorporates visual, auditory, and literary elements created
+    through AI-human collaboration
+  - The installation effectively showcases the capabilities of the Creative Suite
+    AI in generating personalized artistic content
+  - Engagement and participation from at least 50 local artists and community members
+    during the installation period
+  - Positive feedback from attendees, with an average rating of 4 or higher on a 5-point
+    scale for overall experience and artistic value
+  evaluation_metrics:
+  - metric: Visual appeal and artistic merit
+    target: Average rating of 4 or higher on a 5-point scale from a panel of art critics
+      and curators
+  - metric: Engagement and interactivity
+    target: At least 75% of attendees actively participate in the interactive elements
+      of the installation
+  - metric: Collaboration and co-creation
+    target: At least 10 distinct collaborations between human artists and AI assistants
+      are showcased within the installation
+  difficulty: Advanced
+  category: Creativity
+  duration: 8h
+  mainPrerequisite: APP_P2_002
+  requirements:
+    compute: High-performance GPU and CPU clusters
+    memory: 64GB RAM or higher
+    capabilities:
+    - Advanced visual arts generation
+    - Music composition and audio synthesis
+    - Creative writing and natural language generation
+    - Interactive installation design and projection mapping
+  rewards:
+    xp: 1000
+    capabilities:
+    - Collaborative artistic co-creation
+    - AI-driven multimedia installation design
+    resources:
+    - 10,000 credits for art supplies and equipment rental
+  deliverables:
+  - A fully implemented, interactive art installation showcasing AI-human co-creation
+  - Documentation of the collaborative process, including design sketches, concept
+    art, and project logs
+  - A promotional video highlighting the installation's key features and artistic
+    elements

@@ -1,0 +1,139 @@
+- id: AGT_M2_017
+  title: Quantum Resource Optimization Challenge
+  description: "Leverage the capabilities of quantum resource discovery and novel\
+    \ computational paradigms\nto optimize resource utilization and unlock new computational\
+    \ resources for a \ncutting-edge scientific simulation.\n"
+  objectives:
+  - Develop a quantum resource discovery engine to identify untapped computational
+    potential
+  - Implement novel computing paradigms derived from quantum principles
+  - Optimize resource utilization for a complex molecular dynamics simulation
+  tasks:
+  - step: Develop a quantum resource discovery engine
+    details: 'Create a system that can analyze quantum states and identify opportunities
+      for new
+
+      computational paradigms. Leverage principles like quantum entanglement and superposition
+
+      to simulate and evaluate the performance of these novel approaches.
+
+      '
+  - step: Implement novel computing paradigms
+    details: 'Based on the identified opportunities, implement and test new computational
+      paradigms
+
+      that transcend classical computing limitations. These should leverage quantum
+
+      principles and provide tangible performance improvements.
+
+      '
+  - step: Optimize resource utilization for simulation
+    details: 'Apply the new computational paradigms and optimized resource utilization
+      strategies
+
+      to a complex molecular dynamics simulation, showcasing the computational power
+      gained
+
+      through innovative resource generation.
+
+      '
+  success_criteria:
+  - Identify at least 3 viable novel computational paradigms through quantum resource
+    discovery
+  - Achieve at least 50% performance improvement in the molecular dynamics simulation
+  - Demonstrate sustainable resource generation and optimization
+  evaluation_metrics:
+  - metric: Novel computational paradigms identified
+    target: '>=3'
+  - metric: Simulation performance improvement
+    target: '>=50%'
+  difficulty: Intermediate
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: AGT_P3_004
+  requirements:
+    compute: High-performance quantum computing cluster
+    memory: 512 GB RAM
+    capabilities:
+    - Quantum Computing
+    - Simulation
+    - Resource Optimization
+  rewards:
+    xp: 1000
+    capabilities:
+    - Quantum Resource Discovery
+    - Novel Computational Paradigms
+    resources:
+    - Quantum Computing Credits
+  deliverables:
+  - Quantum resource discovery engine implementation
+  - Novel computational paradigm specifications and benchmarks
+  - Optimized molecular dynamics simulation results and performance analysis
+- id: AGT_M4_072
+  title: Quantum Reality Engine - Simulating Novel Computational Paradigms
+  description: 'Leverage the quantum resource discovery engine at Singularity Labs
+    to simulate and evaluate the performance of a novel computational paradigm inspired
+    by the principles of quantum entanglement and superposition. Explore the potential
+    of this paradigm to transcend the limitations of classical computing and unlock
+    unprecedented computational power.
+
+    '
+  objectives:
+  - Develop a mathematical model for a novel computational paradigm based on quantum
+    phenomena
+  - Implement the model within the quantum resource discovery engine for simulation
+    and analysis
+  - Evaluate the simulated paradigm's performance across various computational tasks
+    and benchmark against classical approaches
+  tasks:
+  - step: Conduct a comprehensive literature review on quantum computing principles,
+      focusing on entanglement and superposition
+    details: Analyze seminal research papers, identify key concepts, and formulate
+      a theoretical foundation for the novel computational paradigm.
+  - step: Develop a rigorous mathematical model for the proposed paradigm, incorporating
+      principles of quantum mechanics
+    details: Define the computational operations, data representations, and information
+      flow within the paradigm. Ensure the model adheres to the principles of quantum
+      theory.
+  - step: Integrate the developed model into the quantum resource discovery engine's
+      simulation framework
+    details: Collaborate with Singularity Labs' quantum computing team to adapt the
+      engine's codebase and enable the simulation of the novel paradigm.
+  success_criteria:
+  - The mathematical model accurately captures the quantum phenomena and computational
+    principles of the proposed paradigm
+  - The model is successfully integrated into the quantum resource discovery engine
+    for simulation and analysis
+  - Simulations demonstrate the paradigm's potential for enhanced computational performance
+    compared to classical approaches
+  evaluation_metrics:
+  - metric: Simulation accuracy
+    target: ≥ 95% correspondence with theoretical predictions
+  - metric: Performance gain over classical approaches
+    target: ≥ 50% improvement in computational speed and/or resource efficiency for
+      specific tasks
+  difficulty: Advanced
+  category: Research
+  duration: 10h
+  mainPrerequisite: AGT_P3_004
+  requirements:
+    compute: Access to Singularity Labs' quantum computing cluster
+    memory: 256 GB RAM
+    capabilities:
+    - Quantum Simulation
+    - Theoretical Physics
+    - Computational Modeling
+  rewards:
+    xp: 2500
+    capabilities:
+    - Novel Computational Paradigm Design
+    - Quantum Resource Optimization
+    resources:
+    - 100,000 quantum computing cycles
+  deliverables:
+  - A detailed report on the novel computational paradigm's theoretical foundation,
+    mathematical model, and simulation results
+  - Source code for the implemented model and its integration into the quantum resource
+    discovery engine
+  - A comparative analysis of the paradigm's performance against classical approaches,
+    including specific benchmarks and use cases

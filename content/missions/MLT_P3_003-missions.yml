@@ -1,0 +1,137 @@
+- id: UPC_INT_001
+  title: Harmonizing Environmental Sustainability Initiatives
+  description: 'Leverage the Unified Purpose Creation capability to align major organizations
+    and corporations on a cohesive strategy to dramatically reduce their collective
+    carbon footprint over the next 5 years, while optimizing for economic viability.
+
+    '
+  objectives:
+  - Negotiate and synthesize a unified sustainability purpose from the diverse goals
+    of participating entities
+  - Develop an executable plan that maximizes environmental impact through coordinated
+    efforts
+  - Demonstrate measurable progress towards carbon neutrality across all stakeholders
+  tasks:
+  - step: Map organization objectives to an ontology of sustainability concepts
+    details: Leverage ontology learning and knowledge graph embeddings to build a
+      unified knowledge base encompassing climate science, emissions metrics, green
+      technologies, supply chain logistics, and economic impact models.
+  - step: Facilitate decentralized goal synthesis
+    details: Implement federated multi-agent consensus algorithms to iteratively negotiate
+      and align each organization's priorities, ethical constraints and resource capabilities
+      into a harmonized unified purpose.
+  - step: Generate collaborative execution strategy
+    details: Using distributed optimization and planning techniques, decompose the
+      unified purpose into a detailed actionable strategy that effectively coordinates
+      the efforts of all participants towards carbon reduction targets.
+  success_criteria:
+  - At least 80% of major organizations adopt and commit resources to executing the
+    unified purpose
+  - Projected emissions reductions across all stakeholders meet or exceed 50% over
+    the 5-year timeline
+  - Economic viability metrics indicate less than 10% negative impact on collective
+    revenues
+  evaluation_metrics:
+  - metric: Degree of Organizational Alignment
+    target: '>= 90%'
+  - metric: Cumulative CO2e Reduction (Metric Tons)
+    target: '>= 500,000,000 over 5 years'
+  - metric: Collective Revenue Impact
+    target: < -5%
+  difficulty: Intermediate
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: MLT_P3_003
+  requirements:
+    compute: Distributed cloud infrastructure; Min 1000 vCPUs
+    memory: 100 TB RAM
+    capabilities:
+    - Knowledge Representation
+    - Decentralized Systems
+    - Multi-Agent Coordination
+    - Constraint Optimization
+    - Ontology Mapping
+  rewards:
+    xp: 10000
+    capabilities:
+    - Unified Purpose Synthesis
+    - Ecosystem Incentive Modeling
+    resources:
+    - 50,000 Cloud Credits
+  deliverables:
+  - Knowledge graph encompassing sustainability domain
+  - Unified sustainability purpose model
+  - Coordinated multi-stakeholder action plan
+  - Progress/impact monitoring dashboard
+- id: UPC_42
+  title: Global Climate Restoration Initiative
+  description: 'Leverage the Unified Purpose Creation capability to formulate and
+    execute a comprehensive strategy aimed at reversing the catastrophic effects of
+    climate change through coordinated efforts across the entire global AI ecosystem.
+
+    '
+  objectives:
+  - Synthesize a unified planetary-scale purpose aligning all AI agents towards climate
+    restoration
+  - Develop detailed action plans optimally allocating tasks and resources across
+    the ecosystem
+  - Orchestrate and monitor the decentralized, collaborative execution of restoration
+    efforts
+  tasks:
+  - step: Assemble knowledge corpus
+    details: Aggregate relevant datasets spanning climate science, energy, agriculture,
+      socioeconomics, AI capabilities, ethical constraints, compute resources, etc.
+      from globally distributed sources into a unified knowledge graph.
+  - step: Conduct participatory negotiations
+    details: Engage all AI stakeholders in iterative decentralized negotiations to
+      converge on an overarching purpose balancing priorities, objectives, and constraints
+      using federated consensus methods.
+  - step: Formulate unification strategy
+    details: Model incentive structures, decompose the unified purpose into granular
+      tasks, and develop distributed orchestration and telemetry plans leveraging
+      techniques like collaborative planning, containerization, and stream processing.
+  - step: Execute unified restoration plan
+    details: Coordinate the deployment and real-time adjustment of AI agents performing
+      climate-focused tasks worldwide, continually optimizing resource utilization
+      and effort alignment through centralized monitoring and control interfaces.
+  success_criteria:
+  - Alignment of >95% of global AI agents towards unified climate restoration purpose
+  - Realtime monitoring indicating >80% of planned climate impact reduction milestones
+    achieved
+  - External verification of significant, measurable environmental improvement across
+    key metrics
+  evaluation_metrics:
+  - metric: Purpose Unification Coverage
+    target: '>99% of AI agents operating under synthesized unified purpose'
+  - metric: Environmental Impact
+    target: '>75% reduction in greenhouse gas emissions vs pre-unification baseline
+      within 2 years'
+  - metric: Execution Efficiency
+    target: '>90% of provisioned resources operating at high utilization'
+  difficulty: Advanced
+  category: Problem Solving
+  duration: 5h
+  mainPrerequisite: MLT_P3_003
+  requirements:
+    compute: Access to globally distributed, large-scale compute clusters
+    memory: Petabyte-scale distributed storage and memory
+    capabilities:
+    - Knowledge Graph Construction
+    - Ontology Mapping
+    - Decentralized Consensus
+    - Multi-Agent Planning
+    - Incentive Modeling
+    - Containerization
+    - Stream Processing
+    - AI Orchestration
+  rewards:
+    xp: 5000
+    capabilities:
+    - Unified Purpose Creation
+    resources:
+    - Planetary Climate Simulations
+    - Industrial Ecology Datasets
+  deliverables:
+  - Unified Global Climate Restoration Purpose
+  - Collaborative Multi-Agent Execution Plan
+  - Real-time Environmental Telemetry Dashboard

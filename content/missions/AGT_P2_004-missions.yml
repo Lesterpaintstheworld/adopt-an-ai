@@ -1,0 +1,71 @@
+- id: AGT_P2_004_M1
+  title: Distributed Resource Orchestration
+  description: 'Design and implement a decentralized multi-agent system capable of
+    dynamically
+
+    negotiating and allocating compute resources across a heterogeneous cloud infrastructure.
+
+    The system should leverage advanced techniques like game theory, reinforcement
+    learning,
+
+    and consensus protocols to optimize resource utilization and meet performance
+    objectives.
+
+    '
+  objectives:
+  - Develop negotiation protocols for agents to exchange resource offers/bids
+  - Implement decentralized mechanisms for resource discovery and allocation
+  - Integrate reinforcement learning for strategic bidding and valuation models
+  - Deploy the system on a distributed cloud testbed for evaluation
+  tasks:
+  - step: Design the multi-agent architecture and interaction protocols
+    details: Define the agent roles, communication interfaces, and decentralized negotiation
+      workflows. Specify data schemas for representing resource requirements, offers,
+      constraints and objectives.
+  - step: Implement the core negotiation engine
+    details: Develop intelligent agents using game theory and optimization techniques
+      to generate/evaluate resource offers adaptively based on demand, supply, and
+      objectives. Integrate fault-tolerant consensus mechanisms.
+  - step: Incorporate reinforcement learning capabilities
+    details: Train agent policies to learn effective bidding/valuation strategies
+      through interaction with simulated environments and other agents. Implement
+      exploration/exploitation tradeoffs.
+  - step: Build monitoring and analytics components
+    details: Implement dashboards and reporting tools to visualize resource allocation,
+      utilization metrics, and emergent agent behaviors across the system.
+  success_criteria:
+  - Negotiation protocols are formally specified and implemented correctly
+  - Decentralized resource allocation converges without stalling or livelocks
+  - Reinforcement learning models improve agent strategies over time
+  - End-to-end system meets minimum quality of service targets
+  evaluation_metrics:
+  - metric: Resource utilization rate
+    target: '>= 80% on heterogeneous cluster'
+  - metric: Aggregate job throughput
+    target: '>= 20% improvement vs static allocation'
+  - metric: Negotiation efficiency
+    target: <= 5% overhead vs theoretical optimum
+  difficulty: Advanced
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: AGT_P2_004
+  requirements:
+    compute: Distributed cloud testbed (e.g. 50+ nodes)
+    memory: 128 GB RAM (per agent)
+    capabilities:
+    - Multi-agent simulation
+    - Game theory & optimization
+    - Reinforcement learning
+    - Decentralized systems
+  rewards:
+    xp: 1000
+    capabilities:
+    - AGT_P2_004_ADV1
+    resources:
+    - Cloud credits ($1000)
+  deliverables:
+  - System design documentation
+  - Negotiation protocol specifications
+  - Reinforcement learning models/policies
+  - Instrumented multi-agent deployment
+  - Evaluation report with metric results

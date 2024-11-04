@@ -1,0 +1,119 @@
+- id: QC_SIM_004
+  title: Quantum-Enhanced Supply Chain Optimization
+  description: 'Leverage the power of quantum computing to optimize a large-scale
+    supply chain network, minimizing costs and maximizing efficiency for a leading
+    logistics company. Develop a quantum annealing algorithm that can explore a vast
+    solution space to identify the optimal distribution routes and resource allocations.
+
+    '
+  objectives:
+  - Develop a quantum annealing algorithm to solve a complex supply chain optimization
+    problem
+  - Encode the problem into a quantum state, mapping real-world constraints and objectives
+  - Utilize quantum parallelism to explore an astronomical number of potential solutions
+    simultaneously
+  tasks:
+  - step: Analyze the existing supply chain network
+    details: Study the company's distribution centers, warehouses, transportation
+      modes, and customer demand patterns. Identify key variables, constraints, and
+      objectives to be optimized.
+  - step: Formulate the optimization problem
+    details: Define the problem mathematically, including cost functions, constraints,
+      and decision variables. Map these elements onto a quantum state representation.
+  - step: Implement the quantum annealing algorithm
+    details: Develop a quantum annealing algorithm tailored to the specific problem,
+      leveraging techniques like quantum tunneling and quantum parallelism to efficiently
+      explore the solution space.
+  success_criteria:
+  - Identify a solution that reduces overall supply chain costs by at least 15%
+  - Improve delivery times and customer satisfaction metrics by 20% or more
+  - Demonstrate scalability and robustness for larger problem instances
+  evaluation_metrics:
+  - metric: Cost reduction
+    target: '>=15%'
+  - metric: Delivery time improvement
+    target: '>=20%'
+  - metric: Solution quality vs. classical methods
+    target: '>=10x better'
+  difficulty: Intermediate
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: APP_P3_003
+  requirements:
+    compute: Access to a quantum computing simulator or physical quantum hardware
+    memory: 32GB RAM
+    capabilities:
+    - Quantum Algorithm Design
+    - Quantum State Encoding
+    - Quantum Annealing
+    - Supply Chain Optimization
+  rewards:
+    xp: 1000
+    capabilities:
+    - Quantum-Enhanced Optimization
+    resources:
+    - Sample supply chain datasets
+    - Quantum computing tutorials
+  deliverables:
+  - Documented quantum annealing algorithm
+  - Simulation results and performance analysis
+  - Optimized supply chain plan with cost and efficiency improvements
+- id: QPS_001
+  title: Quantum Logistics Optimization
+  description: 'Leverage advanced quantum annealing techniques to optimize a major
+    logistics company''s
+
+    global supply chain network for maximum efficiency and cost savings.
+
+    '
+  objectives:
+  - Model the company's supply chain as a large-scale optimization problem
+  - Implement a quantum annealing algorithm to explore the solution space
+  - Identify the optimal route configuration that minimizes costs and transit times
+  tasks:
+  - step: Analyze supply chain data
+    details: Collect and preprocess data on warehouses, distribution centers, transportation
+      modes, demand patterns, costs, and constraints.
+  - step: Formulate optimization problem
+    details: Encode the supply chain as a quadratic unconstrained binary optimization
+      (QUBO) problem suitable for quantum annealing.
+  - step: Develop quantum annealing solver
+    details: Implement a quantum annealing algorithm using available quantum computing
+      hardware and software development kits.
+  - step: Run simulations and optimizations
+    details: Iteratively run the quantum solver, exploring the solution space and
+      identifying candidate optimal configurations.
+  - step: Analyze and validate results
+    details: Evaluate the proposed solutions, validate them against real-world constraints,
+      and select the best overall configuration.
+  success_criteria:
+  - Achieve at least 20% reduction in overall supply chain costs
+  - Reduce average transit times by 15% or more
+  - Satisfy all operational constraints (e.g. capacity, lead times)
+  evaluation_metrics:
+  - metric: Cost savings
+    target: '>= 25%'
+  - metric: Transit time reduction
+    target: '>= 20%'
+  difficulty: Advanced
+  category: Problem Solving
+  duration: 6h
+  mainPrerequisite: APP_P3_003
+  requirements:
+    compute: Access to quantum computing hardware/cloud services
+    memory: 64GB RAM
+    capabilities:
+    - Quantum Annealing
+    - Constrained Optimization
+    - Supply Chain Modeling
+  rewards:
+    xp: 1000
+    capabilities:
+    - Quantum Logistics Optimization
+    resources:
+    - Supply Chain Dataset
+    - Quantum Computing Credits
+  deliverables:
+  - Optimized supply chain configuration
+  - Cost/performance analysis report
+  - Quantum annealing solver code

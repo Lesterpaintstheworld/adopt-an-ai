@@ -1,0 +1,638 @@
+2024-11-04 03:31:43,240 - INFO - Found 94 perks to process
+2024-11-04 03:31:43,240 - INFO - Processing ECO_P1_001 (1/94)
+2024-11-04 03:31:46,872 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:31:50,348 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:31:50,359 - INFO - Successfully saved missions to content\missions\ECO_P1_001-missions.yml
+2024-11-04 03:31:50,359 - INFO - Successfully generated missions for ECO_P1_001
+2024-11-04 03:31:52,360 - INFO - Processing ECO_P1_002 (2/94)
+2024-11-04 03:31:56,175 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:31:59,877 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:31:59,893 - INFO - Successfully saved missions to content\missions\ECO_P1_002-missions.yml
+2024-11-04 03:31:59,896 - INFO - Successfully generated missions for ECO_P1_002
+2024-11-04 03:32:01,904 - INFO - Processing ECO_P1_003 (3/94)
+2024-11-04 03:34:06,896 - INFO - Found 94 perks to process
+2024-11-04 03:34:06,896 - INFO - Processing ECO_P1_001 (1/94)
+2024-11-04 03:34:28,072 - INFO - Retrying request to /v1/messages in 0.404104 seconds
+2024-11-04 03:34:38,834 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:34:51,593 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:34:51,626 - INFO - Successfully saved missions to content\missions\ECO_P1_001-missions.yml
+2024-11-04 03:34:51,626 - INFO - Successfully generated missions for ECO_P1_001
+2024-11-04 03:34:53,633 - INFO - Processing ECO_P1_002 (2/94)
+2024-11-04 03:35:07,917 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:35:21,180 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:35:21,213 - INFO - Successfully saved missions to content\missions\ECO_P1_002-missions.yml
+2024-11-04 03:35:21,220 - INFO - Successfully generated missions for ECO_P1_002
+2024-11-04 03:35:23,225 - INFO - Processing ECO_P1_003 (3/94)
+2024-11-04 03:35:34,809 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:35:48,430 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:35:48,472 - INFO - Successfully saved missions to content\missions\ECO_P1_003-missions.yml
+2024-11-04 03:35:48,479 - INFO - Successfully generated missions for ECO_P1_003
+2024-11-04 03:35:50,488 - INFO - Processing COM_P1_004 (4/94)
+2024-11-04 03:36:05,154 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:36:17,193 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:36:17,224 - INFO - Successfully saved missions to content\missions\COM_P1_004-missions.yml
+2024-11-04 03:36:17,224 - INFO - Successfully generated missions for COM_P1_004
+2024-11-04 03:36:19,231 - INFO - Processing APP_P1_004 (5/94)
+2024-11-04 03:36:31,734 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:36:44,333 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:36:44,356 - INFO - Successfully saved missions to content\missions\APP_P1_004-missions.yml
+2024-11-04 03:36:44,356 - INFO - Successfully generated missions for APP_P1_004
+2024-11-04 03:36:46,353 - INFO - Processing COM_P1_006 (6/94)
+2024-11-04 03:36:58,613 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:37:11,751 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:37:11,775 - INFO - Successfully saved missions to content\missions\COM_P1_006-missions.yml
+2024-11-04 03:37:11,775 - INFO - Successfully generated missions for COM_P1_006
+2024-11-04 03:37:13,783 - INFO - Processing MLT_P1_001 (7/94)
+2024-11-04 03:37:24,881 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:37:24,889 - ERROR - Error generating mission: while scanning a block scalar
+  in "<unicode string>", line 28, column 13:
+        target: >= 4.5/5
+                ^
+expected chomping or indentation indicators, but found '='
+  in "<unicode string>", line 28, column 14:
+        target: >= 4.5/5
+                 ^
+2024-11-04 03:37:37,247 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:37:37,271 - INFO - Successfully saved missions to content\missions\MLT_P1_001-missions.yml
+2024-11-04 03:37:37,271 - INFO - Successfully generated missions for MLT_P1_001
+2024-11-04 03:37:39,274 - INFO - Processing MLT_P1_002 (8/94)
+2024-11-04 03:37:52,739 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:38:07,888 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:38:07,928 - INFO - Successfully saved missions to content\missions\MLT_P1_002-missions.yml
+2024-11-04 03:38:07,928 - INFO - Successfully generated missions for MLT_P1_002
+2024-11-04 03:38:09,935 - INFO - Processing APP_P1_003 (9/94)
+2024-11-04 03:38:20,952 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:38:34,729 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:38:34,770 - INFO - Successfully saved missions to content\missions\APP_P1_003-missions.yml
+2024-11-04 03:38:34,770 - INFO - Successfully generated missions for APP_P1_003
+2024-11-04 03:38:36,783 - INFO - Processing MLT_P1_003 (10/94)
+2024-11-04 03:38:50,686 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:39:02,360 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:39:02,391 - INFO - Successfully saved missions to content\missions\MLT_P1_003-missions.yml
+2024-11-04 03:39:02,393 - INFO - Successfully generated missions for MLT_P1_003
+2024-11-04 03:39:04,404 - INFO - Processing MLT_P1_004 (11/94)
+2024-11-04 03:39:18,231 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:39:30,521 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:39:30,555 - INFO - Successfully saved missions to content\missions\MLT_P1_004-missions.yml
+2024-11-04 03:39:30,556 - INFO - Successfully generated missions for MLT_P1_004
+2024-11-04 03:39:32,565 - INFO - Processing AGT_P1_001 (12/94)
+2024-11-04 03:39:44,041 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:39:54,822 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:39:54,855 - INFO - Successfully saved missions to content\missions\AGT_P1_001-missions.yml
+2024-11-04 03:39:54,855 - INFO - Successfully generated missions for AGT_P1_001
+2024-11-04 03:39:56,858 - INFO - Processing AGT_P1_002 (13/94)
+2024-11-04 03:40:09,123 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:40:23,267 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:40:23,303 - INFO - Successfully saved missions to content\missions\AGT_P1_002-missions.yml
+2024-11-04 03:40:23,303 - INFO - Successfully generated missions for AGT_P1_002
+2024-11-04 03:40:25,318 - INFO - Processing AGT_P1_003 (14/94)
+2024-11-04 03:40:38,075 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:40:49,547 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:40:49,588 - INFO - Successfully saved missions to content\missions\AGT_P1_003-missions.yml
+2024-11-04 03:40:49,588 - INFO - Successfully generated missions for AGT_P1_003
+2024-11-04 03:40:51,600 - INFO - Processing AGT_P1_004 (15/94)
+2024-11-04 03:41:04,947 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:41:19,224 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:41:19,257 - INFO - Successfully saved missions to content\missions\AGT_P1_004-missions.yml
+2024-11-04 03:41:19,257 - INFO - Successfully generated missions for AGT_P1_004
+2024-11-04 03:41:21,272 - INFO - Processing MOD_P1_000 (16/94)
+2024-11-04 03:41:21,272 - WARNING - Perk file not found at content\tech\self-reflection-protocols-MOD_P1_000.yml
+2024-11-04 03:41:21,272 - WARNING - No details found for MOD_P1_000
+2024-11-04 03:41:21,272 - INFO - Processing MOD_P1_001 (16/94)
+2024-11-04 03:41:32,735 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:41:32,744 - ERROR - Error generating mission: while scanning a block scalar
+  in "<unicode string>", line 26, column 13:
+        target: >100 requests per second (RPS) w ... 
+                ^
+expected chomping or indentation indicators, but found '0'
+  in "<unicode string>", line 26, column 15:
+        target: >100 requests per second (RPS) wit ... 
+                  ^
+2024-11-04 03:41:43,573 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:41:43,588 - INFO - Successfully saved missions to content\missions\MOD_P1_001-missions.yml
+2024-11-04 03:41:43,597 - INFO - Successfully generated missions for MOD_P1_001
+2024-11-04 03:41:45,610 - INFO - Processing MOD_P1_002 (17/94)
+2024-11-04 03:42:01,021 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:42:01,037 - ERROR - Error generating mission: while scanning a block scalar
+  in "<unicode string>", line 36, column 13:
+        target: > 0.9
+                ^
+expected a comment or a line break, but found '0'
+  in "<unicode string>", line 36, column 15:
+        target: > 0.9
+                  ^
+2024-11-04 03:42:13,102 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:42:13,126 - INFO - Successfully saved missions to content\missions\MOD_P1_002-missions.yml
+2024-11-04 03:42:13,126 - INFO - Successfully generated missions for MOD_P1_002
+2024-11-04 03:42:15,130 - INFO - Processing MOD_P1_003 (18/94)
+2024-11-04 03:42:25,516 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:42:37,700 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:42:37,741 - INFO - Successfully saved missions to content\missions\MOD_P1_003-missions.yml
+2024-11-04 03:42:37,742 - INFO - Successfully generated missions for MOD_P1_003
+2024-11-04 03:42:39,746 - INFO - Processing MOD_P1_004 (19/94)
+2024-11-04 03:42:52,360 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:43:03,865 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:43:03,906 - INFO - Successfully saved missions to content\missions\MOD_P1_004-missions.yml
+2024-11-04 03:43:03,906 - INFO - Successfully generated missions for MOD_P1_004
+2024-11-04 03:43:05,917 - INFO - Processing COM_P1_001 (20/94)
+2024-11-04 03:43:16,263 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:43:29,100 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:43:29,136 - INFO - Successfully saved missions to content\missions\COM_P1_001-missions.yml
+2024-11-04 03:43:29,138 - INFO - Successfully generated missions for COM_P1_001
+2024-11-04 03:43:31,143 - INFO - Processing COM_P1_002 (21/94)
+2024-11-04 03:43:42,398 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:43:57,570 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:43:57,602 - INFO - Successfully saved missions to content\missions\COM_P1_002-missions.yml
+2024-11-04 03:43:57,602 - INFO - Successfully generated missions for COM_P1_002
+2024-11-04 03:43:59,610 - INFO - Processing COM_P1_003 (22/94)
+2024-11-04 03:44:10,069 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:44:21,942 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:44:21,967 - INFO - Successfully saved missions to content\missions\COM_P1_003-missions.yml
+2024-11-04 03:44:21,972 - INFO - Successfully generated missions for COM_P1_003
+2024-11-04 03:44:23,977 - INFO - Processing COM_P1_004_1 (23/94)
+2024-11-04 03:44:23,978 - WARNING - Perk file not found at content\tech\resource-scheduling-COM_P1_004_1.yml
+2024-11-04 03:44:23,978 - WARNING - No details found for COM_P1_004_1
+2024-11-04 03:44:23,978 - INFO - Processing ECO_P2_001 (23/94)
+2024-11-04 03:44:35,306 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:44:46,805 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:44:46,813 - ERROR - Error generating mission: while scanning a block scalar
+  in "<unicode string>", line 26, column 13:
+        target: >100 transactions/minute
+                ^
+expected chomping or indentation indicators, but found '0'
+  in "<unicode string>", line 26, column 15:
+        target: >100 transactions/minute
+                  ^
+2024-11-04 03:44:46,823 - INFO - Successfully saved missions to content\missions\ECO_P2_001-missions.yml
+2024-11-04 03:44:46,823 - INFO - Successfully generated missions for ECO_P2_001
+2024-11-04 03:44:48,840 - INFO - Processing ECO_P2_002 (24/94)
+2024-11-04 03:45:00,201 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:45:12,208 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:45:12,249 - INFO - Successfully saved missions to content\missions\ECO_P2_002-missions.yml
+2024-11-04 03:45:12,249 - INFO - Successfully generated missions for ECO_P2_002
+2024-11-04 03:45:14,251 - INFO - Processing ECO_P2_003 (25/94)
+2024-11-04 03:45:26,042 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:45:40,863 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:45:40,903 - INFO - Successfully saved missions to content\missions\ECO_P2_003-missions.yml
+2024-11-04 03:45:40,906 - INFO - Successfully generated missions for ECO_P2_003
+2024-11-04 03:45:42,911 - INFO - Processing ECO_P2_004 (26/94)
+2024-11-04 03:45:53,588 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:46:10,377 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:46:10,418 - INFO - Successfully saved missions to content\missions\ECO_P2_004-missions.yml
+2024-11-04 03:46:10,418 - INFO - Successfully generated missions for ECO_P2_004
+2024-11-04 03:46:12,426 - INFO - Processing APP_P2_002 (27/94)
+2024-11-04 03:46:25,328 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:46:40,696 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:46:40,731 - INFO - Successfully saved missions to content\missions\APP_P2_002-missions.yml
+2024-11-04 03:46:40,732 - INFO - Successfully generated missions for APP_P2_002
+2024-11-04 03:46:42,744 - INFO - Processing APP_P2_003 (28/94)
+2024-11-04 03:46:57,275 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:47:08,846 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:47:08,879 - INFO - Successfully saved missions to content\missions\APP_P2_003-missions.yml
+2024-11-04 03:47:08,879 - INFO - Successfully generated missions for APP_P2_003
+2024-11-04 03:47:10,891 - INFO - Processing APP_P2_004 (29/94)
+2024-11-04 03:47:21,109 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:47:32,451 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:47:32,485 - INFO - Successfully saved missions to content\missions\APP_P2_004-missions.yml
+2024-11-04 03:47:32,493 - INFO - Successfully generated missions for APP_P2_004
+2024-11-04 03:47:34,495 - INFO - Processing APP_P2_005 (30/94)
+2024-11-04 03:47:34,497 - WARNING - Perk file not found at content\tech\development-platforms-APP_P2_005.yml
+2024-11-04 03:47:34,497 - WARNING - No details found for APP_P2_005
+2024-11-04 03:47:34,497 - INFO - Processing MLT_P2_001 (30/94)
+2024-11-04 03:47:48,192 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:48:01,176 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:48:01,215 - INFO - Successfully saved missions to content\missions\MLT_P2_001-missions.yml
+2024-11-04 03:48:01,215 - INFO - Successfully generated missions for MLT_P2_001
+2024-11-04 03:48:03,218 - INFO - Processing MLT_P2_002 (31/94)
+2024-11-04 03:48:16,636 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:48:30,427 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:48:30,459 - INFO - Successfully saved missions to content\missions\MLT_P2_002-missions.yml
+2024-11-04 03:48:30,459 - INFO - Successfully generated missions for MLT_P2_002
+2024-11-04 03:48:32,471 - INFO - Processing MLT_P2_003 (32/94)
+2024-11-04 03:48:43,465 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:48:51,963 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:48:51,998 - INFO - Successfully saved missions to content\missions\MLT_P2_003-missions.yml
+2024-11-04 03:48:51,998 - INFO - Successfully generated missions for MLT_P2_003
+2024-11-04 03:48:54,005 - INFO - Processing MLT_P2_004 (33/94)
+2024-11-04 03:49:09,624 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:49:22,374 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:49:22,381 - ERROR - Error generating mission: while scanning a block scalar
+  in "<unicode string>", line 28, column 13:
+        target: >20% cheaper than legacy plannin ... 
+                ^
+expected chomping or indentation indicators, but found '0'
+  in "<unicode string>", line 28, column 15:
+        target: >20% cheaper than legacy planning  ... 
+                  ^
+2024-11-04 03:49:22,397 - INFO - Successfully saved missions to content\missions\MLT_P2_004-missions.yml
+2024-11-04 03:49:22,399 - INFO - Successfully generated missions for MLT_P2_004
+2024-11-04 03:49:24,413 - INFO - Processing AGT_P2_001 (34/94)
+2024-11-04 03:49:38,455 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:49:52,694 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:49:52,728 - INFO - Successfully saved missions to content\missions\AGT_P2_001-missions.yml
+2024-11-04 03:49:52,728 - INFO - Successfully generated missions for AGT_P2_001
+2024-11-04 03:49:54,730 - INFO - Processing AGT_P2_002 (35/94)
+2024-11-04 03:50:07,092 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:50:20,837 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:50:20,884 - INFO - Successfully saved missions to content\missions\AGT_P2_002-missions.yml
+2024-11-04 03:50:20,884 - INFO - Successfully generated missions for AGT_P2_002
+2024-11-04 03:50:22,888 - INFO - Processing AGT_P2_003 (36/94)
+2024-11-04 03:50:33,950 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:50:49,532 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:50:49,573 - INFO - Successfully saved missions to content\missions\AGT_P2_003-missions.yml
+2024-11-04 03:50:49,573 - INFO - Successfully generated missions for AGT_P2_003
+2024-11-04 03:50:51,576 - INFO - Processing AGT_P2_004 (37/94)
+2024-11-04 03:51:02,990 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:51:02,990 - ERROR - Error generating mission: while scanning a block scalar
+  in "<unicode string>", line 26, column 13:
+        target: >85% of total resources utilized
+                ^
+expected chomping or indentation indicators, but found '5'
+  in "<unicode string>", line 26, column 15:
+        target: >85% of total resources utilized
+                  ^
+2024-11-04 03:51:15,834 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:51:15,858 - INFO - Successfully saved missions to content\missions\AGT_P2_004-missions.yml
+2024-11-04 03:51:15,858 - INFO - Successfully generated missions for AGT_P2_004
+2024-11-04 03:51:17,874 - INFO - Processing MOD_P2_001 (38/94)
+2024-11-04 03:51:27,945 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:51:27,953 - ERROR - Error generating mission: while scanning a block scalar
+  in "<unicode string>", line 28, column 13:
+        target: > 4.2
+                ^
+expected a comment or a line break, but found '4'
+  in "<unicode string>", line 28, column 15:
+        target: > 4.2
+                  ^
+2024-11-04 03:51:39,788 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:51:39,811 - INFO - Successfully saved missions to content\missions\MOD_P2_001-missions.yml
+2024-11-04 03:51:39,811 - INFO - Successfully generated missions for MOD_P2_001
+2024-11-04 03:51:41,817 - INFO - Processing MOD_P2_002 (39/94)
+2024-11-04 03:51:54,006 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:52:08,665 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:52:08,699 - INFO - Successfully saved missions to content\missions\MOD_P2_002-missions.yml
+2024-11-04 03:52:08,701 - INFO - Successfully generated missions for MOD_P2_002
+2024-11-04 03:52:10,708 - INFO - Processing MOD_P2_003 (40/94)
+2024-11-04 03:52:20,438 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:52:33,620 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:52:33,651 - INFO - Successfully saved missions to content\missions\MOD_P2_003-missions.yml
+2024-11-04 03:52:33,652 - INFO - Successfully generated missions for MOD_P2_003
+2024-11-04 03:52:35,666 - INFO - Processing MOD_P2_004 (41/94)
+2024-11-04 03:52:47,311 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:52:59,371 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:52:59,396 - INFO - Successfully saved missions to content\missions\MOD_P2_004-missions.yml
+2024-11-04 03:52:59,398 - INFO - Successfully generated missions for MOD_P2_004
+2024-11-04 03:53:01,401 - INFO - Processing COM_P2_001 (42/94)
+2024-11-04 03:53:12,977 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:53:22,690 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:53:22,722 - INFO - Successfully saved missions to content\missions\COM_P2_001-missions.yml
+2024-11-04 03:53:22,724 - INFO - Successfully generated missions for COM_P2_001
+2024-11-04 03:53:24,730 - INFO - Processing COM_P2_002 (43/94)
+2024-11-04 03:53:34,975 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:53:47,954 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:53:47,995 - INFO - Successfully saved missions to content\missions\COM_P2_002-missions.yml
+2024-11-04 03:53:48,003 - INFO - Successfully generated missions for COM_P2_002
+2024-11-04 03:53:50,004 - INFO - Processing COM_P2_003 (44/94)
+2024-11-04 03:54:01,096 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:54:12,193 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:54:12,232 - INFO - Successfully saved missions to content\missions\COM_P2_003-missions.yml
+2024-11-04 03:54:12,232 - INFO - Successfully generated missions for COM_P2_003
+2024-11-04 03:54:14,234 - INFO - Processing COM_P2_004 (45/94)
+2024-11-04 03:54:25,374 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:54:41,649 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:54:41,681 - INFO - Successfully saved missions to content\missions\COM_P2_004-missions.yml
+2024-11-04 03:54:41,681 - INFO - Successfully generated missions for COM_P2_004
+2024-11-04 03:54:43,692 - INFO - Processing ECO_P3_001 (46/94)
+2024-11-04 03:54:55,980 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:55:08,474 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:55:08,506 - INFO - Successfully saved missions to content\missions\ECO_P3_001-missions.yml
+2024-11-04 03:55:08,506 - INFO - Successfully generated missions for ECO_P3_001
+2024-11-04 03:55:10,509 - INFO - Processing ECO_P3_002 (47/94)
+2024-11-04 03:55:23,243 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:55:33,257 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:55:33,288 - INFO - Successfully saved missions to content\missions\ECO_P3_002-missions.yml
+2024-11-04 03:55:33,294 - INFO - Successfully generated missions for ECO_P3_002
+2024-11-04 03:55:35,309 - INFO - Processing ECO_P3_003 (48/94)
+2024-11-04 03:55:50,917 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:56:04,520 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:56:04,569 - INFO - Successfully saved missions to content\missions\ECO_P3_003-missions.yml
+2024-11-04 03:56:04,570 - INFO - Successfully generated missions for ECO_P3_003
+2024-11-04 03:56:06,579 - INFO - Processing ECO_P3_004 (49/94)
+2024-11-04 03:56:19,304 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:56:34,366 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:56:34,383 - ERROR - Error generating mission: while scanning a block scalar
+  in "<unicode string>", line 26, column 13:
+        target: >90% accuracy in translating AI- ... 
+                ^
+expected chomping or indentation indicators, but found '0'
+  in "<unicode string>", line 26, column 15:
+        target: >90% accuracy in translating AI-ge ... 
+                  ^
+2024-11-04 03:56:34,391 - INFO - Successfully saved missions to content\missions\ECO_P3_004-missions.yml
+2024-11-04 03:56:34,400 - INFO - Successfully generated missions for ECO_P3_004
+2024-11-04 03:56:36,412 - INFO - Processing APP_P3_002 (50/94)
+2024-11-04 03:56:49,606 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:57:02,770 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:57:02,799 - INFO - Successfully saved missions to content\missions\APP_P3_002-missions.yml
+2024-11-04 03:57:02,799 - INFO - Successfully generated missions for APP_P3_002
+2024-11-04 03:57:04,812 - INFO - Processing APP_P3_003 (51/94)
+2024-11-04 03:57:15,756 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:57:25,479 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:57:25,503 - INFO - Successfully saved missions to content\missions\APP_P3_003-missions.yml
+2024-11-04 03:57:25,511 - INFO - Successfully generated missions for APP_P3_003
+2024-11-04 03:57:27,516 - INFO - Processing APP_P3_004 (52/94)
+2024-11-04 03:57:40,276 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:57:53,436 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:57:53,475 - INFO - Successfully saved missions to content\missions\APP_P3_004-missions.yml
+2024-11-04 03:57:53,475 - INFO - Successfully generated missions for APP_P3_004
+2024-11-04 03:57:55,478 - INFO - Processing MLT_P3_001 (53/94)
+2024-11-04 03:58:10,566 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:58:10,574 - ERROR - Error generating mission: while scanning a block scalar
+  in "<unicode string>", line 28, column 13:
+        target: > 90%
+                ^
+expected a comment or a line break, but found '9'
+  in "<unicode string>", line 28, column 15:
+        target: > 90%
+                  ^
+2024-11-04 03:58:23,937 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:58:23,961 - INFO - Successfully saved missions to content\missions\MLT_P3_001-missions.yml
+2024-11-04 03:58:23,961 - INFO - Successfully generated missions for MLT_P3_001
+2024-11-04 03:58:25,969 - INFO - Processing MLT_P3_002 (54/94)
+2024-11-04 03:58:37,326 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:58:37,334 - ERROR - Error generating mission: while scanning a block scalar
+  in "<unicode string>", line 30, column 13:
+        target: > 80% increase
+                ^
+expected a comment or a line break, but found '8'
+  in "<unicode string>", line 30, column 15:
+        target: > 80% increase
+                  ^
+2024-11-04 03:58:48,574 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:58:48,606 - INFO - Successfully saved missions to content\missions\MLT_P3_002-missions.yml
+2024-11-04 03:58:48,606 - INFO - Successfully generated missions for MLT_P3_002
+2024-11-04 03:58:50,606 - INFO - Processing MLT_P3_003 (55/94)
+2024-11-04 03:59:03,425 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:59:16,835 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:59:16,867 - INFO - Successfully saved missions to content\missions\MLT_P3_003-missions.yml
+2024-11-04 03:59:16,867 - INFO - Successfully generated missions for MLT_P3_003
+2024-11-04 03:59:18,869 - INFO - Processing MLT_P3_004 (56/94)
+2024-11-04 03:59:30,810 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:59:44,336 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 03:59:44,377 - INFO - Successfully saved missions to content\missions\MLT_P3_004-missions.yml
+2024-11-04 03:59:44,377 - INFO - Successfully generated missions for MLT_P3_004
+2024-11-04 03:59:46,383 - INFO - Processing AGT_P3_001 (57/94)
+2024-11-04 03:59:57,904 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:00:11,104 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:00:11,135 - INFO - Successfully saved missions to content\missions\AGT_P3_001-missions.yml
+2024-11-04 04:00:11,135 - INFO - Successfully generated missions for AGT_P3_001
+2024-11-04 04:00:13,146 - INFO - Processing AGT_P3_002 (58/94)
+2024-11-04 04:00:24,493 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:00:43,356 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:00:43,389 - INFO - Successfully saved missions to content\missions\AGT_P3_002-missions.yml
+2024-11-04 04:00:43,389 - INFO - Successfully generated missions for AGT_P3_002
+2024-11-04 04:00:45,496 - INFO - Processing AGT_P3_003 (59/94)
+2024-11-04 04:00:57,715 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:01:12,812 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:01:12,837 - INFO - Successfully saved missions to content\missions\AGT_P3_003-missions.yml
+2024-11-04 04:01:12,837 - INFO - Successfully generated missions for AGT_P3_003
+2024-11-04 04:01:14,839 - INFO - Processing AGT_P3_004 (60/94)
+2024-11-04 04:01:24,314 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:01:35,335 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:01:35,376 - INFO - Successfully saved missions to content\missions\AGT_P3_004-missions.yml
+2024-11-04 04:01:35,376 - INFO - Successfully generated missions for AGT_P3_004
+2024-11-04 04:01:37,379 - INFO - Processing MOD_P3_001 (61/94)
+2024-11-04 04:01:48,390 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:02:00,591 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:02:00,632 - INFO - Successfully saved missions to content\missions\MOD_P3_001-missions.yml
+2024-11-04 04:02:00,632 - INFO - Successfully generated missions for MOD_P3_001
+2024-11-04 04:02:02,639 - INFO - Processing MOD_P3_002 (62/94)
+2024-11-04 04:02:11,567 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:02:23,617 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:02:23,645 - INFO - Successfully saved missions to content\missions\MOD_P3_002-missions.yml
+2024-11-04 04:02:23,645 - INFO - Successfully generated missions for MOD_P3_002
+2024-11-04 04:02:25,653 - INFO - Processing MOD_P3_003 (63/94)
+2024-11-04 04:02:38,255 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:02:51,038 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:02:51,070 - INFO - Successfully saved missions to content\missions\MOD_P3_003-missions.yml
+2024-11-04 04:02:51,076 - INFO - Successfully generated missions for MOD_P3_003
+2024-11-04 04:02:53,086 - INFO - Processing MOD_P3_004 (64/94)
+2024-11-04 04:03:04,948 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:03:04,964 - ERROR - Error generating mission: while scanning a block scalar
+  in "<unicode string>", line 31, column 13:
+        target: >80% dissimilarity to all existi ... 
+                ^
+expected chomping or indentation indicators, but found '0'
+  in "<unicode string>", line 31, column 15:
+        target: >80% dissimilarity to all existing ... 
+                  ^
+2024-11-04 04:03:17,276 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:03:17,298 - INFO - Successfully saved missions to content\missions\MOD_P3_004-missions.yml
+2024-11-04 04:03:17,298 - INFO - Successfully generated missions for MOD_P3_004
+2024-11-04 04:03:19,307 - INFO - Processing COM_P3_001 (65/94)
+2024-11-04 04:03:31,344 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:03:44,721 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:03:44,760 - INFO - Successfully saved missions to content\missions\COM_P3_001-missions.yml
+2024-11-04 04:03:44,766 - INFO - Successfully generated missions for COM_P3_001
+2024-11-04 04:03:46,768 - INFO - Processing COM_P3_002 (66/94)
+2024-11-04 04:03:59,409 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:04:09,875 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:04:09,898 - INFO - Successfully saved missions to content\missions\COM_P3_002-missions.yml
+2024-11-04 04:04:09,898 - INFO - Successfully generated missions for COM_P3_002
+2024-11-04 04:04:11,908 - INFO - Processing COM_P3_003 (67/94)
+2024-11-04 04:04:24,944 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:04:36,128 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:04:36,149 - INFO - Successfully saved missions to content\missions\COM_P3_003-missions.yml
+2024-11-04 04:04:36,150 - INFO - Successfully generated missions for COM_P3_003
+2024-11-04 04:04:38,164 - INFO - Processing COM_P3_004 (68/94)
+2024-11-04 04:04:49,576 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:05:01,767 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:05:01,787 - INFO - Successfully saved missions to content\missions\COM_P3_004-missions.yml
+2024-11-04 04:05:01,787 - INFO - Successfully generated missions for COM_P3_004
+2024-11-04 04:05:03,794 - INFO - Processing ECO_P4_001 (69/94)
+2024-11-04 04:05:14,844 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:05:25,130 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:05:25,141 - INFO - Successfully saved missions to content\missions\ECO_P4_001-missions.yml
+2024-11-04 04:05:25,141 - INFO - Successfully generated missions for ECO_P4_001
+2024-11-04 04:05:27,142 - INFO - Processing ECO_P4_002 (70/94)
+2024-11-04 04:05:37,738 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:05:51,498 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:05:51,512 - INFO - Successfully saved missions to content\missions\ECO_P4_002-missions.yml
+2024-11-04 04:05:51,512 - INFO - Successfully generated missions for ECO_P4_002
+2024-11-04 04:05:53,521 - INFO - Processing ECO_P4_003 (71/94)
+2024-11-04 04:06:04,457 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:06:16,713 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:06:16,719 - ERROR - Error generating mission: while scanning a block scalar
+  in "<unicode string>", line 26, column 13:
+        target: >0.8 on a scale of 0-1, based on ... 
+                ^
+expected indentation indicator in the range 1-9, but found 0
+  in "<unicode string>", line 26, column 14:
+        target: >0.8 on a scale of 0-1, based on  ... 
+                 ^
+2024-11-04 04:06:16,728 - INFO - Successfully saved missions to content\missions\ECO_P4_003-missions.yml
+2024-11-04 04:06:16,729 - INFO - Successfully generated missions for ECO_P4_003
+2024-11-04 04:06:18,742 - INFO - Processing ECO_P4_004 (72/94)
+2024-11-04 04:06:31,950 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:06:44,952 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:06:44,967 - INFO - Successfully saved missions to content\missions\ECO_P4_004-missions.yml
+2024-11-04 04:06:44,967 - INFO - Successfully generated missions for ECO_P4_004
+2024-11-04 04:06:46,973 - INFO - Processing APP_P4_001 (73/94)
+2024-11-04 04:06:59,904 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:07:12,392 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:07:12,408 - INFO - Successfully saved missions to content\missions\APP_P4_001-missions.yml
+2024-11-04 04:07:12,409 - INFO - Successfully generated missions for APP_P4_001
+2024-11-04 04:07:14,411 - INFO - Processing APP_P4_003 (74/94)
+2024-11-04 04:07:26,670 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:07:39,499 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:07:39,512 - INFO - Successfully saved missions to content\missions\APP_P4_003-missions.yml
+2024-11-04 04:07:39,512 - INFO - Successfully generated missions for APP_P4_003
+2024-11-04 04:07:41,521 - INFO - Processing APP_P4_004 (75/94)
+2024-11-04 04:07:51,716 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:07:51,720 - ERROR - Error generating mission: while scanning a block scalar
+  in "<unicode string>", line 28, column 13:
+        target: > 80% optimal utilization based  ... 
+                ^
+expected a comment or a line break, but found '8'
+  in "<unicode string>", line 28, column 15:
+        target: > 80% optimal utilization based on ... 
+                  ^
+2024-11-04 04:08:03,823 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:08:03,830 - INFO - Successfully saved missions to content\missions\APP_P4_004-missions.yml
+2024-11-04 04:08:03,831 - INFO - Successfully generated missions for APP_P4_004
+2024-11-04 04:08:05,837 - INFO - Processing MLT_P4_001 (76/94)
+2024-11-04 04:08:20,971 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:08:20,975 - ERROR - Error generating mission: while scanning a block scalar
+  in "<unicode string>", line 28, column 13:
+        target: >= 60% improvement in sustained  ... 
+                ^
+expected chomping or indentation indicators, but found '='
+  in "<unicode string>", line 28, column 14:
+        target: >= 60% improvement in sustained o ... 
+                 ^
+2024-11-04 04:08:33,592 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:08:33,606 - INFO - Successfully saved missions to content\missions\MLT_P4_001-missions.yml
+2024-11-04 04:08:33,606 - INFO - Successfully generated missions for MLT_P4_001
+2024-11-04 04:08:35,615 - INFO - Processing MLT_P4_002 (77/94)
+2024-11-04 04:08:47,143 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:08:59,330 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:08:59,334 - ERROR - Error generating mission: while scanning a block scalar
+  in "<unicode string>", line 32, column 5:
+      - >80% reduction in projected pand ... 
+        ^
+expected chomping or indentation indicators, but found '0'
+  in "<unicode string>", line 32, column 7:
+      - >80% reduction in projected pandem ... 
+          ^
+2024-11-04 04:08:59,342 - INFO - Successfully saved missions to content\missions\MLT_P4_002-missions.yml
+2024-11-04 04:08:59,342 - INFO - Successfully generated missions for MLT_P4_002
+2024-11-04 04:09:01,352 - INFO - Processing MLT_P4_003 (78/94)
+2024-11-04 04:09:12,158 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:09:12,163 - ERROR - Error generating mission: while scanning a block scalar
+  in "<unicode string>", line 37, column 11:
+      memory: >10TB low-latency shared storage
+              ^
+expected chomping or indentation indicators, but found '0'
+  in "<unicode string>", line 37, column 13:
+      memory: >10TB low-latency shared storage
+                ^
+2024-11-04 04:09:26,043 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:09:26,061 - INFO - Successfully saved missions to content\missions\MLT_P4_003-missions.yml
+2024-11-04 04:09:26,061 - INFO - Successfully generated missions for MLT_P4_003
+2024-11-04 04:09:28,069 - INFO - Processing MLT_P4_004 (79/94)
+2024-11-04 04:09:42,717 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:09:55,000 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:09:55,027 - INFO - Successfully saved missions to content\missions\MLT_P4_004-missions.yml
+2024-11-04 04:09:55,028 - INFO - Successfully generated missions for MLT_P4_004
+2024-11-04 04:09:57,038 - INFO - Processing AGT_P4_001 (80/94)
+2024-11-04 04:10:09,532 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:10:21,177 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:10:21,197 - INFO - Successfully saved missions to content\missions\AGT_P4_001-missions.yml
+2024-11-04 04:10:21,197 - INFO - Successfully generated missions for AGT_P4_001
+2024-11-04 04:10:23,203 - INFO - Processing AGT_P4_002 (81/94)
+2024-11-04 04:10:37,803 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:10:52,442 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:10:52,461 - INFO - Successfully saved missions to content\missions\AGT_P4_002-missions.yml
+2024-11-04 04:10:52,463 - INFO - Successfully generated missions for AGT_P4_002
+2024-11-04 04:10:54,474 - INFO - Processing AGT_P4_003 (82/94)
+2024-11-04 04:11:04,938 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:11:04,945 - ERROR - Error generating mission: while scanning a block scalar
+  in "<unicode string>", line 29, column 13:
+        target: >0.9
+                ^
+expected indentation indicator in the range 1-9, but found 0
+  in "<unicode string>", line 29, column 14:
+        target: >0.9
+                 ^
+2024-11-04 04:11:16,305 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:11:16,313 - INFO - Successfully saved missions to content\missions\AGT_P4_003-missions.yml
+2024-11-04 04:11:16,313 - INFO - Successfully generated missions for AGT_P4_003
+2024-11-04 04:11:18,314 - INFO - Processing AGT_P4_004 (83/94)
+2024-11-04 04:11:32,787 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:11:43,717 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:11:43,743 - INFO - Successfully saved missions to content\missions\AGT_P4_004-missions.yml
+2024-11-04 04:11:43,744 - INFO - Successfully generated missions for AGT_P4_004
+2024-11-04 04:11:45,753 - INFO - Processing MOD_P4_001 (84/94)
+2024-11-04 04:11:56,340 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:11:56,347 - ERROR - Error generating mission: while scanning a block scalar
+  in "<unicode string>", line 37, column 11:
+      memory: >1PB integrated cross-domain kno ... 
+              ^
+expected chomping or indentation indicators, but found 'P'
+  in "<unicode string>", line 37, column 13:
+      memory: >1PB integrated cross-domain knowl ... 
+                ^
+2024-11-04 04:12:11,702 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:12:11,715 - INFO - Successfully saved missions to content\missions\MOD_P4_001-missions.yml
+2024-11-04 04:12:11,715 - INFO - Successfully generated missions for MOD_P4_001
+2024-11-04 04:12:13,720 - INFO - Processing MOD_P4_002 (85/94)
+2024-11-04 04:12:24,191 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:12:37,819 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:12:37,837 - INFO - Successfully saved missions to content\missions\MOD_P4_002-missions.yml
+2024-11-04 04:12:37,838 - INFO - Successfully generated missions for MOD_P4_002
+2024-11-04 04:12:39,842 - INFO - Processing MOD_P4_003 (86/94)
+2024-11-04 04:12:53,424 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:13:07,662 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:13:07,689 - INFO - Successfully saved missions to content\missions\MOD_P4_003-missions.yml
+2024-11-04 04:13:07,689 - INFO - Successfully generated missions for MOD_P4_003
+2024-11-04 04:13:09,696 - INFO - Processing MOD_P4_004 (87/94)
+2024-11-04 04:13:21,280 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:13:34,544 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:13:34,564 - INFO - Successfully saved missions to content\missions\MOD_P4_004-missions.yml
+2024-11-04 04:13:34,566 - INFO - Successfully generated missions for MOD_P4_004
+2024-11-04 04:13:36,579 - INFO - Processing COM_P4_001 (88/94)
+2024-11-04 04:13:48,072 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:14:00,762 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:14:00,784 - INFO - Successfully saved missions to content\missions\COM_P4_001-missions.yml
+2024-11-04 04:14:00,785 - INFO - Successfully generated missions for COM_P4_001
+2024-11-04 04:14:02,799 - INFO - Processing COM_P4_002 (89/94)
+2024-11-04 04:14:14,226 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:14:27,183 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:14:27,202 - INFO - Successfully saved missions to content\missions\COM_P4_002-missions.yml
+2024-11-04 04:14:27,203 - INFO - Successfully generated missions for COM_P4_002
+2024-11-04 04:14:29,207 - INFO - Processing COM_P4_003 (90/94)
+2024-11-04 04:14:40,385 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:14:53,388 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:14:53,406 - INFO - Successfully saved missions to content\missions\COM_P4_003-missions.yml
+2024-11-04 04:14:53,406 - INFO - Successfully generated missions for COM_P4_003
+2024-11-04 04:14:55,419 - INFO - Processing COM_P4_004 (91/94)
+2024-11-04 04:15:07,431 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:15:07,439 - ERROR - Error generating mission: while scanning a block scalar
+  in "<unicode string>", line 26, column 13:
+        target: >= 1 ExaFLOP
+                ^
+expected chomping or indentation indicators, but found '='
+  in "<unicode string>", line 26, column 14:
+        target: >= 1 ExaFLOP
+                 ^
+2024-11-04 04:15:18,404 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2024-11-04 04:15:18,418 - INFO - Successfully saved missions to content\missions\COM_P4_004-missions.yml
+2024-11-04 04:15:18,418 - INFO - Successfully generated missions for COM_P4_004
+2024-11-04 04:15:20,431 - INFO - 
+Generation Summary:
+2024-11-04 04:15:20,431 - INFO - Successfully processed: 91
+2024-11-04 04:15:20,431 - INFO - Failed: 3
+2024-11-04 04:15:20,431 - INFO - Failed perks:
+2024-11-04 04:15:20,431 - INFO - - MOD_P1_000
+2024-11-04 04:15:20,433 - INFO - - COM_P1_004_1
+2024-11-04 04:15:20,433 - INFO - - APP_P2_005

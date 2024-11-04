@@ -1,0 +1,150 @@
+- id: MON_INT_001
+  title: Intelligent Network Optimization
+  description: 'Leverage advanced monitoring and analytics capabilities to optimize
+    network performance
+
+    and resource utilization across a large-scale enterprise network. Identify bottlenecks,
+
+    load imbalances, and inefficiencies while recommending targeted improvements.
+
+    '
+  objectives:
+  - Establish comprehensive network monitoring for all routers, switches, and links
+  - Analyze network traffic patterns and identify potential congestion points
+  - Recommend configuration changes to load balance traffic more effectively
+  tasks:
+  - step: Deploy network monitoring agents across the enterprise infrastructure
+    details: Configure agents to collect detailed telemetry data from network devices
+  - step: Integrate data sources into centralized monitoring platform
+    details: Consolidate network, system, and application data for unified visibility
+  - step: Build machine learning models for anomaly detection and prediction
+    details: Train models on historical data to identify patterns and forecast issues
+  - step: Develop interactive dashboards for network performance visualization
+    details: Design intuitive dashboards to surface insights and facilitate analysis
+  success_criteria:
+  - Achieve 95% coverage of all network devices and links within monitoring system
+  - Maintain average network latency below 30ms across the enterprise
+  - Reduce overall bandwidth utilization by at least 15%
+  evaluation_metrics:
+  - metric: Network devices monitored
+    target: '>= 95%'
+  - metric: Average network latency
+    target: < 30ms
+  - metric: Bandwidth utilization reduction
+    target: '>= 15%'
+  difficulty: Intermediate
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: MON_P1_002
+  requirements:
+    compute: 16 vCPU, 32 GiB RAM
+    memory: 1 TiB storage
+    capabilities:
+    - Advanced Monitoring
+    - Network Telemetry Collection
+    - Data Visualization
+    - Machine Learning Modeling
+  rewards:
+    xp: 2500
+    capabilities:
+    - Network Optimization
+    - Traffic Engineering
+    resources:
+    - Network Optimization Playbook
+    - Traffic Flow Analysis Templates
+  deliverables:
+  - Network performance report with identified issues and recommendations
+  - Optimized network configurations for load balancing and resource allocation
+  - Interactive dashboards for ongoing network monitoring and analytics
+- id: ADV_MON_001
+  title: Optimize Cloud Infrastructure with Advanced Monitoring
+  description: 'Design and implement an advanced monitoring system to optimize resource
+    utilization, detect performance bottlenecks, and enhance overall efficiency in
+    a large-scale cloud infrastructure environment.
+
+    '
+  objectives:
+  - Develop a scalable data ingestion pipeline capable of processing millions of events
+    per second from diverse sources.
+  - Implement a distributed, fault-tolerant storage system for efficient time-series
+    data management and querying.
+  - Build machine learning models to detect anomalies, uncover patterns, and predict
+    future performance bottlenecks.
+  - Create interactive dashboards and visualizations for real-time monitoring and
+    data-driven decision-making.
+  - Enable proactive capacity planning and seamless infrastructure scaling based on
+    predicted workload demands.
+  tasks:
+  - step: Analyze existing cloud infrastructure and identify key performance metrics
+      and data sources.
+    details: Conduct a comprehensive audit of the cloud infrastructure, including
+      servers, networks, applications, and services. Identify relevant performance
+      metrics, such as CPU utilization, memory usage, network throughput, and application
+      response times. Determine data sources for collecting these metrics, such as
+      server logs, application telemetry, and network monitoring tools.
+  - step: Design and implement a scalable data ingestion pipeline.
+    details: Develop a high-performance data ingestion pipeline capable of handling
+      millions of events per second from diverse data sources. Ensure the pipeline
+      supports real-time data processing, fault tolerance, and horizontal scaling
+      to accommodate increasing data volumes.
+  - step: Set up a distributed, fault-tolerant storage system for time-series data.
+    details: Implement a distributed storage system optimized for efficient time-series
+      data management and querying. The system should support high availability, horizontal
+      scaling, and automated failover mechanisms to ensure uninterrupted data storage
+      and retrieval.
+  - step: Develop machine learning models for anomaly detection, pattern recognition,
+      and performance prediction.
+    details: Build and train machine learning models using historical monitoring data
+      to detect anomalies, uncover patterns in system behavior, and predict future
+      performance bottlenecks. Incorporate techniques such as anomaly detection, time-series
+      forecasting, and clustering algorithms.
+  - step: Create interactive dashboards and visualizations for real-time monitoring
+      and data-driven decision-making.
+    details: Develop intuitive and customizable dashboards and visualizations that
+      provide stakeholders with a comprehensive view of system performance, resource
+      utilization, and optimization opportunities. Enable drill-down capabilities
+      to analyze specific components or services.
+  - step: Implement proactive capacity planning and infrastructure scaling mechanisms.
+    details: Leverage the predictive capabilities of the monitoring system to enable
+      proactive capacity planning and seamless infrastructure scaling. Develop algorithms
+      and automation tools to automatically provision or decommission resources based
+      on predicted workload demands, ensuring optimal resource utilization and minimizing
+      over-provisioning.
+  success_criteria:
+  - Data ingestion pipeline can process at least 5 million events per second with
+    less than 1% data loss.
+  - Storage system can handle at least 10TB of monitoring data with query latency
+    under 500ms for 95th percentile.
+  - Machine learning models achieve at least 90% accuracy in anomaly detection and
+    performance prediction tasks.
+  - Dashboards and visualizations provide real-time updates with a maximum lag of
+    5 seconds.
+  - Proactive capacity planning and scaling mechanisms can accurately predict resource
+    demands within 10% error margin.
+  evaluation_metrics:
+  - metric: Data ingestion throughput
+    target: '>= 5 million events/second'
+  - metric: Storage query latency (95th percentile)
+    target: < 500ms
+  - metric: Anomaly detection accuracy
+    target: '>= 90%'
+  - metric: Performance prediction accuracy
+    target: '>= 90%'
+  - metric: Dashboard update lag
+    target: < 5 seconds
+  - metric: Capacity planning accuracy
+    target: Within 10% error margin
+  difficulty: Advanced
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: COM_P2_004
+  requirements:
+    compute: High-performance compute clusters with distributed processing capabilities
+    memory: Terabytes of memory for storing and processing large volumes of monitoring
+      data
+    capabilities:
+    - Distributed Systems
+    - Data Engineering
+    - Machine Learning
+    - Data Visualization
+  rewards: null

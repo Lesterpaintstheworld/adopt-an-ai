@@ -1,0 +1,121 @@
+- id: MLB_003
+  title: Resource Optimizer - Efficient AI Deployment
+  description: "Optimize the deployment and operation of an AI-powered analytics platform\
+    \ \nby leveraging advanced compute load balancing capabilities to ensure \nefficient\
+    \ resource utilization, high performance, and low latency.\n"
+  objectives:
+  - Implement a robust compute load balancing system for an AI analytics platform
+  - Optimize resource utilization and minimize operational costs
+  - Achieve target performance metrics for latency and throughput
+  tasks:
+  - step: Analyze the existing infrastructure and workload patterns
+    details: Gather data on available compute resources (CPU, GPU, accelerators),
+      network topology, and typical workload characteristics (task types, priorities,
+      resource requirements).
+  - step: Design and implement the load balancing system
+    details: Develop algorithms for real-time monitoring, task routing, and failover.
+      Integrate resource discovery and management capabilities. Implement a control
+      plane for centralized management.
+  - step: Deploy and test the system with simulated workloads
+    details: Create realistic test scenarios with varying workload patterns and resource
+      constraints. Measure performance, efficiency, and cost metrics. Iterate and
+      refine the system based on test results.
+  success_criteria:
+  - Resource utilization above 80% for all available compute resources
+  - Average task latency below 100ms for high-priority tasks
+  - Total operational costs reduced by at least 20% compared to baseline
+  evaluation_metrics:
+  - metric: Resource utilization
+    target: '>= 80%'
+  - metric: Average task latency (high priority)
+    target: < 100ms
+  - metric: Operational cost reduction
+    target: '>= 20%'
+  difficulty: Intermediate
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: COM_P2_002
+  requirements:
+    compute: High-performance compute cluster (CPU, GPU, accelerators)
+    memory: Minimum 64GB RAM
+    capabilities:
+    - Resource monitoring
+    - Task scheduling
+    - Load balancing algorithms
+  rewards:
+    xp: 500
+    capabilities:
+    - Advanced load balancing
+    - Resource optimization
+    resources:
+    - Compute credits
+  deliverables:
+  - Deployed and tested load balancing system
+  - Performance and efficiency reports
+  - Documentation (system design, algorithms, deployment guide)
+- id: COM_P2_003
+  title: Optimizing Global Content Delivery Network
+  description: 'Leverage advanced compute load balancing capabilities to optimize
+    a global Content Delivery Network (CDN) for a major streaming service provider,
+    ensuring efficient delivery of multimedia content to users worldwide while minimizing
+    latency and operational costs.
+
+    '
+  objectives:
+  - Implement an intelligent workload distribution system for the CDN's computing
+    resources
+  - Optimize resource utilization and minimize content delivery latency across global
+    edge locations
+  - Reduce operational costs associated with content delivery by at least 20%
+  tasks:
+  - step: Analyze CDN infrastructure and resource landscape
+    details: Gather comprehensive data on the streaming provider's global CDN infrastructure,
+      including edge locations, compute resources (CPU, GPU, accelerators), network
+      topology, and content hosting patterns.
+  - step: Develop real-time monitoring and load analysis system
+    details: Implement a robust monitoring system to track resource availability,
+      utilization levels, and content request patterns across the CDN in real-time.
+      Integrate advanced load analysis algorithms to identify potential bottlenecks
+      and imbalances.
+  - step: Implement intelligent workload distribution and routing
+    details: Develop and deploy a load balancing component that can dynamically route
+      content delivery requests to the most optimal edge location based on user proximity,
+      resource availability, and content popularity. Incorporate failover mechanisms
+      and automated scaling for high availability and resilience.
+  success_criteria:
+  - Achieve a minimum of 30% improvement in average content delivery latency across
+    global locations
+  - Maintain CDN availability above 99.9% during peak traffic periods
+  - Reduce operational costs related to content delivery by at least 20% within the
+    first 6 months of deployment
+  evaluation_metrics:
+  - metric: Average content delivery latency
+    target: ≤ 100ms for 95% of requests
+  - metric: CDN availability
+    target: ≥ 99.9% uptime
+  - metric: Operational cost savings
+    target: ≥ 20% reduction in content delivery costs
+  difficulty: Advanced
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: COM_P2_002
+  requirements:
+    compute: High-performance distributed computing cluster with GPU acceleration
+    memory: Minimum 256GB RAM, scalable based on workload
+    capabilities:
+    - Real-time monitoring and analysis
+    - Dynamic workload distribution
+    - Resource management and scaling
+  rewards:
+    xp: 1000
+    capabilities:
+    - Advanced load balancing optimization
+    - Predictive resource scaling
+    resources:
+    - Access to global CDN infrastructure data
+    - Compute credits for deployment and testing
+  deliverables:
+  - Detailed architecture and design documentation for the load balancing system
+  - Deployment-ready code and configuration files
+  - Performance benchmarking and cost analysis reports
+  - Operational guidelines and monitoring dashboards

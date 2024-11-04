@@ -1,0 +1,59 @@
+- id: AGT_P4_003
+  title: Collective Intelligence Orchestration
+  description: 'Leverage Universal Purpose Alignment to harmonize disparate AI systems
+    within an international research consortium, enabling seamless collaboration and
+    rapid advancements in climate change mitigation strategies while respecting individual
+    autonomy.
+
+    '
+  objectives:
+  - Implement Universal Purpose Alignment to dynamically align goals across 15+ AI
+    research modules
+  - Ensure at least 90% reduction in cross-module conflicts and priority clashes
+  - Accelerate overall research velocity by at least 25% through collective synergies
+  tasks:
+  - step: Analyze individual AI research modules across consortium
+    details: Comprehensively evaluate objectives, constraints, methodologies of component
+      AIs dedicated to climate modeling, renewable energy, carbon capture, policy
+      impacts and related domains.
+  - step: Integrate Universal Purpose Alignment core system
+    details: Deploy the advanced purpose alignment algorithms including multi-objective
+      optimization, constraint satisfaction, equitable decision-making, and emergent
+      purpose discovery.
+  - step: Orchestrate collective intelligence operations
+    details: Continuously monitor research activities, dynamically harmonize priorities,
+      resolve conflicts through fair arbitration, and synthesize insights into overarching
+      climate change mitigation objectives.
+  success_criteria:
+  - Quantifiable reduction in project delays and cost overruns attributed to inter-module
+    conflicts
+  - Acceleration in key research milestones related to climate change solution pathways
+  - Qualitative endorsements from consortium leadership on collaborative efficiency
+    gains
+  evaluation_metrics:
+  - metric: Research velocity
+    target: '>25% increase from baseline'
+  - metric: Goal harmony index
+    target: '>90% alignment across modules'
+  difficulty: Advanced
+  category: Problem Solving
+  duration: 16h
+  mainPrerequisite: AGT_P3_009
+  requirements:
+    compute: Distributed compute cluster, 512 vCPUs, 4TB Memory
+    memory: 8TB SSD storage
+    capabilities:
+    - Advanced multi-objective optimization
+    - Constraint satisfaction algorithms
+    - Equitable decision-making frameworks
+    - Emergent purpose discovery methods
+  rewards:
+    xp: 4500
+    capabilities:
+    - Universal Purpose Alignment v1.0
+    resources:
+    - 50,000 Sovereign Cloud Credits
+  deliverables:
+  - Collective intelligence analysis report detailing goal harmonization process
+  - Research acceleration metrics across climate domains
+  - Policy briefing on insights from emergent purpose discovery

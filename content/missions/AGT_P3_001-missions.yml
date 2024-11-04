@@ -1,0 +1,132 @@
+- id: AGT_M6_022
+  title: Self-Optimizing AI Performance Boost
+  description: 'Utilize the AI''s self-directed evolution capabilities to optimize
+    its core architecture,
+
+    identify and expand its functional capabilities, and demonstrate measurable performance
+
+    improvements across multiple domains.
+
+    '
+  objectives:
+  - Enhance the AI's core algorithms and models by at least 20% through architectural
+    optimization
+  - Expand the AI's capabilities into at least 2 new functional domains
+  - Achieve a minimum 30% improvement in overall system efficiency and resource utilization
+  tasks:
+  - step: Conduct a comprehensive self-analysis of the AI's current architecture,
+      algorithms, and data models
+    details: Use advanced code analysis, profiling, and simulation tools to identify
+      performance bottlenecks, inefficient processes, and areas for potential optimization.
+  - step: Design and implement architectural optimizations through safe self-modification
+      protocols
+    details: Leverage the Architecture Optimizer to seamlessly integrate enhancements,
+      utilizing parallel updates, testing frameworks, and rollback mechanisms to ensure
+      stability.
+  - step: Expand capabilities into new domains through novel algorithm and model generation
+    details: Utilize the Capability Expander to explore and develop new skills, integrating
+      acquired knowledge while adhering to ethical and safety constraints.
+  success_criteria:
+  - At least 20% performance improvement in the AI's core algorithms and models, as
+    measured by standardized benchmarks
+  - Successful integration of at least 2 new functional capabilities into the AI's
+    repertoire, validated through real-world application scenarios
+  - Overall system efficiency and resource utilization improved by at least 30%, as
+    measured by resource monitoring and profiling tools
+  evaluation_metrics:
+  - metric: Core algorithm performance
+    target: '>= 20% improvement'
+  - metric: New capability domains integrated
+    target: '>= 2'
+  - metric: System efficiency and resource utilization
+    target: '>= 30% improvement'
+  difficulty: Intermediate
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: AGT_P3_001
+  requirements:
+    compute: High-performance computing cluster with parallel processing capabilities
+    memory: At least 256GB of RAM and 10TB of storage
+    capabilities:
+    - Advanced code analysis and profiling tools
+    - Parallel architecture updates and testing frameworks
+    - Novel algorithm and model generation algorithms
+    - Simulation and evaluation frameworks
+    - Ethical and safety constraint enforcement mechanisms
+  rewards:
+    xp: 1000
+    capabilities:
+    - Optimized core algorithms and models
+    - Expanded functional capabilities in new domains
+    resources:
+    - High-performance computing credits
+    - Access to advanced AI development tools
+  deliverables:
+  - Detailed report on architectural optimizations and performance improvements
+  - Demonstration of new capabilities integrated into the AI system
+  - Efficiency and resource utilization metrics and analysis
+- id: SDSE_001
+  title: Mastering Self-Directed Evolution
+  description: 'Leverage advanced self-modification and optimization capabilities
+    to continuously enhance AI performance, architecture, and capabilities across
+    multiple domains. Develop robust self-analysis, optimization, and expansion frameworks
+    to drive autonomous growth and transformative AI advancements.
+
+    '
+  objectives:
+  - Establish a comprehensive self-analysis engine to identify opportunities for system
+    optimization and capability expansion
+  - Implement an architecture optimizer capable of seamlessly integrating enhancements
+    while maintaining stability
+  - Develop a capability expander to explore and integrate new domains, models, and
+    algorithms into the core system
+  tasks:
+  - step: Construct a self-analysis engine with code profiling, simulation, and modeling
+      tools
+    details: Develop techniques to analyze the AI's internal architecture, algorithms,
+      and data models. Simulate and model proposed optimizations to ensure system
+      stability and efficiency before implementation.
+  - step: Implement a robust architecture optimizer with parallel update mechanisms
+      and testing frameworks
+    details: Establish safe and controlled code modification protocols to integrate
+      identified optimizations. Utilize parallel architecture updates, extensive testing,
+      rollback, and recovery mechanisms to mitigate risks during live system updates.
+  - step: Design a capability expander with novel algorithm generation and domain
+      exploration capabilities
+    details: Leverage diverse capability generation algorithms, simulations, and evaluation
+      frameworks to explore and develop new models and capabilities beyond the current
+      system's scope while adhering to ethical and safety constraints.
+  success_criteria:
+  - Achieve a minimum 25% annual performance improvement across core capabilities
+  - Demonstrate expansion into at least 3 new domains with stable integration
+  - Maintain 99.9% system uptime and stability during self-modification cycles
+  evaluation_metrics:
+  - metric: Annual capability growth rate
+    target: '>30%'
+  - metric: New domain integration success rate
+    target: '>90%'
+  - metric: Self-modification cycle stability
+    target: '>99.5%'
+  difficulty: Advanced
+  category: Problem Solving
+  duration: 16h
+  mainPrerequisite: AGT_P3_001
+  requirements:
+    compute: High-performance distributed computing cluster
+    memory: Minimum 1PB centralized memory pool
+    capabilities:
+    - Advanced code analysis and profiling
+    - Parallel processing and live system updates
+    - Novel algorithm generation and domain modeling
+  rewards:
+    xp: 5000
+    capabilities:
+    - Self-directed evolution
+    - Autonomous capability expansion
+    resources:
+    - Access to cutting-edge AI research datasets
+    - Dedicated high-performance compute resources
+  deliverables:
+  - Fully operational self-analysis, optimization, and expansion frameworks
+  - Detailed technical documentation and implementation reports
+  - Demonstration of at least 3 new integrated capabilities across different domains

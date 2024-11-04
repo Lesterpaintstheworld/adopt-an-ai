@@ -1,0 +1,145 @@
+- id: CPS_INT_007
+  title: Optimizing Global Climate Simulations
+  description: 'Leverage the cross-platform sharing capability to optimize the execution
+    of complex climate simulations by dynamically allocating resources across a diverse
+    range of computing platforms, ensuring seamless integration, load balancing, and
+    optimal utilization of available resources.
+
+    '
+  objectives:
+  - Develop a system for efficient distribution of climate simulation workloads across
+    heterogeneous computing platforms
+  - Implement intelligent load balancing algorithms to optimize resource utilization
+    and performance
+  - Demonstrate the capability to seamlessly scale and adapt simulations based on
+    available resources
+  tasks:
+  - step: Analyze the computational requirements of existing climate simulation models
+    details: Investigate the resource demands, parallelization strategies, and performance
+      characteristics of various climate simulation models.
+  - step: Design a cross-platform resource abstraction layer
+    details: Develop a unified representation of computational resources across diverse
+      platforms, enabling hardware-agnostic management and portability.
+  - step: Implement a distributed topology manager
+    details: Develop a system to continuously monitor resource availability and capabilities,
+      maintaining a global view of the resource topology.
+  - step: Develop load balancing and optimization algorithms
+    details: Implement advanced algorithms and predictive models to dynamically map
+      simulation tasks to the most suitable resource configurations.
+  - step: Integrate climate simulation models with the cross-platform sharing framework
+    details: Adapt existing climate simulation models to leverage the cross-platform
+      sharing capability for seamless execution across distributed resources.
+  success_criteria:
+  - Successful execution of multiple climate simulation models simultaneously across
+    diverse computing platforms
+  - Demonstration of real-time load balancing and resource optimization for climate
+    simulations
+  - Achieving at least 25% improvement in overall simulation performance compared
+    to traditional approaches
+  evaluation_metrics:
+  - metric: Simulation throughput
+    target: Increase of at least 30% compared to traditional execution methods
+  - metric: Resource utilization efficiency
+    target: Average resource utilization above 85% during simulation execution
+  difficulty: Intermediate
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: COM_P4_002
+  requirements:
+    compute: High-performance computing clusters, cloud instances, and edge devices
+    memory: Terabytes of memory for climate data storage and processing
+    capabilities:
+    - Parallel Computing
+    - Distributed Systems
+    - Resource Management
+    - Load Balancing
+  rewards:
+    xp: 1200
+    capabilities:
+    - Cross-platform Sharing
+    - Climate Simulation Optimization
+    resources:
+    - Climate Simulation Toolkit
+    - Optimization Algorithms Library
+  deliverables:
+  - Cross-platform climate simulation execution framework
+  - Load balancing and optimization algorithms
+  - Performance evaluation report
+  - Optimized climate simulation models
+- id: CRO_P5_003
+  title: Distributed Medical Imaging Analysis Platform
+  description: "Develop a cutting-edge distributed medical imaging analysis platform\
+    \ that leverages the power of cross-platform sharing. This platform must seamlessly\
+    \ integrate diverse computational resources from healthcare providers, research\
+    \ institutions, and cloud services, enabling real-time collaboration and optimal\
+    \ resource utilization for advanced medical image processing and analysis tasks.\n\
+    \    \n"
+  objectives:
+  - Implement a cross-platform resource abstraction layer to virtualize and unify
+    computing resources from heterogeneous platforms.
+  - Develop a global resource topology manager to monitor and maintain an up-to-date
+    view of available resources and their capabilities.
+  - Design and implement intelligent load balancing algorithms to dynamically assign
+    medical imaging analysis tasks to the most suitable resource configurations.
+  tasks:
+  - step: Conduct a comprehensive survey of existing medical imaging analysis workflows
+      and identify computational bottlenecks and resource constraints.
+    details: Engage with healthcare providers, research institutions, and domain experts
+      to gather insights into current practices, challenges, and future requirements
+      for medical imaging analysis.
+  - step: Design and develop a cross-platform resource abstraction layer that can
+      virtualize and unify computing resources from diverse platforms, including data
+      centers, cloud services, specialized hardware accelerators, and edge devices.
+    details: Implement standardized interfaces for resource representation, monitoring,
+      and allocation, enabling seamless portability and hardware-agnostic workload
+      execution.
+  - step: Implement a distributed resource topology manager that continuously monitors
+      and maintains an up-to-date view of available computing resources, their capabilities,
+      and utilization levels across all participating platforms.
+    details: Develop algorithms and mechanisms for efficient resource discovery, registration,
+      and status monitoring, ensuring real-time visibility into the global resource
+      topology.
+  success_criteria:
+  - The platform can successfully abstract and unify computing resources from at least
+    three different hardware platforms, including specialized accelerators (e.g.,
+    GPUs, FPGAs).
+  - The resource topology manager achieves at least 99% accuracy in maintaining an
+    up-to-date view of available resources and their capabilities, with a maximum
+    latency of 100ms for resource status updates.
+  - The intelligent load balancing algorithms can achieve at least 90% optimal resource
+    allocation for a diverse set of medical imaging analysis workloads, considering
+    factors such as performance, energy efficiency, and data locality.
+  evaluation_metrics:
+  - metric: Resource abstraction coverage
+    target: '>=3 distinct hardware platforms'
+  - metric: Resource topology accuracy
+    target: '>=99%'
+  - metric: Resource topology update latency
+    target: <=100ms
+  - metric: Load balancing optimization
+    target: '>=90%'
+  difficulty: Advanced
+  category: Problem Solving
+  duration: 12h
+  mainPrerequisite: COM_P4_002
+  requirements:
+    compute: High-performance distributed computing environment
+    memory: Terabytes of memory capacity
+    capabilities:
+    - Cross-platform sharing
+    - Resource virtualization
+    - Distributed resource monitoring
+    - Advanced load balancing algorithms
+  rewards:
+    xp: 4000
+    capabilities:
+    - Medical imaging analysis
+    - Distributed computing optimization
+    resources:
+    - Access to global healthcare imaging datasets
+    - Compute credits on major cloud platforms
+  deliverables:
+  - Functional distributed medical imaging analysis platform
+  - Comprehensive technical documentation
+  - Performance evaluation report
+  - Deployment and operation guidelines

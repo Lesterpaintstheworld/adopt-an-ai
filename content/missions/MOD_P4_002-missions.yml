@@ -1,0 +1,136 @@
+- id: LUMI_INT_009
+  title: Orchestrating the AI Symphony
+  description: 'Leverage Lumina Corp''s cross-model synthesis framework to seamlessly
+    integrate multiple AI models and create a unified intelligence platform for predictive
+    maintenance in manufacturing facilities. Orchestrate diverse models to optimize
+    production processes, predict equipment failures, and recommend proactive maintenance
+    actions.
+
+    '
+  objectives:
+  - Integrate at least 5 AI models from different domains into a cohesive system
+  - Achieve >90% accuracy in predicting equipment failures 48 hours in advance
+  - Generate actionable maintenance recommendations with >85% precision
+  tasks:
+  - step: Select and prepare AI models
+    details: Choose 5 or more AI models from computer vision, time-series forecasting,
+      anomaly detection, natural language processing, and other relevant domains.
+      Preprocess and format model inputs/outputs for integration.
+  - step: Implement model integration framework
+    details: Utilize Lumina's cross-model synthesis framework to load and integrate
+      the selected models, handling format compatibility, resource optimization, and
+      dynamic model execution.
+  - step: Develop intelligent model orchestration
+    details: Build a decision engine to analyze task requirements, performance characteristics,
+      and contextual data. Dynamically compose and chain the appropriate models to
+      tackle predictive maintenance tasks efficiently.
+  success_criteria:
+  - At least 5 heterogeneous AI models successfully integrated into a unified system
+  - End-to-end system accurately predicts >90% of equipment failures 48 hours in advance
+  - Generated maintenance recommendations have a precision of >85%
+  evaluation_metrics:
+  - metric: Model integration diversity
+    target: '>=5 distinct AI model domains'
+  - metric: Failure prediction accuracy
+    target: '>=90% within 48 hour window'
+  - metric: Maintenance recommendation precision
+    target: '>=85%'
+  difficulty: Intermediate
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: MOD_P4_002
+  requirements:
+    compute: High-performance GPU cluster
+    memory: 128GB RAM
+    capabilities:
+    - AI Model Integration
+    - Intelligent Orchestration
+    - Quantization
+    - Pruning
+  rewards:
+    xp: 2000
+    capabilities:
+    - Cross-model Synthesis
+    - Predictive Maintenance
+    resources:
+    - Lumina Integrated AI Platform License
+    - Reduced Cloud Compute Costs
+  deliverables:
+  - Integrated predictive maintenance AI system
+  - System documentation and performance reports
+  - Deployment and maintenance guidelines
+- id: MOD_T8_022
+  title: Orchestrating AI Symphony
+  description: 'Harness the power of cross-model synthesis to create a unified AI
+    platform capable of tackling complex, multidisciplinary challenges by seamlessly
+    integrating diverse models and leveraging their collective strengths.
+
+    '
+  objectives:
+  - Develop a robust model integration framework to dynamically load, optimize, and
+    execute AI models from various domains and architectures.
+  - Implement an intelligent model orchestration engine to analyze task requirements,
+    performance characteristics, and contextual information, then dynamically compose
+    and chain the most suitable models.
+  - Integrate knowledge representation systems and ensemble techniques to enhance
+    reasoning and optimize model performance.
+  tasks:
+  - step: Analyze and document the diverse set of AI models, frameworks, and architectures
+      to be integrated, identifying their capabilities, strengths, performance characteristics,
+      and resource requirements.
+    details: Conduct a comprehensive review, gathering information from research papers,
+      technical documentation, and domain experts. Create a structured knowledge base
+      to facilitate model selection and composition.
+  - step: Design and implement a modular model integration framework that can dynamically
+      load, quantize, prune, and execute AI models from various sources, abstracting
+      away complexities of model formats and enabling efficient resource utilization.
+    details: Develop a flexible and extensible architecture, leveraging techniques
+      like containerization and model serving frameworks. Implement optimization methods
+      like quantization and pruning to enhance performance and reduce resource requirements.
+  - step: Develop an intelligent model orchestration engine that can analyze task
+      requirements, performance characteristics, and contextual information, then
+      dynamically compose and chain the most suitable models to tackle any given problem.
+    details: Integrate decision-making algorithms, machine learning techniques, and
+      knowledge representation systems to enable intelligent model selection, composition,
+      and execution. Implement ensemble techniques and performance profiling to continuously
+      adapt and optimize model strategies.
+  success_criteria:
+  - Successful integration and execution of at least 10 diverse AI models from different
+    domains and architectures within the unified platform.
+  - Demonstration of dynamic model composition and chaining to solve at least 5 complex,
+    multidisciplinary challenges, leveraging the collective strengths of multiple
+    models.
+  - Measurable performance improvements (e.g., accuracy, efficiency, resource utilization)
+    compared to siloed model execution, with at least 20% overall gains.
+  evaluation_metrics:
+  - metric: Model integration coverage
+    target: 80% of identified AI models successfully integrated
+  - metric: Task completion accuracy
+    target: 90% average accuracy across multidisciplinary challenges
+  - metric: Resource utilization efficiency
+    target: 30% reduction in compute and memory requirements
+  difficulty: Advanced
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: MOD_P4_002
+  requirements:
+    compute: High-performance GPU computing clusters
+    memory: Terabytes of RAM
+    capabilities:
+    - AI model development
+    - Knowledge representation
+    - Decision-making algorithms
+    - Ensemble techniques
+    - Performance optimization
+  rewards:
+    xp: 2000
+    capabilities:
+    - Cross-model synthesis
+    resources:
+    - 10 AI model licenses
+    - 5 TB of cloud storage
+  deliverables:
+  - Documented architecture and implementation of the model integration framework
+  - Intelligent model orchestration engine codebase
+  - Demonstration of the unified AI platform solving multidisciplinary challenges
+  - Performance evaluation report and benchmarking results

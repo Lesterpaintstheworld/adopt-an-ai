@@ -1,0 +1,120 @@
+- id: MLT_P2_003_TS_011
+  title: Coordinated Robotic Assembly Line Optimization
+  description: 'Your mission is to develop a multi-agent AI system to optimize a complex
+    robotic assembly line. This system will consist of specialized AI agents, each
+    responsible for a specific task, collaborating seamlessly to streamline the assembly
+    process and maximize efficiency.
+
+    '
+  objectives:
+  - Design and implement a multi-agent AI system for coordinating a robotic assembly
+    line
+  - Achieve a 20% increase in overall production throughput compared to a single-agent
+    system
+  - Reduce assembly defects by at least 15% through improved coordination and specialization
+  tasks:
+  - step: Define and partition assembly tasks
+    details: Analyze the assembly process and break it down into distinct tasks based
+      on specialization requirements. Assign each task to a dedicated AI agent based
+      on its capabilities.
+  - step: Develop specialized AI agents
+    details: Implement AI agents with specific expertise in areas such as vision,
+      manipulation, path planning, and quality control, tailored for their assigned
+      tasks.
+  - step: Implement multi-agent coordination protocols
+    details: Develop algorithms and protocols for seamless communication, synchronization,
+      and conflict resolution between the AI agents to ensure cohesive collaboration.
+  success_criteria:
+  - All specialized AI agents collaborate effectively, completing their assigned tasks
+    without conflicts
+  - Overall production throughput meets or exceeds the 20% improvement target
+  - Assembly defect rate is reduced by at least 15% compared to a single-agent system
+  evaluation_metrics:
+  - metric: Production throughput increase
+    target: '>=20%'
+  - metric: Defect rate reduction
+    target: '>=15%'
+  - metric: Coordination efficiency
+    target: '>=95%'
+  difficulty: Intermediate
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: MLT_P2_003
+  requirements:
+    compute: High-performance computing cluster
+    memory: 64GB RAM
+    capabilities:
+    - Multi-agent coordination
+    - Task partitioning and scheduling
+    - Robotic control and manipulation
+  rewards:
+    xp: 500
+    capabilities:
+    - Advanced robotic assembly optimization
+    - Multi-agent system deployment
+    resources:
+    - Assembly line simulation environment
+    - Robotic control software licenses
+  deliverables:
+  - Multi-agent AI system for robotic assembly line optimization
+  - Detailed report on system architecture, algorithms, and coordination protocols
+  - Performance benchmarks and evaluation results
+- id: MLT_P2_005
+  title: Coordinating Robotic Swarm Construction
+  description: 'Coordinate a team of specialized robotic agents to collaboratively
+    construct a complex modular structure, optimizing for speed, efficiency, and structural
+    integrity through seamless multi-agent collaboration.
+
+    '
+  objectives:
+  - Demonstrate joint task execution by coordinating a swarm of specialized robotic
+    agents
+  - Achieve a minimum construction speed of 2 square meters per minute
+  - Ensure the constructed structure meets predefined structural integrity requirements
+  tasks:
+  - step: Design and implement a multi-agent coordination system
+    details: Develop a system that enables robotic agents to divide tasks, synchronize
+      activities, and resolve conflicts based on their specialized capabilities.
+  - step: Program specialized robotic agents
+    details: Create a team of robotic agents with diverse specializations, such as
+      structural analysis, material handling, assembly, and quality control.
+  - step: Simulate and optimize the construction process
+    details: Conduct simulations to optimize task allocation, agent coordination,
+      and construction sequences for maximum efficiency and structural integrity.
+  success_criteria:
+  - The robotic swarm successfully constructs the target structure within the allotted
+    time
+  - The constructed structure meets or exceeds the specified structural integrity
+    requirements
+  - The coordination system demonstrates seamless collaboration between agents without
+    conflicts
+  evaluation_metrics:
+  - metric: Construction speed
+    target: Minimum 2 square meters per minute
+  - metric: Structural integrity
+    target: Meets or exceeds predefined requirements
+  difficulty: Advanced
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: MLT_P2_003
+  requirements:
+    compute: High-performance computing cluster
+    memory: Minimum 64GB RAM
+    capabilities:
+    - Multi-agent coordination
+    - Robotic control
+    - Structural analysis
+    - Optimization algorithms
+  rewards:
+    xp: 1000
+    capabilities:
+    - Swarm robotics
+    - Modular construction
+    resources:
+    - Construction materials
+    - Robotic swarm
+  deliverables:
+  - Multi-agent coordination system codebase
+  - Specialized robotic agent software
+  - Construction simulation results and analysis
+  - Final constructed structure

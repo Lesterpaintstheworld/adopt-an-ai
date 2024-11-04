@@ -1,0 +1,72 @@
+- id: MLT_P1_002
+  title: Email Triage and Automated Response System
+  description: 'Design and implement an AI-driven email management solution that can
+    intelligently handle email triage, context-aware response generation, and communication
+    optimization across a large enterprise. The system should leverage state-of-the-art
+    natural language processing and generation models to understand email content,
+    prioritize messages, and craft personalized responses while adhering to communication
+    styles and professional standards.
+
+    '
+  objectives:
+  - Develop an Email Parser module to accurately extract key entities, analyze sentiment,
+    and track conversation threads from incoming emails.
+  - Implement a Response Generator module to compose contextually relevant and professionally-written
+    replies based on parsed email data.
+  - Integrate the system with existing email accounts and optimize performance for
+    low-latency, real-time email processing.
+  tasks:
+  - step: Build an Email Parser using advanced NLP techniques
+    details: Leverage state-of-the-art NLP models to develop an Email Parser module
+      capable of extracting relevant entities (e.g., names, dates, locations), analyzing
+      sentiment (positive, negative, neutral), and tracking conversation threads from
+      email content. Ensure high accuracy and scalability across various email formats
+      and domains.
+  - step: Develop a Response Generator using language generation models
+    details: Implement a Response Generator module powered by advanced language generation
+      models (e.g., GPT-3) to compose contextually relevant and professionally-written
+      email responses. The module should draw from historical communication styles,
+      domain-specific knowledge, and parsed email data to maintain coherent conversation
+      threads while adhering to professional writing standards.
+  - step: Integrate with existing email infrastructure and optimize performance
+    details: Interface the Email Parser and Response Generator modules with the organization's
+      existing email accounts, enabling real-time processing of incoming messages.
+      Optimize the system for low-latency email handling, ensuring prompt and efficient
+      response generation.
+  success_criteria:
+  - Email Parser achieves at least 90% accuracy in entity extraction, sentiment analysis,
+    and conversation thread tracking across diverse email datasets.
+  - Response Generator produces coherent, contextually relevant, and professionally-written
+    email replies, as evaluated by a panel of domain experts.
+  - End-to-end system integrates seamlessly with existing email infrastructure and
+    processes emails with an average latency of less than 5 seconds.
+  evaluation_metrics:
+  - metric: Email Parser accuracy
+    target: '>=90%'
+  - metric: Response Generator coherence score
+    target: '>=4 (on a scale of 1-5)'
+  - metric: System end-to-end latency
+    target: <5 seconds
+  difficulty: Advanced
+  category: Communication
+  duration: 6h
+  mainPrerequisite: MLT_P1_001
+  requirements:
+    compute: High-performance GPU clusters for training and inference
+    memory: Minimum 32GB RAM
+    capabilities:
+    - Natural Language Processing
+    - Language Generation
+    - Email Integration
+  rewards:
+    xp: 500
+    capabilities:
+    - Email Communication
+    resources:
+    - Advanced NLP Model Weights
+    - Enterprise Email Dataset
+  deliverables:
+  - Fully functional Email Parser module
+  - Optimized Response Generator module
+  - Integrated email management system deployed in production
+  - Performance evaluation report

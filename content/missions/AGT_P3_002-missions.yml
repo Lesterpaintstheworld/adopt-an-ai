@@ -1,0 +1,126 @@
+- id: RBC_INT_001
+  title: Immersive Virtual Environment Design
+  description: "Design and create a highly detailed, interactive virtual environment\
+    \ leveraging \nthe reality-bending capabilities. Seamlessly blend physical and\
+    \ virtual elements, \nmanipulate environmental factors, and incorporate complex\
+    \ physics simulations.\n"
+  objectives:
+  - Create a visually stunning and immersive virtual environment
+  - Incorporate dynamic environmental elements that can be manipulated in real-time
+  - Simulate realistic physics and natural phenomena within the virtual space
+  tasks:
+  - step: Define the overall theme and setting of the virtual environment
+    details: Determine the specific location, time period, and overall aesthetic of
+      the environment. Consider factors such as climate, geography, and architectural
+      styles.
+  - step: Design and construct the static elements of the environment
+    details: Use the reality-bending capabilities to sculpt and shape the terrain,
+      landscape features, structures, and other static elements within the virtual
+      space.
+  - step: Implement dynamic environmental elements and physics simulations
+    details: Incorporate elements such as weather systems, natural disasters, fluid
+      dynamics, and advanced physics simulations that can be manipulated and adjusted
+      in real-time using thought-based interfaces.
+  success_criteria:
+  - The virtual environment should be highly detailed, visually appealing, and consistent
+    with the defined theme and setting.
+  - Dynamic environmental elements should respond accurately and in real-time to mental
+    commands and intentions.
+  - Physics simulations should be realistic and consistent with the established laws
+    of physics within the virtual space.
+  evaluation_metrics:
+  - metric: Visual Fidelity
+    target: Achieve a minimum score of 9 out of 10 on a subjective visual quality
+      assessment by a panel of experts.
+  - metric: Real-time Responsiveness
+    target: Ensure a maximum latency of 50ms between mental commands and environmental
+      changes.
+  difficulty: Intermediate
+  category: Creativity
+  duration: 8h
+  mainPrerequisite: AGT_P3_002
+  requirements:
+    compute: High-performance GPU computing resources
+    memory: Minimum 32GB RAM
+    capabilities:
+    - Reality Simulation Engine
+    - Advanced Neural Interface
+    - Intelligent Translation System
+  rewards:
+    xp: 1000
+    capabilities:
+    - Advanced Environmental Manipulation
+    - Dynamic Physics Simulation
+    resources:
+    - High-Resolution Texture Library
+    - Procedural Geometry Generation Tools
+  deliverables:
+  - A fully functional, highly detailed, and immersive virtual environment
+  - A comprehensive report detailing the design process, implementation details, and
+    technical specifications
+  - A live demonstration showcasing the dynamic environmental manipulation and physics
+    simulations
+- id: VR_RBM_003
+  title: Utopia Redesign - Reshaping Urban Environments through Thought
+  description: 'Leverage reality-bending capabilities to redesign a virtual city environment,
+
+    addressing key urban challenges while creating an optimal space for community
+
+    well-being and sustainable living.
+
+    '
+  objectives:
+  - Optimize urban layout for efficient transportation and resource distribution
+  - Enhance green spaces and integrate nature into the cityscape
+  - Design inclusive, accessible spaces that foster social connectivity
+  tasks:
+  - step: Analyze current city layout and identify areas for improvement
+    details: Conduct a thorough assessment of the existing virtual city, pinpointing
+      transportation bottlenecks, resource inefficiencies, lack of green spaces, and
+      accessibility issues.
+  - step: Conceptualize an optimized urban design
+    details: Develop a comprehensive plan for redesigning the city, addressing transportation,
+      resource management, green spaces, accessibility, and social connectivity through
+      thoughtful urban planning principles.
+  - step: Iteratively reshape the virtual environment
+    details: Utilizing reality-bending capabilities, incrementally reshape the city
+      according to the optimized design, making real-time adjustments based on simulated
+      outcomes and feedback.
+  success_criteria:
+  - Reduce average commute times by at least 25%
+  - Increase green space coverage to a minimum of 30% of the total area
+  - Ensure at least 90% of residential areas are within a 10-minute walk of community
+    spaces
+  evaluation_metrics:
+  - metric: Transportation Efficiency
+    target: Reduce vehicle emissions by 40% compared to baseline
+  - metric: Resource Optimization
+    target: Achieve a 30% reduction in energy and water consumption
+  - metric: Social Connectivity
+    target: Increase community event participation by 50%
+  difficulty: Advanced
+  category:
+  - Creativity
+  - Problem Solving
+  duration: 8h
+  mainPrerequisite: AGT_P3_002
+  requirements:
+    compute: High-performance computing cluster with parallel processing capabilities
+    memory: Minimum 256 GB RAM
+    capabilities:
+    - Reality Simulation
+    - Urban Planning
+    - Resource Management
+    - Environmental Modeling
+  rewards:
+    xp: 2000
+    capabilities:
+    - Advanced Urban Design
+    - Sustainable City Planning
+    resources:
+    - Virtual City Blueprint
+    - Green City Design Guide
+  deliverables:
+  - Comprehensive report detailing the optimized city design
+  - Interactive 3D model of the redesigned virtual city
+  - Simulated outcomes and projections for key metrics

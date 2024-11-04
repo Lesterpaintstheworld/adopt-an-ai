@@ -1,0 +1,128 @@
+- id: AGT_TRAIN_012
+  title: Autonomous Logistics Optimization
+  description: 'In this mission, you will leverage the simple goal setting capability
+    to coordinate a fleet of autonomous drones for efficient package delivery across
+    multiple locations. The AI system must optimally plan routes, track progress,
+    adapt to changing conditions, and validate successful outcomes.
+
+    '
+  objectives:
+  - Develop a comprehensive delivery plan to transport packages to multiple destinations
+    within a specified time window
+  - Monitor and track package movements in real-time, ensuring adherence to the planned
+    schedule
+  - Dynamically adjust routes and delivery sequences based on evolving traffic conditions,
+    weather patterns, and resource constraints
+  tasks:
+  - step: Define delivery goals and constraints
+    details: Specify the package pickup and drop-off locations, delivery time windows,
+      drone fleet specifications, and any applicable regulations or operational constraints.
+  - step: Develop an optimal delivery plan
+    details: Leverage the goal decomposition module to break down the high-level delivery
+      objectives into actionable tasks, milestones, and resource allocations. Sequence
+      the deliveries, assign drones, and optimize routes for efficient travel and
+      resource utilization.
+  - step: Execute and monitor the delivery plan
+    details: Deploy the autonomous drone fleet and monitor real-time progress through
+      the intuitive tracking interface. Validate milestone achievements, identify
+      deviations from the plan, and trigger alerts for any issues or delays.
+  - step: Adapt and recalibrate the plan
+    details: Continuously analyze incoming data streams to identify optimization opportunities.
+      Leverage the strategy adaptation module to dynamically adjust routes, reassign
+      resources, and re-prioritize deliveries based on changing conditions, such as
+      traffic patterns, weather events, or unexpected delays.
+  success_criteria:
+  - All packages must be delivered to their respective destinations within the specified
+    time windows
+  - Deviations from the planned delivery schedule should not exceed 10% of the total
+    delivery time
+  - Route adjustments should result in at least 5% reduction in overall travel time
+    compared to the initial plan
+  evaluation_metrics:
+  - metric: On-time delivery rate
+    target: '>= 95%'
+  - metric: Average route optimization savings
+    target: '>= 10%'
+  - metric: Successful package delivery validation
+    target: 100%
+  difficulty: Intermediate
+  category: Problem Solving
+  duration: 6h
+  mainPrerequisite: AGT_P1_003
+  requirements:
+    compute: High-performance computing cluster
+    memory: 32GB RAM
+    capabilities:
+    - Goal Decomposition
+    - Real-time Monitoring
+    - Strategy Adaptation
+  rewards:
+    xp: 500
+    capabilities:
+    - Advanced Route Optimization
+    - Multi-Agent Coordination
+    resources:
+    - Drone Fleet Simulation Environment
+    - Logistics Data Sets
+  deliverables:
+  - Detailed delivery plan with optimized routes and resource allocations
+  - Real-time progress monitoring dashboard with alerts and notifications
+  - Comprehensive report on plan execution, adjustments made, and outcome validation
+- id: AGT_T2_014
+  title: Autonomous Logistics Fleet Optimization
+  description: 'Leverage the simple goal setting AI capability to optimally coordinate
+    a fleet of autonomous delivery vehicles, efficiently routing them to fulfill a
+    set of delivery orders within tight time constraints while minimizing operational
+    costs.
+
+    '
+  objectives:
+  - Maximize on-time delivery rate (>95%) for a set of 200 orders across the city
+  - Minimize total fleet fuel consumption (<5000 liters)
+  - Ensure no vehicle exceeds maximum daily operational hours (10 hours)
+  tasks:
+  - step: Ingest and process order data
+    details: Parse the provided order data file, extracting delivery locations, time
+      windows, and package details. Cross-reference against vehicle fleet data for
+      capacity constraints.
+  - step: Set up goal decomposition and tracking
+    details: Define top-level goals (on-time delivery, fuel efficiency, operational
+      limits). Break down into sub-goals and milestones for each order and vehicle
+      assignment.
+  - step: Develop routing and scheduling strategy
+    details: Using the goal tracking system, devise an optimal routing plan that meets
+      all objectives, considering traffic patterns, vehicle range, delivery time windows,
+      and potential contingencies.
+  success_criteria:
+  - At least 95% of orders delivered within specified time windows
+  - Total fleet fuel consumption under 5000 liters for the day's operations
+  - No vehicle exceeds 10 hours of operation time
+  evaluation_metrics:
+  - metric: On-time delivery rate
+    target: '>= 95%'
+  - metric: Total fleet fuel consumption
+    target: < 5000 liters
+  - metric: Maximum vehicle operation time
+    target: <= 10 hours
+  difficulty: Advanced
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: AGT_P1_003
+  requirements:
+    compute: 16 vCPU, GPU accelerated
+    memory: 32 GB RAM
+    capabilities:
+    - Simple Goal Setting
+    - Vehicle Routing
+    - Logistics Planning
+  rewards:
+    xp: 2500
+    capabilities:
+    - Fleet Optimization
+    - Dynamic Rescheduling
+    resources:
+    - Bonus Compute Credits
+  deliverables:
+  - Detailed routing and scheduling plan for the delivery fleet
+  - Real-time monitoring dashboard with goal tracking
+  - Performance report with key metrics

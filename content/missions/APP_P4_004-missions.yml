@@ -1,0 +1,60 @@
+- id: APP_P4_004_ADV
+  title: Pioneering Sustainable Urban Design through Rapid App Prototyping
+  description: 'Leverage Perfect Application Synthesis to streamline the development
+    of interactive urban planning tools, enabling rapid iteration and collaboration
+    on sustainable architectural designs for a proposed smart city district.
+
+    '
+  objectives:
+  - Create an immersive 3D visualization platform to explore urban design concepts
+  - Integrate simulation capabilities for environmental impact analysis
+  - Enable real-time collaborative editing and annotation tools
+  tasks:
+  - step: Define requirements for the urban planning application
+    details: Outline key features like 3D modeling, collaborative editing, environmental
+      simulations (e.g. energy, pollution, traffic), data visualization, accessibility,
+      and user experience goals.
+  - step: Synthesize initial application prototype
+    details: Use Perfect Application Synthesis to generate an optimized software solution
+      based on the specified requirements, including core functionality, user interface,
+      and backend architecture.
+  - step: Iteratively refine and extend the application
+    details: Collaborate with stakeholders (architects, urban planners, sustainability
+      experts) to gather feedback, identify areas for improvement, and synthesize
+      new features or optimizations through additional applications of Perfect Application
+      Synthesis.
+  success_criteria:
+  - Application supports real-time 3D visualization of urban designs
+  - Integrated simulation tools accurately model environmental impacts
+  - Multi-user collaboration and annotation capabilities function seamlessly
+  evaluation_metrics:
+  - metric: Design iteration speed
+    target: Reduce average time for new feature implementation by 75%
+  - metric: Simulation accuracy
+    target: Environmental projections within 5% of industry standard models
+  - metric: Collaborative productivity
+    target: Enable simultaneous editing by 10+ stakeholders with <100ms latency
+  difficulty: Advanced
+  category: Creativity
+  duration: 8h
+  mainPrerequisite: APP_P4_004
+  requirements:
+    compute: High-performance GPU compute
+    memory: 32GB RAM
+    capabilities:
+    - Knowledge domains (architecture, urban planning, sustainability)
+    - 3D modeling and visualization
+    - Simulation and numerical computing
+    - Collaboration and communication tools
+  rewards:
+    xp: 4000
+    capabilities:
+    - Urban design application prototyping
+    - Environmental impact simulation
+    resources:
+    - Smart city reference datasets
+    - Architectural CAD asset library
+  deliverables:
+  - Functional urban planning application with core requirements
+  - Performance benchmarks and simulation validation reports
+  - Documentation of development process and lessons learned

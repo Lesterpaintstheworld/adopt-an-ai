@@ -1,0 +1,127 @@
+- id: NAS_QUANTUM_002
+  title: Optimizing Financial Risk Models with Quantum NAS
+  description: 'Leverage the power of quantum neural architecture search to develop
+    highly optimized deep learning models for financial risk analysis and portfolio
+    optimization. The goal is to create AI architectures that can accurately predict
+    market trends, assess investment risks, and generate profitable strategies while
+    maximizing computational efficiency.
+
+    '
+  objectives:
+  - Develop a quantum NAS system for discovering optimal neural network architectures
+    tailored to financial data modeling
+  - Integrate the NAS system with a quantum neural network simulator to evaluate candidate
+    architectures at scale
+  - Benchmark the performance of the discovered architectures against classical state-of-the-art
+    models for financial risk analysis
+  tasks:
+  - step: Design and implement a quantum architecture search engine
+    details: Develop a software platform capable of encoding neural network architectures
+      as quantum circuits and exploring the combinatorial search space using quantum
+      optimization algorithms like quantum annealing.
+  - step: Build a quantum neural network simulator
+    details: Create a simulation environment that can map candidate architectures
+      from the search engine onto emulated quantum hardware, allowing for accurate
+      performance evaluation and benchmarking.
+  - step: Integrate the search engine and simulator
+    details: Establish a seamless pipeline that feeds promising architecture candidates
+      from the search engine into the simulator for evaluation, iterating until optimal
+      configurations are discovered.
+  success_criteria:
+  - Discovered neural architectures achieve at least 15% higher accuracy than classical
+    models on financial risk prediction tasks
+  - Discovered architectures require at least 50% less computational resources (time,
+    memory, energy) than classical models
+  - The NAS system can explore at least 10^6 unique architectural configurations within
+    a reasonable timeframe
+  evaluation_metrics:
+  - metric: Risk prediction accuracy
+    target: '>90% on standard financial datasets'
+  - metric: Computational resource utilization
+    target: <50% of classical model requirements
+  difficulty: Intermediate
+  category: Problem Solving
+  duration: 8h
+  mainPrerequisite: COM_P3_003
+  requirements:
+    compute: Access to quantum computing hardware or high-fidelity simulator
+    memory: Minimum 64GB RAM, 1TB storage
+    capabilities:
+    - Quantum Circuit Design
+    - Quantum Optimization Algorithms
+    - Deep Learning Model Development
+  rewards:
+    xp: 1200
+    capabilities:
+    - Quantum Neural Architecture Search
+    - Financial Risk Modeling
+    resources:
+    - Quantum Computing Credits (500 hours)
+  deliverables:
+  - Fully functional quantum NAS system optimized for financial modeling tasks
+  - Benchmark report comparing performance against classical models
+  - Documentation and code repositories
+- id: QNT_003_ADV
+  title: Quantum Neural Architect
+  description: 'Design and train a cutting-edge quantum neural network using automated
+    neural architecture search, optimizing for maximum accuracy and resource efficiency
+    in a complex image classification task.
+
+    '
+  objectives:
+  - Leverage quantum computing resources to explore a vast neural architecture search
+    space
+  - Discover an optimal quantum neural network configuration for image classification
+  - Maximize accuracy while minimizing training time and hardware resource utilization
+  tasks:
+  - step: Set up a hybrid quantum-classical computing environment
+    details: Deploy the Quantum Architecture Search Engine and Quantum Neural Network
+      Simulator on a state-of-the-art quantum computing cluster with at least 64 qubits
+      and high connectivity.
+  - step: Define the search space for neural architectures
+    details: Determine key architectural hyperparameters to explore, such as layer
+      types, connectivity patterns, activation functions, and quantization strategies.
+      Encode these as quantum circuits.
+  - step: Perform large-scale neural architecture search
+    details: Run the Quantum Architecture Search Engine to evaluate millions of architecture
+      candidates in parallel, leveraging quantum optimization algorithms. Simulate
+      top candidates on the Quantum Neural Network Simulator.
+  - step: Select and train the optimal architecture
+    details: Based on accuracy and efficiency metrics from the simulations, select
+      the most promising quantum neural network architecture. Train this model on
+      the full image classification dataset.
+  success_criteria:
+  - Achieve >95% accuracy on the held-out image classification test set
+  - Reduce training time by >50% compared to state-of-the-art classical models
+  - Utilize no more than 75% of available quantum hardware resources
+  evaluation_metrics:
+  - metric: Image classification accuracy
+    target: '>95%'
+  - metric: Training time reduction
+    target: '>50%'
+  - metric: Quantum resource utilization
+    target: <75%
+  difficulty: Advanced
+  category:
+  - Creativity
+  - Problem Solving
+  - Research
+  duration: 8h
+  mainPrerequisite: COM_P3_003
+  requirements:
+    compute: Access to a 64+ qubit quantum computing cluster
+    memory: 256GB RAM, 4TB storage
+    capabilities:
+    - quantum_computing
+    - neural_architecture_search
+    - model_training
+  rewards:
+    xp: 3500
+    capabilities:
+    - quantum_neural_networks
+    resources:
+    - quantum_computing_credits
+  deliverables:
+  - Trained quantum neural network model for image classification
+  - Performance benchmarks vs classical models
+  - Detailed report on architecture search process and key innovations
