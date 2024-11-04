@@ -52,7 +52,7 @@ const MissionModal: React.FC<MissionModalProps> = ({
           .filter(([key]) => !['name', 'period', 'description'].includes(key))
           .flatMap(([_, items]) => items as Array<{ capability_id: string; name: string }>)
       )
-      .find(item => 
+      .find((item): item is { capability_id: string; name: string } => 
         item && 
         typeof item === 'object' && 
         'capability_id' in item && 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Mission, Difficulty, Status, Phase } from '../types/missions';
 import MissionModal from '../components/MissionModal';
+import { getPerkIconUrl } from '../utils/iconUtils';
 
 const getPhaseLabel = (phase: Phase): string => {
   switch (phase) {
@@ -491,7 +492,7 @@ const MissionsPage: React.FC = () => {
                     mb: 0.5 
                   }}>
                     Requirements: {
-                      typeof mission.requirements === 'object' 
+                      typeof mission.requirements === 'object' && mission.requirements !== null
                         ? Object.entries(mission.requirements as Record<string, unknown>)
                             .map(([key, value]) => `${key}: ${String(value)}`)
                             .join(', ')

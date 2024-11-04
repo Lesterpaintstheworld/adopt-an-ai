@@ -674,7 +674,7 @@ const TechTreePage = ({ standalone = false }: TechTreePageProps): JSX.Element =>
               );
             })}
 
-            {Object.entries(techTree as TechTree).map(([phaseKey, phaseData]) => {
+            {Object.entries(techTree as TechTree).map(([phaseKey, phaseData], index) => {
               if (!isPhaseData(phaseData)) return null;
               const previousPhases = Object.values(techTree).slice(0, index);
               const xPosition = previousPhases.reduce((acc: number, phase: any) => {
