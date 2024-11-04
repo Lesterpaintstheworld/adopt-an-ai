@@ -51,34 +51,6 @@ export const Header = () => {
           >
             Tech Tree
           </Button>
-          <Button 
-            component={RouterLink} 
-            to="/adopt"
-            sx={{ color: (theme) => theme.palette.text.primary }}
-          >
-            Adopt
-          </Button>
-          <Button 
-            component={RouterLink} 
-            to="/my-ais"
-            sx={{ color: (theme) => theme.palette.text.primary }}
-          >
-            My AIs
-          </Button>
-          <Button 
-            component={RouterLink} 
-            to="/pricing"
-            sx={{ color: (theme) => theme.palette.text.primary }}
-          >
-            Pricing
-          </Button>
-          <Button 
-            component={RouterLink} 
-            to="/blog"
-            sx={{ color: (theme) => theme.palette.text.primary }}
-          >
-            Blog
-          </Button>
           {!isAuthenticated ? (
             <Button 
               component={RouterLink} 
