@@ -17,6 +17,7 @@ const getPhaseLabel = (phase: Phase): string => {
   }
 };
 import { mockMissions } from '../data/mockMissions';
+import techTree from '../../content/tech/tech-tree.yml';
 import { 
   Box, 
   Container, 
@@ -416,27 +417,52 @@ const MissionsPage: React.FC = () => {
                       <Typography variant="caption" color="text.secondary">
                         Required Perk:
                       </Typography>
-                      <Box
-                        component="img"
-                        src={getPerkIconUrl({ capability_id: mission.mainPrerequisite })}
-                        alt="Required Perk"
-                        sx={{
-                          width: 32,
-                          height: 32,
-                          borderRadius: '4px',
-                          objectFit: 'cover',
-                          boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-                          opacity: mission.status === 'locked' ? 0.5 : 1,
-                          filter: mission.status === 'locked' ? 'grayscale(100%)' : 'none',
-                          transition: 'all 0.2s ease',
-                          '&:hover': {
-                            transform: 'scale(1.1)',
-                          }
-                        }}
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).style.display = 'none';
-                        }}
-                      />
+                      <Box sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 1,
+                        backgroundColor: 'rgba(0, 0, 0, 0.05)',
+                        padding: '4px 8px',
+                        borderRadius: '4px',
+                        border: '1px solid rgba(0, 0, 0, 0.1)'
+                      }}>
+                        <Box
+                          component="img"
+                          src={getPerkIconUrl({ capability_id: mission.mainPrerequisite })}
+                          alt="Required Perk"
+                          sx={{
+                            width: 32,
+                            height: 32,
+                            borderRadius: '4px',
+                            objectFit: 'cover',
+                            boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                            opacity: mission.status === 'locked' ? 0.5 : 1,
+                            filter: mission.status === 'locked' ? 'grayscale(100%)' : 'none',
+                            transition: 'all 0.2s ease',
+                            '&:hover': {
+                              transform: 'scale(1.1)',
+                            }
+                          }}
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).style.display = 'none';
+                          }}
+                        />
+                        <Typography 
+                          variant="caption" 
+                          sx={{
+                            color: mission.status === 'locked' ? 'text.disabled' : 'text.primary',
+                            fontWeight: 500
+                          }}
+                        >
+                          {Object.values(techTree)
+                            .flatMap(phase => 
+                              Object.entries(phase)
+                                .filter(([key]) => !['name', 'period', 'description'].includes(key))
+                                .flatMap(([_, items]) => items)
+                            )
+                            .find(item => item.capability_id === mission.mainPrerequisite)?.name || 'Unknown Perk'}
+                        </Typography>
+                      </Box>
                     </Box>
                   )}
                 </Box>
