@@ -56,8 +56,8 @@ const SideMenu = () => {
                 src={item.icon}
                 alt={item.text}
                 sx={{
-                  width: '100px',
-                  height: '20px',
+                  width: '200px',
+                  height: '40px',
                   objectFit: 'contain',
                   mr: isCollapsed ? 0 : 2,
                   transition: 'margin 0.2s',
