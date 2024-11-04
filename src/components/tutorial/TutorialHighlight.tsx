@@ -14,8 +14,6 @@ import type { PageKey } from '../../data/tutorialSteps';
 export const TutorialHighlight = ({ pageKey }: { pageKey: PageKey }) => {
   const { user, isAuthenticated } = useAuth();
   const [visible, setVisible] = useState(false);
-  const [currentStep, setCurrentStep] = useState(0);
-
   const tutorial = pageTutorials[pageKey];
 
   useEffect(() => {
