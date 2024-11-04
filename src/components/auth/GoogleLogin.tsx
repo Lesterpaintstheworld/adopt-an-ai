@@ -54,7 +54,7 @@ export const GoogleLogin = () => {
         body: JSON.stringify({
           googleToken: tokenResponse.access_token,
           userData: {
-            googleId: user.sub,
+            google_id: user.sub,  // Changed from googleId to google_id to match DB column
             email: user.email,
             name: user.name || user.email.split('@')[0],
             picture: user.picture,
