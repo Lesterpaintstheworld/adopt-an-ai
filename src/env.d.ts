@@ -8,6 +8,7 @@ interface ImportMetaEnv {
   readonly VITE_STRIPE_DEVELOPER_YEARLY_PRICE_ID: string;
   readonly VITE_STRIPE_CREATOR_MONTHLY_PRICE_ID: string;
   readonly VITE_STRIPE_CREATOR_YEARLY_PRICE_ID: string;
+  readonly VITE_JWT_SECRET?: string;
 }
 
 interface ImportMeta {
