@@ -9,7 +9,16 @@ import {
 } from '@mui/material';
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
 import yaml from 'react-syntax-highlighter/dist/esm/languages/hljs/yaml';
-import { atomOneDark, atomOneLight } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+
+const darkTheme = {
+  ...atomOneDark,
+  'hljs': {
+    ...atomOneDark.hljs,
+    background: '#1a1b2e',
+    color: '#e4e4e7',
+  }
+};
 import { parseYaml } from '../utils/yamlFormatter';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -38,8 +47,10 @@ export const YamlModal: React.FC<YamlModalProps> = ({
       fullWidth
       PaperProps={{
         sx: {
-          bgcolor: theme.palette.background.paper,
+          bgcolor: '#0f1021',
           backgroundImage: 'none',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
         }
       }}
     >
@@ -49,7 +60,10 @@ export const YamlModal: React.FC<YamlModalProps> = ({
           p: 2,
           display: 'flex',
           justifyContent: 'space-between',
-          alignItems: 'center'
+          alignItems: 'center',
+          bgcolor: '#1a1b2e',
+          color: '#fff',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
         }}
       >
         {title}
@@ -66,17 +80,29 @@ export const YamlModal: React.FC<YamlModalProps> = ({
           <CloseIcon />
         </IconButton>
       </DialogTitle>
-      <DialogContent dividers>
-        <Box sx={{ p: 1 }}>
+      <DialogContent 
+        dividers
+        sx={{
+          bgcolor: '#0f1021',
+          borderTop: 'none',
+          borderBottom: 'none',
+          p: 0,
+        }}
+      >
+        <Box sx={{ p: 2 }}>
           <SyntaxHighlighter
             language="yaml"
-            style={theme.palette.mode === 'dark' ? atomOneDark : atomOneLight}
+            style={darkTheme}
             customStyle={{
               margin: 0,
-              borderRadius: '4px',
-              fontSize: '14px',
+              borderRadius: '8px',
+              fontSize: '15px',
+              backgroundColor: '#1a1b2e',
+              fontFamily: '"Inter", "Roboto", "Helvetica Neue", sans-serif',
+              lineHeight: '1.6',
+              padding: '20px',
             }}
-            showLineNumbers
+            showLineNumbers={false}
           >
             {parseYaml(data)}
           </SyntaxHighlighter>
