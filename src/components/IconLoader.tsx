@@ -13,7 +13,7 @@ const IconLoader: FC<IconLoaderProps> = ({ perk, onClick, sx }) => {
   const [iconUrl, setIconUrl] = useState('/default-perk-icon.png');
 
   useEffect(() => {
-    getPerkIconUrl(perk).then(setIconUrl);
+    setIconUrl(getPerkIconUrl(perk));
   }, [perk]);
 
   return (
