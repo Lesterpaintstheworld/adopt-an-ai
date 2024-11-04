@@ -110,7 +110,7 @@ export const TutorialHighlight = ({ pageKey }: { pageKey: PageKey }) => {
         <Button 
           onClick={handleNext}
           variant="contained"
-          aria-label="Marquer comme lu"
+          aria-label="Mark as read"
           sx={{ 
             backgroundColor: '#ff9800',
             '&:hover': {
@@ -118,7 +118,7 @@ export const TutorialHighlight = ({ pageKey }: { pageKey: PageKey }) => {
             }
           }}
         >
-          J'ai compris
+          I understand
         </Button>
       </Box>
     </Paper>
