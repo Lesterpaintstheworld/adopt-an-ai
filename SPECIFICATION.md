@@ -524,7 +524,10 @@ optimization:
   - cache_filter_results
   - preload_next_page
 ```
-import { Box, Container, Typography, Link } from '@mui/material';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import Link from '@mui/material/Link';
 import { Link as RouterLink } from 'react-router-dom';
 
 export const Footer = () => {
