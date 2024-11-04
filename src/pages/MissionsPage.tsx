@@ -1,25 +1,6 @@
 import React, { useState } from 'react';
 import { Mission, Difficulty, Status, Phase } from '../types/missions';
 
-interface MissionRequirements {
-  compute?: string;
-  memory?: string;
-  capabilities?: string[];
-  [key: string]: any;
-}
-
-interface PhaseData {
-  name: string;
-  period: string;
-  description: string;
-  [key: string]: any;
-}
-
-interface PerkItem {
-  capability_id: string;
-  name: string;
-}
-
 interface PhaseData {
   name: string;
   period: string;
