@@ -2,7 +2,13 @@ const express = require('express');
 const cors = require('cors');
 const { OAuth2Client } = require('google-auth-library');
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
 require('dotenv').config();
+
+if (!process.env.JWT_SECRET) {
+  console.error('JWT_SECRET is not set in environment variables');
+  process.exit(1);
+}
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -34,10 +40,14 @@ app.post('/api/auth/google', async (req, res) => {
     const token = jwt.sign(
       { 
         userId: payload.sub,
-        email: payload.email 
+        email: payload.email,
+        iat: Math.floor(Date.now() / 1000)
       }, 
       process.env.JWT_SECRET,
-      { expiresIn: '24h' }
+      { 
+        expiresIn: '24h',
+        algorithm: 'HS256'
+      }
     );
 
     // Envoyer la réponse
