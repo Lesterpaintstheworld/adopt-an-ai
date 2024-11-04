@@ -207,11 +207,12 @@ const MissionsPage: React.FC = () => {
   };
 
   return (
-    <Container maxWidth="lg" sx={{ py: 4 }}>
-      <Box sx={{ mb: 4 }}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          AI Missions
-        </Typography>
+    <>
+      <Container maxWidth="lg" sx={{ py: 4 }}>
+        <Box sx={{ mb: 4 }}>
+          <Typography variant="h4" component="h1" gutterBottom>
+            AI Missions
+          </Typography>
         <Box sx={{ display: 'flex', gap: 2, mb: 3 }}>
           <Chip 
             label={`Active Missions: ${activeMissions.length}/${userResources.activeMissionLimit}`}
@@ -616,16 +617,17 @@ const MissionsPage: React.FC = () => {
         ))}
         </Grid>
       )}
-    </Container>
-    {selectedMission && (
-      <MissionModal
-        open={!!selectedMission}
-        onClose={() => setSelectedMission(null)}
-        mission={selectedMission}
-        onStart={handleStartMission}
-        isStarting={isStartingMission}
-      />
-    )}
+      </Container>
+      {selectedMission && (
+        <MissionModal
+          open={!!selectedMission}
+          onClose={() => setSelectedMission(null)}
+          mission={selectedMission}
+          onStart={handleStartMission}
+          isStarting={isStartingMission}
+        />
+      )}
+    </>
   );
 };
 
