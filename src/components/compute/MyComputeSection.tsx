@@ -43,6 +43,24 @@ export default function MyComputeSection() {
       temperature: 65,
       power: 85,
       status: 'active'
+    },
+    {
+      id: '2',
+      name: 'NVIDIA V100',
+      memory: 32,
+      usage: 45,
+      temperature: 55,
+      power: 65,
+      status: 'idle'
+    },
+    {
+      id: '3',
+      name: 'NVIDIA A6000',
+      memory: 48,
+      usage: 0,
+      temperature: 35,
+      power: 15,
+      status: 'offline'
     }
   ];
 

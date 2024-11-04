@@ -16,10 +16,99 @@ interface AvailableGPU {
 }
 
 export default function AvailableComputeSection() {
-  const { data: gpus, loading, hasMore, loadMore } = useInfiniteScroll<AvailableGPU>(
-    '/api/available-gpus',
-    20
-  );
+  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [gpus, setGpus] = useState<AvailableGPU[]>([
+    {
+      id: 'a1',
+      name: 'NVIDIA A100',
+      memory: 80,
+      performance: 'Ultra High',
+      price: {
+        hourly: 2.5,
+        monthly: 1200
+      },
+      availability: 'available'
+    },
+    {
+      id: 'a2',
+      name: 'NVIDIA V100',
+      memory: 32,
+      performance: 'High',
+      price: {
+        hourly: 1.8,
+        monthly: 800
+      },
+      availability: 'limited'
+    },
+    {
+      id: 'a3',
+      name: 'NVIDIA T4',
+      memory: 16,
+      performance: 'Medium',
+      price: {
+        hourly: 0.8,
+        monthly: 350
+      },
+      availability: 'available'
+    },
+    {
+      id: 'a4',
+      name: 'NVIDIA A6000',
+      memory: 48,
+      performance: 'Very High',
+      price: {
+        hourly: 2.0,
+        monthly: 900
+      },
+      availability: 'unavailable'
+    }
+  ]);
+
+  const loadMore = async () => {
+    if (loading || !hasMore) return;
+    
+    setLoading(true);
+    // Simulate API delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    // Add more mock data
+    const newGpus: AvailableGPU[] = [
+      {
+        id: `a${gpus.length + 1}`,
+        name: 'NVIDIA A40',
+        memory: 48,
+        performance: 'High',
+        price: {
+          hourly: 1.5,
+          monthly: 650
+        },
+        availability: 'available'
+      },
+      {
+        id: `a${gpus.length + 2}`,
+        name: 'NVIDIA RTX 6000',
+        memory: 24,
+        performance: 'Medium',
+        price: {
+          hourly: 1.2,
+          monthly: 500
+        },
+        availability: 'limited'
+      }
+    ];
+
+    setGpus(prev => [...prev, ...newGpus]);
+    setPage(prev => prev + 1);
+    
+    // Stop after 3 pages
+    if (page >= 3) {
+      setHasMore(false);
+    }
+    
+    setLoading(false);
+  };
 
   const lastCardRef = useRef<HTMLDivElement>(null);
 
