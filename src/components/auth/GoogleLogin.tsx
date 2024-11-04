@@ -55,6 +55,19 @@ export const GoogleLogin = () => {
         }
       });
 
+      const requestBody = {
+        googleToken: tokenResponse.access_token,
+        googleId: user.sub,
+        userData: {
+          google_id: user.sub,
+          email: user.email,
+          name: user.name || user.email.split('@')[0],
+          picture: user.picture,
+        }
+      };
+
+      console.log('Sending request body:', JSON.stringify(requestBody, null, 2));
+
       const authResponse = await fetch(`${API_URL}/api/auth/google`, {
         method: 'POST',
         headers: {
@@ -62,16 +75,7 @@ export const GoogleLogin = () => {
           'Accept': 'application/json',
         },
         credentials: 'include',
-        body: JSON.stringify({
-          googleToken: tokenResponse.access_token,
-          googleId: user.sub,  // Add explicit googleId at top level
-          userData: {
-            google_id: user.sub,
-            email: user.email,
-            name: user.name || user.email.split('@')[0],
-            picture: user.picture,
-          }
-        }),
+        body: JSON.stringify(requestBody)
       });
 
       if (!authResponse.ok) {
