@@ -4,38 +4,19 @@
   "description": "Backend for raise-an.ai",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
+    "start": "cross-env PATH=\"%PATH%;C:\\Program Files\\PostgreSQL\\17\\bin\" node server.js",
+    "dev": "cross-env PATH=\"%PATH%;C:\\Program Files\\PostgreSQL\\17\\bin\" nodemon server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "google-auth-library": "^9.0.0",
-    "jsonwebtoken": "^9.0.2"
-  },
-  "devDependencies": {
-    "nodemon": "^3.0.1"
-  }
-}
-{
-  "name": "raise-an-ai-backend",
-  "version": "1.0.0",
-  "description": "Backend server for raise-an.ai",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
-  },
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "google-auth-library": "^8.7.0",
-    "jsonwebtoken": "^9.0.0",
+    "jsonwebtoken": "^9.0.2",
     "pg": "^8.11.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "cross-env": "^7.0.3",
+    "nodemon": "^3.0.1"
   }
 }
