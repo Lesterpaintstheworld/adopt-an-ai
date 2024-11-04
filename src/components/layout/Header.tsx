@@ -79,13 +79,61 @@ export const Header = () => {
           >
             Blog
           </Button>
-          <Button 
-            component={RouterLink} 
-            to="/login"
-            sx={{ color: (theme) => theme.palette.text.primary }}
-          >
-            Login
-          </Button>
+          {!isAuthenticated ? (
+            <Button 
+              component={RouterLink} 
+              to="/login"
+              sx={{ color: (theme) => theme.palette.text.primary }}
+            >
+              Login
+            </Button>
+          ) : (
+            <>
+              <Button
+                onClick={handleMenu}
+                sx={{ 
+                  color: (theme) => theme.palette.text.primary,
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 1
+                }}
+              >
+                <Avatar 
+                  src={user?.picture} 
+                  sx={{ width: 32, height: 32 }}
+                >
+                  {user?.name?.charAt(0)}
+                </Avatar>
+                <span>{user?.name}</span>
+              </Button>
+              <Menu
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'right',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+              >
+                <MenuItem component={RouterLink} to="/profile" onClick={handleClose}>
+                  Profile
+                </MenuItem>
+                <MenuItem component={RouterLink} to="/settings" onClick={handleClose}>
+                  Settings
+                </MenuItem>
+                <MenuItem onClick={() => {
+                  handleClose();
+                  handleLogout();
+                }}>
+                  Logout
+                </MenuItem>
+              </Menu>
+            </>
+          )}
         </Box>
       </Toolbar>
     </AppBar>
