@@ -10,12 +10,11 @@ import {
 } from '@mui/material';
 
 import { TechTree, PhaseData, Perk, PerkFullData } from '../types/tech';
-import PerkDetailModal from '../components/PerkDetailModal';
+import YamlModal from '../components/YamlModal';
 
 interface ModalState {
   isOpen: boolean;
-  selectedPerk: Perk | null;
-  fullData: PerkFullData | null;
+  data: any | null;
 }
 import { getPerkIconUrl } from '../utils/iconUtils';
 import CodeIcon from '@mui/icons-material/Code';
@@ -469,36 +468,22 @@ const TechTreePage: React.FC<TechTreePageProps> = ({ standalone = false }) => {
   const [highlightedItem, setHighlightedItem] = useState<string | null>(null);
   const [modalState, setModalState] = useState<ModalState>({
     isOpen: false,
-    selectedPerk: null,
-    fullData: null,
+    data: null
   });
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handlePerkClick = async (perk: Perk) => {
     if (!perk) return;
     
-    console.log('Loading details for perk:', perk);
-    
     try {
       let fullData = null;
       if (perk.capability_id) {
         fullData = await loadFullPerkData(perk.capability_id);
-        console.log('Loaded full data:', fullData);
       }
-      
-      // Create safe copies of the data before setting state
-      const sanitizedPerk = { ...perk };
-      const sanitizedFullData = fullData ? { ...fullData } : null;
-      
-      console.log('Setting modal state with:', {
-        sanitizedPerk,
-        sanitizedFullData
-      });
       
       setModalState({
         isOpen: true,
-        selectedPerk: sanitizedPerk,
-        fullData: sanitizedFullData,
+        data: fullData || perk
       });
     } catch (error) {
       console.error('Error handling perk click:', error);
@@ -688,11 +673,11 @@ const TechTreePage: React.FC<TechTreePageProps> = ({ standalone = false }) => {
           </Box>
         </Box>
       </Box>
-      <PerkDetailModal
+      <YamlModal
         open={modalState.isOpen}
         onClose={() => setModalState(prev => ({ ...prev, isOpen: false }))}
-        perk={modalState.selectedPerk}
-        fullData={modalState.fullData}
+        title={modalState.data?.name || 'Perk Details'}
+        data={modalState.data}
       />
     </>
   );
