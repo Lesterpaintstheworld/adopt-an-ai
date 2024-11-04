@@ -2,8 +2,10 @@ import { createContext, useContext, useState, useEffect, ReactNode } from 'react
 import { User, AuthState } from '../types/auth';
 
 interface AuthContextType extends AuthState {
-  login: (user: User) => void;
+  login: (user: User, token: string) => void;
   logout: () => void;
+  updateUser: (userData: Partial<User>) => void;
+  clearError: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -13,46 +15,99 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     isAuthenticated: false,
     user: null,
     loading: true,
+    error: undefined
   });
 
   useEffect(() => {
-    // Vérifier si l'utilisateur est déjà connecté
     const checkAuth = async () => {
-      const storedUser = localStorage.getItem('user');
-      if (storedUser) {
+      try {
+        const token = localStorage.getItem('auth_token');
+        const storedUser = localStorage.getItem('user');
+        
+        if (token && storedUser) {
+          // Vérifier la validité du token
+          const isValid = await validateToken(token);
+          
+          if (isValid) {
+            setAuth({
+              isAuthenticated: true,
+              user: JSON.parse(storedUser),
+              loading: false
+            });
+          } else {
+            // Token invalide, déconnecter l'utilisateur
+            handleLogout();
+          }
+        } else {
+          setAuth(prev => ({ ...prev, loading: false }));
+        }
+      } catch (error) {
         setAuth({
-          isAuthenticated: true,
-          user: JSON.parse(storedUser),
+          isAuthenticated: false,
+          user: null,
           loading: false,
+          error: 'Session verification failed'
         });
-      } else {
-        setAuth(prev => ({ ...prev, loading: false }));
       }
     };
 
     checkAuth();
   }, []);
 
-  const login = (user: User) => {
+  const validateToken = async (token: string): Promise<boolean> => {
+    try {
+      const response = await fetch('/api/auth/validate', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      return response.ok;
+    } catch {
+      return false;
+    }
+  };
+
+  const login = (user: User, token: string) => {
+    localStorage.setItem('auth_token', token);
     localStorage.setItem('user', JSON.stringify(user));
     setAuth({
       isAuthenticated: true,
       user,
-      loading: false,
+      loading: false
     });
   };
 
-  const logout = () => {
+  const handleLogout = () => {
+    localStorage.removeItem('auth_token');
     localStorage.removeItem('user');
     setAuth({
       isAuthenticated: false,
       user: null,
-      loading: false,
+      loading: false
     });
   };
 
+  const updateUser = (userData: Partial<User>) => {
+    setAuth(prev => {
+      if (!prev.user) return prev;
+      const updatedUser = { ...prev.user, ...userData };
+      localStorage.setItem('user', JSON.stringify(updatedUser));
+      return { ...prev, user: updatedUser };
+    });
+  };
+
+  const clearError = () => {
+    setAuth(prev => ({ ...prev, error: undefined }));
+  };
+
   return (
-    <AuthContext.Provider value={{ ...auth, login, logout }}>
+    <AuthContext.Provider value={{ 
+      ...auth, 
+      login, 
+      logout: handleLogout, 
+      updateUser,
+      clearError 
+    }}>
       {children}
     </AuthContext.Provider>
   );
