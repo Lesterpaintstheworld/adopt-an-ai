@@ -216,7 +216,7 @@ const ConnectionLines = ({
   highlightedItem: string | null 
 }) => {
   const svgRef = useRef<SVGSVGElement>(null);
-  const CORNER_RADIUS = 20; // Radius for rounded corners
+  const CORNER_RADIUS = 24; // Radius for rounded corners
 
   return (
     <svg
@@ -230,6 +230,15 @@ const ConnectionLines = ({
         pointerEvents: 'none',
       }}
     >
+      <defs>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
       {items.map((item) => 
         item.prerequisites?.map((prereq: string, prereqIndex: number) => {
           const prereqItem = items.find(i => i.name === prereq);
@@ -291,10 +300,11 @@ const ConnectionLines = ({
               </defs>
               <path
                 d={path}
-                stroke={isHighlighted ? "#000" : "#666"}
+                stroke={isHighlighted ? "#4fc3f7" : "rgba(255,255,255,0.3)"}
                 strokeWidth={isHighlighted ? "3" : "2"}
                 fill="none"
-                strokeDasharray={isHighlighted ? "" : "4"}
+                strokeDasharray={isHighlighted ? "" : "6,3"}
+                filter={isHighlighted ? "url(#glow)" : "none"}
                 markerEnd={`url(#arrowhead-${isHighlighted ? 'highlighted' : 'normal'})`}
               />
             </g>
@@ -384,7 +394,7 @@ const TechItem = ({
 
   return (
     <Paper
-        elevation={2}
+        elevation={3}
         onClick={() => onClick(item)}
         onMouseEnter={() => onHover(item.capability_id)}
         onMouseLeave={() => onHover(null)}
@@ -398,12 +408,17 @@ const TechItem = ({
           gap: 3,
           padding: 0,
           cursor: 'pointer',
+          transition: 'all 0.3s ease',
           '&:hover': {
             transform: 'scale(1.05)',
-            transition: 'transform 0.2s',
+            boxShadow: '0 8px 16px rgba(0,0,0,0.3)',
             zIndex: 10,
           },
-          backgroundColor: 'rgba(0, 0, 0, 0.75)', // All boxes are black with 75% opacity
+          backgroundColor: 'rgba(0, 0, 0, 0.75)',
+          borderRadius: '12px',
+          border: highlightedItem === item.capability_id ? 
+            '2px solid #4fc3f7' :
+            '1px solid rgba(255, 255, 255, 0.1)',
           fontWeight: item.capability_id === highlightedItem || 
                      (item.prerequisites || []).some(prereq => {
                        const prereqItem = allItems.find(i => i.name === prereq);
@@ -429,29 +444,48 @@ const TechItem = ({
             }}
           />
         </Box>
-        <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: 3 }}>
-          <Typography variant="subtitle1" fontWeight="bold" sx={{ color: '#ffffff' }}>
+        <Box sx={{ 
+          flex: 1, 
+          display: 'flex', 
+          flexDirection: 'column', 
+          justifyContent: 'space-between', 
+          padding: 3,
+          gap: 1
+        }}>
+          <Typography 
+            variant="subtitle1" 
+            fontWeight="bold" 
+            sx={{ 
+              color: '#ffffff',
+              textShadow: '0 1px 2px rgba(0,0,0,0.6)',
+              fontSize: '1.1rem',
+              lineHeight: 1.2
+            }}
+          >
             {mergedData.name}
           </Typography>
           <Chip
             icon={getTagIcon(mergedData.tag)}
             label={mergedData.tag.split(' ')[1]}
             size="small"
-            variant="outlined"
+            variant="filled"
             sx={{
               ...getTagColor(item.tag),
               '& .MuiChip-icon': {
                 color: '#ffffff',
-                marginLeft: '8px'
+                marginLeft: '8px',
+                filter: 'drop-shadow(0 1px 1px rgba(0,0,0,0.3))'
               },
               borderRadius: '16px',
-              fontWeight: 500,
-              height: '28px',
+              fontWeight: 600,
+              height: '32px',
               minWidth: '140px',
               paddingLeft: '12px',
               paddingRight: '12px',
               fontSize: '0.9rem',
-              marginTop: 'auto'
+              marginTop: 'auto',
+              boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
+              letterSpacing: '0.5px'
             }}
           />
         </Box>
@@ -578,10 +612,23 @@ const TechTreePage: React.FC<TechTreePageProps> = ({ standalone = false }) => {
               height: 2000,
               p: 4,
               minWidth: '16000px',
-              backgroundImage: 'url(/website/convergence-dark.png)',
+              backgroundImage: `
+                linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url(/website/convergence-dark.png)
+              `,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
+              '&::before': {
+                content: '""',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                background: 'radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%)',
+                pointerEvents: 'none'
+              }
             }}
           >
             <ConnectionLines 
@@ -664,6 +711,15 @@ const TechTreePage: React.FC<TechTreePageProps> = ({ standalone = false }) => {
                     top: 20,
                     width: 280,
                     textAlign: 'center',
+                    color: '#ffffff',
+                    textShadow: '0 2px 4px rgba(0,0,0,0.5)',
+                    fontWeight: 600,
+                    letterSpacing: '1px',
+                    padding: '8px 16px',
+                    borderRadius: '8px',
+                    backgroundColor: 'rgba(0,0,0,0.6)',
+                    backdropFilter: 'blur(4px)',
+                    border: '1px solid rgba(255,255,255,0.1)'
                   }}
                 >
                   {`${phaseName} (${phasePeriod})`}
