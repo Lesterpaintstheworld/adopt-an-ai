@@ -12,7 +12,7 @@ import type { PageKey } from '../../data/tutorialSteps';
  * @returns {JSX.Element | null} The tutorial highlight component or null if already dismissed
  */
 export const TutorialHighlight = ({ pageKey }: { pageKey: PageKey }) => {
-  const { user, updateUser, isAuthenticated } = useAuth();
+  const { user, isAuthenticated } = useAuth();
   const [visible, setVisible] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
 

@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-const StyledCard = styled(Card)(({ theme }) => ({
+const StyledCard = styled(Card)(() => ({
   height: '100%',
   display: 'flex',
   flexDirection: 'column',
@@ -49,6 +49,14 @@ interface GPUCardProps {
   owned: boolean;
 }
 
+const isOwnedGPU = (gpu: OwnedGPU | AvailableGPU): gpu is OwnedGPU => {
+  return 'usage' in gpu;
+};
+
+const isAvailableGPU = (gpu: OwnedGPU | AvailableGPU): gpu is AvailableGPU => {
+  return 'availability' in gpu;
+};
+
 export default function GPUCard({ gpu, owned }: GPUCardProps) {
   return (
     <StyledCard>
@@ -57,7 +65,7 @@ export default function GPUCard({ gpu, owned }: GPUCardProps) {
           {gpu.name}
         </Typography>
         
-        {owned ? (
+        {isOwnedGPU(gpu) ? (
           <>
             <Box sx={{ mb: 2 }}>
               <Typography variant="body2" color="text.secondary">
@@ -86,7 +94,7 @@ export default function GPUCard({ gpu, owned }: GPUCardProps) {
               />
             </Box>
           </>
-        ) : (
+        ) : isAvailableGPU(gpu) ? (
           <>
             <Box sx={{ mb: 2 }}>
               <Typography variant="body2" color="text.secondary">
@@ -116,7 +124,7 @@ export default function GPUCard({ gpu, owned }: GPUCardProps) {
               Rent GPU
             </Button>
           </>
-        )}
+        ) : null}
       </CardContent>
     </StyledCard>
   );
