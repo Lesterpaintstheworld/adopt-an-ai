@@ -5,8 +5,10 @@ import {
   DialogContent,
   IconButton,
   Box,
-  useTheme
+  useTheme,
+  Typography
 } from '@mui/material';
+import { parseYaml } from '../utils/yamlFormatter';
 import CloseIcon from '@mui/icons-material/Close';
 
 interface YamlModalProps {
@@ -65,9 +67,15 @@ export const YamlModal: React.FC<YamlModalProps> = ({
           <pre style={{ 
             margin: 0,
             whiteSpace: 'pre-wrap',
-            wordWrap: 'break-word'
+            wordWrap: 'break-word',
+            fontFamily: 'monospace',
+            fontSize: '14px',
+            backgroundColor: theme.palette.mode === 'dark' ? '#1a1a1a' : '#f5f5f5',
+            padding: '12px',
+            borderRadius: '4px',
+            color: theme.palette.mode === 'dark' ? '#e6e6e6' : '#333'
           }}>
-            {JSON.stringify(data, null, 2)}
+            {parseYaml(data)}
           </pre>
         </Box>
       </DialogContent>
