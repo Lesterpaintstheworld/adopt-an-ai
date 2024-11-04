@@ -1,6 +1,7 @@
 import { Box, Container, Typography } from '@mui/material';
 import { Header } from './Header';
 import { Outlet } from 'react-router-dom';
+import SideMenu from '../SideMenu';
 
 export const MainLayout = () => {
   console.log('MainLayout rendering...');
@@ -9,9 +10,12 @@ export const MainLayout = () => {
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
       
-      <Container component="main" sx={{ flex: 1, py: 4 }}>
-        <Outlet />
-      </Container>
+      <Box sx={{ display: 'flex', flex: 1 }}>
+        <SideMenu />
+        <Container component="main" sx={{ flex: 1, py: 4 }}>
+          <Outlet />
+        </Container>
+      </Box>
       
       <Box component="footer" sx={{ py: 3, bgcolor: 'background.paper' }}>
         <Container maxWidth="lg">
