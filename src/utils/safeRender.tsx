@@ -53,3 +53,36 @@ export const safeRender = (content: any): React.ReactNode => {
     return <pre>[Error rendering content]</pre>;
   }
 };
+import { ReactNode } from 'react';
+
+/**
+ * Safely renders content that might be a string, number, or React node
+ * Handles undefined, null, and objects by converting them to appropriate string representations
+ */
+export const safeRender = (content: any): ReactNode => {
+  if (content === null || content === undefined) {
+    return '';
+  }
+
+  if (typeof content === 'string' || typeof content === 'number') {
+    return content;
+  }
+
+  if (Array.isArray(content)) {
+    return content.map((item, index) => (
+      <span key={index}>{safeRender(item)}</span>
+    ));
+  }
+
+  if (typeof content === 'object') {
+    // If it's a React element, return it directly
+    if (React.isValidElement(content)) {
+      return content;
+    }
+    // Otherwise convert object to string
+    return JSON.stringify(content);
+  }
+
+  // Convert any other types to string
+  return String(content);
+};

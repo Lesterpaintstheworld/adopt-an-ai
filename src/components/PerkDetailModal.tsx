@@ -7,7 +7,7 @@ import PerkRisksAndMitigations from './perk-detail/PerkRisksAndMitigations';
 import PerkDependencies from './perk-detail/PerkDependencies';
 import PerkSecurityRequirements from './perk-detail/PerkSecurityRequirements';
 
-import { safeRender } from '../../utils/safeRender';
+import { safeRender } from '../utils/safeRender';
 
 import { getTagIcon, getTagColor } from '../utils/tagStyles';
 import IconLoader from './IconLoader';
