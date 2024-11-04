@@ -546,7 +546,7 @@ const MissionsPage: React.FC = () => {
                                 .filter(([key]) => !['name', 'period', 'description'].includes(key))
                                 .flatMap(([_, items]) => items)
                             )
-                            .find(item => item.capability_id === mission.mainPrerequisite)?.name || 'Unknown',
+                            .find((item: any) => item?.capability_id === mission.mainPrerequisite)?.name || 'Unknown',
                           capability_id: mission.mainPrerequisite 
                         })}
                         alt="Required Perk"

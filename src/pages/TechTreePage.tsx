@@ -28,7 +28,6 @@ interface ModalState {
   isOpen: boolean;
   data: any | null;
 }
-import { getPerkIconUrl } from '../utils/iconUtils';
 import CodeIcon from '@mui/icons-material/Code';
 import BrushIcon from '@mui/icons-material/Brush';
 import PeopleIcon from '@mui/icons-material/People';
@@ -395,7 +394,7 @@ const TechItem = ({
   useEffect(() => {
     const loadData = async () => {
       if (item.capability_id) {
-        const fullData = await loadFullPerkData(item.capability_id, allItems);
+        const fullData = await loadFullPerkData(item.capability_id);
         setMergedData(mergePerkData(item, fullData));
       }
     };
@@ -675,7 +674,8 @@ const TechTreePage = ({ standalone = false }: TechTreePageProps): JSX.Element =>
               );
             })}
 
-            {Object.entries(techTree).map(([phaseKey, phaseData]: [string, PhaseData], index) => {
+            {Object.entries(techTree as TechTree).map(([phaseKey, phaseData]) => {
+              if (!isPhaseData(phaseData)) return null;
               const previousPhases = Object.values(techTree).slice(0, index);
               const xPosition = previousPhases.reduce((acc: number, phase: any) => {
                 return acc + calculatePhaseWidth(phase);

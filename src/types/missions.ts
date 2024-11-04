@@ -4,7 +4,8 @@ export type Category = 'Communication' | 'Creativity' | 'Problem Solving' | 'Res
 export type Phase = 'phase_1' | 'phase_2' | 'phase_3' | 'phase_4';
 
 export interface Mission {
-  id: string;
+  id?: string;
+  capability_id?: string;
   title: string;
   description: string;
   objectives: string[];

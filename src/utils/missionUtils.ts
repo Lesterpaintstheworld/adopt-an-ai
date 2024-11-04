@@ -31,7 +31,7 @@ export const loadAllMissions = async (): Promise<Mission[]> => {
           // Add id if missing and ensure unique capability_ids
           const processedMissions = missions.map((mission, index) => ({
             ...mission,
-            id: mission.id || `${mission.capability_id}-${index}`,
+            id: mission.id || `mission-${index}`,
           }));
           allMissions.push(...processedMissions);
         }
