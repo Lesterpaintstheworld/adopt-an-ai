@@ -104,7 +104,7 @@ export const YamlModal: React.FC<YamlModalProps> = ({
             }}
             showLineNumbers={false}
           >
-            {parseYaml(data)}
+            {data?.story ? data.story : parseYaml(data)}
           </SyntaxHighlighter>
         </Box>
       </DialogContent>
