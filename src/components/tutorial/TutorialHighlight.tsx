@@ -1,38 +1,22 @@
 import { Box, Paper, Typography, Button } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
+import { pageTutorials, PageKey } from '../../data/tutorialSteps';
 
-interface TutorialStep {
-  title: string;
-  content: string;
+interface TutorialHighlightProps {
+  pageKey: PageKey;
 }
 
-const tutorialSteps: TutorialStep[] = [
-  {
-    title: "Welcome to raise-an.ai",
-    content: "This platform will help you develop and nurture your own AI assistant through guided missions and resource management."
-  },
-  {
-    title: "Resource Management",
-    content: "Here you can manage your compute resources. Allocate GPUs wisely to optimize your AI's training and development."
-  },
-  {
-    title: "Training Progress",
-    content: "Monitor your AI's progress through various capabilities and unlock new features as you advance."
-  }
-];
-
-export const TutorialHighlight = () => {
+export const TutorialHighlight = ({ pageKey }: TutorialHighlightProps) => {
   const { user, updateUser } = useAuth();
   const [visible, setVisible] = useState(false);
-  const [currentStep, setCurrentStep] = useState(0);
+  const [dismissed, setDismissed] = useState(false);
 
   useEffect(() => {
-    if (user && !user.tutorialCompleted) {
+    if (user && (!user.tutorialProgress?.dismissedPages || !user.tutorialProgress.dismissedPages.includes(pageKey))) {
       setVisible(true);
-      setCurrentStep(user.tutorialProgress?.lastStep || 0);
     }
-  }, [user]);
+  }, [user, pageKey]);
 
   const handleNext = async () => {
     if (currentStep < tutorialSteps.length - 1) {

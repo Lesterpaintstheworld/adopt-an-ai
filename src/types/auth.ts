@@ -10,6 +10,7 @@ export interface User {
   tutorialProgress: {
     lastStep: number;
     completedSteps: number[];
+    dismissedPages: string[];
   };
 }
 
