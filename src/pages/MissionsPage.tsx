@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Mission, Difficulty, Status, Phase } from '../types/missions';
+import { TutorialHighlight } from '../components/tutorial/TutorialHighlight';
 
 interface PhaseData {
   name: string;
@@ -227,6 +228,7 @@ const MissionsPage: React.FC = () => {
   return (
     <>
       <Container maxWidth="lg" sx={{ py: 4 }}>
+        <TutorialHighlight pageKey="missions" />
         <Box sx={{ mb: 4 }}>
           <Typography variant="h4" component="h1" gutterBottom>
             AI Missions
