@@ -1,7 +1,8 @@
 import { Box, Paper, Typography, Button } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
-import { pageTutorials, PageKey } from '../../data/tutorialSteps';
+import { pageTutorials } from '../../data/tutorialSteps';
+import type { PageKey } from '../../data/tutorialSteps';
 
 /**
  * TutorialHighlight Component
@@ -10,7 +11,7 @@ import { pageTutorials, PageKey } from '../../data/tutorialSteps';
  * @param {PageKey} props.pageKey - The key identifying the current page
  * @returns {JSX.Element | null} The tutorial highlight component or null if already dismissed
  */
-export const TutorialHighlight = ({ pageKey }: { pageKey: keyof typeof pageTutorials }) => {
+export const TutorialHighlight = ({ pageKey }: { pageKey: PageKey }) => {
   const { user, updateUser, isAuthenticated } = useAuth();
   const [visible, setVisible] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
