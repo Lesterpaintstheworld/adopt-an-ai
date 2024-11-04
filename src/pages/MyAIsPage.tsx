@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Grid } from '@mui/material';
 import ResourceBar from '../components/myais/ResourceBar';
+import { TutorialHighlight } from '../components/tutorial/TutorialHighlight';
 
 interface ActionParams {
   type: string;
@@ -104,6 +105,7 @@ const MyAIsPage: React.FC = () => {
       display: 'flex',
       flexDirection: 'column'
     }}>
+      <TutorialHighlight pageKey="myais" />
       <ResourceBar 
         resources={gameState.resources}
         cycle={gameState.cycle}
