@@ -453,10 +453,11 @@ const MissionsPage: React.FC = () => {
                   sx={{ 
                     color: 'rgba(255,255,255,0.7)',
                     display: '-webkit-box',
-                    WebkitLineClamp: 3,
+                    WebkitLineClamp: 4,
                     WebkitBoxOrient: 'vertical',
                     overflow: 'hidden',
-                    lineHeight: 1.5
+                    lineHeight: 1.5,
+                    mb: 2
                   }}
                 >
                   {mission.description}
@@ -464,7 +465,7 @@ const MissionsPage: React.FC = () => {
                 
                 <Box sx={{ mt: 'auto' }}>
                   <Typography variant="caption" display="block" sx={{ 
-                    color: 'rgba(255,255,255,0.6)',
+                    color: 'rgba(255,255,255,0.7)',
                     mb: 0.5 
                   }}>
                     Requirements: {
@@ -496,8 +497,8 @@ const MissionsPage: React.FC = () => {
                     alignItems: 'center',
                     gap: 1,
                     mt: 1,
-                    p: 1,
-                    bgcolor: 'rgba(0,0,0,0.2)',
+                    p: 1.5,
+                    bgcolor: 'rgba(255,255,255,0.05)',
                     borderRadius: '8px',
                     border: '1px solid rgba(255,255,255,0.1)'
                   }}>
@@ -527,8 +528,8 @@ const MissionsPage: React.FC = () => {
                         })}
                         alt="Required Perk"
                         sx={{
-                          width: 24,
-                          height: 24,
+                          width: 28,
+                          height: 28,
                           borderRadius: '4px',
                           objectFit: 'cover',
                           flexShrink: 0,
@@ -543,7 +544,7 @@ const MissionsPage: React.FC = () => {
                       <Typography 
                         variant="caption" 
                         sx={{
-                          color: mission.status === 'locked' ? 'text.disabled' : 'text.primary',
+                          color: mission.status === 'locked' ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.9)',
                           fontWeight: 500,
                           whiteSpace: 'nowrap',
                           overflow: 'hidden',
