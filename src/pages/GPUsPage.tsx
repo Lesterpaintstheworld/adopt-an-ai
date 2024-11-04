@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Typography, Paper } from '@mui/material';
 
 export default function GPUsPage() {
+  useEffect(() => {
+    console.log('GPUsPage mounted');
+  }, []);
+
+  console.log('GPUsPage rendering');
+
   return (
     <Box sx={{ p: 4 }}>
       <Paper
@@ -12,7 +18,9 @@ export default function GPUsPage() {
           border: '2px solid #ff9800',
           backgroundColor: 'rgba(255, 152, 0, 0.08)',
           maxWidth: '800px',
-          margin: '0 auto 2rem auto'
+          margin: '0 auto 2rem auto',
+          position: 'relative',
+          zIndex: 1000
         }}
       >
         <Typography variant="h6" component="h2" sx={{ color: '#ff9800', mb: 2 }}>
@@ -30,7 +38,7 @@ export default function GPUsPage() {
         </ul>
       </Paper>
 
-      <Typography variant="h4" component="h1">
+      <Typography variant="h4" component="h1" sx={{ color: 'white' }}>
         GPUs
       </Typography>
     </Box>
