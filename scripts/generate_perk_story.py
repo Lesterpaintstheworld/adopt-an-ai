@@ -92,20 +92,38 @@ def get_prerequisites_context(tech_tree: dict, prerequisites: list) -> str:
                             prereq_context.append(f"- {prereq}: {item.get('description', '')}")
     return "\n".join(prereq_context)
 
+def get_related_capabilities(tech_tree: dict, phase_key: str, current_perk: dict) -> str:
+    """Get context about other capabilities in the same phase/layer"""
+    related = []
+    phase = tech_tree.get(phase_key, {})
+    
+    for layer_key, layer_items in phase.items():
+        if isinstance(layer_items, list):
+            for item in layer_items:
+                if (item.get('capability_id') != current_perk.get('capability_id') and
+                    item.get('layer') == current_perk.get('layer')):
+                    related.append(f"- {item.get('name')}: {item.get('description', '')}")
+    
+    return "\n".join(related)
+
 async def generate_story(client: AsyncAnthropic, perk_data: dict, tech_tree: dict) -> str:
     """Generate a story for a perk using Claude"""
     
     # Extract phase and layer from capability_id
     phase_key = f"phase_{perk_data['capability_id'].split('_')[1][1]}"
     
-    # Build context
+    # Build richer context
     phase_context = get_phase_context(tech_tree, phase_key)
     prereq_context = get_prerequisites_context(tech_tree, perk_data.get('prerequisites', []))
     
-    prompt = f"""You are writing a narrative story about the development and impact of AI capabilities.
-    Write a compelling 5-6 paragraph story about this AI capability:
+    # Get related capabilities in same phase/layer for additional context
+    related_capabilities = get_related_capabilities(tech_tree, phase_key, perk_data)
+    
+    prompt = f"""You are writing a narrative story about the development and real-world impact of AI capabilities.
+    Write a detailed, concrete story about this AI capability that focuses on practical applications and tangible outcomes.
 
-    Capability Name: {perk_data['name']}
+    Capability Details:
+    Name: {perk_data['name']}
     Technical Description: {perk_data.get('description', '')}
     Technical Specifications: {json.dumps(perk_data.get('technical_specifications', {}), indent=2)}
     
@@ -114,17 +132,24 @@ async def generate_story(client: AsyncAnthropic, perk_data: dict, tech_tree: dic
     
     Prerequisites and Their Context:
     {prereq_context}
-
-    Write a story that:
-    1. Introduces the capability and its significance
-    2. Explains how it builds upon prerequisites
-    3. Describes its immediate effects on AI systems
-    4. Explores its broader implications for AI development
-    5. Concludes with future possibilities it enables
     
-    Make it engaging and accessible while maintaining technical accuracy.
-    Focus on the transformative aspects and real-world implications.
-    Use a professional but engaging tone.
+    Related Capabilities in Same Phase:
+    {related_capabilities}
+
+    Write a 5-6 paragraph story that:
+    1. Opens with a specific example of how this capability is being used in practice
+    2. Explains the technical foundations and how it builds upon prerequisites
+    3. Describes its immediate impact on AI systems through concrete examples
+    4. Explores real-world applications and benefits through specific use cases
+    5. Concludes with near-term possibilities it enables, grounded in current technology trends
+    
+    Guidelines:
+    - Use concrete examples and specific scenarios rather than abstract concepts
+    - Include technical details but explain them through practical applications
+    - Focus on realistic outcomes rather than speculative possibilities
+    - Maintain a professional but engaging tone
+    - Include relevant metrics and measurements where appropriate
+    - Reference how actual organizations or industries might utilize this capability
     
     Return only the story text, no additional formatting or metadata."""
 
