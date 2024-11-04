@@ -2,6 +2,7 @@ import os
 import yaml
 import asyncio
 import logging
+import aiohttp
 from pathlib import Path
 from anthropic import AsyncAnthropic
 from openai import AsyncOpenAI
@@ -132,9 +133,10 @@ async def generate_illustration(dalle_client: AsyncOpenAI, prompt: str) -> bytes
         # Get the URL of the generated image
         image_url = response.data[0].url
         
-        # Download the image
-        async with dalle_client.get(image_url) as resp:
-            return await resp.read()
+        # Download the image using aiohttp
+        async with aiohttp.ClientSession() as session:
+            async with session.get(image_url) as resp:
+                return await resp.read()
             
     except Exception as e:
         logging.error(f"Error generating illustration: {e}")
