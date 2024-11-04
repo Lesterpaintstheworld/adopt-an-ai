@@ -44,6 +44,17 @@ export const GoogleLogin = () => {
         throw new Error('Invalid user data');
       }
 
+      // Add debug logging
+      console.log('Sending auth request with data:', {
+        googleToken: tokenResponse.access_token.substring(0, 10) + '...',
+        userData: {
+          google_id: user.sub,
+          email: user.email,
+          name: user.name || user.email.split('@')[0],
+          picture: user.picture,
+        }
+      });
+
       const authResponse = await fetch(`${API_URL}/api/auth/google`, {
         method: 'POST',
         headers: {
@@ -67,7 +78,13 @@ export const GoogleLogin = () => {
       console.log('Auth response:', responseText);
 
       if (!authResponse.ok) {
-        throw new Error(`Authentication failed: ${authResponse.status} - ${responseText}`);
+        const errorText = await authResponse.text();
+        console.log('Full auth error response:', {
+          status: authResponse.status,
+          statusText: authResponse.statusText,
+          body: errorText
+        });
+        throw new Error(`Authentication failed: ${authResponse.status} - ${errorText}`);
       }
 
       // Parse the response only if it's not empty
