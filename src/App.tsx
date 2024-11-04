@@ -1,4 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import LoginPage from './pages/LoginPage';
+import { ProtectedRoute } from './components/auth/ProtectedRoute';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { AuthProvider } from './contexts/AuthContext';
@@ -34,6 +36,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/tech-tree-standalone" element={<StandaloneTechTreePage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route element={<MainLayout />}>
             <Route index element={<HomePage />} />
             <Route path="/payment/success" element={<PaymentSuccessPage />} />
@@ -43,7 +46,10 @@ function App() {
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:slug" element={<BlogPostPage />} />
             <Route path="/adopt" element={<AdoptPage />} />
-            <Route path="/my-ais" element={<MyAIsPage />} />
+            {/* Protected Routes */}
+            <Route element={<ProtectedRoute />}>
+              <Route path="/my-ais" element={<MyAIsPage />} />
+            </Route>
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/governance" element={<GovernancePage />} />
             <Route path="/team" element={<TeamPage />} />
