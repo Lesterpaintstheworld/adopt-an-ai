@@ -1,7 +1,9 @@
-import { AppBar, Toolbar, Typography, Button, Box, Avatar, Menu, MenuItem } from '@mui/material';
+import { AppBar, Toolbar, Typography, Button, Box, Avatar, Menu, MenuItem, Stack, Chip } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import MemoryIcon from '@mui/icons-material/Memory';
 
 export const Header = () => {
   const { isAuthenticated, user, logout } = useAuth();
@@ -43,7 +45,31 @@ export const Header = () => {
         >
           raise-an.ai
         </Typography>
-        <Box sx={{ display: 'flex', gap: 2 }}>
+        <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+          <Stack direction="row" spacing={1} sx={{ mr: 2 }}>
+            <Chip
+              icon={<AttachMoneyIcon />}
+              label={`${7250.toLocaleString()}`}
+              variant="outlined"
+              size="small"
+              sx={{ 
+                borderColor: 'primary.main',
+                color: 'text.primary',
+                '& .MuiChip-icon': { color: 'primary.main' }
+              }}
+            />
+            <Chip
+              icon={<MemoryIcon />}
+              label={`${0.89} Mtokens/h`}
+              variant="outlined"
+              size="small"
+              sx={{ 
+                borderColor: 'primary.main',
+                color: 'text.primary',
+                '& .MuiChip-icon': { color: 'primary.main' }
+              }}
+            />
+          </Stack>
           <Button 
             component={RouterLink} 
             to="/tech-tree"
