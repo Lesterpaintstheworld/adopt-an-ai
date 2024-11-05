@@ -54,7 +54,7 @@ function App() {
             {/* Protected Routes */}
             <Route element={<ProtectedRoute />}>
               <Route path="/my-ais" element={<MyAIsPage />} />
-              <Route path="/agents" element={<OSPage />} />
+              <Route path="/os" element={<OSPage />} />
             </Route>
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/governance" element={<GovernancePage />} />
