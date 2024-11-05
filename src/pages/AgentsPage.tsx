@@ -1,11 +1,11 @@
 import { Box, Grid } from '@mui/material';
 import { useState } from 'react';
 import { TutorialHighlight } from '../components/tutorial/TutorialHighlight';
-import ModelSideMenu from '../components/os/ModelSideMenu';
-import SystemPrompt from '../components/os/SystemPrompt';
-import ModelTools from '../components/os/ModelTools';
-import ModelMemory from '../components/os/ModelMemory';
-import ModelParameters from '../components/os/ModelParameters';
+import ModelSideMenu from '../components/agents/ModelSideMenu';
+import SystemPrompt from '../components/agents/SystemPrompt';
+import ModelTools from '../components/agents/ModelTools';
+import ModelMemory from '../components/agents/ModelMemory';
+import ModelParameters from '../components/agents/ModelParameters';
 
 // Example data - replace with real data
 const models = [
