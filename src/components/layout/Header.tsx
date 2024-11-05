@@ -49,7 +49,7 @@ export const Header = () => {
           <Stack direction="row" spacing={1} sx={{ mr: 2 }}>
             <Chip
               icon={<AttachMoneyIcon />}
-              label={`${7250.toLocaleString()}`}
+              label="$7,250"
               variant="outlined"
               size="small"
               sx={{ 
