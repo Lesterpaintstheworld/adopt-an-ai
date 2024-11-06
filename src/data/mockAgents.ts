@@ -18,10 +18,10 @@ export const mockAgents: Agent[] = [
       size: 1000000,
       lastUpdated: '2024-01-20',
     },
-    parameters: [
-      { name: 'Temperature', value: 0.7, description: 'Controls randomness' },
-      { name: 'Max Tokens', value: 2048, description: 'Maximum response length' },
-    ],
+    parameters: {
+      temperature: { value: 0.7, description: 'Controls randomness' },
+      maxTokens: { value: 2048, description: 'Maximum response length' }
+    },
   },
   {
     id: 'writer',
@@ -35,10 +35,10 @@ export const mockAgents: Agent[] = [
       size: 500000,
       lastUpdated: '2024-01-19',
     },
-    parameters: [
-      { name: 'Temperature', value: 0.9, description: 'Controls randomness' },
-      { name: 'Max Tokens', value: 1024, description: 'Maximum response length' },
-    ],
+    parameters: {
+      temperature: { value: 0.9, description: 'Controls randomness' },
+      maxTokens: { value: 1024, description: 'Maximum response length' }
+    },
   },
   {
     id: 'analyst',
@@ -53,10 +53,10 @@ export const mockAgents: Agent[] = [
       size: 750000,
       lastUpdated: '2024-01-18',
     },
-    parameters: [
-      { name: 'Temperature', value: 0.3, description: 'Controls randomness' },
-      { name: 'Max Tokens', value: 1500, description: 'Maximum response length' },
-    ],
+    parameters: {
+      temperature: { value: 0.3, description: 'Controls randomness' },
+      maxTokens: { value: 1500, description: 'Maximum response length' }
+    },
   },
   {
     id: 'teacher',
@@ -71,10 +71,10 @@ export const mockAgents: Agent[] = [
       size: 600000,
       lastUpdated: '2024-01-17',
     },
-    parameters: [
-      { name: 'Temperature', value: 0.6, description: 'Controls randomness' },
-      { name: 'Max Tokens', value: 2000, description: 'Maximum response length' },
-    ],
+    parameters: {
+      temperature: { value: 0.6, description: 'Controls randomness' },
+      maxTokens: { value: 2000, description: 'Maximum response length' }
+    },
   },
   {
     id: 'assistant',
@@ -89,10 +89,10 @@ export const mockAgents: Agent[] = [
       size: 450000,
       lastUpdated: '2024-01-16',
     },
-    parameters: [
-      { name: 'Temperature', value: 0.7, description: 'Controls randomness' },
-      { name: 'Max Tokens', value: 1800, description: 'Maximum response length' },
-    ],
+    parameters: {
+      temperature: { value: 0.7, description: 'Controls randomness' },
+      maxTokens: { value: 1800, description: 'Maximum response length' }
+    },
   },
   {
     id: 'coder',
@@ -107,9 +107,9 @@ export const mockAgents: Agent[] = [
       size: 300000,
       lastUpdated: '2024-01-15',
     },
-    parameters: [
-      { name: 'Temperature', value: 0.5, description: 'Controls randomness' },
-      { name: 'Max Tokens', value: 1600, description: 'Maximum response length' },
-    ],
+    parameters: {
+      temperature: { value: 0.5, description: 'Controls randomness' },
+      maxTokens: { value: 1600, description: 'Maximum response length' }
+    },
   }
 ];
