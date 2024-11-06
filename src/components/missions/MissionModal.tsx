@@ -21,7 +21,7 @@ import StarIcon from '@mui/icons-material/Star';
 import TimerIcon from '@mui/icons-material/Timer';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import { Mission, Difficulty } from '../types/missions';
-import { getPerkIconUrl } from '../utils/iconUtils';
+import { getPerkIconUrl } from '../../utils/iconUtils';
 import techTree from '../../content/tech/tech-tree.yml';
 
 const difficultyColors = {
