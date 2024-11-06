@@ -189,7 +189,7 @@ export default function AgentChat({
                   ...messages
                 ]);
                 if (onGenerate) {
-                  onGenerate(finalPrompt);
+                  onGenerate(finalPrompt); // Pass the generated prompt to parent
                 }
               } catch (error) {
                 console.error('Failed to generate system prompt:', error);
