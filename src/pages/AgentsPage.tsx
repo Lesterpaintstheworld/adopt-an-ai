@@ -3,6 +3,10 @@ import { useState, useEffect } from 'react';
 import { ChatMessage } from '../utils/openai';
 import { useAgents } from '../hooks/useAgents';
 
+type ChatHistories = {
+  [key: string]: ChatMessage[];
+};
+
 const KINDESIGNER_PROMPT = `# Prompt for the AI Prompt Design Assistant (KinDesigner)
 
 Once we have completed creating your personalized prompt, I will generate a final system prompt based on our discussion. When you're satisfied with the result, click the "Generate System Prompt" button below to create your new AI agent.
@@ -210,10 +214,6 @@ export default function AgentsPage() {
       </Box>
     );
   }
-  type ChatHistories = {
-    [key: string]: ChatMessage[];
-  };
-
   const [chatHistories, setChatHistories] = useState<ChatHistories>({
     create: []
   });
