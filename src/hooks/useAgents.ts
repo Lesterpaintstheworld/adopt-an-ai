@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Agent } from '../types/database';
 import { AgentCreationData, AgentUpdateData } from '../types/agents';
-import { mockAgents } from '../data/mockAgents';
+import { agentsApi } from '../utils/api';
 
 export const useAgents = () => {
   const [agents, setAgents] = useState<Agent[]>([]);
@@ -11,9 +11,8 @@ export const useAgents = () => {
   const fetchAgents = async () => {
     try {
       setLoading(true);
-      // Simulate network delay
-      await new Promise(resolve => setTimeout(resolve, 500));
-      setAgents(mockAgents);
+      const response = await agentsApi.getAll();
+      setAgents(response.data);
       setError(null);
     } catch (err) {
       setError('Failed to fetch agents');
@@ -25,17 +24,11 @@ export const useAgents = () => {
 
   const createAgent = async (agentData: AgentCreationData) => {
     try {
-      // Simulate agent creation with generated ID
-      const newAgent = {
-        ...agentData,
-        id: crypto.randomUUID(),
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString()
-      };
+      const response = await agentsApi.create(agentData);
+      const newAgent = response.data;
       setAgents(prev => [...prev, newAgent]);
       return newAgent;
     } catch (err) {
-      setError('Failed to create agent');
       console.error('Error creating agent:', err);
       throw err;
     }
@@ -43,18 +36,13 @@ export const useAgents = () => {
 
   const updateAgent = async (id: string, updateData: AgentUpdateData) => {
     try {
-      // Simulate agent update
-      const updatedAgent = {
-        ...agents.find(a => a.id === id),
-        ...updateData,
-        updated_at: new Date().toISOString()
-      };
+      const response = await agentsApi.update(id, updateData);
+      const updatedAgent = response.data;
       setAgents(prev => prev.map(agent => 
         agent.id === id ? updatedAgent : agent
       ));
       return updatedAgent;
     } catch (err) {
-      setError('Failed to update agent');
       console.error('Error updating agent:', err);
       throw err;
     }
