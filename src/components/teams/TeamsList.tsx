@@ -21,12 +21,12 @@ import TeamDialog from './TeamDialog';
 import AddAgentToTeamDialog from './AddAgentToTeamDialog';
 import type { Team } from '../../types/teams';
 
-interface TeamMember {
+interface TeamAgent {
   id: string;
   name: string;
-  email: string;
-  picture: string;
-  role: 'owner' | 'admin' | 'member';
+  system_prompt: string;
+  status: string;
+  created_at: string;
 }
 
 export default function TeamsList() {
@@ -35,23 +35,23 @@ export default function TeamsList() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isAddAgentDialogOpen, setIsAddAgentDialogOpen] = useState(false);
   const [selectedTeamForAgent, setSelectedTeamForAgent] = useState<string | null>(null);
-  const [teamMembers, setTeamMembers] = useState<Record<string, TeamMember[]>>({});
+  const [teamAgents, setTeamAgents] = useState<Record<string, TeamAgent[]>>({});
 
   useEffect(() => {
     teams.forEach(team => {
-      loadTeamMembers(team.id);
+      loadTeamAgents(team.id);
     });
   }, [teams]);
 
-  const loadTeamMembers = async (teamId: string) => {
+  const loadTeamAgents = async (teamId: string) => {
     try {
       const response = await teamsApi.getMembers(teamId);
-      setTeamMembers(prev => ({
+      setTeamAgents(prev => ({
         ...prev,
         [teamId]: response.data
       }));
     } catch (error) {
-      console.error('Failed to load team members:', error);
+      console.error('Failed to load team agents:', error);
     }
   };
 
@@ -144,22 +144,7 @@ export default function TeamsList() {
                   <>
                     {team.description}
                     <br />
-                    <AvatarGroup 
-                      max={3} 
-                      sx={{ 
-                        display: 'inline-flex',
-                        '& .MuiAvatar-root': { width: 24, height: 24, fontSize: '0.875rem' }
-                      }}
-                    >
-                      {teamMembers[team.id]?.map(member => (
-                        <Avatar 
-                          key={member.id}
-                          src={member.picture}
-                          alt={member.name}
-                          sx={{ width: 24, height: 24 }}
-                        />
-                      ))}
-                    </AvatarGroup>
+                    {teamAgents[team.id]?.length || 0} agents
                     {' • '}Role: {team.user_role}
                   </>
                 }
@@ -193,25 +178,20 @@ export default function TeamsList() {
             </Box>
 
             <Box sx={{ p: 2, bgcolor: 'background.paper' }}>
-                <Typography variant="subtitle2" gutterBottom>
-                  Members
-                </Typography>
-                <List dense>
-                  {teamMembers[team.id]?.map(member => (
-                    <ListItem key={member.id}>
-                      <Avatar 
-                        src={member.picture} 
-                        alt={member.name}
-                        sx={{ width: 32, height: 32, mr: 2 }}
-                      />
-                      <ListItemText 
-                        primary={member.name}
-                        secondary={`${member.role} • ${member.email}`}
-                      />
-                    </ListItem>
-                  ))}
-                </List>
-              </Box>
+              <Typography variant="subtitle2" gutterBottom>
+                Agents
+              </Typography>
+              <List dense>
+                {teamAgents[team.id]?.map(agent => (
+                  <ListItem key={agent.id}>
+                    <ListItemText 
+                      primary={agent.name}
+                      secondary={agent.system_prompt.substring(0, 100) + '...'}
+                    />
+                  </ListItem>
+                ))}
+              </List>
+            </Box>
           </ListItem>
         ))}
       </List>

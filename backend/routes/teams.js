@@ -212,19 +212,19 @@ router.post('/:teamId/agents', async (req, res) => {
 router.get('/:teamId/members', async (req, res) => {
   try {
     const query = `
-      SELECT u.id, u.name, u.email, u.picture, tm.role
-      FROM team_members tm
-      JOIN users u ON tm.user_id = u.id
-      WHERE tm.team_id = $1
-      ORDER BY tm.role DESC, u.name ASC
+      SELECT a.*
+      FROM team_agents ta
+      JOIN agents a ON ta.agent_id = a.id
+      WHERE ta.team_id = $1
+      ORDER BY a.name ASC
     `;
     
     const result = await pool.query(query, [req.params.teamId]);
     res.json(result.rows);
   } catch (error) {
-    console.error('Error fetching team members:', error);
+    console.error('Error fetching team agents:', error);
     res.status(500).json({ 
-      error: 'Failed to fetch team members',
+      error: 'Failed to fetch team agents',
       details: error.message 
     });
   }
