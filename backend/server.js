@@ -55,6 +55,7 @@ const verifyToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
   
   if (!authHeader?.startsWith('Bearer ')) {
+    console.log('No token provided in request');
     return res.status(401).json({ error: 'No token provided' });
   }
 
@@ -62,11 +63,15 @@ const verifyToken = (req, res, next) => {
   
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    console.log('Decoded token:', decoded);
     req.user = decoded;
     next();
   } catch (error) {
     console.error('Token verification error:', error);
-    res.status(401).json({ error: 'Invalid token' });
+    res.status(401).json({ 
+      error: 'Invalid token',
+      details: error.message
+    });
   }
 };
 

@@ -14,16 +14,21 @@ const pool = new Pool({
 // GET /api/agents
 router.get('/', async (req, res) => {
   try {
+    console.log('Fetching agents for user:', req.user.userId);
     const query = `
       SELECT * FROM agents 
       WHERE user_id = $1 
       ORDER BY created_at DESC
     `;
-    const result = await pool.query(query, [req.user.id]);
+    const result = await pool.query(query, [req.user.userId]);
+    console.log('Found agents:', result.rows.length);
     res.json(result.rows);
   } catch (error) {
     console.error('Error fetching agents:', error);
-    res.status(500).json({ error: 'Failed to fetch agents' });
+    res.status(500).json({ 
+      error: 'Failed to fetch agents',
+      details: error.message 
+    });
   }
 });
 

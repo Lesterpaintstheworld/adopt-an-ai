@@ -214,8 +214,10 @@ export default function AgentsPage() {
   if (error) {
     return (
       <Box sx={{ p: 3 }}>
-        <Alert severity="error">
-          Failed to load agents: {error}
+        <Alert severity="error" onClose={() => window.location.reload()}>
+          Failed to load agents: {error.message || error}
+          <br />
+          {error.details && <Typography variant="body2">{error.details}</Typography>}
         </Alert>
       </Box>
     );
