@@ -1,7 +1,6 @@
 import { Box, Grid, CircularProgress, Alert, Button } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { ChatMessage } from '../utils/openai';
-import { ChatMessage } from '../utils/openai';
 import { useAgents } from '../hooks/useAgents';
 
 const KINDESIGNER_PROMPT = `# Prompt for the AI Prompt Design Assistant (KinDesigner)
