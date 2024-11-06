@@ -4,10 +4,11 @@ const { OAuth2Client } = require('google-auth-library');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const { Pool } = require('pg');
+const path = require('path');
 require('dotenv').config();
 
 // Import routes
-const agentsRouter = require('./routes/agents');
+const agentsRouter = require(path.join(__dirname, 'routes', 'agents'));
 
 // Database configuration
 const pool = new Pool({
