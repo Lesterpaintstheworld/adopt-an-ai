@@ -6,6 +6,9 @@ const crypto = require('crypto');
 const { Pool } = require('pg');
 require('dotenv').config();
 
+// Import routes
+const agentsRouter = require('./routes/agents');
+
 // Database configuration
 const pool = new Pool({
   user: process.env.DB_USER || 'postgres',
@@ -38,6 +41,24 @@ app.use(cors({
   credentials: true
 }));
 app.use(express.json());
+
+// Request logging middleware
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
+  next();
+});
+
+// Register routes
+app.use('/api/agents', agentsRouter);
+
+// Log registered routes
+console.log('Registered routes:', app._router.stack
+  .filter(r => r.route)
+  .map(r => ({
+    path: r.route.path,
+    methods: Object.keys(r.route.methods)
+  }))
+);
 
 // Configuration Google OAuth
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
@@ -199,4 +220,6 @@ app.post('/api/users/:userId/tutorial-status', async (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+  console.log(`API URL: http://localhost:${PORT}`);
+  console.log('Environment:', process.env.NODE_ENV);
 });

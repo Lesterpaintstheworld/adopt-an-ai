@@ -1,13 +1,16 @@
 import axios from 'axios';
 import type { AgentCreationData, AgentUpdateData } from '../types/agents';
 
-// Créer une instance axios avec la configuration de base
+// Create axios instance with base configuration
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000',
   headers: {
     'Content-Type': 'application/json',
   },
 });
+
+// Log API configuration
+console.log('API URL:', import.meta.env.VITE_API_URL || 'http://localhost:3000');
 
 // Intercepteur pour ajouter le token d'authentification
 api.interceptors.request.use((config) => {
