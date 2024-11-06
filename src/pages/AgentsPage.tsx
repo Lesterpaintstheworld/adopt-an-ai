@@ -3,9 +3,7 @@ import { useState } from 'react';
 import { TutorialHighlight } from '../components/tutorial/TutorialHighlight';
 import ModelSideMenu from '../components/agents/ModelSideMenu';
 import SystemPrompt from '../components/agents/SystemPrompt';
-import ModelTools from '../components/agents/ModelTools';
-import ModelMemory from '../components/agents/ModelMemory';
-import ModelParameters from '../components/agents/ModelParameters';
+import ModelChat from '../components/agents/ModelChat';
 
 // Example data - replace with real data
 const models = [
@@ -152,14 +150,9 @@ export default function OSPage() {
             />
           </Grid>
 
-          {/* Right half */}
-          <Grid item xs={6}>
-            <Grid container spacing={3} sx={{ height: '100%' }}>
-              {/* Parameters */}
-              <Grid item xs={12}>
-                <ModelParameters parameters={selectedModel?.parameters || []} />
-              </Grid>
-            </Grid>
+          {/* Chat - Right half */}
+          <Grid item xs={6} sx={{ height: '100%' }}>
+            <ModelChat />
           </Grid>
         </Grid>
       </Box>
