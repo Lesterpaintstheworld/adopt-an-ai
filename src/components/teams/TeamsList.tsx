@@ -15,7 +15,7 @@ import {
   AvatarGroup,
   Collapse
 } from '@mui/material';
-import { Edit as EditIcon, Delete as DeleteIcon, Add as AddIcon } from '@mui/icons-material';
+import { Edit as EditIcon, Close as CloseIcon, Add as AddIcon } from '@mui/icons-material';
 import { useTeams } from '../../hooks/useTeams';
 import TeamDialog from './TeamDialog';
 import AddAgentToTeamDialog from './AddAgentToTeamDialog';
@@ -188,7 +188,7 @@ export default function TeamsList() {
                   onClick={() => handleDelete(team)}
                   sx={{ ml: 1 }}
                 >
-                  <DeleteIcon />
+                  <CloseIcon />
                 </IconButton>
               )}
             </Box>
@@ -215,7 +215,7 @@ export default function TeamsList() {
                         }
                       }}
                     >
-                      <DeleteIcon />
+                      <CloseIcon />
                     </IconButton>
                   </ListItem>
                 ))}
