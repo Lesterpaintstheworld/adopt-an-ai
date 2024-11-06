@@ -42,7 +42,7 @@ export default function AgentsPage() {
 
           {/* Chat - Right half */}
           <Grid item xs={6} sx={{ height: '100%' }}>
-            <AgentChat />
+            <AgentChat systemPrompt={selectedAgent?.systemPrompt || ''} />
           </Grid>
         </Grid>
       </Box>
