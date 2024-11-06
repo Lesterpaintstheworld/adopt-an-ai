@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Dialog,
   DialogTitle,
@@ -12,6 +12,7 @@ import {
   ListItemIcon,
   ListItemText,
   Button,
+  TextField,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
@@ -34,7 +35,7 @@ interface MissionModalProps {
   open: boolean;
   onClose: () => void;
   mission: Mission;
-  onStart: (mission: Mission) => void;
+  onStart: (mission: Mission & { instructions?: string }) => void;
   isStarting?: boolean;
 }
 
@@ -45,6 +46,11 @@ const MissionModal: React.FC<MissionModalProps> = ({
   onStart,
   isStarting = false,
 }) => {
+  const [instructions, setInstructions] = useState<string>('');
+
+  const handleStartMission = () => {
+    onStart({ ...mission, instructions });
+  };
   const getRequiredPerkName = () => {
     return Object.values(techTree)
       .flatMap(phase => 
@@ -64,7 +70,7 @@ const MissionModal: React.FC<MissionModalProps> = ({
     <Dialog
       open={open}
       onClose={onClose}
-      maxWidth="md"
+      maxWidth="lg"
       fullWidth
       PaperProps={{
         sx: {
@@ -73,6 +79,7 @@ const MissionModal: React.FC<MissionModalProps> = ({
           border: '1px solid rgba(255, 255, 255, 0.1)',
           boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
           borderRadius: '12px',
+          minHeight: '80vh',
         }
       }}
     >
@@ -119,8 +126,14 @@ const MissionModal: React.FC<MissionModalProps> = ({
         </IconButton>
       </DialogTitle>
 
-      <DialogContent sx={{ p: 0 }}>
-        <Box sx={{ p: 3 }}>
+      <DialogContent sx={{ p: 0, display: 'flex', height: '100%' }}>
+        {/* Left column - Mission details */}
+        <Box sx={{ 
+          flex: 1, 
+          p: 3, 
+          borderRight: '1px solid rgba(255, 255, 255, 0.1)',
+          overflowY: 'auto'
+        }}>
           {/* Description */}
           <Typography variant="body1" sx={{ color: 'rgba(255,255,255,0.8)', mb: 4, lineHeight: 1.7 }}>
             {mission.description}
@@ -284,30 +297,53 @@ const MissionModal: React.FC<MissionModalProps> = ({
           </Box>
         </Box>
 
-        {/* Action buttons */}
+        {/* Right column - Instructions */}
         <Box sx={{ 
-          p: 3, 
-          bgcolor: 'rgba(0,0,0,0.3)', 
-          borderTop: '1px solid rgba(255,255,255,0.1)',
+          flex: 1, 
+          p: 3,
           display: 'flex',
-          justifyContent: 'flex-end',
-          gap: 2
+          flexDirection: 'column'
         }}>
-          <Button
-            variant="outlined"
-            onClick={onClose}
-            sx={{ color: 'rgba(255,255,255,0.7)', borderColor: 'rgba(255,255,255,0.2)' }}
-          >
-            Cancel
-          </Button>
+          <Typography variant="h6" sx={{ color: '#fff', mb: 2 }}>
+            Instructions spécifiques
+          </Typography>
+          
+          <TextField
+            multiline
+            rows={12}
+            fullWidth
+            value={instructions}
+            onChange={(e) => setInstructions(e.target.value)}
+            placeholder="How do you want your AIs to perform this mission? Help them by providing guidance on how to accomplish the mission"
+            sx={{
+              flex: 1,
+              mb: 3,
+              '& .MuiOutlinedInput-root': {
+                color: 'rgba(255,255,255,0.9)',
+                backgroundColor: 'rgba(255,255,255,0.05)',
+                '& fieldset': {
+                  borderColor: 'rgba(255,255,255,0.1)',
+                },
+                '&:hover fieldset': {
+                  borderColor: 'rgba(255,255,255,0.2)',
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: 'primary.main',
+                },
+              },
+            }}
+          />
+          
           <Button
             variant="contained"
-            onClick={() => onStart(mission)}
+            onClick={handleStartMission}
             disabled={isStarting || mission.status === 'locked'}
+            fullWidth
             sx={{
-              px: 4,
+              py: 1.5,
               bgcolor: '#4CAF50',
-              '&:hover': { bgcolor: '#45a049' }
+              '&:hover': { bgcolor: '#45a049' },
+              fontSize: '1.1rem',
             }}
           >
             {isStarting ? 'Starting...' : 'Start Mission'}

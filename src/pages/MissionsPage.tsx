@@ -208,15 +208,18 @@ const MissionsPage: React.FC = () => {
     }
   };
 
-  const handleStartMission = async (mission: Mission) => {
+  const handleStartMission = async (missionData: Mission & { instructions?: string }) => {
     setIsStartingMission(true);
     
     try {
       const updatedMissions: Mission[] = missions.map(m => 
-        m.id === mission.id ? { ...m, status: 'in_progress' as const } : m
+        m.id === missionData.id ? { ...m, status: 'in_progress' as const } : m
       );
       setMissions(updatedMissions);
-      setActiveMissions([...activeMissions, mission]);
+      setActiveMissions([...activeMissions, { ...missionData }]);
+      
+      // Log mission instructions if provided
+      console.log('Mission instructions:', missionData.instructions);
       setSelectedMission(null);
     } catch (error) {
       console.error('Error starting mission:', error);
