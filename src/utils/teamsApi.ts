@@ -8,5 +8,6 @@ export const teamsApi = {
   update: (id: string, data: TeamUpdateData) => api.put<Team>(`/api/teams/${id}`, data),
   delete: (id: string) => api.delete(`/api/teams/${id}`),
   addAgent: (teamId: string, agentId: string) => api.post(`/api/teams/${teamId}/agents`, { agentId }),
+  removeAgent: (teamId: string, agentId: string) => api.delete(`/api/teams/${teamId}/agents/${agentId}`),
   getMembers: (teamId: string) => api.get(`/api/teams/${teamId}/members`)
 };

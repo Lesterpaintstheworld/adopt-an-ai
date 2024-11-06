@@ -208,6 +208,40 @@ router.post('/:teamId/agents', async (req, res) => {
   }
 });
 
+// DELETE agent from team
+router.delete('/:teamId/agents/:agentId', async (req, res) => {
+  const { teamId, agentId } = req.params;
+  
+  try {
+    // Check user has rights on the team
+    const teamCheck = await pool.query(
+      `SELECT * FROM teams t
+       LEFT JOIN team_members tm ON t.id = tm.team_id
+       WHERE t.id = $1 AND (t.owner_id = $2 OR tm.user_id = $2)`,
+      [teamId, req.user.userId]
+    );
+
+    if (teamCheck.rows.length === 0) {
+      return res.status(403).json({ error: 'Not authorized to modify this team' });
+    }
+
+    // Remove agent from team
+    await pool.query(
+      `DELETE FROM team_agents 
+       WHERE team_id = $1 AND agent_id = $2`,
+      [teamId, agentId]
+    );
+
+    res.status(204).send();
+  } catch (error) {
+    console.error('Error removing agent from team:', error);
+    res.status(500).json({ 
+      error: 'Failed to remove agent from team',
+      details: error.message 
+    });
+  }
+});
+
 // GET /api/teams/:teamId/members
 router.get('/:teamId/members', async (req, res) => {
   try {
