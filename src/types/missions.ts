@@ -8,25 +8,13 @@ export interface Mission {
   capability_id?: string;
   title: string;
   description: string;
-  objectives: string[];
-  tasks: {
-    step: string;
-    details: string;
-  }[];
-  success_criteria: string[];
-  evaluation_metrics: {
-    metric: string;
-    target: string;
-  }[];
   difficulty: Difficulty;
   category: Category;
   duration: string;
+  objectives: string[];
+  success_criteria: string[];
+  requirements: Record<string, string>;
   mainPrerequisite?: string;
-  requirements: {
-    compute: string;
-    memory: string;
-    capabilities: string[];
-  };
   rewards: {
     xp?: number;
     capabilities?: string[];
