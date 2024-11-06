@@ -1,7 +1,6 @@
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, CircularProgress, Alert } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { ChatMessage } from '../utils/openai';
-import { Box, CircularProgress, Alert } from '@mui/material';
 import { useAgents } from '../hooks/useAgents';
 
 const KINDESIGNER_PROMPT = `# Prompt for the AI Prompt Design Assistant (KinDesigner)
@@ -126,7 +125,6 @@ import { TutorialHighlight } from '../components/tutorial/TutorialHighlight';
 import AgentSideMenu from '../components/agents/AgentSideMenu';
 import AgentSystem from '../components/agents/AgentSystem';
 import AgentChat from '../components/agents/AgentChat';
-import { mockAgents } from '../data/mockAgents';
 
 export default function AgentsPage() {
   const { agents, loading, error, createAgent } = useAgents();
@@ -138,6 +136,7 @@ export default function AgentsPage() {
   const handleGeneratePrompt = async () => {
     try {
       const newAgent = await createAgent({
+        user_id: '', // Will be set by backend
         name: 'New Agent',
         system_prompt: customPrompt,
         status: 'active',
@@ -163,17 +162,26 @@ export default function AgentsPage() {
   }, [agents]);
 
   if (loading) {
-    return <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-      <CircularProgress />
-    </Box>;
+    return (
+      <Box sx={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        height: 'calc(100vh - 64px)'
+      }}>
+        <CircularProgress />
+      </Box>
+    );
   }
 
   if (error) {
-    return <Box sx={{ p: 3 }}>
-      <Alert severity="error">
-        Failed to load agents: {error}
-      </Alert>
-    </Box>;
+    return (
+      <Box sx={{ p: 3 }}>
+        <Alert severity="error">
+          Failed to load agents: {error}
+        </Alert>
+      </Box>
+    );
   }
   type ChatHistories = {
     [key: string]: ChatMessage[];
