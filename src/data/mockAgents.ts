@@ -25,7 +25,11 @@ export const mockAgents: Agent[] = [
   },
   {
     id: 'writer',
-    name: 'Creative Writer', 
+    user_id: '123e4567-e89b-12d3-a456-426614174111',
+    name: 'Creative Writer',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+    status: 'active',
     system_prompt: 'You are a creative writing assistant specializing in storytelling...',
     tools: [
       { id: 't1', name: 'Web Search', description: 'Search the internet' },
@@ -42,7 +46,11 @@ export const mockAgents: Agent[] = [
   },
   {
     id: 'analyst',
+    user_id: '123e4567-e89b-12d3-a456-426614174111',
     name: 'Data Analyst',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+    status: 'active',
     system_prompt: 'You are a data analysis expert focused on finding insights...',
     tools: [
       { id: 't1', name: 'Web Search', description: 'Search the internet' },
@@ -60,7 +68,11 @@ export const mockAgents: Agent[] = [
   },
   {
     id: 'teacher',
+    user_id: '123e4567-e89b-12d3-a456-426614174111',
     name: 'Educational Tutor',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+    status: 'active',
     system_prompt: 'You are an educational tutor specializing in personalized learning...',
     tools: [
       { id: 't1', name: 'Web Search', description: 'Search the internet' },
@@ -78,7 +90,11 @@ export const mockAgents: Agent[] = [
   },
   {
     id: 'assistant',
+    user_id: '123e4567-e89b-12d3-a456-426614174111',
     name: 'Personal Assistant',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+    status: 'active',
     system_prompt: 'You are a helpful personal assistant focused on organization and productivity...',
     tools: [
       { id: 't1', name: 'Web Search', description: 'Search the internet' },
@@ -96,7 +112,11 @@ export const mockAgents: Agent[] = [
   },
   {
     id: 'coder',
+    user_id: '123e4567-e89b-12d3-a456-426614174111',
     name: 'Code Assistant',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+    status: 'active',
     system_prompt: 'You are a specialized programming assistant...',
     tools: [
       { id: 't1', name: 'Web Search', description: 'Search the internet' },
