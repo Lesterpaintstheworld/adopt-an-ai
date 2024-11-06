@@ -1,9 +1,9 @@
 import { Box, Grid } from '@mui/material';
 import { useState } from 'react';
 import { TutorialHighlight } from '../components/tutorial/TutorialHighlight';
-import ModelSideMenu from '../components/agents/ModelSideMenu';
+import AgentSideMenu from '../components/agents/AgentSideMenu';
 import SystemPrompt from '../components/agents/SystemPrompt';
-import ModelChat from '../components/agents/ModelChat';
+import AgentChat from '../components/agents/AgentChat';
 
 // Example data - replace with real data
 const models = [
@@ -116,9 +116,9 @@ const models = [
   }
 ];
 
-export default function OSPage() {
-  const [selectedModelId, setSelectedModelId] = useState(models[0].id);
-  const selectedModel = models.find(m => m.id === selectedModelId);
+export default function AgentsPage() {
+  const [selectedAgentId, setSelectedAgentId] = useState(models[0].id);
+  const selectedAgent = models.find(m => m.id === selectedAgentId);
 
   return (
     <Box sx={{ 
@@ -127,10 +127,10 @@ export default function OSPage() {
       overflow: 'hidden',
       backgroundColor: 'rgba(0, 0, 0, 0.2)',
     }}>
-      <ModelSideMenu 
-        models={models}
-        selectedModel={selectedModelId}
-        onSelectModel={setSelectedModelId}
+      <AgentSideMenu 
+        agents={models}
+        selectedAgent={selectedAgentId}
+        onSelectAgent={setSelectedAgentId}
       />
       
       <Box sx={{ 
@@ -145,14 +145,14 @@ export default function OSPage() {
           {/* System Prompt - Left half */}
           <Grid item xs={6} sx={{ height: '100%' }}>
             <SystemPrompt 
-              prompt={selectedModel?.systemPrompt || ''}
+              prompt={selectedAgent?.systemPrompt || ''}
               readOnly
             />
           </Grid>
 
           {/* Chat - Right half */}
           <Grid item xs={6} sx={{ height: '100%' }}>
-            <ModelChat />
+            <AgentChat />
           </Grid>
         </Grid>
       </Box>

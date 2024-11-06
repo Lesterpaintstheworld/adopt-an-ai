@@ -10,7 +10,7 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
   border: '1px solid rgba(255, 255, 255, 0.1)',
 }));
 
-interface ModelMemoryProps {
+interface AgentMemoryProps {
   vectorStore: {
     name: string;
     size: number;
@@ -18,7 +18,7 @@ interface ModelMemoryProps {
   };
 }
 
-export default function ModelMemory({ vectorStore }: ModelMemoryProps) {
+export default function AgentMemory({ vectorStore }: AgentMemoryProps) {
   return (
     <StyledPaper>
       <Typography variant="h6" gutterBottom>

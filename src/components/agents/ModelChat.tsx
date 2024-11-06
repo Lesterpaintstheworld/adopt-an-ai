@@ -9,7 +9,7 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
   border: '1px solid rgba(255, 255, 255, 0.1)',
 }));
 
-export default function ModelChat() {
+export default function AgentChat() {
   return (
     <StyledPaper>
       <Typography variant="h6" gutterBottom>

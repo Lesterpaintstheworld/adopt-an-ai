@@ -25,23 +25,23 @@ const StyledList = styled(List)(({ theme }) => ({
   }
 }));
 
-interface ModelSideMenuProps {
-  models: Array<{
+interface AgentSideMenuProps {
+  agents: Array<{
     id: string;
     name: string;
   }>;
-  selectedModel: string;
-  onSelectModel: (id: string) => void;
+  selectedAgent: string;
+  onSelectAgent: (id: string) => void;
 }
 
-export default function ModelSideMenu({ models, selectedModel, onSelectModel }: ModelSideMenuProps) {
+export default function AgentSideMenu({ agents, selectedAgent, onSelectAgent }: AgentSideMenuProps) {
   return (
     <StyledList>
-      {models.map((model) => (
-        <ListItem key={model.id} disablePadding>
+      {agents.map((agent) => (
+        <ListItem key={agent.id} disablePadding>
           <ListItemButton 
-            selected={selectedModel === model.id}
-            onClick={() => onSelectModel(model.id)}
+            selected={selectedAgent === agent.id}
+            onClick={() => onSelectAgent(agent.id)}
           >
             <ListItemText primary={model.name} />
           </ListItemButton>

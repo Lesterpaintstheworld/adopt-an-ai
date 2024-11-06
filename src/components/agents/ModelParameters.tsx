@@ -29,11 +29,11 @@ interface Parameter {
   description: string;
 }
 
-interface ModelParametersProps {
+interface AgentParametersProps {
   parameters: Parameter[];
 }
 
-export default function ModelParameters({ parameters }: ModelParametersProps) {
+export default function AgentParameters({ parameters }: AgentParametersProps) {
   return (
     <StyledPaper>
       <Typography variant="h6" gutterBottom>

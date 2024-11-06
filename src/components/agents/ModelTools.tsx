@@ -33,11 +33,11 @@ interface Tool {
   description: string;
 }
 
-interface ModelToolsProps {
+interface AgentToolsProps {
   tools: Tool[];
 }
 
-export default function ModelTools({ tools }: ModelToolsProps) {
+export default function AgentTools({ tools }: AgentToolsProps) {
   return (
     <StyledPaper>
       <Typography variant="h6" gutterBottom>
