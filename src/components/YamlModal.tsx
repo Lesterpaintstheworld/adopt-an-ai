@@ -20,7 +20,7 @@ const darkTheme = {
   }
 };
 import { parseYaml } from '../utils/yamlFormatter';
-import { getPerkIconUrl } from '../utils/iconUtils';
+import { getPerkIconUrl } from '../../utils/iconUtils';
 import CloseIcon from '@mui/icons-material/Close';
 
 SyntaxHighlighter.registerLanguage('yaml', yaml);
