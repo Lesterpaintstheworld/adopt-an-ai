@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from 'express';
+import express, { Request, Response } from 'express';
 import { z } from 'zod';
 import type { ZodError } from 'zod';
 import { AgentSchema } from '../../types/database';
@@ -33,7 +33,7 @@ router.get('/', auth, async (req: Request, res: Response) => {
 });
 
 // GET /api/agents/:id - Get a specific agent
-router.get('/:id', auth, async (req: Request, res: Response) => {
+router.get('/:id', auth, async (req: Request, res: Response): Promise<void> => {
   const authReq = req as AuthRequest;
   try {
     const agent = await db.agent.findFirst({
@@ -44,7 +44,8 @@ router.get('/:id', auth, async (req: Request, res: Response) => {
     });
     
     if (!agent) {
-      return res.status(404).json({ error: 'Agent not found' });
+      res.status(404).json({ error: 'Agent not found' });
+      return;
     }
     
     res.json(agent);
