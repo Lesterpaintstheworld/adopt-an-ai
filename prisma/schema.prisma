@@ -1,0 +1,59 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id                String   @id @default(uuid())
+  email            String   @unique
+  name             String
+  picture          String?
+  googleId         String   @unique
+  createdAt        DateTime @default(now())
+  lastLogin        DateTime @default(now())
+  tutorialCompleted Boolean  @default(false)
+  tutorialProgress Json     @default("{\"lastStep\": 0, \"completedSteps\": [], \"dismissedPages\": []}")
+  agents           Agent[]
+  teams           Team[]
+}
+
+model Agent {
+  id            String   @id @default(uuid())
+  user_id       String
+  name          String
+  system_prompt String
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+  status        String   @default("active")
+  parameters    Json     @default("{}")
+  tools         Json     @default("[]")
+  vector_store  Json     @default("{\"name\": \"Pinecone DB\", \"size\": 0, \"lastUpdated\": null}")
+  user          User     @relation(fields: [user_id], references: [id])
+  teams         TeamsOnAgents[]
+}
+
+model Team {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  status      String   @default("active")
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  user_id     String
+  user        User     @relation(fields: [user_id], references: [id])
+  agents      TeamsOnAgents[]
+}
+
+model TeamsOnAgents {
+  team_id    String
+  agent_id   String
+  created_at DateTime @default(now())
+  team       Team     @relation(fields: [team_id], references: [id])
+  agent      Agent    @relation(fields: [agent_id], references: [id])
+
+  @@id([team_id, agent_id])
+}
