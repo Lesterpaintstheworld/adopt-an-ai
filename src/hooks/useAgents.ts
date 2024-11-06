@@ -11,6 +11,8 @@ export const useAgents = () => {
   const fetchAgents = async () => {
     try {
       setLoading(true);
+      const token = localStorage.getItem('token');
+      console.log('Auth token present:', !!token);
       const response = await agentsApi.getAll();
       console.log('Agents response:', response); // Debug log
       setAgents(response.data);
