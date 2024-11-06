@@ -75,6 +75,19 @@ export default function TeamsList() {
     setIsAddAgentDialogOpen(true);
   };
 
+  const handleAgentAdded = async (teamId: string) => {
+    try {
+      // Recharger les membres de l'équipe spécifique
+      const response = await teamsApi.getMembers(teamId);
+      setTeamMembers(prev => ({
+        ...prev,
+        [teamId]: response.data
+      }));
+    } catch (error) {
+      console.error('Failed to refresh team members:', error);
+    }
+  };
+
   const handleCreate = () => {
     setSelectedTeam(null);
     setIsDialogOpen(true);
@@ -217,6 +230,7 @@ export default function TeamsList() {
             setSelectedTeamForAgent(null);
           }}
           onAgentAdded={() => {
+            handleAgentAdded(selectedTeamForAgent);
             refreshTeams();
           }}
         />
