@@ -344,8 +344,8 @@ const loadFullPerkData = async (perkId: string): Promise<PerkFullData | null> =>
     }
 
     // Use file_base_name to load the file
-    const modules = import.meta.glob('../../content/tech/*.yml', { eager: true }) as Record<string, { default: PerkFullData }>;
-    const path = `../../content/tech/${item.file_base_name}.yml`;
+    const modules = import.meta.glob('../../content/tech-tree/*.yml', { eager: true }) as Record<string, { default: PerkFullData }>;
+    const path = `../../content/tech-tree/${item.file_base_name}.yml`;
     
     if (path in modules) {
       const module = modules[path];
