@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import { z } from 'zod';
 import type { ZodError } from 'zod';
 import { AgentSchema } from '../../types/database';
@@ -14,11 +14,12 @@ interface AuthRequest extends Request {
 const router = express.Router();
 
 // GET /api/agents - Get all agents for the authenticated user
-router.get('/', auth, async (req: AuthRequest, res: Response) => {
+router.get('/', auth, async (req: Request, res: Response) => {
+  const authReq = req as AuthRequest;
   try {
     const agents = await db.agent.findMany({
       where: {
-        user_id: req.user.id
+        user_id: authReq.user.id
       },
       orderBy: {
         created_at: 'desc'
@@ -32,12 +33,13 @@ router.get('/', auth, async (req: AuthRequest, res: Response) => {
 });
 
 // GET /api/agents/:id - Get a specific agent
-router.get('/:id', auth, async (req: AuthRequest, res: Response) => {
+router.get('/:id', auth, async (req: Request, res: Response) => {
+  const authReq = req as AuthRequest;
   try {
     const agent = await db.agent.findFirst({
       where: {
-        id: req.params.id,
-        user_id: req.user.id
+        id: authReq.params.id,
+        user_id: authReq.user.id
       }
     });
     
@@ -53,19 +55,20 @@ router.get('/:id', auth, async (req: AuthRequest, res: Response) => {
 });
 
 // POST /api/agents - Create a new agent
-router.post('/', auth, async (req: AuthRequest, res: Response) => {
+router.post('/', auth, async (req: Request, res: Response) => {
+  const authReq = req as AuthRequest;
   try {
     const agentData = AgentSchema.omit({ 
       id: true, 
       user_id: true, 
       created_at: true, 
       updated_at: true 
-    }).parse(req.body);
+    }).parse(authReq.body);
 
     const agent = await db.agent.create({
       data: {
         ...agentData,
-        user_id: req.user.id,
+        user_id: authReq.user.id,
       }
     });
 
@@ -83,13 +86,14 @@ router.post('/', auth, async (req: AuthRequest, res: Response) => {
 });
 
 // PUT /api/agents/:id - Update an agent
-router.put('/:id', auth, async (req: AuthRequest, res: Response) => {
+router.put('/:id', auth, async (req: Request, res: Response) => {
+  const authReq = req as AuthRequest;
   try {
     // First verify the agent belongs to the user
     const existingAgent = await db.agent.findFirst({
       where: {
-        id: req.params.id,
-        user_id: req.user.id
+        id: authReq.params.id,
+        user_id: authReq.user.id
       }
     });
 
@@ -120,13 +124,14 @@ router.put('/:id', auth, async (req: AuthRequest, res: Response) => {
 });
 
 // DELETE /api/agents/:id - Delete an agent
-router.delete('/:id', auth, async (req: AuthRequest, res: Response) => {
+router.delete('/:id', auth, async (req: Request, res: Response) => {
+  const authReq = req as AuthRequest;
   try {
     // First verify the agent belongs to the user
     const existingAgent = await db.agent.findFirst({
       where: {
-        id: req.params.id,
-        user_id: req.user.id
+        id: authReq.params.id,
+        user_id: authReq.user.id
       }
     });
 
