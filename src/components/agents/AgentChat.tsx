@@ -184,6 +184,7 @@ export default function AgentChat({
             sx={{ 
               mt: 1,
               backgroundColor: 'rgba(255, 255, 255, 0.1)',
+              color: '#ffffff',
               '&:hover': {
                 backgroundColor: 'rgba(255, 255, 255, 0.2)',
               }
