@@ -55,6 +55,7 @@
     "@modyfi/vite-plugin-yaml": "^1.1.0",
     "@rollup/plugin-yaml": "^4.1.2",
     "@types/axios": "^0.14.0",
+    "@types/axios": "^0.14.0",
     "@types/express": "^5.0.0",
     "@types/js-yaml": "^4.0.9",
     "@types/markdown-it": "^13.0.7",

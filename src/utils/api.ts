@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 import type { AgentCreationData, AgentUpdateData } from '../types/agents';
 
 // Create axios instance with base configuration
@@ -13,7 +13,7 @@ export const api = axios.create({
 console.log('API URL:', import.meta.env.VITE_API_URL || 'http://localhost:3000');
 
 // Request interceptor to add auth token
-api.interceptors.request.use((config) => {
+api.interceptors.request.use((config: AxiosRequestConfig) => {
   const token = localStorage.getItem('token');
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
@@ -24,8 +24,8 @@ api.interceptors.request.use((config) => {
 
 // Response interceptor to handle errors
 api.interceptors.response.use(
-  (response) => response,
-  (error) => {
+  (response: AxiosResponse) => response,
+  (error: AxiosError) => {
     // Only redirect if:
     // 1. It's a 401 error
     // 2. We have a token (meaning our token is invalid/expired)
