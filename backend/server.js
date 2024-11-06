@@ -48,8 +48,28 @@ app.use((req, res, next) => {
   next();
 });
 
-// Register routes
-app.use('/api/agents', agentsRouter);
+// Auth middleware
+const verifyToken = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  
+  if (!authHeader?.startsWith('Bearer ')) {
+    return res.status(401).json({ error: 'No token provided' });
+  }
+
+  const token = authHeader.split(' ')[1];
+  
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded;
+    next();
+  } catch (error) {
+    console.error('Token verification error:', error);
+    res.status(401).json({ error: 'Invalid token' });
+  }
+};
+
+// Register routes with auth middleware
+app.use('/api/agents', verifyToken, agentsRouter);
 
 // Log registered routes
 console.log('Registered routes:', app._router.stack
