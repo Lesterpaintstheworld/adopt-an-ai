@@ -40,6 +40,8 @@ interface Props {
   systemPrompt: string;
   messages: ChatMessage[];
   onMessagesChange: (messages: ChatMessage[]) => void;
+  showGenerateButton?: boolean;
+  onGenerate?: () => void;
 }
 
 export default function AgentChat({ systemPrompt, messages, onMessagesChange }: Props) {
@@ -106,30 +108,44 @@ export default function AgentChat({ systemPrompt, messages, onMessagesChange }: 
         )}
       </MessageContainer>
 
-      <Box sx={{ display: 'flex', gap: 1 }}>
-        <TextField
-          fullWidth
-          multiline
-          maxRows={4}
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyPress={handleKeyPress}
-          placeholder="Type your message..."
-          disabled={isLoading}
-          sx={{
-            '& .MuiOutlinedInput-root': {
-              backgroundColor: 'rgba(0, 0, 0, 0.2)',
-            }
-          }}
-        />
-        <Button
-          variant="contained"
-          onClick={handleSend}
-          disabled={isLoading || !input.trim()}
-          sx={{ minWidth: 100 }}
-        >
-          {isLoading ? <CircularProgress size={24} /> : <SendIcon />}
-        </Button>
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+        <Box sx={{ display: 'flex', gap: 1 }}>
+          <TextField
+            fullWidth
+            multiline
+            maxRows={4}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyPress={handleKeyPress}
+            placeholder="Type your message..."
+            disabled={isLoading}
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                backgroundColor: 'rgba(0, 0, 0, 0.2)',
+              }
+            }}
+          />
+          <Button
+            variant="contained"
+            onClick={handleSend}
+            disabled={isLoading || !input.trim()}
+            sx={{ minWidth: 100 }}
+          >
+            {isLoading ? <CircularProgress size={24} /> : <SendIcon />}
+          </Button>
+        </Box>
+        
+        {showGenerateButton && (
+          <Button
+            variant="contained"
+            onClick={onGenerate}
+            color="secondary"
+            fullWidth
+            sx={{ mt: 1 }}
+          >
+            Generate System Prompt
+          </Button>
+        )}
       </Box>
     </StyledPaper>
   );

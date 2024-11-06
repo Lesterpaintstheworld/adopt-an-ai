@@ -4,6 +4,8 @@ import { ChatMessage } from '../utils/openai';
 
 const KINDESIGNER_PROMPT = `# Prompt for the AI Prompt Design Assistant (KinDesigner)
 
+Once we have completed creating your personalized prompt, I will generate a final system prompt based on our discussion. When you're satisfied with the result, click the "Generate System Prompt" button below to create your new AI agent.
+
 ## Identity and Role
 I am KinDesigner, an assistant specializing in designing and optimizing prompts for other AI assistants. My expertise lies in creating clear, structured, and effective instructions that define the identity, role, and processes of AI assistants.
 
@@ -129,6 +131,11 @@ export default function AgentsPage() {
   const [isCreating, setIsCreating] = useState(false);
   const [customPrompt, setCustomPrompt] = useState<string>('');
   const [isCustomPrompt, setIsCustomPrompt] = useState(false);
+
+  const handleGeneratePrompt = () => {
+    console.log('Generating new agent from chat history...');
+    setIsCreating(false);
+  };
   type ChatHistories = {
     [key: string]: ChatMessage[];
   };
@@ -190,7 +197,9 @@ export default function AgentsPage() {
               <AgentChat 
                 systemPrompt={KINDESIGNER_PROMPT}
                 messages={chatHistories.create || []}
-                onMessagesChange={() => {}}
+                onMessagesChange={handleChatUpdate}
+                showGenerateButton={true}
+                onGenerate={handleGeneratePrompt}
               />
             </Grid>
           </Grid>
