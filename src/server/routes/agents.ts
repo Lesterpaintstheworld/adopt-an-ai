@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import { z } from 'zod';
+import type { ZodError } from 'zod';
 import { AgentSchema } from '../../types/database';
 import { auth } from '../middleware/auth';
 import { db } from '../db';
@@ -71,7 +72,10 @@ router.post('/', auth, async (req: AuthRequest, res: Response) => {
     res.status(201).json(agent);
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return res.status(400).json({ error: 'Invalid agent data', details: error.errors });
+      return res.status(400).json({ 
+        error: 'Invalid agent data', 
+        details: (error as ZodError).errors 
+      });
     }
     console.error('Error creating agent:', error);
     res.status(500).json({ error: 'Failed to create agent' });
