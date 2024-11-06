@@ -76,6 +76,22 @@ export default function TeamsList() {
     setIsAddAgentDialogOpen(true);
   };
 
+  const handleRemoveAgent = async (teamId: string, agentId: string) => {
+    if (!window.confirm('Are you sure you want to remove this agent from the team?')) {
+      return;
+    }
+
+    try {
+      await teamsApi.removeAgent(teamId, agentId);
+      setTeamAgents(prev => ({
+        ...prev,
+        [teamId]: prev[teamId].filter(agent => agent.id !== agentId)
+      }));
+    } catch (error) {
+      console.error('Failed to remove agent:', error);
+    }
+  };
+
   const handleAgentAdded = async (teamId: string) => {
     try {
       // Recharger les membres de l'équipe spécifique
@@ -188,6 +204,19 @@ export default function TeamsList() {
                       primary={agent.name}
                       secondary={agent.system_prompt.substring(0, 100) + '...'}
                     />
+                    <IconButton
+                      edge="end"
+                      aria-label="delete"
+                      onClick={() => handleRemoveAgent(team.id, agent.id)}
+                      sx={{ 
+                        color: 'error.main',
+                        '&:hover': {
+                          backgroundColor: 'rgba(211, 47, 47, 0.04)'
+                        }
+                      }}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
                   </ListItem>
                 ))}
               </List>
