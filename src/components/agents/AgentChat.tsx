@@ -145,9 +145,14 @@ export default function AgentChat({
           <Button
             variant="contained"
             onClick={onGenerate}
-            color="secondary"
             fullWidth
-            sx={{ mt: 1 }}
+            sx={{ 
+              mt: 1,
+              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+              '&:hover': {
+                backgroundColor: 'rgba(255, 255, 255, 0.2)',
+              }
+            }}
           >
             Generate System Prompt
           </Button>
