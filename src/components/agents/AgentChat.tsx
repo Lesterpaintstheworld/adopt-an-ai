@@ -72,7 +72,7 @@ interface Props {
   messages: ChatMessage[];
   onMessagesChange: (messages: ChatMessage[]) => void;
   showGenerateButton?: boolean;
-  onGenerate?: (prompt: string) => void;  // Update type to receive the generated prompt
+  onGenerate?: (prompt: string, name: string) => void;
 }
 
 export default function AgentChat({ 
@@ -83,6 +83,7 @@ export default function AgentChat({
   onGenerate
 }: Props) {
   const [input, setInput] = useState('');
+  const [agentName, setAgentName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
 
@@ -178,42 +179,56 @@ export default function AgentChat({
         </Box>
         
         {showGenerateButton && (
-          <Button
-            variant="contained"
-            onClick={async () => {
-              if (!messages.length) return;
-              try {
-                setIsGenerating(true);
-                const finalPrompt = await generateSystemPrompt([
-                  { role: 'system', content: systemPrompt },
-                  ...messages
-                ]);
-                if (onGenerate && finalPrompt) {
-                  onGenerate(finalPrompt); // Pass the generated prompt to parent
+          <>
+            <TextField
+              fullWidth
+              value={agentName}
+              onChange={(e) => setAgentName(e.target.value)}
+              placeholder="Enter agent name"
+              sx={{
+                mt: 1,
+                '& .MuiOutlinedInput-root': {
+                  backgroundColor: 'rgba(0, 0, 0, 0.2)',
                 }
-              } catch (error) {
-                console.error('Failed to generate system prompt:', error);
-              } finally {
-                setIsGenerating(false);
-              }
-            }}
-            disabled={isGenerating || messages.length === 0}
-            fullWidth
-            sx={{ 
-              mt: 1,
-              backgroundColor: 'rgba(255, 255, 255, 0.1)',
-              color: '#ffffff',
-              '&:hover': {
-                backgroundColor: 'rgba(255, 255, 255, 0.2)',
-              }
-            }}
-          >
-            {isGenerating ? (
-              <CircularProgress size={24} color="inherit" />
-            ) : (
-              'Generate System Prompt'
-            )}
-          </Button>
+              }}
+            />
+            <Button
+              variant="contained"
+              onClick={async () => {
+                if (!messages.length || !agentName.trim()) return;
+                try {
+                  setIsGenerating(true);
+                  const finalPrompt = await generateSystemPrompt([
+                    { role: 'system', content: systemPrompt },
+                    ...messages
+                  ]);
+                  if (onGenerate && finalPrompt) {
+                    onGenerate(finalPrompt, agentName.trim());
+                  }
+                } catch (error) {
+                  console.error('Failed to generate system prompt:', error);
+                } finally {
+                  setIsGenerating(false);
+                }
+              }}
+              disabled={isGenerating || messages.length === 0 || !agentName.trim()}
+              fullWidth
+              sx={{ 
+                mt: 1,
+                backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                color: '#ffffff',
+                '&:hover': {
+                  backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                }
+              }}
+            >
+              {isGenerating ? (
+                <CircularProgress size={24} color="inherit" />
+              ) : (
+                'Generate System Prompt'
+              )}
+            </Button>
+          </>
         )}
       </Box>
     </StyledPaper>

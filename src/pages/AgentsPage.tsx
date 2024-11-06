@@ -160,16 +160,16 @@ export default function AgentsPage() {
   }, [selectedAgent]);
 
   // Handler functions after hooks
-  const handleGeneratePrompt = async (generatedPrompt: string) => {
-    if (!generatedPrompt.trim()) {
-      setCreateError('Generated prompt cannot be empty');
+  const handleGeneratePrompt = async (generatedPrompt: string, name: string) => {
+    if (!generatedPrompt.trim() || !name.trim()) {
+      setCreateError('Generated prompt and name cannot be empty');
       return;
     }
 
     try {
       setCreateError(null);
       const newAgent = await createAgent({
-        name: 'New Agent',
+        name: name,
         system_prompt: generatedPrompt,
         status: 'active',
         parameters: {},
