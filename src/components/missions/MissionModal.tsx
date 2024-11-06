@@ -276,7 +276,7 @@ const MissionModal: React.FC<MissionModalProps> = ({
               {/* Deliverables */}
               <Typography variant="h6" sx={{ color: '#fff', mb: 2 }}>Deliverables</Typography>
               <List>
-                {mission.deliverables.map((deliverable, index) => (
+                {mission.deliverables.map((deliverable: string, index: number) => (
                   <ListItem key={index} sx={{ px: 2, py: 0.5 }}>
                     <ListItemIcon sx={{ minWidth: 32, color: 'rgba(255,255,255,0.6)' }}>
                       <CheckCircleOutlineIcon fontSize="small" />
