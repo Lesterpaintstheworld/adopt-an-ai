@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
 import { ThemeProvider, CssBaseline } from '@mui/material';
-import OSPage from './pages/OSPage';
+import AgentsPage from './pages/AgentsPage';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { AuthProvider } from './contexts/AuthContext';
 import { TutorialProvider } from './contexts/TutorialContext';
@@ -54,7 +54,7 @@ function App() {
             {/* Protected Routes */}
             <Route element={<ProtectedRoute />}>
               <Route path="/my-ais" element={<MyAIsPage />} />
-              <Route path="/os" element={<OSPage />} />
+              <Route path="/agents" element={<AgentsPage />} />
             </Route>
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/governance" element={<GovernancePage />} />
