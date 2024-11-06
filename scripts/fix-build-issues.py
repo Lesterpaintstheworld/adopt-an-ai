@@ -5,9 +5,11 @@ import sys
 def run_build():
     """Run npm run build and capture output"""
     try:
-        result = subprocess.run(['npm', 'run', 'build'], 
+        npm_path = "..\\node_modules\\.bin\\npm.cmd"  # Pour Windows
+        result = subprocess.run([npm_path, 'run', 'build'], 
                               capture_output=True, 
-                              text=True)
+                              text=True,
+                              cwd="..")  # Exécuter dans le répertoire parent
         return result.stdout, result.stderr
     except subprocess.CalledProcessError as e:
         return e.stdout, e.stderr
@@ -22,8 +24,9 @@ def extract_errors(build_output):
 def fix_error(error_message):
     """Use aider to fix an error"""
     try:
-        cmd = ['aider', '--yes-always', '--message', f'Please fix this error: {error_message}']
-        subprocess.run(cmd, check=True)
+        aider_path = "..\\venv\\Scripts\\aider.exe"  # Pour Windows
+        cmd = [aider_path, '--yes-always', '--message', f'Please fix this error: {error_message}']
+        subprocess.run(cmd, check=True, cwd="..")  # Exécuter dans le répertoire parent
     except subprocess.CalledProcessError as e:
         print(f"Error running aider: {e}")
         return False
