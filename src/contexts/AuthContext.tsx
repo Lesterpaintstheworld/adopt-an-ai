@@ -24,24 +24,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const token = localStorage.getItem('token');
         const storedUser = localStorage.getItem('user');
         
-        if (token && storedUser) {
-          // Verify token validity
-          const isValid = await validateToken(token);
-          
-          if (isValid) {
-            setAuth({
-              isAuthenticated: true,
-              user: JSON.parse(storedUser),
-              loading: false
-            });
-          } else {
-            // Invalid token, logout user
-            handleLogout();
-          }
-        } else {
+        if (!token || !storedUser) {
           setAuth(prev => ({ ...prev, loading: false }));
+          return;
+        }
+
+        const isValid = await validateToken(token);
+        
+        if (isValid) {
+          setAuth({
+            isAuthenticated: true,
+            user: JSON.parse(storedUser),
+            loading: false
+          });
+        } else {
+          // Invalid token, clear storage but don't redirect
+          localStorage.removeItem('token');
+          localStorage.removeItem('user');
+          setAuth({
+            isAuthenticated: false,
+            user: null,
+            loading: false
+          });
         }
       } catch (error) {
+        console.error('Auth check failed:', error);
         setAuth({
           isAuthenticated: false,
           user: null,
@@ -56,13 +63,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const validateToken = async (token: string): Promise<boolean> => {
     try {
+      // Only validate if we actually have a token
+      if (!token) return false;
+      
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/validate`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       });
-      return response.ok;
-    } catch {
+      
+      if (!response.ok) {
+        console.error('Token validation failed:', await response.json());
+        return false;
+      }
+      
+      return true;
+    } catch (error) {
+      console.error('Token validation error:', error);
       return false;
     }
   };

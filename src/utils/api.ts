@@ -26,9 +26,15 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
-      // Gérer l'expiration du token
+    // Only redirect if:
+    // 1. It's a 401 error
+    // 2. We have a token (meaning our token is invalid/expired)
+    // 3. We're not already on the login page
+    if (error.response?.status === 401 && 
+        localStorage.getItem('token') && 
+        !window.location.pathname.includes('/login')) {
       localStorage.removeItem('token');
+      localStorage.removeItem('user');
       window.location.href = '/login';
     }
     return Promise.reject(error);
