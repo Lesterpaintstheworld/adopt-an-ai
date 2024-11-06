@@ -84,6 +84,7 @@ export default function AgentChat({
 }: Props) {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
 
   const handleSend = async () => {
     if (!input.trim()) return;
@@ -179,7 +180,24 @@ export default function AgentChat({
         {showGenerateButton && (
           <Button
             variant="contained"
-            onClick={onGenerate}
+            onClick={async () => {
+              if (!messages.length) return;
+              try {
+                setIsGenerating(true);
+                const finalPrompt = await generateSystemPrompt([
+                  { role: 'system', content: systemPrompt },
+                  ...messages
+                ]);
+                if (onGenerate) {
+                  onGenerate(finalPrompt);
+                }
+              } catch (error) {
+                console.error('Failed to generate system prompt:', error);
+              } finally {
+                setIsGenerating(false);
+              }
+            }}
+            disabled={isGenerating || messages.length === 0}
             fullWidth
             sx={{ 
               mt: 1,
@@ -190,7 +208,11 @@ export default function AgentChat({
               }
             }}
           >
-            Generate System Prompt
+            {isGenerating ? (
+              <CircularProgress size={24} color="inherit" />
+            ) : (
+              'Generate System Prompt'
+            )}
           </Button>
         )}
       </Box>
