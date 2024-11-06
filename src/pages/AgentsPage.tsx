@@ -35,6 +35,11 @@ export default function AgentsPage() {
     setIsCustomPrompt(false);
   }, [selectedAgentId]);
 
+  const handleCreateAgent = () => {
+    // For now just console.log, you can implement the creation logic later
+    console.log('Create agent clicked');
+  };
+
   return (
     <Box sx={{ 
       display: 'flex', 
@@ -46,6 +51,7 @@ export default function AgentsPage() {
         agents={mockAgents}
         selectedAgent={selectedAgentId}
         onSelectAgent={setSelectedAgentId}
+        onCreateAgent={handleCreateAgent}
       />
       
       <Box sx={{ 

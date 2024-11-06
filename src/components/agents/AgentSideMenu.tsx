@@ -1,5 +1,6 @@
-import { List, ListItem, ListItemButton, ListItemText } from '@mui/material';
+import { List, ListItem, ListItemButton, ListItemText, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import AddIcon from '@mui/icons-material/Add';
 
 const StyledList = styled(List)(({ theme }) => ({
   width: '240px',
@@ -25,6 +26,21 @@ const StyledList = styled(List)(({ theme }) => ({
   }
 }));
 
+const CreateButton = styled(Button)(({ theme }) => ({
+  width: '90%',
+  margin: '10px auto',
+  padding: theme.spacing(1.5),
+  backgroundColor: theme.palette.primary.main,
+  color: theme.palette.primary.contrastText,
+  '&:hover': {
+    backgroundColor: theme.palette.primary.dark,
+  },
+  display: 'flex',
+  gap: theme.spacing(1),
+  justifyContent: 'center',
+  alignItems: 'center',
+}));
+
 interface AgentSideMenuProps {
   agents: Array<{
     id: string;
@@ -32,11 +48,26 @@ interface AgentSideMenuProps {
   }>;
   selectedAgent: string;
   onSelectAgent: (id: string) => void;
+  onCreateAgent?: () => void;
 }
 
-export default function AgentSideMenu({ agents, selectedAgent, onSelectAgent }: AgentSideMenuProps) {
+export default function AgentSideMenu({ 
+  agents, 
+  selectedAgent, 
+  onSelectAgent,
+  onCreateAgent = () => {}
+}: AgentSideMenuProps) {
   return (
     <StyledList>
+      <ListItem sx={{ display: 'flex', justifyContent: 'center' }}>
+        <CreateButton
+          variant="contained"
+          onClick={onCreateAgent}
+          startIcon={<AddIcon />}
+        >
+          Create Agent
+        </CreateButton>
+      </ListItem>
       {agents.map((agent) => (
         <ListItem key={agent.id} disablePadding>
           <ListItemButton 
