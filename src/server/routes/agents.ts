@@ -1,13 +1,19 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import { z } from 'zod';
 import { AgentSchema } from '../../types/database';
 import { auth } from '../middleware/auth';
 import { db } from '../db';
 
+interface AuthRequest extends Request {
+  user: {
+    id: string;
+  };
+}
+
 const router = express.Router();
 
 // GET /api/agents - Get all agents for the authenticated user
-router.get('/', auth, async (req, res) => {
+router.get('/', auth, async (req: AuthRequest, res: Response) => {
   try {
     const agents = await db.agent.findMany({
       where: {
@@ -25,7 +31,7 @@ router.get('/', auth, async (req, res) => {
 });
 
 // GET /api/agents/:id - Get a specific agent
-router.get('/:id', auth, async (req, res) => {
+router.get('/:id', auth, async (req: AuthRequest, res: Response) => {
   try {
     const agent = await db.agent.findFirst({
       where: {
@@ -46,7 +52,7 @@ router.get('/:id', auth, async (req, res) => {
 });
 
 // POST /api/agents - Create a new agent
-router.post('/', auth, async (req, res) => {
+router.post('/', auth, async (req: AuthRequest, res: Response) => {
   try {
     const agentData = AgentSchema.omit({ 
       id: true, 
@@ -73,7 +79,7 @@ router.post('/', auth, async (req, res) => {
 });
 
 // PUT /api/agents/:id - Update an agent
-router.put('/:id', auth, async (req, res) => {
+router.put('/:id', auth, async (req: AuthRequest, res: Response) => {
   try {
     // First verify the agent belongs to the user
     const existingAgent = await db.agent.findFirst({
@@ -110,7 +116,7 @@ router.put('/:id', auth, async (req, res) => {
 });
 
 // DELETE /api/agents/:id - Delete an agent
-router.delete('/:id', auth, async (req, res) => {
+router.delete('/:id', auth, async (req: AuthRequest, res: Response) => {
   try {
     // First verify the agent belongs to the user
     const existingAgent = await db.agent.findFirst({

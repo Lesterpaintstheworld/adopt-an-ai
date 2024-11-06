@@ -37,4 +37,4 @@ export const pageTutorials = {
   }
 } as const;
 
-export type PageKey = keyof typeof pageTutorials;
+export type PageKey = 'DAOs' | 'missions' | 'team' | 'os' | 'training' | 'gpus' | 'GPUs' | 'models' | 'myais';
