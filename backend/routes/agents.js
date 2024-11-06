@@ -101,7 +101,7 @@ router.put('/:id', async (req, res) => {
       parameters,
       tools,
       req.params.id,
-      req.user.id
+      req.user.userId
     ];
 
     const result = await pool.query(query, values);
