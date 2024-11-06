@@ -1,4 +1,4 @@
-import { Box, Grid, CircularProgress, Alert } from '@mui/material';
+import { Box, Grid, CircularProgress, Alert, Button } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { ChatMessage } from '../utils/openai';
 import { useAgents } from '../hooks/useAgents';
@@ -132,9 +132,16 @@ export default function AgentsPage() {
   const [isCreating, setIsCreating] = useState(false);
   const [customPrompt, setCustomPrompt] = useState<string>('');
   const [isCustomPrompt, setIsCustomPrompt] = useState(false);
+  const [createError, setCreateError] = useState<string | null>(null);
 
   const handleGeneratePrompt = async () => {
+    if (!customPrompt.trim()) {
+      setCreateError('System prompt cannot be empty');
+      return;
+    }
+
     try {
+      setCreateError(null);
       const newAgent = await createAgent({
         user_id: '', // Will be set by backend
         name: 'New Agent',
@@ -150,8 +157,23 @@ export default function AgentsPage() {
       });
       setSelectedAgentId(newAgent.id);
       setIsCreating(false);
+      setChatHistories(prev => ({...prev, create: []}));
     } catch (error) {
+      setCreateError('Failed to create agent. Please try again.');
       console.error('Failed to create agent:', error);
+    }
+  };
+
+  const handleCancelCreate = () => {
+    if (chatHistories.create?.length > 0) {
+      if (window.confirm('Are you sure you want to cancel? All progress will be lost.')) {
+        setIsCreating(false);
+        setChatHistories(prev => ({...prev, create: []}));
+        setCreateError(null);
+      }
+    } else {
+      setIsCreating(false);
+      setCreateError(null);
     }
   };
 
@@ -200,9 +222,11 @@ export default function AgentsPage() {
   const selectedAgent = agents.find(a => a.id === selectedAgentId);
 
   useEffect(() => {
-    setCustomPrompt(selectedAgent?.systemPrompt || '');
-    setIsCustomPrompt(false);
-  }, [selectedAgentId]);
+    if (selectedAgent) {
+      setCustomPrompt(selectedAgent.systemPrompt);
+      setIsCustomPrompt(false);
+    }
+  }, [selectedAgent]);
 
   const handleCreateAgent = () => {
     setIsCreating(true);
@@ -240,7 +264,18 @@ export default function AgentsPage() {
         {isCreating ? (
           // Show only chat when creating
           <Grid container spacing={4} sx={{ height: '100%' }}>
-            <Grid item xs={12} sx={{ height: '100%' }}>
+            <Grid item xs={12}>
+              {createError && (
+                <Alert 
+                  severity="error" 
+                  sx={{ mb: 2 }}
+                  onClose={() => setCreateError(null)}
+                >
+                  {createError}
+                </Alert>
+              )}
+            </Grid>
+            <Grid item xs={12} sx={{ height: 'calc(100% - 48px)' }}>
               <AgentChat 
                 systemPrompt={KINDESIGNER_PROMPT}
                 messages={chatHistories.create || []}
@@ -248,6 +283,15 @@ export default function AgentsPage() {
                 showGenerateButton={true}
                 onGenerate={handleGeneratePrompt}
               />
+            </Grid>
+            <Grid item xs={12}>
+              <Button
+                variant="outlined"
+                onClick={handleCancelCreate}
+                sx={{ mt: 2 }}
+              >
+                Cancel
+              </Button>
             </Grid>
           </Grid>
         ) : (
