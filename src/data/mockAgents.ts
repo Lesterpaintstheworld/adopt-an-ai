@@ -13,7 +13,7 @@ export const mockAgents: Agent[] = [
       { id: 't1', name: 'Web Search', description: 'Search the internet' },
       { id: 't2', name: 'Calculator', description: 'Perform calculations' },
     ],
-    vectorStore: {
+    vector_store: {
       name: 'Pinecone DB',
       size: 1000000,
       lastUpdated: '2024-01-20',
@@ -30,7 +30,7 @@ export const mockAgents: Agent[] = [
     tools: [
       { id: 't1', name: 'Web Search', description: 'Search the internet' },
     ],
-    vectorStore: {
+    vector_store: {
       name: 'Pinecone DB',
       size: 500000,
       lastUpdated: '2024-01-19',
@@ -48,7 +48,7 @@ export const mockAgents: Agent[] = [
       { id: 't1', name: 'Web Search', description: 'Search the internet' },
       { id: 't3', name: 'Code Interpreter', description: 'Execute code' },
     ],
-    vectorStore: {
+    vector_store: {
       name: 'Weaviate',
       size: 750000,
       lastUpdated: '2024-01-18',
@@ -66,7 +66,7 @@ export const mockAgents: Agent[] = [
       { id: 't1', name: 'Web Search', description: 'Search the internet' },
       { id: 't4', name: 'Image Analysis', description: 'Analyze images' },
     ],
-    vectorStore: {
+    vector_store: {
       name: 'Milvus',
       size: 600000,
       lastUpdated: '2024-01-17',
@@ -84,7 +84,7 @@ export const mockAgents: Agent[] = [
       { id: 't1', name: 'Web Search', description: 'Search the internet' },
       { id: 't5', name: 'File Manager', description: 'Manage files' },
     ],
-    vectorStore: {
+    vector_store: {
       name: 'Qdrant',
       size: 450000,
       lastUpdated: '2024-01-16',
@@ -102,7 +102,7 @@ export const mockAgents: Agent[] = [
       { id: 't1', name: 'Web Search', description: 'Search the internet' },
       { id: 't6', name: 'Code Analysis', description: 'Analyze and debug code' },
     ],
-    vectorStore: {
+    vector_store: {
       name: 'ChromaDB',
       size: 300000,
       lastUpdated: '2024-01-15',

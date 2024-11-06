@@ -182,7 +182,7 @@ const MissionsPage: React.FC = () => {
     }
 
     // When mission is available, show the modal
-    if (mission.status === 'available' || mission.status === 'pending') {
+    if (mission.status === 'available') {
       if (activeMissions.length >= userResources.activeMissionLimit) {
         // You could add a notification/alert here
         console.warn('Mission limit reached');
