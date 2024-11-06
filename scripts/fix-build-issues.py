@@ -2,14 +2,45 @@ import subprocess
 import re
 import sys
 
+def check_dependencies():
+    """Check and install dependencies if needed"""
+    try:
+        print("Checking node_modules...")
+        # Vérifier si node_modules existe
+        result = subprocess.run(['npm', 'list'], 
+                              capture_output=True, 
+                              text=True,
+                              cwd="..",
+                              shell=True)
+        
+        if "ERR!" in result.stderr:
+            print("Installing dependencies...")
+            install = subprocess.run(['npm', 'install'], 
+                                   capture_output=True, 
+                                   text=True,
+                                   cwd="..",
+                                   shell=True)
+            if install.returncode != 0:
+                print("Error installing dependencies:")
+                print(install.stderr)
+                return False
+            print("Dependencies installed successfully")
+        return True
+    except Exception as e:
+        print(f"Error checking dependencies: {e}")
+        return False
+
 def run_build():
     """Run npm run build and capture output"""
     try:
+        if not check_dependencies():
+            return "", "Failed to install dependencies"
+            
         result = subprocess.run(['npm', 'run', 'build'], 
                               capture_output=True, 
                               text=True,
-                              cwd="..",  # Exécuter dans le répertoire parent
-                              shell=True)  # Ajouter shell=True pour Windows
+                              cwd="..",
+                              shell=True)
         return result.stdout, result.stderr
     except subprocess.CalledProcessError as e:
         return e.stdout, e.stderr
@@ -36,6 +67,11 @@ def fix_error(error_message):
 def main():
     print("Running build...")
     stdout, stderr = run_build()
+    
+    if stderr == "Failed to install dependencies":
+        print("Please ensure npm is installed and try again")
+        return
+        
     build_output = stdout + stderr
     
     if "Successfully" in build_output:
