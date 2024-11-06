@@ -26,21 +26,21 @@ export const theme = createTheme({
   typography: {
     fontFamily: '"Roboto", "Inter", "Arial", sans-serif',
     h1: {
-      fontSize: '2rem',
-      fontWeight: 600,
-      letterSpacing: '0.02em',
-    },
-    h2: {
       fontSize: '1.75rem',
       fontWeight: 600,
       letterSpacing: '0.02em',
     },
+    h2: {
+      fontSize: '1.5rem',
+      fontWeight: 600,
+      letterSpacing: '0.02em',
+    },
     h6: {
-      fontSize: '1rem',
+      fontSize: '0.875rem',
       fontWeight: 500,
     },
     body1: {
-      fontSize: '0.875rem',
+      fontSize: '0.8125rem',
     },
     body2: {
       fontSize: '0.75rem',
@@ -48,14 +48,14 @@ export const theme = createTheme({
     button: {
       textTransform: 'none',
       fontWeight: 500,
-      fontSize: '0.875rem',
+      fontSize: '0.8125rem',
     },
   },
   components: {
     MuiButton: {
       styleOverrides: {
         root: {
-          padding: '6px 16px',
+          padding: '4px 12px',
         },
       },
     },
@@ -63,7 +63,7 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           '& .MuiInputBase-root': {
-            fontSize: '0.875rem',
+            fontSize: '0.8125rem',
           },
         },
       },
@@ -71,7 +71,7 @@ export const theme = createTheme({
     MuiListItem: {
       styleOverrides: {
         root: {
-          padding: '4px 8px',
+          padding: '3px 6px',
         },
       },
     },
@@ -91,7 +91,7 @@ export const theme = createTheme({
       },
     },
   },
-  spacing: (factor: number) => `${0.75 * factor}rem`,
+  spacing: (factor: number) => `${0.625 * factor}rem`,
   shape: {
     borderRadius: 8,
   },
