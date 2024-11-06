@@ -20,7 +20,7 @@ interface ProgressBarProps {
 }
 
 const EntityProgressBar: React.FC<ProgressBarProps> = ({ value, type }) => (
-  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
+  <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
     <Typography variant="caption" sx={{ minWidth: 70 }}>
       {type}
     </Typography>
