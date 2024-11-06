@@ -45,7 +45,7 @@ This document outlines the structure and format for the AI technology tree, mapp
 
 6. **Ecosystem Layer**
    - Overall AI environment
-   - Community and governance
+   - Community and DAOs
 
 ### Additional Foundational Layers
 1. **Data & Knowledge Infrastructure**
@@ -56,7 +56,7 @@ This document outlines the structure and format for the AI technology tree, mapp
    - Interface design
    - Collaboration frameworks
 
-3. **Ethics & Governance Systems**
+3. **Ethics & DAOs Systems**
    - Ethical frameworks
    - Regulatory compliance
 

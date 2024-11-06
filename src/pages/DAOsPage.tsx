@@ -1,8 +1,8 @@
 import { Box, Typography } from '@mui/material';
 import { useState } from 'react';
 import { TutorialHighlight } from '../components/tutorial/TutorialHighlight';
-import DAOSideMenu from '../components/governance/DAOSideMenu';
-import VoteCard from '../components/governance/VoteCard';
+import DAOSideMenu from '../components/DAOs/DAOSideMenu';
+import VoteCard from '../components/DAOs/VoteCard';
 
 // Example data
 const daos = [
@@ -36,7 +36,7 @@ const votes = {
   // Add votes for other DAOs...
 };
 
-export default function GovernancePage() {
+export default function DAOsPage() {
   const [selectedDAO, setSelectedDAO] = useState(daos[0].id);
 
   const handleVote = (voteId: string, vote: 'yes' | 'no') => {
@@ -62,7 +62,7 @@ export default function GovernancePage() {
         p: 4,
         overflow: 'auto',
       }}>
-        <TutorialHighlight pageKey="governance" />
+        <TutorialHighlight pageKey="DAOs" />
         
         <Typography variant="h4" gutterBottom>
           {daos.find(dao => dao.id === selectedDAO)?.name} Proposals

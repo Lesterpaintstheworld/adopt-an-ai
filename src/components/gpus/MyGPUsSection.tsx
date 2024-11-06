@@ -32,7 +32,7 @@ interface GPU {
   status: 'active' | 'idle' | 'offline';
 }
 
-export default function MyComputeSection() {
+export default function MyGPUsSection() {
   // Example data - replace with real data from your backend
   const myGPUs: GPU[] = [
     {

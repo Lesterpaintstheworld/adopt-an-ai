@@ -14,7 +14,7 @@ interface AvailableGPU {
   availability: 'available' | 'limited' | 'unavailable';
 }
 
-export default function AvailableComputeSection() {
+export default function AvailableGPUsSection() {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);

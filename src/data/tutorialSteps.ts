@@ -1,6 +1,6 @@
 export const pageTutorials = {
-  governance: {
-    title: "Welcome to Governance",
+  DAOs: {
+    title: "Welcome to DAOs",
     content: "Shape the future of AI development by participating in key decisions about platform evolution and AI capabilities. Your voice matters in creating responsible AI systems."
   },
   missions: {
@@ -21,11 +21,11 @@ export const pageTutorials = {
   },
   gpus: {
     title: "GPU Resources",
-    content: "Your AIs need GPUs to run and learn effectively. Manage your compute resources here to keep your AIs performing at their best."
+    content: "Your AIs need GPUs to run and learn effectively. Manage your GPUs resources here to keep your AIs performing at their best."
   },
-  compute: {
-    title: "Compute Resources",
-    content: "Manage and monitor your compute resources to ensure optimal performance for your AI workloads."
+  GPUs: {
+    title: "GPUs Resources",
+    content: "Manage and monitor your GPUs resources to ensure optimal performance for your AI workloads."
   },
   models: {
     title: "AI Models",

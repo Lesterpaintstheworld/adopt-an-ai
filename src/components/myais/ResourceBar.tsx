@@ -32,7 +32,7 @@ interface ResourceBarProps {
 const ResourceBar: React.FC<ResourceBarProps> = ({ resources, cycle }) => {
   // Calculate percentages (assuming 1000 is max for now)
   const MAX_RESOURCE = 1000;
-  const computePercent = (resources.compute / MAX_RESOURCE) * 100;
+  const GPUsPercent = (resources.GPUs / MAX_RESOURCE) * 100;
   const energyPercent = (resources.energy / MAX_RESOURCE) * 100;
   const knowledgePercent = (resources.knowledge / MAX_RESOURCE) * 100;
 
@@ -54,12 +54,12 @@ const ResourceBar: React.FC<ResourceBarProps> = ({ resources, cycle }) => {
         <Box sx={{ display: 'flex', gap: 3, flex: 1 }}>
           <Box sx={{ flex: 1 }}>
             <ResourceLabel>
-              Compute: {resources.compute}
+              GPUs: {resources.GPUs}
             </ResourceLabel>
             <ResourceProgress 
               variant="determinate" 
-              value={computePercent}
-              sx={{ '& .MuiLinearProgress-bar': { backgroundColor: MYAIS_THEME.colors.resources.compute } }}
+              value={GPUsPercent}
+              sx={{ '& .MuiLinearProgress-bar': { backgroundColor: MYAIS_THEME.colors.resources.GPUs } }}
             />
           </Box>
 

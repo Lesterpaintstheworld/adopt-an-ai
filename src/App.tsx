@@ -9,9 +9,9 @@ import { AuthProvider } from './contexts/AuthContext';
 import { TutorialProvider } from './contexts/TutorialContext';
 import { theme } from './utils/theme';
 import { MainLayout } from './components/layout/MainLayout';
-import GovernancePage from './pages/GovernancePage';
+import DAOsPage from './pages/DAOsPage';
 import TeamsPage from './pages/TeamsPage';
-import ComputePage from './pages/ComputePage';
+import GPUsPage from './pages/GPUsPage';
 import ModelsPage from './pages/ModelsPage';
 import StandaloneTechTreePage from './pages/StandaloneTechTreePage';
 import HomePage from './pages/HomePage';
@@ -58,9 +58,9 @@ function App() {
             </Route>
               <Route path="/agents" element={<AgentsPage />} />
             <Route path="/pricing" element={<PricingPage />} />
-            <Route path="/governance" element={<GovernancePage />} />
+            <Route path="/DAOs" element={<DAOsPage />} />
             <Route path="/teams" element={<TeamsPage />} />
-            <Route path="/compute" element={<ComputePage />} />
+            <Route path="/GPUs" element={<GPUsPage />} />
             <Route path="/models" element={<ModelsPage />} />
             <Route path="*" element={
               <div style={{ padding: '20px' }}>
