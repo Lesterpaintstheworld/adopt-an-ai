@@ -131,6 +131,7 @@ import AgentSystem from '../components/agents/AgentSystem';
 import AgentChat from '../components/agents/AgentChat';
 
 export default function AgentsPage() {
+  // All useState hooks first
   const { agents, loading, error, createAgent } = useAgents();
   const [selectedAgentId, setSelectedAgentId] = useState<string>('');
   const [isCreating, setIsCreating] = useState(false);
@@ -141,6 +142,23 @@ export default function AgentsPage() {
     create: []
   });
 
+  // All useEffect hooks together
+  useEffect(() => {
+    if (agents.length > 0 && !selectedAgentId) {
+      setSelectedAgentId(agents[0].id);
+    }
+  }, [agents, selectedAgentId]);
+
+  const selectedAgent = agents.find(a => a.id === selectedAgentId);
+
+  useEffect(() => {
+    if (selectedAgent) {
+      setCustomPrompt(selectedAgent.systemPrompt);
+      setIsCustomPrompt(false);
+    }
+  }, [selectedAgent]);
+
+  // Handler functions after hooks
   const handleGeneratePrompt = async () => {
     if (!customPrompt.trim()) {
       setCreateError('System prompt cannot be empty');
@@ -184,12 +202,6 @@ export default function AgentsPage() {
     }
   };
 
-  useEffect(() => {
-    if (agents.length > 0 && !selectedAgentId) {
-      setSelectedAgentId(agents[0].id);
-    }
-  }, [agents]);
-
   if (loading) {
     return (
       <Box sx={{ 
@@ -214,21 +226,12 @@ export default function AgentsPage() {
     );
   }
 
-  const selectedAgent = agents.find(a => a.id === selectedAgentId);
-
   const handleChatUpdate = (messages: ChatMessage[]) => {
     setChatHistories(prev => ({
       ...prev,
       [isCreating ? 'create' : selectedAgentId]: messages
     }));
   };
-
-  useEffect(() => {
-    if (selectedAgent) {
-      setCustomPrompt(selectedAgent.systemPrompt);
-      setIsCustomPrompt(false);
-    }
-  }, [selectedAgent]);
 
   const handleCreateAgent = () => {
     setIsCreating(true);
