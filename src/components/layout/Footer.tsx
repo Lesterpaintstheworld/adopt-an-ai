@@ -26,20 +26,6 @@ export const Footer = () => {
             </Link>
             <Link
               component={RouterLink}
-              to="/my-ais"
-              sx={{ color: 'text.secondary', textDecoration: 'none', '&:hover': { color: 'primary.main' } }}
-            >
-              My AIs
-            </Link>
-            <Link
-              component={RouterLink}
-              to="/missions"
-              sx={{ color: 'text.secondary', textDecoration: 'none', '&:hover': { color: 'primary.main' } }}
-            >
-              Missions
-            </Link>
-            <Link
-              component={RouterLink}
               to="/blog"
               sx={{ color: 'text.secondary', textDecoration: 'none', '&:hover': { color: 'primary.main' } }}
             >

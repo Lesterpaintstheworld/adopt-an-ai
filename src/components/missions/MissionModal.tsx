@@ -22,7 +22,7 @@ import TimerIcon from '@mui/icons-material/Timer';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import { Mission, Difficulty } from '../types/missions';
 import { getPerkIconUrl } from '../../utils/iconUtils';
-import techTree from '../../content/tech/tech-tree.yml';
+import techTree from 'content/tech/tech-tree.yml';
 
 const difficultyColors = {
   Beginner: '#2ecc71',
