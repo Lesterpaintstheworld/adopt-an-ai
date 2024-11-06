@@ -1,5 +1,5 @@
 import { Box, Grid } from '@mui/material';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { TutorialHighlight } from '../components/tutorial/TutorialHighlight';
 import AgentSideMenu from '../components/agents/AgentSideMenu';
 import AgentSystem from '../components/agents/AgentSystem';
@@ -8,7 +8,14 @@ import { mockAgents } from '../data/mockAgents';
 
 export default function AgentsPage() {
   const [selectedAgentId, setSelectedAgentId] = useState(mockAgents[0].id);
+  const [customPrompt, setCustomPrompt] = useState<string>('');
+  const [isCustomPrompt, setIsCustomPrompt] = useState(false);
   const selectedAgent = mockAgents.find(m => m.id === selectedAgentId);
+
+  useEffect(() => {
+    setCustomPrompt(selectedAgent?.systemPrompt || '');
+    setIsCustomPrompt(false);
+  }, [selectedAgentId]);
 
   return (
     <Box sx={{ 
@@ -35,14 +42,20 @@ export default function AgentsPage() {
           {/* System Prompt - Left half */}
           <Grid item xs={6} sx={{ height: '100%' }}>
             <AgentSystem 
-              prompt={selectedAgent?.systemPrompt || ''}
-              readOnly
+              prompt={isCustomPrompt ? customPrompt : (selectedAgent?.systemPrompt || '')}
+              onChange={(newPrompt) => {
+                setCustomPrompt(newPrompt);
+                setIsCustomPrompt(true);
+              }}
+              readOnly={false}
             />
           </Grid>
 
           {/* Chat - Right half */}
           <Grid item xs={6} sx={{ height: '100%' }}>
-            <AgentChat systemPrompt={selectedAgent?.systemPrompt || ''} />
+            <AgentChat 
+              systemPrompt={isCustomPrompt ? customPrompt : (selectedAgent?.systemPrompt || '')} 
+            />
           </Grid>
         </Grid>
       </Box>
