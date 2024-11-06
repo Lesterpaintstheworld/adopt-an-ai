@@ -1,4 +1,5 @@
 import axios from 'axios';
+import type { AgentCreationData, AgentUpdateData } from '../types/agents';
 
 // Créer une instance axios avec la configuration de base
 export const api = axios.create({
