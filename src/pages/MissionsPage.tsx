@@ -13,7 +13,7 @@ interface PerkItem {
   capability_id: string;
   name: string;
 }
-import MissionModal from '../components/MissionModal';
+import MissionModal from '../components/missions/MissionModal';
 import { getPerkIconUrl } from '../utils/iconUtils';
 
 const getPhaseLabel = (phase: Phase): string => {
