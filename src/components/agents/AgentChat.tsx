@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Paper, Typography, Box, TextField, Button, CircularProgress } from '@mui/material';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { styled } from '@mui/material/styles';
 import SendIcon from '@mui/icons-material/Send';
 import { ChatMessage, getChatCompletion } from '../../utils/openai';
@@ -134,7 +135,7 @@ export default function AgentChat({
               component={message.role === 'user' ? UserMessage : AssistantMessage}
             >
               {message.role === 'assistant' ? (
-                <ReactMarkdown>{message.content}</ReactMarkdown>
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>{message.content}</ReactMarkdown>
               ) : (
                 <Typography>{message.content}</Typography>
               )}
