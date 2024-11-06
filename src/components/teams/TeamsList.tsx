@@ -18,7 +18,7 @@ import AddAgentToTeamDialog from './AddAgentToTeamDialog';
 import type { Team } from '../../types/teams';
 
 export default function TeamsList() {
-  const { teams, loading, error, deleteTeam } = useTeams();
+  const { teams, loading, error, deleteTeam, refreshTeams } = useTeams();
   const [selectedTeam, setSelectedTeam] = useState<Team | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isAddAgentDialogOpen, setIsAddAgentDialogOpen] = useState(false);
