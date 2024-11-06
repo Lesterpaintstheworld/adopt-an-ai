@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Paper, Typography, Box, TextField, Button, CircularProgress } from '@mui/material';
+import ReactMarkdown from 'react-markdown';
 import { styled } from '@mui/material/styles';
 import SendIcon from '@mui/icons-material/Send';
 import { ChatMessage, getChatCompletion } from '../../utils/openai';
@@ -34,6 +35,35 @@ const UserMessage = styled(Box)(({ theme }) => ({
 const AssistantMessage = styled(Box)(({ theme }) => ({
   backgroundColor: 'rgba(255, 255, 255, 0.1)',
   marginRight: 'auto',
+  '& p': {
+    margin: 0,
+  },
+  '& code': {
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    padding: '2px 4px',
+    borderRadius: 4,
+    fontSize: '0.9em',
+  },
+  '& pre': {
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    padding: theme.spacing(1),
+    borderRadius: theme.shape.borderRadius,
+    overflow: 'auto',
+    '& code': {
+      backgroundColor: 'transparent',
+      padding: 0,
+    }
+  },
+  '& ul, & ol': {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+    paddingLeft: theme.spacing(2),
+  },
+  '& h1, & h2, & h3, & h4, & h5, & h6': {
+    margin: `${theme.spacing(1)} 0`,
+    fontSize: '1em',
+    fontWeight: 600,
+  },
 }));
 
 interface Props {
@@ -103,7 +133,11 @@ export default function AgentChat({
               key={index}
               component={message.role === 'user' ? UserMessage : AssistantMessage}
             >
-              <Typography>{message.content}</Typography>
+              {message.role === 'assistant' ? (
+                <ReactMarkdown>{message.content}</ReactMarkdown>
+              ) : (
+                <Typography>{message.content}</Typography>
+              )}
             </Box>
           )
         ))}
