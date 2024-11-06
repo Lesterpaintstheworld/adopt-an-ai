@@ -182,27 +182,28 @@ const MissionsPage: React.FC = () => {
     }
 
     // When mission is available, show the modal
-    if (mission.status === 'available') {
+    if (mission.status === 'available' || mission.status === 'pending') {
       if (activeMissions.length >= userResources.activeMissionLimit) {
-        // Optionally show a notification that limit is reached
+        // You could add a notification/alert here
+        console.warn('Mission limit reached');
         return;
       }
-      setSelectedMission(mission); // This opens the modal
+      setSelectedMission(mission);
     }
     // Handle in_progress missions
     else if (mission.status === 'in_progress') {
-      const updatedMissions: Mission[] = missions.map(m => 
+      const updatedMissions = missions.map(m => 
         m.id === mission.id ? { ...m, status: 'completed' as const } : m
       );
       setMissions(updatedMissions);
-      setActiveMissions(activeMissions.filter(m => m.id !== mission.id));
+      setActiveMissions(prev => prev.filter(m => m.id !== mission.id));
       
       setUserResources(prev => ({
         ...prev,
-        xp: prev.xp + (mission.rewards.xp || 0),
+        xp: prev.xp + (mission.rewards?.xp || 0),
         capabilities: [
           ...prev.capabilities,
-          ...(mission.rewards.capabilities || [])
+          ...(mission.rewards?.capabilities || [])
         ]
       }));
     }
@@ -212,15 +213,27 @@ const MissionsPage: React.FC = () => {
     setIsStartingMission(true);
     
     try {
-      const updatedMissions: Mission[] = missions.map(m => 
-        m.id === missionData.id ? { ...m, status: 'in_progress' as const } : m
-      );
-      setMissions(updatedMissions);
-      setActiveMissions([...activeMissions, { ...missionData }]);
+      // Create updated mission with in_progress status
+      const updatedMission = {
+        ...missionData,
+        status: 'in_progress' as const
+      };
+
+      // Update missions list
+      setMissions(prev => prev.map(m => 
+        m.id === missionData.id ? updatedMission : m
+      ));
+
+      // Add to active missions
+      setActiveMissions(prev => [...prev, updatedMission]);
       
-      // Log mission instructions if provided
-      console.log('Mission instructions:', missionData.instructions);
+      // Close the modal
       setSelectedMission(null);
+
+      // Log mission instructions if provided
+      if (missionData.instructions) {
+        console.log('Mission instructions:', missionData.instructions);
+      }
     } catch (error) {
       console.error('Error starting mission:', error);
     } finally {
