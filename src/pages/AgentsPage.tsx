@@ -142,14 +142,15 @@ export default function AgentsPage() {
     create: []
   });
 
+  // Calculate selectedAgent once
+  const selectedAgent = agents.find(a => a.id === selectedAgentId);
+
   // All useEffect hooks together
   useEffect(() => {
     if (agents.length > 0 && !selectedAgentId) {
       setSelectedAgentId(agents[0].id);
     }
   }, [agents, selectedAgentId]);
-
-  const selectedAgent = agents.find(a => a.id === selectedAgentId);
 
   useEffect(() => {
     if (selectedAgent) {
