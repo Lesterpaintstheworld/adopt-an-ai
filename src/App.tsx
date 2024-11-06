@@ -10,7 +10,7 @@ import { TutorialProvider } from './contexts/TutorialContext';
 import { theme } from './utils/theme';
 import { MainLayout } from './components/layout/MainLayout';
 import GovernancePage from './pages/GovernancePage';
-import TeamPage from './pages/TeamPage';
+import TeamsPage from './pages/TeamsPage';
 import ComputePage from './pages/ComputePage';
 import ModelsPage from './pages/ModelsPage';
 import StandaloneTechTreePage from './pages/StandaloneTechTreePage';
@@ -55,11 +55,11 @@ function App() {
             {/* Protected Routes */}
             <Route element={<ProtectedRoute />}>
               <Route path="/my-ais" element={<MyAIsPage />} />
-              <Route path="/agents" element={<AgentsPage />} />
             </Route>
+              <Route path="/agents" element={<AgentsPage />} />
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/governance" element={<GovernancePage />} />
-            <Route path="/team" element={<TeamPage />} />
+            <Route path="/teams" element={<TeamsPage />} />
             <Route path="/compute" element={<ComputePage />} />
             <Route path="/models" element={<ModelsPage />} />
             <Route path="*" element={

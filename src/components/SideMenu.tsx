@@ -7,7 +7,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 const menuItems = [
   { text: 'Governance', path: '/governance', icon: '/images/governance.png' },
   { text: 'Missions', path: '/missions', icon: '/images/missions.png' },
-  { text: 'AI Team', path: '/team', icon: '/images/team.png' },
+  { text: 'Teams', path: '/teams', icon: '/images/teams.png' },
   { text: 'Agents', path: '/agents', icon: '/images/agents.png' },
   { text: 'Models', path: '/models', icon: '/images/models.png' },
   { text: 'Compute', path: '/compute', icon: '/images/compute.png' },
