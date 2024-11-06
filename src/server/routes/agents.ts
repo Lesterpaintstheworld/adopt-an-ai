@@ -9,6 +9,10 @@ interface AuthRequest extends Request {
   user: {
     id: string;
   };
+  params: {
+    id: string;
+  };
+  body: any;
 }
 
 const router = express.Router();
@@ -78,7 +82,7 @@ router.post('/', auth, async (req: Request, res: Response): Promise<void> => {
     if (error instanceof z.ZodError) {
       res.status(400).json({ 
         error: 'Invalid agent data', 
-        details: (error as ZodError).errors 
+        details: error.errors 
       });
       return;
     }
