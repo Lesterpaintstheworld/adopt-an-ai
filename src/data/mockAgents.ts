@@ -1,7 +1,13 @@
-export const mockAgents = [
+import { Agent } from '../types/database';
+
+export const mockAgents: Agent[] = [
   {
-    id: 'researcher',
+    id: '123e4567-e89b-12d3-a456-426614174000',
+    user_id: '123e4567-e89b-12d3-a456-426614174111',
     name: 'Research Assistant',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+    status: 'active',
     systemPrompt: 'You are a dedicated research assistant focused on gathering and analyzing information...',
     tools: [
       { id: 't1', name: 'Web Search', description: 'Search the internet' },
