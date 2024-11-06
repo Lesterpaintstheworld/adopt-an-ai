@@ -12,16 +12,17 @@ export const api = axios.create({
 // Log API configuration
 console.log('API URL:', import.meta.env.VITE_API_URL || 'http://localhost:3000');
 
-// Intercepteur pour ajouter le token d'authentification
+// Request interceptor to add auth token
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
+  console.log('Request headers:', config.headers);
   return config;
 });
 
-// Intercepteur pour gérer les erreurs
+// Response interceptor to handle errors
 api.interceptors.response.use(
   (response) => response,
   (error) => {

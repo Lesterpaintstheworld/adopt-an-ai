@@ -21,11 +21,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const token = localStorage.getItem('auth_token');
+        const token = localStorage.getItem('token');
         const storedUser = localStorage.getItem('user');
         
         if (token && storedUser) {
-          // Vérifier la validité du token
+          // Verify token validity
           const isValid = await validateToken(token);
           
           if (isValid) {
@@ -35,7 +35,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               loading: false
             });
           } else {
-            // Token invalide, déconnecter l'utilisateur
+            // Invalid token, logout user
             handleLogout();
           }
         } else {
@@ -77,7 +77,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
     };
     
-    localStorage.setItem('auth_token', token);
+    localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(userWithDefaultTutorial));
     setAuth({
       isAuthenticated: true,
@@ -87,7 +87,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('auth_token');
+    localStorage.removeItem('token');
     localStorage.removeItem('user');
     setAuth({
       isAuthenticated: false,
