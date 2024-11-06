@@ -55,7 +55,7 @@ router.get('/:id', auth, async (req: Request, res: Response) => {
 });
 
 // POST /api/agents - Create a new agent
-router.post('/', auth, async (req: Request, res: Response) => {
+router.post('/', auth, async (req: Request, res: Response): Promise<void> => {
   const authReq = req as AuthRequest;
   try {
     const agentData = AgentSchema.omit({ 
@@ -75,10 +75,11 @@ router.post('/', auth, async (req: Request, res: Response) => {
     res.status(201).json(agent);
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return res.status(400).json({ 
+      res.status(400).json({ 
         error: 'Invalid agent data', 
         details: (error as ZodError).errors 
       });
+      return;
     }
     console.error('Error creating agent:', error);
     res.status(500).json({ error: 'Failed to create agent' });
@@ -86,10 +87,9 @@ router.post('/', auth, async (req: Request, res: Response) => {
 });
 
 // PUT /api/agents/:id - Update an agent
-router.put('/:id', auth, async (req: Request, res: Response) => {
+router.put('/:id', auth, async (req: Request, res: Response): Promise<void> => {
   const authReq = req as AuthRequest;
   try {
-    // First verify the agent belongs to the user
     const existingAgent = await db.agent.findFirst({
       where: {
         id: authReq.params.id,
@@ -98,7 +98,8 @@ router.put('/:id', auth, async (req: Request, res: Response) => {
     });
 
     if (!existingAgent) {
-      return res.status(404).json({ error: 'Agent not found' });
+      res.status(404).json({ error: 'Agent not found' });
+      return;
     }
 
     const agentData = AgentSchema.omit({ 
@@ -116,7 +117,8 @@ router.put('/:id', auth, async (req: Request, res: Response) => {
     res.json(updatedAgent);
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return res.status(400).json({ error: 'Invalid agent data', details: error.errors });
+      res.status(400).json({ error: 'Invalid agent data', details: error.errors });
+      return;
     }
     console.error('Error updating agent:', error);
     res.status(500).json({ error: 'Failed to update agent' });
@@ -124,10 +126,9 @@ router.put('/:id', auth, async (req: Request, res: Response) => {
 });
 
 // DELETE /api/agents/:id - Delete an agent
-router.delete('/:id', auth, async (req: Request, res: Response) => {
+router.delete('/:id', auth, async (req: Request, res: Response): Promise<void> => {
   const authReq = req as AuthRequest;
   try {
-    // First verify the agent belongs to the user
     const existingAgent = await db.agent.findFirst({
       where: {
         id: authReq.params.id,
@@ -136,7 +137,8 @@ router.delete('/:id', auth, async (req: Request, res: Response) => {
     });
 
     if (!existingAgent) {
-      return res.status(404).json({ error: 'Agent not found' });
+      res.status(404).json({ error: 'Agent not found' });
+      return;
     }
 
     await db.agent.delete({
