@@ -10,6 +10,7 @@ require('dotenv').config();
 // Import routes
 const agentsRouter = require(path.join(__dirname, 'routes', 'agents'));
 const authRouter = require(path.join(__dirname, 'routes', 'auth'));
+const teamsRouter = require(path.join(__dirname, 'routes', 'teams'));
 
 // Database configuration
 const pool = new Pool({
@@ -78,6 +79,7 @@ const verifyToken = (req, res, next) => {
 // Register routes with auth middleware
 app.use('/api/agents', verifyToken, agentsRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/teams', verifyToken, teamsRouter);
 
 // Log registered routes
 console.log('Registered routes:', app._router.stack
