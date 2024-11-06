@@ -1,8 +1,8 @@
 import { Box, Grid } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { ChatMessage } from '../utils/openai';
+import { Box, CircularProgress, Alert } from '@mui/material';
 import { useAgents } from '../hooks/useAgents';
-import { Box, CircularProgress } from '@mui/material';
 
 const KINDESIGNER_PROMPT = `# Prompt for the AI Prompt Design Assistant (KinDesigner)
 
@@ -169,7 +169,11 @@ export default function AgentsPage() {
   }
 
   if (error) {
-    return <Box sx={{ p: 3, color: 'error.main' }}>Error: {error}</Box>;
+    return <Box sx={{ p: 3 }}>
+      <Alert severity="error">
+        Failed to load agents: {error}
+      </Alert>
+    </Box>;
   }
   type ChatHistories = {
     [key: string]: ChatMessage[];
@@ -185,7 +189,7 @@ export default function AgentsPage() {
       [isCreating ? 'create' : selectedAgentId]: messages
     }));
   };
-  const selectedAgent = mockAgents.find(m => m.id === selectedAgentId);
+  const selectedAgent = agents.find(a => a.id === selectedAgentId);
 
   useEffect(() => {
     setCustomPrompt(selectedAgent?.systemPrompt || '');
@@ -208,7 +212,7 @@ export default function AgentsPage() {
       backgroundColor: 'rgba(0, 0, 0, 0.2)',
     }}>
       <AgentSideMenu 
-        agents={mockAgents}
+        agents={agents}
         selectedAgent={selectedAgentId}
         onSelectAgent={(id) => {
           setSelectedAgentId(id);
