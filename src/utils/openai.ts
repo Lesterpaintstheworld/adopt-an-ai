@@ -30,18 +30,23 @@ export async function generateSystemPrompt(messages: ChatMessage[]): Promise<str
     const promptGenerationMessages: ChatMessage[] = [
       {
         role: 'system',
-        content: `You are an expert at analyzing conversations and generating system prompts. 
-        Based on the conversation history provided, create a comprehensive system prompt that:
-        1. Captures the key requirements and constraints discussed
-        2. Defines clear behavioral guidelines and objectives
-        3. Incorporates any specific capabilities or limitations mentioned
-        4. Maintains a professional and focused tone
+        content: `You are an expert at analyzing conversations and generating system prompts.
+        Your next response must ONLY contain the system prompt text for the new KIN to be created.
+        Do not include any explanations, metadata, or other text.
+        Do not use phrases like "Here's the system prompt:" or "System prompt:".
+        Just output the raw system prompt text that will define the new KIN's behavior.
         
-        Return ONLY the system prompt text, without any explanations or metadata.`
+        Based on the conversation history provided:
+        1. Extract key requirements and constraints discussed
+        2. Define clear behavioral guidelines and objectives
+        3. Incorporate specific capabilities or limitations mentioned
+        4. Maintain a professional and focused tone
+        
+        Remember: Your entire response should be ONLY the system prompt text that will be used directly.`
       },
       {
         role: 'user',
-        content: `Please analyze this conversation and generate an optimized system prompt:\n\n${
+        content: `Based on this conversation, generate the system prompt for the new KIN:\n\n${
           messages.map(m => `${m.role}: ${m.content}`).join('\n\n')
         }`
       }
