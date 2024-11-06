@@ -132,11 +132,9 @@ import AgentChat from '../components/agents/AgentChat';
 
 export default function AgentsPage() {
   // All useState hooks first
-  const { agents, loading, error, createAgent } = useAgents();
+  const { agents, loading, error, createAgent, updateAgent } = useAgents();
   const [selectedAgentId, setSelectedAgentId] = useState<string>('');
   const [isCreating, setIsCreating] = useState(false);
-  const [customPrompt, setCustomPrompt] = useState<string>('');
-  const [isCustomPrompt, setIsCustomPrompt] = useState(false);
   const [createError, setCreateError] = useState<string | null>(null);
   const [chatHistories, setChatHistories] = useState<ChatHistories>({
     create: []
@@ -152,12 +150,6 @@ export default function AgentsPage() {
     }
   }, [agents, selectedAgentId]);
 
-  useEffect(() => {
-    if (selectedAgent) {
-      setCustomPrompt(selectedAgent.systemPrompt);
-      setIsCustomPrompt(false);
-    }
-  }, [selectedAgent]);
 
   // Handler functions after hooks
   const handleGeneratePrompt = async (generatedPrompt: string, name: string) => {
@@ -305,17 +297,20 @@ export default function AgentsPage() {
           <Grid container spacing={4} sx={{ height: '100%' }}>
             <Grid item xs={6} sx={{ height: '100%' }}>
               <AgentSystem 
-                prompt={isCustomPrompt ? customPrompt : (selectedAgent?.systemPrompt || '')}
+                prompt={selectedAgent?.system_prompt || ''}
                 onChange={(newPrompt) => {
-                  setCustomPrompt(newPrompt);
-                  setIsCustomPrompt(true);
+                  if (selectedAgent) {
+                    updateAgent(selectedAgent.id, {
+                      system_prompt: newPrompt
+                    });
+                  }
                 }}
                 readOnly={false}
               />
             </Grid>
             <Grid item xs={6} sx={{ height: '100%' }}>
               <AgentChat 
-                systemPrompt={isCustomPrompt ? customPrompt : (selectedAgent?.systemPrompt || '')}
+                systemPrompt={selectedAgent?.system_prompt || ''}
                 messages={chatHistories[selectedAgentId] || []}
                 onMessagesChange={handleChatUpdate}
                 showGenerateButton={false}
