@@ -9,13 +9,24 @@ import {
   Typography,
   Button,
   Alert,
-  CircularProgress
+  CircularProgress,
+  Avatar,
+  AvatarGroup,
+  Collapse
 } from '@mui/material';
-import { Edit as EditIcon, Delete as DeleteIcon, Add as AddIcon } from '@mui/icons-material';
+import { Edit as EditIcon, Delete as DeleteIcon, Add as AddIcon, ExpandMore as ExpandMoreIcon, ExpandLess as ExpandLessIcon } from '@mui/icons-material';
 import { useTeams } from '../../hooks/useTeams';
 import TeamDialog from './TeamDialog';
 import AddAgentToTeamDialog from './AddAgentToTeamDialog';
 import type { Team } from '../../types/teams';
+
+interface TeamMember {
+  id: string;
+  name: string;
+  email: string;
+  picture: string;
+  role: 'owner' | 'admin' | 'member';
+}
 
 export default function TeamsList() {
   const { teams, loading, error, deleteTeam, refreshTeams } = useTeams();
@@ -23,6 +34,20 @@ export default function TeamsList() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isAddAgentDialogOpen, setIsAddAgentDialogOpen] = useState(false);
   const [selectedTeamForAgent, setSelectedTeamForAgent] = useState<string | null>(null);
+  const [expandedTeam, setExpandedTeam] = useState<string | null>(null);
+  const [teamMembers, setTeamMembers] = useState<Record<string, TeamMember[]>>({});
+
+  const loadTeamMembers = async (teamId: string) => {
+    try {
+      const response = await teamsApi.getMembers(teamId);
+      setTeamMembers(prev => ({
+        ...prev,
+        [teamId]: response.data
+      }));
+    } catch (error) {
+      console.error('Failed to load team members:', error);
+    }
+  };
 
   const handleEdit = (team: Team) => {
     setSelectedTeam(team);
@@ -89,27 +114,52 @@ export default function TeamsList() {
               borderColor: 'divider',
               borderRadius: 1,
               mb: 1,
-              '&:hover': {
-                bgcolor: 'action.hover',
-              },
+              flexDirection: 'column',
+              alignItems: 'stretch',
             }}
           >
-            <ListItemText
-              primary={team.name}
-              secondary={
-                <>
-                  {team.description}
-                  <br />
-                  Members: {team.member_count} • Role: {team.user_role}
-                </>
-              }
-            />
-            <ListItemSecondaryAction>
+            <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+              <ListItemText
+                primary={team.name}
+                secondary={
+                  <>
+                    {team.description}
+                    <br />
+                    <AvatarGroup 
+                      max={3} 
+                      sx={{ 
+                        display: 'inline-flex',
+                        '& .MuiAvatar-root': { width: 24, height: 24, fontSize: '0.875rem' }
+                      }}
+                    >
+                      {teamMembers[team.id]?.map(member => (
+                        <Avatar 
+                          key={member.id}
+                          src={member.picture}
+                          alt={member.name}
+                          sx={{ width: 24, height: 24 }}
+                        />
+                      ))}
+                    </AvatarGroup>
+                    {' • '}Role: {team.user_role}
+                  </>
+                }
+              />
+              <IconButton
+                onClick={() => {
+                  if (expandedTeam !== team.id) {
+                    loadTeamMembers(team.id);
+                  }
+                  setExpandedTeam(expandedTeam === team.id ? null : team.id);
+                }}
+              >
+                {expandedTeam === team.id ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+              </IconButton>
               <IconButton
                 edge="end"
                 aria-label="add-agent"
                 onClick={() => handleAddAgentClick(team.id)}
-                sx={{ mr: 1 }}
+                sx={{ ml: 1 }}
               >
                 <AddIcon />
               </IconButton>
@@ -117,7 +167,7 @@ export default function TeamsList() {
                 edge="end"
                 aria-label="edit"
                 onClick={() => handleEdit(team)}
-                sx={{ mr: 1 }}
+                sx={{ ml: 1 }}
               >
                 <EditIcon />
               </IconButton>
@@ -126,11 +176,35 @@ export default function TeamsList() {
                   edge="end"
                   aria-label="delete"
                   onClick={() => handleDelete(team)}
+                  sx={{ ml: 1 }}
                 >
                   <DeleteIcon />
                 </IconButton>
               )}
-            </ListItemSecondaryAction>
+            </Box>
+
+            <Collapse in={expandedTeam === team.id} timeout="auto" unmountOnExit>
+              <Box sx={{ p: 2, bgcolor: 'background.paper' }}>
+                <Typography variant="subtitle2" gutterBottom>
+                  Members
+                </Typography>
+                <List dense>
+                  {teamMembers[team.id]?.map(member => (
+                    <ListItem key={member.id}>
+                      <Avatar 
+                        src={member.picture} 
+                        alt={member.name}
+                        sx={{ width: 32, height: 32, mr: 2 }}
+                      />
+                      <ListItemText 
+                        primary={member.name}
+                        secondary={`${member.role} • ${member.email}`}
+                      />
+                    </ListItem>
+                  ))}
+                </List>
+              </Box>
+            </Collapse>
           </ListItem>
         ))}
       </List>

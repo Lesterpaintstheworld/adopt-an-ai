@@ -208,4 +208,26 @@ router.post('/:teamId/agents', async (req, res) => {
   }
 });
 
+// GET /api/teams/:teamId/members
+router.get('/:teamId/members', async (req, res) => {
+  try {
+    const query = `
+      SELECT u.id, u.name, u.email, u.picture, tm.role
+      FROM team_members tm
+      JOIN users u ON tm.user_id = u.id
+      WHERE tm.team_id = $1
+      ORDER BY tm.role DESC, u.name ASC
+    `;
+    
+    const result = await pool.query(query, [req.params.teamId]);
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error fetching team members:', error);
+    res.status(500).json({ 
+      error: 'Failed to fetch team members',
+      details: error.message 
+    });
+  }
+});
+
 module.exports = router;
