@@ -43,7 +43,7 @@ export default function AgentSideMenu({ agents, selectedAgent, onSelectAgent }: 
             selected={selectedAgent === agent.id}
             onClick={() => onSelectAgent(agent.id)}
           >
-            <ListItemText primary={model.name} />
+            <ListItemText primary={agent.name} />
           </ListItemButton>
         </ListItem>
       ))}
