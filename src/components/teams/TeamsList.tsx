@@ -96,7 +96,7 @@ export default function TeamsList() {
     try {
       // Recharger les membres de l'équipe spécifique
       const response = await teamsApi.getMembers(teamId);
-      setTeamMembers(prev => ({
+      setTeamAgents(prev => ({
         ...prev,
         [teamId]: response.data
       }));
