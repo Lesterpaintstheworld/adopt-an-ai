@@ -2,7 +2,7 @@ import { Box, Grid } from '@mui/material';
 import { useState } from 'react';
 import { TutorialHighlight } from '../components/tutorial/TutorialHighlight';
 import AgentSideMenu from '../components/agents/AgentSideMenu';
-import SystemPrompt from '../components/agents/SystemPrompt';
+import AgentSystem from '../components/agents/AgentSystem';
 import AgentChat from '../components/agents/AgentChat';
 
 // Example data - replace with real data
@@ -144,7 +144,7 @@ export default function AgentsPage() {
         <Grid container spacing={4} sx={{ height: '100%' }}>
           {/* System Prompt - Left half */}
           <Grid item xs={6} sx={{ height: '100%' }}>
-            <SystemPrompt 
+            <AgentSystem 
               prompt={selectedAgent?.systemPrompt || ''}
               readOnly
             />
