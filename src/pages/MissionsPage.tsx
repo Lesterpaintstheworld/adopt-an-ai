@@ -14,7 +14,7 @@ interface PerkItem {
   name: string;
 }
 import MissionModal from '../components/missions/MissionModal';
-import { getPerkIconUrl } from '../utils/iconUtils';
+import { getPerkIconUrl } from '../../utils/iconUtils';
 
 const getPhaseLabel = (phase: Phase): string => {
   switch (phase) {
