@@ -155,20 +155,6 @@ export default function OSPage() {
           {/* Right half */}
           <Grid item xs={6}>
             <Grid container spacing={3} sx={{ height: '100%' }}>
-              {/* Tools */}
-              <Grid item xs={12}>
-                <ModelTools tools={selectedModel?.tools || []} />
-              </Grid>
-              
-              {/* Memory */}
-              <Grid item xs={12}>
-                <ModelMemory vectorStore={selectedModel?.vectorStore || {
-                  name: '',
-                  size: 0,
-                  lastUpdated: '',
-                }} />
-              </Grid>
-              
               {/* Parameters */}
               <Grid item xs={12}>
                 <ModelParameters parameters={selectedModel?.parameters || []} />
