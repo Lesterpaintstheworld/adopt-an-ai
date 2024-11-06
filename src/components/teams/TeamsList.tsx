@@ -14,7 +14,7 @@ import {
   AvatarGroup,
   Collapse
 } from '@mui/material';
-import { Edit as EditIcon, Delete as DeleteIcon, Add as AddIcon, ExpandMore as ExpandMoreIcon, ExpandLess as ExpandLessIcon } from '@mui/icons-material';
+import { Edit as EditIcon, Delete as DeleteIcon, Add as AddIcon } from '@mui/icons-material';
 import { useTeams } from '../../hooks/useTeams';
 import TeamDialog from './TeamDialog';
 import AddAgentToTeamDialog from './AddAgentToTeamDialog';
@@ -34,8 +34,13 @@ export default function TeamsList() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isAddAgentDialogOpen, setIsAddAgentDialogOpen] = useState(false);
   const [selectedTeamForAgent, setSelectedTeamForAgent] = useState<string | null>(null);
-  const [expandedTeam, setExpandedTeam] = useState<string | null>(null);
   const [teamMembers, setTeamMembers] = useState<Record<string, TeamMember[]>>({});
+
+  useEffect(() => {
+    teams.forEach(team => {
+      loadTeamMembers(team.id);
+    });
+  }, [teams]);
 
   const loadTeamMembers = async (teamId: string) => {
     try {
@@ -146,16 +151,6 @@ export default function TeamsList() {
                 }
               />
               <IconButton
-                onClick={() => {
-                  if (expandedTeam !== team.id) {
-                    loadTeamMembers(team.id);
-                  }
-                  setExpandedTeam(expandedTeam === team.id ? null : team.id);
-                }}
-              >
-                {expandedTeam === team.id ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-              </IconButton>
-              <IconButton
                 edge="end"
                 aria-label="add-agent"
                 onClick={() => handleAddAgentClick(team.id)}
@@ -183,8 +178,7 @@ export default function TeamsList() {
               )}
             </Box>
 
-            <Collapse in={expandedTeam === team.id} timeout="auto" unmountOnExit>
-              <Box sx={{ p: 2, bgcolor: 'background.paper' }}>
+            <Box sx={{ p: 2, bgcolor: 'background.paper' }}>
                 <Typography variant="subtitle2" gutterBottom>
                   Members
                 </Typography>
@@ -204,7 +198,6 @@ export default function TeamsList() {
                   ))}
                 </List>
               </Box>
-            </Collapse>
           </ListItem>
         ))}
       </List>
