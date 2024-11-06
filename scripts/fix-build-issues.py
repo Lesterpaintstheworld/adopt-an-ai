@@ -1,14 +1,21 @@
 import subprocess
 import re
 import sys
+import os
+
+def get_project_root():
+    """Get the absolute path to the project root"""
+    # Le script est dans le dossier scripts, donc on remonte d'un niveau
+    return os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 def check_available_scripts():
     """Check what npm scripts are available"""
     try:
+        project_root = get_project_root()
         result = subprocess.run(['npm', 'run'], 
                               capture_output=True, 
                               text=True,
-                              cwd="..",
+                              cwd=project_root,
                               shell=True)
         print("Available scripts:")
         print(result.stdout)
@@ -20,10 +27,15 @@ def check_available_scripts():
 def check_dependencies(is_backend=False):
     """Check and install dependencies if needed"""
     try:
-        cwd = "../backend" if is_backend else ".."
+        project_root = get_project_root()
+        cwd = os.path.join(project_root, 'backend') if is_backend else project_root
+        
+        if not os.path.exists(cwd):
+            print(f"Directory not found: {cwd}")
+            return False
+            
         print(f"Checking {'backend' if is_backend else 'frontend'} dependencies in {cwd}...")
         
-        # Vérifier si package.json existe
         result = subprocess.run(['npm', 'list'], 
                               capture_output=True, 
                               text=True,
@@ -50,6 +62,8 @@ def check_dependencies(is_backend=False):
 def run_build():
     """Run npm run build and capture output"""
     try:
+        project_root = get_project_root()
+        
         # Check both frontend and backend dependencies
         if not check_dependencies(is_backend=False):
             return "", "Failed to install frontend dependencies"
@@ -61,11 +75,10 @@ def run_build():
             return "", "Build script not found in package.json"
             
         print("Running build command in frontend directory...")
-        # Run the build command in the frontend directory
         result = subprocess.run(['npm', 'run', 'build'], 
                               capture_output=True, 
                               text=True,
-                              cwd="..",
+                              cwd=project_root,
                               shell=True)
         return result.stdout, result.stderr
     except subprocess.CalledProcessError as e:
