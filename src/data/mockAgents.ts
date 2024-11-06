@@ -8,7 +8,7 @@ export const mockAgents: Agent[] = [
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
     status: 'active',
-    systemPrompt: 'You are a dedicated research assistant focused on gathering and analyzing information...',
+    system_prompt: 'You are a dedicated research assistant focused on gathering and analyzing information...',
     tools: [
       { id: 't1', name: 'Web Search', description: 'Search the internet' },
       { id: 't2', name: 'Calculator', description: 'Perform calculations' },
@@ -26,7 +26,7 @@ export const mockAgents: Agent[] = [
   {
     id: 'writer',
     name: 'Creative Writer', 
-    systemPrompt: 'You are a creative writing assistant specializing in storytelling...',
+    system_prompt: 'You are a creative writing assistant specializing in storytelling...',
     tools: [
       { id: 't1', name: 'Web Search', description: 'Search the internet' },
     ],
@@ -43,7 +43,7 @@ export const mockAgents: Agent[] = [
   {
     id: 'analyst',
     name: 'Data Analyst',
-    systemPrompt: 'You are a data analysis expert focused on finding insights...',
+    system_prompt: 'You are a data analysis expert focused on finding insights...',
     tools: [
       { id: 't1', name: 'Web Search', description: 'Search the internet' },
       { id: 't3', name: 'Code Interpreter', description: 'Execute code' },
@@ -61,7 +61,7 @@ export const mockAgents: Agent[] = [
   {
     id: 'teacher',
     name: 'Educational Tutor',
-    systemPrompt: 'You are an educational tutor specializing in personalized learning...',
+    system_prompt: 'You are an educational tutor specializing in personalized learning...',
     tools: [
       { id: 't1', name: 'Web Search', description: 'Search the internet' },
       { id: 't4', name: 'Image Analysis', description: 'Analyze images' },
@@ -79,7 +79,7 @@ export const mockAgents: Agent[] = [
   {
     id: 'assistant',
     name: 'Personal Assistant',
-    systemPrompt: 'You are a helpful personal assistant focused on organization and productivity...',
+    system_prompt: 'You are a helpful personal assistant focused on organization and productivity...',
     tools: [
       { id: 't1', name: 'Web Search', description: 'Search the internet' },
       { id: 't5', name: 'File Manager', description: 'Manage files' },
@@ -97,7 +97,7 @@ export const mockAgents: Agent[] = [
   {
     id: 'coder',
     name: 'Code Assistant',
-    systemPrompt: 'You are a specialized programming assistant...',
+    system_prompt: 'You are a specialized programming assistant...',
     tools: [
       { id: 't1', name: 'Web Search', description: 'Search the internet' },
       { id: 't6', name: 'Code Analysis', description: 'Analyze and debug code' },
