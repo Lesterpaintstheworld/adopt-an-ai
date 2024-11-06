@@ -169,17 +169,11 @@ export default function AgentsPage() {
     try {
       setCreateError(null);
       const newAgent = await createAgent({
-        user_id: '', // Will be set by backend
         name: 'New Agent',
         system_prompt: customPrompt,
         status: 'active',
         parameters: {},
-        tools: [],
-        vector_store: {
-          name: 'Pinecone DB',
-          size: 0,
-          lastUpdated: null
-        }
+        tools: []
       });
       setSelectedAgentId(newAgent.id);
       setIsCreating(false);

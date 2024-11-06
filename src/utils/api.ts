@@ -29,3 +29,12 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+// Agent API endpoints
+export const agentsApi = {
+  getAll: () => api.get('/api/agents'),
+  getById: (id: string) => api.get(`/api/agents/${id}`),
+  create: (data: AgentCreationData) => api.post('/api/agents', data),
+  update: (id: string, data: AgentUpdateData) => api.put(`/api/agents/${id}`, data),
+  delete: (id: string) => api.delete(`/api/agents/${id}`)
+};
