@@ -52,9 +52,8 @@ export const YamlModal: React.FC<YamlModalProps> = ({
 
   // Extract story from data if it exists
   const story = data?.story || '';
-  // Create a copy of data without the story for YAML display
-  const yamlData = { ...data };
-  delete yamlData?.story;
+  // Use the full data for YAML display
+  const yamlData = data;
 
 
   return (
