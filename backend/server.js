@@ -9,6 +9,7 @@ require('dotenv').config();
 
 // Import routes
 const agentsRouter = require(path.join(__dirname, 'routes', 'agents'));
+const authRouter = require(path.join(__dirname, 'routes', 'auth'));
 
 // Database configuration
 const pool = new Pool({
@@ -71,6 +72,7 @@ const verifyToken = (req, res, next) => {
 
 // Register routes with auth middleware
 app.use('/api/agents', verifyToken, agentsRouter);
+app.use('/api/auth', authRouter);
 
 // Log registered routes
 console.log('Registered routes:', app._router.stack
@@ -85,42 +87,6 @@ console.log('Registered routes:', app._router.stack
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 // Route d'authentification Google
-// Token validation endpoint
-app.get('/api/auth/validate', verifyToken, (req, res) => {
-  try {
-    // If the verifyToken middleware passed, the token is valid
-    // and the user data is available in req.user
-    const user = req.user;
-    
-    // Query the database to get the latest user data
-    pool.query(
-      'SELECT id, email, name, picture, tutorial_completed, tutorial_progress FROM users WHERE id = $1',
-      [user.userId]
-    )
-    .then(result => {
-      if (result.rows.length === 0) {
-        return res.status(404).json({ error: 'User not found' });
-      }
-      
-      // Return the user data
-      res.json({
-        isValid: true,
-        user: result.rows[0]
-      });
-    })
-    .catch(error => {
-      console.error('Database error during token validation:', error);
-      res.status(500).json({ error: 'Internal server error' });
-    });
-
-  } catch (error) {
-    console.error('Token validation error:', error);
-    res.status(401).json({ 
-      isValid: false,
-      error: 'Invalid token'
-    });
-  }
-});
 
 app.post('/api/auth/google', async (req, res) => {
   try {
