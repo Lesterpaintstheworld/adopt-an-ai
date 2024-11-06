@@ -1,6 +1,8 @@
 import { Box, Grid } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { ChatMessage } from '../utils/openai';
+import { useAgents } from '../hooks/useAgents';
+import { Box, CircularProgress } from '@mui/material';
 
 const KINDESIGNER_PROMPT = `# Prompt for the AI Prompt Design Assistant (KinDesigner)
 
@@ -127,15 +129,48 @@ import AgentChat from '../components/agents/AgentChat';
 import { mockAgents } from '../data/mockAgents';
 
 export default function AgentsPage() {
-  const [selectedAgentId, setSelectedAgentId] = useState(mockAgents[0].id);
+  const { agents, loading, error, createAgent } = useAgents();
+  const [selectedAgentId, setSelectedAgentId] = useState<string>('');
   const [isCreating, setIsCreating] = useState(false);
   const [customPrompt, setCustomPrompt] = useState<string>('');
   const [isCustomPrompt, setIsCustomPrompt] = useState(false);
 
-  const handleGeneratePrompt = () => {
-    console.log('Generating new agent from chat history...');
-    setIsCreating(false);
+  const handleGeneratePrompt = async () => {
+    try {
+      const newAgent = await createAgent({
+        name: 'New Agent',
+        system_prompt: customPrompt,
+        status: 'active',
+        parameters: {},
+        tools: [],
+        vector_store: {
+          name: 'Pinecone DB',
+          size: 0,
+          lastUpdated: null
+        }
+      });
+      setSelectedAgentId(newAgent.id);
+      setIsCreating(false);
+    } catch (error) {
+      console.error('Failed to create agent:', error);
+    }
   };
+
+  useEffect(() => {
+    if (agents.length > 0 && !selectedAgentId) {
+      setSelectedAgentId(agents[0].id);
+    }
+  }, [agents]);
+
+  if (loading) {
+    return <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <CircularProgress />
+    </Box>;
+  }
+
+  if (error) {
+    return <Box sx={{ p: 3, color: 'error.main' }}>Error: {error}</Box>;
+  }
   type ChatHistories = {
     [key: string]: ChatMessage[];
   };

@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { CircularProgress } from '@mui/material';
 import LoginPage from './pages/LoginPage';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
 import { ThemeProvider, CssBaseline } from '@mui/material';

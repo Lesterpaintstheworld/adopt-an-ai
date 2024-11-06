@@ -41,11 +41,10 @@ const CreateButton = styled(Button)(({ theme }) => ({
   alignItems: 'center',
 }));
 
+import { Agent } from '../../types/database';
+
 interface AgentSideMenuProps {
-  agents: Array<{
-    id: string;
-    name: string;
-  }>;
+  agents: Agent[];
   selectedAgent: string;
   onSelectAgent: (id: string) => void;
   onCreateAgent?: () => void;
