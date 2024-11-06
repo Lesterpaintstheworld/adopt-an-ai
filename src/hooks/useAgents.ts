@@ -6,7 +6,7 @@ import { agentsApi } from '../utils/api';
 export const useAgents = () => {
   const [agents, setAgents] = useState<Agent[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<{message: string, details?: string} | null>(null);
 
   const fetchAgents = async () => {
     try {
@@ -14,9 +14,15 @@ export const useAgents = () => {
       const response = await agentsApi.getAll();
       setAgents(response.data);
       setError(null);
-    } catch (err) {
-      setError('Failed to fetch agents');
-      console.error('Error fetching agents:', err);
+    } catch (err: any) {
+      const errorMessage = err.response?.data?.error || 'Failed to fetch agents';
+      const errorDetails = err.response?.data?.details || err.message;
+      setError({ message: errorMessage, details: errorDetails });
+      console.error('Error fetching agents:', {
+        error: err,
+        response: err.response?.data,
+        status: err.response?.status
+      });
     } finally {
       setLoading(false);
     }
@@ -28,9 +34,15 @@ export const useAgents = () => {
       const newAgent = response.data;
       setAgents(prev => [...prev, newAgent]);
       return newAgent;
-    } catch (err) {
-      console.error('Error creating agent:', err);
-      throw err;
+    } catch (err: any) {
+      console.error('Error creating agent:', {
+        error: err,
+        response: err.response?.data,
+        status: err.response?.status
+      });
+      throw new Error(err.response?.data?.error || 'Failed to create agent', { 
+        cause: err 
+      });
     }
   };
 
@@ -42,9 +54,15 @@ export const useAgents = () => {
         agent.id === id ? updatedAgent : agent
       ));
       return updatedAgent;
-    } catch (err) {
-      console.error('Error updating agent:', err);
-      throw err;
+    } catch (err: any) {
+      console.error('Error updating agent:', {
+        error: err,
+        response: err.response?.data,
+        status: err.response?.status
+      });
+      throw new Error(err.response?.data?.error || 'Failed to update agent', {
+        cause: err
+      });
     }
   };
 
