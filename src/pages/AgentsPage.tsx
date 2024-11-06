@@ -165,7 +165,13 @@ export default function AgentsPage() {
         system_prompt: generatedPrompt,
         status: 'active',
         parameters: {},
-        tools: []
+        tools: [],
+        user_id: '', // Will be set by backend
+        vector_store: {
+          name: "Pinecone DB",
+          size: 0,
+          lastUpdated: null
+        }
       });
       setSelectedAgentId(newAgent.id);
       setIsCreating(false);

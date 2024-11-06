@@ -14,7 +14,7 @@ interface AuthRequest extends Request {
 const router = express.Router();
 
 // GET /api/agents - Get all agents for the authenticated user
-router.get('/', auth, async (req: Request, res: Response) => {
+router.get('/', auth, async (req: Request, res: Response): Promise<void> => {
   const authReq = req as AuthRequest;
   try {
     const agents = await db.agent.findMany({
