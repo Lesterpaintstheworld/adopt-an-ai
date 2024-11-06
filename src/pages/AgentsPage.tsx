@@ -54,23 +54,20 @@ export default function AgentsPage() {
   const [isCreating, setIsCreating] = useState(false);
   const [customPrompt, setCustomPrompt] = useState<string>('');
   const [isCustomPrompt, setIsCustomPrompt] = useState(false);
-  const [chatHistories, setChatHistories] = useState<{[agentId: string]: ChatMessage[]}>({});
+  type ChatHistories = {
+    [key: string]: ChatMessage[];
+  };
+
+  const [chatHistories, setChatHistories] = useState<ChatHistories>({
+    create: []
+  });
 
   const handleChatUpdate = (messages: ChatMessage[]) => {
     setChatHistories(prev => ({
       ...prev,
-      [selectedAgentId]: messages
+      [isCreating ? 'create' : selectedAgentId]: messages
     }));
   };
-
-  useEffect(() => {
-    if (!(selectedAgentId in chatHistories)) {
-      setChatHistories(prev => ({
-        ...prev,
-        [selectedAgentId]: []
-      }));
-    }
-  }, [selectedAgentId]);
   const selectedAgent = mockAgents.find(m => m.id === selectedAgentId);
 
   useEffect(() => {
@@ -80,6 +77,10 @@ export default function AgentsPage() {
 
   const handleCreateAgent = () => {
     setIsCreating(true);
+    setChatHistories(prev => ({
+      ...prev,
+      create: []
+    }));
   };
 
   return (
@@ -113,7 +114,7 @@ export default function AgentsPage() {
             <Grid item xs={12} sx={{ height: '100%' }}>
               <AgentChat 
                 systemPrompt={KINDESIGNER_PROMPT}
-                messages={[]}
+                messages={chatHistories.create || []}
                 onMessagesChange={() => {}}
               />
             </Grid>
