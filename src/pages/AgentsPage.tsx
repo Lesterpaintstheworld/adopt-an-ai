@@ -1,6 +1,7 @@
 import { Box, Grid, CircularProgress, Alert, Button } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { ChatMessage } from '../utils/openai';
+import { ChatMessage } from '../utils/openai';
 import { useAgents } from '../hooks/useAgents';
 
 const KINDESIGNER_PROMPT = `# Prompt for the AI Prompt Design Assistant (KinDesigner)
@@ -134,6 +135,10 @@ export default function AgentsPage() {
   const [isCustomPrompt, setIsCustomPrompt] = useState(false);
   const [createError, setCreateError] = useState<string | null>(null);
 
+  type ChatHistories = {
+    [key: string]: ChatMessage[];
+  };
+
   const handleGeneratePrompt = async () => {
     if (!customPrompt.trim()) {
       setCreateError('System prompt cannot be empty');
@@ -189,7 +194,8 @@ export default function AgentsPage() {
         display: 'flex', 
         justifyContent: 'center', 
         alignItems: 'center', 
-        height: 'calc(100vh - 64px)'
+        height: 'calc(100vh - 64px)',
+        backgroundColor: 'rgba(0, 0, 0, 0.2)'
       }}>
         <CircularProgress />
       </Box>
@@ -249,6 +255,7 @@ export default function AgentsPage() {
         onSelectAgent={(id) => {
           setSelectedAgentId(id);
           setIsCreating(false);
+          setCreateError(null);
         }}
         onCreateAgent={handleCreateAgent}
       />
