@@ -31,6 +31,7 @@ export const useTeams = () => {
     try {
       const response = await teamsApi.create(teamData);
       const newTeam = response.data;
+      // Update local state immediately with the new team
       setTeams(prev => [...prev, newTeam]);
       return newTeam;
     } catch (err: any) {
