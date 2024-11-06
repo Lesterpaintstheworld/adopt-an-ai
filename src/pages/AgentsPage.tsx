@@ -1,5 +1,6 @@
 import { Box, Grid } from '@mui/material';
 import { useState, useEffect } from 'react';
+import { ChatMessage } from '../utils/openai';
 import { TutorialHighlight } from '../components/tutorial/TutorialHighlight';
 import AgentSideMenu from '../components/agents/AgentSideMenu';
 import AgentSystem from '../components/agents/AgentSystem';
@@ -10,6 +11,23 @@ export default function AgentsPage() {
   const [selectedAgentId, setSelectedAgentId] = useState(mockAgents[0].id);
   const [customPrompt, setCustomPrompt] = useState<string>('');
   const [isCustomPrompt, setIsCustomPrompt] = useState(false);
+  const [chatHistories, setChatHistories] = useState<{[agentId: string]: ChatMessage[]}>({});
+
+  const handleChatUpdate = (messages: ChatMessage[]) => {
+    setChatHistories(prev => ({
+      ...prev,
+      [selectedAgentId]: messages
+    }));
+  };
+
+  useEffect(() => {
+    if (!(selectedAgentId in chatHistories)) {
+      setChatHistories(prev => ({
+        ...prev,
+        [selectedAgentId]: []
+      }));
+    }
+  }, [selectedAgentId]);
   const selectedAgent = mockAgents.find(m => m.id === selectedAgentId);
 
   useEffect(() => {
@@ -54,7 +72,9 @@ export default function AgentsPage() {
           {/* Chat - Right half */}
           <Grid item xs={6} sx={{ height: '100%' }}>
             <AgentChat 
-              systemPrompt={isCustomPrompt ? customPrompt : (selectedAgent?.systemPrompt || '')} 
+              systemPrompt={isCustomPrompt ? customPrompt : (selectedAgent?.systemPrompt || '')}
+              messages={chatHistories[selectedAgentId] || []}
+              onMessagesChange={handleChatUpdate}
             />
           </Grid>
         </Grid>

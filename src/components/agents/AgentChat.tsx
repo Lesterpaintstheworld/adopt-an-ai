@@ -38,10 +38,11 @@ const AssistantMessage = styled(Box)(({ theme }) => ({
 
 interface Props {
   systemPrompt: string;
+  messages: ChatMessage[];
+  onMessagesChange: (messages: ChatMessage[]) => void;
 }
 
-export default function AgentChat({ systemPrompt }: Props) {
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+export default function AgentChat({ systemPrompt, messages, onMessagesChange }: Props) {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -55,13 +56,16 @@ export default function AgentChat({ systemPrompt }: Props) {
     ] as ChatMessage[];
 
     setInput('');
-    setMessages(messages => [...messages, { role: 'user', content: input.trim() }]);
+    onMessagesChange([...messages, { role: 'user', content: input.trim() }]);
     setIsLoading(true);
 
     try {
       const response = await getChatCompletion(newMessages);
       if (response) {
-        setMessages(messages => [...messages, { role: 'assistant', content: response.content || '' }]);
+        onMessagesChange([...messages, 
+          { role: 'user', content: input.trim() },
+          { role: 'assistant', content: response.content || '' }
+        ]);
       }
     } catch (error) {
       console.error('Chat error:', error);
