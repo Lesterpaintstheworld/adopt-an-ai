@@ -5,15 +5,11 @@ import {
   List,
   ListItem,
   ListItemText,
-  ListItemSecondaryAction,
   IconButton,
   Typography,
   Button,
   Alert,
-  CircularProgress,
-  Avatar,
-  AvatarGroup,
-  Collapse
+  CircularProgress
 } from '@mui/material';
 import { Edit as EditIcon, Close as CloseIcon, Add as AddIcon } from '@mui/icons-material';
 import { useTeams } from '../../hooks/useTeams';

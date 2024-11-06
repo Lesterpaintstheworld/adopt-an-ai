@@ -1,8 +1,8 @@
 import { Box, Typography } from '@mui/material';
 import { useState } from 'react';
 import { TutorialHighlight } from '../components/tutorial/TutorialHighlight';
-import DAOSideMenu from '../components/DAOs/DAOSideMenu';
-import VoteCard from '../components/DAOs/VoteCard';
+import DAOSideMenu from '../components/daos/DAOSideMenu';
+import VoteCard from '../components/daos/VoteCard';
 
 // Example data
 const daos = [
