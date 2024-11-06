@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { AI } from '../types/ai';
-import AIDetailsDialog from '../components/AIDetailsDialog';
+import AIDetailsDialog from '../components/adopt/AIDetailsDialog';
 
 import {
   Box,
@@ -17,7 +17,7 @@ import {
 } from '@mui/material';
 import ViewModuleIcon from '@mui/icons-material/ViewModule';
 import ViewListIcon from '@mui/icons-material/ViewList';
-import AICard from '../components/AICard';
+import AICard from '../components/adopt/AICard';
 import { AdoptFilters } from '../types/ai';
 import { mockAIs } from '../data/mockAIs';
 import { filterAIs } from '../utils/filterAIs';

@@ -31,6 +31,13 @@ export const Footer = () => {
             >
               Blog
             </Link>
+            <Link
+              component={RouterLink}
+              to="/adopt"
+              sx={{ color: 'text.secondary', textDecoration: 'none', '&:hover': { color: 'primary.main' } }}
+            >
+              Blog
+            </Link>
           </Box>
         </Box>
         <Typography variant="body2" color="text.secondary" align="center">

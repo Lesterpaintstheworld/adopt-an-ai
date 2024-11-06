@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 
 import { TechTree, PhaseData, Perk, PerkFullData } from '../types/tech';
-import YamlModal from '../components/YamlModal';
+import YamlModal from '../components/tech-tree/YamlModal';
 
 const isPerk = (item: unknown): item is Perk => {
   return item !== null && 
@@ -35,7 +35,7 @@ import BuildIcon from '@mui/icons-material/Build';
 import NetworkCheckIcon from '@mui/icons-material/NetworkCheck';
 import PsychologyIcon from '@mui/icons-material/Psychology';
 import SettingsIcon from '@mui/icons-material/Settings';
-import techTree from '../../content/tech/tech-tree.yml';
+import techTree from '../../content/tech-tree/tech-tree.yml';
 
 // Constants for layout calculations
 const ITEM_HEIGHT = 160;

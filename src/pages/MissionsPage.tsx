@@ -31,7 +31,7 @@ const getPhaseLabel = (phase: Phase): string => {
   }
 };
 import { loadAllMissions } from '../utils/missionUtils';
-import techTree from '../../content/tech/tech-tree.yml';
+import techTree from '../../content/tech-tree/tech-tree.yml';
 import { useEffect } from 'react';
 import { 
   Box, 

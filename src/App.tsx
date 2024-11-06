@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { CircularProgress } from '@mui/material';
 import LoginPage from './pages/LoginPage';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
 import { ThemeProvider, CssBaseline } from '@mui/material';
@@ -22,7 +21,6 @@ import MissionsPage from './pages/MissionsPage';
 import BlogPage from './pages/BlogPage';
 import BlogPostPage from './pages/BlogPostPage';
 import AdoptPage from './pages/AdoptPage';
-import MyAIsPage from './pages/MyAIsPage';
 import PricingPage from './pages/PricingPage';
 
 console.log('App component initializing...');
@@ -54,7 +52,6 @@ function App() {
             <Route path="/adopt" element={<AdoptPage />} />
             {/* Protected Routes */}
             <Route element={<ProtectedRoute />}>
-              <Route path="/my-ais" element={<MyAIsPage />} />
             </Route>
               <Route path="/agents" element={<AgentsPage />} />
             <Route path="/pricing" element={<PricingPage />} />
