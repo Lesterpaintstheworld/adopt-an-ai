@@ -1,11 +1,15 @@
 import { Box, Typography } from '@mui/material';
 import { TutorialHighlight } from '../components/tutorial/TutorialHighlight';
+import TeamsList from '../components/teams/TeamsList';
 
-export default function TeamPage() {
+export default function TeamsPage() {
   return (
     <Box sx={{ p: 4 }}>
       <TutorialHighlight pageKey="teams" />
-      <Typography variant="h1">Teams</Typography>
+      <Typography variant="h4" gutterBottom>
+        Teams
+      </Typography>
+      <TeamsList />
     </Box>
   );
 }
