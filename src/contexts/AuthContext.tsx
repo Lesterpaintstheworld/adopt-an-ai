@@ -56,7 +56,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const validateToken = async (token: string): Promise<boolean> => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/validate`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/validate`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
