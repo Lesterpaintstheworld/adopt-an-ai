@@ -19,16 +19,25 @@ const pool = new Pool({
   database: process.env.DB_NAME || 'raise_an_ai',
   password: process.env.DB_PASSWORD,
   port: process.env.DB_PORT || 5432,
+  max: 20, // Maximum number of clients in the pool
+  idleTimeoutMillis: 30000, // Close idle clients after 30 seconds
+  connectionTimeoutMillis: 2000, // Return an error after 2 seconds if connection could not be established
 });
 
-// Test database connection
-pool.query('SELECT NOW()', (err, res) => {
-  if (err) {
-    console.error('Database connection error:', err);
-  } else {
-    console.log('Database connection established');
-  }
+// Test database connection and handle errors
+pool.on('error', (err) => {
+  console.error('Unexpected database error:', err);
 });
+
+pool.connect()
+  .then(client => {
+    console.log('Database connection established');
+    client.release();
+  })
+  .catch(err => {
+    console.error('Database connection error:', err);
+    process.exit(1); // Exit if we can't connect to database
+  });
 
 if (!process.env.JWT_SECRET) {
   console.error('JWT_SECRET is not set in environment variables');
@@ -98,11 +107,14 @@ const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 app.post('/api/auth/google', async (req, res) => {
   try {
     const { googleToken, userData } = req.body;
-    console.log('Received request with userData:', userData);
+    console.log('Received auth request for:', userData?.email);
 
-    if (!userData || !userData.googleId) {
-      console.error('Missing userData or googleId');
-      return res.status(400).json({ error: 'Missing user data' });
+    if (!userData?.googleId || !userData?.email) {
+      console.error('Invalid user data received:', userData);
+      return res.status(400).json({ 
+        error: 'Missing required user data',
+        details: 'Both googleId and email are required'
+      });
     }
 
     // Create/update user in database
