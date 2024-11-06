@@ -172,4 +172,40 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// Add agent to team
+router.post('/:teamId/agents', async (req, res) => {
+  const { teamId } = req.params;
+  const { agentId } = req.body;
+  
+  try {
+    // Check user has rights on the team
+    const teamCheck = await pool.query(
+      `SELECT * FROM teams t
+       LEFT JOIN team_members tm ON t.id = tm.team_id
+       WHERE t.id = $1 AND (t.owner_id = $2 OR tm.user_id = $2)`,
+      [teamId, req.user.userId]
+    );
+
+    if (teamCheck.rows.length === 0) {
+      return res.status(403).json({ error: 'Not authorized to modify this team' });
+    }
+
+    // Add agent to team
+    await pool.query(
+      `INSERT INTO team_agents (team_id, agent_id)
+       VALUES ($1, $2)
+       ON CONFLICT (team_id, agent_id) DO NOTHING`,
+      [teamId, agentId]
+    );
+
+    res.status(201).json({ message: 'Agent added to team successfully' });
+  } catch (error) {
+    console.error('Error adding agent to team:', error);
+    res.status(500).json({ 
+      error: 'Failed to add agent to team',
+      details: error.message 
+    });
+  }
+});
+
 module.exports = router;

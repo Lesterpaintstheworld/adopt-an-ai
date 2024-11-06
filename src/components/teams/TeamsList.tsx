@@ -11,15 +11,18 @@ import {
   Alert,
   CircularProgress
 } from '@mui/material';
-import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
+import { Edit as EditIcon, Delete as DeleteIcon, Add as AddIcon } from '@mui/icons-material';
 import { useTeams } from '../../hooks/useTeams';
 import TeamDialog from './TeamDialog';
+import AddAgentToTeamDialog from './AddAgentToTeamDialog';
 import type { Team } from '../../types/teams';
 
 export default function TeamsList() {
   const { teams, loading, error, deleteTeam } = useTeams();
   const [selectedTeam, setSelectedTeam] = useState<Team | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isAddAgentDialogOpen, setIsAddAgentDialogOpen] = useState(false);
+  const [selectedTeamForAgent, setSelectedTeamForAgent] = useState<string | null>(null);
 
   const handleEdit = (team: Team) => {
     setSelectedTeam(team);
@@ -35,6 +38,11 @@ export default function TeamsList() {
         alert('Failed to delete team. Please try again.');
       }
     }
+  };
+
+  const handleAddAgentClick = (teamId: string) => {
+    setSelectedTeamForAgent(teamId);
+    setIsAddAgentDialogOpen(true);
   };
 
   const handleCreate = () => {
@@ -99,6 +107,14 @@ export default function TeamsList() {
             <ListItemSecondaryAction>
               <IconButton
                 edge="end"
+                aria-label="add-agent"
+                onClick={() => handleAddAgentClick(team.id)}
+                sx={{ mr: 1 }}
+              >
+                <AddIcon />
+              </IconButton>
+              <IconButton
+                edge="end"
                 aria-label="edit"
                 onClick={() => handleEdit(team)}
                 sx={{ mr: 1 }}
@@ -124,6 +140,20 @@ export default function TeamsList() {
         onClose={() => setIsDialogOpen(false)}
         team={selectedTeam}
       />
+      
+      {selectedTeamForAgent && (
+        <AddAgentToTeamDialog
+          open={isAddAgentDialogOpen}
+          teamId={selectedTeamForAgent}
+          onClose={() => {
+            setIsAddAgentDialogOpen(false);
+            setSelectedTeamForAgent(null);
+          }}
+          onAgentAdded={() => {
+            refreshTeams();
+          }}
+        />
+      )}
     </Box>
   );
 }
