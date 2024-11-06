@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Agent } from '../types/database';
+import { AgentCreationData, AgentUpdateData } from '../types/agents';
 import { api } from '../utils/api';
 
 export const useAgents = () => {
@@ -21,7 +22,7 @@ export const useAgents = () => {
     }
   };
 
-  const createAgent = async (agentData: Partial<Agent>) => {
+  const createAgent = async (agentData: AgentCreationData) => {
     try {
       const response = await api.post('/agents', agentData);
       setAgents(prev => [...prev, response.data]);
@@ -37,11 +38,26 @@ export const useAgents = () => {
     fetchAgents();
   }, []);
 
+  const updateAgent = async (id: string, updateData: AgentUpdateData) => {
+    try {
+      const response = await api.patch(`/agents/${id}`, updateData);
+      setAgents(prev => prev.map(agent => 
+        agent.id === id ? { ...agent, ...response.data } : agent
+      ));
+      return response.data;
+    } catch (err) {
+      setError('Failed to update agent');
+      console.error('Error updating agent:', err);
+      throw err;
+    }
+  };
+
   return {
     agents,
     loading,
     error,
     createAgent,
+    updateAgent,
     refreshAgents: fetchAgents
   };
 };
