@@ -20,7 +20,7 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import StarIcon from '@mui/icons-material/Star';
 import TimerIcon from '@mui/icons-material/Timer';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import { Mission, Difficulty } from '../types/missions';
+import { Mission, Difficulty } from '../../types/missions';
 import { getPerkIconUrl } from '../../utils/iconUtils';
 import techTree from 'content/tech-tree/tech-tree.yml';
 
@@ -147,7 +147,7 @@ const MissionModal: React.FC<MissionModalProps> = ({
                 <AssignmentIcon /> Objectives
               </Typography>
               <List sx={{ mb: 3 }}>
-                {mission.objectives.map((objective, index) => (
+                {mission.objectives.map((objective: string, index: number) => (
                   <ListItem key={index} sx={{ px: 2, py: 0.5 }}>
                     <ListItemIcon sx={{ minWidth: 32, color: 'rgba(255,255,255,0.6)' }}>
                       <CheckCircleOutlineIcon fontSize="small" />
@@ -170,7 +170,7 @@ const MissionModal: React.FC<MissionModalProps> = ({
                 <StarIcon /> Success Criteria
               </Typography>
               <List>
-                {mission.success_criteria.map((criterion, index) => (
+                {mission.success_criteria.map((criterion: string, index: number) => (
                   <ListItem key={index} sx={{ px: 2, py: 0.5 }}>
                     <ListItemIcon sx={{ minWidth: 32, color: 'rgba(255,255,255,0.6)' }}>
                       <CheckCircleOutlineIcon fontSize="small" />
@@ -235,7 +235,7 @@ const MissionModal: React.FC<MissionModalProps> = ({
                       {key}:
                     </Typography>
                     <Typography variant="body2" sx={{ color: '#fff' }}>
-                      {value}
+                      {String(value)}
                     </Typography>
                   </Box>
                 ))}
@@ -258,7 +258,7 @@ const MissionModal: React.FC<MissionModalProps> = ({
                     }}
                   />
                 )}
-                {mission.rewards.capabilities?.map((capability, index) => (
+                {mission.rewards.capabilities?.map((capability: string, index: number) => (
                   <Chip 
                     key={index}
                     label={capability}
