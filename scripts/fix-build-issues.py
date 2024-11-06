@@ -2,40 +2,66 @@ import subprocess
 import re
 import sys
 
-def check_dependencies():
-    """Check and install dependencies if needed"""
+def check_available_scripts():
+    """Check what npm scripts are available"""
     try:
-        print("Checking node_modules...")
-        # Vérifier si node_modules existe
-        result = subprocess.run(['npm', 'list'], 
+        result = subprocess.run(['npm', 'run'], 
                               capture_output=True, 
                               text=True,
                               cwd="..",
                               shell=True)
+        print("Available scripts:")
+        print(result.stdout)
+        return "build" in result.stdout
+    except Exception as e:
+        print(f"Error checking available scripts: {e}")
+        return False
+
+def check_dependencies(is_backend=False):
+    """Check and install dependencies if needed"""
+    try:
+        cwd = "../backend" if is_backend else ".."
+        print(f"Checking {'backend' if is_backend else 'frontend'} dependencies in {cwd}...")
+        
+        # Vérifier si package.json existe
+        result = subprocess.run(['npm', 'list'], 
+                              capture_output=True, 
+                              text=True,
+                              cwd=cwd,
+                              shell=True)
         
         if "ERR!" in result.stderr:
-            print("Installing dependencies...")
+            print(f"Installing {'backend' if is_backend else 'frontend'} dependencies...")
             install = subprocess.run(['npm', 'install'], 
                                    capture_output=True, 
                                    text=True,
-                                   cwd="..",
+                                   cwd=cwd,
                                    shell=True)
             if install.returncode != 0:
-                print("Error installing dependencies:")
+                print(f"Error installing {'backend' if is_backend else 'frontend'} dependencies:")
                 print(install.stderr)
                 return False
-            print("Dependencies installed successfully")
+            print(f"{'Backend' if is_backend else 'Frontend'} dependencies installed successfully")
         return True
     except Exception as e:
-        print(f"Error checking dependencies: {e}")
+        print(f"Error checking {'backend' if is_backend else 'frontend'} dependencies: {e}")
         return False
 
 def run_build():
     """Run npm run build and capture output"""
     try:
-        if not check_dependencies():
-            return "", "Failed to install dependencies"
+        # Check both frontend and backend dependencies
+        if not check_dependencies(is_backend=False):
+            return "", "Failed to install frontend dependencies"
+        if not check_dependencies(is_backend=True):
+            return "", "Failed to install backend dependencies"
             
+        # Vérifier si le script build existe
+        if not check_available_scripts():
+            return "", "Build script not found in package.json"
+            
+        print("Running build command in frontend directory...")
+        # Run the build command in the frontend directory
         result = subprocess.run(['npm', 'run', 'build'], 
                               capture_output=True, 
                               text=True,
@@ -68,8 +94,12 @@ def main():
     print("Running build...")
     stdout, stderr = run_build()
     
-    if stderr == "Failed to install dependencies":
+    if stderr == "Failed to install frontend dependencies" or stderr == "Failed to install backend dependencies":
         print("Please ensure npm is installed and try again")
+        return
+        
+    if stderr == "Build script not found in package.json":
+        print("The build script is not defined in package.json")
         return
         
     build_output = stdout + stderr
