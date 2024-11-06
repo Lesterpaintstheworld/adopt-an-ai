@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Agent } from '../types/database';
 import { AgentCreationData, AgentUpdateData } from '../types/agents';
-import { api } from '../utils/api';
+import { mockAgents } from '../data/mockAgents';
 
 export const useAgents = () => {
   const [agents, setAgents] = useState<Agent[]>([]);
@@ -11,8 +11,9 @@ export const useAgents = () => {
   const fetchAgents = async () => {
     try {
       setLoading(true);
-      const response = await api.get('/agents');
-      setAgents(response.data);
+      // Simulate network delay
+      await new Promise(resolve => setTimeout(resolve, 500));
+      setAgents(mockAgents);
       setError(null);
     } catch (err) {
       setError('Failed to fetch agents');
@@ -24,9 +25,15 @@ export const useAgents = () => {
 
   const createAgent = async (agentData: AgentCreationData) => {
     try {
-      const response = await api.post('/agents', agentData);
-      setAgents(prev => [...prev, response.data]);
-      return response.data;
+      // Simulate agent creation with generated ID
+      const newAgent = {
+        ...agentData,
+        id: crypto.randomUUID(),
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      };
+      setAgents(prev => [...prev, newAgent]);
+      return newAgent;
     } catch (err) {
       setError('Failed to create agent');
       console.error('Error creating agent:', err);
@@ -34,23 +41,28 @@ export const useAgents = () => {
     }
   };
 
-  useEffect(() => {
-    fetchAgents();
-  }, []);
-
   const updateAgent = async (id: string, updateData: AgentUpdateData) => {
     try {
-      const response = await api.patch(`/agents/${id}`, updateData);
+      // Simulate agent update
+      const updatedAgent = {
+        ...agents.find(a => a.id === id),
+        ...updateData,
+        updated_at: new Date().toISOString()
+      };
       setAgents(prev => prev.map(agent => 
-        agent.id === id ? { ...agent, ...response.data } : agent
+        agent.id === id ? updatedAgent : agent
       ));
-      return response.data;
+      return updatedAgent;
     } catch (err) {
       setError('Failed to update agent');
       console.error('Error updating agent:', err);
       throw err;
     }
   };
+
+  useEffect(() => {
+    fetchAgents();
+  }, []);
 
   return {
     agents,
