@@ -11,7 +11,7 @@ import {
   Chip,
   Grid
 } from '@mui/material';
-import { AI } from '../types/ai';
+import { AI } from '../../types/ai';
 
 interface AIDetailsDialogProps {
   ai: AI | null;
