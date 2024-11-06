@@ -221,6 +221,7 @@ export default function AgentsPage() {
                 systemPrompt={isCustomPrompt ? customPrompt : (selectedAgent?.systemPrompt || '')}
                 messages={chatHistories[selectedAgentId] || []}
                 onMessagesChange={handleChatUpdate}
+                showGenerateButton={false}
               />
             </Grid>
           </Grid>

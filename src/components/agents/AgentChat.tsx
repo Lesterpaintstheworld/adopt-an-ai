@@ -44,7 +44,13 @@ interface Props {
   onGenerate?: () => void;
 }
 
-export default function AgentChat({ systemPrompt, messages, onMessagesChange }: Props) {
+export default function AgentChat({ 
+  systemPrompt, 
+  messages, 
+  onMessagesChange,
+  showGenerateButton = false,
+  onGenerate
+}: Props) {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
