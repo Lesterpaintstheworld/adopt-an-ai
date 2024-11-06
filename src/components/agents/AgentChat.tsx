@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { styled } from '@mui/material/styles';
 import SendIcon from '@mui/icons-material/Send';
-import { ChatMessage, getChatCompletion } from '../../utils/openai';
+import { ChatMessage, getChatCompletion, generateSystemPrompt } from '../../utils/openai';
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   height: '100%',
@@ -72,7 +72,7 @@ interface Props {
   messages: ChatMessage[];
   onMessagesChange: (messages: ChatMessage[]) => void;
   showGenerateButton?: boolean;
-  onGenerate?: () => void;
+  onGenerate?: (prompt: string) => void;  // Update type to receive the generated prompt
 }
 
 export default function AgentChat({ 
@@ -188,7 +188,7 @@ export default function AgentChat({
                   { role: 'system', content: systemPrompt },
                   ...messages
                 ]);
-                if (onGenerate) {
+                if (onGenerate && finalPrompt) {
                   onGenerate(finalPrompt); // Pass the generated prompt to parent
                 }
               } catch (error) {
