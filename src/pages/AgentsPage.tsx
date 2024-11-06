@@ -138,10 +138,6 @@ export default function AgentsPage() {
   const [isCustomPrompt, setIsCustomPrompt] = useState(false);
   const [createError, setCreateError] = useState<string | null>(null);
 
-  type ChatHistories = {
-    [key: string]: ChatMessage[];
-  };
-
   const handleGeneratePrompt = async () => {
     if (!customPrompt.trim()) {
       setCreateError('System prompt cannot be empty');
@@ -214,6 +210,9 @@ export default function AgentsPage() {
       </Box>
     );
   }
+
+  const selectedAgent = agents.find(a => a.id === selectedAgentId);
+
   const [chatHistories, setChatHistories] = useState<ChatHistories>({
     create: []
   });
@@ -224,7 +223,6 @@ export default function AgentsPage() {
       [isCreating ? 'create' : selectedAgentId]: messages
     }));
   };
-  const selectedAgent = agents.find(a => a.id === selectedAgentId);
 
   useEffect(() => {
     if (selectedAgent) {
