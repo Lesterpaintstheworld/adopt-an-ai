@@ -137,6 +137,9 @@ export default function AgentsPage() {
   const [customPrompt, setCustomPrompt] = useState<string>('');
   const [isCustomPrompt, setIsCustomPrompt] = useState(false);
   const [createError, setCreateError] = useState<string | null>(null);
+  const [chatHistories, setChatHistories] = useState<ChatHistories>({
+    create: []
+  });
 
   const handleGeneratePrompt = async () => {
     if (!customPrompt.trim()) {
@@ -212,10 +215,6 @@ export default function AgentsPage() {
   }
 
   const selectedAgent = agents.find(a => a.id === selectedAgentId);
-
-  const [chatHistories, setChatHistories] = useState<ChatHistories>({
-    create: []
-  });
 
   const handleChatUpdate = (messages: ChatMessage[]) => {
     setChatHistories(prev => ({
