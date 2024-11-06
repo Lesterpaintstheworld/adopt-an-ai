@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
+import axios, { InternalAxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 import type { AgentCreationData, AgentUpdateData } from '../types/agents';
 
 // Create axios instance with base configuration
@@ -13,9 +13,9 @@ export const api = axios.create({
 console.log('API URL:', import.meta.env.VITE_API_URL || 'http://localhost:3000');
 
 // Request interceptor to add auth token
-api.interceptors.request.use((config: AxiosRequestConfig) => {
+api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   const token = localStorage.getItem('token');
-  if (token) {
+  if (token && config.headers) {
     config.headers.Authorization = `Bearer ${token}`;
   }
   console.log('Request headers:', config.headers);

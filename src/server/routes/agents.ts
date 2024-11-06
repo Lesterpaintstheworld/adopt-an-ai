@@ -1,6 +1,5 @@
 import express, { Request, Response } from 'express';
 import { z } from 'zod';
-import type { ZodError } from 'zod';
 import { AgentSchema } from '../../types/database';
 import { auth } from '../middleware/auth';
 import { db } from '../db';
