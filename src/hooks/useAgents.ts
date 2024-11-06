@@ -12,6 +12,7 @@ export const useAgents = () => {
     try {
       setLoading(true);
       const response = await agentsApi.getAll();
+      console.log('Agents response:', response); // Debug log
       setAgents(response.data);
       setError(null);
     } catch (err: any) {
@@ -21,7 +22,8 @@ export const useAgents = () => {
       console.error('Error fetching agents:', {
         error: err,
         response: err.response?.data,
-        status: err.response?.status
+        status: err.response?.status,
+        stack: err.stack // Add stack trace
       });
     } finally {
       setLoading(false);

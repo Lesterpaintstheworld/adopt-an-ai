@@ -51,7 +51,7 @@ router.post('/', async (req, res) => {
     `;
     
     const values = [
-      req.user.id,
+      req.user.userId,
       name,
       system_prompt,
       status || 'active',
@@ -72,7 +72,7 @@ router.put('/:id', async (req, res) => {
   try {
     const existingAgent = await pool.query(
       'SELECT * FROM agents WHERE id = $1 AND user_id = $2',
-      [req.params.id, req.user.id]
+      [req.params.id, req.user.userId]
     );
     
     if (existingAgent.rows.length === 0) {
@@ -117,7 +117,7 @@ router.delete('/:id', async (req, res) => {
   try {
     const result = await pool.query(
       'DELETE FROM agents WHERE id = $1 AND user_id = $2 RETURNING id',
-      [req.params.id, req.user.id]
+      [req.params.id, req.user.userId]
     );
     
     if (result.rows.length === 0) {
