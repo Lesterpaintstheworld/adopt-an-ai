@@ -1,10 +1,3 @@
-import OpenAI from 'openai';
-
-const openai = new OpenAI({
-  apiKey: import.meta.env.VITE_OPENAI_API_KEY,
-  dangerouslyAllowBrowser: true // Note: In production, calls should go through your backend
-});
-
 export interface ChatMessage {
   role: 'system' | 'user' | 'assistant';
   content: string;
@@ -12,15 +5,23 @@ export interface ChatMessage {
 
 export async function getChatCompletion(messages: ChatMessage[]) {
   try {
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4",
-      messages,
-      temperature: 0.7,
+    const response = await fetch('/api/ai/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
+      body: JSON.stringify({ messages }),
     });
 
+    if (!response.ok) {
+      throw new Error(`API error: ${response.statusText}`);
+    }
+
+    const completion = await response.json();
     return completion.choices[0].message;
   } catch (error) {
-    console.error('OpenAI API Error:', error);
+    console.error('Chat API Error:', error);
     throw error;
   }
 }
@@ -52,12 +53,20 @@ export async function generateSystemPrompt(messages: ChatMessage[]): Promise<str
       }
     ];
 
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4",
-      messages: promptGenerationMessages,
-      temperature: 0.7,
+    const response = await fetch('/api/ai/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
+      body: JSON.stringify({ messages: promptGenerationMessages }),
     });
 
+    if (!response.ok) {
+      throw new Error(`API error: ${response.statusText}`);
+    }
+
+    const completion = await response.json();
     return completion.choices[0].message?.content || '';
   } catch (error) {
     console.error('Failed to generate system prompt:', error);
