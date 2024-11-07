@@ -1,8 +1,11 @@
 import express, { Request, Response } from 'express';
 import { z } from 'zod';
+import { Prisma } from '@prisma/client';
 import { AgentSchema } from '../../types/database';
 import { auth } from '../middleware/auth';
 import { db } from '../db';
+
+type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
 
 interface AuthRequest extends Request {
   user: {
@@ -73,6 +76,9 @@ router.post('/', auth, async (req: Request, res: Response): Promise<void> => {
       data: {
         ...agentData,
         user_id: authReq.user.id,
+        parameters: JSON.stringify(agentData.parameters),
+        tools: JSON.stringify(agentData.tools),
+        vector_store: JSON.stringify(agentData.vector_store)
       }
     });
 
@@ -115,7 +121,12 @@ router.put('/:id', auth, async (req: Request, res: Response): Promise<void> => {
 
     const updatedAgent = await db.agent.update({
       where: { id: req.params.id },
-      data: agentData
+      data: {
+        ...agentData,
+        parameters: agentData.parameters ? JSON.stringify(agentData.parameters) : undefined,
+        tools: agentData.tools ? JSON.stringify(agentData.tools) : undefined,
+        vector_store: agentData.vector_store ? JSON.stringify(agentData.vector_store) : undefined
+      }
     });
 
     res.json(updatedAgent);
