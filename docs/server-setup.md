@@ -20,8 +20,18 @@ touch .env
 
 2. Add the required environment variables:
 ```env
-# OpenAI API Configuration
-REACT_APP_OPENAI_API_KEY=your_openai_api_key_here
+# Database Configuration
+DATABASE_URL=postgresql://postgres:password@localhost:5432/raise_an_ai
+
+# JWT Configuration
+JWT_SECRET=your-jwt-secret-here
+
+# OpenAI Configuration
+OPENAI_API_KEY=sk-your-api-key-here
+VITE_OPENAI_API_KEY=sk-your-api-key-here
+
+# Google OAuth Configuration
+GOOGLE_CLIENT_ID=your-google-client-id
 ```
 
 ## Starting the Development Server

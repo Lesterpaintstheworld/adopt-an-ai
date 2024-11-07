@@ -7,6 +7,12 @@ const { Pool } = require('pg');
 const path = require('path');
 require('dotenv').config();
 
+// Validate required environment variables
+if (!process.env.OPENAI_API_KEY) {
+  console.error('OPENAI_API_KEY is not set in environment variables');
+  process.exit(1);
+}
+
 // Import routes
 const agentsRouter = require(path.join(__dirname, 'routes', 'agents'));
 const authRouter = require(path.join(__dirname, 'routes', 'auth'));
