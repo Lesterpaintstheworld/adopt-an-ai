@@ -67,6 +67,22 @@ router.get('/', async (req, res) => {
 // POST /api/teams
 router.post('/', async (req, res) => {
   const { name, description } = req.body;
+  
+  // Validation basique
+  if (!name || name.trim().length === 0) {
+    return res.status(400).json({ 
+      error: 'Team name is required',
+      field: 'name'
+    });
+  }
+
+  if (name.length > 100) {
+    return res.status(400).json({
+      error: 'Team name must be less than 100 characters',
+      field: 'name'
+    });
+  }
+
   const client = await pool.connect();
   
   try {

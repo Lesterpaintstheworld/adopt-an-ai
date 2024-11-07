@@ -39,16 +39,22 @@ const pool = new Pool({
 // Test database connection and handle errors
 pool.on('error', (err) => {
   console.error('Unexpected database error:', err);
+  // Tentative de reconnexion
+  setTimeout(() => {
+    console.log('Attempting to reconnect to database...');
+    pool.connect();
+  }, 5000);
 });
 
+// Test de connexion initial
 pool.connect()
   .then(client => {
     console.log('Database connection established');
     client.release();
   })
   .catch(err => {
-    console.error('Database connection error:', err);
-    process.exit(1); // Exit if we can't connect to database
+    console.error('Initial database connection error:', err);
+    process.exit(1);
   });
 
 if (!process.env.JWT_SECRET) {
@@ -93,7 +99,19 @@ app.use((req, res, next) => {
 
 // Request logging middleware
 app.use((req, res, next) => {
-  console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
+  const start = Date.now();
+  res.on('finish', () => {
+    const duration = Date.now() - start;
+    console.log({
+      timestamp: new Date().toISOString(),
+      method: req.method,
+      path: req.path,
+      status: res.statusCode,
+      duration: `${duration}ms`,
+      ip: req.ip,
+      userAgent: req.get('user-agent')
+    });
+  });
   next();
 });
 
@@ -305,18 +323,37 @@ app.post('/api/users/:userId/tutorial-status', async (req, res) => {
 // Add timeout middleware
 const timeout = require('connect-timeout');
 app.use(timeout('30s'));
-app.use(haltOnTimedout);
-
-function haltOnTimedout(req, res, next) {
-  if (!req.timedout) next();
-}
+app.use((req, res, next) => {
+  if (!req.timedout) {
+    next();
+  } else {
+    console.error('Request timeout:', {
+      method: req.method,
+      path: req.path,
+      duration: '30s'
+    });
+    res.status(503).json({
+      error: 'Request timeout',
+      message: 'The request took too long to process'
+    });
+  }
+});
 
 // Global error handler
 app.use((err, req, res, next) => {
-  console.error('Unhandled error:', err);
-  res.status(500).json({
-    error: 'Internal server error',
-    details: process.env.NODE_ENV === 'development' ? err.message : undefined
+  console.error('Unhandled error:', {
+    message: err.message,
+    stack: err.stack,
+    path: req.path,
+    method: req.method
+  });
+  
+  res.status(err.status || 500).json({
+    error: process.env.NODE_ENV === 'production' 
+      ? 'Internal server error' 
+      : err.message,
+    path: req.path,
+    timestamp: new Date().toISOString()
   });
 });
 
