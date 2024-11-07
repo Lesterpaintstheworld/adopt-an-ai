@@ -9,7 +9,6 @@ dist/*
 node_modules/*
 
 # Database
-*.sql
 *.sqlite
 /data
 /postgres-data
