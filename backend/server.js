@@ -302,7 +302,34 @@ app.post('/api/users/:userId/tutorial-status', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
+// Add timeout middleware
+const timeout = require('connect-timeout');
+app.use(timeout('30s'));
+app.use(haltOnTimedout);
+
+function haltOnTimedout(req, res, next) {
+  if (!req.timedout) next();
+}
+
+// Global error handler
+app.use((err, req, res, next) => {
+  console.error('Unhandled error:', err);
+  res.status(500).json({
+    error: 'Internal server error',
+    details: process.env.NODE_ENV === 'development' ? err.message : undefined
+  });
+});
+
+// Handle termination signals
+process.on('SIGTERM', () => {
+  console.log('SIGTERM received, shutting down gracefully');
+  pool.end();
+  server.close(() => {
+    console.log('Process terminated');
+  });
+});
+
+const server = app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
   console.log(`API URL: http://localhost:${PORT}`);
   console.log('Environment:', process.env.NODE_ENV);
