@@ -46,21 +46,52 @@ npm run preview -- --host 0.0.0.0 --port 3000
 
 ## Production Deployment
 
-1. Build the production-ready application:
+1. Install production dependencies:
 ```bash
-npm run build
+cd backend
+npm ci --only=production
 ```
 
-2. The build process will create a `dist` directory containing the optimized production files.
-
-3. Deploy the contents of the `dist` directory to your web server. Common options:
-   - Upload to a static hosting service (Netlify, Vercel, GitHub Pages)
-   - Copy to an nginx/Apache web server directory
-   - Deploy to a cloud service (AWS S3, Google Cloud Storage)
-
-4. Before deploying to production, verify the build:
+2. Set up PM2 process manager:
 ```bash
-npm run preview
+# Install PM2 globally
+npm install -g pm2
+
+# Start the backend with PM2
+pm2 start ecosystem.config.js
+
+# Useful PM2 commands
+pm2 status                    # Check status
+pm2 logs raise-an-ai-backend  # View logs
+pm2 restart raise-an-ai-backend
+pm2 stop raise-an-ai-backend
+```
+
+3. Configure nginx as reverse proxy:
+```nginx
+# /etc/nginx/sites-available/raise-an-ai
+server {
+    listen 80;
+    server_name api.raise-an.ai;
+
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
+```
+
+4. Enable and start nginx:
+```bash
+sudo ln -s /etc/nginx/sites-available/raise-an-ai /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl restart nginx
 ```
 
 5. For nginx deployment, use this configuration:
