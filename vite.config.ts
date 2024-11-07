@@ -35,14 +35,7 @@ export default defineConfig(({ mode }) => {
         '/api': {
           target: env.VITE_API_URL || 'http://localhost:3000',
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, ''),
-          configure: (proxy, _options) => {
-            proxy.on('proxyReq', (proxyReq) => {
-              if (env.VITE_OPENAI_API_KEY) {
-                proxyReq.setHeader('X-OpenAI-Key', env.VITE_OPENAI_API_KEY);
-              }
-            });
-          }
+          rewrite: (path) => path.replace(/^\/api/, '')
         }
       }
     },

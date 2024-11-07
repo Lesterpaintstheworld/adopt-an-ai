@@ -5,11 +5,12 @@ export interface ChatMessage {
 
 export async function getChatCompletion(messages: ChatMessage[]) {
   try {
+    const token = localStorage.getItem('token');
     const response = await fetch('/api/ai/chat', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify({ messages }),
     });
@@ -53,11 +54,12 @@ export async function generateSystemPrompt(messages: ChatMessage[]): Promise<str
       }
     ];
 
+    const token = localStorage.getItem('token');
     const response = await fetch('/api/ai/chat', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify({ messages: promptGenerationMessages }),
     });
