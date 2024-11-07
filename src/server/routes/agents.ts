@@ -1,11 +1,8 @@
 import express, { Request, Response } from 'express';
 import { z } from 'zod';
-import { Prisma } from '@prisma/client';
 import { AgentSchema } from '../../types/database';
 import { auth } from '../middleware/auth';
 import { db } from '../db';
-
-type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
 
 interface AuthRequest extends Request {
   user: {
