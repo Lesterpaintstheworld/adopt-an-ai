@@ -13,6 +13,15 @@ if (!process.env.OPENAI_API_KEY) {
   process.exit(1);
 }
 
+// Debug database configuration
+console.log('Database config:', {
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT,
+  passwordSet: !!process.env.DB_PASSWORD
+});
+
 // Import routes
 const agentsRouter = require(path.join(__dirname, 'routes', 'agents'));
 const authRouter = require(path.join(__dirname, 'routes', 'auth'));
