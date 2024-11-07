@@ -116,10 +116,14 @@ const verifyToken = (req, res, next) => {
   }
 };
 
+// Import AI router
+const aiRouter = require(path.join(__dirname, 'routes', 'ai'));
+
 // Register routes with auth middleware
 app.use('/api/agents', verifyToken, agentsRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/teams', verifyToken, teamsRouter);
+app.use('/api/ai', verifyToken, aiRouter);
 
 // Log registered routes
 console.log('Registered routes:', app._router.stack

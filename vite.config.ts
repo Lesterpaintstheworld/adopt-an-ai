@@ -21,7 +21,7 @@ export default defineConfig(({ mode }) => {
       })
     ],
     define: {
-      'process.env.VITE_OPENAI_API_KEY': JSON.stringify(env.VITE_OPENAI_API_KEY),
+      // Runtime config injected during build
     },
     resolve: {
       alias: {
