@@ -117,7 +117,7 @@ const verifyToken = (req, res, next) => {
 };
 
 // Import AI router
-const aiRouter = require(path.join(__dirname, 'routes', 'ai'));
+const aiRouter = require('./routes/ai');
 
 // Register routes with auth middleware
 app.use('/api/agents', verifyToken, agentsRouter);
