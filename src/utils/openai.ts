@@ -6,6 +6,10 @@ export interface ChatMessage {
 export async function getChatCompletion(messages: ChatMessage[]) {
   try {
     const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('No authentication token found');
+    }
+
     const response = await fetch('/api/ai/chat', {
       method: 'POST',
       headers: {
@@ -15,6 +19,11 @@ export async function getChatCompletion(messages: ChatMessage[]) {
       body: JSON.stringify({ messages }),
     });
 
+    if (response.status === 401) {
+      // Handle auth error specifically
+      throw new Error('Authentication failed - please log in again');
+    }
+
     if (!response.ok) {
       throw new Error(`API error: ${response.statusText}`);
     }
@@ -23,6 +32,7 @@ export async function getChatCompletion(messages: ChatMessage[]) {
     return completion.choices[0].message;
   } catch (error) {
     console.error('Chat API Error:', error);
+    // Re-throw to handle in UI
     throw error;
   }
 }
@@ -55,6 +65,10 @@ export async function generateSystemPrompt(messages: ChatMessage[]): Promise<str
     ];
 
     const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('No authentication token found');
+    }
+
     const response = await fetch('/api/ai/chat', {
       method: 'POST',
       headers: {
@@ -63,6 +77,10 @@ export async function generateSystemPrompt(messages: ChatMessage[]): Promise<str
       },
       body: JSON.stringify({ messages: promptGenerationMessages }),
     });
+
+    if (response.status === 401) {
+      throw new Error('Authentication failed - please log in again');
+    }
 
     if (!response.ok) {
       throw new Error(`API error: ${response.statusText}`);
