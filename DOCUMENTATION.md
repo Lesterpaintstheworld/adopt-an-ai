@@ -118,12 +118,14 @@ The ResourceManager provides a standardized way to handle CRUD operations with b
 
 #### Core Features
 
-- **Ownership Validation**: Automatically verifies resource ownership
-- **Access Control**: Team-based and role-based access management  
-- **Event System**: Emits events for all resource changes
-- **Query Building**: Safe SQL construction with QueryBuilder
-- **Error Handling**: Standardized error responses
-- **Transaction Support**: Automatic rollback on failures
+- **Ownership Validation**: Automatically verifies resource ownership and permissions
+- **Access Control**: Team-based and role-based access management with granular permissions
+- **Event System**: Emits events for all resource lifecycle changes with detailed context
+- **Query Building**: Safe SQL construction with QueryBuilder and parameterized queries
+- **Error Handling**: Standardized error responses with detailed context
+- **Transaction Support**: Automatic rollback on failures with nested transaction support
+- **Validation**: Schema-based validation using Zod
+- **Audit Logging**: Tracks all changes with user context
 
 #### Usage Example
 
@@ -134,30 +136,191 @@ const manager = new ResourceManager('agents', 'agent');
 // Create resource with validation
 const agent = await manager.create(userId, {
   name: 'My Agent',
-  system_prompt: 'You are a helpful assistant'
+  system_prompt: 'You are a helpful assistant',
+  parameters: {
+    temperature: 0.7,
+    max_tokens: 1000
+  },
+  tools: ['search', 'calculator']
 });
-// Emits: resource.created
+// Emits: resource.created with full context
 
-// List resources with filtering
+// List resources with advanced filtering
 const agents = await manager.list(userId, {
   status: 'active',
   orderBy: 'created_at',
-  direction: 'DESC'
+  direction: 'DESC',
+  limit: 20,
+  offset: 0,
+  search: 'keyword',
+  filters: {
+    created_after: '2024-01-01',
+    has_tools: true
+  }
 });
 
 // Get single resource with access check
 const agent = await manager.getResource(agentId, userId);
-// Throws: NotFoundError or AccessDeniedError
+// Throws: NotFoundError or AccessDeniedError with context
 
-// Update with validation
+// Update with validation and partial updates
 const updated = await manager.updateResource(agentId, userId, {
-  name: 'Updated Name'
+  name: 'Updated Name',
+  parameters: {
+    ...agent.parameters,
+    temperature: 0.8
+  }
 });
-// Emits: resource.updated
+// Emits: resource.updated with change tracking
 
-// Delete with cascading
+// Delete with cascading and cleanup
 await manager.deleteResource(agentId, userId);
-// Emits: resource.deleted
+// Emits: resource.deleted with cleanup details
+// Handles: Related record cleanup, file deletion, cache invalidation
+
+// Transaction example
+await manager.withTransaction(async (transaction) => {
+  const agent = await manager.create(userId, data, { transaction });
+  await manager.addToTeam(teamId, agent.id, { transaction });
+});
+
+// Event handling
+manager.on('resource.created', ({ resource, user, context }) => {
+  // Handle resource creation
+  // Access full audit context
+  // Trigger side effects
+});
+```
+
+#### Validation System
+
+```javascript
+// Resource schemas
+const schemas = {
+  agent: z.object({
+    name: z.string().min(1).max(255),
+    system_prompt: z.string().optional(),
+    status: z.enum(['active', 'inactive']),
+    parameters: z.object({
+      temperature: z.number().min(0).max(1),
+      max_tokens: z.number().positive()
+    }).optional(),
+    tools: z.array(z.string()).optional()
+  }),
+
+  team: z.object({
+    name: z.string().min(1).max(100),
+    description: z.string().optional(),
+    status: z.enum(['active', 'inactive', 'archived'])
+  })
+};
+
+// Validation middleware
+app.post('/api/resources',
+  validate(schemas.resource),
+  async (req, res) => {
+    // req.validated contains validated data
+  }
+);
+```
+
+#### Event System
+
+```javascript
+// Resource lifecycle events
+events.on('resource.created', ({ id, type, userId, resource }) => {
+  // Handle resource creation
+  // Full resource data available
+});
+
+events.on('resource.updated', ({ id, type, userId, changes, previous }) => {
+  // Handle resource update
+  // Access what changed
+});
+
+events.on('resource.deleted', ({ id, type, userId, resource }) => {
+  // Handle resource deletion
+  // Last chance to access data
+});
+
+// Access control events
+events.on('resource.accessDenied', ({ id, type, userId, action }) => {
+  // Handle access denial
+  // Audit security events
+});
+
+// Error events
+events.on('resource.error', ({ error, context }) => {
+  // Handle operation errors
+  // Access full error context
+});
+```
+
+#### Query Builder Usage
+
+```javascript
+const qb = new QueryBuilder();
+
+// SELECT query with joins
+const query = qb
+  .select(['a.*', 't.name as team_name'])
+  .from('agents a')
+  .leftJoin('team_agents ta', 'a.id = ta.agent_id')
+  .leftJoin('teams t', 'ta.team_id = t.id')
+  .where({ 'a.status': 'active' })
+  .orderBy('a.created_at', 'DESC')
+  .limit(10)
+  .offset(20)
+  .build();
+
+// INSERT with returning
+const insert = qb
+  .insert('agents', {
+    name: 'New Agent',
+    user_id: userId,
+    parameters: { temperature: 0.7 }
+  })
+  .returning('*')
+  .build();
+
+// UPDATE with conditions
+const update = qb
+  .update('agents', 
+    { status: 'inactive' },
+    { id: agentId, user_id: userId }
+  )
+  .returning('*')
+  .build();
+
+// DELETE with cascade
+const del = qb
+  .delete()
+  .from('agents')
+  .where({ id: agentId })
+  .returning('id')
+  .build();
+```
+
+#### Error Handling
+
+```javascript
+try {
+  await manager.getResource(id, userId);
+} catch (error) {
+  if (error instanceof NotFoundError) {
+    // Resource not found
+    // Access error.details for context
+  } else if (error instanceof AccessDeniedError) {
+    // User does not have access
+    // Access error.context for audit
+  } else if (error instanceof ValidationError) {
+    // Invalid data
+    // Access error.errors for details
+  } else {
+    // Unexpected error
+    // Full error context available
+  }
+}
 ```
 
 #### Event System
