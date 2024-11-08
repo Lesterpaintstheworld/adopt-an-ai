@@ -1694,18 +1694,25 @@ const schemas = {
 
 The ResourceManager provides a standardized way to handle CRUD operations with built-in validation, access control, and event tracking.
 
-#### Core Features
-- Generic CRUD operations with type safety and validation
-- Ownership validation and team-based access control 
-- Event emission for all resource changes
-- Query building with SQL injection protection
-- Transaction support with automatic rollback
-- Schema validation using Zod
-- Comprehensive audit logging
-- Real-time event tracking
+### Core Features
+- Generic resource CRUD operations with type safety
+- Ownership validation with team support
+- Role-based access control
+- Event emission for all operations
+- Query building with parameterization
+- Transaction support
+- Validation using Zod schemas
+- Audit logging
+- Real-time event tracking and webhooks
 - Cascading deletions and cleanup
+- Team-based access control and sharing
+- Automatic timestamps and versioning
+- Resource ownership transfer
+- Bulk operations support
+- Custom validation rules
+- Soft delete option
 
-#### ResourceManager Usage
+### ResourceManager Usage
 ```javascript
 // Initialize a resource manager
 const manager = new ResourceManager('table_name', 'resource_name');
