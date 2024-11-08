@@ -4,8 +4,13 @@ const { OAuth2Client } = require('google-auth-library');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const path = require('path');
+const timeout = require('connect-timeout');
 const pool = require('./config/db');
 const verifyToken = require('./middleware/auth');
+const corsOptions = require('./config/cors');
+const errorHandler = require('./middleware/errorHandler');
+const logger = require('./utils/logger');
+const { REQUEST_TIMEOUT } = require('./constants');
 require('dotenv').config();
 
 // Validate required environment variables
@@ -57,26 +62,23 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Middleware
-app.use(cors({
-  origin: function(origin, callback) {
-    // Allow requests from localhost development ports
-    const allowedOrigins = [
-      'http://localhost:5173',
-      'http://localhost:5174', 
-      'http://localhost:3000'
-    ];
-    
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    
-    if (allowedOrigins.indexOf(origin) === -1) {
-      return callback(new Error('CORS policy violation'), false);
-    }
-    return callback(null, true);
-  },
-  credentials: true
-}));
+app.use(cors(corsOptions));
 app.use(express.json());
+app.use(timeout(REQUEST_TIMEOUT));
+
+// Request logging middleware
+app.use((req, res, next) => {
+  const start = Date.now();
+  res.on('finish', () => {
+    logger.info('Request completed', {
+      method: req.method,
+      path: req.path,
+      status: res.statusCode,
+      duration: `${Date.now() - start}ms`
+    });
+  });
+  next();
+});
 
 // Add CORS headers middleware
 app.use((req, res, next) => {
@@ -306,23 +308,8 @@ app.use((req, res, next) => {
   }
 });
 
-// Global error handler
-app.use((err, req, res, next) => {
-  console.error('Unhandled error:', {
-    message: err.message,
-    stack: err.stack,
-    path: req.path,
-    method: req.method
-  });
-  
-  res.status(err.status || 500).json({
-    error: process.env.NODE_ENV === 'production' 
-      ? 'Internal server error' 
-      : err.message,
-    path: req.path,
-    timestamp: new Date().toISOString()
-  });
-});
+// Error handling
+app.use(errorHandler);
 
 // Handle termination signals
 process.on('SIGTERM', () => {
