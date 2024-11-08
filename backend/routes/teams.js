@@ -48,7 +48,7 @@ router.get('/', async (req, res, next) => {
 });
 
 // POST /api/teams
-router.post('/', validateRequest(schemas.team), async (req, res, next) => {
+router.post('/', validateResource('team'), async (req, res, next) => {
   try {
     const result = await dbUtils.withTransaction(async (client) => {
       const teamResult = await dbUtils.executeQuery(
