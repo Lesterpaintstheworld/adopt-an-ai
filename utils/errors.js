@@ -1,5 +1,8 @@
 const { formatResponse } = require('./responses');
 
+const { formatResponse } = require('./responses');
+const logger = require('./logger');
+
 class AppError extends Error {
   constructor(message, statusCode = 500, details = null) {
     super(message);
@@ -16,13 +19,25 @@ class AppError extends Error {
   getPublicMessage() {
     const messages = {
       400: 'Invalid request',
-      401: 'Unauthorized',
-      403: 'Forbidden', 
+      401: 'Unauthorized', 
+      403: 'Forbidden',
       404: 'Not found',
       429: 'Too many requests',
       500: 'Internal server error'
     };
     return messages[this.statusCode] || 'Internal server error';
+  }
+
+  static handleError(err, req) {
+    logger.error('Error caught', err, {
+      path: req.path,
+      method: req.method,
+      query: req.query,
+      body: req.body,
+      user: req.user?.userId
+    });
+
+    return err instanceof AppError ? err : new AppError(err.message);
   }
 }
 
