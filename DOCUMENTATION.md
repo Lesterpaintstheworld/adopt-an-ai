@@ -117,12 +117,69 @@ events.onWithLog('resource.created', handleCreate);
 The API uses a powerful ResourceManager system that provides standardized CRUD operations, validation, access control and event tracking for all resources.
 
 #### Resource Manager Features
-- Automatic ownership validation and access control
+- Automatic ownership validation and access control 
 - Event emission for all resource changes
 - Query building with SQL injection protection
 - Transaction support with rollback
 - Standardized error handling and logging
 - Built-in pagination and filtering
+
+#### Core Components
+
+##### QueryBuilder
+Provides safe SQL query construction:
+```javascript
+const qb = new QueryBuilder();
+const query = qb
+  .select(['id', 'name'])
+  .from('users')
+  .where({ status: 'active' })
+  .orderBy('created_at', 'DESC')
+  .limit(10)
+  .build();
+```
+
+##### Event System
+Resource changes emit events that can be monitored:
+```javascript
+// Resource lifecycle events
+events.on('resource.created', ({ id, type, userId }) => {
+  // Handle resource creation
+});
+
+events.on('resource.updated', ({ id, type, userId, changes }) => {
+  // Handle resource update  
+});
+
+events.on('resource.deleted', ({ id, type, userId }) => {
+  // Handle resource deletion
+});
+
+// Access control events  
+events.on('resource.accessDenied', ({ id, type, userId, action }) => {
+  // Handle access denial
+});
+```
+
+##### Validation System
+Schema-based validation using Zod:
+```javascript
+const schemas = {
+  agent: z.object({
+    name: z.string().min(1).max(255),
+    system_prompt: z.string().optional(),
+    status: z.enum(['active', 'inactive']).optional(),
+    parameters: z.record(z.any()).optional(),
+    tools: z.array(z.any()).optional()
+  }),
+
+  team: z.object({
+    name: z.string().min(1).max(100), 
+    description: z.string().optional(),
+    status: z.enum(['active', 'inactive', 'archived']).optional()
+  })
+};
+```
 
 #### Using ResourceManager
 
@@ -136,10 +193,10 @@ const resource = await manager.create(userId, {
   description: 'Resource Description'
 }); // Validates against schema
 
-// List with filtering and pagination
+// List with filtering and pagination 
 const resources = await manager.list(userId, {
   filter: { status: 'active' },
-  sort: '-created_at',
+  sort: '-created_at', 
   page: 1,
   limit: 20
 });
@@ -156,6 +213,46 @@ const updated = await manager.updateResource(resourceId, userId, {
 // Delete with cascading
 await manager.deleteResource(resourceId, userId);
 // Handles related records cleanup
+```
+
+#### Error Handling
+
+The ResourceManager provides standardized error handling:
+
+```javascript
+try {
+  await manager.getResource(id, userId);
+} catch (error) {
+  if (error instanceof NotFoundError) {
+    // Resource not found
+  } else if (error instanceof AccessDeniedError) {
+    // User does not have access
+  } else if (error instanceof ValidationError) {
+    // Invalid data
+  } else {
+    // Unexpected error
+  }
+}
+```
+
+#### Middleware Integration
+
+The system includes middleware for validation and rate limiting:
+
+```javascript
+// Validation middleware
+app.post('/api/resources', 
+  validate(schemas.resource),
+  async (req, res) => {
+    // req.validated contains validated data
+  }
+);
+
+// Rate limiting middleware
+app.use('/api', rateLimiter({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100 // limit each IP to 100 requests
+}));
 ```
 
 #### Event System
