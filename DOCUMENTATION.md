@@ -319,6 +319,153 @@ try {
   }
 }
 ```
+
+### Request Validation
+
+All requests are validated using Zod schemas before processing. The validation system provides:
+
+- Type safety with Zod schemas
+- Custom validation rules
+- Standardized error messages
+- Request sanitization
+
+#### Available Schemas
+
+```typescript
+// Agent Schema
+const agentSchema = z.object({
+  name: z.string().min(1).max(255),
+  system_prompt: z.string().optional(),
+  status: z.enum(['active', 'inactive']).optional(),
+  parameters: z.record(z.any()).optional(),
+  tools: z.array(z.any()).optional()
+});
+
+// Team Schema
+const teamSchema = z.object({
+  name: z.string().min(1).max(100),
+  description: z.string().optional(),
+  status: z.enum(['active', 'inactive', 'archived']).optional()
+});
+
+// Team Member Schema
+const teamMemberSchema = z.object({
+  userId: z.string().min(1),
+  role: z.enum(['owner', 'admin', 'member']).default('member')
+});
+
+// Team Agent Schema 
+const teamAgentSchema = z.object({
+  agentId: z.string().uuid()
+});
+```
+
+#### Using Validation
+
+```javascript
+// In route handlers
+router.post('/', validate(schemas.agent), async (req, res) => {
+  // req.validated contains the validated data
+  const agent = await agentManager.create(req.user.id, req.validated);
+  res.json(agent);
+});
+
+// Manual validation
+const result = schemas.agent.safeParse(data);
+if (!result.success) {
+  throw new ValidationError(result.error);
+}
+```
+
+### API Endpoints
+
+All resource endpoints follow this pattern:
+```
+GET    /api/{resource}          - List resources
+POST   /api/{resource}          - Create resource
+GET    /api/{resource}/:id      - Get resource
+PUT    /api/{resource}/:id      - Update resource
+DELETE /api/{resource}/:id      - Delete resource
+```
+
+Common Headers:
+```
+Authorization: Bearer <jwt_token>
+Content-Type: application/json
+```
+
+Standard Response Format:
+```json
+{
+  "success": true,
+  "data": {},
+  "timestamp": "ISO-8601",
+  "requestId": "uuid"
+}
+```
+
+Error Response Format:
+```json
+{
+  "success": false,
+  "error": "Error message",
+  "code": 400,
+  "type": "ValidationError",
+  "details": {},
+  "timestamp": "ISO-8601",
+  "requestId": "uuid"
+}
+```
+
+### Authentication 
+
+#### POST /api/auth/google
+Authenticate user with Google OAuth token.
+
+Headers:
+```
+Content-Type: application/json
+Authorization: Bearer <google_token>
+```
+
+Request:
+```json
+{
+  "googleToken": "string",  // Valid Google OAuth token
+  "userData": {
+    "googleId": "string",   // Google user ID
+    "email": "string",      // User email address
+    "name": "string",       // User display name
+    "picture": "string",    // Profile picture URL
+    "locale": "string"      // User locale
+  }
+}
+```
+
+Response:
+```json
+{
+  "user": {
+    "id": "string",         // Internal user ID
+    "email": "string",      // User email
+    "name": "string",       // User name
+    "tutorial_completed": boolean,
+    "tutorial_progress": {
+      "lastStep": number,
+      "completedSteps": string[]
+    }
+  },
+  "token": "string"         // JWT token for authentication
+}
+```
+
+Error Responses:
+- 400: Invalid request data
+- 401: Invalid Google token
+- 500: Server error
+
+Rate Limiting:
+- 100 requests per 15 minutes per IP
 - Real-time event tracking
 - Cascading deletions
 - Team-based access control
