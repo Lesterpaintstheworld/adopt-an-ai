@@ -1,5 +1,21 @@
+const logger = require('./logger');
+
 class QueryBuilder {
+  static validateInput(input) {
+    if (typeof input !== 'string' || input.trim().length === 0) {
+      throw new Error('Invalid input parameter');
+    }
+    // Basic SQL injection prevention
+    if (input.toLowerCase().includes('--') || input.includes(';')) {
+      throw new Error('Potential SQL injection detected');
+    }
+    return input.trim();
+  }
+
   static buildPaginatedQuery(baseQuery, orderBy = 'created_at DESC') {
+    try {
+      baseQuery = this.validateInput(baseQuery);
+      orderBy = this.validateInput(orderBy);
     return `
       ${baseQuery}
       ORDER BY ${orderBy}

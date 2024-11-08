@@ -2,7 +2,16 @@ const { AppError } = require('../utils/errors');
 const logger = require('../utils/logger');
 
 module.exports = (err, req, res, next) => {
-  logger.error('Error caught by handler', err);
+  const errorContext = {
+    path: req.path,
+    method: req.method,
+    query: req.query,
+    body: req.body,
+    user: req.user?.userId,
+    timestamp: new Date().toISOString()
+  };
+
+  logger.error('Error caught by handler', err, errorContext);
 
   if (err instanceof AppError) {
     return res.status(err.statusCode).json({
