@@ -1,7 +1,8 @@
 const formatResponse = (success, data, error = null) => {
   const response = { 
     success,
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
+    requestId: crypto.randomUUID()
   };
   
   if (success) {
@@ -9,6 +10,7 @@ const formatResponse = (success, data, error = null) => {
   } else {
     response.error = error.getPublicMessage();
     response.code = error.statusCode || 500;
+    response.type = error.name;
     
     if (process.env.NODE_ENV === 'development') {
       response.details = error.details;
@@ -56,6 +58,16 @@ const httpResponses = {
   notFound(res, resource = 'Resource') {
     const error = new NotFoundError(resource);
     res.status(404).json(formatResponse(false, null, error));
+  },
+
+  tooManyRequests(res, message = 'Too many requests') {
+    const error = new RateLimitError(message);
+    res.status(429).json(formatResponse(false, null, error));
+  },
+
+  serviceUnavailable(res, message = 'Service temporarily unavailable') {
+    const error = new ServiceError(message);
+    res.status(503).json(formatResponse(false, null, error));
   }
 };
 
