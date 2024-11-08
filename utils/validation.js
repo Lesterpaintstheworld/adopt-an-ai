@@ -27,13 +27,13 @@ const schemas = {
 
 const validate = (schema) => (req, res, next) => {
   try {
+    if (!schema) {
+      throw new Error('No validation schema provided');
+    }
     req.validated = schema.parse(req.body);
     next();
   } catch (error) {
-    res.status(400).json({
-      error: 'Validation failed',
-      details: error.errors
-    });
+    next(new ValidationError('Validation failed', error.errors));
   }
 };
 

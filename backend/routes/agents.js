@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const validate = require('../middleware/validate');
-const { schemas } = require('../utils/validation');
+const { validate, schemas } = require('../utils/validation');
 const ResourceManager = require('../utils/resourceManager');
 const ResourceController = require('../controllers/resourceController');
 const eventEmitter = require('../utils/eventEmitter');
