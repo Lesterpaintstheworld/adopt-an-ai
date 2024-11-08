@@ -1842,7 +1842,7 @@ const schemas = {
 
 The ResourceManager provides a standardized way to handle CRUD operations with built-in validation, access control, and event tracking.
 
-#### Core Features
+### Core Features
 - Generic resource CRUD operations with type safety
 - Ownership validation with team support
 - Role-based access control
@@ -1856,10 +1856,30 @@ The ResourceManager provides a standardized way to handle CRUD operations with b
 - Team-based access control
 - Automatic timestamps
 
-#### Usage Example
+### ResourceManager API
 
+#### Constructor
 ```javascript
-// Initialize manager for a resource type
+const manager = new ResourceManager(tableName, resourceName);
+```
+
+#### Methods
+- `create(userId, data)` - Create new resource
+- `list(userId, options)` - List resources with filtering
+- `getResource(resourceId, userId)` - Get single resource
+- `updateResource(resourceId, userId, data)` - Update resource
+- `deleteResource(resourceId, userId)` - Delete resource
+- `checkOwnership(resourceId, userId)` - Verify ownership
+- `checkAccess(resourceId, userId)` - Check access rights
+
+#### Events Emitted
+- `resource.created` - When resource is created
+- `resource.updated` - When resource is updated  
+- `resource.deleted` - When resource is deleted
+- `resource.accessDenied` - When access check fails
+
+#### Usage Example
+```javascript
 const manager = new ResourceManager('agents', 'agent');
 
 // Create with validation and events
