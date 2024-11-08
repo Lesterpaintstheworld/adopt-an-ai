@@ -193,3 +193,7 @@ Common HTTP status codes:
 2. Optimize indexes
 3. Adjust connection pools
 4. Cache frequently accessed data
+
+## Related Documentation
+- [README](README.md) - Project overview and setup
+- [Technical Architecture](ARCHITECTURE.md) - System design and components

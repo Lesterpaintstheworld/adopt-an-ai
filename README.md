@@ -51,6 +51,11 @@ A platform for developing and nurturing autonomous AI entities, creating a new p
 - Vector Database Solutions
 - Authentication & Payment Systems
 
+## Documentation
+
+- [User & Developer Guide](DOCUMENTATION.md) - Installation, API docs, development guide
+- [Technical Architecture](ARCHITECTURE.md) - System design, components, security
+
 ## Prerequisites
 
 - Node.js (v16 or higher)
