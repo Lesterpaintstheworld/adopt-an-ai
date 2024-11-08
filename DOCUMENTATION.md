@@ -2930,35 +2930,92 @@ PUT    /api/{resource}/:id      - Update resource
 DELETE /api/{resource}/:id      - Delete resource
 ```
 
-#### Using ResourceManager
+### Resource Management System
+
+The ResourceManager provides a standardized way to handle CRUD operations with built-in validation, access control, and event tracking.
+
+#### Core Features
+
+- **Generic Resource Operations**
+  - Type-safe CRUD operations with validation
+  - Automatic timestamps and audit trails
+  - Transaction support with automatic rollback
+  - Bulk operations and batch processing
+  - Cascading deletions and cleanup
+
+- **Access Control & Security**
+  - Ownership validation per resource
+  - Team-based access control
+  - Role-based permissions
+  - Resource sharing rules
+  - Access audit logging
+  - Rate limiting integration
+
+- **Event System Integration**
+  - Real-time event emission
+  - Operation tracking and metrics
+  - Audit trail generation
+  - Error event handling
+  - Custom event subscribers
+  - Async operation support
+
+- **Query Building & Data Access**
+  - Safe SQL construction via QueryBuilder
+  - Parameterized queries
+  - Transaction management
+  - Connection pooling
+  - Query optimization
+  - Index utilization
+
+#### Usage Examples
+
 ```javascript
-// Create a resource manager instance
-const manager = new ResourceManager('table_name', 'resource_name');
+// Initialize manager for a resource type
+const manager = new ResourceManager('agents', 'agent');
 
-// Create a new resource
-const resource = await manager.create(userId, {
-  name: 'Resource Name',
-  description: 'Resource Description'
+// Create with validation and events
+const agent = await manager.create(userId, {
+  name: 'My Agent',
+  system_prompt: 'You are a helpful assistant',
+  parameters: {
+    temperature: 0.7,
+    max_tokens: 1000
+  }
+}); // Emits: resource.created
+
+// List with advanced filtering
+const agents = await manager.list(userId, {
+  status: 'active',
+  orderBy: 'created_at', 
+  direction: 'DESC',
+  limit: 20,
+  offset: 0,
+  search: 'keyword'
 });
 
-// List resources with options
-const resources = await manager.list(userId, {
-  sort: 'created_at',
-  order: 'DESC',
-  limit: 10,
-  offset: 0
+// Get with access check
+const agent = await manager.getResource(agentId, userId);
+// Throws: NotFoundError or AccessDeniedError
+
+// Update with validation
+const updated = await manager.updateResource(agentId, userId, {
+  name: 'Updated Name',
+  parameters: {
+    ...agent.parameters,
+    temperature: 0.8
+  }
+}); // Emits: resource.updated
+
+// Delete with cleanup
+await manager.deleteResource(agentId, userId);
+// Emits: resource.deleted
+// Handles: Related cleanup
+
+// Transaction example
+await manager.withTransaction(async (transaction) => {
+  const agent = await manager.create(userId, data, { transaction });
+  await manager.addToTeam(teamId, agent.id, { transaction });
 });
-
-// Get single resource
-const resource = await manager.getResource(resourceId, userId);
-
-// Update resource
-const updated = await manager.updateResource(resourceId, userId, {
-  name: 'Updated Name'
-});
-
-// Delete resource
-await manager.deleteResource(resourceId, userId);
 ```
 
 #### Event System
