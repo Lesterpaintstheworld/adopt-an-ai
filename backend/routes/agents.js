@@ -1,15 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Pool } = require('pg');
-const jwt = require('jsonwebtoken');
-
-// Reuse pool configuration from main server
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: process.env.NODE_ENV === 'production' ? {
-    rejectUnauthorized: false
-  } : false  // Désactive SSL en développement
-});
+const pool = require('../config/db');
 
 // GET /api/agents
 router.get('/', async (req, res) => {
