@@ -176,3 +176,48 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+# raise-an.ai Backend
+
+A platform for developing and nurturing autonomous AI entities, creating a new paradigm for human-AI collaboration while advancing the field of AI personhood development.
+
+## Documentation
+
+- [User & Developer Documentation](DOCUMENTATION.md) - Installation, API docs, development guide
+- [Technical Architecture](ARCHITECTURE.md) - System design, components, security
+
+## Core Technologies
+
+- Node.js/Express - Backend API framework
+- PostgreSQL - Primary database
+- OpenAI API - AI model integration
+- JWT - Authentication
+- PM2 - Process management
+
+## Quick Start
+
+```bash
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.example .env
+# Edit .env with your settings
+
+# Initialize database
+npm run db:init
+
+# Start development server
+npm run dev
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
