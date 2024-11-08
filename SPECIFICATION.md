@@ -238,6 +238,113 @@ Enterprise Tier (Custom):
 
 The platform aims to become the primary ecosystem for developing and nurturing autonomous AI entities, creating a new paradigm for human-AI collaboration while advancing the field of AI personhood development.
 
+### Utils Layer (`utils/`)
+
+#### Response Handler (`utils/responses.js`)
+Standardizes API responses.
+```javascript
+httpResponses {
+  success()         // Returns successful response with data
+  error()           // Returns error response with details
+  unauthorized()    // Returns 401 unauthorized response
+  notFound()        // Returns 404 not found response
+  serverError()     // Returns 500 server error response
+}
+```
+
+#### Cache Manager (`utils/cache.js`) 
+Manages application-level caching.
+```javascript
+cache {
+  get()            // Retrieves cached value
+  set()            // Stores value in cache with TTL
+  del()            // Removes value from cache
+  flush()          // Clears entire cache
+  stats()          // Returns cache statistics
+}
+```
+
+#### Metrics Collector (`utils/metrics.js`)
+Tracks application performance metrics.
+```javascript
+metrics {
+  startTimer()     // Starts timing an operation
+  endTimer()       // Ends timing and records duration
+  increment()      // Increments a counter metric
+  getValue()       // Gets current metric value
+  clear()          // Resets all metrics
+}
+```
+
+#### Event Emitter (`utils/eventEmitter.js`)
+Handles application events with logging.
+```javascript
+eventEmitter {
+  emit()           // Emits event with logging
+  onWithLog()      // Subscribes to event with logging
+}
+```
+
+### Middleware Layer (`middleware/`)
+
+#### Request Validator (`middleware/requestValidator.js`)
+Validates incoming requests against schemas.
+```javascript
+validateRequest(schema) {
+  // Validates body, query and params against provided schema
+  // Attaches validated data to request object
+  // Throws validation errors if invalid
+}
+```
+
+#### Rate Limiter (`middleware/rateLimiter.js`)
+Implements API rate limiting.
+```javascript
+rateLimiter {
+  // Limits requests per IP based on configuration
+  // Returns 429 Too Many Requests when limit exceeded
+}
+```
+
+### Database Migrations (`migrations/`)
+
+#### Teams Migration (`migrations/003_create_teams_table.sql`)
+Creates teams and related tables.
+```sql
+CREATE TABLE teams
+CREATE TABLE team_members
+CREATE TABLE team_agents
+CREATE INDEX idx_teams_owner
+CREATE INDEX idx_team_members_user
+CREATE INDEX idx_team_agents_agent
+```
+
+### Configuration (`config/`)
+
+#### CORS Configuration (`config/cors.js`)
+Configures Cross-Origin Resource Sharing.
+```javascript
+corsOptions {
+  origin           // Allowed origins based on environment
+  methods          // Allowed HTTP methods
+  allowedHeaders   // Allowed request headers
+  credentials      // Enable credentials
+  maxAge          // Preflight cache duration
+}
+```
+
+### Deployment (`deploy.sh`)
+Deployment automation script.
+```bash
+# Handles:
+- PM2 process management
+- Dependencies installation
+- Database migrations
+- Environment configuration
+- Application restart
+- Status verification
+```
+
 ### 10. Main Screen Specifications
 
 #### 10.1 Tech Tree Screen
