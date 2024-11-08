@@ -1,1 +1,0 @@
--- This file is deprecated. Use backend/migrations/003_create_teams_table.sql instead
