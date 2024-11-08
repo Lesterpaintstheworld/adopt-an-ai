@@ -29,11 +29,11 @@ const teamsRouter = require(path.join(__dirname, 'routes', 'teams'));
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: process.env.NODE_ENV === 'production' ? {
-    rejectUnauthorized: false // Required for RDS connections
-  } : false,
-  max: 20, // Maximum number of clients in the pool
-  idleTimeoutMillis: 30000, // Close idle clients after 30 seconds
-  connectionTimeoutMillis: 2000, // Return an error after 2 seconds if connection could not be established
+    rejectUnauthorized: false
+  } : false, // Désactive SSL en développement
+  max: 20,
+  idleTimeoutMillis: 30000,
+  connectionTimeoutMillis: 2000,
 });
 
 // Test database connection and handle errors
