@@ -70,7 +70,7 @@ await manager.deleteResource(agentId, userId);
 
 #### Event System Integration
 ```javascript
-// Resource lifecycle events
+// Resource lifecycle events with full context
 events.on('resource.created', ({ id, type, userId, resource }) => {
   // Handle resource creation
   // Full resource data available
@@ -2399,9 +2399,7 @@ app.post('/api/agents',
 );
 ```
 
-#### Error Handling
-
-Standardized error handling:
+### Error Handling
 
 ```javascript
 try {
@@ -2409,15 +2407,22 @@ try {
 } catch (error) {
   if (error instanceof NotFoundError) {
     // Resource not found
+    // Access error.details for context
   } else if (error instanceof AccessDeniedError) {
     // User does not have access
+    // Access error.context for audit
   } else if (error instanceof ValidationError) {
     // Invalid data
+    // Access error.errors for details
   }
 }
 ```
 
-#### Event System Integration
+### Event System
+
+The event system provides real-time tracking of all resource operations:
+
+#### Event Emitter Configuration
 
 ```javascript
 // Resource lifecycle events
