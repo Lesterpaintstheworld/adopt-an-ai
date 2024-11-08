@@ -7,22 +7,25 @@ class AppError extends Error {
   }
 
   toResponse() {
+    const isProduction = process.env.NODE_ENV === 'production';
     return {
-      error: process.env.NODE_ENV === 'production' 
-        ? this.getPublicMessage()
-        : this.message,
-      details: this.details
+      success: false,
+      error: isProduction ? this.getPublicMessage() : this.message,
+      details: isProduction ? undefined : this.details,
+      statusCode: this.statusCode
     };
   }
 
   getPublicMessage() {
-    switch(this.statusCode) {
-      case 400: return 'Invalid request';
-      case 401: return 'Unauthorized';
-      case 403: return 'Forbidden';
-      case 404: return 'Not found';
-      default: return 'Internal server error';
-    }
+    const messages = {
+      400: 'Invalid request',
+      401: 'Unauthorized',
+      403: 'Forbidden', 
+      404: 'Not found',
+      429: 'Too many requests',
+      500: 'Internal server error'
+    };
+    return messages[this.statusCode] || 'Internal server error';
   }
 }
 
