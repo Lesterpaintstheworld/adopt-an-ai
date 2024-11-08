@@ -91,24 +91,30 @@ class ResourceManager {
   async getResource(resourceId, userId) {
     await this.checkOwnership(resourceId, userId);
     
-    const result = await dbUtils.executeQuery(
-      `SELECT * FROM ${this.tableName}
-       WHERE id = $1`,
-      [resourceId]
-    );
-    
+    const qb = new QueryBuilder();
+    const query = qb
+      .select('*')
+      .from(this.tableName)
+      .where({ id: resourceId })
+      .build();
+
+    const result = await dbUtils.executeQuery(query.text, query.values);
     return result.rows[0];
   }
 
   async deleteResource(resourceId, userId) {
     await this.checkOwnership(resourceId, userId);
     
-    return dbUtils.executeQuery(
-      `DELETE FROM ${this.tableName}
-       WHERE id = $1
-       RETURNING id`,
-      [resourceId]
-    );
+    const qb = new QueryBuilder();
+    const query = qb
+      .delete()
+      .from(this.tableName)
+      .where({ id: resourceId })
+      .returning('id')
+      .build();
+
+    const result = await dbUtils.executeQuery(query.text, query.values);
+    return result.rows[0];
   }
 
   async updateResource(resourceId, userId, data) {

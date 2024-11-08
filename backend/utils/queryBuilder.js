@@ -90,6 +90,16 @@ class QueryBuilder {
     return this;
   }
 
+  delete() {
+    this.query = 'DELETE';
+    return this;
+  }
+
+  returning(fields = '*') {
+    this.query += ` RETURNING ${Array.isArray(fields) ? fields.join(', ') : fields}`;
+    return this;
+  }
+
   build() {
     return {
       text: this.query,
