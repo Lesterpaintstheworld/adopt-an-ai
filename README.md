@@ -53,8 +53,18 @@ A platform for developing and nurturing autonomous AI entities, creating a new p
 
 ## Documentation
 
-- [User & Developer Guide](DOCUMENTATION.md) - Installation, API docs, development guide
+### For Developers
+- [Developer Guide](DOCUMENTATION.md) - Installation, API, workflows
 - [Technical Architecture](ARCHITECTURE.md) - System design, components, security
+
+### For Users
+- [User Guide](docs/USER_GUIDE.md) - Getting started, features
+- [FAQ](docs/FAQ.md) - Frequently asked questions
+- [Tutorial](docs/TUTORIAL.md) - Step-by-step guide
+
+### For Contributors
+- [Contributing Guide](CONTRIBUTING.md) - How to participate
+- [Code of Conduct](CODE_OF_CONDUCT.md) - Community rules
 
 ## Prerequisites
 
