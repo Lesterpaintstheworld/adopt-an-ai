@@ -117,12 +117,74 @@ events.onWithLog('resource.created', handleCreate);
 The API uses a powerful ResourceManager system that provides standardized CRUD operations, validation, access control and event tracking for all resources.
 
 #### Resource Manager Features
-- Automatic ownership validation
-- Built-in access control
-- Event emission on changes
-- Standardized error handling
-- Query building with safety checks
-- Transaction support
+- Automatic ownership validation and access control
+- Event emission for all resource changes
+- Query building with SQL injection protection
+- Transaction support with rollback
+- Standardized error handling and logging
+- Built-in pagination and filtering
+
+#### Using ResourceManager
+
+```javascript
+// Create a resource manager instance
+const manager = new ResourceManager('table_name', 'resource_name');
+
+// Create with validation
+const resource = await manager.create(userId, {
+  name: 'Resource Name',
+  description: 'Resource Description'
+}); // Validates against schema
+
+// List with filtering and pagination
+const resources = await manager.list(userId, {
+  filter: { status: 'active' },
+  sort: '-created_at',
+  page: 1,
+  limit: 20
+});
+
+// Get with ownership check
+const resource = await manager.getResource(resourceId, userId);
+// Throws NotFoundError or AccessDeniedError if not authorized
+
+// Update with validation
+const updated = await manager.updateResource(resourceId, userId, {
+  name: 'Updated Name'
+}); // Validates changes
+
+// Delete with cascading
+await manager.deleteResource(resourceId, userId);
+// Handles related records cleanup
+```
+
+#### Event System
+Resource changes emit events that can be monitored:
+
+```javascript
+// Resource lifecycle events
+resourceManager.on('resource.created', ({ id, type, userId }) => {
+  // Handle resource creation
+});
+
+resourceManager.on('resource.updated', ({ id, type, userId, changes }) => {
+  // Handle resource update
+});
+
+resourceManager.on('resource.deleted', ({ id, type, userId }) => {
+  // Handle resource deletion
+});
+
+// Access control events
+resourceManager.on('resource.accessDenied', ({ id, type, userId, action }) => {
+  // Handle access denial
+});
+
+// Error events
+resourceManager.on('resource.error', ({ error, context }) => {
+  // Handle operation error
+});
+```
 
 #### Common Resource Endpoints
 All resources follow this pattern:
