@@ -1158,7 +1158,7 @@ The ResourceManager provides a standardized way to handle CRUD operations with b
   - Type-safe CRUD operations with validation
   - Automatic timestamps and audit trails
   - Transaction support with automatic rollback
-  - Bulk operations and batch processing
+  - Query building with SQL injection protection
   - Cascading deletions and cleanup
 
 - **Access Control & Security**
@@ -1168,6 +1168,150 @@ The ResourceManager provides a standardized way to handle CRUD operations with b
   - Resource sharing rules
   - Access audit logging
   - Rate limiting integration
+
+#### Usage Example
+
+```javascript
+// Initialize manager for a resource type
+const manager = new ResourceManager('agents', 'agent');
+
+// Create with validation and events
+const agent = await manager.create(userId, {
+  name: 'My Agent',
+  system_prompt: 'You are a helpful assistant',
+  parameters: { temperature: 0.7 }
+}); // Emits: resource.created
+
+// List with filtering
+const agents = await manager.list(userId, {
+  status: 'active',
+  orderBy: 'created_at',
+  direction: 'DESC',
+  limit: 20
+});
+
+// Get with ownership check
+const agent = await manager.getResource(agentId, userId);
+// Throws NotFoundError or AccessDeniedError if not authorized
+
+// Update with validation
+const updated = await manager.updateResource(agentId, userId, {
+  name: 'Updated Name'
+}); // Emits: resource.updated
+
+// Delete with cleanup
+await manager.deleteResource(agentId, userId);
+// Emits: resource.deleted, handles related cleanup
+```
+
+#### Query Builder Integration
+
+```javascript
+const qb = new QueryBuilder();
+
+// SELECT with joins
+const query = qb
+  .select(['a.*', 't.name as team_name'])
+  .from('agents a')
+  .leftJoin('team_agents ta', 'a.id = ta.agent_id')
+  .leftJoin('teams t', 'ta.team_id = t.id')
+  .where({ 'a.status': 'active' })
+  .orderBy('a.created_at', 'DESC')
+  .limit(10)
+  .build();
+
+// INSERT with returning
+const insert = qb
+  .insert('agents', {
+    name: 'New Agent',
+    user_id: userId,
+    parameters: { temperature: 0.7 }
+  })
+  .returning('*')
+  .build();
+
+// UPDATE with conditions
+const update = qb
+  .update('agents', 
+    { status: 'inactive' },
+    { id: agentId, user_id: userId }
+  )
+  .returning('*')
+  .build();
+```
+
+#### Event System
+
+```javascript
+// Resource lifecycle events
+events.on('resource.created', ({ id, type, userId, resource }) => {
+  // Handle resource creation
+  // Full resource data available
+});
+
+events.on('resource.updated', ({ id, type, userId, changes, previous }) => {
+  // Handle resource update
+  // Access what changed
+});
+
+events.on('resource.deleted', ({ id, type, userId, resource }) => {
+  // Handle resource deletion
+  // Last chance to access data
+});
+
+events.on('resource.accessDenied', ({ id, type, userId, action }) => {
+  // Handle access denial
+  // Audit security events
+});
+```
+
+#### Validation System
+
+```javascript
+// Resource schemas
+const schemas = {
+  agent: z.object({
+    name: z.string().min(1).max(255),
+    system_prompt: z.string().optional(),
+    status: z.enum(['active', 'inactive']),
+    parameters: z.record(z.any()).optional(),
+    tools: z.array(z.any()).optional()
+  }),
+
+  team: z.object({
+    name: z.string().min(1).max(100),
+    description: z.string().optional(),
+    status: z.enum(['active', 'inactive', 'archived'])
+  })
+};
+
+// Using validation middleware
+app.post('/api/resources',
+  validate(schemas.resource),
+  async (req, res) => {
+    // req.validated contains validated data
+  }
+);
+```
+
+#### Error Handling
+
+```javascript
+try {
+  await manager.getResource(id, userId);
+} catch (error) {
+  if (error instanceof NotFoundError) {
+    // Resource not found
+    // Access error.details for context
+  } else if (error instanceof AccessDeniedError) {
+    // User does not have access
+    // Access error.context for audit
+  } else if (error instanceof ValidationError) {
+    // Invalid data
+    // Access error.errors for details
+  }
+}
+```
 
 #### Usage Example
 
