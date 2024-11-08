@@ -42,7 +42,7 @@ router.get('/', async (req, res) => {
 });
 
 // POST /api/agents
-router.post('/', async (req, res) => {
+router.post('/', validateResource('agent'), async (req, res) => {
   try {
     const { name, system_prompt, status, parameters, tools } = req.body;
     

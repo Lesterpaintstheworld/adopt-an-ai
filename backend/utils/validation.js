@@ -52,9 +52,12 @@ const schemas = {
   })
 };
 
-const validate = (schema) => (req, res, next) => {
+const validateResource = (resourceType) => (req, res, next) => {
   try {
-    req.validated = schema.parse(req.body);
+    if (!schemas[resourceType]) {
+      throw new Error(`No validation schema found for resource type: ${resourceType}`);
+    }
+    req.validated = schemas[resourceType].parse(req.body);
     next();
   } catch (error) {
     res.status(400).json({
@@ -66,5 +69,5 @@ const validate = (schema) => (req, res, next) => {
 
 module.exports = {
   schemas,
-  validate
+  validateResource
 };
