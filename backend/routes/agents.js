@@ -42,34 +42,16 @@ router.get('/', async (req, res) => {
 });
 
 // POST /api/agents
-router.post('/', validateResource('agent'), async (req, res) => {
+router.post('/', validateResource('agent'), async (req, res, next) => {
   try {
-    const { name, system_prompt, status, parameters, tools } = req.body;
-    
-    const query = `
-      INSERT INTO agents (
-        user_id, 
-        name, 
-        system_prompt, 
-        status, 
-        parameters, 
-        tools
-      ) 
-      VALUES ($1, $2, $3, $4, $5, $6) 
-      RETURNING *
-    `;
-    
-    const values = [
-      req.user.userId,
-      name,
-      system_prompt,
-      status || 'active',
-      parameters || {},
-      tools || []
-    ];
+    const result = await agentManager.create(req.user.userId, {
+      ...req.validated,
+      status: req.validated.status || 'active',
+      parameters: req.validated.parameters || {},
+      tools: req.validated.tools || []
+    });
 
-    const result = await dbUtils.executeQuery(query, values);
-    res.status(201).json(result.rows[0]);
+    httpResponses.success(res, result, 201);
   } catch (error) {
     next(error);
   }

@@ -50,42 +50,29 @@ router.get('/', async (req, res, next) => {
 // POST /api/teams
 router.post('/', validateResource('team'), async (req, res, next) => {
   try {
-    const result = await dbUtils.withTransaction(async (client) => {
-      const teamResult = await dbUtils.executeQuery(
-        `INSERT INTO teams (name, description, owner_id, status)
-         VALUES ($1, $2, $3, $4)
-         RETURNING *`,
-        [req.validated.name, req.validated.description, req.user.userId, 'active'],
-        { client }
-      );
-
-      await dbUtils.executeQuery(
-        `INSERT INTO team_members (team_id, user_id, role)
-         VALUES ($1, $2, 'owner')`,
-        [teamResult.rows[0].id, req.user.userId],
-        { client }
-      );
-
-      return {
-        ...teamResult.rows[0],
-        member_count: 1,
-        user_role: 'owner'
-      };
+    const result = await teamManager.create(req.user.userId, {
+      ...req.validated,
+      status: 'active'
     });
 
-    eventEmitter.emit('team:created', { 
+    await dbUtils.executeQuery(
+      `INSERT INTO team_members (team_id, user_id, role)
+       VALUES ($1, $2, 'owner')`,
+      [result.id, req.user.userId]
+    );
+
+    eventEmitter.emit('team:created', {
       teamId: result.id,
-      userId: req.user.userId 
+      userId: req.user.userId
     });
 
-    httpResponses.success(res, result, 201);
-    
-    httpResponses.success(res, team, 201);
+    httpResponses.success(res, {
+      ...result,
+      member_count: 1,
+      user_role: 'owner'
+    }, 201);
   } catch (error) {
-    await client.query('ROLLBACK');
     next(error);
-  } finally {
-    client.release();
   }
 });
 

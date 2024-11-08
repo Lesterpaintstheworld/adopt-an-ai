@@ -1,11 +1,50 @@
 const dbUtils = require('./db');
 const { NotFoundError, AccessDeniedError } = require('./errors');
 const logger = require('./logger');
+const QueryBuilder = require('./queryBuilder');
 
 class ResourceManager {
   constructor(tableName, resourceName) {
     this.tableName = tableName;
-    this.resourceName = resourceName;
+    this.resourceName = resourceName || tableName;
+  }
+
+  async create(userId, data) {
+    try {
+      const qb = new QueryBuilder();
+      const query = qb
+        .insert(this.tableName, {
+          ...data,
+          user_id: userId,
+          created_at: new Date(),
+          updated_at: new Date()
+        })
+        .build();
+
+      const result = await dbUtils.executeQuery(query.text, query.values);
+      return result.rows[0];
+    } catch (error) {
+      logger.error(`Error creating ${this.resourceName}`, error);
+      throw error;
+    }
+  }
+
+  async list(userId, options = {}) {
+    try {
+      const qb = new QueryBuilder();
+      const query = qb
+        .select('*')
+        .from(this.tableName)
+        .where({ user_id: userId })
+        .orderBy('created_at', 'DESC')
+        .build();
+
+      const result = await dbUtils.executeQuery(query.text, query.values);
+      return result.rows;
+    } catch (error) {
+      logger.error(`Error listing ${this.resourceName}s`, error);
+      throw error;
+    }
   }
 
   async checkOwnership(resourceId, userId) {
