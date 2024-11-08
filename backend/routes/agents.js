@@ -14,6 +14,21 @@ const pool = new Pool({
 router.get('/', async (req, res) => {
   try {
     console.log('Fetching agents for user:', req.user.userId);
+    
+    // Verify user exists first
+    const userCheck = await pool.query(
+      'SELECT id FROM users WHERE id = $1',
+      [req.user.userId]
+    );
+
+    if (userCheck.rows.length === 0) {
+      console.error('User not found:', req.user.userId);
+      return res.status(404).json({ 
+        error: 'User not found',
+        details: 'The authenticated user does not exist in the database'
+      });
+    }
+
     const query = `
       SELECT * FROM agents 
       WHERE user_id = $1 

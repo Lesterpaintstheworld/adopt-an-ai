@@ -13,15 +13,20 @@ const pool = new Pool({
 
 async function runMigration() {
   try {
-    // Read migration file
-    const sql = await fs.readFile(
-      path.join(__dirname, '..', 'migrations', '001_create_users_table.sql'),
-      'utf8'
-    );
+    // Read and execute migrations in order
+    const migrations = [
+      '001_create_users_table.sql',
+      '002_create_agents_table.sql'
+    ];
 
-    // Run migration
-    await pool.query(sql);
-    console.log('Migration completed successfully');
+    for (const migration of migrations) {
+      const sql = await fs.readFile(
+        path.join(__dirname, '..', 'migrations', migration),
+        'utf8'
+      );
+      await pool.query(sql);
+      console.log(`Migration ${migration} completed successfully`);
+    }
   } catch (error) {
     console.error('Migration failed:', error);
   } finally {
