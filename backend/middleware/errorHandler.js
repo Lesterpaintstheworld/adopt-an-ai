@@ -1,3 +1,4 @@
+const { AppError } = require('../utils/errors');
 const logger = require('../utils/logger');
 
 const errorHandler = (err, req, res, next) => {
@@ -5,14 +6,9 @@ const errorHandler = (err, req, res, next) => {
     path: req.path,
     method: req.method
   });
-  
-  res.status(err.status || 500).json({
-    error: process.env.NODE_ENV === 'production' 
-      ? 'Internal server error' 
-      : err.message,
-    path: req.path,
-    timestamp: new Date().toISOString()
-  });
+
+  const error = err instanceof AppError ? err : new AppError(err.message);
+  res.status(error.statusCode).json(error.toResponse());
 };
 
 module.exports = errorHandler;
