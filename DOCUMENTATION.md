@@ -18,19 +18,75 @@
 ## Core Components
 
 ### ResourceManager
-Generic resource management system that handles CRUD operations with built-in:
-- Ownership validation
-- Access control
-- Event emission
-- Error handling
+Generic resource management system that handles CRUD operations with built-in validation, access control, and event tracking.
+
+#### Methods
 
 ```javascript
 const manager = new ResourceManager('table_name', 'resource_name');
-await manager.create(userId, data);
-await manager.list(userId, options);
+
+// Create a new resource
+await manager.create(userId, {
+  name: 'Resource Name',
+  description: 'Resource Description'
+});
+
+// List resources with options
+await manager.list(userId, {
+  sort: 'created_at',
+  order: 'DESC',
+  limit: 10,
+  offset: 0
+});
+
+// Get single resource
 await manager.getResource(resourceId, userId);
-await manager.updateResource(resourceId, userId, data);
+
+// Update resource
+await manager.updateResource(resourceId, userId, {
+  name: 'Updated Name'
+});
+
+// Delete resource
 await manager.deleteResource(resourceId, userId);
+```
+
+#### Features
+
+- **Ownership Validation**: Automatically checks if user owns or has access to resource
+- **Access Control**: Configurable access rules per resource type
+- **Event Emission**: Emits events for all CRUD operations
+- **Error Handling**: Standardized error responses
+- **Query Building**: Uses QueryBuilder for safe SQL operations
+- **Transaction Support**: Wraps operations in transactions when needed
+
+#### Events Emitted
+
+```javascript
+// Resource created
+resource.created: { id, type, userId }
+
+// Resource updated  
+resource.updated: { id, type, userId, changes }
+
+// Resource deleted
+resource.deleted: { id, type, userId }
+
+// Access denied
+resource.accessDenied: { id, type, userId, action }
+```
+
+#### Error Handling
+
+```javascript
+try {
+  await manager.getResource(id, userId);
+} catch (error) {
+  // NotFoundError: Resource not found
+  // AccessDeniedError: User does not have access
+  // ValidationError: Invalid data
+  // DatabaseError: Database operation failed
+}
 ```
 
 ### QueryBuilder
