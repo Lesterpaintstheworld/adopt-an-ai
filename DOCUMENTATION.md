@@ -31,6 +31,10 @@ The ResourceManager provides a standardized way to handle CRUD operations with b
 - Transaction support
 - Validation using Zod schemas
 - Audit logging
+- Event-driven architecture
+- Real-time updates
+- Cascading deletions
+- Audit trail generation
 
 ### ResourceManager Usage
 
