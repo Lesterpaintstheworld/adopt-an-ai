@@ -10,7 +10,8 @@
     "db:init": "prisma migrate deploy && prisma generate",
     "db:reset": "prisma migrate reset --force",
     "db:seed": "prisma db seed",
-    "prod:setup": "npm ci --only=production && npm run db:init"
+    "prod:setup": "npm ci --only=production && npm run db:init",
+    "migrate": "node scripts/migrate.js"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
