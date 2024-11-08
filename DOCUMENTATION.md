@@ -117,12 +117,162 @@ events.onWithLog('resource.created', handleCreate);
 The API uses a powerful ResourceManager system that provides standardized CRUD operations, validation, access control and event tracking for all resources.
 
 #### Resource Manager Features
-- Automatic ownership validation and access control 
-- Event emission for all resource changes
+- Automatic ownership validation and access control
+- Event emission for all resource changes 
 - Query building with SQL injection protection
 - Transaction support with rollback
 - Standardized error handling and logging
 - Built-in pagination and filtering
+
+#### Using ResourceManager
+
+```javascript
+// Create a resource manager instance
+const manager = new ResourceManager('table_name', 'resource_name');
+
+// Create with validation and events
+const resource = await manager.create(userId, {
+  name: 'Resource Name',
+  description: 'Resource Description'
+}); // Validates against schema, emits resource.created
+
+// List with filtering and pagination
+const resources = await manager.list(userId, {
+  filter: { status: 'active' },
+  sort: '-created_at',
+  page: 1,
+  limit: 20
+});
+
+// Get with ownership check
+const resource = await manager.getResource(resourceId, userId);
+// Throws NotFoundError or AccessDeniedError if not authorized
+
+// Update with validation and events
+const updated = await manager.updateResource(resourceId, userId, {
+  name: 'Updated Name'
+}); // Validates changes, emits resource.updated
+
+// Delete with cascading and events
+await manager.deleteResource(resourceId, userId);
+// Handles related records cleanup, emits resource.deleted
+```
+
+#### Event System
+Resource changes emit events that can be monitored:
+
+```javascript
+// Resource lifecycle events
+events.on('resource.created', ({ id, type, userId }) => {
+  // Handle resource creation
+});
+
+events.on('resource.updated', ({ id, type, userId, changes }) => {
+  // Handle resource update
+});
+
+events.on('resource.deleted', ({ id, type, userId }) => {
+  // Handle resource deletion
+});
+
+// Access control events
+events.on('resource.accessDenied', ({ id, type, userId, action }) => {
+  // Handle access denial
+});
+
+// Error events
+events.on('resource.error', ({ error, context }) => {
+  // Handle operation error
+});
+```
+
+#### Query Builder
+Safe SQL query construction:
+
+```javascript
+const qb = new QueryBuilder();
+
+// SELECT query
+const query = qb
+  .select(['id', 'name'])
+  .from('users')
+  .where({ status: 'active' })
+  .orderBy('created_at', 'DESC')
+  .limit(10)
+  .build();
+
+// INSERT query
+const insert = qb
+  .insert('users', {
+    name: 'John',
+    email: 'john@example.com'
+  })
+  .returning('*')
+  .build();
+
+// UPDATE query
+const update = qb
+  .update('users', 
+    { name: 'Updated' },
+    { id: userId }
+  )
+  .returning('*')
+  .build();
+
+// DELETE query
+const del = qb
+  .delete()
+  .from('users')
+  .where({ id: userId })
+  .returning('id')
+  .build();
+```
+
+#### Validation System
+Schema-based validation using Zod:
+
+```javascript
+const schemas = {
+  agent: z.object({
+    name: z.string().min(1).max(255),
+    system_prompt: z.string().optional(),
+    status: z.enum(['active', 'inactive']).optional(),
+    parameters: z.record(z.any()).optional(),
+    tools: z.array(z.any()).optional()
+  }),
+
+  team: z.object({
+    name: z.string().min(1).max(100),
+    description: z.string().optional(),
+    status: z.enum(['active', 'inactive', 'archived']).optional()
+  })
+};
+
+// Using validation middleware
+app.post('/api/resources',
+  validate(schemas.resource),
+  async (req, res) => {
+    // req.validated contains validated data
+  }
+);
+```
+
+#### Rate Limiting
+Request rate limiting configuration:
+
+```javascript
+const rateLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  message: {
+    error: 'Too many requests',
+    retryAfter: 900 // 15 minutes in seconds
+  }
+});
+
+// Apply rate limiting to routes
+app.use('/api', rateLimiter);
+```
 
 #### Core Components
 
