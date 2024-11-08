@@ -1,9 +1,10 @@
-const config = {
+module.exports = {
   db: {
     poolConfig: {
       max: 20,
       idleTimeoutMillis: 30000,
-      connectionTimeoutMillis: 2000
+      connectionTimeoutMillis: 2000,
+      min: 2
     }
   },
   auth: {
@@ -11,32 +12,15 @@ const config = {
     tokenAlgorithm: 'HS256'
   },
   api: {
+    timeout: 30000,
+    version: 'v1',
     defaultPageSize: 20,
-    maxPageSize: 100,
-    timeout: '30s'
+    maxPageSize: 100
   },
   openai: {
     defaultModel: 'gpt-4',
     defaultTemperature: 0.7,
     defaultMaxTokens: 1000
-  }
-};
-
-module.exports = config;
-module.exports = {
-  api: {
-    timeout: 30000, // 30 seconds
-    version: 'v1',
-  },
-  openai: {
-    defaultModel: 'gpt-4',
-    defaultTemperature: 0.7,
-    defaultMaxTokens: 1000,
-  },
-  db: {
-    poolMin: 2,
-    poolMax: 10,
-    idleTimeoutMillis: 30000,
   },
   security: {
     rateLimits: {
