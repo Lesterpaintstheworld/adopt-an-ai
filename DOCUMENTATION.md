@@ -22,7 +22,7 @@
 
 The ResourceManager provides a standardized way to handle CRUD operations with built-in validation, access control, and event tracking.
 
-#### Core Features
+### Core Features
 - Generic resource CRUD operations with type safety
 - Ownership validation with team support
 - Role-based access control
@@ -31,6 +31,66 @@ The ResourceManager provides a standardized way to handle CRUD operations with b
 - Transaction support
 - Validation using Zod schemas
 - Audit logging
+
+### Usage Example
+
+```javascript
+// Initialize a resource manager
+const manager = new ResourceManager('agents', 'agent');
+
+// Create with validation
+const agent = await manager.create(userId, {
+  name: 'My Agent',
+  system_prompt: 'You are a helpful assistant',
+  parameters: { temperature: 0.7 }
+}); // Validates against schema
+
+// List with filtering and pagination
+const agents = await manager.list(userId, {
+  filter: { status: 'active' },
+  sort: '-created_at',
+  page: 1,
+  limit: 20
+});
+
+// Get with ownership check
+const agent = await manager.getResource(agentId, userId);
+// Throws NotFoundError or AccessDeniedError if not authorized
+
+// Update with validation
+const updated = await manager.updateResource(agentId, userId, {
+  name: 'Updated Name'
+}); // Validates changes
+
+// Delete with cascading cleanup
+await manager.deleteResource(agentId, userId);
+```
+
+### Event System Integration
+
+```javascript
+// Resource lifecycle events
+events.on('resource.created', ({ id, type, userId, resource }) => {
+  // Handle resource creation
+  // Full resource data available
+});
+
+events.on('resource.updated', ({ id, type, userId, changes, previous }) => {
+  // Handle resource update
+  // Access what changed
+});
+
+events.on('resource.deleted', ({ id, type, userId, resource }) => {
+  // Handle resource deletion
+  // Last chance to access data
+});
+
+// Access control events
+events.on('resource.accessDenied', ({ id, type, userId, action }) => {
+  // Handle access denial
+  // Audit security events
+});
+```
 
 #### Creating a Resource Manager
 ```javascript
