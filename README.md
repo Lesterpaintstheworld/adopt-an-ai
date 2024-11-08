@@ -85,14 +85,28 @@ cd raise-an.ai
 npm install
 ```
 
-3. Create a `.env` file in the root directory with the following variables:
-```
-REACT_APP_OPENAI_API_KEY=your_openai_api_key_here
+3. Configure environment variables in `.env`:
+```bash
+# Required environment variables
+OPENAI_API_KEY=your_openai_api_key
+JWT_SECRET=your_jwt_secret
+DATABASE_URL=your_database_url
+GOOGLE_CLIENT_ID=your_google_client_id
+
+# Optional environment variables
+NODE_ENV=development
+PORT=3001
+CORS_ORIGINS=http://localhost:3000,http://localhost:5173
 ```
 
-4. Start the development server:
+4. Initialize database:
 ```bash
-npm start
+npm run db:init
+```
+
+5. Start development server:
+```bash
+npm run dev
 ```
 
 ## Project Structure
@@ -105,6 +119,24 @@ npm start
   - `/utils` - Utility functions
 - `/scripts` - Build and generation scripts
 - `/public` - Static assets
+
+## Architecture
+
+### Core Components
+- Express backend with TypeScript
+- PostgreSQL database
+- Generic resource management
+- Event-driven architecture
+- Query builder for SQL operations
+
+### Key Features
+- Google OAuth authentication
+- JWT token validation
+- Rate limiting and request timeout
+- Standardized error handling
+- Resource ownership validation
+
+See [ARCHITECTURE.md](ARCHITECTURE.md) for detailed technical documentation.
 
 ## Available Scripts
 

@@ -85,14 +85,17 @@ erDiagram
 graph TB
     subgraph API Layer
         Routes --> Middleware
-        Middleware --> Controllers
+        Middleware --> RequestValidator
+        RequestValidator --> RateLimiter
+        RateLimiter --> Controllers
     end
 
     subgraph Core Services
         Controllers --> ResourceManager
-        Controllers --> EventEmitter
         ResourceManager --> QueryBuilder
+        ResourceManager --> EventEmitter
         ResourceManager --> ValidationService
+        EventEmitter --> Logger
     end
 
     subgraph Data Layer
@@ -103,7 +106,15 @@ graph TB
     subgraph Support Services
         Logger --> Winston
         Cache --> NodeCache
+        Auth --> GoogleOAuth
         Auth --> JWT
+        Auth --> ResourceManager
+    end
+
+    subgraph Resource Management
+        ResourceManager --> OwnershipValidator
+        ResourceManager --> AccessControl
+        ResourceManager --> EventSystem
     end
 ```
 

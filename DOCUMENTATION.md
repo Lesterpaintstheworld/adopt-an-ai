@@ -21,15 +21,20 @@
 #### POST /api/auth/google
 Authenticate user with Google OAuth token.
 
+Headers:
+```
+Content-Type: application/json
+```
+
 Request:
 ```json
 {
-  "googleToken": "string",
+  "googleToken": "string",  // Valid Google OAuth token
   "userData": {
-    "googleId": "string",
-    "email": "string",
-    "name": "string",
-    "picture": "string"
+    "googleId": "string",   // Google user ID
+    "email": "string",      // User email address
+    "name": "string",       // User display name
+    "picture": "string"     // Profile picture URL
   }
 }
 ```
@@ -38,13 +43,26 @@ Response:
 ```json
 {
   "user": {
-    "id": "string",
-    "email": "string",
-    "name": "string"
+    "id": "string",         // Internal user ID
+    "email": "string",      // User email
+    "name": "string",       // User name
+    "tutorial_completed": boolean,
+    "tutorial_progress": {
+      "lastStep": number,
+      "completedSteps": string[]
+    }
   },
-  "token": "string"
+  "token": "string"         // JWT token for authentication
 }
 ```
+
+Error Responses:
+- 400: Invalid request data
+- 401: Invalid Google token
+- 500: Server error
+
+Rate Limiting:
+- 100 requests per 15 minutes per IP
 
 ### Teams
 
