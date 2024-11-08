@@ -89,37 +89,6 @@ router.post('/', validateResource('team'), async (req, res, next) => {
   }
 });
 
-router.get('/', async (req, res, next) => {
-  try {
-    const qb = new QueryBuilder();
-    const query = qb
-      .select([
-        't.*',
-        'COUNT(tm.user_id) as member_count',
-        `CASE 
-          WHEN t.owner_id = $1 THEN 'owner'
-          ELSE tm.role 
-        END as user_role`
-      ])
-      .from('teams t')
-      .join('LEFT JOIN team_members tm ON t.id = tm.team_id')
-      .where('t.owner_id = $1 OR tm.user_id = $1')
-      .groupBy(['t.id', 'tm.role'])
-      .orderBy('t.created_at', 'DESC')
-      .build();
-
-    const result = await dbUtils.executeQuery(query.text, [req.user.userId]);
-    httpResponses.success(res, result.rows);
-    
-    res.json(result.rows[0]);
-  } catch (error) {
-    console.error('Error fetching team:', error);
-    res.status(500).json({ 
-      error: 'Failed to fetch team',
-      details: error.message 
-    });
-  }
-});
 
 // PUT /api/teams/:id
 router.put('/:id', async (req, res) => {
