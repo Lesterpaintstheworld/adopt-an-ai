@@ -1539,7 +1539,7 @@ const schemas = {
 The ResourceManager provides a standardized way to handle CRUD operations with built-in validation, access control, and event tracking.
 
 ### Core Features
-- Generic resource CRUD operations with type safety
+- Generic resource CRUD operations with type safety 
 - Ownership validation with team support
 - Role-based access control
 - Event emission for all operations
@@ -1547,10 +1547,14 @@ The ResourceManager provides a standardized way to handle CRUD operations with b
 - Transaction support
 - Validation using Zod schemas
 - Audit logging
-- Real-time event tracking
-- Cascading deletions
-- Team-based access control
-- Automatic timestamps
+- Real-time event tracking and webhooks
+- Cascading deletions and cleanup
+- Team-based access control and sharing
+- Automatic timestamps and versioning
+- Resource ownership transfer
+- Bulk operations support
+- Custom validation rules
+- Soft delete option
 
 ### ResourceManager Usage
 
