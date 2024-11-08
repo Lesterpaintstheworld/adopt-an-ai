@@ -3218,42 +3218,62 @@ PUT    /api/{resource}/:id      - Update resource
 DELETE /api/{resource}/:id      - Delete resource
 ```
 
-### Resource Management System
+## Resource Management System
 
-The ResourceManager provides a standardized way to handle CRUD operations with built-in validation, access control, and event tracking.
+### Overview
+Le ResourceManager fournit une interface standardisée pour gérer les opérations CRUD avec :
+- Validation automatique
+- Contrôle d'accès  
+- Suivi des événements
+- Protection contre les injections SQL
+- Support des transactions
 
-#### Core Features
+### Usage
+```javascript
+const manager = new ResourceManager('table_name', 'resource_name');
 
-- **Generic Resource Operations**
-  - Type-safe CRUD operations with validation
-  - Automatic timestamps and audit trails
-  - Transaction support with automatic rollback
-  - Bulk operations and batch processing
-  - Cascading deletions and cleanup
+// Create with validation
+const resource = await manager.create(userId, {
+  name: 'Resource Name',
+  description: 'Description'
+}); // Émet: resource.created
 
-- **Access Control & Security**
-  - Ownership validation per resource
-  - Team-based access control
-  - Role-based permissions
-  - Resource sharing rules
-  - Access audit logging
-  - Rate limiting integration
+// List with filtering
+const resources = await manager.list(userId, {
+  status: 'active',
+  orderBy: 'created_at',
+  direction: 'DESC'
+});
 
-- **Event System Integration**
-  - Real-time event emission
-  - Operation tracking and metrics
-  - Audit trail generation
-  - Error event handling
-  - Custom event subscribers
-  - Async operation support
+// Get with ownership check
+const resource = await manager.getResource(resourceId, userId);
+// Throws NotFoundError or AccessDeniedError
 
-- **Query Building & Data Access**
-  - Safe SQL construction via QueryBuilder
-  - Parameterized queries
-  - Transaction management
-  - Connection pooling
-  - Query optimization
-  - Index utilization
+// Update with validation
+const updated = await manager.updateResource(resourceId, userId, {
+  name: 'Updated Name'
+}); // Émet: resource.updated
+
+// Delete with cleanup
+await manager.deleteResource(resourceId, userId);
+// Émet: resource.deleted
+```
+
+### Event System
+```javascript
+// Resource lifecycle events
+events.on('resource.created', ({ id, type, userId }) => {
+  // Handle resource creation
+});
+
+events.on('resource.updated', ({ id, type, userId, changes }) => {
+  // Handle resource update
+});
+
+events.on('resource.deleted', ({ id, type, userId }) => {
+  // Handle resource deletion
+});
+```
 
 #### Usage Examples
 
