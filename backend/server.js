@@ -10,7 +10,8 @@ const verifyToken = require('./middleware/auth');
 const corsOptions = require('./config/cors');
 const errorHandler = require('./middleware/errorHandler');
 const logger = require('./utils/logger');
-const { REQUEST_TIMEOUT } = require('./constants');
+const config = require('./config');
+const rateLimiter = require('./middleware/rateLimiter');
 require('dotenv').config();
 
 // Validate required environment variables
@@ -289,9 +290,10 @@ app.post('/api/users/:userId/tutorial-status', async (req, res) => {
   }
 });
 
+// Add rate limiting
+app.use(rateLimiter);
+
 // Add timeout middleware
-const config = require('./config');
-const timeout = require('connect-timeout');
 app.use(timeout(config.api.timeout));
 app.use((req, res, next) => {
   if (!req.timedout) {
