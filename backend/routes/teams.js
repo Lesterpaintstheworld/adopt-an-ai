@@ -41,7 +41,7 @@ router.get('/', async (req, res, next) => {
     const result = await dbUtils.executeQuery(query.text, [req.user.userId]);
     eventEmitter.emit('teams:listed', { userId: req.user.userId, count: result.rows.length });
     
-    httpResponses.success(res, result.rows);
+    res.json(result.rows);
   } catch (error) {
     next(error);
   }
@@ -125,9 +125,9 @@ router.delete('/:id', async (req, res, next) => {
       userId: req.user.userId
     });
 
-    httpResponses.success(res, null, 204);
+    res.status(204).send();
   } catch (error) {
-    httpResponses.serverError(res, error);
+    next(error);
   }
 });
 

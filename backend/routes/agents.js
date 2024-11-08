@@ -13,12 +13,12 @@ const agentManager = new ResourceManager('agents');
 router.get('/', async (req, res) => {
   try {
     if (!req.user?.userId) {
-      return httpResponses.unauthorized(res, 'No user data found in request');
+      throw new AppError('No user data found in request', 401);
     }
 
     const userExists = await dbUtils.checkExists('users', req.user.userId, req.user.userId);
     if (!userExists) {
-      return httpResponses.notFound(res, 'User not found');
+      throw new AppError('User not found', 404);
     }
 
     const qb = new QueryBuilder();
@@ -35,9 +35,9 @@ router.get('/', async (req, res) => {
       { logExtra: { route: 'GET /agents' }}
     );
 
-    httpResponses.success(res, result.rows);
+    res.json(result.rows);
   } catch (error) {
-    httpResponses.serverError(res, error);
+    next(error);
   }
 });
 
@@ -71,7 +71,7 @@ router.post('/', validateResource('agent'), async (req, res) => {
     const result = await dbUtils.executeQuery(query, values);
     res.status(201).json(result.rows[0]);
   } catch (error) {
-    httpResponses.serverError(res, error);
+    next(error);
   }
 });
 
