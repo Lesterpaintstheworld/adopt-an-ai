@@ -3,7 +3,7 @@ import type { AgentCreationData, AgentUpdateData } from '../types/agents';
 
 // Create axios instance with base configuration
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3001', // Match backend port
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3001',
   headers: {
     'Content-Type': 'application/json',
   },
