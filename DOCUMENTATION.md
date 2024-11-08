@@ -1979,18 +1979,34 @@ const schemas = {
 The ResourceManager provides a standardized way to handle CRUD operations with built-in validation, access control, and event tracking.
 
 ### Core Features
-- Generic resource CRUD operations with type safety
-- Ownership validation with team support
-- Role-based access control
-- Event emission for all operations
-- Query building with parameterization
-- Transaction support
-- Validation using Zod schemas
-- Audit logging
-- Real-time event tracking
-- Cascading deletions
-- Team-based access control
-- Automatic timestamps
+
+- **Generic Resource Operations**
+  - Type-safe CRUD operations
+  - Automatic timestamps
+  - Transaction support with rollback
+  - Cascading deletions
+  - Bulk operations support
+
+- **Access Control**
+  - Ownership validation
+  - Team-based permissions
+  - Role-based access control
+  - Resource sharing rules
+  - Access audit logging
+
+- **Event System Integration** 
+  - Real-time event emission
+  - Operation tracking
+  - Audit trail generation
+  - Error event handling
+  - Custom event subscribers
+
+- **Data Validation**
+  - Schema-based validation using Zod
+  - Custom validation rules
+  - Input sanitization
+  - Error aggregation
+  - Type inference
 
 ### ResourceManager API
 
