@@ -1,0 +1,17 @@
+module.exports = {
+  REQUEST_TIMEOUT: 30000,
+  MAX_PAGE_SIZE: 100,
+  DEFAULT_PAGE_SIZE: 20,
+  AGENT_STATUSES: {
+    ACTIVE: 'active',
+    INACTIVE: 'inactive',
+    TRAINING: 'training',
+    ERROR: 'error'
+  },
+  ERROR_CODES: {
+    VALIDATION_ERROR: 'VALIDATION_ERROR',
+    AUTH_ERROR: 'AUTH_ERROR',
+    NOT_FOUND: 'NOT_FOUND',
+    SERVER_ERROR: 'SERVER_ERROR'
+  }
+};
