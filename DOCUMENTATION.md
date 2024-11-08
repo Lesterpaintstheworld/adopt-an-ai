@@ -112,7 +112,52 @@ events.onWithLog('resource.created', handleCreate);
 
 ## API Documentation
 
-### Authentication
+### Resource Management
+
+The API uses a generic ResourceManager system for handling CRUD operations on resources like agents, teams, etc.
+
+#### Common Resource Endpoints
+All resources follow this pattern:
+```
+GET    /api/{resource}          - List resources
+POST   /api/{resource}          - Create resource  
+GET    /api/{resource}/:id      - Get resource
+PUT    /api/{resource}/:id      - Update resource
+DELETE /api/{resource}/:id      - Delete resource
+```
+
+#### Request Validation
+All requests are validated using Zod schemas:
+
+```typescript
+// Example agent schema
+{
+  name: string().min(1).max(255),
+  system_prompt: string().optional(),
+  status: enum(['active', 'inactive']).optional(),
+  parameters: record(any()).optional(),
+  tools: array(any()).optional()
+}
+```
+
+#### Event System
+Resource changes emit events that can be monitored:
+
+```javascript
+// Resource created
+resource.created: { id, type, userId }
+
+// Resource updated
+resource.updated: { id, type, userId, changes }
+
+// Resource deleted  
+resource.deleted: { id, type, userId }
+
+// Access denied
+resource.accessDenied: { id, type, userId, action }
+```
+
+### Authentication 
 
 #### POST /api/auth/google
 Authenticate user with Google OAuth token.
