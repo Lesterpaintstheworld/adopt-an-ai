@@ -16,7 +16,8 @@ async function runMigration() {
     // Read and execute migrations in order
     const migrations = [
       '001_create_users_table.sql',
-      '002_create_agents_table.sql'
+      '002_create_agents_table.sql',
+      '003_create_teams_table.sql'
     ];
 
     for (const migration of migrations) {
