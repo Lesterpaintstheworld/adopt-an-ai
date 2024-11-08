@@ -16,7 +16,7 @@ class QueryBuilder {
     try {
       baseQuery = this.validateInput(baseQuery);
       orderBy = this.validateInput(orderBy);
-    return `
+      return `
       ${baseQuery}
       ORDER BY ${orderBy}
       LIMIT $1 OFFSET $2
@@ -24,7 +24,9 @@ class QueryBuilder {
   }
 
   static buildUpdateQuery(table, fields, conditions) {
-    const updates = Object.keys(fields)
+    try {
+      table = this.validateInput(table);
+      const updates = Object.keys(fields)
       .map((key, index) => `${key} = $${index + 1}`)
       .join(', ');
       
@@ -41,7 +43,9 @@ class QueryBuilder {
   }
 
   static buildInsertQuery(table, fields) {
-    const columns = Object.keys(fields).join(', ');
+    try {
+      table = this.validateInput(table);
+      const columns = Object.keys(fields).join(', ');
     const values = Object.keys(fields)
       .map((_, index) => `$${index + 1}`)
       .join(', ');
