@@ -6,6 +6,7 @@ const crypto = require('crypto');
 const path = require('path');
 const timeout = require('connect-timeout');
 const pool = require('./config/db');
+const config = require('./config');
 const verifyToken = require('./middleware/auth');
 const corsOptions = require('./config/cors');
 const errorHandler = require('./middleware/errorHandler');
@@ -65,7 +66,7 @@ const PORT = process.env.PORT || 3001;
 // Middleware
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use(timeout(REQUEST_TIMEOUT));
+app.use(timeout(config.api.timeout));
 
 // Request logging middleware
 app.use((req, res, next) => {
