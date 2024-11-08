@@ -3,9 +3,10 @@
 ## Getting Started
 
 ### Prerequisites
-- Node.js 16+
-- PostgreSQL 13+
+- Node.js 18+
+- PostgreSQL 14+
 - OpenAI API key
+- Google OAuth credentials
 
 ### Installation
 1. Clone the repository
@@ -13,6 +14,45 @@
 3. Configure environment variables (see .env.example)
 4. Initialize database: `npm run db:init`
 5. Start development server: `npm run dev`
+
+## Core Components
+
+### ResourceManager
+Generic resource management system that handles CRUD operations with built-in:
+- Ownership validation
+- Access control
+- Event emission
+- Error handling
+
+```javascript
+const manager = new ResourceManager('table_name', 'resource_name');
+await manager.create(userId, data);
+await manager.list(userId, options);
+await manager.getResource(resourceId, userId);
+await manager.updateResource(resourceId, userId, data);
+await manager.deleteResource(resourceId, userId);
+```
+
+### QueryBuilder
+SQL query builder with protection against injection:
+```javascript
+const qb = new QueryBuilder();
+const query = qb
+  .select(['id', 'name'])
+  .from('users')
+  .where({ status: 'active' })
+  .orderBy('created_at', 'DESC')
+  .limit(10)
+  .build();
+```
+
+### Event System
+Application-wide event handling:
+```javascript
+const events = require('./utils/eventEmitter');
+events.emit('resource.created', { id, type });
+events.onWithLog('resource.created', handleCreate);
+```
 
 ## API Documentation
 
@@ -24,6 +64,7 @@ Authenticate user with Google OAuth token.
 Headers:
 ```
 Content-Type: application/json
+Authorization: Bearer <google_token>
 ```
 
 Request:
@@ -34,8 +75,49 @@ Request:
     "googleId": "string",   // Google user ID
     "email": "string",      // User email address
     "name": "string",       // User display name
-    "picture": "string"     // Profile picture URL
+    "picture": "string",    // Profile picture URL
+    "locale": "string"      // User locale
   }
+}
+```
+
+### Resource Endpoints
+
+All resource endpoints follow this pattern:
+```
+GET    /api/{resource}          - List resources
+POST   /api/{resource}          - Create resource
+GET    /api/{resource}/:id      - Get resource
+PUT    /api/{resource}/:id      - Update resource
+DELETE /api/{resource}/:id      - Delete resource
+```
+
+Common Headers:
+```
+Authorization: Bearer <jwt_token>
+Content-Type: application/json
+```
+
+Standard Response Format:
+```json
+{
+  "success": true,
+  "data": {},
+  "timestamp": "ISO-8601",
+  "requestId": "uuid"
+}
+```
+
+Error Response Format:
+```json
+{
+  "success": false,
+  "error": "Error message",
+  "code": 400,
+  "type": "ValidationError",
+  "details": {},
+  "timestamp": "ISO-8601",
+  "requestId": "uuid"
 }
 ```
 
