@@ -5,9 +5,9 @@ const { Pool } = require('pg');
 // Reuse pool configuration from main server
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: {
+  ssl: process.env.NODE_ENV === 'production' ? {
     rejectUnauthorized: false
-  }
+  } : false  // Désactive SSL en développement
 });
 
 // GET /api/agents
