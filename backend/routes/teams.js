@@ -3,7 +3,7 @@ const router = express.Router();
 const dbUtils = require('../utils/db');
 const httpResponses = require('../utils/responses');
 const { schemas, validate } = require('../utils/validation');
-const QueryBuilder = require('../utils/queryBuilder');
+const QueryBuilder = require('../../backend/utils/queryBuilder');
 const ResourceManager = require('../utils/resourceManager');
 const eventEmitter = require('../utils/eventEmitter');
 
