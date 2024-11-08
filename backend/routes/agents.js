@@ -42,7 +42,7 @@ router.get('/', async (req, res) => {
 });
 
 // POST /api/agents
-router.post('/', validateResource('agent'), async (req, res, next) => {
+router.post('/', validate('agent'), async (req, res, next) => {
   try {
     const result = await agentManager.create(req.user.userId, {
       ...req.validated,

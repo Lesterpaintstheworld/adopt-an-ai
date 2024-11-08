@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const dbUtils = require('../utils/db');
 const httpResponses = require('../utils/responses');
-const { schemas, validate } = require('../utils/validation');
+const validate = require('../middleware/validate');
 const QueryBuilder = require('../../backend/utils/queryBuilder');
 const ResourceManager = require('../utils/resourceManager');
 const eventEmitter = require('../utils/eventEmitter');
@@ -48,7 +48,7 @@ router.get('/', async (req, res, next) => {
 });
 
 // POST /api/teams
-router.post('/', validateResource('team'), async (req, res, next) => {
+router.post('/', validate('team'), async (req, res, next) => {
   try {
     const result = await teamManager.create(req.user.userId, {
       ...req.validated,
