@@ -1,2 +1,0 @@
-# Suivi
-[Initial content]
