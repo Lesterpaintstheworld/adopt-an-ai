@@ -1,132 +1,195 @@
-# Backend Documentation
+# raise-an.ai Backend Documentation
 
-## File Organization
+## Getting Started
 
-### Config Files
-- `config/index.js`: Global configuration settings
-- `config/cors.js`: CORS configuration
-- `config/db.js`: Database configuration
+### Prerequisites
+- Node.js 16+
+- PostgreSQL 13+
+- OpenAI API key
 
-### Middleware
-- `middleware/auth.js`: JWT authentication
-- `middleware/errorHandler.js`: Error processing
-- `middleware/rateLimiter.js`: Request limiting
-- `middleware/requestValidator.js`: Input validation
+### Installation
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Configure environment variables (see .env.example)
+4. Initialize database: `npm run db:init`
+5. Start development server: `npm run dev`
 
-### Database
-- `migrations/*.sql`: Database schema changes
-- `utils/db.js`: Database operations
-- `utils/queryBuilder.js`: SQL query construction
-
-### Utils
-- `utils/responses.js`: HTTP response formatting
-- `utils/validation.js`: Data validation
-- `utils/eventEmitter.js`: Event handling
-- `utils/logger.js`: Logging utilities
-- `utils/resourceManager.js`: Resource CRUD
-
-## Features
+## API Documentation
 
 ### Authentication
-- Google OAuth integration
-- JWT token management
-- Session handling
-- User management
 
-### Resource Management
-- Teams CRUD operations
-- Agent management
-- User profiles
-- Tutorial progress
+#### POST /api/auth/google
+Authenticate user with Google OAuth token.
 
-### AI Integration
-- OpenAI API integration
-- Chat completions
-- System prompts
-- Tool management
+Request:
+```json
+{
+  "googleToken": "string",
+  "userData": {
+    "googleId": "string",
+    "email": "string",
+    "name": "string",
+    "picture": "string"
+  }
+}
+```
 
-## User Guides
+Response:
+```json
+{
+  "user": {
+    "id": "string",
+    "email": "string",
+    "name": "string"
+  },
+  "token": "string"
+}
+```
 
-### Setting Up Development Environment
-1. Install dependencies
-2. Configure environment variables
-3. Initialize database
-4. Start development server
+### Teams
 
-### Database Management
-1. Creating migrations
-2. Running migrations
-3. Database backup
-4. Data restoration
+#### GET /api/teams
+Get teams for authenticated user.
+
+Response:
+```json
+[
+  {
+    "id": "uuid",
+    "name": "string",
+    "description": "string",
+    "memberCount": "number",
+    "userRole": "owner|admin|member"
+  }
+]
+```
+
+#### POST /api/teams
+Create new team.
+
+Request:
+```json
+{
+  "name": "string",
+  "description": "string"
+}
+```
+
+### Agents
+
+#### GET /api/agents
+Get AI agents for authenticated user.
+
+Response:
+```json
+[
+  {
+    "id": "uuid",
+    "name": "string",
+    "systemPrompt": "string",
+    "status": "active|inactive",
+    "parameters": {}
+  }
+]
+```
+
+#### POST /api/agents
+Create new AI agent.
+
+Request:
+```json
+{
+  "name": "string",
+  "systemPrompt": "string",
+  "parameters": {}
+}
+```
+
+### Tutorial Progress
+
+#### GET /api/users/:userId/tutorial-status
+Get user's tutorial progress.
+
+Response:
+```json
+{
+  "isComplete": "boolean",
+  "progress": {
+    "lastStep": "number",
+    "completedSteps": "string[]"
+  }
+}
+```
+
+## Error Handling
+
+All error responses follow this format:
+```json
+{
+  "error": "string",
+  "details": "string|object"
+}
+```
+
+Common HTTP status codes:
+- 400: Bad Request (validation error)
+- 401: Unauthorized
+- 403: Forbidden
+- 404: Not Found
+- 429: Too Many Requests
+- 500: Internal Server Error
+
+## Development Guide
 
 ### Adding New Features
-1. Creating routes
-2. Implementing validation
-3. Adding middleware
-4. Testing endpoints
+1. Create route handler in `routes/`
+2. Add validation schema in `utils/validation.js`
+3. Implement business logic
+4. Add tests
+5. Update documentation
 
-## Workflows
+### Database Migrations
+1. Create migration file in `migrations/`
+2. Test locally: `npm run migrate`
+3. Deploy: Migration runs automatically on deploy
 
-### Development Workflow
-1. Feature branch creation
-2. Local development
-3. Testing
-4. Pull request
-5. Code review
-6. Deployment
-
-### Deployment Workflow
-1. Environment preparation
-2. Database migration
-3. Code deployment
-4. Service restart
-5. Health verification
-
-### Maintenance Procedures
-1. Log rotation
-2. Database backup
-3. Performance monitoring
-4. Security updates
+### Deployment
+1. Push to main branch
+2. CI/CD pipeline runs tests
+3. Deploy script executes:
+   - Install dependencies
+   - Run migrations
+   - Restart PM2 processes
 
 ## Troubleshooting
 
 ### Common Issues
-- Database connection errors
-- Authentication failures
-- Rate limit issues
-- Validation errors
 
-### Debugging Tools
-- PM2 logs
-- Database queries
-- API testing
-- Error tracking
+#### Database Connection Errors
+- Check DATABASE_URL in .env
+- Verify PostgreSQL is running
+- Check connection pool settings
 
-### Maintenance Tasks
-- Log cleanup
-- Database optimization
-- Cache clearing
-- Security updates
+#### Authentication Issues
+- Verify JWT_SECRET is set
+- Check token expiration
+- Validate Google OAuth credentials
 
-## API Documentation
+#### Rate Limiting
+- Default: 100 requests per 15 minutes
+- Increase limits in config/index.js
+- Check client IP address handling
 
-### Authentication Endpoints
-- POST /api/auth/google
-- GET /api/auth/validate
-- POST /api/auth/logout
+## Maintenance
 
-### Team Endpoints
-- GET /api/teams
-- POST /api/teams
-- PUT /api/teams/:id
-- DELETE /api/teams/:id
+### Regular Tasks
+1. Monitor error logs
+2. Check resource usage
+3. Backup database
+4. Update dependencies
 
-### Agent Endpoints
-- GET /api/agents
-- POST /api/agents
-- PUT /api/agents/:id
-- DELETE /api/agents/:id
-
-### Tutorial Endpoints
-- GET /api/users/:userId/tutorial-status
-- POST /api/users/:userId/tutorial-status
+### Performance Optimization
+1. Review slow queries
+2. Optimize indexes
+3. Adjust connection pools
+4. Cache frequently accessed data
