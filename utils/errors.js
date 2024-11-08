@@ -7,11 +7,10 @@ class AppError extends Error {
   }
 
   toResponse() {
-    const isProduction = process.env.NODE_ENV === 'production';
     return {
       success: false,
-      error: isProduction ? this.getPublicMessage() : this.message,
-      details: isProduction ? undefined : this.details,
+      error: process.env.NODE_ENV === 'production' ? this.getPublicMessage() : this.message,
+      details: process.env.NODE_ENV === 'development' ? this.details : undefined,
       statusCode: this.statusCode
     };
   }
@@ -19,8 +18,8 @@ class AppError extends Error {
   getPublicMessage() {
     const messages = {
       400: 'Invalid request',
-      401: 'Unauthorized',
-      403: 'Forbidden', 
+      401: 'Unauthorized', 
+      403: 'Forbidden',
       404: 'Not found',
       429: 'Too many requests',
       500: 'Internal server error'
