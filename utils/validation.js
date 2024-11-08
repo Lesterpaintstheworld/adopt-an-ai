@@ -28,7 +28,7 @@ const schemas = {
 const validate = (schema) => (req, res, next) => {
   try {
     if (!schema) {
-      throw new Error('No validation schema provided');
+      throw new ValidationError('No validation schema provided');
     }
     req.validated = schema.parse(req.body);
     next();
