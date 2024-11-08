@@ -3,6 +3,7 @@ const router = express.Router();
 const dbUtils = require('../utils/db');
 const httpResponses = require('../utils/responses');
 const validation = require('../utils/validation');
+const QueryBuilder = require('../utils/queryBuilder');
 
 router.get('/', async (req, res) => {
   try {
@@ -15,9 +16,17 @@ router.get('/', async (req, res) => {
       return httpResponses.notFound(res, 'User not found');
     }
 
+    const qb = new QueryBuilder();
+    const query = qb
+      .select('*')
+      .from('agents')
+      .where({ user_id: req.user.userId })
+      .orderBy('created_at', 'DESC')
+      .build();
+
     const result = await dbUtils.executeQuery(
-      'SELECT * FROM agents WHERE user_id = $1 ORDER BY created_at DESC',
-      [req.user.userId],
+      query.text,
+      query.values,
       { logExtra: { route: 'GET /agents' }}
     );
 
