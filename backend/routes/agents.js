@@ -68,11 +68,10 @@ router.post('/', async (req, res) => {
       tools || []
     ];
 
-    const result = await pool.query(query, values);
+    const result = await dbUtils.executeQuery(query, values);
     res.status(201).json(result.rows[0]);
   } catch (error) {
-    console.error('Error creating agent:', error);
-    res.status(500).json({ error: 'Failed to create agent' });
+    httpResponses.serverError(res, error);
   }
 });
 
@@ -113,11 +112,10 @@ router.put('/:id', async (req, res) => {
       req.user.userId
     ];
 
-    const result = await pool.query(query, values);
+    const result = await dbUtils.executeQuery(query, values);
     res.json(result.rows[0]);
   } catch (error) {
-    console.error('Error updating agent:', error);
-    res.status(500).json({ error: 'Failed to update agent' });
+    httpResponses.serverError(res, error);
   }
 });
 

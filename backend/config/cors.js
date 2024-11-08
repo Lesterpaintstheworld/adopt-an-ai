@@ -1,16 +1,17 @@
-const { CORS_ORIGINS } = require('../constants');
+const config = require('./index');
 
 const corsOptions = {
   origin: function(origin, callback) {
-    if (!origin || CORS_ORIGINS.includes(origin)) {
+    if (!origin || config.cors.origins.includes(origin)) {
       callback(null, true);
     } else {
       callback(new Error('CORS policy violation'), false);
     }
   },
-  credentials: true,
-  allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+  credentials: config.cors.credentials,
+  allowedHeaders: config.cors.allowedHeaders,
+  methods: config.cors.methods,
+  maxAge: config.cors.maxAge
 };
 
 module.exports = corsOptions;
