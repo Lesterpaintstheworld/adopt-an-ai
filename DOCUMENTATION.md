@@ -301,7 +301,70 @@ app.post('/api/resources',
 );
 ```
 
-### Error Handling
+### Error Handling System
+
+#### Custom Error Classes
+
+```javascript
+// Base application error
+class AppError extends Error {
+  constructor(message, statusCode = 500, details = null) {
+    super(message);
+    this.statusCode = statusCode;
+    this.details = details;
+    this.name = this.constructor.name;
+  }
+}
+
+// Specific errors
+class ValidationError extends AppError {
+  constructor(details) {
+    super('Validation failed', 400, details);
+  }
+}
+
+class AuthError extends AppError {
+  constructor(message = 'Authentication failed') {
+    super(message, 401);
+  }
+}
+
+class NotFoundError extends AppError {
+  constructor(resource) {
+    super(`${resource} not found`, 404);
+  }
+}
+```
+
+#### Error Handling Middleware
+
+```javascript
+app.use((err, req, res, next) => {
+  logger.error('Error caught', err, {
+    path: req.path,
+    method: req.method,
+    query: req.query,
+    body: req.body,
+    user: req.user?.userId
+  });
+
+  if (err instanceof AppError) {
+    return res.status(err.statusCode).json({
+      success: false,
+      error: err.message,
+      details: process.env.NODE_ENV === 'development' ? err.details : undefined
+    });
+  }
+
+  // Default error
+  res.status(500).json({
+    success: false,
+    error: 'Internal server error'
+  });
+});
+```
+
+#### Error Handling Example
 
 ```javascript
 try {
