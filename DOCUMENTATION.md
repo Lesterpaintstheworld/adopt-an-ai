@@ -1694,23 +1694,104 @@ const schemas = {
 
 The ResourceManager provides a standardized way to handle CRUD operations with built-in validation, access control, and event tracking.
 
-### Core Features
-- Generic resource CRUD operations with type safety 
-- Ownership validation with team support
-- Role-based access control
-- Event emission for all operations
-- Query building with parameterization
-- Transaction support
-- Validation using Zod schemas
-- Audit logging
-- Real-time event tracking and webhooks
+#### Core Features
+- Generic CRUD operations with type safety and validation
+- Ownership validation and team-based access control
+- Event emission for all resource changes
+- Query building with SQL injection protection
+- Transaction support with automatic rollback
+- Schema validation using Zod
+- Comprehensive audit logging
+- Real-time event tracking
 - Cascading deletions and cleanup
-- Team-based access control and sharing
-- Automatic timestamps and versioning
-- Resource ownership transfer
-- Bulk operations support
-- Custom validation rules
-- Soft delete option
+
+#### Usage Example
+```javascript
+// Initialize a resource manager
+const manager = new ResourceManager('agents', 'agent');
+
+// Create with validation
+const agent = await manager.create(userId, {
+  name: 'My Agent',
+  system_prompt: 'You are a helpful assistant',
+  parameters: { temperature: 0.7 }
+}); // Emits: resource.created
+
+// List with filtering
+const agents = await manager.list(userId, {
+  status: 'active',
+  orderBy: 'created_at',
+  direction: 'DESC'
+});
+
+// Get with ownership check
+const agent = await manager.getResource(agentId, userId);
+// Throws: NotFoundError or AccessDeniedError
+
+// Update with validation
+const updated = await manager.updateResource(agentId, userId, {
+  name: 'Updated Name'
+}); // Emits: resource.updated
+
+// Delete with cleanup
+await manager.deleteResource(agentId, userId);
+// Emits: resource.deleted
+```
+
+#### Event System Integration
+```javascript
+// Resource lifecycle events
+events.on('resource.created', ({ id, type, userId, resource }) => {
+  // Handle resource creation
+});
+
+events.on('resource.updated', ({ id, type, userId, changes }) => {
+  // Handle resource update
+});
+
+events.on('resource.deleted', ({ id, type, userId }) => {
+  // Handle resource deletion
+});
+
+events.on('resource.accessDenied', ({ id, type, userId, action }) => {
+  // Handle access denial
+});
+```
+
+#### Validation System
+```javascript
+const schemas = {
+  agent: z.object({
+    name: z.string().min(1).max(255),
+    system_prompt: z.string().optional(),
+    status: z.enum(['active', 'inactive']),
+    parameters: z.record(z.any()).optional()
+  })
+};
+
+// Using validation middleware
+app.post('/api/resources',
+  validate(schemas.resource),
+  async (req, res) => {
+    // req.validated contains validated data
+  }
+);
+```
+
+#### Error Handling
+```javascript
+try {
+  await manager.getResource(id, userId);
+} catch (error) {
+  if (error instanceof NotFoundError) {
+    // Resource not found
+  } else if (error instanceof AccessDeniedError) {
+    // Access denied
+  } else if (error instanceof ValidationError) {
+    // Invalid data
+  }
+}
+```
 
 ### ResourceManager Usage
 
