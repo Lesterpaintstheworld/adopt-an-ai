@@ -76,46 +76,26 @@ router.post('/', validateResource('agent'), async (req, res) => {
 });
 
 // PUT /api/agents/:id
-router.put('/:id', async (req, res) => {
+router.put('/:id', async (req, res, next) => {
   try {
-    const existingAgent = await pool.query(
-      'SELECT * FROM agents WHERE id = $1 AND user_id = $2',
-      [req.params.id, req.user.userId]
-    );
-    
-    if (existingAgent.rows.length === 0) {
-      return res.status(404).json({ error: 'Agent not found' });
-    }
-
     const { name, system_prompt, status, parameters, tools } = req.body;
     
-    const query = `
-      UPDATE agents 
-      SET 
-        name = COALESCE($1, name),
-        system_prompt = COALESCE($2, system_prompt),
-        status = COALESCE($3, status),
-        parameters = COALESCE($4, parameters),
-        tools = COALESCE($5, tools),
-        updated_at = CURRENT_TIMESTAMP
-      WHERE id = $6 AND user_id = $7
-      RETURNING *
-    `;
-    
-    const values = [
-      name,
-      system_prompt,
-      status,
-      parameters,
-      tools,
+    const result = await agentManager.updateResource(
       req.params.id,
-      req.user.userId
-    ];
+      req.user.userId,
+      {
+        name,
+        system_prompt,
+        status,
+        parameters,
+        tools,
+        updated_at: new Date()
+      }
+    );
 
-    const result = await dbUtils.executeQuery(query, values);
-    res.json(result.rows[0]);
+    res.json(result);
   } catch (error) {
-    httpResponses.serverError(res, error);
+    next(error);
   }
 });
 

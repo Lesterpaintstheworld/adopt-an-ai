@@ -71,6 +71,21 @@ class ResourceManager {
       [resourceId]
     );
   }
+
+  async updateResource(resourceId, userId, data) {
+    await this.checkOwnership(resourceId, userId);
+
+    const qb = new QueryBuilder();
+    const query = qb
+      .update(this.tableName, data, {
+        id: resourceId,
+        user_id: userId
+      })
+      .build();
+
+    const result = await dbUtils.executeQuery(query.text, query.values);
+    return result.rows[0];
+  }
 }
 
 module.exports = ResourceManager;

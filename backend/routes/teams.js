@@ -92,25 +92,23 @@ router.post('/', validateResource('team'), async (req, res, next) => {
 
 // PUT /api/teams/:id
 router.put('/:id', async (req, res, next) => {
-  const { name, description, status } = req.body;
-  
   try {
-    await teamManager.checkOwnership(req.params.id, req.user.userId);
+    const { name, description, status } = req.body;
     
-    const result = await dbUtils.executeQuery(
-      `UPDATE teams 
-       SET name = COALESCE($1, name),
-           description = COALESCE($2, description), 
-           status = COALESCE($3, status),
-           updated_at = CURRENT_TIMESTAMP
-       WHERE id = $4
-       RETURNING *`,
-      [name, description, status, req.params.id]
+    const result = await teamManager.updateResource(
+      req.params.id,
+      req.user.userId,
+      {
+        name,
+        description,
+        status,
+        updated_at: new Date()
+      }
     );
-    
-    httpResponses.success(res, result.rows[0]);
+
+    httpResponses.success(res, result);
   } catch (error) {
-    httpResponses.serverError(res, error);
+    next(error);
   }
 });
 
