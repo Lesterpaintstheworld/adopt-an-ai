@@ -23,7 +23,7 @@
 The ResourceManager provides a standardized way to handle CRUD operations with built-in validation, access control, and event tracking.
 
 #### Core Features
-- Generic resource CRUD operations 
+- Generic resource CRUD operations with type safety
 - Ownership validation with team support
 - Role-based access control
 - Event emission for all operations
@@ -31,6 +31,143 @@ The ResourceManager provides a standardized way to handle CRUD operations with b
 - Transaction support
 - Validation using Zod schemas
 - Audit logging
+
+#### Creating a Resource Manager
+```javascript
+// Initialize manager for a resource type
+const manager = new ResourceManager('table_name', 'resource_name');
+
+// Create with validation
+const resource = await manager.create(userId, {
+  name: 'Resource Name',
+  description: 'Description'
+}); // Validates against schema
+
+// List with filtering and pagination
+const resources = await manager.list(userId, {
+  filter: { status: 'active' },
+  sort: '-created_at',
+  page: 1,
+  limit: 20
+});
+
+// Get with ownership check
+const resource = await manager.getResource(resourceId, userId);
+// Throws NotFoundError or AccessDeniedError if not authorized
+
+// Update with validation
+const updated = await manager.updateResource(resourceId, userId, {
+  name: 'Updated Name'
+}); // Validates changes
+
+// Delete with cascading cleanup
+await manager.deleteResource(resourceId, userId);
+```
+
+#### Event System Integration
+```javascript
+// Resource lifecycle events
+events.on('resource.created', ({ id, type, userId }) => {
+  // Handle resource creation
+  // Full resource data available
+});
+
+events.on('resource.updated', ({ id, type, userId, changes }) => {
+  // Handle resource update
+  // Access what changed
+});
+
+events.on('resource.deleted', ({ id, type, userId }) => {
+  // Handle resource deletion
+  // Last chance to access data
+});
+
+// Access control events
+events.on('resource.accessDenied', ({ id, type, userId, action }) => {
+  // Handle access denial
+  // Audit security events
+});
+```
+
+#### Query Builder Usage
+```javascript
+const qb = new QueryBuilder();
+
+// SELECT query with joins
+const query = qb
+  .select(['a.*', 't.name as team_name'])
+  .from('agents a')
+  .leftJoin('team_agents ta', 'a.id = ta.agent_id')
+  .leftJoin('teams t', 'ta.team_id = t.id')
+  .where({ 'a.status': 'active' })
+  .orderBy('a.created_at', 'DESC')
+  .limit(10)
+  .build();
+
+// INSERT with returning
+const insert = qb
+  .insert('agents', {
+    name: 'New Agent',
+    user_id: userId,
+    parameters: { temperature: 0.7 }
+  })
+  .returning('*')
+  .build();
+
+// UPDATE with conditions
+const update = qb
+  .update('agents', 
+    { status: 'inactive' },
+    { id: agentId, user_id: userId }
+  )
+  .returning('*')
+  .build();
+```
+
+#### Validation System
+```javascript
+const schemas = {
+  agent: z.object({
+    name: z.string().min(1).max(255),
+    system_prompt: z.string().optional(),
+    status: z.enum(['active', 'inactive']),
+    parameters: z.record(z.any()).optional(),
+    tools: z.array(z.any()).optional()
+  }),
+
+  team: z.object({
+    name: z.string().min(1).max(100),
+    description: z.string().optional(),
+    status: z.enum(['active', 'inactive', 'archived'])
+  })
+};
+
+// Using validation middleware
+app.post('/api/resources',
+  validate(schemas.resource),
+  async (req, res) => {
+    // req.validated contains validated data
+  }
+);
+```
+
+#### Error Handling
+```javascript
+try {
+  await manager.getResource(id, userId);
+} catch (error) {
+  if (error instanceof NotFoundError) {
+    // Resource not found
+    // Access error.details for context
+  } else if (error instanceof AccessDeniedError) {
+    // User does not have access
+    // Access error.context for audit
+  } else if (error instanceof ValidationError) {
+    // Invalid data
+    // Access error.errors for details
+  }
+}
+```
 
 #### Usage Example
 
