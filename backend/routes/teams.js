@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const ResourceController = require('../controllers/resourceController');
+const BaseController = require('../controllers/baseController');
 const validate = require('../middleware/validate');
 const { schemas } = require('../utils/validation');
 const ResourceManager = require('../utils/resourceManager');
 const eventEmitter = require('../utils/eventEmitter');
 
 const teamManager = new ResourceManager('teams', 'team');
-const teamsController = new ResourceController(teamManager);
+const baseController = new BaseController();
 
 // Apply validation middleware
 router.post('/', validate(schemas.team));
@@ -22,11 +22,11 @@ router.put('/:id', teamsController.update);
 router.delete('/:id', teamsController.delete);
 
 // Add agent to team
-router.post('/:teamId/agents', validateResource('teamAgent'), async (req, res, next) => {
-  const { teamId } = req.params;
-  const { agentId } = req.validated;
-  
-  try {
+router.post('/:teamId/agents', validateResource('teamAgent'), (req, res, next) => {
+  baseController.execute(req, res, next, async (req) => {
+    const { teamId } = req.params;
+    const { agentId } = req.validated;
+    
     await teamManager.checkOwnership(teamId, req.user.userId);
     
     await dbUtils.executeQuery(
@@ -36,10 +36,8 @@ router.post('/:teamId/agents', validateResource('teamAgent'), async (req, res, n
       [teamId, agentId]
     );
 
-    httpResponses.success(res, { message: 'Agent added to team successfully' }, 201);
-  } catch (error) {
-    next(error);
-  }
+    return { message: 'Agent added to team successfully' };
+  });
 });
 
 // DELETE agent from team
