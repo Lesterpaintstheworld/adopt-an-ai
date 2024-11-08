@@ -13,13 +13,22 @@ const pool = new Pool({
 // GET /api/agents
 router.get('/', async (req, res) => {
   try {
-    console.log('Fetching agents for user:', req.user.userId);
+    console.log('Fetching agents - Debug Info:', {
+      userId: req.user?.userId,
+      headers: req.headers,
+      authHeader: req.headers.authorization
+    });
+    
+    // Verify database connection
+    const dbCheck = await pool.query('SELECT NOW()');
+    console.log('Database connection check:', dbCheck.rows[0]);
     
     // Verify user exists first
     const userCheck = await pool.query(
       'SELECT id FROM users WHERE id = $1',
       [req.user.userId]
     );
+    console.log('User check result:', userCheck.rows);
 
     if (userCheck.rows.length === 0) {
       console.error('User not found:', req.user.userId);
@@ -34,14 +43,25 @@ router.get('/', async (req, res) => {
       WHERE user_id = $1 
       ORDER BY created_at DESC
     `;
+    console.log('Executing agents query with userId:', req.user.userId);
     const result = await pool.query(query, [req.user.userId]);
-    console.log('Found agents:', result.rows.length);
+    console.log('Agents query result:', {
+      rowCount: result.rowCount,
+      firstRow: result.rows[0]
+    });
+    
     res.json(result.rows);
   } catch (error) {
-    console.error('Error fetching agents:', error);
+    console.error('Error fetching agents - Full error:', {
+      message: error.message,
+      stack: error.stack,
+      code: error.code,
+      detail: error.detail
+    });
     res.status(500).json({ 
       error: 'Failed to fetch agents',
-      details: error.message 
+      details: error.message,
+      code: error.code
     });
   }
 });
