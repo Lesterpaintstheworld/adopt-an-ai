@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { Pool } = require('pg');
+const jwt = require('jsonwebtoken');
 
 // Reuse pool configuration from main server
 const pool = new Pool({
@@ -13,22 +14,37 @@ const pool = new Pool({
 // GET /api/agents
 router.get('/', async (req, res) => {
   try {
-    console.log('Fetching agents - Debug Info:', {
+    // Log the incoming request
+    console.log('GET /agents request:', {
       userId: req.user?.userId,
-      headers: req.headers,
-      authHeader: req.headers.authorization
+      headers: req.headers
     });
-    
-    // Verify database connection
-    const dbCheck = await pool.query('SELECT NOW()');
-    console.log('Database connection check:', dbCheck.rows[0]);
-    
+
+    // Validate user object exists
+    if (!req.user || !req.user.userId) {
+      console.error('No user data in request');
+      return res.status(401).json({
+        error: 'Unauthorized',
+        details: 'No user data found in request'
+      });
+    }
+
+    // Test database connection first
+    try {
+      await pool.query('SELECT 1');
+    } catch (dbError) {
+      console.error('Database connection error:', dbError);
+      return res.status(500).json({
+        error: 'Database connection failed',
+        details: process.env.NODE_ENV === 'development' ? dbError.message : 'Internal server error'
+      });
+    }
+
     // Verify user exists first
     const userCheck = await pool.query(
       'SELECT id FROM users WHERE id = $1',
       [req.user.userId]
     );
-    console.log('User check result:', userCheck.rows);
 
     if (userCheck.rows.length === 0) {
       console.error('User not found:', req.user.userId);
@@ -38,18 +54,20 @@ router.get('/', async (req, res) => {
       });
     }
 
+    // Fetch agents with better error handling
     const query = `
       SELECT * FROM agents 
       WHERE user_id = $1 
       ORDER BY created_at DESC
     `;
-    console.log('Executing agents query with userId:', req.user.userId);
+
     const result = await pool.query(query, [req.user.userId]);
-    console.log('Agents query result:', {
-      rowCount: result.rowCount,
-      firstRow: result.rows[0]
-    });
     
+    console.log('Agents query successful:', {
+      userId: req.user.userId,
+      agentsFound: result.rowCount
+    });
+
     res.json(result.rows);
   } catch (error) {
     console.error('Error fetching agents - Full error:', {
