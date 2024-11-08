@@ -1154,16 +1154,246 @@ The ResourceManager provides a standardized way to handle CRUD operations with b
 
 #### Core Features
 
-- **Ownership Validation**: Automatically verifies resource ownership and permissions
-- **Access Control**: Team-based and role-based access management with granular permissions
-- **Event System**: Emits events for all resource lifecycle changes with detailed context
-- **Query Building**: Safe SQL construction with QueryBuilder and parameterized queries
-- **Error Handling**: Standardized error responses with detailed context
-- **Transaction Support**: Automatic rollback on failures with nested transaction support
-- **Validation**: Schema-based validation using Zod
-- **Audit Logging**: Tracks all changes with user context
+- **Generic Resource Operations**
+  - Type-safe CRUD operations with validation
+  - Automatic timestamps and audit trails
+  - Transaction support with automatic rollback
+  - Bulk operations and batch processing
+  - Cascading deletions and cleanup
 
-#### Usage Example
+- **Access Control & Security**
+  - Ownership validation per resource
+  - Team-based access control
+  - Role-based permissions
+  - Resource sharing rules
+  - Access audit logging
+  - Rate limiting integration
+
+- **Event System Integration**
+  - Real-time event emission
+  - Operation tracking and metrics
+  - Audit trail generation
+  - Error event handling
+  - Custom event subscribers
+  - Async operation support
+
+- **Query Building & Data Access**
+  - Safe SQL construction via QueryBuilder
+  - Parameterized queries
+  - Transaction management
+  - Connection pooling
+  - Query optimization
+  - Index utilization
+
+#### Usage Examples
+
+```typescript
+// Initialize manager for a resource type
+const manager = new ResourceManager('agents', 'agent');
+
+// Create with validation and events
+const agent = await manager.create(userId, {
+  name: 'My Agent',
+  system_prompt: 'You are a helpful assistant',
+  parameters: {
+    temperature: 0.7,
+    max_tokens: 1000
+  }
+}); // Emits: resource.created
+
+// List with advanced filtering
+const agents = await manager.list(userId, {
+  status: 'active',
+  orderBy: 'created_at', 
+  direction: 'DESC',
+  limit: 20,
+  offset: 0,
+  search: 'keyword'
+});
+
+// Get with access check
+const agent = await manager.getResource(agentId, userId);
+// Throws: NotFoundError or AccessDeniedError
+
+// Update with validation
+const updated = await manager.updateResource(agentId, userId, {
+  name: 'Updated Name',
+  parameters: {
+    ...agent.parameters,
+    temperature: 0.8
+  }
+}); // Emits: resource.updated
+
+// Delete with cleanup
+await manager.deleteResource(agentId, userId);
+// Emits: resource.deleted
+// Handles: Related cleanup
+
+// Transaction example
+await manager.withTransaction(async (transaction) => {
+  const agent = await manager.create(userId, data, { transaction });
+  await manager.addToTeam(teamId, agent.id, { transaction });
+});
+```
+
+#### Event System
+
+```typescript
+// Resource lifecycle events
+events.on('resource.created', ({ id, type, userId, resource }) => {
+  // Handle resource creation
+  // Full resource data available
+});
+
+events.on('resource.updated', ({ id, type, userId, changes, previous }) => {
+  // Handle resource update
+  // Access what changed
+});
+
+events.on('resource.deleted', ({ id, type, userId, resource }) => {
+  // Handle resource deletion
+  // Last chance to access data
+});
+
+events.on('resource.accessDenied', ({ id, type, userId, action }) => {
+  // Handle access denial
+  // Audit security events
+});
+
+// Error events
+events.on('resource.error', ({ error, context }) => {
+  // Handle operation errors
+  // Access full error context
+});
+```
+
+#### Query Builder Usage
+
+```typescript
+const qb = new QueryBuilder();
+
+// SELECT with joins
+const query = qb
+  .select(['a.*', 't.name as team_name'])
+  .from('agents a')
+  .leftJoin('team_agents ta', 'a.id = ta.agent_id')
+  .leftJoin('teams t', 'ta.team_id = t.id')
+  .where({ 'a.status': 'active' })
+  .orderBy('a.created_at', 'DESC')
+  .limit(10)
+  .build();
+
+// INSERT with returning
+const insert = qb
+  .insert('agents', {
+    name: 'New Agent',
+    user_id: userId,
+    parameters: { temperature: 0.7 }
+  })
+  .returning('*')
+  .build();
+
+// UPDATE with conditions
+const update = qb
+  .update('agents', 
+    { status: 'inactive' },
+    { id: agentId, user_id: userId }
+  )
+  .returning('*')
+  .build();
+```
+
+#### Validation System
+
+```typescript
+// Resource schemas
+const schemas = {
+  agent: z.object({
+    name: z.string().min(1).max(255),
+    system_prompt: z.string().optional(),
+    status: z.enum(['active', 'inactive']),
+    parameters: z.object({
+      temperature: z.number().min(0).max(1),
+      max_tokens: z.number().positive()
+    }).optional(),
+    tools: z.array(z.string()).optional()
+  }),
+
+  team: z.object({
+    name: z.string().min(1).max(100),
+    description: z.string().optional(),
+    status: z.enum(['active', 'inactive', 'archived'])
+  })
+};
+
+// Using validation middleware
+app.post('/api/resources',
+  validate(schemas.resource),
+  async (req, res) => {
+    // req.validated contains validated data
+  }
+);
+```
+
+#### Error Handling
+
+```typescript
+try {
+  await manager.getResource(id, userId);
+} catch (error) {
+  if (error instanceof NotFoundError) {
+    // Resource not found
+    // Access error.details for context
+  } else if (error instanceof AccessDeniedError) {
+    // User does not have access
+    // Access error.context for audit
+  } else if (error instanceof ValidationError) {
+    // Invalid data
+    // Access error.errors for details
+  }
+}
+```
+
+### API Endpoints
+
+All resource endpoints follow this pattern:
+
+```
+GET    /api/resources          - List resources
+POST   /api/resources          - Create resource
+GET    /api/resources/:id      - Get resource
+PUT    /api/resources/:id      - Update resource  
+DELETE /api/resources/:id      - Delete resource
+```
+
+Common Headers:
+```
+Authorization: Bearer <jwt_token>
+Content-Type: application/json
+```
+
+Standard Response Format:
+```json
+{
+  "success": true,
+  "data": {},
+  "timestamp": "ISO-8601",
+  "requestId": "uuid"
+}
+```
+
+Error Response Format:
+```json
+{
+  "success": false,
+  "error": "Error message",
+  "code": 400,
+  "type": "ValidationError", 
+  "details": {},
+  "timestamp": "ISO-8601",
+  "requestId": "uuid"
+}
+```
 
 ```javascript
 // Initialize manager for a resource type
