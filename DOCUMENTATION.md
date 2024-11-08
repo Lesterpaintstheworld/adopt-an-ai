@@ -1194,17 +1194,117 @@ const updated = await manager.updateResource(resourceId, userId, {
 await manager.deleteResource(resourceId, userId);
 ```
 
-#### Event System Integration
+### Caching System
+
+#### Cache Configuration
+
 ```javascript
-// Resource lifecycle events
-events.on('resource.created', ({ id, type, userId }) => {
-  // Handle resource creation
-  // Full resource data available
+const NodeCache = require('node-cache');
+
+class Cache {
+  constructor(ttlSeconds = 3600) {
+    this.cache = new NodeCache({
+      stdTTL: ttlSeconds,
+      checkperiod: ttlSeconds * 0.2,
+      useClones: false
+    });
+  }
+
+  get(key) {
+    return this.cache.get(key);
+  }
+
+  set(key, value, ttl = 3600) {
+    return this.cache.set(key, value, ttl);
+  }
+
+  del(key) {
+    return this.cache.del(key);
+  }
+
+  flush() {
+    return this.cache.flushAll();
+  }
+
+  stats() {
+    return this.cache.getStats();
+  }
+}
+```
+
+#### Cache Usage Example
+
+```javascript
+const cache = new Cache();
+
+// In controllers
+async function getResource(req, res) {
+  const cacheKey = `resource:${req.params.id}`;
+  
+  // Check cache first
+  let data = cache.get(cacheKey);
+  
+  if (!data) {
+    // Get from database if not in cache
+    data = await db.getResource(req.params.id);
+    // Cache for 1 hour
+    cache.set(cacheKey, data, 3600);
+  }
+  
+  return res.json(data);
+}
+```
+
+### Logging System
+
+#### Logger Configuration
+
+```javascript
+const logger = {
+  info: (message, data = {}) => {
+    console.log({
+      timestamp: new Date().toISOString(),
+      level: 'info',
+      message,
+      ...data
+    });
+  },
+
+  error: (message, error, data = {}) => {
+    console.error({
+      timestamp: new Date().toISOString(),
+      level: 'error',
+      message,
+      error: {
+        message: error.message,
+        stack: error.stack,
+        code: error.code
+      },
+      ...data
+    });
+  }
+};
+```
+
+#### Logging Usage Examples
+
+```javascript
+// Info logging
+logger.info('Request received', {
+  path: req.path,
+  method: req.method,
+  userId: req.user.id
 });
 
-events.on('resource.updated', ({ id, type, userId, changes }) => {
-  // Handle resource update
-  // Access what changed
+// Error logging
+logger.error('Processing error', error, {
+  resourceId: req.params.id,
+  userId: req.user.id
+});
+
+// Resource lifecycle events
+events.on('resource.created', ({ id, type, userId }) => {
+  logger.info('Resource created', { id, type, userId });
 });
 
 events.on('resource.deleted', ({ id, type, userId }) => {
