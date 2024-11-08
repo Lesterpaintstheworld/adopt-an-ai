@@ -91,23 +91,16 @@ router.post('/', validateResource('team'), async (req, res, next) => {
 
 
 // PUT /api/teams/:id
-router.put('/:id', async (req, res) => {
+router.put('/:id', async (req, res, next) => {
   const { name, description, status } = req.body;
   
   try {
-    const team = await pool.query(
-      'SELECT * FROM teams WHERE id = $1 AND owner_id = $2',
-      [req.params.id, req.user.userId]
-    );
+    await teamManager.checkOwnership(req.params.id, req.user.userId);
     
-    if (team.rows.length === 0) {
-      return res.status(403).json({ error: 'Not authorized to update this team' });
-    }
-    
-    const result = await pool.query(
+    const result = await dbUtils.executeQuery(
       `UPDATE teams 
        SET name = COALESCE($1, name),
-           description = COALESCE($2, description),
+           description = COALESCE($2, description), 
            status = COALESCE($3, status),
            updated_at = CURRENT_TIMESTAMP
        WHERE id = $4
@@ -115,7 +108,7 @@ router.put('/:id', async (req, res) => {
       [name, description, status, req.params.id]
     );
     
-    res.json(result.rows[0]);
+    httpResponses.success(res, result.rows[0]);
   } catch (error) {
     httpResponses.serverError(res, error);
   }
@@ -139,74 +132,62 @@ router.delete('/:id', async (req, res, next) => {
 });
 
 // Add agent to team
-router.post('/:teamId/agents', async (req, res) => {
+router.post('/:teamId/agents', validateResource('teamAgent'), async (req, res, next) => {
   const { teamId } = req.params;
-  const { agentId } = req.body;
+  const { agentId } = req.validated;
   
   try {
     await teamManager.checkOwnership(teamId, req.user.userId);
     
-    // Add agent to team
-    await pool.query(
+    await dbUtils.executeQuery(
       `INSERT INTO team_agents (team_id, agent_id)
        VALUES ($1, $2)
        ON CONFLICT (team_id, agent_id) DO NOTHING`,
       [teamId, agentId]
     );
 
-    res.status(201).json({ message: 'Agent added to team successfully' });
+    httpResponses.success(res, { message: 'Agent added to team successfully' }, 201);
   } catch (error) {
-    console.error('Error adding agent to team:', error);
-    res.status(500).json({ 
-      error: 'Failed to add agent to team',
-      details: error.message 
-    });
+    next(error);
   }
 });
 
 // DELETE agent from team
-router.delete('/:teamId/agents/:agentId', async (req, res) => {
+router.delete('/:teamId/agents/:agentId', async (req, res, next) => {
   const { teamId, agentId } = req.params;
   
   try {
     await teamManager.checkOwnership(teamId, req.user.userId);
     
-    // Remove agent from team
-    await pool.query(
+    await dbUtils.executeQuery(
       `DELETE FROM team_agents 
        WHERE team_id = $1 AND agent_id = $2`,
       [teamId, agentId]
     );
 
-    res.status(204).send();
+    httpResponses.noContent(res);
   } catch (error) {
-    console.error('Error removing agent from team:', error);
-    res.status(500).json({ 
-      error: 'Failed to remove agent from team',
-      details: error.message 
-    });
+    next(error);
   }
 });
 
 // GET /api/teams/:teamId/members
-router.get('/:teamId/members', async (req, res) => {
+router.get('/:teamId/members', async (req, res, next) => {
   try {
-    const query = `
-      SELECT a.*
-      FROM team_agents ta
-      JOIN agents a ON ta.agent_id = a.id
-      WHERE ta.team_id = $1
-      ORDER BY a.name ASC
-    `;
+    await teamManager.checkOwnership(req.params.teamId, req.user.userId);
+
+    const result = await dbUtils.executeQuery(
+      `SELECT a.*
+       FROM team_agents ta
+       JOIN agents a ON ta.agent_id = a.id
+       WHERE ta.team_id = $1
+       ORDER BY a.name ASC`,
+      [req.params.teamId]
+    );
     
-    const result = await pool.query(query, [req.params.teamId]);
-    res.json(result.rows);
+    httpResponses.success(res, result.rows);
   } catch (error) {
-    console.error('Error fetching team agents:', error);
-    res.status(500).json({ 
-      error: 'Failed to fetch team agents',
-      details: error.message 
-    });
+    next(error);
   }
 });
 
