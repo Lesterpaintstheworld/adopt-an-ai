@@ -1534,38 +1534,72 @@ const schemas = {
 };
 ```
 
-#### Using ResourceManager
+### Resource Management System
+
+The ResourceManager provides a standardized way to handle CRUD operations with built-in validation, access control, and event tracking.
+
+#### Core Features
+- Generic resource CRUD operations with type safety
+- Ownership validation with team support 
+- Role-based access control
+- Event emission for all operations
+- Query building with parameterization
+- Transaction support
+- Validation using Zod schemas
+- Audit logging
+
+#### Usage Example
 
 ```javascript
-// Create a resource manager instance
-const manager = new ResourceManager('table_name', 'resource_name');
+// Initialize manager for a resource type
+const manager = new ResourceManager('agents', 'agent');
 
-// Create with validation
-const resource = await manager.create(userId, {
-  name: 'Resource Name',
-  description: 'Resource Description'
-}); // Validates against schema
+// Create with validation and events
+const agent = await manager.create(userId, {
+  name: 'My Agent',
+  system_prompt: 'You are a helpful assistant',
+  parameters: {
+    temperature: 0.7,
+    max_tokens: 1000
+  },
+  tools: ['search', 'calculator']
+});
+// Emits: resource.created
 
-// List with filtering and pagination 
-const resources = await manager.list(userId, {
-  filter: { status: 'active' },
-  sort: '-created_at', 
-  page: 1,
-  limit: 20
+// List with advanced filtering
+const agents = await manager.list(userId, {
+  status: 'active',
+  orderBy: 'created_at',
+  direction: 'DESC',
+  limit: 20,
+  offset: 0,
+  search: 'keyword'
 });
 
-// Get with ownership check
-const resource = await manager.getResource(resourceId, userId);
-// Throws NotFoundError or AccessDeniedError if not authorized
+// Get with access check
+const agent = await manager.getResource(agentId, userId);
+// Throws: NotFoundError or AccessDeniedError
 
 // Update with validation
-const updated = await manager.updateResource(resourceId, userId, {
-  name: 'Updated Name'
-}); // Validates changes
+const updated = await manager.updateResource(agentId, userId, {
+  name: 'Updated Name',
+  parameters: {
+    ...agent.parameters,
+    temperature: 0.8
+  }
+});
+// Emits: resource.updated
 
-// Delete with cascading
-await manager.deleteResource(resourceId, userId);
-// Handles related records cleanup
+// Delete with cleanup
+await manager.deleteResource(agentId, userId);
+// Emits: resource.deleted
+// Handles: Related cleanup
+
+// Transaction example
+await manager.withTransaction(async (transaction) => {
+  const agent = await manager.create(userId, data, { transaction });
+  await manager.addToTeam(teamId, agent.id, { transaction });
+});
 ```
 
 #### Error Handling
