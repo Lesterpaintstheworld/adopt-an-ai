@@ -11,7 +11,6 @@ const verifyToken = require('./middleware/auth');
 const corsOptions = require('./config/cors');
 const errorHandler = require('./middleware/errorHandler');
 const logger = require('./utils/logger');
-const config = require('./config');
 const rateLimiter = require('./middleware/rateLimiter');
 require('dotenv').config();
 
