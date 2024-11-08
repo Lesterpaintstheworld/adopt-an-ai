@@ -1,6 +1,113 @@
 # Backend Architecture
 
 ## System Overview
+
+## System Architecture Diagram
+```mermaid
+graph TB
+    Client[Client Application] --> API[API Layer]
+    API --> Auth[Authentication]
+    API --> Resources[Resource Management]
+    API --> Events[Event System]
+    
+    Auth --> DB[(Database)]
+    Resources --> DB
+    Events --> DB
+    
+    subgraph Backend Services
+        API
+        Auth
+        Resources
+        Events
+    end
+```
+
+## Data Flow Diagram
+```mermaid
+sequenceDiagram
+    participant Client
+    participant API
+    participant Auth
+    participant ResourceMgr
+    participant DB
+    participant EventSystem
+
+    Client->>API: HTTP Request
+    API->>Auth: Validate Token
+    Auth-->>API: Token Valid
+    API->>ResourceMgr: Process Request
+    ResourceMgr->>DB: Query Data
+    DB-->>ResourceMgr: Return Data
+    ResourceMgr->>EventSystem: Emit Event
+    ResourceMgr-->>API: Return Result
+    API-->>Client: HTTP Response
+```
+
+## Database Schema
+```mermaid
+erDiagram
+    users ||--o{ agents : owns
+    users ||--o{ teams : owns
+    teams ||--o{ team_members : has
+    teams ||--o{ team_agents : contains
+    agents ||--o{ team_agents : belongs_to
+
+    users {
+        string id PK
+        string email
+        string name
+        string google_id
+        boolean tutorial_completed
+        jsonb tutorial_progress
+    }
+
+    agents {
+        uuid id PK
+        string user_id FK
+        string name
+        text system_prompt
+        string status
+        jsonb parameters
+        jsonb tools
+    }
+
+    teams {
+        uuid id PK
+        string owner_id FK
+        string name
+        text description
+        string status
+    }
+```
+
+## Component Architecture
+```mermaid
+graph TB
+    subgraph API Layer
+        Routes --> Middleware
+        Middleware --> Controllers
+    end
+
+    subgraph Core Services
+        Controllers --> ResourceManager
+        Controllers --> EventEmitter
+        ResourceManager --> QueryBuilder
+        ResourceManager --> ValidationService
+    end
+
+    subgraph Data Layer
+        QueryBuilder --> DatabasePool
+        DatabasePool --> PostgreSQL[(PostgreSQL)]
+    end
+
+    subgraph Support Services
+        Logger --> Winston
+        Cache --> NodeCache
+        Auth --> JWT
+    end
+```
+
+## System Overview
 - Node.js/Express backend service
 - PostgreSQL database with connection pooling
 - JWT-based authentication
