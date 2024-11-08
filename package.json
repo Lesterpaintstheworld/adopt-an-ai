@@ -24,6 +24,8 @@
     "@mui/icons-material": "^5.16.7",
     "@mui/lab": "^5.0.0-alpha.165",
     "@mui/material": "^5.16.7",
+    "node-cache": "^5.1.2",
+    "perf_hooks": "^0.0.1",
     "@prisma/client": "^5.22.0",
     "@react-oauth/google": "^0.12.1",
     "@stripe/react-stripe-js": "^2.8.1",
