@@ -35,7 +35,17 @@ class ResourceManager {
   }
 
   async checkAccess(resourceId, userId) {
-    // Override this method in child classes to implement custom access logic
+    if (this.tableName === 'teams') {
+      const result = await dbUtils.executeQuery(
+        `SELECT EXISTS(
+          SELECT 1 FROM teams t
+          LEFT JOIN team_members tm ON t.id = tm.team_id
+          WHERE t.id = $1 AND (t.owner_id = $2 OR tm.user_id = $2)
+        )`,
+        [resourceId, userId]
+      );
+      return result.rows[0].exists;
+    }
     return true;
   }
 
