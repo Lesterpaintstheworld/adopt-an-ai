@@ -129,12 +129,137 @@ The API uses a powerful ResourceManager system that provides standardized CRUD o
 // Initialize a resource manager for a specific table
 const manager = new ResourceManager('table_name', 'resource_name');
 
-// The manager provides standard CRUD operations:
-await manager.create(userId, data);
-await manager.list(userId, options);
-await manager.getResource(resourceId, userId);
-await manager.updateResource(resourceId, userId, data);
+// Create a new resource with validation
+const resource = await manager.create(userId, {
+  name: 'Resource Name',
+  description: 'Resource Description'
+}); // Validates against schema
+
+// List resources with filtering and pagination
+const resources = await manager.list(userId, {
+  filter: { status: 'active' },
+  sort: '-created_at',
+  page: 1,
+  limit: 20
+});
+
+// Get resource with ownership check
+const resource = await manager.getResource(resourceId, userId);
+// Throws NotFoundError or AccessDeniedError if not authorized
+
+// Update with validation
+const updated = await manager.updateResource(resourceId, userId, {
+  name: 'Updated Name'
+}); // Validates changes
+
+// Delete with cascading
 await manager.deleteResource(resourceId, userId);
+// Handles related records cleanup
+```
+
+#### Event System Integration
+```javascript
+// Resource lifecycle events
+events.on('resource.created', ({ id, type, userId }) => {
+  // Handle resource creation
+});
+
+events.on('resource.updated', ({ id, type, userId, changes }) => {
+  // Handle resource update
+});
+
+events.on('resource.deleted', ({ id, type, userId }) => {
+  // Handle resource deletion
+});
+
+// Access control events
+events.on('resource.accessDenied', ({ id, type, userId, action }) => {
+  // Handle access denial
+});
+```
+
+#### Query Builder Usage
+```javascript
+const qb = new QueryBuilder();
+
+// SELECT query
+const query = qb
+  .select(['id', 'name'])
+  .from('users')
+  .where({ status: 'active' })
+  .orderBy('created_at', 'DESC')
+  .limit(10)
+  .build();
+
+// INSERT query  
+const insert = qb
+  .insert('users', {
+    name: 'John',
+    email: 'john@example.com'
+  })
+  .returning('*')
+  .build();
+
+// UPDATE query
+const update = qb
+  .update('users', 
+    { name: 'Updated' },
+    { id: userId }
+  )
+  .returning('*')
+  .build();
+
+// DELETE query
+const del = qb
+  .delete()
+  .from('users')
+  .where({ id: userId })
+  .returning('id')
+  .build();
+```
+
+#### Validation System
+```javascript
+const schemas = {
+  agent: z.object({
+    name: z.string().min(1).max(255),
+    system_prompt: z.string().optional(),
+    status: z.enum(['active', 'inactive']).optional(),
+    parameters: z.record(z.any()).optional(),
+    tools: z.array(z.any()).optional()
+  }),
+
+  team: z.object({
+    name: z.string().min(1).max(100),
+    description: z.string().optional(),
+    status: z.enum(['active', 'inactive', 'archived']).optional()
+  })
+};
+
+// Using validation middleware
+app.post('/api/resources',
+  validate(schemas.resource),
+  async (req, res) => {
+    // req.validated contains validated data
+  }
+);
+```
+
+#### Error Handling
+```javascript
+try {
+  await manager.getResource(id, userId);
+} catch (error) {
+  if (error instanceof NotFoundError) {
+    // Resource not found
+  } else if (error instanceof AccessDeniedError) {
+    // User does not have access
+  } else if (error instanceof ValidationError) {
+    // Invalid data
+  } else {
+    // Unexpected error
+  }
+}
 ```
 
 #### Access Control
