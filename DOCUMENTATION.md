@@ -379,19 +379,144 @@ if (!result.success) {
 
 ### API Endpoints
 
-All resource endpoints follow this pattern:
-```
-GET    /api/{resource}          - List resources
-POST   /api/{resource}          - Create resource
-GET    /api/{resource}/:id      - Get resource
-PUT    /api/{resource}/:id      - Update resource
-DELETE /api/{resource}/:id      - Delete resource
-```
+All endpoints require authentication via Bearer token.
 
 Common Headers:
 ```
 Authorization: Bearer <jwt_token>
 Content-Type: application/json
+```
+
+### Teams
+
+#### GET /api/teams
+Get teams for authenticated user.
+
+Response:
+```json
+[
+  {
+    "id": "uuid",
+    "name": "string",
+    "description": "string", 
+    "memberCount": "number",
+    "userRole": "owner|admin|member"
+  }
+]
+```
+
+#### POST /api/teams
+Create new team.
+
+Request:
+```json
+{
+  "name": "string",
+  "description": "string"
+}
+```
+
+#### POST /api/teams/:teamId/members
+Add member to team.
+
+Request:
+```json
+{
+  "userId": "string",
+  "role": "admin|member"
+}
+```
+
+#### POST /api/teams/:teamId/agents
+Add agent to team.
+
+Request:
+```json
+{
+  "agentId": "uuid"
+}
+```
+
+### Agents
+
+#### GET /api/agents
+Get AI agents for authenticated user.
+
+Response:
+```json
+[
+  {
+    "id": "uuid",
+    "name": "string",
+    "systemPrompt": "string",
+    "status": "active|inactive",
+    "parameters": {}
+  }
+]
+```
+
+#### POST /api/agents
+Create new AI agent.
+
+Request:
+```json
+{
+  "name": "string",
+  "systemPrompt": "string",
+  "parameters": {
+    "temperature": number,
+    "maxTokens": number
+  }
+}
+```
+
+### AI Interactions
+
+#### POST /api/ai/chat
+Send messages to AI model.
+
+Request:
+```json
+{
+  "messages": [
+    {
+      "role": "system|user|assistant",
+      "content": "string"
+    }
+  ],
+  "temperature": number,
+  "max_tokens": number
+}
+```
+
+### Tutorial Progress
+
+#### GET /api/users/:userId/tutorial-status
+Get user's tutorial progress.
+
+Response:
+```json
+{
+  "isComplete": "boolean",
+  "progress": {
+    "lastStep": "number",
+    "completedSteps": "string[]"
+  }
+}
+```
+
+#### POST /api/users/:userId/tutorial-status
+Update tutorial progress.
+
+Request:
+```json
+{
+  "isComplete": "boolean",
+  "progress": {
+    "lastStep": "number",
+    "completedSteps": "string[]"
+  }
+}
 ```
 
 Standard Response Format:
@@ -409,13 +534,21 @@ Error Response Format:
 {
   "success": false,
   "error": "Error message",
-  "code": 400,
-  "type": "ValidationError",
-  "details": {},
+  "code": "HTTP status code",
+  "type": "Error type",
+  "details": "Error details object",
   "timestamp": "ISO-8601",
-  "requestId": "uuid"
+  "requestId": "Unique request ID"
 }
 ```
+
+Common HTTP status codes:
+- 400: Bad Request (validation error)
+- 401: Unauthorized (invalid/missing token)
+- 403: Forbidden (insufficient permissions)
+- 404: Not Found (resource doesn't exist)
+- 429: Too Many Requests (rate limit exceeded)
+- 500: Internal Server Error
 
 ### Authentication 
 
