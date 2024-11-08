@@ -1,75 +1,72 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../config/db');
+const dbUtils = require('../utils/db');
+const httpResponses = require('../utils/responses');
+const { schemas, validate } = require('../utils/validation');
+const QueryBuilder = require('../utils/queryBuilder');
+const ResourceManager = require('../utils/resourceManager');
+const eventEmitter = require('../utils/eventEmitter');
+
+const teamManager = new ResourceManager('teams');
 
 // Apply auth middleware to all routes
 router.use(verifyToken);
 
+// Apply validation middleware to relevant routes
+router.post('/', validate(schemas.team));
+router.put('/:id', validate(schemas.team));
+router.post('/:teamId/members', validate(schemas.teamMember));
+router.post('/:teamId/agents', validate(schemas.teamAgent));
+
 // GET /api/teams
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
   try {
-    const query = `
-      SELECT t.*, 
-             COUNT(tm.user_id) as member_count,
-             CASE 
-               WHEN t.owner_id = $1 THEN 'owner'
-               ELSE tm.role 
-             END as user_role
-      FROM teams t
-      LEFT JOIN team_members tm ON t.id = tm.team_id
-      WHERE t.owner_id = $1 
-         OR tm.user_id = $1
-      GROUP BY t.id, tm.role
-      ORDER BY t.created_at DESC
-    `;
+    const qb = new QueryBuilder();
+    const query = qb
+      .select([
+        't.*',
+        'COUNT(tm.user_id) as member_count',
+        `CASE 
+          WHEN t.owner_id = $1 THEN 'owner'
+          ELSE tm.role 
+        END as user_role`
+      ])
+      .from('teams t')
+      .join('LEFT JOIN team_members tm ON t.id = tm.team_id')
+      .where('t.owner_id = $1 OR tm.user_id = $1')
+      .groupBy(['t.id', 'tm.role'])
+      .orderBy('t.created_at', 'DESC')
+      .build();
+
+    const result = await dbUtils.executeQuery(query.text, [req.user.userId]);
+    eventEmitter.emit('teams:listed', { userId: req.user.userId, count: result.rows.length });
     
-    const result = await pool.query(query, [req.user.userId]);
-    console.log('Teams found:', result.rows.length);
-    res.json(result.rows);
+    httpResponses.success(res, result.rows);
   } catch (error) {
-    console.error('Error fetching teams:', error);
-    res.status(500).json({ 
-      error: 'Failed to fetch teams',
-      details: error.message 
-    });
+    next(error);
   }
 });
 
 // POST /api/teams
-router.post('/', async (req, res) => {
-  const { name, description } = req.body;
-  
-  // Validation basique
-  if (!name || name.trim().length === 0) {
-    return res.status(400).json({ 
-      error: 'Team name is required',
-      field: 'name'
-    });
-  }
-
-  if (name.length > 100) {
-    return res.status(400).json({
-      error: 'Team name must be less than 100 characters',
-      field: 'name'
-    });
-  }
-
-  const client = await pool.connect();
+router.post('/', async (req, res, next) => {
+  const client = await dbUtils.getClient();
   
   try {
     await client.query('BEGIN');
     
-    const teamResult = await client.query(
-      `INSERT INTO teams (name, description, owner_id)
-       VALUES ($1, $2, $3)
+    const teamResult = await dbUtils.executeQuery(
+      `INSERT INTO teams (name, description, owner_id, status)
+       VALUES ($1, $2, $3, $4)
        RETURNING *`,
-      [name, description, req.user.userId]
+      [req.body.name, req.body.description, req.user.userId, 'active'],
+      { client }
     );
     
-    await client.query(
+    await dbUtils.executeQuery(
       `INSERT INTO team_members (team_id, user_id, role)
        VALUES ($1, $2, 'owner')`,
-      [teamResult.rows[0].id, req.user.userId]
+      [teamResult.rows[0].id, req.user.userId],
+      { client }
     );
 
     await client.query('COMMIT');
@@ -79,15 +76,16 @@ router.post('/', async (req, res) => {
       member_count: 1,
       user_role: 'owner'
     };
+
+    eventEmitter.emit('team:created', { 
+      teamId: team.id, 
+      userId: req.user.userId 
+    });
     
-    res.status(201).json(team);
+    httpResponses.success(res, team, 201);
   } catch (error) {
     await client.query('ROLLBACK');
-    console.error('Error creating team:', error);
-    res.status(500).json({ 
-      error: 'Failed to create team',
-      details: error.message 
-    });
+    next(error);
   } finally {
     client.release();
   }

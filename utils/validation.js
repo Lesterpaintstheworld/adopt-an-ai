@@ -11,7 +11,17 @@ const schemas = {
 
   team: z.object({
     name: z.string().min(1).max(100),
-    description: z.string().optional()
+    description: z.string().optional(),
+    status: z.enum(['active', 'inactive', 'archived']).optional()
+  }),
+
+  teamMember: z.object({
+    userId: z.string().min(1),
+    role: z.enum(['owner', 'admin', 'member']).default('member')
+  }),
+
+  teamAgent: z.object({
+    agentId: z.string().uuid()
   })
 };
 
