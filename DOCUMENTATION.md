@@ -124,6 +124,86 @@ The API uses a powerful ResourceManager system that provides standardized CRUD o
 - Standardized error handling and logging
 - Built-in pagination and filtering
 
+#### Creating a Resource Manager
+```javascript
+// Initialize a resource manager for a specific table
+const manager = new ResourceManager('table_name', 'resource_name');
+
+// The manager provides standard CRUD operations:
+await manager.create(userId, data);
+await manager.list(userId, options);
+await manager.getResource(resourceId, userId);
+await manager.updateResource(resourceId, userId, data);
+await manager.deleteResource(resourceId, userId);
+```
+
+#### Access Control
+The ResourceManager automatically handles:
+- Resource ownership verification
+- Team-based access control
+- Role-based permissions
+- Cross-resource access rules
+
+```javascript
+// Ownership checking
+await manager.checkOwnership(resourceId, userId);
+
+// Access control for teams
+await manager.checkAccess(resourceId, userId);
+```
+
+#### Event System Integration
+Resource changes emit events that can be monitored:
+
+```javascript
+// Resource lifecycle events
+events.on('resource.created', ({ id, type, userId }) => {
+  // Handle resource creation
+});
+
+events.on('resource.updated', ({ id, type, userId, changes }) => {
+  // Handle resource update
+});
+
+events.on('resource.deleted', ({ id, type, userId }) => {
+  // Handle resource deletion
+});
+
+// Access control events
+events.on('resource.accessDenied', ({ id, type, userId, action }) => {
+  // Handle access denial
+});
+```
+
+#### Query Builder Integration
+The ResourceManager uses QueryBuilder for safe SQL operations:
+
+```javascript
+const qb = new QueryBuilder();
+const query = qb
+  .select(['id', 'name'])
+  .from('users')
+  .where({ status: 'active' })
+  .orderBy('created_at', 'DESC')
+  .limit(10)
+  .build();
+```
+
+#### Error Handling
+```javascript
+try {
+  await manager.getResource(id, userId);
+} catch (error) {
+  if (error instanceof NotFoundError) {
+    // Resource not found
+  } else if (error instanceof AccessDeniedError) {
+    // User does not have access
+  } else if (error instanceof ValidationError) {
+    // Invalid data
+  }
+}
+```
+
 #### Using ResourceManager
 
 ```javascript
