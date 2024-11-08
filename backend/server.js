@@ -290,8 +290,9 @@ app.post('/api/users/:userId/tutorial-status', async (req, res) => {
 });
 
 // Add timeout middleware
+const config = require('./config');
 const timeout = require('connect-timeout');
-app.use(timeout('30s'));
+app.use(timeout(config.api.timeout));
 app.use((req, res, next) => {
   if (!req.timedout) {
     next();

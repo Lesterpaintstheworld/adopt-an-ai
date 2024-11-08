@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const OpenAI = require('openai');
+const config = require('../config');
+const { AppError } = require('../utils/errors');
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
@@ -10,15 +12,15 @@ const openai = new OpenAI({
 router.post('/chat', async (req, res) => {
   try {
     const response = await openai.chat.completions.create({
-      model: "gpt-4",
+      model: config.openai.defaultModel,
       messages: req.body.messages,
-      temperature: req.body.temperature || 0.7,
-      max_tokens: req.body.max_tokens || 1000
+      temperature: req.body.temperature || config.openai.defaultTemperature,
+      max_tokens: req.body.max_tokens || config.openai.defaultMaxTokens
     });
     res.json(response);
   } catch (error) {
     console.error('OpenAI API error:', error);
-    res.status(500).json({ error: 'Failed to get AI response' });
+    throw new AppError('Failed to get AI response', 500, error.message);
   }
 });
 
