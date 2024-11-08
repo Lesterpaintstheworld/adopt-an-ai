@@ -4,22 +4,22 @@ class AppError extends Error {
     this.statusCode = statusCode;
     this.details = details;
     this.name = this.constructor.name;
+    Error.captureStackTrace(this, this.constructor);
   }
 
   toResponse() {
     return {
       success: false,
       error: process.env.NODE_ENV === 'production' ? this.getPublicMessage() : this.message,
-      details: process.env.NODE_ENV === 'development' ? this.details : undefined,
-      statusCode: this.statusCode
+      details: process.env.NODE_ENV === 'development' ? this.details : undefined
     };
   }
 
   getPublicMessage() {
     const messages = {
       400: 'Invalid request',
-      401: 'Unauthorized', 
-      403: 'Forbidden',
+      401: 'Unauthorized',
+      403: 'Forbidden', 
       404: 'Not found',
       429: 'Too many requests',
       500: 'Internal server error'

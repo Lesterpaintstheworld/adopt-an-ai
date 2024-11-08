@@ -1,9 +1,6 @@
 const { AppError } = require('../utils/errors');
 const logger = require('../utils/logger');
 
-const { AppError } = require('../utils/errors');
-const logger = require('../utils/logger');
-
 module.exports = (err, req, res, next) => {
   logger.error('Error caught by handler', err, {
     path: req.path,
