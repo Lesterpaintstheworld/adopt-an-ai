@@ -112,9 +112,17 @@ events.onWithLog('resource.created', handleCreate);
 
 ## API Documentation
 
-### Resource Management
+### Resource Management System
 
-The API uses a generic ResourceManager system for handling CRUD operations on resources like agents, teams, etc.
+The API uses a powerful ResourceManager system that provides standardized CRUD operations, validation, access control and event tracking for all resources.
+
+#### Resource Manager Features
+- Automatic ownership validation
+- Built-in access control
+- Event emission on changes
+- Standardized error handling
+- Query building with safety checks
+- Transaction support
 
 #### Common Resource Endpoints
 All resources follow this pattern:
@@ -126,17 +134,108 @@ PUT    /api/{resource}/:id      - Update resource
 DELETE /api/{resource}/:id      - Delete resource
 ```
 
-#### Request Validation
-All requests are validated using Zod schemas:
+#### Using ResourceManager
+```javascript
+// Create a resource manager instance
+const manager = new ResourceManager('table_name', 'resource_name');
+
+// Create a new resource
+const resource = await manager.create(userId, {
+  name: 'Resource Name',
+  description: 'Resource Description'
+});
+
+// List resources with options
+const resources = await manager.list(userId, {
+  sort: 'created_at',
+  order: 'DESC',
+  limit: 10,
+  offset: 0
+});
+
+// Get single resource
+const resource = await manager.getResource(resourceId, userId);
+
+// Update resource
+const updated = await manager.updateResource(resourceId, userId, {
+  name: 'Updated Name'
+});
+
+// Delete resource
+await manager.deleteResource(resourceId, userId);
+```
+
+#### Event System
+Resource changes emit events that can be monitored:
+
+```javascript
+// Resource created
+resource.created: { id, type, userId }
+
+// Resource updated
+resource.updated: { id, type, userId, changes }
+
+// Resource deleted
+resource.deleted: { id, type, userId }
+
+// Access denied
+resource.accessDenied: { id, type, userId, action }
+```
+
+### Request Validation
+
+All requests are validated using Zod schemas before processing. The validation system provides:
+
+- Type safety with Zod schemas
+- Custom validation rules
+- Standardized error messages
+- Request sanitization
+
+#### Available Schemas
 
 ```typescript
-// Example agent schema
-{
-  name: string().min(1).max(255),
-  system_prompt: string().optional(),
-  status: enum(['active', 'inactive']).optional(),
-  parameters: record(any()).optional(),
-  tools: array(any()).optional()
+// Agent Schema
+const agentSchema = z.object({
+  name: z.string().min(1).max(255),
+  system_prompt: z.string().optional(),
+  status: z.enum(['active', 'inactive']).optional(),
+  parameters: z.record(z.any()).optional(),
+  tools: z.array(z.any()).optional()
+});
+
+// Team Schema
+const teamSchema = z.object({
+  name: z.string().min(1).max(100),
+  description: z.string().optional(),
+  status: z.enum(['active', 'inactive', 'archived']).optional()
+});
+
+// Team Member Schema
+const teamMemberSchema = z.object({
+  userId: z.string().min(1),
+  role: z.enum(['owner', 'admin', 'member']).default('member')
+});
+
+// Team Agent Schema 
+const teamAgentSchema = z.object({
+  agentId: z.string().uuid()
+});
+```
+
+#### Using Validation
+
+```javascript
+// In route handlers
+router.post('/', validate(schemas.agent), async (req, res) => {
+  // req.validated contains the validated data
+  const agent = await agentManager.create(req.user.id, req.validated);
+  res.json(agent);
+});
+
+// Manual validation
+const result = schemas.agent.safeParse(data);
+if (!result.success) {
+  throw new ValidationError(result.error);
 }
 ```
 
