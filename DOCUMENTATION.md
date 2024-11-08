@@ -23,6 +23,7 @@
 The ResourceManager provides a standardized way to handle CRUD operations with built-in validation, access control, and event tracking.
 
 #### Core Features
+- Generic resource CRUD operations 
 - Ownership validation with team support
 - Role-based access control
 - Event emission for all operations
