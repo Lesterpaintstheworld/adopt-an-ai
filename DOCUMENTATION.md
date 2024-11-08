@@ -114,48 +114,147 @@ events.onWithLog('resource.created', handleCreate);
 
 ### Resource Management System
 
-The API uses a powerful ResourceManager system that provides standardized CRUD operations, validation, access control and event tracking for all resources.
+The ResourceManager provides a standardized way to handle CRUD operations with built-in validation, access control, and event tracking.
 
-#### Resource Manager Features
-- Automatic ownership validation and access control
-- Event emission for all resource changes 
-- Query building with SQL injection protection
-- Transaction support with rollback
-- Standardized error handling and logging
-- Built-in pagination and filtering
+#### Core Features
 
-#### Using ResourceManager
+- **Ownership Validation**: Automatically verifies resource ownership
+- **Access Control**: Team-based and role-based access management  
+- **Event System**: Emits events for all resource changes
+- **Query Building**: Safe SQL construction with QueryBuilder
+- **Error Handling**: Standardized error responses
+- **Transaction Support**: Automatic rollback on failures
+
+#### Usage Example
 
 ```javascript
-// Initialize a resource manager
-const manager = new ResourceManager('table_name', 'resource_name');
+// Initialize manager for a resource type
+const manager = new ResourceManager('agents', 'agent');
 
-// Create with validation
-const resource = await manager.create(userId, {
-  name: 'Resource Name',
-  description: 'Resource Description'
-}); // Validates against schema, emits resource.created
+// Create resource with validation
+const agent = await manager.create(userId, {
+  name: 'My Agent',
+  system_prompt: 'You are a helpful assistant'
+});
+// Emits: resource.created
 
-// List with filtering and pagination
-const resources = await manager.list(userId, {
-  filter: { status: 'active' },
-  sort: '-created_at',
-  page: 1,
-  limit: 20
+// List resources with filtering
+const agents = await manager.list(userId, {
+  status: 'active',
+  orderBy: 'created_at',
+  direction: 'DESC'
 });
 
-// Get with ownership check
-const resource = await manager.getResource(resourceId, userId);
-// Throws NotFoundError or AccessDeniedError if not authorized
+// Get single resource with access check
+const agent = await manager.getResource(agentId, userId);
+// Throws: NotFoundError or AccessDeniedError
 
 // Update with validation
-const updated = await manager.updateResource(resourceId, userId, {
+const updated = await manager.updateResource(agentId, userId, {
   name: 'Updated Name'
-}); // Validates changes, emits resource.updated
+});
+// Emits: resource.updated
 
 // Delete with cascading
-await manager.deleteResource(resourceId, userId);
-// Handles related records cleanup, emits resource.deleted
+await manager.deleteResource(agentId, userId);
+// Emits: resource.deleted
+```
+
+#### Event System
+
+The ResourceManager emits events for all operations:
+
+```javascript
+// Resource lifecycle events
+events.on('resource.created', ({ id, type, userId }) => {
+  // Handle resource creation
+});
+
+events.on('resource.updated', ({ id, type, userId, changes }) => {
+  // Handle resource update
+});
+
+events.on('resource.deleted', ({ id, type, userId }) => {
+  // Handle resource deletion
+});
+
+// Access control events
+events.on('resource.accessDenied', ({ id, type, userId, action }) => {
+  // Handle access denial
+});
+```
+
+#### Query Builder Integration
+
+Uses QueryBuilder for safe SQL operations:
+
+```javascript
+const qb = new QueryBuilder();
+
+// SELECT query
+const query = qb
+  .select(['id', 'name'])
+  .from('agents')
+  .where({ status: 'active' })
+  .orderBy('created_at', 'DESC')
+  .limit(10)
+  .build();
+
+// INSERT query
+const insert = qb
+  .insert('agents', {
+    name: 'New Agent',
+    user_id: userId
+  })
+  .returning('*')
+  .build();
+```
+
+#### Validation System
+
+Integrated with Zod schemas:
+
+```javascript
+const schemas = {
+  agent: z.object({
+    name: z.string().min(1).max(255),
+    system_prompt: z.string().optional(),
+    status: z.enum(['active', 'inactive']),
+    parameters: z.record(z.any()).optional()
+  }),
+
+  team: z.object({
+    name: z.string().min(1).max(100),
+    description: z.string().optional(),
+    status: z.enum(['active', 'inactive', 'archived'])
+  })
+};
+
+// Validation middleware
+app.post('/api/agents',
+  validate(schemas.agent),
+  async (req, res) => {
+    // req.validated contains validated data
+  }
+);
+```
+
+#### Error Handling
+
+Standardized error handling:
+
+```javascript
+try {
+  await manager.getResource(id, userId);
+} catch (error) {
+  if (error instanceof NotFoundError) {
+    // Resource not found
+  } else if (error instanceof AccessDeniedError) {
+    // User does not have access
+  } else if (error instanceof ValidationError) {
+    // Invalid data
+  }
+}
 ```
 
 #### Event System Integration
