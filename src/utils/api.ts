@@ -3,14 +3,14 @@ import type { AgentCreationData, AgentUpdateData } from '../types/agents';
 
 // Create axios instance with base configuration
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000',
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3001', // Match backend port
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-// Log API configuration
-console.log('API URL:', import.meta.env.VITE_API_URL || 'http://localhost:3000');
+// Log API configuration for debugging
+console.log('API URL:', import.meta.env.VITE_API_URL || 'http://localhost:3001');
 
 // Request interceptor to add auth token
 api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
@@ -20,12 +20,21 @@ api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   }
   console.log('Request headers:', config.headers);
   return config;
+}, (error) => {
+  console.error('Request interceptor error:', error);
+  return Promise.reject(error);
 });
 
 // Response interceptor to handle errors
 api.interceptors.response.use(
   (response: AxiosResponse) => response,
   (error: AxiosError) => {
+    console.error('API Error:', {
+      status: error.response?.status,
+      data: error.response?.data,
+      config: error.config
+    });
+
     // Only redirect if:
     // 1. It's a 401 error
     // 2. We have a token (meaning our token is invalid/expired)
