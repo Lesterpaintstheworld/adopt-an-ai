@@ -148,11 +148,7 @@ router.put('/:id', async (req, res) => {
     
     res.json(result.rows[0]);
   } catch (error) {
-    console.error('Error updating team:', error);
-    res.status(500).json({ 
-      error: 'Failed to update team',
-      details: error.message 
-    });
+    httpResponses.serverError(res, error);
   }
 });
 
@@ -169,11 +165,7 @@ router.delete('/:id', async (req, res, next) => {
 
     httpResponses.success(res, null, 204);
   } catch (error) {
-    console.error('Error deleting team:', error);
-    res.status(500).json({ 
-      error: 'Failed to delete team',
-      details: error.message 
-    });
+    httpResponses.serverError(res, error);
   }
 });
 
