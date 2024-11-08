@@ -48,39 +48,37 @@ router.get('/', async (req, res, next) => {
 });
 
 // POST /api/teams
-router.post('/', async (req, res, next) => {
-  const client = await dbUtils.getClient();
-  
+router.post('/', validateRequest(schemas.team), async (req, res, next) => {
   try {
-    await client.query('BEGIN');
-    
-    const teamResult = await dbUtils.executeQuery(
-      `INSERT INTO teams (name, description, owner_id, status)
-       VALUES ($1, $2, $3, $4)
-       RETURNING *`,
-      [req.body.name, req.body.description, req.user.userId, 'active'],
-      { client }
-    );
-    
-    await dbUtils.executeQuery(
-      `INSERT INTO team_members (team_id, user_id, role)
-       VALUES ($1, $2, 'owner')`,
-      [teamResult.rows[0].id, req.user.userId],
-      { client }
-    );
+    const result = await dbUtils.withTransaction(async (client) => {
+      const teamResult = await dbUtils.executeQuery(
+        `INSERT INTO teams (name, description, owner_id, status)
+         VALUES ($1, $2, $3, $4)
+         RETURNING *`,
+        [req.validated.name, req.validated.description, req.user.userId, 'active'],
+        { client }
+      );
 
-    await client.query('COMMIT');
-    
-    const team = {
-      ...teamResult.rows[0],
-      member_count: 1,
-      user_role: 'owner'
-    };
+      await dbUtils.executeQuery(
+        `INSERT INTO team_members (team_id, user_id, role)
+         VALUES ($1, $2, 'owner')`,
+        [teamResult.rows[0].id, req.user.userId],
+        { client }
+      );
+
+      return {
+        ...teamResult.rows[0],
+        member_count: 1,
+        user_role: 'owner'
+      };
+    });
 
     eventEmitter.emit('team:created', { 
-      teamId: team.id, 
+      teamId: result.id,
       userId: req.user.userId 
     });
+
+    httpResponses.success(res, result, 201);
     
     httpResponses.success(res, team, 201);
   } catch (error) {
@@ -91,28 +89,27 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-// GET /api/teams/:id
-router.get('/:id', async (req, res) => {
+router.get('/', async (req, res, next) => {
   try {
-    const query = `
-      SELECT t.*, 
-             COUNT(tm.user_id) as member_count,
-             CASE 
-               WHEN t.owner_id = $1 THEN 'owner'
-               ELSE tm2.role 
-             END as user_role
-      FROM teams t
-      LEFT JOIN team_members tm ON t.id = tm.team_id
-      LEFT JOIN team_members tm2 ON t.id = tm2.team_id AND tm2.user_id = $1
-      WHERE t.id = $2 AND (t.owner_id = $1 OR tm2.user_id = $1)
-      GROUP BY t.id, tm2.role
-    `;
-    
-    const result = await pool.query(query, [req.user.userId, req.params.id]);
-    
-    if (result.rows.length === 0) {
-      return res.status(404).json({ error: 'Team not found' });
-    }
+    const qb = new QueryBuilder();
+    const query = qb
+      .select([
+        't.*',
+        'COUNT(tm.user_id) as member_count',
+        `CASE 
+          WHEN t.owner_id = $1 THEN 'owner'
+          ELSE tm.role 
+        END as user_role`
+      ])
+      .from('teams t')
+      .join('LEFT JOIN team_members tm ON t.id = tm.team_id')
+      .where('t.owner_id = $1 OR tm.user_id = $1')
+      .groupBy(['t.id', 'tm.role'])
+      .orderBy('t.created_at', 'DESC')
+      .build();
+
+    const result = await dbUtils.executeQuery(query.text, [req.user.userId]);
+    httpResponses.success(res, result.rows);
     
     res.json(result.rows[0]);
   } catch (error) {
