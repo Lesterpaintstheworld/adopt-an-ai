@@ -4,9 +4,10 @@
 
 ### Prerequisites
 - Node.js 18+
-- PostgreSQL 14+
+- PostgreSQL 14+ 
 - OpenAI API key
 - Google OAuth credentials
+- Redis (optional, for caching)
 
 ### Installation
 1. Clone the repository
@@ -17,38 +18,148 @@
 
 ## Core Components
 
-### ResourceManager
-Generic resource management system that handles CRUD operations with built-in validation, access control, and event tracking.
+### Resource Management System
 
-#### Methods
+The ResourceManager provides a standardized way to handle CRUD operations with built-in validation, access control, and event tracking.
+
+#### Core Features
+- Ownership validation with team support
+- Role-based access control
+- Event emission for all operations
+- Query building with parameterization
+- Transaction support
+- Validation using Zod schemas
+- Audit logging
+
+#### Usage Example
 
 ```javascript
-const manager = new ResourceManager('table_name', 'resource_name');
+// Initialize manager for a resource type
+const manager = new ResourceManager('agents', 'agent');
 
-// Create a new resource
-await manager.create(userId, {
-  name: 'Resource Name',
-  description: 'Resource Description'
+// Create with validation
+const agent = await manager.create(userId, {
+  name: 'My Agent',
+  system_prompt: 'You are a helpful assistant',
+  parameters: {
+    temperature: 0.7,
+    max_tokens: 1000
+  },
+  tools: ['search', 'calculator']
+});
+// Emits: resource.created
+
+// List with filtering
+const agents = await manager.list(userId, {
+  status: 'active',
+  orderBy: 'created_at',
+  direction: 'DESC',
+  limit: 20,
+  offset: 0,
+  search: 'keyword'
 });
 
-// List resources with options
-await manager.list(userId, {
-  sort: 'created_at',
-  order: 'DESC',
-  limit: 10,
-  offset: 0
+// Get with access check
+const agent = await manager.getResource(agentId, userId);
+// Throws: NotFoundError or AccessDeniedError
+
+// Update with validation
+const updated = await manager.updateResource(agentId, userId, {
+  name: 'Updated Name',
+  parameters: {
+    ...agent.parameters,
+    temperature: 0.8
+  }
+});
+// Emits: resource.updated
+
+// Delete with cleanup
+await manager.deleteResource(agentId, userId);
+// Emits: resource.deleted
+// Handles: Related cleanup
+
+// Transaction example
+await manager.withTransaction(async (transaction) => {
+  const agent = await manager.create(userId, data, { transaction });
+  await manager.addToTeam(teamId, agent.id, { transaction });
+});
+```
+
+### Query Builder
+
+Safe SQL query construction with parameterization:
+
+```javascript
+const qb = new QueryBuilder();
+
+// SELECT query
+const query = qb
+  .select(['id', 'name'])
+  .from('agents')
+  .where({ status: 'active' })
+  .orderBy('created_at', 'DESC')
+  .limit(10)
+  .build();
+
+// INSERT query
+const insert = qb
+  .insert('agents', {
+    name: 'New Agent',
+    user_id: userId
+  })
+  .returning('*')
+  .build();
+
+// UPDATE query
+const update = qb
+  .update('agents', 
+    { name: 'Updated' },
+    { id: agentId }
+  )
+  .returning('*')
+  .build();
+
+// DELETE query
+const del = qb
+  .delete()
+  .from('agents')
+  .where({ id: agentId })
+  .returning('id')
+  .build();
+```
+
+### Event System
+
+Resource changes emit events that can be monitored:
+
+```javascript
+// Resource lifecycle events
+events.on('resource.created', ({ id, type, userId }) => {
+  // Handle resource creation
+  // Full resource data available
 });
 
-// Get single resource
-await manager.getResource(resourceId, userId);
-
-// Update resource
-await manager.updateResource(resourceId, userId, {
-  name: 'Updated Name'
+events.on('resource.updated', ({ id, type, userId, changes }) => {
+  // Handle resource update
+  // Access what changed
 });
 
-// Delete resource
-await manager.deleteResource(resourceId, userId);
+events.on('resource.deleted', ({ id, type, userId }) => {
+  // Handle resource deletion
+  // Last chance to access data
+});
+
+// Access control events
+events.on('resource.accessDenied', ({ id, type, userId, action }) => {
+  // Handle access denial
+  // Audit security events
+});
+
+// Error events
+events.on('resource.error', ({ error, context }) => {
+  // Handle operation errors
+  // Access full error context
+});
 ```
 
 #### Features
