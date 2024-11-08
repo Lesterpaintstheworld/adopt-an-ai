@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const BaseController = require('../controllers/baseController');
 const validate = require('../middleware/validate');
 const { schemas } = require('../utils/validation');
 const ResourceManager = require('../utils/resourceManager');
+const ResourceController = require('../controllers/resourceController');
 const eventEmitter = require('../utils/eventEmitter');
 
 const teamManager = new ResourceManager('teams', 'team');
-const baseController = new BaseController();
+const controller = new ResourceController(teamManager);
 
 // Apply validation middleware
 router.post('/', validate(schemas.team));
@@ -16,10 +16,10 @@ router.post('/:teamId/members', validate(schemas.teamMember));
 router.post('/:teamId/agents', validate(schemas.teamAgent));
 
 // CRUD routes
-router.get('/', teamsController.list);
-router.post('/', teamsController.create);
-router.put('/:id', teamsController.update);
-router.delete('/:id', teamsController.delete);
+router.get('/', controller.list.bind(controller));
+router.post('/', controller.create.bind(controller));
+router.put('/:id', controller.update.bind(controller));
+router.delete('/:id', controller.delete.bind(controller));
 
 // Add agent to team
 router.post('/:teamId/agents', validateResource('teamAgent'), (req, res, next) => {

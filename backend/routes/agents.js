@@ -1,22 +1,22 @@
 const express = require('express');
 const router = express.Router();
-const BaseController = require('../controllers/baseController');
 const validate = require('../middleware/validate');
 const { schemas } = require('../utils/validation');
 const ResourceManager = require('../utils/resourceManager');
+const ResourceController = require('../controllers/resourceController');
 const eventEmitter = require('../utils/eventEmitter');
 
 const agentManager = new ResourceManager('agents', 'agent');
-const baseController = new BaseController();
+const controller = new ResourceController(agentManager);
 
 // Apply validation middleware
 router.post('/', validate(schemas.agent));
 router.put('/:id', validate(schemas.agent));
 
 // CRUD routes
-router.get('/', agentsController.list);
-router.post('/', agentsController.create);
-router.put('/:id', agentsController.update);
-router.delete('/:id', agentsController.delete);
+router.get('/', controller.list.bind(controller));
+router.post('/', controller.create.bind(controller));
+router.put('/:id', controller.update.bind(controller));
+router.delete('/:id', controller.delete.bind(controller));
 
 module.exports = router;
