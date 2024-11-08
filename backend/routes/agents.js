@@ -1,77 +1,29 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../config/db');
+const dbUtils = require('../utils/db');
+const httpResponses = require('../utils/responses');
+const validation = require('../utils/validation');
 
-// GET /api/agents
 router.get('/', async (req, res) => {
   try {
-    // Log the incoming request
-    console.log('GET /agents request:', {
-      userId: req.user?.userId,
-      headers: req.headers
-    });
-
-    // Validate user object exists
-    if (!req.user || !req.user.userId) {
-      console.error('No user data in request');
-      return res.status(401).json({
-        error: 'Unauthorized',
-        details: 'No user data found in request'
-      });
+    if (!req.user?.userId) {
+      return httpResponses.unauthorized(res, 'No user data found in request');
     }
 
-    // Test database connection first
-    try {
-      await pool.query('SELECT 1');
-    } catch (dbError) {
-      console.error('Database connection error:', dbError);
-      return res.status(500).json({
-        error: 'Database connection failed',
-        details: process.env.NODE_ENV === 'development' ? dbError.message : 'Internal server error'
-      });
+    const userExists = await dbUtils.checkExists('users', req.user.userId, req.user.userId);
+    if (!userExists) {
+      return httpResponses.notFound(res, 'User not found');
     }
 
-    // Verify user exists first
-    const userCheck = await pool.query(
-      'SELECT id FROM users WHERE id = $1',
-      [req.user.userId]
+    const result = await dbUtils.executeQuery(
+      'SELECT * FROM agents WHERE user_id = $1 ORDER BY created_at DESC',
+      [req.user.userId],
+      { logExtra: { route: 'GET /agents' }}
     );
 
-    if (userCheck.rows.length === 0) {
-      console.error('User not found:', req.user.userId);
-      return res.status(404).json({ 
-        error: 'User not found',
-        details: 'The authenticated user does not exist in the database'
-      });
-    }
-
-    // Fetch agents with better error handling
-    const query = `
-      SELECT * FROM agents 
-      WHERE user_id = $1 
-      ORDER BY created_at DESC
-    `;
-
-    const result = await pool.query(query, [req.user.userId]);
-    
-    console.log('Agents query successful:', {
-      userId: req.user.userId,
-      agentsFound: result.rowCount
-    });
-
-    res.json(result.rows);
+    httpResponses.success(res, result.rows);
   } catch (error) {
-    console.error('Error fetching agents - Full error:', {
-      message: error.message,
-      stack: error.stack,
-      code: error.code,
-      detail: error.detail
-    });
-    res.status(500).json({ 
-      error: 'Failed to fetch agents',
-      details: error.message,
-      code: error.code
-    });
+    httpResponses.serverError(res, error);
   }
 });
 
