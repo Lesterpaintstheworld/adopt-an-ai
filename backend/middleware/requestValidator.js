@@ -1,18 +1,24 @@
-const { ValidationError } = require('../utils/errors');
+const { validate } = require('../utils/validation');
+const { AppError } = require('../utils/errors');
 
 const validateRequest = (schema) => {
   return (req, res, next) => {
     try {
-      const validated = schema.parse({
-        body: req.body,
-        query: req.query,
-        params: req.params
-      });
+      const { body, query, params } = req;
       
-      req.validated = validated;
+      if (schema.body) {
+        req.validatedBody = validate(schema.body, body);
+      }
+      if (schema.query) {
+        req.validatedQuery = validate(schema.query, query);
+      }
+      if (schema.params) {
+        req.validatedParams = validate(schema.params, params);
+      }
+      
       next();
     } catch (error) {
-      next(new ValidationError('Invalid request data', error.errors));
+      next(new AppError('Validation failed', 400, error.details));
     }
   };
 };
