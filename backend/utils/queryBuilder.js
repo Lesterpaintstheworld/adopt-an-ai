@@ -21,40 +21,52 @@ class QueryBuilder {
       ORDER BY ${orderBy}
       LIMIT $1 OFFSET $2
     `;
+    } catch (error) {
+      logger.error('Error building paginated query:', error);
+      throw error;
+    }
   }
 
   static buildUpdateQuery(table, fields, conditions) {
     try {
       table = this.validateInput(table);
       const updates = Object.keys(fields)
-      .map((key, index) => `${key} = $${index + 1}`)
-      .join(', ');
+        .map((key, index) => `${key} = $${index + 1}`)
+        .join(', ');
       
-    const whereClause = Object.keys(conditions)
-      .map((key, index) => `${key} = $${index + Object.keys(fields).length + 1}`)
-      .join(' AND ');
+      const whereClause = Object.keys(conditions)
+        .map((key, index) => `${key} = $${index + Object.keys(fields).length + 1}`)
+        .join(' AND ');
 
-    return `
-      UPDATE ${table}
-      SET ${updates}, updated_at = CURRENT_TIMESTAMP
-      WHERE ${whereClause}
-      RETURNING *
-    `;
+      return `
+        UPDATE ${table}
+        SET ${updates}, updated_at = CURRENT_TIMESTAMP
+        WHERE ${whereClause}
+        RETURNING *
+      `;
+    } catch (error) {
+      logger.error('Error building update query:', error);
+      throw error;
+    }
   }
 
   static buildInsertQuery(table, fields) {
     try {
       table = this.validateInput(table);
       const columns = Object.keys(fields).join(', ');
-    const values = Object.keys(fields)
-      .map((_, index) => `$${index + 1}`)
-      .join(', ');
+      const values = Object.keys(fields)
+        .map((_, index) => `$${index + 1}`)
+        .join(', ');
 
-    return `
-      INSERT INTO ${table} (${columns})
-      VALUES (${values})
-      RETURNING *
-    `;
+      return `
+        INSERT INTO ${table} (${columns})
+        VALUES (${values})
+        RETURNING *
+      `;
+    } catch (error) {
+      logger.error('Error building insert query:', error);
+      throw error;
+    }
   }
 }
 
