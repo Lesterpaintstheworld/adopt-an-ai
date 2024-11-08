@@ -3880,6 +3880,144 @@ Common HTTP status codes:
 - 429: Too Many Requests
 - 500: Internal Server Error
 
+## Resource Management System
+
+The system uses a generic `ResourceManager` class to handle CRUD operations on resources with:
+
+### Core Features
+
+- Automatic data validation
+- Access control and ownership verification  
+- Event emission for tracking
+- Transaction support
+- Standardized error handling
+
+### Usage Example
+
+```javascript
+// Initialize a resource manager
+const manager = new ResourceManager('agents', 'agent');
+
+// Create with validation
+const agent = await manager.create(userId, {
+  name: 'My Agent',
+  system_prompt: 'You are an assistant',
+  parameters: { temperature: 0.7 }
+}); // Emits: resource.created
+
+// List with filtering
+const agents = await manager.list(userId, {
+  status: 'active',
+  orderBy: 'created_at',
+  direction: 'DESC'
+});
+
+// Get with access check
+const agent = await manager.getResource(agentId, userId);
+// Throws NotFoundError or AccessDeniedError if not authorized
+
+// Update with validation
+const updated = await manager.updateResource(agentId, userId, {
+  name: 'New Name'
+}); // Emits: resource.updated
+
+// Delete with cleanup
+await manager.deleteResource(agentId, userId);
+// Emits: resource.deleted
+```
+
+### Event System
+
+```javascript
+// Resource lifecycle events
+events.on('resource.created', ({ id, type, userId }) => {
+  // Handle resource creation
+});
+
+events.on('resource.updated', ({ id, type, userId, changes }) => {
+  // Handle resource update
+});
+
+events.on('resource.deleted', ({ id, type, userId }) => {
+  // Handle resource deletion
+});
+
+events.on('resource.accessDenied', ({ id, type, userId, action }) => {
+  // Handle access denial
+});
+```
+
+### Request Validation
+
+All requests are validated using Zod schemas:
+
+```javascript
+const schemas = {
+  agent: z.object({
+    name: z.string().min(1).max(255),
+    system_prompt: z.string().optional(),
+    status: z.enum(['active', 'inactive']),
+    parameters: z.record(z.any()).optional(),
+    tools: z.array(z.any()).optional()
+  }),
+
+  team: z.object({
+    name: z.string().min(1).max(100),
+    description: z.string().optional(),
+    status: z.enum(['active', 'inactive', 'archived'])
+  })
+};
+
+// Using validation middleware
+app.post('/api/resources',
+  validate(schemas.resource),
+  async (req, res) => {
+    // req.validated contains validated data
+  }
+);
+```
+
+### Standard API Endpoints
+
+All resource endpoints follow this pattern:
+
+```
+GET    /api/resources          - List resources
+POST   /api/resources          - Create resource
+GET    /api/resources/:id      - Get resource
+PUT    /api/resources/:id      - Update resource  
+DELETE /api/resources/:id      - Delete resource
+```
+
+Common Headers:
+```
+Authorization: Bearer <jwt_token>
+Content-Type: application/json
+```
+
+Standard Response Format:
+```json
+{
+  "success": true,
+  "data": {},
+  "timestamp": "ISO-8601",
+  "requestId": "uuid"
+}
+```
+
+Error Response Format:
+```json
+{
+  "success": false,
+  "error": "Error message",
+  "code": "HTTP status code",
+  "type": "Error type",
+  "details": {},
+  "timestamp": "ISO-8601",
+  "requestId": "uuid"
+}
+```
+
 ## Development Guide
 
 ### Adding New Features
