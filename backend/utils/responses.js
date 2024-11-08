@@ -4,9 +4,10 @@ const formatResponse = (success, data, error = null) => {
   if (success) {
     response.data = data;
   } else {
-    response.error = process.env.NODE_ENV === 'production' ? error.getPublicMessage() : error.message;
+    response.error = error.getPublicMessage();
     if (process.env.NODE_ENV === 'development') {
       response.details = error.details;
+      response.stack = error.stack;
     }
   }
   
@@ -26,28 +27,9 @@ const httpResponses = {
     res.status(204).send();
   },
 
-  badRequest(res, message = 'Bad request', details = null) {
-    const error = { message, details, getPublicMessage: () => message };
-    res.status(400).json(formatResponse(false, null, error));
-  },
-
-  unauthorized(res, message = 'Unauthorized') {
-    const error = { message, getPublicMessage: () => message };
-    res.status(401).json(formatResponse(false, null, error));
-  },
-
-  notFound(res, message = 'Not found', details = null) {
-    const error = { message, details, getPublicMessage: () => message };
-    res.status(404).json(formatResponse(false, null, error));
-  },
-
-  serverError(res, error) {
-    const wrappedError = {
-      message: error.message,
-      details: error.stack,
-      getPublicMessage: () => 'Internal server error'
-    };
-    res.status(500).json(formatResponse(false, null, wrappedError));
+  error(res, error) {
+    const status = error.statusCode || 500;
+    res.status(status).json(formatResponse(false, null, error));
   }
 };
 
