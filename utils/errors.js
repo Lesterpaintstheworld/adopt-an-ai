@@ -1,3 +1,5 @@
+const { formatResponse } = require('./responses');
+
 class AppError extends Error {
   constructor(message, statusCode = 500, details = null) {
     super(message);
@@ -8,11 +10,7 @@ class AppError extends Error {
   }
 
   toResponse() {
-    return {
-      success: false,
-      error: process.env.NODE_ENV === 'production' ? this.getPublicMessage() : this.message,
-      details: process.env.NODE_ENV === 'development' ? this.details : undefined
-    };
+    return formatResponse(false, null, this);
   }
 
   getPublicMessage() {
