@@ -160,18 +160,17 @@ router.put('/:id', async (req, res) => {
 });
 
 // DELETE /api/teams/:id
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', async (req, res, next) => {
   try {
-    const result = await pool.query(
-      'DELETE FROM teams WHERE id = $1 AND owner_id = $2 RETURNING id',
-      [req.params.id, req.user.userId]
-    );
+    await teamManager.checkOwnership(req.params.id, req.user.userId);
+    await teamManager.deleteResource(req.params.id, req.user.userId);
     
-    if (result.rows.length === 0) {
-      return res.status(403).json({ error: 'Not authorized to delete this team' });
-    }
-    
-    res.status(204).send();
+    eventEmitter.emit('team:deleted', {
+      teamId: req.params.id,
+      userId: req.user.userId
+    });
+
+    httpResponses.success(res, null, 204);
   } catch (error) {
     console.error('Error deleting team:', error);
     res.status(500).json({ 
