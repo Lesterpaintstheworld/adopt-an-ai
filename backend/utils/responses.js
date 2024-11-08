@@ -1,13 +1,19 @@
 const formatResponse = (success, data, error = null) => {
-  const response = { success };
+  const response = { 
+    success,
+    timestamp: new Date().toISOString()
+  };
   
   if (success) {
     response.data = data;
   } else {
     response.error = error.getPublicMessage();
+    response.code = error.statusCode || 500;
+    
     if (process.env.NODE_ENV === 'development') {
       response.details = error.details;
       response.stack = error.stack;
+      response.context = error.context;
     }
   }
   
@@ -30,6 +36,26 @@ const httpResponses = {
   error(res, error) {
     const status = error.statusCode || 500;
     res.status(status).json(formatResponse(false, null, error));
+  },
+
+  badRequest(res, message, details = null) {
+    const error = new ValidationError(message, details);
+    res.status(400).json(formatResponse(false, null, error));
+  },
+
+  unauthorized(res, message = 'Unauthorized') {
+    const error = new AuthError(message);
+    res.status(401).json(formatResponse(false, null, error));
+  },
+
+  forbidden(res, message = 'Forbidden') {
+    const error = new AccessDeniedError(message);
+    res.status(403).json(formatResponse(false, null, error));
+  },
+
+  notFound(res, resource = 'Resource') {
+    const error = new NotFoundError(resource);
+    res.status(404).json(formatResponse(false, null, error));
   }
 };
 
